@@ -67,7 +67,7 @@ ALTER TABLE proj_rentCar.rent
 CREATE TABLE proj_rentCar.car_type (
 	code       VARCHAR(4)  NOT NULL COMMENT '차종', -- 차종
 	brand_code INTEGER     NOT NULL COMMENT '브랜드번호', -- 브랜드번호
-	name       VARCHAR(20) NOT NULL COMMENT '차종명' -- 차종명
+	name       VARCHAR(20) NOT NULL COMMENT '차량유형' -- 차량유형
 )
 COMMENT '차종(소 중 대)';
 
@@ -83,12 +83,12 @@ CREATE TABLE proj_rentCar.car_model (
 	car_code        VARCHAR(5) NOT NULL COMMENT '차코드', -- 차코드
 	color           CHAR(2)    NOT NULL COMMENT '색상', -- 색상
 	gear            CHAR(2)    NOT NULL COMMENT '오토/', -- 조작방식
-	fuel_code       VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
 	brand_code      VARCHAR(5) NOT NULL COMMENT '브랜드번호', -- 브랜드번호
 	cartype_code    VARCHAR(4) NOT NULL COMMENT '차종', -- 차종
 	six_hour        INTEGER    NOT NULL COMMENT '6시간비용', -- 6시간비용
 	twelve_hour     INTEGER    NOT NULL COMMENT '12시간비용', -- 12시간비용
-	twentyfour_hour INTEGER    NOT NULL COMMENT '24시간비용' -- 24시간비용
+	twentyfour_hour INTEGER    NOT NULL COMMENT '24시간비용', -- 24시간비용
+	fuel_code       VARCHAR(5) NULL     COMMENT '연료코드' -- 연료코드
 )
 COMMENT '차(모델)';
 
@@ -249,14 +249,14 @@ ALTER TABLE proj_rentCar.car_model
 			code -- 차종
 		);
 
--- 연료
-ALTER TABLE proj_rentCar.fuel
-	ADD CONSTRAINT FK_car_model_TO_fuel -- 차(모델) -> 연료
+-- 차(모델)
+ALTER TABLE proj_rentCar.car_model
+	ADD CONSTRAINT FK_fuel_TO_car_model -- 연료 -> 차(모델)
 		FOREIGN KEY (
-			car_code -- 차코드
+			fuel_code -- 연료코드
 		)
-		REFERENCES proj_rentCar.car_model ( -- 차(모델)
-			car_code -- 차코드
+		REFERENCES proj_rentCar.fuel ( -- 연료
+			code -- 연료코드
 		);
 
 -- 적용된 이벤트
