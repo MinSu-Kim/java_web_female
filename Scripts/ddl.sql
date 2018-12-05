@@ -88,7 +88,8 @@ CREATE TABLE proj_rentCar.car_model (
 	six_hour        INTEGER    NOT NULL COMMENT '6시간비용', -- 6시간비용
 	twelve_hour     INTEGER    NOT NULL COMMENT '12시간비용', -- 12시간비용
 	twentyfour_hour INTEGER    NOT NULL COMMENT '24시간비용', -- 24시간비용
-	fuel_code       VARCHAR(5) NULL     COMMENT '연료코드' -- 연료코드
+	fuel_code       VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
+	is_rent         BOOLEAN    NOT NULL COMMENT '대여여부' -- 대여여부
 )
 COMMENT '차(모델)';
 
