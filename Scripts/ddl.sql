@@ -80,16 +80,16 @@ ALTER TABLE proj_rentCar.car_type
 
 -- 차(모델)
 CREATE TABLE proj_rentCar.car_model (
-	car_code        VARCHAR(5) NOT NULL COMMENT '차코드', -- 차코드
-	color           CHAR(2)    NOT NULL COMMENT '색상', -- 색상
-	gear            CHAR(2)    NOT NULL COMMENT '오토/', -- 조작방식
-	brand_code      VARCHAR(5) NOT NULL COMMENT '브랜드번호', -- 브랜드번호
-	cartype_code    VARCHAR(4) NOT NULL COMMENT '차종', -- 차종
-	six_hour        INTEGER    NOT NULL COMMENT '6시간비용', -- 6시간비용
-	twelve_hour     INTEGER    NOT NULL COMMENT '12시간비용', -- 12시간비용
-	twentyfour_hour INTEGER    NOT NULL COMMENT '24시간비용', -- 24시간비용
-	fuel_code       VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
-	is_rent         BOOLEAN    NOT NULL COMMENT '대여여부' -- 대여여부
+	car_code        VARCHAR(5)  NOT NULL COMMENT '차코드', -- 차코드
+	color           CHAR(2)     NOT NULL COMMENT '색상', -- 색상
+	gear            CHAR(2)     NOT NULL COMMENT '오토/', -- 조작방식
+	brand_code      VARCHAR(5)  NOT NULL COMMENT '브랜드번호', -- 브랜드번호
+	cartype_code    VARCHAR(4)  NOT NULL COMMENT '차종', -- 차종
+	six_hour        INTEGER     NOT NULL COMMENT '6시간비용', -- 6시간비용
+	twelve_hour     INTEGER     NOT NULL COMMENT '12시간비용', -- 12시간비용
+	twentyfour_hour INTEGER     NOT NULL COMMENT '24시간비용', -- 24시간비용
+	fuel_code       VARCHAR(10) NOT NULL COMMENT '연료코드', -- 연료코드
+	is_rent         BOOLEAN     NOT NULL COMMENT '대여여부' -- 대여여부
 )
 COMMENT '차(모델)';
 
@@ -102,8 +102,8 @@ ALTER TABLE proj_rentCar.car_model
 
 -- 연료
 CREATE TABLE proj_rentCar.fuel (
-	code     VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
-	car_code VARCHAR(5) NOT NULL COMMENT '차코드' -- 차코드
+	code     VARCHAR(10) NOT NULL COMMENT '연료코드', -- 연료코드
+	car_code VARCHAR(5)  NOT NULL COMMENT '차코드' -- 차코드
 )
 COMMENT '연료';
 
