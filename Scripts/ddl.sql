@@ -10,10 +10,10 @@ CREATE TABLE proj_rentCar.customer (
 	Id         VARCHAR(40) NOT NULL COMMENT '아이디', -- 아이디
 	passwd     VARCHAR(40) NOT NULL COMMENT '비밀번호', -- 비밀번호
 	Name       VARCHAR(20) NOT NULL COMMENT '고객이름', -- 고객이름
-	address    VARCHAR(50) NOT NULL COMMENT '주소', -- 주소
+	address    VARCHAR(50) NULL     COMMENT '주소', -- 주소
 	phone      VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
 	dob        DATE        NOT NULL COMMENT '생년월일', -- 생년월일
-	email      VARCHAR(30) NOT NULL COMMENT '이메일', -- 이메일
+	email      VARCHAR(30) NULL     COMMENT '이메일', -- 이메일
 	emp_code   VARCHAR(5)  NOT NULL COMMENT '직원코드', -- 직원코드
 	license    VARCHAR(4)  NOT NULL COMMENT '면허종류', -- 면허종류
 	grade_code CHAR(5)     NOT NULL COMMENT '등급코드' -- 등급코드
@@ -66,7 +66,7 @@ ALTER TABLE proj_rentCar.rent
 -- 차종(소 중 대)
 CREATE TABLE proj_rentCar.car_type (
 	code       VARCHAR(4)  NOT NULL COMMENT '차종', -- 차종
-	brand_code VARCHAR(5)  NOT NULL COMMENT '브랜드코드', -- 브랜드코드
+	brand_code INTEGER     NOT NULL COMMENT '브랜드번호', -- 브랜드번호
 	name       VARCHAR(20) NOT NULL COMMENT '차종명' -- 차종명
 )
 COMMENT '차종(소 중 대)';
@@ -84,7 +84,7 @@ CREATE TABLE proj_rentCar.car_model (
 	color           CHAR(2)    NOT NULL COMMENT '색상', -- 색상
 	gear            CHAR(2)    NOT NULL COMMENT '오토/', -- 조작방식
 	fuel_code       VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
-	brand_code      VARCHAR(5) NOT NULL COMMENT '브랜드코드', -- 브랜드코드
+	brand_code      VARCHAR(5) NOT NULL COMMENT '브랜드번호', -- 브랜드번호
 	cartype_code    VARCHAR(4) NOT NULL COMMENT '차종', -- 차종
 	six_hour        INTEGER    NOT NULL COMMENT '6시간비용', -- 6시간비용
 	twelve_hour     INTEGER    NOT NULL COMMENT '12시간비용', -- 12시간비용
@@ -115,7 +115,7 @@ ALTER TABLE proj_rentCar.fuel
 
 -- 브랜드
 CREATE TABLE proj_rentCar.brand (
-	code VARCHAR(5)  NOT NULL COMMENT '브랜드코드', -- 브랜드코드
+	no   INTEGER     NOT NULL COMMENT '브랜드번호', -- 브랜드번호
 	name VARCHAR(20) NOT NULL COMMENT '브랜드명' -- 브랜드명
 )
 COMMENT '브랜드';
@@ -124,7 +124,7 @@ COMMENT '브랜드';
 ALTER TABLE proj_rentCar.brand
 	ADD CONSTRAINT PK_brand -- 브랜드 기본키
 		PRIMARY KEY (
-			code -- 브랜드코드
+			no -- 브랜드번호
 		);
 
 -- 보험
@@ -233,10 +233,10 @@ ALTER TABLE proj_rentCar.rent
 ALTER TABLE proj_rentCar.car_type
 	ADD CONSTRAINT FK_brand_TO_car_type -- 브랜드 -> 차종(소 중 대)
 		FOREIGN KEY (
-			brand_code -- 브랜드코드
+			brand_code -- 브랜드번호
 		)
 		REFERENCES proj_rentCar.brand ( -- 브랜드
-			code -- 브랜드코드
+			no -- 브랜드번호
 		);
 
 -- 차(모델)
