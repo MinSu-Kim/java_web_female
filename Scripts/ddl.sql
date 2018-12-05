@@ -1,121 +1,109 @@
-create database proj_rentCar;
-
 -- 렌트카
 DROP SCHEMA IF EXISTS proj_rentCar;
-
--- 차량관리
-DROP SCHEMA IF EXISTS Car;
 
 -- 렌트카
 CREATE SCHEMA proj_rentCar;
 
--- 차량관리
-CREATE SCHEMA Car;
-
--- 고객관리
+-- 고객
 CREATE TABLE proj_rentCar.customer (
-	Code        VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
-	Name        VARCHAR(20) NULL     COMMENT '고객이름', -- 고객이름
-	address     VARCHAR(50) NULL     COMMENT '주소', -- 주소
-	phone       VARCHAR(13) NULL     COMMENT '연락처', -- 연락처
-	dob         DATE        NULL     COMMENT '생년월일', -- 생년월일
-	email       VARCHAR(30) NULL     COMMENT '이메일', -- 이메일
-	gradeCode   CHAR(5)     NULL     COMMENT '등급코드', -- 등급코드
-	licenseCode VARCHAR(4)  NULL     COMMENT '면허코드' -- 면허코드
+	code       VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
+	Id         VARCHAR(40) NOT NULL COMMENT '아이디', -- 아이디
+	passwd     VARCHAR(40) NOT NULL COMMENT '비밀번호', -- 비밀번호
+	Name       VARCHAR(20) NOT NULL COMMENT '고객이름', -- 고객이름
+	address    VARCHAR(50) NULL     COMMENT '주소', -- 주소
+	phone      VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
+	dob        DATE        NOT NULL COMMENT '생년월일', -- 생년월일
+	email      VARCHAR(30) NULL     COMMENT '이메일', -- 이메일
+	emp_code   VARCHAR(5)  NOT NULL COMMENT '직원코드', -- 직원코드
+	license    VARCHAR(4)  NOT NULL COMMENT '면허종류', -- 면허종류
+	grade_code CHAR(5)     NOT NULL COMMENT '등급코드' -- 등급코드
 )
-COMMENT '고객관리';
+COMMENT '고객';
 
--- 고객관리
+-- 고객
 ALTER TABLE proj_rentCar.customer
-	ADD CONSTRAINT PK_customer -- 고객관리 기본키
+	ADD CONSTRAINT PK_customer -- 고객 기본키
 		PRIMARY KEY (
-			Code -- 고객코드
-		);
-
--- 면허
-CREATE TABLE proj_rentCar.drive_license (
-	licenseCode VARCHAR(4)  NOT NULL COMMENT '면허코드', -- 면허코드
-	licenseType VARCHAR(20) NULL     COMMENT '면허종류' -- 면허종류
-)
-COMMENT '면허';
-
--- 면허
-ALTER TABLE proj_rentCar.drive_license
-	ADD CONSTRAINT PK_drive_license -- 면허 기본키
-		PRIMARY KEY (
-			licenseCode -- 면허코드
+			code -- 고객코드
 		);
 
 -- 회원등급
-CREATE TABLE proj_rentCar.customer_grade (
-	gradeCode CHAR(5)     NOT NULL COMMENT '등급코드', -- 등급코드
-	gradeName VARCHAR(20) NULL     COMMENT '등급이름' -- 등급이름
+CREATE TABLE proj_rentCar.grade (
+	code CHAR(5)     NOT NULL COMMENT '등급코드', -- 등급코드
+	name VARCHAR(20) NOT NULL COMMENT '등급이름' -- 등급이름
 )
 COMMENT '회원등급';
 
 -- 회원등급
-ALTER TABLE proj_rentCar.customer_grade
-	ADD CONSTRAINT PK_customer_grade -- 회원등급 기본키
+ALTER TABLE proj_rentCar.grade
+	ADD CONSTRAINT PK_grade -- 회원등급 기본키
 		PRIMARY KEY (
-			gradeCode -- 등급코드
+			code -- 등급코드
 		);
 
--- 대여테이블
+-- 차량대여
 CREATE TABLE proj_rentCar.rent (
-	rentCode      VARCHAR(10) NOT NULL COMMENT '대여코드', -- 대여코드
-	startDate     DATE        NOT NULL COMMENT '시작날짜', -- 시작날짜
-	startTime     TIME        NOT NULL COMMENT '시작시간', -- 시작시간
-	endDate       DATE        NOT NULL COMMENT '반납날짜', -- 반납날짜
-	endTime       TIME        NOT NULL COMMENT '반납시간', -- 반납시간
-	isReturn      BOOLEAN     NOT NULL COMMENT '반납여부', -- 반납여부
-	rentPrice     INT         NULL     COMMENT '렌트비용', -- 렌트비용
-	carCode       VARCHAR(5)  NOT NULL COMMENT '차코드', -- 차코드
-	Code          VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
-	insuranceCode VARCHAR(5)  NOT NULL COMMENT '보험코드' -- 보험코드
+	code           VARCHAR(10) NOT NULL COMMENT '대여코드', -- 대여코드
+	start_date     DATE        NOT NULL COMMENT '시작날짜', -- 시작날짜
+	start_time     TIME        NOT NULL COMMENT '시작시간', -- 시작시간
+	end_date       DATE        NOT NULL COMMENT '반납날짜', -- 반납날짜
+	end_time       TIME        NOT NULL COMMENT '반납시간', -- 반납시간
+	is_return      BOOLEAN     NOT NULL COMMENT '반납여부', -- 반납여부
+	price          INT         NOT NULL COMMENT '렌트비용', -- 렌트비용
+	car_code       VARCHAR(5)  NOT NULL COMMENT '차코드', -- 차코드
+	costomer_code  VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
+	insurance_code VARCHAR(5)  NOT NULL COMMENT '보험코드' -- 보험코드
 )
-COMMENT '대여테이블';
+COMMENT '차량대여';
 
--- 대여테이블
+-- 차량대여
 ALTER TABLE proj_rentCar.rent
-	ADD CONSTRAINT PK_rent -- 대여테이블 기본키
+	ADD CONSTRAINT PK_rent -- 차량대여 기본키
 		PRIMARY KEY (
-			rentCode -- 대여코드
+			code -- 대여코드
 		);
 
--- 차종
-CREATE TABLE proj_rentCar.carKind (
-	COL VARCHAR(4) NOT NULL COMMENT '차종' -- 차종
+-- 차종(소 중 대)
+CREATE TABLE proj_rentCar.car_type (
+	code       VARCHAR(4)  NOT NULL COMMENT '차종', -- 차종
+	brand_code INTEGER     NOT NULL COMMENT '브랜드번호', -- 브랜드번호
+	name       VARCHAR(20) NOT NULL COMMENT '차량유형' -- 차량유형
 )
-COMMENT '차종';
+COMMENT '차종(소 중 대)';
 
--- 차종
-ALTER TABLE proj_rentCar.carKind
-	ADD CONSTRAINT PK_carKind -- 차종 기본키
+-- 차종(소 중 대)
+ALTER TABLE proj_rentCar.car_type
+	ADD CONSTRAINT PK_car_type -- 차종(소 중 대) 기본키
 		PRIMARY KEY (
-			COL -- 차종
+			code -- 차종
 		);
 
--- 차
-CREATE TABLE proj_rentCar.car (
-	carCode   VARCHAR(5) NOT NULL COMMENT '차코드', -- 차코드
-	carColor  CHAR(2)    NOT NULL COMMENT '색상', -- 색상
-	priceCode VARCHAR(5) NOT NULL COMMENT '비용코드', -- 비용코드
-	gear      CHAR(2)    NOT NULL COMMENT '오토/', -- 조작방식
-	fuelCode  VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
-	brandCode VARCHAR(5) NOT NULL COMMENT '브랜드코드' -- 브랜드코드
+-- 차(모델)
+CREATE TABLE proj_rentCar.car_model (
+	car_code        VARCHAR(5) NOT NULL COMMENT '차코드', -- 차코드
+	color           CHAR(2)    NOT NULL COMMENT '색상', -- 색상
+	gear            CHAR(2)    NOT NULL COMMENT '오토/', -- 조작방식
+	brand_code      VARCHAR(5) NOT NULL COMMENT '브랜드번호', -- 브랜드번호
+	cartype_code    VARCHAR(4) NOT NULL COMMENT '차종', -- 차종
+	six_hour        INTEGER    NOT NULL COMMENT '6시간비용', -- 6시간비용
+	twelve_hour     INTEGER    NOT NULL COMMENT '12시간비용', -- 12시간비용
+	twentyfour_hour INTEGER    NOT NULL COMMENT '24시간비용', -- 24시간비용
+	fuel_code       VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
+	is_rent         BOOLEAN    NOT NULL COMMENT '대여여부' -- 대여여부
 )
-COMMENT '차';
+COMMENT '차(모델)';
 
--- 차
-ALTER TABLE proj_rentCar.car
-	ADD CONSTRAINT PK_car -- 차 기본키
+-- 차(모델)
+ALTER TABLE proj_rentCar.car_model
+	ADD CONSTRAINT PK_car_model -- 차(모델) 기본키
 		PRIMARY KEY (
-			carCode -- 차코드
+			car_code -- 차코드
 		);
 
 -- 연료
 CREATE TABLE proj_rentCar.fuel (
-	fuelCode VARCHAR(5) NOT NULL COMMENT '연료코드' -- 연료코드
+	code     VARCHAR(5) NOT NULL COMMENT '연료코드', -- 연료코드
+	car_code VARCHAR(5) NOT NULL COMMENT '차코드' -- 차코드
 )
 COMMENT '연료';
 
@@ -123,13 +111,13 @@ COMMENT '연료';
 ALTER TABLE proj_rentCar.fuel
 	ADD CONSTRAINT PK_fuel -- 연료 기본키
 		PRIMARY KEY (
-			fuelCode -- 연료코드
+			code -- 연료코드
 		);
 
 -- 브랜드
 CREATE TABLE proj_rentCar.brand (
-	brandCode VARCHAR(5)  NOT NULL COMMENT '브랜드코드', -- 브랜드코드
-	country   VARCHAR(20) NULL     COMMENT '생산국가' -- 생산국가
+	no   INTEGER     NOT NULL COMMENT '브랜드번호', -- 브랜드번호
+	name VARCHAR(20) NOT NULL COMMENT '브랜드명' -- 브랜드명
 )
 COMMENT '브랜드';
 
@@ -137,29 +125,13 @@ COMMENT '브랜드';
 ALTER TABLE proj_rentCar.brand
 	ADD CONSTRAINT PK_brand -- 브랜드 기본키
 		PRIMARY KEY (
-			brandCode -- 브랜드코드
-		);
-
--- 시간당 렌트비용
-CREATE TABLE proj_rentCar.price (
-	priceCode      VARCHAR(5) NOT NULL COMMENT '비용코드', -- 비용코드
-	sixTime        DATE       NULL     COMMENT '6시간', -- 6시간
-	twelveTime     DATE       NULL     COMMENT '12시간', -- 12시간
-	twentyfourTime DATE       NULL     COMMENT '24시간' -- 24시간
-)
-COMMENT '시간당 렌트비용';
-
--- 시간당 렌트비용
-ALTER TABLE proj_rentCar.price
-	ADD CONSTRAINT PK_price -- 시간당 렌트비용 기본키
-		PRIMARY KEY (
-			priceCode -- 비용코드
+			no -- 브랜드번호
 		);
 
 -- 보험
 CREATE TABLE proj_rentCar.insurance (
-	insuranceCode VARCHAR(5) NOT NULL COMMENT '보험코드', -- 보험코드
-	insuranceType VARCHAR(5) NULL     COMMENT '종류' -- 종류
+	code VARCHAR(5) NOT NULL COMMENT '보험코드', -- 보험코드
+	type VARCHAR(5) NOT NULL COMMENT '종류' -- 종류
 )
 COMMENT '보험';
 
@@ -167,65 +139,143 @@ COMMENT '보험';
 ALTER TABLE proj_rentCar.insurance
 	ADD CONSTRAINT PK_insurance -- 보험 기본키
 		PRIMARY KEY (
-			insuranceCode -- 보험코드
+			code -- 보험코드
 		);
 
--- 고객관리
+-- 직원
+CREATE TABLE proj_rentCar.employee (
+	code   VARCHAR(5)  NOT NULL COMMENT '직원코드', -- 직원코드
+	name   VARCHAR(40) NOT NULL COMMENT '직원명', -- 직원명
+	phone  VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
+	passwd VARCHAR(40) NOT NULL COMMENT '비밀번호' -- 비밀번호
+)
+COMMENT '직원';
+
+-- 직원
+ALTER TABLE proj_rentCar.employee
+	ADD CONSTRAINT PK_employee -- 직원 기본키
+		PRIMARY KEY (
+			code -- 직원코드
+		);
+
+-- 적용된 이벤트
+CREATE TABLE proj_rentCar.event_apply (
+	code       VARCHAR(10) NOT NULL COMMENT '대여코드', -- 대여코드
+	event_code CHAR(5)     NOT NULL COMMENT '이벤트코드' -- 이벤트코드
+)
+COMMENT '적용된 이벤트';
+
+-- 이벤트
+CREATE TABLE proj_rentCar.event (
+	code CHAR(5)     NOT NULL COMMENT '이벤트코드', -- 이벤트코드
+	name VARCHAR(20) NOT NULL COMMENT '이벤트명', -- 이벤트명
+	rate INTEGER     NOT NULL COMMENT '할인율' -- 할인율
+)
+COMMENT '이벤트';
+
+-- 이벤트
+ALTER TABLE proj_rentCar.event
+	ADD CONSTRAINT PK_event -- 이벤트 기본키
+		PRIMARY KEY (
+			code -- 이벤트코드
+		);
+
+-- 고객
 ALTER TABLE proj_rentCar.customer
-	ADD CONSTRAINT FK_customer_grade_TO_customer -- 회원등급 -> 고객관리
+	ADD CONSTRAINT FK_employee_TO_customer -- 직원 -> 고객
 		FOREIGN KEY (
-			gradeCode -- 등급코드
+			emp_code -- 직원코드
 		)
-		REFERENCES proj_rentCar.customer_grade ( -- 회원등급
-			gradeCode -- 등급코드
+		REFERENCES proj_rentCar.employee ( -- 직원
+			code -- 직원코드
 		);
 
--- 고객관리
+-- 고객
 ALTER TABLE proj_rentCar.customer
-	ADD CONSTRAINT FK_drive_license_TO_customer -- 면허 -> 고객관리
+	ADD CONSTRAINT FK_grade_TO_customer -- 회원등급 -> 고객
 		FOREIGN KEY (
-			licenseCode -- 면허코드
+			grade_code -- 등급코드
 		)
-		REFERENCES proj_rentCar.drive_license ( -- 면허
-			licenseCode -- 면허코드
+		REFERENCES proj_rentCar.grade ( -- 회원등급
+			code -- 등급코드
 		);
 
--- 대여테이블
+-- 차량대여
 ALTER TABLE proj_rentCar.rent
-	ADD CONSTRAINT FK_car_TO_rent -- 차 -> 대여테이블
+	ADD CONSTRAINT FK_car_model_TO_rent -- 차(모델) -> 차량대여
 		FOREIGN KEY (
-			carCode -- 차코드
+			car_code -- 차코드
 		)
-		REFERENCES proj_rentCar.car ( -- 차
-			carCode -- 차코드
+		REFERENCES proj_rentCar.car_model ( -- 차(모델)
+			car_code -- 차코드
 		);
 
--- 대여테이블
+-- 차량대여
 ALTER TABLE proj_rentCar.rent
-	ADD CONSTRAINT FK_customer_TO_rent -- 고객관리 -> 대여테이블
+	ADD CONSTRAINT FK_customer_TO_rent -- 고객 -> 차량대여
 		FOREIGN KEY (
-			Code -- 고객코드
+			costomer_code -- 고객코드
 		)
-		REFERENCES proj_rentCar.customer ( -- 고객관리
-			Code -- 고객코드
+		REFERENCES proj_rentCar.customer ( -- 고객
+			code -- 고객코드
 		);
 
--- 대여테이블
+-- 차량대여
 ALTER TABLE proj_rentCar.rent
-	ADD CONSTRAINT FK_insurance_TO_rent -- 보험 -> 대여테이블
+	ADD CONSTRAINT FK_insurance_TO_rent -- 보험 -> 차량대여
 		FOREIGN KEY (
-			insuranceCode -- 보험코드
+			insurance_code -- 보험코드
 		)
 		REFERENCES proj_rentCar.insurance ( -- 보험
-			insuranceCode -- 보험코드
+			code -- 보험코드
 		);
 
--- 차
-ALTER TABLE proj_rentCar.car
-	ADD CONSTRAINT FK_price_TO_car -- 시간당 렌트비용 -> 차
+-- 차종(소 중 대)
+ALTER TABLE proj_rentCar.car_type
+	ADD CONSTRAINT FK_brand_TO_car_type -- 브랜드 -> 차종(소 중 대)
 		FOREIGN KEY (
-			priceCode -- 비용코드
+			brand_code -- 브랜드번호
 		)
-		REFERENCES proj_rentCar.price ( -- 시간당 렌트비용
-			priceCode -- 비용코드
+		REFERENCES proj_rentCar.brand ( -- 브랜드
+			no -- 브랜드번호
+		);
+
+-- 차(모델)
+ALTER TABLE proj_rentCar.car_model
+	ADD CONSTRAINT FK_car_type_TO_car_model -- 차종(소 중 대) -> 차(모델)
+		FOREIGN KEY (
+			cartype_code -- 차종
+		)
+		REFERENCES proj_rentCar.car_type ( -- 차종(소 중 대)
+			code -- 차종
+		);
+
+-- 차(모델)
+ALTER TABLE proj_rentCar.car_model
+	ADD CONSTRAINT FK_fuel_TO_car_model -- 연료 -> 차(모델)
+		FOREIGN KEY (
+			fuel_code -- 연료코드
+		)
+		REFERENCES proj_rentCar.fuel ( -- 연료
+			code -- 연료코드
+		);
+
+-- 적용된 이벤트
+ALTER TABLE proj_rentCar.event_apply
+	ADD CONSTRAINT FK_rent_TO_event_apply -- 차량대여 -> 적용된 이벤트
+		FOREIGN KEY (
+			code -- 대여코드
+		)
+		REFERENCES proj_rentCar.rent ( -- 차량대여
+			code -- 대여코드
+		);
+
+-- 적용된 이벤트
+ALTER TABLE proj_rentCar.event_apply
+	ADD CONSTRAINT FK_event_TO_event_apply -- 이벤트 -> 적용된 이벤트
+		FOREIGN KEY (
+			event_code -- 이벤트코드
+		)
+		REFERENCES proj_rentCar.event ( -- 이벤트
+			code -- 이벤트코드
 		);
