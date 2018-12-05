@@ -49,10 +49,11 @@ CREATE TABLE proj_rentCar.rent (
 	end_date       DATE        NOT NULL COMMENT '반납날짜', -- 반납날짜
 	end_time       TIME        NOT NULL COMMENT '반납시간', -- 반납시간
 	is_return      BOOLEAN     NOT NULL COMMENT '반납여부', -- 반납여부
-	price          INT         NOT NULL COMMENT '렌트비용', -- 렌트비용
-	car_code       VARCHAR(5)  NOT NULL COMMENT '차코드', -- 차코드
+	basic_price    INT         NOT NULL COMMENT '렌트비용', -- 렌트비용
+	car_code       CHAR(10)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
-	insurance_code VARCHAR(5)  NOT NULL COMMENT '보험코드' -- 보험코드
+	insurance_code VARCHAR(5)  NOT NULL COMMENT '보험코드', -- 보험코드
+	opt_price      INTEGER     NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';
 
@@ -65,7 +66,7 @@ ALTER TABLE proj_rentCar.rent
 
 -- 차종(소 중 대)
 CREATE TABLE proj_rentCar.car_type (
-	code       VARCHAR(4)  NOT NULL COMMENT '차종', -- 차종
+	code       CHAR(4)     NOT NULL COMMENT '차종', -- 차종
 	brand_code INTEGER     NOT NULL COMMENT '브랜드번호', -- 브랜드번호
 	name       VARCHAR(20) NOT NULL COMMENT '차량유형' -- 차량유형
 )
@@ -80,11 +81,10 @@ ALTER TABLE proj_rentCar.car_type
 
 -- 차(모델)
 CREATE TABLE proj_rentCar.car_model (
-	car_code        VARCHAR(5)  NOT NULL COMMENT '차코드', -- 차코드
+	car_code        CHAR(10)    NOT NULL COMMENT 's수동 a 자동 ,hy01:carType,ga연료 ,bk색상', -- 차코드
 	color           CHAR(2)     NOT NULL COMMENT '색상', -- 색상
-	gear            CHAR(2)     NOT NULL COMMENT '오토/', -- 조작방식
-	brand_code      VARCHAR(5)  NOT NULL COMMENT '브랜드번호', -- 브랜드번호
-	cartype_code    VARCHAR(4)  NOT NULL COMMENT '차종', -- 차종
+	gear            VARCHAR(5)  NOT NULL COMMENT '오토 스틱', -- 조작방식
+	cartype_code    CHAR(4)     NOT NULL COMMENT '차종', -- 차종
 	six_hour        INTEGER     NOT NULL COMMENT '6시간비용', -- 6시간비용
 	twelve_hour     INTEGER     NOT NULL COMMENT '12시간비용', -- 12시간비용
 	twentyfour_hour INTEGER     NOT NULL COMMENT '24시간비용', -- 24시간비용
@@ -102,8 +102,7 @@ ALTER TABLE proj_rentCar.car_model
 
 -- 연료
 CREATE TABLE proj_rentCar.fuel (
-	code     VARCHAR(10) NOT NULL COMMENT '연료코드', -- 연료코드
-	car_code VARCHAR(5)  NOT NULL COMMENT '차코드' -- 차코드
+	code VARCHAR(10) NOT NULL COMMENT '연료코드' -- 연료코드
 )
 COMMENT '연료';
 
@@ -179,6 +178,28 @@ ALTER TABLE proj_rentCar.event
 		PRIMARY KEY (
 			code -- 이벤트코드
 		);
+
+-- 차량옵션
+CREATE TABLE proj_rentCar.car_option (
+	no    INTEGER     NOT NULL COMMENT '옵션번호', -- 옵션번호
+	name  VARCHAR(50) NOT NULL COMMENT '옵션명', -- 옵션명
+	price INTEGER     NOT NULL COMMENT '옵션비용' -- 옵션비용
+)
+COMMENT '차량옵션';
+
+-- 차량옵션
+ALTER TABLE proj_rentCar.car_option
+	ADD CONSTRAINT PK_car_option -- 차량옵션 기본키
+		PRIMARY KEY (
+			no -- 옵션번호
+		);
+
+-- 추가옵션
+CREATE TABLE proj_rentCar.add_option (
+	option_id INTEGER  NOT NULL COMMENT '옵션번호', -- 옵션번호
+	car_code  CHAR(10) NOT NULL COMMENT '차코드' -- 차코드
+)
+COMMENT '추가옵션';
 
 -- 고객
 ALTER TABLE proj_rentCar.customer
@@ -278,4 +299,24 @@ ALTER TABLE proj_rentCar.event_apply
 		)
 		REFERENCES proj_rentCar.event ( -- 이벤트
 			code -- 이벤트코드
+		);
+
+-- 추가옵션
+ALTER TABLE proj_rentCar.add_option
+	ADD CONSTRAINT FK_car_option_TO_add_option -- 차량옵션 -> 추가옵션
+		FOREIGN KEY (
+			option_id -- 옵션번호
+		)
+		REFERENCES proj_rentCar.car_option ( -- 차량옵션
+			no -- 옵션번호
+		);
+
+-- 추가옵션
+ALTER TABLE proj_rentCar.add_option
+	ADD CONSTRAINT FK_car_model_TO_add_option -- 차(모델) -> 추가옵션
+		FOREIGN KEY (
+			car_code -- 차코드
+		)
+		REFERENCES proj_rentCar.car_model ( -- 차(모델)
+			car_code -- 차코드
 		);
