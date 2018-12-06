@@ -30,7 +30,8 @@ ALTER TABLE proj_rentCar.customer
 -- 회원등급
 CREATE TABLE proj_rentCar.grade (
 	code CHAR(5)     NOT NULL COMMENT '등급코드', -- 등급코드
-	name VARCHAR(20) NOT NULL COMMENT '등급이름' -- 등급이름
+	name VARCHAR(20) NOT NULL COMMENT '등급이름', -- 등급이름
+	rate INTEGER     NOT NULL COMMENT '등급별할인율' -- 등급별할인율
 )
 COMMENT '회원등급';
 
