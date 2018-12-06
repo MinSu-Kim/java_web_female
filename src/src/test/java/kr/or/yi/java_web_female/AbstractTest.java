@@ -1,4 +1,4 @@
-package java_web_female;
+package kr.or.yi.java_web_female;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;

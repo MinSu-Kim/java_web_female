@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration  
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="application.properties"></properties>
+	
+	<typeAliases>
+
+	</typeAliases>
+
+	<typeHandlers>
+
+	</typeHandlers>
+	
+	<environments default="development">
+
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="kr.or.yi.java_web_female.jdbc.C3P0DataSourceFactory">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
