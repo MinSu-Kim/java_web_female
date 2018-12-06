@@ -82,6 +82,7 @@ ALTER TABLE proj_rentCar.car_type
 -- 차(모델)
 CREATE TABLE proj_rentCar.car_model (
 	car_code        CHAR(10)    NOT NULL COMMENT 's수동 a 자동 ,hy01:carType,ga연료 ,bk색상', -- 차코드
+	name            VARCHAR(20) NOT NULL COMMENT '이름', -- 이름
 	color           CHAR(2)     NOT NULL COMMENT '색상', -- 색상
 	gear            VARCHAR(5)  NOT NULL COMMENT '오토 스틱', -- 조작방식
 	cartype_code    CHAR(4)     NOT NULL COMMENT '차종', -- 차종
