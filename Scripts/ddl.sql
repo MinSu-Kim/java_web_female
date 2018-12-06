@@ -81,7 +81,7 @@ ALTER TABLE proj_rentcar.car_type
 
 -- 고객
 CREATE TABLE proj_rentcar.customer (
-	code       VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
+	code       CHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
 	Id         VARCHAR(40) NOT NULL COMMENT '아이디', -- 아이디
 	passwd     CHAR(42)    NOT NULL COMMENT '비밀번호', -- 비밀번호
 	Name       VARCHAR(20) NOT NULL COMMENT '고객이름', -- 고객이름
@@ -137,7 +137,7 @@ ALTER TABLE proj_rentcar.event
 
 -- 적용된 이벤트
 CREATE TABLE proj_rentcar.event_apply (
-	code       VARCHAR(10) NOT NULL COMMENT '대여코드', -- 대여코드
+	code       CHAR(5) NOT NULL COMMENT '대여코드', -- 대여코드
 	event_code CHAR(5)     NOT NULL COMMENT '이벤트코드' -- 이벤트코드
 )
 COMMENT '적용된 이벤트';
@@ -172,7 +172,7 @@ ALTER TABLE proj_rentcar.grade
 
 -- 보험
 CREATE TABLE proj_rentcar.insurance (
-	code VARCHAR(5) NOT NULL COMMENT '보험코드', -- 보험코드
+	code CHAR(5) NOT NULL COMMENT '보험코드', -- 보험코드
 	type VARCHAR(5) NOT NULL COMMENT '종류' -- 종류
 )
 COMMENT '보험';
@@ -194,7 +194,7 @@ COMMENT '회원등급기준';
 
 -- 차량대여
 CREATE TABLE proj_rentcar.rent (
-	code           VARCHAR(10) NOT NULL COMMENT '대여코드', -- 대여코드
+	code           CHAR(5) NOT NULL COMMENT '대여코드', -- 대여코드
 	start_date     DATE        NOT NULL COMMENT '시작날짜', -- 시작날짜
 	start_time     TIME        NOT NULL COMMENT '시작시간', -- 시작시간
 	end_date       DATE        NOT NULL COMMENT '반납날짜', -- 반납날짜
@@ -202,8 +202,8 @@ CREATE TABLE proj_rentcar.rent (
 	is_return      TINYINT(4)  NOT NULL COMMENT '반납여부', -- 반납여부
 	basic_price    INT(11)     NOT NULL COMMENT '렌트비용', -- 렌트비용
 	car_code       CHAR(10)    NOT NULL COMMENT '차코드', -- 차코드
-	costomer_code  VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
-	insurance_code VARCHAR(5)  NOT NULL COMMENT '보험코드', -- 보험코드
+	costomer_code  CHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
+	insurance_code CHAR(5)  NOT NULL COMMENT '보험코드', -- 보험코드
 	opt_price      INT(11)     NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';
