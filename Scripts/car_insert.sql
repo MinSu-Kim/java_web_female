@@ -9,6 +9,9 @@ values
 (2, 'kia'),
 (3,'bmw');
 
+select *
+from brand;
+
 -- 차종
 INSERT INTO proj_rentcar.car_type
 (code, brand_code, name)
@@ -36,7 +39,8 @@ values
 ('Bm05', 3, '승합'),
 ('Bm06', 3, 'suv');
 
-
+select *
+from car_type;
 -- 차연료
 INSERT INTO proj_rentcar.fuel
 (code)
@@ -47,6 +51,8 @@ values
 ('hybrid'),
 ('electric');
 
+select *
+from fuel;
 
 -- 옵션
 INSERT INTO proj_rentcar.car_option
@@ -57,25 +63,23 @@ values
 (2, 'blackbox', 6000), -- 블랙박스
 (3, 'sunroof', 6000);
 
-
+select *
+from car_option;
 
 -- 차모델
 -- s수동 a 자동 ,hy01:carType,ga연료 ,bk색상
 INSERT INTO proj_rentcar.car_model
-(car_code, name, color, gear, cartype_code, one_hour, six_hour, twelve_hour, twentyfour_hour, fuel_code, is_rent)
+(car_code, name, color, gear, cartype_code, one_hour, six_hour, twelve_hour, twentyfour_hour, fuel_code, is_rent, rent_cnt)
 values
-('a-ki01gawh', '모닝','wh', 'auto', 'ki01', 3200 ,13100, 18700, 23400, 'gasolin', 0),
-('a-hy02gabk', 'i20','bk', 'auto', 'hy02', 3400, 13700, 19500, 24400, 'gasolin', 0),
-('a-bm02debk', 'bmw2','bk', 'auto', 'bm02', 4500, 18200, 26100, 32600, 'diesel', 0);
+('a-ki01gawh', '모닝','wh', 'auto', 'ki01', 3200 ,13100, 18700, 23400, 'gasolin', 0,0),
+('a-hy02gabk', 'i20','bk', 'auto', 'hy02', 3400, 13700, 19500, 24400, 'gasolin', 0,0),
+('a-bm02debk', 'bmw2','bk', 'auto', 'bm02', 4500, 18200, 26100, 32600, 'diesel', 0,0),
+('s-ki02lpwh', '프라이드','wh', 'stick', 'ki02', 3400 ,13700, 19500, 24400, 'lpg', 0,0),
+('a-hy02gawh', '쏘나타','wh', 'auto', 'hy02', 4500, 18200, 26100, 32600, 'gasolin', 0,0),
+('a-bm02dewh', 'bmw3','wh', 'auto', 'bm02', 5700, 22800, 32600, 40800, 'diesel', 0,0);
 
-INSERT INTO proj_rentcar.car_model
-(car_code, name, color, gear, cartype_code, one_hour, six_hour, twelve_hour, twentyfour_hour, fuel_code, is_rent)
-values
-('s-ki02lpwh', '프라이드','wh', 'stick', 'ki02', 3400 ,13700, 19500, 24400, 'lpg', 0),
-('a-hy02gawh', '쏘나타','wh', 'auto', 'hy02', 4500, 18200, 26100, 32600, 'gasolin', 0),
-('a-bm02dewh', 'bmw3','wh', 'auto', 'bm02', 5700, 22800, 32600, 40800, 'diesel', 0);
-
-
+select *
+from car_model;
 
 INSERT INTO proj_rentcar.add_option
 (option_id, car_code)
@@ -87,6 +91,8 @@ values
 (2, 'a-bm02debk'),
 (3, 'a-bm02debk');
 
+select *
+from add_option;
 
 
 
