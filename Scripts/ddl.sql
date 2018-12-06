@@ -14,9 +14,10 @@ CREATE TABLE proj_rentCar.customer (
 	phone      VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
 	dob        DATE        NOT NULL COMMENT '생년월일', -- 생년월일
 	email      VARCHAR(30) NULL     COMMENT '이메일', -- 이메일
-	emp_code   VARCHAR(5)  NOT NULL COMMENT '직원코드', -- 직원코드
+	emp_code   CHAR(5)     NOT NULL COMMENT '직원코드', -- 직원코드
 	license    VARCHAR(4)  NOT NULL COMMENT '면허종류', -- 면허종류
-	grade_code CHAR(5)     NOT NULL COMMENT '등급코드' -- 등급코드
+	grade_code CHAR(5)     NOT NULL COMMENT '등급코드', -- 등급코드
+	rent_cnt   INTEGER     NOT NULL COMMENT '대여횟수' -- 대여횟수
 )
 COMMENT '고객';
 
@@ -49,7 +50,7 @@ CREATE TABLE proj_rentCar.rent (
 	start_time     TIME        NOT NULL COMMENT '시작시간', -- 시작시간
 	end_date       DATE        NOT NULL COMMENT '반납날짜', -- 반납날짜
 	end_time       TIME        NOT NULL COMMENT '반납시간', -- 반납시간
-	is_return      BOOLEAN     NOT NULL COMMENT '반납여부', -- 반납여부
+	is_return      TINYINT     NOT NULL COMMENT '반납여부', -- 반납여부
 	basic_price    INT         NOT NULL COMMENT '렌트비용', -- 렌트비용
 	car_code       CHAR(10)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
@@ -92,7 +93,8 @@ CREATE TABLE proj_rentCar.car_model (
 	twelve_hour     INTEGER     NOT NULL COMMENT '12시간비용', -- 12시간비용
 	twentyfour_hour INTEGER     NOT NULL COMMENT '24시간비용', -- 24시간비용
 	fuel_code       VARCHAR(10) NOT NULL COMMENT '연료코드', -- 연료코드
-	is_rent         BOOLEAN     NOT NULL COMMENT '대여여부' -- 대여여부
+	is_rent         TINYINT     NOT NULL COMMENT '대여여부', -- 대여여부
+	rent_cnt        INTEGER     NOT NULL COMMENT '대여횟수' -- 대여횟수
 )
 COMMENT '차(모델)';
 
@@ -146,10 +148,11 @@ ALTER TABLE proj_rentCar.insurance
 
 -- 직원
 CREATE TABLE proj_rentCar.employee (
-	code   VARCHAR(5)  NOT NULL COMMENT '직원코드', -- 직원코드
+	code   CHAR(5)     NOT NULL COMMENT '직원코드', -- 직원코드
 	name   VARCHAR(40) NOT NULL COMMENT '직원명', -- 직원명
 	phone  VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
-	passwd CHAR(42)    NOT NULL COMMENT '비밀번호' -- 비밀번호
+	passwd CHAR(42)    NOT NULL COMMENT '비밀번호', -- 비밀번호
+	t_code CHAR(5)     NOT NULL COMMENT '직책코드' -- 직책코드
 )
 COMMENT '직원';
 
@@ -203,6 +206,29 @@ CREATE TABLE proj_rentCar.add_option (
 	car_code  CHAR(10) NOT NULL COMMENT '차코드' -- 차코드
 )
 COMMENT '추가옵션';
+
+-- 직책
+CREATE TABLE proj_rentCar.title (
+	code    CHAR(5)     NOT NULL COMMENT '직책코드', -- 직책코드
+	name    VARCHAR(20) NOT NULL COMMENT '직책명', -- 직책명
+	t_grant TINYINT     NOT NULL COMMENT '권한' -- 권한
+)
+COMMENT '직책';
+
+-- 직책
+ALTER TABLE proj_rentCar.title
+	ADD CONSTRAINT PK_title -- 직책 기본키
+		PRIMARY KEY (
+			code -- 직책코드
+		);
+
+-- 회원등급기준
+CREATE TABLE proj_rentCar.level (
+	bronze TINYINT NOT NULL COMMENT '0-6', -- 0-6
+	sliver TINYINT NOT NULL COMMENT '7-40', -- 7-40
+	gold   TINYINT NOT NULL COMMENT '40-' -- 40-
+)
+COMMENT '회원등급기준';
 
 -- 고객
 ALTER TABLE proj_rentCar.customer
@@ -282,6 +308,16 @@ ALTER TABLE proj_rentCar.car_model
 		)
 		REFERENCES proj_rentCar.fuel ( -- 연료
 			code -- 연료코드
+		);
+
+-- 직원
+ALTER TABLE proj_rentCar.employee
+	ADD CONSTRAINT FK_title_TO_employee -- 직책 -> 직원
+		FOREIGN KEY (
+			t_code -- 직책코드
+		)
+		REFERENCES proj_rentCar.title ( -- 직책
+			code -- 직책코드
 		);
 
 -- 적용된 이벤트
