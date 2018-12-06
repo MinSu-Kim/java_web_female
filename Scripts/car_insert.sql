@@ -71,7 +71,7 @@ values
 INSERT INTO proj_rentcar.car_model
 (car_code, name, color, gear, cartype_code, one_hour, six_hour, twelve_hour, twentyfour_hour, fuel_code, is_rent)
 values
-('s-ki02lpwh', '프라이드','wh', 'stick', 'ki02', 3400 ,13700, 19500, 24400, 'lpg', 0),
+('s-ki02lpwh', '프라이드s','wh', 'stick', 'ki02', 3400 ,13700, 19500, 24400, 'lpg', 0),
 ('a-hy02gawh', '쏘나타','wh', 'auto', 'hy02', 4500, 18200, 26100, 32600, 'gasolin', 0),
 ('a-bm02dewh', 'bmw3','wh', 'auto', 'bm02', 5700, 22800, 32600, 40800, 'diesel', 0);
 

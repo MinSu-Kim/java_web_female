@@ -8,7 +8,7 @@ CREATE SCHEMA proj_rentCar;
 CREATE TABLE proj_rentCar.customer (
 	code       VARCHAR(5)  NOT NULL COMMENT '고객코드', -- 고객코드
 	Id         VARCHAR(40) NOT NULL COMMENT '아이디', -- 아이디
-	passwd     VARCHAR(41) NOT NULL COMMENT '비밀번호', -- 비밀번호
+	passwd     CHAR(42)    NOT NULL COMMENT '비밀번호', -- 비밀번호
 	Name       VARCHAR(20) NOT NULL COMMENT '고객이름', -- 고객이름
 	address    VARCHAR(50) NULL     COMMENT '주소', -- 주소
 	phone      VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
@@ -148,7 +148,7 @@ CREATE TABLE proj_rentCar.employee (
 	code   VARCHAR(5)  NOT NULL COMMENT '직원코드', -- 직원코드
 	name   VARCHAR(40) NOT NULL COMMENT '직원명', -- 직원명
 	phone  VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
-	passwd VARCHAR(40) NOT NULL COMMENT '비밀번호' -- 비밀번호
+	passwd CHAR(42)    NOT NULL COMMENT '비밀번호' -- 비밀번호
 )
 COMMENT '직원';
 
