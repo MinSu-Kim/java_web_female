@@ -86,6 +86,7 @@ CREATE TABLE proj_rentCar.car_model (
 	color           CHAR(2)     NOT NULL COMMENT '색상', -- 색상
 	gear            VARCHAR(5)  NOT NULL COMMENT '오토 스틱', -- 조작방식
 	cartype_code    CHAR(4)     NOT NULL COMMENT '차종', -- 차종
+	one_hour        INTEGER     NOT NULL COMMENT '1시간비용', -- 1시간비용
 	six_hour        INTEGER     NOT NULL COMMENT '6시간비용', -- 6시간비용
 	twelve_hour     INTEGER     NOT NULL COMMENT '12시간비용', -- 12시간비용
 	twentyfour_hour INTEGER     NOT NULL COMMENT '24시간비용', -- 24시간비용
