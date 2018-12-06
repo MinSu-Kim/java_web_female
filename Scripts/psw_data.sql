@@ -4,10 +4,10 @@ select * from grade;
 
 select * from employee;
 
-insert into grade values ('G001', '브론즈'),
-						('G002', '실버'),
-						('G003', '골드'),
-						('G004', '블랙리스트');
+insert into grade values ('G001', '브론즈', 5),
+						('G002', '실버', 10),
+						('G003', '골드', 20),
+						('G004', '블랙리스트', 0);
 						
 insert into employee values ('E001', '홍길동1', '010-1234-1234', password('rootroot')),
 							('E002', '홍길동2', '010-5678-5678', password('abcdef'));
