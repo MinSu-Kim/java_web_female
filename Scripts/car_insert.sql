@@ -1,46 +1,30 @@
-INSERT INTO proj_rentcar.brand
-(`no`, name)
-values
-(1,'hyundai');
 
+-- 브랜드 B+넘버링
 INSERT INTO proj_rentcar.brand
 (`no`, name)
 values
-(2, 'kia'),
-(3,'bmw');
+("B1",'hyundai'),
+("B2", 'kia'),
+("B3",'bmw');
 
 select *
 from brand;
 
--- 차종
+-- 차종 S+넘버링
 INSERT INTO proj_rentcar.car_type
-(code, brand_code, name)
+(code , type)
 values
-('hy01', 1,'경형'),
-('hy02',1,'소형'),
-('hy03',1,'중형'),
-('hy04',1,'대형'),
-('hy05',1,'승합'),
-('hy06',1,'suv');
+('S1','경형'),
+('S2','소형'),
+('S3','중형'),
+('S4','대형'),
+('S5','승합'),
+('S6','suv');
 
-INSERT INTO proj_rentcar.car_type
-(code, brand_code, name)
-values
-('ki01', 2, '경형'), -- 기아
-('ki02', 2, '소형'),
-('ki03', 2, '중형'),
-('ki04', 2, '대형'),
-('ki05', 2, '승합'),
-('ki06', 2, 'suv'),
-('Bm01', 3, '경형'), -- bmw
-('Bm02', 3, '소형'),
-('Bm03', 3, '중형'),
-('Bm04', 3, '대형'),
-('Bm05', 3, '승합'),
-('Bm06', 3, 'suv');
 
 select *
 from car_type;
+
 -- 차연료
 INSERT INTO proj_rentcar.fuel
 (code)
@@ -66,17 +50,23 @@ values
 select *
 from car_option;
 
--- 차모델
--- s수동 a 자동 ,hy01:carType,ga연료 ,bk색상
+-- 차모델 C
 INSERT INTO proj_rentcar.car_model
-(car_code, name, color, gear, cartype_code, one_hour, six_hour, twelve_hour, twentyfour_hour, fuel_code, is_rent, rent_cnt)
+(car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt)
 values
-('a-ki01gawh', '모닝','wh', 'auto', 'ki01', 3200 ,13100, 18700, 23400, 'gasolin', 0,0),
-('a-hy02gabk', 'i20','bk', 'auto', 'hy02', 3400, 13700, 19500, 24400, 'gasolin', 0,0),
-('a-bm02debk', 'bmw2','bk', 'auto', 'bm02', 4500, 18200, 26100, 32600, 'diesel', 0,0),
-('s-ki02lpwh', '프라이드','wh', 'stick', 'ki02', 3400 ,13700, 19500, 24400, 'lpg', 0,0),
-('a-hy02gawh', '쏘나타','wh', 'auto', 'hy02', 4500, 18200, 26100, 32600, 'gasolin', 0,0),
-('a-bm02dewh', 'bmw3','wh', 'auto', 'bm02', 5700, 22800, 32600, 40800, 'diesel', 0,0);
+('V001', '모닝','wh', 'auto', 'B2', 'S1' ,74000 ,41400, 53300, 59200, 74000,'gasolin', 0,0),
+('V002', '아반떼AD','bk', 'auto', 'B1','S2', 108000,60500,77800, 86400, 108000,'gasolin', 0,0),
+('V003', 'bmw2','bk', 'auto', 'B3', 'S2',204000,114200, 146900,163200,204000,'diesel', 0,0),
+('V004', '프라이드','wh', 'stick', 'B2','S2',118000 ,66100, 85000, 94400, 118000,'lpg', 0,0),
+('V005', 'LF쏘나타','wh', 'auto', 'B1', 'S3',155000, 86800, 111600,124000,155000 ,'gasolin', 0,0),
+('V006', 'bmw3','wh', 'auto', 'B3', 'S3',266000, 149000, 191500, 212800,266000, 'diesel', 0,0);
+
+INSERT INTO proj_rentcar.car_model
+(car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt)
+values
+('V007', '그랜저','wh', 'auto', 'B1', 'S4' ,210000 ,117600, 151200, 168000, 210000,'gasolin', 0,0),
+('V008', '스포티지','bk', 'auto', 'B2','S5', 153000,85700,110200, 122400, 153000,'gasolin', 0,0);
+
 
 select *
 from car_model;
@@ -84,15 +74,21 @@ from car_model;
 INSERT INTO proj_rentcar.add_option
 (option_id, car_code)
 values
-(1, 'a-ki01gawh'),
-(1, 'a-hy02gabk'),
-(2, 'a-hy02gabk'),
-(1, 'a-bm02debk'),
-(2, 'a-bm02debk'),
-(3, 'a-bm02debk');
+(1, 'V001'),
+(1, 'V002'),
+(2, 'V002'),
+(1, 'V003'),
+(2, 'V003'),
+(3, 'V003');
 
 select *
 from add_option;
+
+
+
+
+
+
 
 
 
