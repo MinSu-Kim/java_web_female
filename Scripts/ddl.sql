@@ -136,13 +136,6 @@ ALTER TABLE proj_rentcar.event
 			code -- 이벤트코드
 		);
 
--- 적용된 이벤트
-CREATE TABLE proj_rentcar.event_apply (
-	code       CHAR(5) NOT NULL COMMENT '대여코드', -- 대여코드
-	event_code CHAR(4) NOT NULL COMMENT '이벤트코드' -- 이벤트코드
-)
-COMMENT '적용된 이벤트';
-
 -- 연료
 CREATE TABLE proj_rentcar.fuel (
 	code VARCHAR(10) NOT NULL COMMENT '연료코드' -- 연료코드
@@ -351,36 +344,6 @@ ALTER TABLE proj_rentcar.employee
 		ON UPDATE RESTRICT,
 	ADD INDEX FK_title_TO_employee (
 		t_code -- 직책코드
-	);
-
--- 적용된 이벤트
-ALTER TABLE proj_rentcar.event_apply
-	ADD CONSTRAINT FK_event_TO_event_apply -- FK_event_TO_event_apply
-		FOREIGN KEY (
-			event_code -- 이벤트코드
-		)
-		REFERENCES proj_rentcar.event ( -- 이벤트
-			code -- 이벤트코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
-	ADD INDEX FK_event_TO_event_apply (
-		event_code -- 이벤트코드
-	);
-
--- 적용된 이벤트
-ALTER TABLE proj_rentcar.event_apply
-	ADD CONSTRAINT FK_rent_TO_event_apply -- FK_rent_TO_event_apply
-		FOREIGN KEY (
-			code -- 대여코드
-		)
-		REFERENCES proj_rentcar.rent ( -- 차량대여
-			code -- R0001
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
-	ADD INDEX FK_rent_TO_event_apply (
-		code -- 대여코드
 	);
 
 -- 차량대여
