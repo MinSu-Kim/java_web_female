@@ -1,0 +1,44 @@
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] testOpenSession()
+[2018-12-06] session org.apache.ibatis.session.defaults.DefaultSqlSession@749b14b8
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] testOpenSession()
+[2018-12-06] session org.apache.ibatis.session.defaults.DefaultSqlSession@749b14b8
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] testOpenSession()
+[2018-12-06] session org.apache.ibatis.session.defaults.DefaultSqlSession@3d62ec5c
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] testOpenSession()
+[2018-12-06] session org.apache.ibatis.session.defaults.DefaultSqlSession@3d62ec5c
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] testOpenSession()
+[2018-12-06] session org.apache.ibatis.session.defaults.DefaultSqlSession@3d62ec5c
+[2018-12-06] test01selectTitleByNo()
+[2018-12-06] testOpenSession()
+[2018-12-06] session org.apache.ibatis.session.defaults.DefaultSqlSession@3d62ec5c
+[2018-12-06] test01selectTitleByNo()
+[2018-12-07] testOpenSession()
+[2018-12-07] session org.apache.ibatis.session.defaults.DefaultSqlSession@749b14b8
+[2018-12-07] test01selectTitleByNo()
+[2018-12-07] testOpenSession()
+[2018-12-07] session org.apache.ibatis.session.defaults.DefaultSqlSession@749b14b8
+[2018-12-07] test01selectTitleByNo()
+[2018-12-07] testOpenSession()
+[2018-12-07] session org.apache.ibatis.session.defaults.DefaultSqlSession@3d62ec5c
+[2018-12-07] test01selectTitleByNo()
+[2018-12-07] testOpenSession()
+[2018-12-07] session org.apache.ibatis.session.defaults.DefaultSqlSession@749b14b8
+[2018-12-07] test01selectTitleByNo()
+[2018-12-07] test01selectTitleByNo()
+[2018-12-07] testOpenSession()
+[2018-12-07] test01selectTitleByNo()
+[2018-12-07] testOpenSession()
+[2018-12-07] session org.apache.ibatis.session.defaults.DefaultSqlSession@4c371962
+[2018-12-07] test01selectTitleByNo()
+[2018-12-07] ==>  Preparing: select code, name, t_grant as tGrant from title where code=?; 
+[2018-12-07] ==> Parameters: T0001(String)
+[2018-12-07] <==    Columns: code, name, tGrant
+[2018-12-07] <==        Row: T0001, ¸Å´ÏÀú, 1
+[2018-12-07] <==      Total: 1

@@ -8,7 +8,9 @@ select * from title;
 
 select * from level;
 
+-- 회원등급기준
 desc `level`;
+
 
 -- 등급 insert
 insert into grade values ('G0001', '브론즈', 5),
@@ -25,6 +27,7 @@ insert into employee values ('E0001', '홍길동1', '010-1234-1234', password('r
 
 -- 비밀번호 길이 확인
 select length(password('root123345')) from dual;
+
 -- 비밀번호가 같은지 확인
 select password('rootroot') = password('rootroot1') from dual;
 
@@ -38,5 +41,4 @@ insert into customer values ('C0001', 'asd132', password('rootroot'), '김철수
 							('C0007', 'fkufj12', password('dhtdhd5645'), '김민정', '울산 서구', '010-6666-1111', '1994-03-16', 'abc@naver.com' ,'E0002' , '2종보통','G0004', 1),
 							('C0008', 'xbmhw325',password('aggarg54'), '김재영', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E0001' , '1종보통','G0004', 2);
 
-						
 							
