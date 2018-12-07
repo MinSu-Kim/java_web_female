@@ -206,6 +206,7 @@ CREATE TABLE proj_rentcar.rent (
 	car_code       CHAR(4)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  CHAR(4)    NOT NULL COMMENT '고객코드', -- 고객코드
 	insurance_code CHAR(4)    NOT NULL COMMENT '보험코드', -- 보험코드
+	e_code         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트코드
 	opt_price      INT(11)    NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';
@@ -426,3 +427,13 @@ ALTER TABLE proj_rentcar.rent
 	ADD INDEX FK_insurance_TO_rent (
 		insurance_code -- 보험코드
 	);
+
+-- 차량대여
+ALTER TABLE proj_rentcar.rent
+	ADD CONSTRAINT FK_event_TO_rent -- 이벤트 -> 차량대여
+		FOREIGN KEY (
+			e_code -- 이벤트코드
+		)
+		REFERENCES proj_rentcar.event ( -- 이벤트
+			code -- 이벤트코드
+		);
