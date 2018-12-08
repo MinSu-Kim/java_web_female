@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.java_web_female.dao.EmployeeMapper">
+
+<!--sql 문장 -->
+	<sql id="selectSql">
+		select code, name, phone, passwd, t_code as tCode from employee
+	</sql>
+
+	<sql id="whereSql">
+		<where>
+			<if test="code != null">
+				code=#{code};
+			</if>
+		</where>
+	</sql>
+
+	<sql id="insertSql">
+		insert into employee(code, name, phone, passwd, t_code)
+		values(#{code},
+		#{name}, #{phone}, #{passwd}, t_code=#{tCode})
+	</sql>
+
+	<sql id="updateSql">
+		update title set code=#{code}, name=#{name},
+		phone=#{phone}, t_code=#{tCode}
+		where code=#{code}
+	</sql>
+
+	<!-- selectTitleByNo -->
+	<select id="selectEmployeeByNo" parameterType="Employee"
+		resultType="Employee">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+
+	<!-- selectEmployeeByAll -->
+	<select id="selectEmployeeByAll" resultType="Employee">
+		<include refid="selectSql" />
+	</select> 
+
+	<!-- insert -->
+	  <!-- <insert id="insertEmployee" parameterType="Employee">
+		<include refid="insertSql" />
+	</insert>  -->
+
+	<!-- update -->
+	<!-- <update id="updateTitle" parameterType="Title">
+		<include refid="updateSql" />
+	</update> -->
+	
+	<!-- delete -->
+	 <delete id="deleteEmployee" parameterType="Employee">
+		delete from employee
+		where code=#{code}
+	</delete> 
+
+</mapper>

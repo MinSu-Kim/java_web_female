@@ -35,7 +35,7 @@ public class TitleMapperTest  extends AbstractTest{
 		Assert.assertNotNull(titList);
 	}
 	
-	/*@Test
+	@Test
 	public void test03insertTitle() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Title title = new Title();
@@ -57,7 +57,7 @@ public class TitleMapperTest  extends AbstractTest{
 		int res = dao.updateTitle(title);
 		Assert.assertSame(1, res);
 
-	}*/
+	}
 	@Test
 	public void test05deleteTitle() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");

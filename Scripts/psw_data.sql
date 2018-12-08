@@ -26,6 +26,7 @@ insert into title values ('T001', '매니저', true),
 -- 직원 insert					
 insert into employee values ('E001', '나매니저', '010-1234-1234', password('rootroot'), 'T001'),
 							('E002', '너일반사원', '010-5678-5678', password('abcdef'), 'T002');
+						
 
 -- 비밀번호 길이 확인
 select length(password('root123345')) from dual;
@@ -48,11 +49,6 @@ insert into level values ('브론즈',0,5),
 							('실버',6,10),
 							('골드',11,99999),
 							('블랙리스트',-1,-1);	
-
-
-
-
-
 
 
 

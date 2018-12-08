@@ -5,6 +5,7 @@ public class Title {
 	private String name; //직책명
 	private boolean tGrant; //권한
 	
+	
 	/*getter & setter*/
 	public String getCode() {
 		return code;
