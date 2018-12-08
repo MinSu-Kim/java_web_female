@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.yi.java_web_female.dao.EmployeeMapper">
-
-<!--sql 문장 -->
+<mapper namespace="kr.or.yi.java_web_female.dao.GradeMapper">
+	<!--sql 문장 -->
 	<sql id="selectSql">
-		select code, name, phone, passwd, t_code as tCode from employee
+		select code, name, rate from grade
 	</sql>
 
 	<sql id="whereSql">
@@ -16,43 +15,42 @@
 	</sql>
 
 	<sql id="insertSql">
-		insert into employee(code, name, phone, passwd, t_code)
+		insert into Title(code, name, rate)
 		values(#{code},
-		#{name}, #{phone}, #{passwd}, t_code=#{tCode})
+		#{name}, rate=#{rate})
 	</sql>
 
 	<sql id="updateSql">
 		update title set code=#{code}, name=#{name},
-		phone=#{phone}, t_code=#{tCode}
+		rate=#{rate}
 		where code=#{code}
 	</sql>
 
 	<!-- selectTitleByNo -->
-	<select id="selectEmployeeByNo" parameterType="Employee"
-		resultType="Employee">
+	<select id="selectGradeByNo" parameterType="Grade"
+		resultType="Grade">
 		<include refid="selectSql" />
 		<include refid="whereSql" />
 	</select>
 
-	<!-- selectEmployeeByAll -->
-	<select id="selectEmployeeByAll" resultType="Employee">
+	<!-- selectTitleByAll -->
+	<!-- <select id="selectTitleByAll" resultType="Grade">
 		<include refid="selectSql" />
-	</select> 
+	</select> -->
 
 	<!-- insert -->
-	  <!-- <insert id="insertEmployee" parameterType="Employee">
+	<!-- <insert id="insertTitle" parameterType="Grade">
 		<include refid="insertSql" />
-	</insert>  -->
+	</insert> -->
 
 	<!-- update -->
-	<!-- <update id="updateTitle" parameterType="Title">
+	<!-- <update id="updateTitle" parameterType="Grade">
 		<include refid="updateSql" />
 	</update> -->
 	
 	<!-- delete -->
-	 <!-- <delete id="deleteEmployee" parameterType="Employee">
-		delete from employee
+	<!-- <delete id="deleteTitle" parameterType="Title">
+		delete from title
 		where code=#{code}
-	</delete>  -->
-
+	</delete> -->
 </mapper>
