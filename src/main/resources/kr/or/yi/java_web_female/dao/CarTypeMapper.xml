@@ -3,28 +3,30 @@
 <mapper namespace="kr.or.yi.java_web_female.dao.CarTypeMapper">
 
 	<select id="selectCarTypeByNo" parameterType="CarType" resultType="CarType">
-		select code, type from CarType 
-		where code=#{code}
+		select code, type 
+		from CarType 
+		where code=#{code};
 	</select>
 	
 	<select id="selectCarTypeByAll" resultType="CarType">
-		select code, type from CarType
+		select code, type 
+		from CarType;
 	</select>
 	
 	<insert id="insertCarType" parameterType="CarType">
-		insert into CarType values(#{code},#{type})
+		insert into CarType values(#{code},#{type});
 	</insert>
 	
 	<update id="updateCarType" parameterType="CarType">
 		update CarType
 		set code=#{code}, type=#{type}
-		where code=#{code}
+		where code=#{code};
 	</update>
 	
 	<delete id="deleteCarType" parameterType="CarType">
 		delete
 		from CarType
-		where code=#{code}
+		where code=#{code};
 	</delete>
 	
 </mapper>

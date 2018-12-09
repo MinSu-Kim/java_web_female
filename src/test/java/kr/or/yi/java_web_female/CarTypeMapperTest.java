@@ -5,12 +5,15 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.CarTypeMapper;
 import kr.or.yi.java_web_female.dao.CarTypeMapperImpl;
 import kr.or.yi.java_web_female.dto.CarType;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CarTypeMapperTest extends AbstractTest {
 	private CarTypeMapper dao = new CarTypeMapperImpl();
 	
