@@ -1,21 +1,23 @@
 package kr.or.yi.java_web_female;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.BrandMapper;
 import kr.or.yi.java_web_female.dao.BrandMapperImpl;
 import kr.or.yi.java_web_female.dto.Brand;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BrandMapperTest extends AbstractTest {
 	private BrandMapper dao = new BrandMapperImpl();
 	
 	@Test
-	public void test01selectStudentByNo() {
+	public void test01selectBrandByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Brand searchBrand = new Brand();
 		searchBrand.setNo("B1");
@@ -62,21 +64,3 @@ public class BrandMapperTest extends AbstractTest {
 		Assert.assertEquals(1, res);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
