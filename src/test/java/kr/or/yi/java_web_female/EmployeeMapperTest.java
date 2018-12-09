@@ -1,7 +1,5 @@
 package kr.or.yi.java_web_female;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import org.junit.Assert;
@@ -11,7 +9,6 @@ import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.EmployeeMapper;
 import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
-import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Employee;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

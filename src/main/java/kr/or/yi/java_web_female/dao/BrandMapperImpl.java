@@ -2,6 +2,8 @@ package kr.or.yi.java_web_female.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -35,7 +37,7 @@ public class BrandMapperImpl implements BrandMapper {
 	@Override
 	public int updateBrand(Brand brand) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
-			int res = sqlSession.update(namespace+".updateBrand");
+			int res = sqlSession.update(namespace+".updateBrand", brand);
 			sqlSession.commit();
 			return res;
 		}
@@ -44,12 +46,10 @@ public class BrandMapperImpl implements BrandMapper {
 	@Override
 	public int deleteBrand(Brand brand) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
-			int res = sqlSession.delete(namespace+".deleteBrand");
+			int res = sqlSession.delete(namespace+".deleteBrand", brand);
 			sqlSession.commit();
 			return res;
 		}
 	}
 	
-	
-
 }
