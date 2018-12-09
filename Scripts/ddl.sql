@@ -1,11 +1,5 @@
--- 내 스키마
-DROP SCHEMA IF EXISTS `MY_SCHEMA`;
-
 -- proj_rentcar
 DROP SCHEMA IF EXISTS `proj_rentcar`;
-
--- 내 스키마
-CREATE SCHEMA `MY_SCHEMA`;
 
 -- proj_rentcar
 CREATE SCHEMA `proj_rentcar`;
