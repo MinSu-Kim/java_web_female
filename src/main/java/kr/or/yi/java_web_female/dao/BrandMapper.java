@@ -8,4 +8,7 @@ public interface BrandMapper {
 	
 	Brand selectBrandByNo(Brand brand);
 	List<Brand> selectBrandByAll();
+	int insertBrand(Brand brand);
+	int updateBrand(Brand brand);
+	int deleteBrand(Brand brand);
 }

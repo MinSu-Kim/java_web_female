@@ -6,7 +6,7 @@ import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class BrandMapperImpl implements BrandMapper {
-	private String namespace = "kr.or.yi.java_web_female.dao.BrandMapper";
+	private static final String namespace = "kr.or.yi.java_web_female.dao.BrandMapper";
 
 	@Override
 	public Brand selectBrandByNo(Brand brand) {
@@ -19,6 +19,34 @@ public class BrandMapperImpl implements BrandMapper {
 	public List<Brand> selectBrandByAll() {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
 			return sqlSession.selectList(namespace + ".selectBrandByAll");
+		}
+	}
+
+	@Override
+	public int insertBrand(Brand brand) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.insert(namespace+".insertBrand",brand);
+			sqlSession.commit();
+			return res;
+		}
+		
+	}
+
+	@Override
+	public int updateBrand(Brand brand) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.update(namespace+".updateBrand");
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteBrand(Brand brand) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.delete(namespace+".deleteBrand");
+			sqlSession.commit();
+			return res;
 		}
 	}
 	
