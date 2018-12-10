@@ -1,8 +1,10 @@
-apply plugin: 'java-library'
+apply plugin: 'java'
+apply plugin: 'application'
 
 repositories {
     jcenter()
 }
+
 
 tasks.withType(JavaCompile){
     options.encoding= 'UTF-8'
@@ -24,3 +26,16 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
+jar{
+    version = 1.0
+    mainClassName = 'kr.or.yi.java_web_female.Main'//메인클래스가 있는 메소드지정
+    baseName = 'Erp'
+    appendix = 'bin'
+    
+    manifest{
+        attributes 'Title':baseName, 'Version':version, 'Main-Class':mainClassName
+    }
+    
+    dependsOn configurations.runtime//실행가능한 파일로 만드는 것
+
+}

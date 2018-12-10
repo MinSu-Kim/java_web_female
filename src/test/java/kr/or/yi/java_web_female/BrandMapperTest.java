@@ -34,7 +34,7 @@ public class BrandMapperTest extends AbstractTest {
 	}
 	
 	@Test
-	public void test02insertBrand() {
+	public void test03insertBrand() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Brand brand = new Brand();
 		brand.setNo("B4");

@@ -4,28 +4,28 @@
 
 	<select id="selectCarTypeByNo" parameterType="CarType" resultType="CarType">
 		select code, type 
-		from CarType 
+		from Car_type 
 		where code=#{code};
 	</select>
 	
 	<select id="selectCarTypeByAll" resultType="CarType">
 		select code, type 
-		from CarType;
+		from Car_type;
 	</select>
 	
 	<insert id="insertCarType" parameterType="CarType">
-		insert into CarType values(#{code},#{type});
+		insert into Car_type values(#{code},#{type});
 	</insert>
 	
 	<update id="updateCarType" parameterType="CarType">
-		update CarType
+		update Car_type
 		set code=#{code}, type=#{type}
 		where code=#{code};
 	</update>
 	
 	<delete id="deleteCarType" parameterType="CarType">
 		delete
-		from CarType
+		from Car_type
 		where code=#{code};
 	</delete>
 	
