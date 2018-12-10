@@ -1,14 +1,11 @@
 package kr.or.yi.java_web_female.ui;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
 
+@SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
 	
 	
