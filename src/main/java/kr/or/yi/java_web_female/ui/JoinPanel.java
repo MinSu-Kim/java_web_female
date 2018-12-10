@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 
-public class JoinP extends JPanel {
+public class JoinPanel extends JPanel {
    private JTextField textField;
    private JTextField textField_1;
    private JTextField textField_2;
@@ -24,7 +24,7 @@ public class JoinP extends JPanel {
    /**
     * Create the panel.
     */
-   public JoinP() {
+   public JoinPanel() {
       setLayout(new BorderLayout(0, 0));
       
       JPanel pContent = new JPanel();
