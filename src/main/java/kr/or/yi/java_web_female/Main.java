@@ -2,7 +2,7 @@ package kr.or.yi.java_web_female;
 
 import java.awt.EventQueue;
 
-import kr.or.yi.java_web_female.ui.Brand;
+import kr.or.yi.java_web_female.ui.CarManagementUi;
 
 public class Main {
 
@@ -13,7 +13,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Brand frame = new Brand();
+					CarManagementUi frame = new CarManagementUi();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
