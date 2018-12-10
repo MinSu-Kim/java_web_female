@@ -4,11 +4,9 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+@SuppressWarnings("serial")
 public class CarPanel extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
 	public CarPanel() {
 		setLayout(new BorderLayout(0, 0));
 		

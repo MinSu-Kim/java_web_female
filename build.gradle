@@ -27,6 +27,9 @@ dependencies {
     
     // libs폴더 생성 후 jar파일 추가
     compile fileTree(dir:'libs', include:['*.jar'])
+    
+    // LookAndFeel 파일 추가(jar 파일 추가)
+	compile files('libs/liquidlnf.jar')
 }
 
 jar{
@@ -40,5 +43,4 @@ jar{
     }
     
     dependsOn configurations.runtime//실행가능한 파일로 만드는 것
-
 }

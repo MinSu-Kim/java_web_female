@@ -24,11 +24,7 @@ public class RentPanel extends JPanel {
 	private JTextField textField_1;
 	private JTextField tfName;
 
-	/**
-	 * Create the panel.
-	 */
 	public RentPanel() {
-		
 		initComponents();
 	}
 	private void initComponents() {

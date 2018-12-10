@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 
+@SuppressWarnings("serial")
 public class JoinPanel extends JPanel {
    private JTextField textField;
    private JTextField textField_1;

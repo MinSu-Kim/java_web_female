@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import javax.swing.JCheckBox;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class LoginUI extends JFrame {
 
 	private JPanel contentPane;

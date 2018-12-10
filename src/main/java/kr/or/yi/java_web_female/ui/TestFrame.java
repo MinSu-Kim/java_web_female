@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarType;
 
+@SuppressWarnings("serial")
 public class TestFrame extends JFrame {
 
 	private JPanel contentPane;
