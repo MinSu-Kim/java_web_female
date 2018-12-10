@@ -136,6 +136,13 @@ ALTER TABLE proj_rentcar.event
 			code -- 이벤트코드
 		);
 
+-- 적용된 이벤트
+CREATE TABLE proj_rentcar.event_apply (
+	code       CHAR(5) NOT NULL COMMENT '대여코드', -- 대여코드
+	event_code CHAR(4) NOT NULL COMMENT '이벤트코드' -- 이벤트코드
+)
+COMMENT '적용된 이벤트';
+
 -- 연료
 CREATE TABLE proj_rentcar.fuel (
 	code VARCHAR(10) NOT NULL COMMENT '연료코드' -- 연료코드
@@ -199,7 +206,6 @@ CREATE TABLE proj_rentcar.rent (
 	car_code       CHAR(4)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  CHAR(4)    NOT NULL COMMENT '고객코드', -- 고객코드
 	insurance_code CHAR(4)    NOT NULL COMMENT '보험코드', -- 보험코드
-	e_code         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트코드
 	opt_price      INT(11)    NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';
@@ -226,6 +232,17 @@ ALTER TABLE proj_rentcar.title
 			code -- 직책코드
 		);
 
+-- 주소
+CREATE TABLE proj_rentcar.post (
+	zipcode   CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
+	sido      VARCHAR(20) NULL COMMENT '시도', -- 시도
+	sigungu   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
+	doro      VARCHAR(80) NULL COMMENT '도로', -- 도로
+	building1 INT(5)      NULL COMMENT '건물명1', -- 건물명1
+	building2 VARCHAR(80) NULL COMMENT '건물명2' -- 건물명2
+)
+COMMENT '주소';
+
 -- 추가옵션
 ALTER TABLE proj_rentcar.add_option
 	ADD CONSTRAINT FK_car_model_TO_add_option -- FK_car_model_TO_add_option
@@ -234,9 +251,7 @@ ALTER TABLE proj_rentcar.add_option
 		)
 		REFERENCES proj_rentcar.car_model ( -- 차(모델)
 			car_code -- C001
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_car_model_TO_add_option (
 		car_code -- 차코드
 	);
@@ -249,9 +264,7 @@ ALTER TABLE proj_rentcar.add_option
 		)
 		REFERENCES proj_rentcar.car_option ( -- 차량옵션
 			no -- 옵션번호
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_car_option_TO_add_option (
 		option_id -- 옵션번호
 	);
@@ -264,9 +277,7 @@ ALTER TABLE proj_rentcar.car_model
 		)
 		REFERENCES proj_rentcar.brand ( -- 브랜드
 			no -- 브랜드번호
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_brand_TO_car_model (
 		brand -- 브랜드
 	);
@@ -279,9 +290,7 @@ ALTER TABLE proj_rentcar.car_model
 		)
 		REFERENCES proj_rentcar.car_type ( -- 차종(소 중 대)
 			code -- 차종
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_car_type_TO_car_model (
 		cartype -- 차종
 	);
@@ -294,9 +303,7 @@ ALTER TABLE proj_rentcar.car_model
 		)
 		REFERENCES proj_rentcar.fuel ( -- 연료
 			code -- 연료코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_fuel_TO_car_model (
 		fuel_code -- 연료코드
 	);
@@ -309,9 +316,7 @@ ALTER TABLE proj_rentcar.customer
 		)
 		REFERENCES proj_rentcar.employee ( -- 직원
 			code -- 직원코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_employee_TO_customer (
 		emp_code -- 직원코드
 	);
@@ -324,9 +329,7 @@ ALTER TABLE proj_rentcar.customer
 		)
 		REFERENCES proj_rentcar.grade ( -- 회원등급
 			code -- 등급코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_grade_TO_customer (
 		grade_code -- 등급코드
 	);
@@ -339,11 +342,35 @@ ALTER TABLE proj_rentcar.employee
 		)
 		REFERENCES proj_rentcar.title ( -- 직책
 			code -- 직책코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_title_TO_employee (
 		t_code -- 직책코드
+	);
+
+-- 적용된 이벤트
+ALTER TABLE proj_rentcar.event_apply
+	ADD CONSTRAINT FK_event_TO_event_apply -- FK_event_TO_event_apply
+		FOREIGN KEY (
+			event_code -- 이벤트코드
+		)
+		REFERENCES proj_rentcar.event ( -- 이벤트
+			code -- 이벤트코드
+		),
+	ADD INDEX FK_event_TO_event_apply (
+		event_code -- 이벤트코드
+	);
+
+-- 적용된 이벤트
+ALTER TABLE proj_rentcar.event_apply
+	ADD CONSTRAINT FK_rent_TO_event_apply -- FK_rent_TO_event_apply
+		FOREIGN KEY (
+			code -- 대여코드
+		)
+		REFERENCES proj_rentcar.rent ( -- 차량대여
+			code -- R0001
+		),
+	ADD INDEX FK_rent_TO_event_apply (
+		code -- 대여코드
 	);
 
 -- 차량대여
@@ -354,9 +381,7 @@ ALTER TABLE proj_rentcar.rent
 		)
 		REFERENCES proj_rentcar.car_model ( -- 차(모델)
 			car_code -- C001
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_car_model_TO_rent (
 		car_code -- 차코드
 	);
@@ -369,9 +394,7 @@ ALTER TABLE proj_rentcar.rent
 		)
 		REFERENCES proj_rentcar.customer ( -- 고객
 			code -- 고객코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_customer_TO_rent (
 		costomer_code -- 고객코드
 	);
@@ -384,19 +407,7 @@ ALTER TABLE proj_rentcar.rent
 		)
 		REFERENCES proj_rentcar.insurance ( -- 보험
 			code -- 보험코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_insurance_TO_rent (
 		insurance_code -- 보험코드
 	);
-
--- 차량대여
-ALTER TABLE proj_rentcar.rent
-	ADD CONSTRAINT FK_event_TO_rent -- 이벤트 -> 차량대여
-		FOREIGN KEY (
-			e_code -- 이벤트코드
-		)
-		REFERENCES proj_rentcar.event ( -- 이벤트
-			code -- 이벤트코드
-		);
