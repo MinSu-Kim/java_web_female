@@ -2,7 +2,7 @@ package kr.or.yi.java_web_female;
 
 import java.awt.EventQueue;
 
-import kr.or.yi.java_web_female.ui.CarManagementUi;
+import kr.or.yi.java_web_female.ui.ManagerPanel;
 
 public class Main {
 
@@ -13,7 +13,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CarManagementUi frame = new CarManagementUi();//나중에 메인화면만들면 변경되야함
+					TestFrame frame = new TestFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

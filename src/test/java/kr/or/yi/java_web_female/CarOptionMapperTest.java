@@ -37,7 +37,13 @@ public class CarOptionMapperTest extends AbstractTest {
 	@Test
 	public void test03insertCarOption() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-//		CarOption carOption = new Ca
+		CarOption carOption = new CarOption();
+		carOption.setNo(5);
+		carOption.setName("네비게이션");
+		carOption.setPrice(5000);
+		
+		int res = dao.insertCarOption(carOption);
+		Assert.assertEquals(1, res);
 	}
 
 }

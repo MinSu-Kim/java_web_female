@@ -36,7 +36,9 @@ public class CarOptionMapperImpl implements CarOptionMapper {
 
 	@Override
 	public int updateCarOption(CarOption carOption) {
-		// TODO Auto-generated method stub
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.update(namespace+".updateCarOption",carOption);
+		}
 		return 0;
 	}
 

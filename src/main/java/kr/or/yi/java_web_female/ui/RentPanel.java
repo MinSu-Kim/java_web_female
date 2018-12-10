@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class RentUi extends JPanel {
+public class RentPanel extends JPanel {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -24,7 +24,7 @@ public class RentUi extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public RentUi() {
+	public RentPanel() {
 		
 		initComponents();
 	}

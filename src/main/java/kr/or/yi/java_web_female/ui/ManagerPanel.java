@@ -9,7 +9,7 @@ import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 
-public class CarManagementUi extends JPanel {
+public class ManagerPanel extends JPanel {
 	
 	
 	private JPanel panel;
@@ -17,7 +17,7 @@ public class CarManagementUi extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CarManagementUi() {
+	public ManagerPanel() {
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new JPanel();
@@ -31,10 +31,10 @@ public class CarManagementUi extends JPanel {
 		panel_1.setToolTipText("");
 		tabbedPane.addTab("고객관리", null, panel_1, null);
 		
-		CarUpdate panel_2 = new CarUpdate();
+		CarPanel panel_2 = new CarPanel();
 		tabbedPane.addTab("차량관리", null, panel_2, null);
 		
-		RentUi panel_3 = new RentUi();
+		RentPanel panel_3 = new RentPanel();
 		tabbedPane.addTab("대여관리", null, panel_3, null);
 		
 		JPanel panel_4 = new JPanel();

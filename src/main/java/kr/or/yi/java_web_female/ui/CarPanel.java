@@ -4,12 +4,12 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
-public class CarUpdate extends JPanel {
+public class CarPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public CarUpdate() {
+	public CarPanel() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
