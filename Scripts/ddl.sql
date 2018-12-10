@@ -239,9 +239,10 @@ CREATE TABLE proj_rentcar.post (
 	zipcode   CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
 	sido      VARCHAR(20) NULL COMMENT '시도', -- 시도
 	sigungu   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
+	eupmyeon  VARCHAR(20) NULL COMMENT '읍면', -- 읍면
 	doro      VARCHAR(80) NULL COMMENT '도로', -- 도로
 	building1 INT(5)      NULL COMMENT '건물명1', -- 건물명1
-	building2 VARCHAR(80) NULL COMMENT '건물명2' -- 건물명2
+	building2 INT(5)      NULL COMMENT '건물명2' -- 건물명2
 )
 COMMENT '주소';
 
