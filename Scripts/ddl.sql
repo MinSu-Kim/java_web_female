@@ -93,7 +93,7 @@ CREATE TABLE proj_rentcar.customer (
 	emp_code   CHAR(4)     NOT NULL COMMENT '직원코드', -- 직원코드
 	license    VARCHAR(4)  NOT NULL COMMENT '면허종류', -- 면허종류
 	grade_code CHAR(4)     NOT NULL COMMENT '등급코드', -- 등급코드
-	rent_cnt   INT(11)     NOT NULL COMMENT '업데이트 트리거 사용' -- 업데이트 트리거 사용
+	rent_cnt   INT(11)     NOT NULL COMMENT '업데이트 트리거 사용' -- 대여횟수
 )
 COMMENT '고객';
 
