@@ -832,3 +832,70 @@
 [2018-12-09] ==>  Preparing: delete from title where code=?; 
 [2018-12-09] ==> Parameters: T003(String)
 [2018-12-09] <==    Updates: 1
+[2018-12-09] test01selectBrandByNo()
+[2018-12-09] ==>  Preparing: select no, name from brand where no=? 
+[2018-12-09] ==> Parameters: B1(String)
+[2018-12-09] <==    Columns: no, name
+[2018-12-09] <==        Row: B1, hyundai
+[2018-12-09] <==      Total: 1
+[2018-12-09] test02insertBrand()
+[2018-12-09] ==>  Preparing: insert into Brand values(?,?) 
+[2018-12-09] ==> Parameters: B4(String), GM(String)
+[2018-12-09] <==    Updates: 1
+[2018-12-09] test02selectBrandByAll()
+[2018-12-09] ==>  Preparing: select no, name from brand 
+[2018-12-09] ==> Parameters: 
+[2018-12-09] <==    Columns: no, name
+[2018-12-09] <==        Row: B1, hyundai
+[2018-12-09] <==        Row: B2, kia
+[2018-12-09] <==        Row: B3, bmw
+[2018-12-09] <==        Row: B4, GM
+[2018-12-09] <==      Total: 4
+[2018-12-09] test04updateBrand()
+[2018-12-09] ==>  Preparing: update Brand set no=?, name=? where no=? 
+[2018-12-09] ==> Parameters: B4(String), 르노(String), B4(String)
+[2018-12-09] <==    Updates: 1
+[2018-12-09] test05deleteBrand()
+[2018-12-09] ==>  Preparing: delete from Brand where no=? 
+[2018-12-09] ==> Parameters: B4(String)
+[2018-12-09] <==    Updates: 1
+[2018-12-09] test01selectEmployeeByNo()
+[2018-12-09] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee where code=? 
+[2018-12-09] ==> Parameters: E001(String)
+[2018-12-09] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-09] <==        Row: E001, 나매니저, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-09] <==      Total: 1
+[2018-12-09] test02selectEmployeeByAll()
+[2018-12-09] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee 
+[2018-12-09] ==> Parameters: 
+[2018-12-09] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-09] <==        Row: E001, 나매니저, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-09] <==        Row: E002, 너일반사원, 010-5678-5678, *C2D24DCA38E9E862098B85BF0AB35CAA52803797, T002
+[2018-12-09] <==      Total: 2
+[2018-12-09] testOpenSession()
+[2018-12-09] session org.apache.ibatis.session.defaults.DefaultSqlSession@2682afcc
+[2018-12-09] test01selectTitleByNo()
+[2018-12-09] ==>  Preparing: select code, name, t_grant as tGrant from title where code=?; 
+[2018-12-09] ==> Parameters: T001(String)
+[2018-12-09] <==    Columns: code, name, tGrant
+[2018-12-09] <==        Row: T001, 매니저, 1
+[2018-12-09] <==      Total: 1
+[2018-12-09] test02selectTitleByAll()
+[2018-12-09] ==>  Preparing: select code, name, t_grant as tGrant from title 
+[2018-12-09] ==> Parameters: 
+[2018-12-09] <==    Columns: code, name, tGrant
+[2018-12-09] <==        Row: T001, 매니저, 1
+[2018-12-09] <==        Row: T002, 일반사원, 0
+[2018-12-09] <==      Total: 2
+[2018-12-09] test03insertTitle()
+[2018-12-09] ==>  Preparing: insert into Title(code, name, t_grant) values(?, ?, ?) 
+[2018-12-09] ==> Parameters: T003(String), 인턴(String), false(Boolean)
+[2018-12-09] <==    Updates: 1
+[2018-12-09] test04updateTitle()
+[2018-12-09] ==>  Preparing: update title set code=?, name=?, t_grant=? where code=?; 
+[2018-12-09] ==> Parameters: T003(String), 알바(String), false(Boolean), T003(String)
+[2018-12-09] <==    Updates: 1
+[2018-12-09] test05deleteTitle()
+[2018-12-09] ==>  Preparing: delete from title where code=?; 
+[2018-12-09] ==> Parameters: T003(String)
+[2018-12-09] <==    Updates: 1

@@ -102,7 +102,7 @@ local.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar   # libs폴더의 jcalendar-1.4.jar를 추가하기 위해 주석처리
 *.war
 *.nar
 *.ear

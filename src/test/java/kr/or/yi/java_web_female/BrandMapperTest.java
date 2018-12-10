@@ -2,7 +2,6 @@ package kr.or.yi.java_web_female;
 
 import java.util.List;
 
-import org.apache.ibatis.exceptions.PersistenceException;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
