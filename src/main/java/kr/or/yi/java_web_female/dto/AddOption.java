@@ -1,26 +1,27 @@
 package kr.or.yi.java_web_female.dto;
 
 public class AddOption {
-	private int id; //erd에서 변수명은 option_id
-	private String code; //erd에서 변수명은 car_code
+	private CarOption optionId; //erd에서 변수명은 option_id
+	private CarModel carCode; //erd에서 변수명은 car_code
 	
-	//get set
-	public int getId() {
-		return id;
+	public CarOption getOptionId() {
+		return optionId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setOptionId(CarOption optionId) {
+		this.optionId = optionId;
 	}
-	public String getCode() {
-		return code;
+	public CarModel getCarCode() {
+		return carCode;
 	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setCarCode(CarModel carCode) {
+		this.carCode = carCode;
 	}
 	
 	@Override
 	public String toString() {
-		return "AddOption [id=" + id + ", code=" + code + "]";
+		return "AddOption [optionId=" + optionId + ", carCode=" + carCode + "]";
 	}
+	
+	
 
 }
