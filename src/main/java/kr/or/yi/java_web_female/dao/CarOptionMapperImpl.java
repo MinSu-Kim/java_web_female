@@ -38,14 +38,36 @@ public class CarOptionMapperImpl implements CarOptionMapper {
 	public int updateCarOption(CarOption carOption) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
 			int res = sqlSession.update(namespace+".updateCarOption",carOption);
+			sqlSession.commit();
+			return res;
 		}
-		return 0;
 	}
 
 	@Override
 	public int deleteCarOption(CarOption carOption) {
-		// TODO Auto-generated method stub
-		return 0;
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.delete(namespace+".deleteCarOption",carOption);
+			sqlSession.commit();
+			return res;
+		}
+		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
