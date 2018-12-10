@@ -8,3 +8,8 @@ where c.rent_cnt between l.g_losal and l.g_hisal
 and c.code = 'C008';
 
 select code, name, phone, passwd, t_code as tCode from employee where code = 'E001';
+
+SELECT * FROM post;
+
+select zipcode, sido, sigungu, eupmyeon, doro, building1, building2
+from post;

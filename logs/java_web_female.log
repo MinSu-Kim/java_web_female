@@ -142,3 +142,19 @@
 [2018-12-10] ==>  Preparing: delete from title where code=?; 
 [2018-12-10] ==> Parameters: T003(String)
 [2018-12-10] <==    Updates: 1
+[2018-12-10] test01selectPostByNo()
+[2018-12-10] ==>  Preparing: select zipcode, sido, sigungu, eupmyeon, doro, building1, building2 from post where zipcode=?; 
+[2018-12-10] ==> Parameters: (String)
+[2018-12-10] <==      Total: 0
+[2018-12-10] test01selectPostByNo()
+[2018-12-10] ==>  Preparing: select zipcode, sido, sigungu, eupmyeon, doro, building1, building2 from post where zipcode=?; 
+[2018-12-10] ==> Parameters: (String)
+[2018-12-10] <==      Total: 0
+[2018-12-10] test01selectPostByNo()
+[2018-12-10] ==>  Preparing: select zipcode, sido, sigungu, eupmyeon, doro, building1, building2 from post where zipcode=?; 
+[2018-12-10] ==> Parameters: (String)
+[2018-12-10] <==      Total: 0
+[2018-12-10] test01selectPostByNo()
+[2018-12-10] ==>  Preparing: select zipcode, sido, sigungu, eupmyeon, doro, building1, building2 from post where zipcode=?; 
+[2018-12-10] ==> Parameters: 41456(String)
+[2018-12-10] <==      Total: 0
