@@ -2,57 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.TitleMapper">
 
-	<!--sql 문장 -->
-	<sql id="selectSql">
+	<select id="selectTitleByNo" parameterType="Title" resultType="Title">
 		select code, name, t_grant as tGrant from title
-	</sql>
-
-	<sql id="whereSql">
-		<where>
-			<if test="code != null">
-				code=#{code};
-			</if>
-		</where>
-	</sql>
-
-	<sql id="insertSql">
-		insert into Title(code, name, t_grant)
-		values(#{code},
-		#{name}, t_grant=#{tGrant})
-	</sql>
-
-	<sql id="updateSql">
-		update title set code=#{code}, name=#{name},
-		t_grant=#{tGrant}
-		where code=#{code}
-	</sql>
-
-	<!-- selectTitleByNo -->
-	<select id="selectTitleByNo" parameterType="Title"
-		resultType="Title">
-		<include refid="selectSql" />
-		<include refid="whereSql" />
+		where code=#{code};
 	</select>
 
-	<!-- selectTitleByAll -->
 	<select id="selectTitleByAll" resultType="Title">
-		<include refid="selectSql" />
+		select code, name, t_grant as tGrant from title
 	</select>
 
-	<!-- insert -->
 	<insert id="insertTitle" parameterType="Title">
-		<include refid="insertSql" />
+		insert into Title(code, name, t_grant)
+		values(#{code},	#{name}, #{tGrant})
 	</insert>
 
-	<!-- update -->
 	<update id="updateTitle" parameterType="Title">
-		<include refid="updateSql" />
+		update title set code=#{code}, name=#{name}, t_grant=#{tGrant}
+		where code=#{code};
 	</update>
 	
-	<!-- delete -->
 	<delete id="deleteTitle" parameterType="Title">
 		delete from title
-		where code=#{code}
+		where code=#{code};
 	</delete>
 
 </mapper>

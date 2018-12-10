@@ -6,6 +6,7 @@ public class Employee {
 	private String phone; //연락처
 	private String passwd; // 비밀번호
 	private Title tCode;// 직책 코드
+	
 	public String getCode() {
 		return code;
 	}

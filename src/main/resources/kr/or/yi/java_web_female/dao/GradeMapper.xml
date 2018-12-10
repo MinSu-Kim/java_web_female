@@ -1,51 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.GradeMapper">
-	<!--sql 문장 -->
-	<sql id="selectSql">
-		select code, name, rate from grade
-	</sql>
-
-	<sql id="whereSql">
-		<where>
-			<if test="code != null">
-				code=#{code};
-			</if>
-		</where>
-	</sql>
-
-	<sql id="insertSql">
-		insert into Title(code, name, rate)
-		values(#{code},
-		#{name}, rate=#{rate})
-	</sql>
-
-	<sql id="updateSql">
-		update title set code=#{code}, name=#{name},
-		rate=#{rate}
-		where code=#{code}
-	</sql>
 
 	<!-- selectTitleByNo -->
-	<select id="selectGradeByNo" parameterType="Grade"
-		resultType="Grade">
-		<include refid="selectSql" />
-		<include refid="whereSql" />
+	<select id="selectGradeByNo" parameterType="Grade" resultType="Grade">
+		select code, name, rate from grade
+		where code=#{code}
 	</select>
 
 	<!-- selectTitleByAll -->
 	<!-- <select id="selectTitleByAll" resultType="Grade">
-		<include refid="selectSql" />
+		select code, name, rate from grade
 	</select> -->
 
 	<!-- insert -->
 	<!-- <insert id="insertTitle" parameterType="Grade">
-		<include refid="insertSql" />
+		insert into Title(code, name, rate)
+		values(#{code},	#{name}, rate=#{rate})
 	</insert> -->
 
 	<!-- update -->
 	<!-- <update id="updateTitle" parameterType="Grade">
-		<include refid="updateSql" />
+		update title 
+		set code=#{code}, name=#{name},	rate=#{rate}
+		where code=#{code}
 	</update> -->
 	
 	<!-- delete -->

@@ -1,14 +1,14 @@
 package kr.or.yi.java_web_female.dto;
 
 public class Brand {
-	private int no; //브랜드코드
+	private String no; //브랜드코드
 	private String name; //브랜드이름
 	
 	//get, set
-	public int getNo() {
+	public String getNo() {
 		return no;
 	}
-	public void setNo(int no) {
+	public void setNo(String no) {
 		this.no = no;
 	}
 	public String getName() {
