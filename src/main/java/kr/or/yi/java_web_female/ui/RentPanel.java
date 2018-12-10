@@ -13,6 +13,10 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.BoxLayout;
 
 public class RentPanel extends JPanel {
 	private JPanel contentPane;
@@ -65,21 +69,29 @@ public class RentPanel extends JPanel {
 		lblStartDate.setHorizontalAlignment(SwingConstants.CENTER);
 		pStartDate.add(lblStartDate);
 		
-		JPanel panel_3 = new JPanel();
-		pStartDate.add(panel_3);
+		JDateChooser dateChooser = new JDateChooser();
+		pStartDate.add(dateChooser);
 		
 		JPanel pStartTime = new JPanel();
 		contentPanel.add(pStartTime);
-		pStartTime.setLayout(new GridLayout(0, 3, 10, 0));
+		pStartTime.setLayout(new BoxLayout(pStartTime, BoxLayout.X_AXIS));
 		
 		JLabel lblStartTime = new JLabel("대여시간");
 		pStartTime.add(lblStartTime);
 		
 		JSpinner spStartHour = new JSpinner();
+		spStartHour.setModel(new SpinnerNumberModel(12, 1, 24, 1));
 		pStartTime.add(spStartHour);
 		
+		JLabel lblSH = new JLabel("시");
+		pStartTime.add(lblSH);
+		
 		JSpinner spStartMinutes = new JSpinner();
+		spStartMinutes.setModel(new SpinnerNumberModel(0, 0, 59, 1));
 		pStartTime.add(spStartMinutes);
+		
+		JLabel lblSM = new JLabel("분");
+		pStartTime.add(lblSM);
 		
 		JPanel pEndDate = new JPanel();
 		contentPanel.add(pEndDate);
@@ -89,21 +101,29 @@ public class RentPanel extends JPanel {
 		lblEndDate.setHorizontalAlignment(SwingConstants.CENTER);
 		pEndDate.add(lblEndDate);
 		
-		JPanel panel_6 = new JPanel();
-		pEndDate.add(panel_6);
+		JDateChooser dateChooser_1 = new JDateChooser();
+		pEndDate.add(dateChooser_1);
 		
 		JPanel pEndTime = new JPanel();
 		contentPanel.add(pEndTime);
-		pEndTime.setLayout(new GridLayout(0, 3, 10, 0));
+		pEndTime.setLayout(new BoxLayout(pEndTime, BoxLayout.X_AXIS));
 		
 		JLabel label_5 = new JLabel("반납시간");
 		pEndTime.add(label_5);
 		
 		JSpinner spEndHour = new JSpinner();
+		spEndHour.setModel(new SpinnerNumberModel(12, 1, 24, 1));
 		pEndTime.add(spEndHour);
 		
+		JLabel lblEH = new JLabel("시");
+		pEndTime.add(lblEH);
+		
 		JSpinner spEndMinutes = new JSpinner();
+		spEndMinutes.setModel(new SpinnerNumberModel(0, 0, 59, 1));
 		pEndTime.add(spEndMinutes);
+		
+		JLabel lblEM = new JLabel("분");
+		pEndTime.add(lblEM);
 		
 		JLabel lblInsurance = new JLabel("자차손해 면책 제도");
 		lblInsurance.setHorizontalAlignment(SwingConstants.CENTER);
