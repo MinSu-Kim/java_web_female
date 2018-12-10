@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.java_web_female.dao.FuelMapper">
+	
+	<select id="selectFuelByNo" parameterType="Fuel" resultType="Fuel">
+		select code
+		from fuel
+		where code=#{code}
+	</select>
+	
+	<select id="selectFuelByAll" resultType="Fuel">
+		select code
+		from fuel
+	</select>
+	
+	<insert id="insertFuel" parameterType="Fuel">
+		insert into fuel values(#{code});
+	</insert>
+	
+	<!-- <update id="updateFuel" parameterType="Fuel">
+		update Fuel
+		set code=#{code}
+		where code=#{code}
+	</update> -->
+	
+	<delete id="deleteFuel" parameterType="Fuel">
+		delete
+		from fuel
+		where code=#{code};
+	</delete>
+</mapper>

@@ -3,28 +3,29 @@
 <mapper namespace="kr.or.yi.java_web_female.dao.BrandMapper">
 
 	<select id="selectBrandByNo" parameterType="Brand" resultType="Brand">
-		select no, name from brand 
-		where no=#{no}
+		select no, name 
+		from brand 
+		where no=#{no};
 	</select>
 	
 	<select id="selectBrandByAll" resultType="Brand">
-		select no, name from brand
+		select no, name from brand;
 	</select>
 	
 	<insert id="insertBrand" parameterType="Brand">
-		insert into Brand values(#{no},#{name})
+		insert into Brand values(#{no},#{name});
 	</insert>
 	
 	<update id="updateBrand" parameterType="Brand">
 		update Brand
 		set no=#{no}, name=#{name}
-		where no=#{no}
+		where no=#{no};
 	</update>
 	
 	<delete id="deleteBrand" parameterType="Brand">
 		delete
 		from Brand
-		where no=#{no}
+		where no=#{no};
 	</delete>
 	
 </mapper>

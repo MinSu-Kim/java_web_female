@@ -23,7 +23,7 @@ FATAL : 가장 크리티컬한 에러가 일어 났을 때 사용한다.
 			<PatternLayout pattern="%5p [%t] - %m%n" />
 		</Console>
 
-		<File name="file" fileName="./logs/mybatis_dev_wsm.log" append="true">
+		<File name="file" fileName="./logs/java_web_female.log" append="true">
 			<PatternLayout
 				pattern="[%d{yyyy-MM-dd}] %m%n" />
 		</File>
