@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.CarOptionMapper">
-
+	
+	<select id="selectCarOptionByNo" parameterType="CarOption" resultType="CarOption">
+		select no, name, price 
+		from car_option 
+		where no=#{no};
+	</select>
+	
+	<select id="selectCarOptionByAll" resultType="CarOption">
+		select no, name, price 
+		from car_option;
+	</select>
+	
+	<insert id="insertCarOption" parameterType="CarOption">
+		insert into Car_option values(#{no},#{name},#{price});
+	</insert>
+	
+	<update id="updateCarOption" parameterType="CarOption">
+		update Car_option
+		set no=#{no}, name=#{name}, price=#{price}
+		where no=#{no};
+	</update>
+	
+	<delete id="deleteCarOption" parameterType="CarOption">
+		delete
+		from Car_option
+		where no=#{no};
+	</delete>
 </mapper>

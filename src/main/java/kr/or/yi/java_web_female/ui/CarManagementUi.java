@@ -1,72 +1,49 @@
 package kr.or.yi.java_web_female.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JList;
+import javax.swing.SwingConstants;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
 
-public class CarManagementUi extends JFrame {
-
-	private JPanel contentPane;
-
+public class CarManagementUi extends JPanel {
+	
+	
+	private JPanel panel;
 
 	/**
-	 * Create the frame.
+	 * Create the panel.
 	 */
 	public CarManagementUi() {
-		setTitle("차량관리");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		setLayout(new BorderLayout(0, 0));
 		
-		JPanel panelComboBox = new JPanel();
-		contentPane.add(panelComboBox, BorderLayout.NORTH);
-		panelComboBox.setLayout(new GridLayout(0, 2, 0, 0));
+		panel = new JPanel();
+		add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
 		
-		ComboPanel panelCarType = new ComboPanel();
-		panelComboBox.add(panelCarType);
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		panel.add(tabbedPane, BorderLayout.CENTER);
 		
-		ComboPanel panelBrand = new ComboPanel();
-		panelComboBox.add(panelBrand);
+		JPanel panel_1 = new JPanel();
+		panel_1.setToolTipText("");
+		tabbedPane.addTab("고객관리", null, panel_1, null);
 		
-		JPanel panel1 = new JPanel();
-		contentPane.add(panel1, BorderLayout.CENTER);
-		panel1.setLayout(new GridLayout(0, 2, 0, 0));
+		CarUpdate panel_2 = new CarUpdate();
+		tabbedPane.addTab("차량관리", null, panel_2, null);
 		
-		JPanel panel2 = new JPanel();
-		panel1.add(panel2);
-		panel2.setLayout(new GridLayout(0, 1, 0, 0));
+		RentUi panel_3 = new RentUi();
+		tabbedPane.addTab("대여관리", null, panel_3, null);
 		
-		JList list = new JList();
-		panel2.add(list);
+		JPanel panel_4 = new JPanel();
+		tabbedPane.addTab("반납관리", null, panel_4, null);
 		
-		JPanel panel3 = new JPanel();
-		panel1.add(panel3);
-		
-		JPanel panelBtn = new JPanel();
-		contentPane.add(panelBtn, BorderLayout.SOUTH);
-		
-		JButton btnUpdate = new JButton("수정");
-		panelBtn.add(btnUpdate);
-		
-		JButton btndelete = new JButton("삭제");
-		panelBtn.add(btndelete);
-		
-		JButton btnCancel = new JButton("취소");
-		panelBtn.add(btnCancel);
+		JPanel panel_5 = new JPanel();
+		tabbedPane.addTab("전체통계", null, panel_5, null);
+
+
 	}
 
 }
