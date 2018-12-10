@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class CarManagementUi extends JFrame {
 
@@ -31,38 +32,41 @@ public class CarManagementUi extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel panelComboBox = new JPanel();
+		contentPane.add(panelComboBox, BorderLayout.NORTH);
+		panelComboBox.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		ComboPanel panel_5 = new ComboPanel();
-		panel.add(panel_5);
+		ComboPanel panelCarType = new ComboPanel();
+		panelComboBox.add(panelCarType);
 		
-		ComboPanel panel_6 = new ComboPanel();
-		panel.add(panel_6);
+		ComboPanel panelBrand = new ComboPanel();
+		panelComboBox.add(panelBrand);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel panel1 = new JPanel();
+		contentPane.add(panel1, BorderLayout.CENTER);
+		panel1.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panel_3 = new JPanel();
-		panel_1.add(panel_3);
-		panel_3.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel panel2 = new JPanel();
+		panel1.add(panel2);
+		panel2.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel_4 = new JPanel();
-		panel_1.add(panel_4);
+		JList list = new JList();
+		panel2.add(list);
 		
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, BorderLayout.SOUTH);
+		JPanel panel3 = new JPanel();
+		panel1.add(panel3);
 		
-		JButton btnNewButton = new JButton("New button");
-		panel_2.add(btnNewButton);
+		JPanel panelBtn = new JPanel();
+		contentPane.add(panelBtn, BorderLayout.SOUTH);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		panel_2.add(btnNewButton_1);
+		JButton btnUpdate = new JButton("수정");
+		panelBtn.add(btnUpdate);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		panel_2.add(btnNewButton_2);
+		JButton btndelete = new JButton("삭제");
+		panelBtn.add(btndelete);
+		
+		JButton btnCancel = new JButton("취소");
+		panelBtn.add(btnCancel);
 	}
 
 }
