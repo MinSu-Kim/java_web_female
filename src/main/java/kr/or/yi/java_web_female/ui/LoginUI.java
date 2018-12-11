@@ -17,8 +17,8 @@ import javax.swing.SwingConstants;
 public class LoginUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfId;
+	private JTextField tfPasswd;
 
 	
 	/**
@@ -36,24 +36,24 @@ public class LoginUI extends JFrame {
 		contentPane.add(pContent, BorderLayout.CENTER);
 		pContent.setLayout(new GridLayout(0, 3, 10, 10));
 		
-		JLabel lblNewLabel = new JLabel("아이디");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		pContent.add(lblNewLabel);
+		JLabel lblId = new JLabel("아이디");
+		lblId.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(lblId);
 		
-		textField = new JTextField();
-		pContent.add(textField);
-		textField.setColumns(10);
+		tfId = new JTextField();
+		pContent.add(tfId);
+		tfId.setColumns(10);
 		
-		JButton btnNewButton_2 = new JButton("로그인");
-		pContent.add(btnNewButton_2);
+		JButton btnLogin = new JButton("로그인");
+		pContent.add(btnLogin);
 		
-		JLabel label = new JLabel("비밀번호");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		pContent.add(label);
+		JLabel lblPasswd = new JLabel("비밀번호");
+		lblPasswd.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(lblPasswd);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		pContent.add(textField_1);
+		tfPasswd = new JTextField();
+		tfPasswd.setColumns(10);
+		pContent.add(tfPasswd);
 		
 		JCheckBox checkBox = new JCheckBox("관리자 모드");
 		checkBox.setHorizontalAlignment(SwingConstants.CENTER);
@@ -62,11 +62,11 @@ public class LoginUI extends JFrame {
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("회원가입");
-		pBtn.add(btnNewButton);
+		JButton btnJoin = new JButton("회원가입");
+		pBtn.add(btnJoin);
 		
-		JButton btnNewButton_1 = new JButton("ID/PW찾기");
-		pBtn.add(btnNewButton_1);
+		JButton btnSearch = new JButton("ID/PW찾기");
+		pBtn.add(btnSearch);
 	}
 
 }

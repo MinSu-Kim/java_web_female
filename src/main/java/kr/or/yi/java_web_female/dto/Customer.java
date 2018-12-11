@@ -17,6 +17,7 @@ public class Customer {
 	private String license;
 	private Grade gradeCode;
 	private int rentCnt;
+	
 	public String getCode() {
 		return code;
 	}
