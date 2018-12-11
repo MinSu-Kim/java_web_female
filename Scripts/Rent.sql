@@ -1,3 +1,4 @@
+
 -- Insurance
 select * from insurance;
 

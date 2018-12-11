@@ -1,3 +1,5 @@
+use proj_rentcar;
+
 select * from customer;
 
 select * from grade;  

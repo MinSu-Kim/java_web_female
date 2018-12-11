@@ -1,4 +1,4 @@
-
+use proj_rentcar;
 -- 브랜드 B+넘버링
 INSERT INTO proj_rentcar.brand
 (`no`, name)
