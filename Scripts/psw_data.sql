@@ -43,7 +43,8 @@ insert into customer values ('C001', 'asd132', password('rootroot'), '김철수'
 							('C006', 'aefvb238', password('qwer2573'), '강호동', '대구 동구', '010-5555-2222', '1999-11-04', 'abc@daum.com' ,'E002' , '1종보통','G003', 30),
 							('C007', 'fkufj12', password('dhtdhd5645'), '김민정', '울산 서구', '010-6666-1111', '1994-03-16', 'abc@naver.com' ,'E002' , '2종보통','G004', -1),
 							('C008', 'xbmhw325',password('aggarg54'), '김재영', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
-
+insert into customer values
+('C009', 'xbmhw325',password('aggarg54'), '김영희', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 -- 회원등급기준 insert					 
 insert into level values ('브론즈',0,5),
 							('실버',6,10),
