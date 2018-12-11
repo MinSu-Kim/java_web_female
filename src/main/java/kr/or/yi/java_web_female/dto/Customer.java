@@ -18,6 +18,19 @@ public class Customer {
 	private Grade gradeCode;
 	private int rentCnt;
 	
+	
+	public Customer() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Customer(String code, String name, Grade gradeCode, String phone, String email) {
+		this.code = code;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.gradeCode = gradeCode;
+	}
+	
 	public String getCode() {
 		return code;
 	}

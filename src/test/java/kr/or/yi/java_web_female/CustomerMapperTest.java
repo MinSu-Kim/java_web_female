@@ -26,5 +26,13 @@ public class CustomerMapperTest extends AbstractTest {
 		List<Customer> list = dao.selectCustomerByName(searchCustomer);
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void test02SelectCustomerByAll() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<Customer> list = dao.selectCustomerByAll();
+		Assert.assertNotNull(list);
+	}
 
 }

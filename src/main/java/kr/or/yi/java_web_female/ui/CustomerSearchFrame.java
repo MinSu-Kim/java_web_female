@@ -9,34 +9,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
+import kr.or.yi.java_web_female.ui.list.CustmConfirmTable;
+
 public class CustomerSearchFrame extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CustomerSearchFrame frame = new CustomerSearchFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private RentUIService rentService;
+	private AbstractListPanel<Customer> cPanel;
 
 	/**
 	 * Create the frame.
 	 */
 	public CustomerSearchFrame() {
+		rentService = new RentUIService();
 		initComponents();
 	}
 	private void initComponents() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,8 +42,8 @@ public class CustomerSearchFrame extends JFrame {
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		panel.add(lblNewLabel);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
+		cPanel = new CustmConfirmTable();
+		contentPane.add(cPanel, BorderLayout.CENTER);
 	}
 
 }

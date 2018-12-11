@@ -16,13 +16,17 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class RentPanel extends JPanel {
+public class RentPanel extends JPanel implements ActionListener {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField tfName;
+	private JButton btnSearch;
+	private CustomerSearchFrame cf;	//고객확인프레임
 
 	public RentPanel() {
 		initComponents();
@@ -54,7 +58,8 @@ public class RentPanel extends JPanel {
 		tfName.setColumns(10);
 		pCustomer.add(tfName);
 		
-		JButton btnSearch = new JButton("검색");
+		btnSearch = new JButton("검색");
+		btnSearch.addActionListener(this);
 		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pCustomer.add(btnSearch);
 		
@@ -172,4 +177,17 @@ public class RentPanel extends JPanel {
 		pBtn.add(btnClose);
 	}
 	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearch) {
+			do_btnSearch_actionPerformed(e);
+		}
+	}
+	
+	//검색버튼
+	protected void do_btnSearch_actionPerformed(ActionEvent e) {
+		if(cf == null) {
+			cf = new CustomerSearchFrame();
+		}
+		cf.setVisible(true);
+	}
 }
