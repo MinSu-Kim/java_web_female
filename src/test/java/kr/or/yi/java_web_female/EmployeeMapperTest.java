@@ -29,8 +29,6 @@ public class EmployeeMapperTest extends AbstractTest {
 	@Test
 	public void test02selectEmployeeByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Employee searchEmp = new Employee();
-		searchEmp.setCode("E001");
 		List<Employee> empList = dao.selectEmployeeByAll();
 		Assert.assertNotNull(empList);
 	}

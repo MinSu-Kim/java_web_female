@@ -29,8 +29,7 @@ public class TitleMapperTest  extends AbstractTest{
 	@Test
 	public void test02selectTitleByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Title searchTit = new Title();
-		searchTit.setCode("T001");
+		
 		List<Title> titList = dao.selectTitleByAll();
 		Assert.assertNotNull(titList);
 	}

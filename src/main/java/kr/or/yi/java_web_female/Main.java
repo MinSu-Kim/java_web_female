@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import kr.or.yi.java_web_female.ui.LoginUI;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -19,7 +21,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestFrame frame = new TestFrame();
+					LoginUI frame = new LoginUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
