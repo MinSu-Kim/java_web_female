@@ -1,12 +1,12 @@
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,8 +19,8 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.Post;
-import javax.swing.DefaultComboBoxModel;
 
+@SuppressWarnings("serial")
 public class JoinUI extends JFrame {
 
    private JPanel contentPane;
@@ -35,25 +35,6 @@ public class JoinUI extends JFrame {
    private JTextField tfZipCode;
    private JTextField tfAddr;
 
-   /**
-    * Launch the application.
-    */
-   public static void main(String[] args) {
-      EventQueue.invokeLater(new Runnable() {
-         public void run() {
-            try {
-               JoinUI frame = new JoinUI();
-               frame.setVisible(true);
-            } catch (Exception e) {
-               e.printStackTrace();
-            }
-         }
-      });
-   }
-
-   /**
-    * Create the frame.
-    */
    public JoinUI() {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 571, 510);
@@ -176,7 +157,7 @@ public class JoinUI extends JFrame {
       tfEmail2.setColumns(8);
       pEmail.add(tfEmail2);
       
-      JComboBox cmbEmail3 = new JComboBox();
+      JComboBox<String> cmbEmail3 = new JComboBox<>();
       pEmail.add(cmbEmail3);
       
       JLabel lblAddr = new JLabel("우편번호");
