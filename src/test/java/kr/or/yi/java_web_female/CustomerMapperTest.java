@@ -17,7 +17,7 @@ import kr.or.yi.java_web_female.dto.Customer;
 public class CustomerMapperTest extends AbstractTest {
 	private CustomerMapper dao = new CustomerMapperImpl();
 	
-/*	@Test
+	@Test
 	public void test01SelectCustomerByName() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -25,6 +25,6 @@ public class CustomerMapperTest extends AbstractTest {
 		searchCustomer.setName("김영희");
 		List<Customer> list = dao.selectCustomerByName(searchCustomer);
 		Assert.assertNotNull(list);
-	}*/
+	}
 
 }
