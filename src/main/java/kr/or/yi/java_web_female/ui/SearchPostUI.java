@@ -1,31 +1,28 @@
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JScrollPane;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.security.Provider.Service;
 import java.sql.SQLException;
-import java.awt.event.ActionEvent;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.SearchPostService;
-import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.AddressTable;
 
+@SuppressWarnings("serial")
 public class SearchPostUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -47,9 +44,6 @@ public class SearchPostUI extends JFrame implements ActionListener {
 		this.pList = pList;
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public SearchPostUI() {
 		postService = new SearchPostService();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

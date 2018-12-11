@@ -1,19 +1,18 @@
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import java.awt.GridLayout;
-import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame {
@@ -22,10 +21,6 @@ public class LoginUI extends JFrame {
    private JTextField tfId;
    private JTextField tfPasswd;
 
-   
-   /**
-    * Create the frame.
-    */
    public LoginUI() {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 450, 186);

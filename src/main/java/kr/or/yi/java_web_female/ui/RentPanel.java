@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,7 +26,6 @@ import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.RentUIService;
-import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 public class RentPanel extends JPanel implements ActionListener {
