@@ -49,6 +49,6 @@ public class Insurance {
 	//toString
 	@Override
 	public String toString() {
-		return String.format("Insurance [%s, %s, %s]", code, carType, price);
+		return String.format("%s, %s, %s", code, carType, price);
 	}	
 }
