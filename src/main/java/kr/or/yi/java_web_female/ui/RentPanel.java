@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +29,7 @@ import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 public class RentPanel extends JPanel implements ActionListener {
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -160,11 +162,13 @@ public class RentPanel extends JPanel implements ActionListener {
 		rbNotReg = new JRadioButton("가입안함");
 		rbNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		rbNotReg.setHorizontalAlignment(SwingConstants.CENTER);
+		buttonGroup.add(rbNotReg);
 		pInsurance.add(rbNotReg);
 		
 		rbReg = new JRadioButton("일반자차");
 		rbReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		rbReg.setHorizontalAlignment(SwingConstants.CENTER);
+		buttonGroup.add(rbReg);
 		pInsurance.add(rbReg);
 		
 		JPanel panel = new JPanel();
