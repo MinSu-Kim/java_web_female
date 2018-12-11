@@ -11,10 +11,10 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
 public class SearchPannel extends JPanel {
-	private JTextField textField;
+	private JTextField tfId;
 	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField tfEmail;
+	private JTextField tfName;
 
 	/**
 	 * Create the panel.
@@ -26,37 +26,37 @@ public class SearchPannel extends JPanel {
 		add(pContent, BorderLayout.CENTER);
 		pContent.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("아이디 찾기");
-		rdbtnNewRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		pContent.add(rdbtnNewRadioButton);
+		JRadioButton rdbtnIdSearch = new JRadioButton("아이디 찾기");
+		rdbtnIdSearch.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(rdbtnIdSearch);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("비밀번호 찾기");
-		rdbtnNewRadioButton_1.setHorizontalAlignment(SwingConstants.CENTER);
-		pContent.add(rdbtnNewRadioButton_1);
+		JRadioButton rdbtnPassSearch = new JRadioButton("비밀번호 찾기");
+		rdbtnPassSearch.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(rdbtnPassSearch);
 		
 		JPanel panel = new JPanel();
 		pContent.add(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel lblNewLabel_3 = new JLabel("아이디");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel_3);
+		JLabel lblId = new JLabel("아이디");
+		lblId.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblId);
 		
-		textField = new JTextField();
-		pContent.add(textField);
-		textField.setColumns(10);
+		tfId = new JTextField();
+		pContent.add(tfId);
+		tfId.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("이름");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		pContent.add(lblNewLabel);
+		JLabel lblName = new JLabel("이름");
+		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(lblName);
 		
-		textField_3 = new JTextField();
-		pContent.add(textField_3);
-		textField_3.setColumns(10);
+		tfName = new JTextField();
+		pContent.add(tfName);
+		tfName.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("이메일");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		pContent.add(lblNewLabel_1);
+		JLabel lblEmail = new JLabel("이메일");
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(lblEmail);
 		
 		JPanel panel_2 = new JPanel();
 		pContent.add(panel_2);
@@ -70,24 +70,24 @@ public class SearchPannel extends JPanel {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNewLabel_2);
 		
-		textField_2 = new JTextField();
-		panel_2.add(textField_2);
-		textField_2.setColumns(10);
+		tfEmail = new JTextField();
+		panel_2.add(tfEmail);
+		tfEmail.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		panel_2.add(comboBox);
+		JComboBox cmbEmail = new JComboBox();
+		panel_2.add(cmbEmail);
 		
 		JPanel pBtn = new JPanel();
 		add(pBtn, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("아이디 찾기");
-		pBtn.add(btnNewButton);
+		JButton btnIdSearch = new JButton("아이디 찾기");
+		pBtn.add(btnIdSearch);
 		
-		JButton btnNewButton_1 = new JButton("비밀번호 찾기");
-		pBtn.add(btnNewButton_1);
+		JButton btnPassSearch = new JButton("비밀번호 찾기");
+		pBtn.add(btnPassSearch);
 		
-		JButton btnNewButton_2 = new JButton("나가기");
-		pBtn.add(btnNewButton_2);
+		JButton btnCancel = new JButton("나가기");
+		pBtn.add(btnCancel);
 
 	}
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.java_web_female.dao.CarModelMapper">
+
+	<select id="selectCarModelByNo" parameterType="CarModel" resultType="CarType">
+		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt
+		FROM car_model
+		where car_code=#{carCode};
+	</select>
+
+	<select id="selectCarModelByAll" resultType="CarModel">
+		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt
+		FROM car_model;
+	</select>
+	
+	<insert id="insertCarModel" parameterType="CarModel">
+		INSERT INTO car_model
+		(car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt)
+		VALUES(#{carCode}, #{name}, #{color}, #{gear}, #{brand}, #{cartype}, #{basicCharge}, #{hour6}, #{hour10}, #{hour12}, #{hourElse}, #{fuel}, #{isRent}, #{rentCnt});
+	</insert>
+	
+	<update id="updateCarModel" parameterType="CarModel">
+		UPDATE car_model
+		SET name=#{name}, color=#{color}, gear=#{gear}, brand=#{brand}, cartype=#{cartype}, basic_charge=#{basicCharge}, hour6=#{hour6}, hour10=#{hour10}, hour12=#{hour12}, hour_else=#{hourElse}, fuel_code=#{fuel}, is_rent=#{isRent}, rent_cnt=#{rentCnt}
+		WHERE car_code=#{carCode};
+	</update>
+	
+	<delete id="deleteCarModel" parameterType="CarModel">
+		DELETE FROM car_model
+		WHERE car_code=#{carCode};
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

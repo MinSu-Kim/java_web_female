@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class JoinPanel extends JPanel {
@@ -91,8 +92,8 @@ public class JoinPanel extends JPanel {
       lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
       pContent.add(lblNewLabel_5);
       
-      JPanel panel_3 = new JPanel();
-      pContent.add(panel_3);
+      JDateChooser dateChooser = new JDateChooser();
+      pContent.add(dateChooser);
       
       JLabel label_1 = new JLabel("전화번호");
       label_1.setHorizontalAlignment(SwingConstants.CENTER);

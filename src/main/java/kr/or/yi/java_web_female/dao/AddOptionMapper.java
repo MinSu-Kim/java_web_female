@@ -5,6 +5,6 @@ import java.util.List;
 import kr.or.yi.java_web_female.dto.AddOption;
 
 public interface AddOptionMapper {
-	AddOption selectAddOptionByNo();
+	AddOption selectAddOptionByCarCode(AddOption addOption);
 	List<AddOption> selectAddOptionByAll();
 }
