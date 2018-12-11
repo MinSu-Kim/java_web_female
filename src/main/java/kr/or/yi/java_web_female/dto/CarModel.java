@@ -19,6 +19,16 @@ public class CarModel {
 	private int rentCnt;
 	private List<CarOption> carOption;
 	
+	
+	public CarModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CarModel(String carCode) {
+		super();
+		this.carCode = carCode;
+	}
 	//get, set
 	
 	public String getCarCode() {

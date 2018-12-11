@@ -61,7 +61,7 @@ public class CarPanel extends JPanel {
 		panelCode.add(tfCode);
 		tfCode.setColumns(10);
 		
-		JPanel panelList = new JPanel();
+		CarPanelList panelList = new CarPanelList();
 		add(panelList, BorderLayout.CENTER);
 		
 		JPanel panelBtn = new JPanel();
