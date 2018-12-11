@@ -4,6 +4,16 @@ public class Brand {
 	private String no; //브랜드코드
 	private String name; //브랜드이름
 	
+	
+	
+	public Brand() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Brand(String no) {
+		super();
+		this.no = no;
+	}
 	//get, set
 	public String getNo() {
 		return no;

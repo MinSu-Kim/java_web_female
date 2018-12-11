@@ -3,6 +3,7 @@ package kr.or.yi.java_web_female.ui;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class CarPanel extends JPanel {
@@ -25,6 +26,12 @@ public class CarPanel extends JPanel {
 		
 		JPanel panel_4 = new JPanel();
 		add(panel_4, BorderLayout.SOUTH);
+		
+		JButton btnOk = new JButton("선택");
+		panel_4.add(btnOk);
+		
+		JButton btnCancel = new JButton("취소");
+		panel_4.add(btnCancel);
 
 	}
 

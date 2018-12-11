@@ -15,10 +15,24 @@ public class CarModel {
 	private Fuel fuel;
 	private boolean isRent;
 	private int rentCnt;
+	private CarOption carOption;
 	
 	//get, set
+	
 	public String getCarCode() {
 		return carCode;
+	}
+	public int getBasicCharge() {
+		return basicCharge;
+	}
+	public void setBasicCharge(int basicCharge) {
+		this.basicCharge = basicCharge;
+	}
+	public CarOption getCarOption() {
+		return carOption;
+	}
+	public void setCarOption(CarOption carOption) {
+		this.carOption = carOption;
 	}
 	public void setCarCode(String carCode) {
 		this.carCode = carCode;
@@ -101,14 +115,15 @@ public class CarModel {
 	public void setRentCnt(int rentCnt) {
 		this.rentCnt = rentCnt;
 	}
-	
 	@Override
 	public String toString() {
 		return "CarModel [carCode=" + carCode + ", name=" + name + ", color=" + color + ", gear=" + gear + ", brand="
-				+ brand + ", cartype=" + cartype + ", basic_charge=" + basicCharge + ", hour6=" + hour6 + ", hour10="
+				+ brand + ", cartype=" + cartype + ", basicCharge=" + basicCharge + ", hour6=" + hour6 + ", hour10="
 				+ hour10 + ", hour12=" + hour12 + ", hourElse=" + hourElse + ", fuel=" + fuel + ", isRent=" + isRent
-				+ ", rentCnt=" + rentCnt + "]";
+				+ ", rentCnt=" + rentCnt + ", carOption=" + carOption + "]";
 	}
+	
+	
 	
 	
 }
