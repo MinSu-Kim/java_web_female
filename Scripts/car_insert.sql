@@ -7,8 +7,7 @@ values
 ("B2", 'kia'),
 ("B3",'bmw');
 
-select *
-from brand;
+
 
 -- 차종 S+넘버링
 INSERT INTO proj_rentcar.car_type
@@ -22,8 +21,6 @@ values
 ('S6','suv');
 
 
-select *
-from car_type;
 
 -- 차연료
 INSERT INTO proj_rentcar.fuel
@@ -35,8 +32,7 @@ values
 ('hybrid'),
 ('electric');
 
-select *
-from fuel;
+
 
 -- 옵션
 INSERT INTO proj_rentcar.car_option
@@ -47,8 +43,7 @@ values
 (2, 'blackbox', 6000), -- 블랙박스
 (3, 'sunroof', 6000);
 
-select *
-from car_option;
+
 
 -- 차모델 C
 INSERT INTO proj_rentcar.car_model
@@ -68,8 +63,7 @@ values
 ('V008', '스포티지','bk', 'auto', 'B2','S5', 153000,85700,110200, 122400, 153000,'gasolin', 0,0);
 
 
-select *
-from car_model;
+
 
 INSERT INTO proj_rentcar.add_option
 (option_id, car_code)
@@ -81,8 +75,8 @@ values
 (2, 'V003'),
 (3, 'V003');
 
-select *
-from add_option;
+
+
 
 
 
