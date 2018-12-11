@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import kr.or.yi.java_web_female.ui.list.CarPanelList;
 
 @SuppressWarnings("serial")
 public class CarPanel extends JPanel {
@@ -61,8 +62,6 @@ public class CarPanel extends JPanel {
 		panelCode.add(tfCode);
 		tfCode.setColumns(10);
 		
-		CarPanelList panelList = new CarPanelList();
-		add(panelList, BorderLayout.CENTER);
 		
 		JPanel panelBtn = new JPanel();
 		add(panelBtn, BorderLayout.SOUTH);
@@ -72,6 +71,9 @@ public class CarPanel extends JPanel {
 		
 		JButton btnCancel = new JButton("취소");
 		panelBtn.add(btnCancel);
+		
+		CarPanelList panel = new CarPanelList();
+		add(panel, BorderLayout.CENTER);
 
 	}
 

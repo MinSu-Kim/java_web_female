@@ -7,26 +7,31 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.List;
+
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
+import kr.or.yi.java_web_female.ui.list.CustmConfirmTable;
 
 public class CustomerSearchFrame extends JFrame {
 
 	private JPanel contentPane;
+	private AbstractListPanel<Customer> cPanel;
+	private List<Customer> cList;
+	private RentPanel rentPanel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CustomerSearchFrame frame = new CustomerSearchFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public void setcList(List<Customer> cList) {
+		this.cList = cList;
+		cPanel.setList(cList);
+		cPanel.loadDatas();
 	}
 
 	/**
@@ -35,8 +40,10 @@ public class CustomerSearchFrame extends JFrame {
 	public CustomerSearchFrame() {
 		initComponents();
 	}
+
+
 	private void initComponents() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -50,8 +57,23 @@ public class CustomerSearchFrame extends JFrame {
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		panel.add(lblNewLabel);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
+		cPanel = new CustmConfirmTable();
+		cPanel.getTable().addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Customer i = cPanel.getSelectedItem();
+				rentPanel.setRentCustomer(i);
+				CustomerSearchFrame.this.dispose();
+			}
+			
+		});
+		
+		contentPane.add(cPanel, BorderLayout.CENTER);
+	}
+
+	public void setRentPanel(RentPanel rentPanel) {
+		this.rentPanel = rentPanel;
 	}
 
 }
