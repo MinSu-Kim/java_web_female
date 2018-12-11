@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.CustomerMapper">
-	<select id="selectCustomerByName" parameterType="Customer" resultType="Customer">
+	<resultMap type="Customer" id="ResultCustom">
+		<id column="code" property="code" />
+		<result column="Id" property="id"/>
+		<result column="passwd" property="passwd"/>
+		<result column="Name" property="name"/>
+		<result column="address" property="address"/>
+		<result column="phone" property="phone"/>
+		<result column="dob" property="dob"/>
+		<result column="email" property="email"/>
+		<result column="emp_code" property="empCode.code"/>
+		<result column="license" property="license"/>
+		<result column="grade_code" property="gradeCode.code"/>
+		<result column="rent_cnt" property="rentCnt"/>
+	</resultMap>
+	<select id="selectCustomerByName" parameterType="Customer" resultMap="ResultCustom">
 		select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt 
 		from customer 
 		where name = #{name}
 	</select>
 	
-	<select id="selectCustomerByAll" resultType="Customer">
+	<select id="selectCustomerByAll" resultMap="ResultCustom">
 		select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt 
 		from customer 
 	</select>

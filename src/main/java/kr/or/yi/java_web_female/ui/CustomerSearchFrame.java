@@ -7,7 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.List;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.RentUIService;
@@ -17,16 +23,25 @@ import kr.or.yi.java_web_female.ui.list.CustmConfirmTable;
 public class CustomerSearchFrame extends JFrame {
 
 	private JPanel contentPane;
-	private RentUIService rentService;
 	private AbstractListPanel<Customer> cPanel;
+	private List<Customer> cList;
+	private RentPanel rentPanel;
+
+	
+	public void setcList(List<Customer> cList) {
+		this.cList = cList;
+		cPanel.setList(cList);
+		cPanel.loadDatas();
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public CustomerSearchFrame() {
-		rentService = new RentUIService();
 		initComponents();
 	}
+
+
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -43,7 +58,22 @@ public class CustomerSearchFrame extends JFrame {
 		panel.add(lblNewLabel);
 		
 		cPanel = new CustmConfirmTable();
+		cPanel.getTable().addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Customer i = cPanel.getSelectedItem();
+				rentPanel.setRentCustomer(i);
+				CustomerSearchFrame.this.dispose();
+			}
+			
+		});
+		
 		contentPane.add(cPanel, BorderLayout.CENTER);
+	}
+
+	public void setRentPanel(RentPanel rentPanel) {
+		this.rentPanel = rentPanel;
 	}
 
 }

@@ -9,7 +9,7 @@ public class CustmConfirmTable extends AbstractListPanel<Customer> {
 	@Override
 	protected void setAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4);
-		tableSetWidth(150, 150, 150, 150, 150);
+		tableSetWidth(100, 100, 100, 200, 200);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class CustmConfirmTable extends AbstractListPanel<Customer> {
 	@Override
 	protected Object[] getItemRows(Customer item) {
 		return new Object[] {
-				item.getCode(), item.getName(), item.getGradeCode(), item.getPhone(), item.getEmail()
+				item.getCode(), item.getName(), item.getGradeCode().getCode(), item.getPhone(), item.getEmail()
 		};
 	}
 

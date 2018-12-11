@@ -5,6 +5,20 @@ public class Grade {
 	private String name; //등급명
 	private int rate; //등급별 할인율
 	
+	public Grade() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Grade(String code) {
+		this.code = code;
+	}
+	
+	public Grade(String code, String name, int rate) {
+		this.code = code;
+		this.name = name;
+		this.rate = rate;
+	}
+	
 	public String getCode() {
 		return code;
 	}

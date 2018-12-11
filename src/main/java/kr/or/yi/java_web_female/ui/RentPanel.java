@@ -4,10 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
@@ -16,8 +21,10 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.service.RentUIService;
+import javax.swing.JCheckBox;
 
 @SuppressWarnings("serial")
 public class RentPanel extends JPanel implements ActionListener {
@@ -27,10 +34,16 @@ public class RentPanel extends JPanel implements ActionListener {
 	private JTextField tfName;
 	private JButton btnSearch;
 	private CustomerSearchFrame cf;	//고객확인프레임
-
+	private RentUIService service;
+	private Customer rentCustomer;
+	private JRadioButton rbNotReg;
+	private JRadioButton rbReg;
+	
 	public RentPanel() {
+		service = new RentUIService();
 		initComponents();
 	}
+	
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -140,19 +153,43 @@ public class RentPanel extends JPanel implements ActionListener {
 		lblInsurance.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPanel.add(lblInsurance);
 		
-		JPanel pGender = new JPanel();
-		contentPanel.add(pGender);
-		pGender.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel pInsurance = new JPanel();
+		contentPanel.add(pInsurance);
+		pInsurance.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JRadioButton rbNotReg = new JRadioButton("가입안함");
+		rbNotReg = new JRadioButton("가입안함");
 		rbNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		rbNotReg.setHorizontalAlignment(SwingConstants.CENTER);
-		pGender.add(rbNotReg);
+		pInsurance.add(rbNotReg);
 		
-		JRadioButton rbReg = new JRadioButton("일반자차");
+		rbReg = new JRadioButton("일반자차");
 		rbReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		rbReg.setHorizontalAlignment(SwingConstants.CENTER);
-		pGender.add(rbReg);
+		pInsurance.add(rbReg);
+		
+		JPanel panel = new JPanel();
+		contentPanel.add(panel);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("카시트");
+		chckbxNewCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(chckbxNewCheckBox);
+		
+		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("블랙박스");
+		chckbxNewCheckBox_1.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(chckbxNewCheckBox_1);
+		
+		JPanel panel_1 = new JPanel();
+		contentPanel.add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("선루프");
+		chckbxNewCheckBox_3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(chckbxNewCheckBox_3);
+		
+		JCheckBox chckbxNewCheckBox_4 = new JCheckBox("운전기사");
+		chckbxNewCheckBox_4.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(chckbxNewCheckBox_4);
 		
 		JLabel lblTotalPrice = new JLabel("최종 요금");
 		lblTotalPrice.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -186,8 +223,25 @@ public class RentPanel extends JPanel implements ActionListener {
 	//검색버튼
 	protected void do_btnSearch_actionPerformed(ActionEvent e) {
 		if(cf == null) {
-			cf = new CustomerSearchFrame();
+			Customer customer = new Customer();
+			customer.setName(tfName.getText().trim());
+			try {
+				List<Customer> cList = service.selectCustomer(customer);
+				if(cList.size() > 1) {
+					cf = new CustomerSearchFrame();
+					cf.setRentPanel(this);
+					cf.setcList(cList);
+					cf.setVisible(true);
+				}
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
-		cf.setVisible(true);
+		
+	}
+	
+	public void setRentCustomer(Customer rentCustomer) {
+		this.rentCustomer = rentCustomer;
+		JOptionPane.showMessageDialog(null, "선택된 고객 " + rentCustomer);
 	}
 }
