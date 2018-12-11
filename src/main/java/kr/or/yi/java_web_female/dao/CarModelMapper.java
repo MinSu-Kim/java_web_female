@@ -10,4 +10,7 @@ public interface CarModelMapper {
 	int insertCarModel(CarModel carModel);
 	int updateCarModel(CarModel carModel);
 	int deleteCarModel(CarModel carModel);
+	
+	List<CarModel> selectCarModelWithCarOptionByAll();
+	List<CarModel> selectCarModelWithCarOptionByCode(CarModel carModel);
 }

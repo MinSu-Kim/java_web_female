@@ -97,6 +97,22 @@ public class CarModelMapperTest extends AbstractTest {
 		int res = dao.deleteCarModel(carModel);
 		Assert.assertEquals(1, res);
 	}
+	
+	@Test
+	public void test06selectCarModelWithCarOptionByAll() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		List<CarModel> list = dao.selectCarModelWithCarOptionByAll();
+		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void test07selectCarModelWithCarOptionByCode() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		CarModel model = new CarModel();
+		model.setCarCode("V003");
+		List<CarModel> searchModel = dao.selectCarModelWithCarOptionByCode(model);
+		Assert.assertNotNull(searchModel);
+	}
 }
 
 

@@ -2,10 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.CarModelMapper">
 	
-	<select id="selectCarModelWithCarOptionByAll">
+	<select id="selectCarModelWithCarOptionByCode" parameterType="CarModel" resultType="CarModel">
+		SELECT m.car_code, m.name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt, option_id,co.no ,co.name, co.price
+		FROM car_model m join add_option ao on m.car_code=ao.car_code join car_option co on ao.option_id = co.no
+		where m.car_code=#{carCode}
+	</select>
+	
+	<select id="selectCarModelWithCarOptionByAll" resultType="CarModel">
 		SELECT m.car_code, m.name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt, option_id,co.no ,co.name, co.price
 		FROM car_model m join add_option ao on m.car_code=ao.car_code join car_option co on ao.option_id = co.no;
 	</select>
+	
 
 	<select id="selectCarModelByNo" parameterType="CarModel" resultType="CarModel">
 		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt

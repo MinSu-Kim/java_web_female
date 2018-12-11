@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female.dto;
 
+import java.util.List;
+
 public class CarModel {
 	private String carCode;
 	private String name;
@@ -15,7 +17,7 @@ public class CarModel {
 	private Fuel fuel;
 	private boolean isRent;
 	private int rentCnt;
-	private CarOption carOption;
+	private List<CarOption> carOption;
 	
 	//get, set
 	
@@ -28,10 +30,11 @@ public class CarModel {
 	public void setBasicCharge(int basicCharge) {
 		this.basicCharge = basicCharge;
 	}
-	public CarOption getCarOption() {
+	
+	public List<CarOption> getCarOption() {
 		return carOption;
 	}
-	public void setCarOption(CarOption carOption) {
+	public void setCarOption(List<CarOption> carOption) {
 		this.carOption = carOption;
 	}
 	public void setCarCode(String carCode) {
