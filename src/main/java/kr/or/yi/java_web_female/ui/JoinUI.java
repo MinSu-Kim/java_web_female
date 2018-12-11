@@ -2,33 +2,38 @@ package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
+
+import kr.or.yi.java_web_female.dto.Post;
+import javax.swing.DefaultComboBoxModel;
 
 public class JoinUI extends JFrame {
 
    private JPanel contentPane;
-   private JTextField textField;
-   private JTextField textField_1;
-   private JTextField textField_2;
-   private JTextField textField_3;
-   private JTextField textField_4;
-   private JTextField textField_5;
-   private JTextField textField_6;
-   private JTextField textField_7;
-   private JTextField textField_9;
-   private JTextField textField_8;
+   private JTextField tfName;
+   private JTextField tfId;
+   private JTextField tfPwd1;
+   private JTextField tfPwd2;
+   private JTextField tfTel2;
+   private JTextField tfTel3;
+   private JTextField tfEmail1;
+   private JTextField tfEmail2;
+   private JTextField tfZipCode;
+   private JTextField tfAddr;
 
    /**
     * Launch the application.
@@ -51,7 +56,7 @@ public class JoinUI extends JFrame {
     */
    public JoinUI() {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setBounds(100, 100, 550, 510);
+      setBounds(100, 100, 571, 510);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       contentPane.setLayout(new BorderLayout(0, 0));
@@ -61,146 +66,148 @@ public class JoinUI extends JFrame {
       contentPane.add(pContent, BorderLayout.CENTER);
       pContent.setLayout(new GridLayout(0, 2, 10, 10));
       
-      JLabel label = new JLabel("이름");
-      label.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label);
+      JLabel lblName = new JLabel("이름");
+      lblName.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblName);
       
-      textField = new JTextField();
-      textField.setColumns(10);
-      pContent.add(textField);
+      tfName = new JTextField();
+      tfName.setColumns(10);
+      pContent.add(tfName);
       
-      JLabel label_1 = new JLabel("아이디");
-      label_1.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_1);
+      JLabel lblId = new JLabel("아이디");
+      lblId.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblId);
       
-      JPanel panel = new JPanel();
-      pContent.add(panel);
-      panel.setLayout(new GridLayout(0, 2, 0, 0));
+      JPanel pId = new JPanel();
+      pContent.add(pId);
+      pId.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_1 = new JTextField();
-      textField_1.setColumns(10);
-      panel.add(textField_1);
+      tfId = new JTextField();
+      tfId.setColumns(10);
+      pId.add(tfId);
       
-      JButton button = new JButton("중복확인");
-      panel.add(button);
+      JButton btnDupConfirm = new JButton("중복확인");
+      pId.add(btnDupConfirm);
       
-      JLabel label_2 = new JLabel("비밀번호");
-      label_2.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_2);
+      JLabel lblPw1 = new JLabel("비밀번호");
+      lblPw1.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblPw1);
       
-      JPanel panel_1 = new JPanel();
-      pContent.add(panel_1);
-      panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+      JPanel pPwd1 = new JPanel();
+      pContent.add(pPwd1);
+      pPwd1.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_2 = new JTextField();
-      textField_2.setColumns(10);
-      panel_1.add(textField_2);
+      tfPwd1 = new JTextField();
+      tfPwd1.setColumns(10);
+      pPwd1.add(tfPwd1);
       
-      JLabel label_3 = new JLabel("");
-      label_3.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_1.add(label_3);
+      JLabel lblBlank1 = new JLabel("");
+      lblBlank1.setHorizontalAlignment(SwingConstants.CENTER);
+      pPwd1.add(lblBlank1);
       
-      JLabel label_4 = new JLabel("비밀번호 확인");
-      label_4.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_4);
+      JLabel lblPw2 = new JLabel("비밀번호 확인");
+      lblPw2.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblPw2);
       
       JPanel panel_2 = new JPanel();
       pContent.add(panel_2);
       panel_2.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_3 = new JTextField();
-      textField_3.setColumns(10);
-      panel_2.add(textField_3);
+      tfPwd2 = new JTextField();
+      tfPwd2.setColumns(10);
+      panel_2.add(tfPwd2);
       
-      JLabel label_5 = new JLabel("");
-      label_5.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_2.add(label_5);
+      JLabel lblBlank2 = new JLabel("");
+      lblBlank2.setHorizontalAlignment(SwingConstants.CENTER);
+      panel_2.add(lblBlank2);
       
-      JLabel label_6 = new JLabel("생년월일");
-      label_6.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_6);
+      JLabel lblBirth = new JLabel("생년월일");
+      lblBirth.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblBirth);
       
-      JDateChooser dateChooser = new JDateChooser();
-      pContent.add(dateChooser);
+      JDateChooser birthDay = new JDateChooser();
+      pContent.add(birthDay);
       
-      JLabel label_7 = new JLabel("전화번호");
-      label_7.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_7);
+      JLabel lblTel = new JLabel("전화번호");
+      lblTel.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblTel);
       
-      JPanel panel_3 = new JPanel();
-      pContent.add(panel_3);
-      panel_3.setLayout(new GridLayout(0, 5, 0, 0));
+      JPanel pTel = new JPanel();
+      pContent.add(pTel);
+      pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
       
-      JComboBox comboBox = new JComboBox();
-      panel_3.add(comboBox);
+      JComboBox<String> cmbTel1 = new JComboBox<>();
+      cmbTel1.setModel(new DefaultComboBoxModel<String>(new String[] {"010", "011", "017"}));
+      pTel.add(cmbTel1);
       
-      JLabel label_8 = new JLabel("-");
-      label_8.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_3.add(label_8);
+      JLabel lbl1 = new JLabel("-");
+      lbl1.setHorizontalAlignment(SwingConstants.CENTER);
+      pTel.add(lbl1);
       
-      textField_4 = new JTextField();
-      textField_4.setColumns(10);
-      panel_3.add(textField_4);
+      tfTel2 = new JTextField();
+      tfTel2.setColumns(10);
+      pTel.add(tfTel2);
       
-      JLabel label_9 = new JLabel("-");
-      label_9.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_3.add(label_9);
+      JLabel lbl2 = new JLabel("-");
+      lbl2.setHorizontalAlignment(SwingConstants.CENTER);
+      pTel.add(lbl2);
       
-      textField_5 = new JTextField();
-      textField_5.setColumns(10);
-      panel_3.add(textField_5);
+      tfTel3 = new JTextField();
+      tfTel3.setColumns(10);
+      pTel.add(tfTel3);
       
-      JLabel label_10 = new JLabel("이메일");
-      label_10.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_10);
+      JLabel lblEmail = new JLabel("이메일");
+      lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblEmail);
       
-      JPanel panel_4 = new JPanel();
-      pContent.add(panel_4);
-      panel_4.setLayout(new GridLayout(0, 4, 0, 0));
+      JPanel pEmail = new JPanel();
+      pContent.add(pEmail);
+      pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
       
-      textField_6 = new JTextField();
-      textField_6.setColumns(10);
-      panel_4.add(textField_6);
+      tfEmail1 = new JTextField();
+      tfEmail1.setColumns(8);
+      pEmail.add(tfEmail1);
       
-      JLabel label_11 = new JLabel("@");
-      label_11.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_4.add(label_11);
+      JLabel lblAt = new JLabel("@");
+      lblAt.setHorizontalAlignment(SwingConstants.CENTER);
+      pEmail.add(lblAt);
       
-      textField_7 = new JTextField();
-      textField_7.setColumns(10);
-      panel_4.add(textField_7);
+      tfEmail2 = new JTextField();
+      tfEmail2.setColumns(8);
+      pEmail.add(tfEmail2);
       
-      JComboBox comboBox_1 = new JComboBox();
-      panel_4.add(comboBox_1);
+      JComboBox cmbEmail3 = new JComboBox();
+      pEmail.add(cmbEmail3);
       
-      JLabel label_12 = new JLabel("주소");
-      label_12.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_12);
+      JLabel lblAddr = new JLabel("우편번호");
+      lblAddr.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblAddr);
       
-      JPanel panel_6 = new JPanel();
-      pContent.add(panel_6);
-      panel_6.setLayout(new GridLayout(0, 2, 0, 0));
+      JPanel pAddr = new JPanel();
+      pContent.add(pAddr);
+      pAddr.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_9 = new JTextField();
-      textField_9.setColumns(10);
-      panel_6.add(textField_9);
+      tfZipCode = new JTextField();
+      tfZipCode.setColumns(10);
+      pAddr.add(tfZipCode);
       
-      JButton button_2 = new JButton("우편번호 검색");
-      button_2.addActionListener(new ActionListener() {
+      JButton btnSearchAddr = new JButton("우편번호 검색");
+      btnSearchAddr.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             SearchPostUI frame = new SearchPostUI();
+            frame.setJoinUi(JoinUI.this); //추가해줌. setAddress()호출하기 위핸
             frame.setVisible(true);
          }
       });
-      panel_6.add(button_2);
+      pAddr.add(btnSearchAddr);
       
-      JLabel label_13 = new JLabel("상세 주소");
-      label_13.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_13);
+      JLabel lblAddrDetail = new JLabel("주소");
+      lblAddrDetail.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblAddrDetail);
       
-      textField_8 = new JTextField();
-      pContent.add(textField_8);
-      textField_8.setColumns(10);
+      tfAddr = new JTextField();
+      pContent.add(tfAddr);
+      tfAddr.setColumns(10);
       
       JPanel pBtn = new JPanel();
       contentPane.add(pBtn, BorderLayout.SOUTH);
@@ -212,4 +219,10 @@ public class JoinUI extends JFrame {
       pBtn.add(btnCalcel);
    }
 
+   /* 추가해줌 */
+   public void setAddress(Post post) {
+	   this.tfZipCode.setText(post.getZipcode());
+	   this.tfAddr.setText(post.toString());
+	   tfAddr.requestFocus();
+   }
 }

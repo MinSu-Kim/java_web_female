@@ -25,11 +25,12 @@ public class AddressTable extends AbstractListPanel<Post> {
 
    @Override
    public Post getItem(int selectedIndex) {
-      String zipCode = (String) table.getValueAt(selectedIndex, 0);
+/*      String zipCode = (String) table.getValueAt(selectedIndex, 0);
       Post searchPost = new Post(zipCode);
       int index = list.indexOf(searchPost);
       
-      return list.get(index);
+      return list.get(index);*/
+	   return list.get(selectedIndex);
    }
 
 }
