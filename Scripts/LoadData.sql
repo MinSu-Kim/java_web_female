@@ -1,4 +1,4 @@
-create table if not exists post (
+/*create table if not exists post (
 zipcode CHAR(5) NULL,
 sido VARCHAR(20) NULL,
 sigungu VARCHAR(20) NULL,
@@ -6,7 +6,7 @@ eupmyeon varchar(20) NULL,
 doro VARCHAR(80) NULL,
 building1 int(5) NULL,
 building2 int(5) NULL
-);
+);*/
 
 load data local INFILE'D:/workspace-proj/java_web_female/DataFiles/대구광역시.txt' into table post
 character set'euckr'

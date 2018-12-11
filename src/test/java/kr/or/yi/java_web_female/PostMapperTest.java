@@ -19,12 +19,12 @@ public class PostMapperTest extends AbstractTest{
 
 	@Test
 	public void test01selectPostByNo() {
-		/*log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Post searchPost = new Post();
 		searchPost.setZipcode("41456");
 		
 		Post searchedPost = dao.selectPostByNo(searchPost);
-		Assert.assertNotNull(searchedPost);*/
+		Assert.assertNotNull(searchedPost);
 	}
 
 }
