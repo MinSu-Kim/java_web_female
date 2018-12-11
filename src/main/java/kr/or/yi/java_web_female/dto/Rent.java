@@ -136,7 +136,7 @@ public class Rent {
 	@Override
 	public String toString() {
 		return String.format(
-				"Rent [%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s]",
+				"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
 				code, startDate, startTime, endDate, endTime, isReturn, totalPrice, carCode, customerCode,
 				insuranceCode, eRate, optPrice);
 	}
