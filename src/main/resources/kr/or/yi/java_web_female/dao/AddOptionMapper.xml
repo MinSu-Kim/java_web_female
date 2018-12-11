@@ -3,7 +3,7 @@
 <mapper namespace="kr.or.yi.java_web_female.dao.AddOptionMapper">
 
 
-	<select id="selectAddOptionByNo" parameterType="AddOption" resultType="AddOption">
+	<select id="selectAddOptionByCarCode" parameterType="AddOption" resultType="AddOption">
 		select option_id, car_code
 		from add_option
 		where option_id=#{optionId}
