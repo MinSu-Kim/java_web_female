@@ -6,7 +6,7 @@ import kr.or.yi.java_web_female.dto.CarModel;
 
 public class CarModelMapperImpl implements CarModelMapper {
 //	private static final String namespace
-	@Override
+	/*@Override
 	public CarModel selectCarModelByNo(CarModel carModel) {
 		// TODO Auto-generated method stub
 		return null;
@@ -16,6 +16,6 @@ public class CarModelMapperImpl implements CarModelMapper {
 	public List<CarModel> selectCarModelByAll() {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 }
