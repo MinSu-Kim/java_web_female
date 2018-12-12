@@ -12,11 +12,9 @@ public class PostMapperImpl implements PostMapper {
    
    private static final PostMapperImpl instance = new PostMapperImpl();
    
-   
-
-   public static PostMapperImpl getInstance() {
-	return instance;
-}
+	public static PostMapperImpl getInstance() {
+		return instance;
+	}
 
    private PostMapperImpl() {}
 

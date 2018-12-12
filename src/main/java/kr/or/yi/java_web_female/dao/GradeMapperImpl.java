@@ -8,15 +8,13 @@ import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 public class GradeMapperImpl implements GradeMapper {
 	private static final String namespace = "kr.or.yi.java_web_female.dao.GradeMapper";
 	private static final GradeMapperImpl instance = new GradeMapperImpl();
-	
-	
-	
+
 	public static GradeMapperImpl getInstance() {
 		return instance;
 	}
 
-
-	private GradeMapperImpl() {}
+	private GradeMapperImpl() {
+	}
 
 	@Override
 	public Grade selectGradeByNo(Grade grade) {
