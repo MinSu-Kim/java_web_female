@@ -94,6 +94,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		service.insertFuel(newFuel);
 		panelList.setList(list);
 		panelList.loadDatas();
+		add(panelList);
 		tfCode.setText("");
 		
 	}

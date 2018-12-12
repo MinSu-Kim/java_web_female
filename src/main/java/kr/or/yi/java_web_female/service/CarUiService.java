@@ -48,5 +48,8 @@ public class CarUiService {
 		return fuelDao.insertFuel(fuel);
 	}
 	
+	public int insertCarOption(CarOption carOption) {
+		return optionDao.insertCarOption(carOption);
+	}
 	
 }
