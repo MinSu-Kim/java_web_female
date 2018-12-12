@@ -13,7 +13,7 @@ import kr.or.yi.java_web_female.dto.Brand;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BrandMapperTest extends AbstractTest {
-	private BrandMapper dao = new BrandMapperImpl();
+	private BrandMapper dao = BrandMapperImpl.getInstance();
 	
 	@Test
 	public void test01selectBrandByNo() {

@@ -25,7 +25,7 @@ public class CarUiService {
 		optionDao = new CarOptionMapperImpl();
 		typeDao = new CarTypeMapperImpl();
 		fuelDao = new FuelMapperImpl();
-		brandDao = new BrandMapperImpl();
+		brandDao = BrandMapperImpl.getInstance();
 	}
 	
 	public List<CarOption> selectAllCarOption(){
@@ -42,6 +42,10 @@ public class CarUiService {
 	
 	public List<Brand> selectAllBrand(){
 		return brandDao.selectBrandByAll();
+	}
+	
+	public int insertFuel(Fuel fuel) {
+		return fuelDao.insertFuel(fuel);
 	}
 	
 	

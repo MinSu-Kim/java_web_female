@@ -8,6 +8,14 @@ import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class BrandMapperImpl implements BrandMapper {
+	private static final BrandMapperImpl instance = new BrandMapperImpl();//자기자신 생성
+	//get,set
+	public static BrandMapperImpl getInstance() {
+		return instance;
+	}
+	
+	private BrandMapperImpl() {}
+
 	private static final String namespace = "kr.or.yi.java_web_female.dao.BrandMapper";
 
 	@Override

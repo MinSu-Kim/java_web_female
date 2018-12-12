@@ -91,6 +91,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		//추가버튼 눌렀을시 실행
 		String code = tfCode.getText();
 		Fuel newFuel = new Fuel(code);
+		service.insertFuel(newFuel);
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
 		//취소버튼 눌렀을시 실행

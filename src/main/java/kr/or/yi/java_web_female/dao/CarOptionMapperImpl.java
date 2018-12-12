@@ -8,6 +8,7 @@ import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class CarOptionMapperImpl implements CarOptionMapper {
+
 	private static final String namespace = "kr.or.yi.java_web_female.dao.CarOptionMapper";
 	
 	@Override
