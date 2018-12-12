@@ -15,7 +15,7 @@ import kr.or.yi.java_web_female.dto.Customer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerMapperTest extends AbstractTest {
-	private CustomerMapper dao = new CustomerMapperImpl();
+	private CustomerMapper dao = CustomerMapperImpl.getInstance();
 	
 	@Test
 	public void test01SelectCustomerByName() {
