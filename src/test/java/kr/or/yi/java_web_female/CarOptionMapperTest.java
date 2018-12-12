@@ -15,7 +15,7 @@ import kr.or.yi.java_web_female.dto.CarOption;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CarOptionMapperTest extends AbstractTest {
-	private CarOptionMapper dao = new CarOptionMapperImpl();
+	private CarOptionMapper dao = CarOptionMapperImpl.getInstance();
 	
 	@Test
 	public void test01selectCarOptionByNo() {

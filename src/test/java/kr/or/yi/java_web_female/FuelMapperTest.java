@@ -15,7 +15,7 @@ import kr.or.yi.java_web_female.dto.Fuel;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FuelMapperTest extends AbstractTest {
-	private FuelMapper dao = new FuelMapperImpl();
+	private FuelMapper dao = FuelMapperImpl.getInstance();
 	
 	@Test
 	public void test01selectFuelByNo() {

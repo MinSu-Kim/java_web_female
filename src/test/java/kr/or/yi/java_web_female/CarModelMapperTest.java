@@ -18,7 +18,7 @@ import kr.or.yi.java_web_female.dto.Fuel;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CarModelMapperTest extends AbstractTest {
-	private CarModelMapper dao = new CarModelMapperImpl();
+	private CarModelMapper dao = CarModelMapperImpl.getInstance();
 	
 	@Test
 	public void test01selectCarModelByNo() {

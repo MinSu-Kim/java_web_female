@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import kr.or.yi.java_web_female.ui.car.CarPanel;
+
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
 	
@@ -34,11 +36,16 @@ public class ManagerPanel extends JPanel {
 		RentPanel panel_3 = new RentPanel();
 		tabbedPane.addTab("대여관리", null, panel_3, null);
 		
+		JPanel panel_3_1 = new JPanel();
+		tabbedPane.addTab("대여현황", null, panel_3_1, null);
+		
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("반납관리", null, panel_4, null);
 		
 		JPanel panel_5 = new JPanel();
 		tabbedPane.addTab("전체통계", null, panel_5, null);
+		
+		
 
 
 	}

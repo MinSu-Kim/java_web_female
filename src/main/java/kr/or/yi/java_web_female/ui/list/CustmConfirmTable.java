@@ -26,12 +26,13 @@ public class CustmConfirmTable extends AbstractListPanel<Customer> {
 
 	@Override
 	protected Customer getItem(int selectedIndex) {
-		String code = (String) table.getValueAt(selectedIndex, 0);
+/*		String code = (String) table.getValueAt(selectedIndex, 0);
 		String name = (String) table.getValueAt(selectedIndex, 1);
 		Customer customer = new Customer();
 		customer.setCode(code);
 		customer.setName(name);
-		return customer;
+		return customer;*/
+		return list.get(selectedIndex);
 	}
 
 }

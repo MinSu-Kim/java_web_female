@@ -5,19 +5,20 @@ import javax.swing.SwingConstants;
 import kr.or.yi.java_web_female.dto.CarModel;
 
 public class CarPanelList extends AbstractListPanel<CarModel> {
+	public CarPanelList() {
+	}
 
 	@Override
 	protected void setAlignWidth() {
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4,5,6,7,8,9,10,11,12,13,14);
-		tableSetWidth(100, 100, 100, 200, 200);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
+		tableSetWidth(100, 100, 100,100,100,100,100,100,100,100,100,100,100,100,100);
 		
 	}
 
 	@Override
 	protected String[] getColumnNames() {
 		return new String[] {
-				"차코드","모델명","색상","기어","브랜드","차종","기본료","6시간",
-				"10시간","12시간","12시간이상","연료","렌트여부","렌트횟수","옵션"
+				"차코드","모델명","색상","기어","브랜드","차종","기본료","6시간","10시간","12시간","12시간이상","연료","렌트여부","렌트횟수","옵션"
 		};
 	}
 
