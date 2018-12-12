@@ -22,9 +22,9 @@ public class CarUiService {
 	private BrandMapper brandDao;
 
 	public CarUiService() {
-		optionDao = new CarOptionMapperImpl();
+		optionDao = CarOptionMapperImpl.getInstance();
 		typeDao = new CarTypeMapperImpl();
-		fuelDao = new FuelMapperImpl();
+		fuelDao = FuelMapperImpl.getInstance();
 		brandDao = BrandMapperImpl.getInstance();
 	}
 	
