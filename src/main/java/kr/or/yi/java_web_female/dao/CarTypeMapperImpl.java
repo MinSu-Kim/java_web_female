@@ -8,6 +8,14 @@ import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class CarTypeMapperImpl implements CarTypeMapper {
+	private static final CarTypeMapperImpl instance = new CarTypeMapperImpl();
+	
+	public static CarTypeMapperImpl getInstance() {
+		return instance;
+	}
+
+	private CarTypeMapperImpl() {}
+	
 	private static final String namespace = "kr.or.yi.java_web_female.dao.CarTypeMapper";
 	
 	
