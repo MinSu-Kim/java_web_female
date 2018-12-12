@@ -16,7 +16,7 @@ public class TestFrame extends JFrame {
 
 	public TestFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 600);
 		contentPane = new ManagerPanel();
 		setContentPane(contentPane);
 	}
