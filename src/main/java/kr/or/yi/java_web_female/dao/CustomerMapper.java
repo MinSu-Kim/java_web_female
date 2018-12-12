@@ -8,4 +8,8 @@ public interface CustomerMapper {
 	List<Customer> selectCustomerByName(Customer customer);
 	
 	List<Customer> selectCustomerByAll();
+	
+	int selectCustomerById(Customer customer);
+	
+	//List<Customer> selectCustomerByPw
 }

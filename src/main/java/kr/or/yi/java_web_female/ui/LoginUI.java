@@ -15,11 +15,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
-public class LoginUI extends JFrame {
+public class LoginUI extends JFrame implements ActionListener {
 
    private JPanel contentPane;
    private JTextField tfId;
    private JTextField tfPasswd;
+   private JButton btnSearch;
 
    public LoginUI() {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,8 +69,18 @@ public class LoginUI extends JFrame {
       });
       pBtn.add(btnJoin);
       
-      JButton btnSearch = new JButton("ID/PW찾기");
+      btnSearch = new JButton("ID/PW찾기");
+      btnSearch.addActionListener(this);
       pBtn.add(btnSearch);
    }
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearch) {
+			do_btnSearch_actionPerformed(e);
+		}
+	}
+	protected void do_btnSearch_actionPerformed(ActionEvent e) {
+		SearchIdPwUI frame = new SearchIdPwUI();
+        frame.setVisible(true);
+	}
 }

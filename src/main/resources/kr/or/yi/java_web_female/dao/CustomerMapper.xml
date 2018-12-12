@@ -25,4 +25,10 @@
 		select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt 
 		from customer 
 	</select>
+	
+	<select id="selectCustomerById" resultMap="ResultCustom">
+		select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+		from customer
+		where Id = #{id}
+	</select>
 </mapper>

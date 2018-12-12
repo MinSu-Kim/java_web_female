@@ -22,6 +22,8 @@ public class Customer {
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	public Customer(String code, String name, Grade gradeCode, String phone, String email) {
 		this.code = code;
@@ -31,6 +33,10 @@ public class Customer {
 		this.gradeCode = gradeCode;
 	}
 	
+	public Customer( String cusId) {
+		this.id = cusId;
+	}
+
 	public String getCode() {
 		return code;
 	}

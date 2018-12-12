@@ -14,7 +14,7 @@ import kr.or.yi.java_web_female.dto.Employee;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class EmployeeMapperTest extends AbstractTest {
-	private EmployeeMapper dao = new EmployeeMapperImpl();
+	private EmployeeMapper dao = EmployeeMapperImpl.getInstance();
 
 	@Test
 	public void test01selectEmployeeByNo() {

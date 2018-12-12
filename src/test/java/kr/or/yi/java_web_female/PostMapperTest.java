@@ -18,7 +18,7 @@ import kr.or.yi.java_web_female.dto.Post;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class PostMapperTest extends AbstractTest{
-   private PostMapper dao = new PostMapperImpl();
+   private PostMapper dao = PostMapperImpl.getInstance();
 
    @Test
    public void test01selectPostByName() {

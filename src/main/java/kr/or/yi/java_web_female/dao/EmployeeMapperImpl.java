@@ -9,7 +9,16 @@ import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class EmployeeMapperImpl implements EmployeeMapper {
 	private static final String namespace = "kr.or.yi.java_web_female.dao.EmployeeMapper";
+	private static final EmployeeMapperImpl instance = new EmployeeMapperImpl();
 	
+	
+	
+	public static EmployeeMapperImpl getInstance() {
+		return instance;
+	}
+	
+	private EmployeeMapperImpl() {}
+
 	@Override
 	public Employee selectEmployeeByNo(Employee employee) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {

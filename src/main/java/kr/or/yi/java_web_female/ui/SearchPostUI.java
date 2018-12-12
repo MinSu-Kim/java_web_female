@@ -1,3 +1,4 @@
+
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
@@ -31,7 +32,6 @@ public class SearchPostUI extends JFrame implements ActionListener {
 	private JButton btnSearch;
 	private SearchPostService postService;
 	private AddressTable pList;
-//	private int selectedIndex; 주석처리함
 	private Post doro;
 	
 	private JoinUI joinUi; //추가
@@ -45,8 +45,9 @@ public class SearchPostUI extends JFrame implements ActionListener {
 	}
 
 	public SearchPostUI() {
+		setTitle("우편번호 검색");
 		postService = new SearchPostService();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 550, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

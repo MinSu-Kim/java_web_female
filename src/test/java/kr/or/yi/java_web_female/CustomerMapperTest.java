@@ -15,7 +15,7 @@ import kr.or.yi.java_web_female.dto.Customer;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerMapperTest extends AbstractTest {
-	private CustomerMapper dao = new CustomerMapperImpl();
+	private CustomerMapper dao =  CustomerMapperImpl.getInstance();
 	
 	@Test
 	public void test01SelectCustomerByName() {
@@ -35,6 +35,17 @@ public class CustomerMapperTest extends AbstractTest {
 		Customer i = list.get(1);
 		System.out.println(i);
 		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void test03selectCustomerById() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Customer searchId = new Customer();
+		searchId.setId("qwer12");
+		int list = dao.selectCustomerById(searchId);
+		
+		Assert.assertEquals(1, list);
 	}
 
 }
