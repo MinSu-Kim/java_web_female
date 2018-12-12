@@ -19,4 +19,5 @@ insert into rent values
 
 select * from customer where name = '김영희';
 
-insert into c
+select * from car_type;
+select * from car_model where cartype = 'S2';
