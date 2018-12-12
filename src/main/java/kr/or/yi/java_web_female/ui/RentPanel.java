@@ -201,6 +201,7 @@ public class RentPanel extends JPanel implements ActionListener {
 		contentPanel.add(lblTotalPrice);
 		
 		JLabel lblPrice = new JLabel("New label");
+		lblPrice.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblPrice.setForeground(Color.RED);
 		lblPrice.setHorizontalAlignment(SwingConstants.RIGHT);
 		contentPanel.add(lblPrice);
@@ -236,7 +237,26 @@ public class RentPanel extends JPanel implements ActionListener {
 					cf.setRentPanel(this);
 					cf.setcList(cList);
 					cf.setVisible(true);
+				}else {
+					setRentCustomer(cList.get(0));
 				}
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}else {
+			Customer customer = new Customer();
+			customer.setName(tfName.getText().trim());
+			try {
+				List<Customer> cList = service.selectCustomer(customer);
+				if(cList.size() > 1) {
+					cf.setRentPanel(this);
+					cf.setcList(cList);
+					cf.setVisible(true);
+				}else {
+					setRentCustomer(cList.get(0));
+				}
+				
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
