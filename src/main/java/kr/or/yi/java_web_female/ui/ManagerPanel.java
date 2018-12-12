@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import kr.or.yi.java_web_female.ui.car.CarPanel;
+import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {

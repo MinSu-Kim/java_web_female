@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.rent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;

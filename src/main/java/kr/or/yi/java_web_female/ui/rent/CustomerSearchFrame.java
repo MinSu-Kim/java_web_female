@@ -1,22 +1,17 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.rent;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import kr.or.yi.java_web_female.dto.Customer;
-import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CustmConfirmTable;
 
