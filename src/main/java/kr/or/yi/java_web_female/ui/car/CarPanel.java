@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.car;
 
 import javax.swing.JPanel;
 
@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import kr.or.yi.java_web_female.ui.list.CarPanelList;
+import kr.or.yi.java_web_female.ui.ComboPanel;
+import kr.or.yi.java_web_female.ui.list.CarOptionList;
 
 @SuppressWarnings("serial")
 public class CarPanel extends JPanel {
@@ -72,7 +74,7 @@ public class CarPanel extends JPanel {
 		JButton btnCancel = new JButton("취소");
 		panelBtn.add(btnCancel);
 		
-		CarPanelList panel = new CarPanelList();
+		CarOptionList panel = new CarOptionList();
 		add(panel, BorderLayout.CENTER);
 
 	}

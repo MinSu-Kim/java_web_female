@@ -3,7 +3,15 @@ package kr.or.yi.java_web_female.dto;
 public class Fuel {
 	private String code;
 	
+	
 
+	public Fuel() {
+
+	}
+
+	public Fuel(String code) {
+		this.code = code;
+	}
 
 	public String getCode() {
 		return code;

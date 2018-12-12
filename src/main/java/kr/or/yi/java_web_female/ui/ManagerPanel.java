@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import kr.or.yi.java_web_female.ui.car.CarPanel;
+
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
 	
