@@ -46,4 +46,13 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
+	@Override
+	public int insertCustomer(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.insert(namespace + ".insertCustomer", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
 }

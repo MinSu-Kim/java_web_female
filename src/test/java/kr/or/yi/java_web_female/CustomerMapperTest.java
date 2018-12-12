@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.w3c.dom.css.CSSUnknownRule;
 
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
@@ -49,6 +50,11 @@ public class CustomerMapperTest extends AbstractTest {
 		int list = dao.selectCustomerById(searchId);
 		
 		Assert.assertEquals(1, list);
+	}
+	
+	@Test
+	public void test04insertCustomer() {
+		
 	}
 
 }

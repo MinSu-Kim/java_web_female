@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -50,8 +51,6 @@ public class JoinUI extends JFrame implements ActionListener {
 	private AbstractListPanel<Customer> cTable;
 	private JTextField tfConfirm;
 
-	
-	
 	public void setcTable(AbstractListPanel<Customer> cTable) {
 		this.cTable = cTable;
 	}
@@ -121,7 +120,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		tfPwd2 = new JPasswordField();
 		tfPwd2.setColumns(10);
 		panel_2.add(tfPwd2);
-		
+
 		tfConfirm = new JTextField();
 		tfConfirm.setEditable(false);
 		panel_2.add(tfConfirm);
@@ -252,47 +251,43 @@ public class JoinUI extends JFrame implements ActionListener {
 	protected void do_btnDupConfirm_actionPerformed(ActionEvent e) throws SQLException {
 		try {
 			Customer customer = getItemCustomer();
-			/*JOptionPane.showMessageDialog(null, customer);*/
-			int res = cusService.selectCustomerById(customer);  //1이면 중복 0이면 사용가능
-			/*JOptionPane.showMessageDialog(null, res);*/
-			if(tfId.getText().trim().length() > 1) {
-				if(res == 0) {
+			/* JOptionPane.showMessageDialog(null, customer); */
+			int res = cusService.selectCustomerById(customer); // 1이면 중복 0이면 사용가능
+			/* JOptionPane.showMessageDialog(null, res); */
+			if (tfId.getText().trim().length() > 1) {
+				if (res == 0) {
 					JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다.");
 					tfPwd1.requestFocus();
 
 				}
-				if(res == 1) {
+				if (res == 1) {
 					JOptionPane.showMessageDialog(null, "중복된 아이디입니다.");
 				}
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "아이디를 입력해주세요");
 			}
-		
-			
-		}catch (Exception e2) {
+
+		} catch (Exception e2) {
 			e2.printStackTrace();
-			
+
 		}
 	}
 
 	protected void do_btnJoin_actionPerformed(ActionEvent e) {
-	/*	try {
+		try {
 			validCheck();
 			
-			//Customer customer = getItemCustomer();
-			//int res = cusService.addcus(customer);
+			Customer customer = getItemCustomer();
 			
-			//if(res == 1) {
-				JOptionPane.showMessageDialog(null, "추가했습니다.");
-				cTable.setList(cusService.selectCustomerByAll());
-				cTable.loadDatas();
-			}
+			JOptionPane.showMessageDialog(null, "추가했습니다.");
+			cTable.setList(cusService.selectCustomerByAll());
+			cTable.loadDatas();
 			clearTf();
-		}catch (SQLException e1) {
+		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}catch (Exception e2) {
+		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(null, e2.getMessage());
-		}*/
+		}
 	}
 
 	private void clearTf() {
@@ -300,14 +295,21 @@ public class JoinUI extends JFrame implements ActionListener {
 		tfId.setText("");
 		String pw1 = new String(tfPwd1.getPassword());
 		String pw2 = new String(tfPwd2.getPassword());
-		
+
 	}
 
 	private Customer getItemCustomer() {
-		
+
 		String cusId = tfId.getText().trim();
-		/*JOptionPane.showMessageDialog(null, cusId);*/
-		return new Customer(cusId);
+		String cusPw = new String(tfPwd1.getPassword());
+		String cusName = tfName.getText().trim();
+		String cusAddress = tfAddr.getText().trim();
+		String cusPhone = tfTel2.getText().trim() /*tfTel3.getText().trim()*/;
+		Date cusDob = birthDay.getDate();
+		String cusEmail = tfEmail1.getText().trim();
+		
+		/* JOptionPane.showMessageDialog(null, cusId); */
+		return new Customer(cusId, cusPw, cusName, cusAddress, cusPhone, cusDob, cusEmail);
 	}
 
 	private void validCheck() throws Exception {
@@ -319,31 +321,24 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfId.requestFocus();
 			throw new Exception("아이디를 입력해 주세요.");
 		}
-		
+
 		String pw1 = new String(tfPwd1.getPassword());
 		String pw2 = new String(tfPwd2.getPassword());
-		if(pw1.equals("")) {
+		if (pw1.equals("")) {
 			tfPwd1.requestFocus();
 			throw new Exception("Password를 입력해 주세요");
 		}
-		if(pw2.equals("")) {
+		if (pw2.equals("")) {
 			tfPwd2.requestFocus();
 			throw new Exception("Password를 입력해 주세요");
 		}
-		/*String pw1 = new String(tfPwd1.getPassword());
-		String pw2 = new String(tfPwd2.getPassword());
-		if (pw1.equals(pw2)) {
-			tfConfirm.setText("일치");
-		}else {
-			tfConfirm.setText("불일치");
-		}*/	
-		
+		          
 //		JOptionPane.showMessageDialog(null, "생년월일"+birthDay.getDate());
-		if(birthDay.getDate()==null) { 
+		if (birthDay.getDate() == null) {
 			birthDay.requestFocus();
-			throw new Exception("생년월일을 입력해 주세요."); 
-		 }
-		 
+			throw new Exception("생년월일을 입력해 주세요.");
+		}
+
 		if (tfTel2.getText().equals("")) {
 			tfTel2.requestFocus();
 			throw new Exception("전화번호 가운데 자리를 입력해 주세요.");
@@ -352,6 +347,6 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfTel3.requestFocus();
 			throw new Exception("전화번호 마지막 자리를 입력해 주세요.");
 		}
-		
+
 	}
 }

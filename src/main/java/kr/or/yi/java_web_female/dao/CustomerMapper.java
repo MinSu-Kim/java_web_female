@@ -11,5 +11,6 @@ public interface CustomerMapper {
 	
 	int selectCustomerById(Customer customer);
 	
+	int insertCustomer(Customer customer);
 	//List<Customer> selectCustomerByPw
 }
