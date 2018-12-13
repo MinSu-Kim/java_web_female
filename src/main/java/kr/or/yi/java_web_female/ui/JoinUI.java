@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -50,6 +51,7 @@ public class JoinUI extends JFrame implements ActionListener {
 	private CustomerUiService cusService;
 	private AbstractListPanel<Customer> cTable;
 	private JTextField tfConfirm;
+	private JButton btnCalcel;
 
 	public void setcTable(AbstractListPanel<Customer> cTable) {
 		this.cTable = cTable;
@@ -197,6 +199,24 @@ public class JoinUI extends JFrame implements ActionListener {
 		tfZipCode = new JTextField();
 		tfZipCode.setColumns(10);
 		pAddr.add(tfZipCode);
+		
+		tfPwd2.getDocument().addDocumentListener(new MyDocumentListener() {
+
+			@Override
+			public void msg() {
+				
+				String pw1 = new String(tfPwd1.getPassword());
+				String pw2 = new String(tfPwd2.getPassword());
+				
+				if (pw1.equals(pw2)) {
+					tfConfirm.setText("비밀번호가 일치합니다.");
+				}else{
+					tfConfirm.setText("비밀번호가 일치하지 않습니다.");
+				}
+				
+			}
+			
+		});
 
 		JButton btnSearchAddr = new JButton("우편번호 검색");
 		btnSearchAddr.addActionListener(new ActionListener() {
@@ -223,7 +243,8 @@ public class JoinUI extends JFrame implements ActionListener {
 		btnJoin.addActionListener(this);
 		pBtn.add(btnJoin);
 
-		JButton btnCalcel = new JButton("취소");
+		btnCalcel = new JButton("취소");
+		btnCalcel.addActionListener(this);
 		pBtn.add(btnCalcel);
 	}
 
@@ -233,8 +254,30 @@ public class JoinUI extends JFrame implements ActionListener {
 		this.tfAddr.setText(post.toString());
 		tfAddr.requestFocus();
 	}
+	
+	/*public void setEmail() {
+		cmbEmail3.setSelectedItem(cmbEmail3);
+		tfEmail2.setText();
+	}*/
+	
+	
+	/*pList = new AddressTable();
+	
+	클릭리스너추가
+	pList.getTable().addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			Post post = pList.getSelectedItem();
+			joinUi.setAddress(post);
+			SearchPostUI.this.dispose();
+		}
+	});*/
+	
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCalcel) {
+			do_btnCalcel_actionPerformed(e);
+		}
 		if (e.getSource() == btnJoin) {
 			do_btnJoin_actionPerformed(e);
 		}
@@ -274,14 +317,18 @@ public class JoinUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_btnJoin_actionPerformed(ActionEvent e) {
+		int res;
 		try {
 			validCheck();
-			
+
 			Customer customer = getItemCustomer();
+			res = cusService.addcus(customer);
+			if(res==1) {
+				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
+				cTable.setList(cusService.selectCustomerByAll());
+				cTable.loadDatas();
+			}
 			
-			JOptionPane.showMessageDialog(null, "추가했습니다.");
-			cTable.setList(cusService.selectCustomerByAll());
-			cTable.loadDatas();
 			clearTf();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -293,22 +340,29 @@ public class JoinUI extends JFrame implements ActionListener {
 	private void clearTf() {
 		tfName.setText("");
 		tfId.setText("");
-		String pw1 = new String(tfPwd1.getPassword());
-		String pw2 = new String(tfPwd2.getPassword());
+		tfPwd1.setText("");
+		tfPwd2.setText("");
+		birthDay.setDate(null);
+		tfTel2.setText("");
+		tfTel3.setText("");
+		tfEmail1.setText("");
+		tfEmail2.setText("");
+		tfZipCode.setText("");
+		tfAddr.setText("");
 
 	}
 
 	private Customer getItemCustomer() {
 
 		String cusId = tfId.getText().trim();
-		String cusPw = new String(tfPwd1.getPassword());
+		String cusPw = new String(tfPwd1.getPassword()).trim();
 		String cusName = tfName.getText().trim();
 		String cusAddress = tfAddr.getText().trim();
-		String cusPhone = tfTel2.getText().trim() /*tfTel3.getText().trim()*/;
+		String cusPhone = tfTel2.getText().trim() /* tfTel3.getText().trim() */;
 		Date cusDob = birthDay.getDate();
 		String cusEmail = tfEmail1.getText().trim();
+
 		
-		/* JOptionPane.showMessageDialog(null, cusId); */
 		return new Customer(cusId, cusPw, cusName, cusAddress, cusPhone, cusDob, cusEmail);
 	}
 
@@ -332,7 +386,7 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfPwd2.requestFocus();
 			throw new Exception("Password를 입력해 주세요");
 		}
-		          
+
 //		JOptionPane.showMessageDialog(null, "생년월일"+birthDay.getDate());
 		if (birthDay.getDate() == null) {
 			birthDay.requestFocus();
@@ -348,5 +402,8 @@ public class JoinUI extends JFrame implements ActionListener {
 			throw new Exception("전화번호 마지막 자리를 입력해 주세요.");
 		}
 
+	}
+	protected void do_btnCalcel_actionPerformed(ActionEvent e) {
+		clearTf();
 	}
 }

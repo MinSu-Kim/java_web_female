@@ -65,19 +65,6 @@ values
 
 
 
-INSERT INTO proj_rentcar.add_option
-(option_id, car_code)
-values
-(1, 'V001'),
-(1, 'V002'),
-(2, 'V002'),
-(1, 'V003'),
-(2, 'V003'),
-(3, 'V003');
-
-
-
-
 
 
 

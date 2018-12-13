@@ -16,8 +16,8 @@ public class CustomerUiService {
 	}
 
 	public int addcus(Customer customer) {
-		return 0;
-//		return cusDao.insertCustomer
+		return cusDao.insertCustomer(customer);
+
 	}
 
 	public List<Customer> selectCustomerByAll() {
@@ -28,10 +28,10 @@ public class CustomerUiService {
 		return cusDao.selectCustomerById(customer);
 	}
 
-	/*public int dupId(Customer customer) {
-		return cusDao.selectCustomerById(customer)
-	}*/
-	
+	/*public int selectCustomerByPw(Customer customer) {
+		return cusDao.selectCustomerByPw(customer);
+	}
+	*/
 
 	
 	

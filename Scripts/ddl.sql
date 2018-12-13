@@ -86,14 +86,14 @@ CREATE TABLE proj_rentcar.customer (
 	Id         VARCHAR(40) NOT NULL COMMENT '아이디', -- 아이디
 	passwd     CHAR(42)    NOT NULL COMMENT '비밀번호', -- 비밀번호
 	Name       VARCHAR(20) NOT NULL COMMENT '고객이름', -- 고객이름
-	address    VARCHAR(50) NULL     COMMENT '주소', -- 주소
+	address    VARCHAR(50) NOT NULL COMMENT '주소', -- 주소
 	phone      VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
 	dob        DATE        NOT NULL COMMENT '생년월일', -- 생년월일
-	email      VARCHAR(30) NULL     COMMENT '이메일', -- 이메일
-	emp_code   CHAR(4)     NOT NULL COMMENT '직원코드', -- 직원코드
-	license    VARCHAR(4)  NOT NULL COMMENT '면허종류', -- 면허종류
-	grade_code CHAR(4)     NOT NULL COMMENT '등급코드', -- 등급코드
-	rent_cnt   INT(11)     NOT NULL COMMENT '업데이트 트리거 사용' -- 대여횟수
+	email      VARCHAR(30) NOT NULL COMMENT '이메일', -- 이메일
+	emp_code   CHAR(4)     NULL     COMMENT '직원코드', -- 직원코드
+	license    VARCHAR(4)  NULL     COMMENT '면허종류', -- 면허종류
+	grade_code CHAR(4)     NULL     COMMENT '등급코드', -- 등급코드
+	rent_cnt   INT(11)     NULL     COMMENT '업데이트 트리거 사용' -- 대여횟수
 )
 COMMENT '고객';
 
@@ -103,6 +103,14 @@ ALTER TABLE proj_rentcar.customer
 		PRIMARY KEY (
 			code -- 고객코드
 		);
+
+-- 고객이벤트
+CREATE TABLE proj_rentcar.custom_event (
+	event_code  CHAR(4)    NULL COMMENT '이벤트코드', -- 이벤트코드
+	custom_code CHAR(4)    NULL COMMENT '고객코드', -- 고객코드
+	is_use      TINYINT(1) NULL COMMENT '사용유무' -- 사용유무
+)
+COMMENT '고객이벤트';
 
 -- 직원
 CREATE TABLE proj_rentcar.employee (
@@ -138,7 +146,6 @@ ALTER TABLE proj_rentcar.event
 
 -- 연료
 CREATE TABLE proj_rentcar.fuel (
-	no integer not null,
 	code VARCHAR(10) NOT NULL COMMENT '연료코드' -- 연료코드
 )
 COMMENT '연료';
@@ -147,7 +154,7 @@ COMMENT '연료';
 ALTER TABLE proj_rentcar.fuel
 	ADD CONSTRAINT
 		PRIMARY KEY (
-			no -- 연료번호
+			code -- 연료코드
 		);
 
 -- 회원등급
@@ -188,6 +195,18 @@ CREATE TABLE proj_rentcar.level (
 )
 COMMENT '회원등급기준';
 
+-- 주소
+CREATE TABLE proj_rentcar.post (
+	zipcode   CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
+	sido      VARCHAR(20) NULL COMMENT '시도', -- 시도
+	sigungu   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
+	eupmyeon  VARCHAR(20) NULL COMMENT '읍면', -- 읍면
+	doro      VARCHAR(80) NULL COMMENT '도로', -- 도로
+	building1 INT(5)      NULL COMMENT '건물명1', -- 건물명1
+	building2 INT(5)      NULL COMMENT '건물명2' -- 건물명2
+)
+COMMENT '주소';
+
 -- 차량대여
 CREATE TABLE proj_rentcar.rent (
 	code           CHAR(5)    NOT NULL COMMENT 'R0001', -- R0001
@@ -200,7 +219,7 @@ CREATE TABLE proj_rentcar.rent (
 	car_code       CHAR(4)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  CHAR(4)    NOT NULL COMMENT '고객코드', -- 고객코드
 	insurance_code CHAR(4)    NOT NULL COMMENT '보험코드', -- 보험코드
-	e_rate         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트할인율
+	e_rate         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트코드
 	opt_price      INT(11)    NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';
@@ -226,26 +245,6 @@ ALTER TABLE proj_rentcar.title
 		PRIMARY KEY (
 			code -- 직책코드
 		);
-
--- 고객이벤트
-CREATE TABLE proj_rentcar.custom_event (
-	event_code  CHAR(4)    NULL COMMENT '이벤트코드', -- 이벤트코드
-	custom_code CHAR(4)    NULL COMMENT '고객코드', -- 고객코드
-	is_use      TINYINT(1) NULL COMMENT '사용유무' -- 사용유무
-)
-COMMENT '고객이벤트';
-
--- 주소
-CREATE TABLE proj_rentcar.post (
-	zipcode   CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
-	sido      VARCHAR(20) NULL COMMENT '시도', -- 시도
-	sigungu   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
-	eupmyeon  VARCHAR(20) NULL COMMENT '읍면', -- 읍면
-	doro      VARCHAR(80) NULL COMMENT '도로', -- 도로
-	building1 INT(5)      NULL COMMENT '건물명1', -- 건물명1
-	building2 INT(5)      NULL COMMENT '건물명2' -- 건물명2
-)
-COMMENT '주소';
 
 -- 추가옵션
 ALTER TABLE proj_rentcar.add_option
@@ -300,7 +299,17 @@ ALTER TABLE proj_rentcar.car_model
 	);
 
 -- 차(모델)
-
+ALTER TABLE proj_rentcar.car_model
+	ADD CONSTRAINT FK_fuel_TO_car_model -- FK_fuel_TO_car_model
+		FOREIGN KEY (
+			fuel_code -- 연료코드
+		)
+		REFERENCES proj_rentcar.fuel ( -- 연료
+			code -- 연료코드
+		),
+	ADD INDEX FK_fuel_TO_car_model (
+		fuel_code -- 연료코드
+	);
 
 -- 고객
 ALTER TABLE proj_rentcar.customer
@@ -326,6 +335,32 @@ ALTER TABLE proj_rentcar.customer
 		),
 	ADD INDEX FK_grade_TO_customer (
 		grade_code -- 등급코드
+	);
+
+-- 고객이벤트
+ALTER TABLE proj_rentcar.custom_event
+	ADD CONSTRAINT FK_customer_TO_custom_event -- FK_customer_TO_custom_event
+		FOREIGN KEY (
+			custom_code -- 고객코드
+		)
+		REFERENCES proj_rentcar.customer ( -- 고객
+			code -- 고객코드
+		),
+	ADD INDEX FK_customer_TO_custom_event (
+		custom_code -- 고객코드
+	);
+
+-- 고객이벤트
+ALTER TABLE proj_rentcar.custom_event
+	ADD CONSTRAINT FK_event_TO_custom_event -- FK_event_TO_custom_event
+		FOREIGN KEY (
+			event_code -- 이벤트코드
+		)
+		REFERENCES proj_rentcar.event ( -- 이벤트
+			code -- 이벤트코드
+		),
+	ADD INDEX FK_event_TO_custom_event (
+		event_code -- 이벤트코드
 	);
 
 -- 직원
@@ -379,23 +414,3 @@ ALTER TABLE proj_rentcar.rent
 	ADD INDEX FK_insurance_TO_rent (
 		insurance_code -- 보험코드
 	);
-
--- 고객이벤트
-ALTER TABLE proj_rentcar.custom_event
-	ADD CONSTRAINT FK_event_TO_custom_event -- 이벤트 -> 고객이벤트
-		FOREIGN KEY (
-			event_code -- 이벤트코드
-		)
-		REFERENCES proj_rentcar.event ( -- 이벤트
-			code -- 이벤트코드
-		);
-
--- 고객이벤트
-ALTER TABLE proj_rentcar.custom_event
-	ADD CONSTRAINT FK_customer_TO_custom_event -- 고객 -> 고객이벤트
-		FOREIGN KEY (
-			custom_code -- 고객코드
-		)
-		REFERENCES proj_rentcar.customer ( -- 고객
-			code -- 고객코드
-		);
