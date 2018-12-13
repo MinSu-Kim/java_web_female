@@ -35,20 +35,20 @@ public class ManagerPanel extends JPanel {
 		CarPanel panel_2 = new CarPanel();
 		tabbedPane.addTab("차량관리", null, panel_2, null);
 		
-		RentPanel panel_3 = new RentPanel();
-		tabbedPane.addTab("대여관리", null, panel_3, null);
+		CarManagementPanel panel_3 = new CarManagementPanel();
+		tabbedPane.addTab("차량옵션관리", null, panel_3, null);
 		
-		JPanel panel_3_1 = new JPanel();
-		tabbedPane.addTab("대여현황", null, panel_3_1, null);
+		RentPanel panel_4 = new RentPanel();
+		tabbedPane.addTab("대여관리", null, panel_4, null);
 		
-		JPanel panel_4 = new JPanel();
-		tabbedPane.addTab("반납관리", null, panel_4, null);
-		
-		CarManagementPanel panel_5 = new CarManagementPanel();
-		tabbedPane.addTab("차량관리", null, panel_5, null);
+		JPanel panel_5 = new JPanel();
+		tabbedPane.addTab("대여현황", null, panel_5, null);
 		
 		JPanel panel_6 = new JPanel();
-		tabbedPane.addTab("전체통계", null, panel_6, null);
+		tabbedPane.addTab("반납관리", null, panel_6, null);
+		
+		JPanel panel_7 = new JPanel();
+		tabbedPane.addTab("전체통계", null, panel_7, null);
 		
 		
 
