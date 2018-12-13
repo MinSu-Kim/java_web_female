@@ -13,3 +13,9 @@ SELECT * FROM post;
 
 select zipcode, sido, sigungu, eupmyeon, doro, building1, building2
 from post;
+
+
+insert into customer(code, Id, passwd, Name, address, phone, dob, email)
+		values('c015','psw2701', password('aggarg54'), '박수완', '대구', '010-1234-5656', '1977-01-02', 'psw2701@naver.com');
+
+desc customer;

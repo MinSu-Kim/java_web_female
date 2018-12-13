@@ -2,6 +2,9 @@ package kr.or.yi.java_web_female;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
@@ -54,7 +57,22 @@ public class CustomerMapperTest extends AbstractTest {
 	
 	@Test
 	public void test04insertCustomer() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Customer customer = new Customer();
+		customer.setId("psw2701");
+		customer.setPasswd("password");
+		customer.setName("박수완");
+		customer.setAddress("대구");
+		customer.setPhone("010-5757-5959");
 		
+		Calendar cal = Calendar.getInstance();
+		cal.set(2018, 11, 13);
+		customer.setDob(cal.getTime());
+		
+		customer.setEmail("psw2701@naver.com");
+		int res = dao.insertCustomer(customer);
+		Assert.assertEquals(1, res);
+
 	}
 
 }

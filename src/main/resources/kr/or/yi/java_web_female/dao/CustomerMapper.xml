@@ -31,4 +31,9 @@
 		from customer
 		where Id = #{id}
 	</select>
+	
+	<insert id="insertCustomer" parameterType="Customer">
+		insert into customer(Id, passwd, Name, address, phone, dob, email)
+		values(#{id}, #{passwd}, #{name}, #{address}, #{phone}, #{dob}, #{email} )
+	</insert>
 </mapper>
