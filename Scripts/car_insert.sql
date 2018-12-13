@@ -24,13 +24,13 @@ values
 
 -- 차연료
 INSERT INTO proj_rentcar.fuel
-(code)
+(no,code)
 values
-('gasolin'),
-('diesel'),
-('lpg'),
-('hybrid'),
-('electric');
+(1,'gasolin'),
+(2,'diesel'),
+(3,'lpg'),
+(4,'hybrid'),
+(5,'electric');
 
 
 

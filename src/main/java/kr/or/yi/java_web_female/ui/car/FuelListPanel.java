@@ -7,7 +7,9 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -77,6 +79,37 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
+		
+		//pop
+		panelList.setPopupMenu(createDeptPopupMenu());
+	}
+
+	private JPopupMenu createDeptPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+		
+		JMenuItem updateItem = new JMenuItem("수정");
+		updateItem.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Fuel item = panelList.getSelectedItem();
+				setItem(item);
+				btnOk.setText("수정");
+			}
+		});
+		popMenu.add(updateItem);
+		
+		JMenuItem delItem = new JMenuItem("삭제");
+		delItem.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				service.deleteFuel(panelList.getSelectedItem());
+				panelList.setList(service.selectAllFuel());
+				panelList.loadDatas();
+			}
+		});
+		popMenu.add(delItem);
+		
+		return popMenu;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -84,14 +117,36 @@ public class FuelListPanel extends JPanel implements ActionListener {
 			do_btnCancel_actionPerformed(e);
 		}
 		if (e.getSource() == btnOk) {
-			do_btnOk_actionPerformed(e);
+			if(btnOk.getText()=="추가") {
+				do_btnOk_actionPerformed(e);
+			}else {
+				do_btnUpdate_actionPerformed(e);
+			}
+			
 		}
 	}
+	private void do_btnUpdate_actionPerformed(ActionEvent e) {
+		String code = tfCode.getText();
+		Fuel item = new Fuel(code);
+		service.updateFuel(item);
+		list = service.selectAllFuel();
+		panelList.setList(list);
+		panelList.loadDatas();	
+		tfCode.setText("");
+		btnOk.setText("추가");
+	}
+
+	private Fuel getItem() {
+		String code = tfCode.getText().trim();
+		return new Fuel(code);
+	}
+
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
 		//추가버튼 눌렀을시 실행
 		String code = tfCode.getText();
 		Fuel newFuel = new Fuel(code);
 		service.insertFuel(newFuel);
+		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
@@ -99,7 +154,14 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		if(btnOk.getText()=="수정") {
+			btnOk.setText("추가");
+		}
 		//취소버튼 눌렀을시 실행
 		tfCode.setText("");
+	}
+	
+	private void setItem(Fuel item) {
+		tfCode.setText(item.getCode());
 	}
 }

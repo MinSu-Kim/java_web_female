@@ -95,13 +95,19 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		String no = tfNo.getText();
 		String name = tfName.getText();
 		Brand brand = new Brand();
+		brand.setNo(no);
+		brand.setName(name);
 		service.insertBrand(brand);
+		list = service.selectAllBrand();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
 		clearTf();
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		if(btnOk.getText()=="수정") {
+			btnOk.setText("추가");
+		}
 		clearTf();
 	}
 

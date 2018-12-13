@@ -45,11 +45,20 @@ public class FuelMapperTest extends AbstractTest {
 	}
 
 	@Test
-	public void test04deleteFuel() {
+	public void test05deleteFuel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Fuel fuel = new Fuel();
 		fuel.setCode("수소");
 		int res = dao.deleteFuel(fuel);
+		Assert.assertEquals(1, res);
+	}
+	
+	@Test
+	public void test04updateFuel() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Fuel fuel = new Fuel();
+		fuel.setCode("수소");
+		int res = dao.updateFuel(fuel);
 		Assert.assertEquals(1, res);
 	}
 }

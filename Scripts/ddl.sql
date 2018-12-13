@@ -138,6 +138,7 @@ ALTER TABLE proj_rentcar.event
 
 -- 연료
 CREATE TABLE proj_rentcar.fuel (
+	no integer not null,
 	code VARCHAR(10) NOT NULL COMMENT '연료코드' -- 연료코드
 )
 COMMENT '연료';
@@ -146,7 +147,7 @@ COMMENT '연료';
 ALTER TABLE proj_rentcar.fuel
 	ADD CONSTRAINT
 		PRIMARY KEY (
-			code -- 연료코드
+			no -- 연료번호
 		);
 
 -- 회원등급
@@ -299,17 +300,7 @@ ALTER TABLE proj_rentcar.car_model
 	);
 
 -- 차(모델)
-ALTER TABLE proj_rentcar.car_model
-	ADD CONSTRAINT FK_fuel_TO_car_model -- FK_fuel_TO_car_model
-		FOREIGN KEY (
-			fuel_code -- 연료코드
-		)
-		REFERENCES proj_rentcar.fuel ( -- 연료
-			code -- 연료코드
-		),
-	ADD INDEX FK_fuel_TO_car_model (
-		fuel_code -- 연료코드
-	);
+
 
 -- 고객
 ALTER TABLE proj_rentcar.customer

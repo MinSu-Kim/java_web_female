@@ -17,11 +17,11 @@
 		insert into fuel values(#{code});
 	</insert>
 	
-	<!-- <update id="updateFuel" parameterType="Fuel">
+	<update id="updateFuel" parameterType="Fuel">
 		update Fuel
 		set code=#{code}
 		where code=#{code}
-	</update> -->
+	</update>
 	
 	<delete id="deleteFuel" parameterType="Fuel">
 		delete

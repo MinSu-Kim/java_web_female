@@ -2,11 +2,19 @@ package kr.or.yi.java_web_female.dto;
 
 public class Fuel {
 	private String code;
-	
+	private int no;
 	
 
 	public Fuel() {
 
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 	public Fuel(String code) {
@@ -23,8 +31,10 @@ public class Fuel {
 
 	@Override
 	public String toString() {
-		return "Fuel [code=" + code + "]";
+		return "Fuel [code=" + code + ", no=" + no + "]";
 	}
+
+	
 	
 	
 }

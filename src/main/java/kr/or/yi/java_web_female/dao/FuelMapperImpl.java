@@ -56,4 +56,14 @@ public class FuelMapperImpl implements FuelMapper {
 		
 	}
 
+	@Override
+	public int updateFuel(Fuel fuel) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.update(namespace+".updateFuel",fuel);
+			sqlSession.commit();
+			return res;
+		}
+		
+	}
+
 }

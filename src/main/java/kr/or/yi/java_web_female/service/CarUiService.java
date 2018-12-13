@@ -27,37 +27,80 @@ public class CarUiService {
 		fuelDao = FuelMapperImpl.getInstance();
 		brandDao = BrandMapperImpl.getInstance();
 	}
-	
+	//카옵션
 	public List<CarOption> selectAllCarOption(){
 		return optionDao.selectCarOptionByAll();
 	}
-	
-	public List<CarType> selectAllCarType(){
-		return typeDao.selectCarTypeByAll();
-	}
-	
-	public List<Fuel> selectAllFuel(){
-		return fuelDao.selectFuelByAll();
-	}
-	
-	public List<Brand> selectAllBrand(){
-		return brandDao.selectBrandByAll();
-	}
-	
-	public int insertFuel(Fuel fuel) {
-		return fuelDao.insertFuel(fuel);
-	}
-	
+
 	public int insertCarOption(CarOption carOption) {
 		return optionDao.insertCarOption(carOption);
 	}
 	
-	public int insertBrand(Brand brand) {
-		return brandDao.insertBrand(brand);
+	public int deleteCarOption(CarOption carOption) {
+		return optionDao.deleteCarOption(carOption);
+	}
+	
+	//차종
+	public List<CarType> selectAllCarType(){
+		return typeDao.selectCarTypeByAll();
 	}
 	
 	public int insertCarType(CarType carType) {
 		return typeDao.insertCarType(carType);
 	}
 	
+	public int deleteCarType(CarType carType) {
+		return typeDao.deleteCarType(carType);
+	}
+	
+	//연료
+	public List<Fuel> selectAllFuel(){
+		return fuelDao.selectFuelByAll();
+	}
+
+	public int insertFuel(Fuel fuel) {
+		return fuelDao.insertFuel(fuel);
+	}
+	
+	public int deleteFuel(Fuel fuel) {
+		return fuelDao.deleteFuel(fuel);
+	}
+	
+	public int updateFuel(Fuel fuel) {
+		return fuelDao.updateFuel(fuel);
+	}
+	
+	//브랜드
+	public List<Brand> selectAllBrand(){
+		return brandDao.selectBrandByAll();
+	}
+	
+	public int insertBrand(Brand brand) {
+		return brandDao.insertBrand(brand);
+	}
+	
+	public int deleteBrand(Brand brand) {
+		return brandDao.deleteBrand(brand);
+	}
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

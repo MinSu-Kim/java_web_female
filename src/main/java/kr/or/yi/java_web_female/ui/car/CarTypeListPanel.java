@@ -97,13 +97,19 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		String code = tfCode.getText();
 		String type = tfType.getText();
 		CarType carType = new CarType();
+		carType.setCode(code);
+		carType.setType(type);
 		service.insertCarType(carType);
+		list = service.selectAllCarType();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
 		clearTf();
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		if(btnOk.getText()=="수정") {
+			btnOk.setText("추가");
+		}
 		clearTf();
 	}
 

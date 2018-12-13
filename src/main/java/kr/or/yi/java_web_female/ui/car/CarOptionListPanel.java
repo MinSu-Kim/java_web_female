@@ -106,6 +106,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		carOption.setName(name);
 		carOption.setPrice(price);
 		service.insertCarOption(carOption);
+		list = service.selectAllCarOption();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
@@ -116,6 +117,9 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 	
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
 		//취소버튼 눌렀을시 실행
+		if(btnOk.getText()=="수정") {
+			btnOk.setText("추가");
+		}
 		clearTf();
 	}
 
