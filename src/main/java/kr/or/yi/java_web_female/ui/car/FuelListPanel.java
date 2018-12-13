@@ -39,7 +39,6 @@ public class FuelListPanel extends JPanel implements ActionListener {
 	}
 
 	private void initcomponent() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		panelList = new FuelList();
 		
@@ -48,6 +47,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();
+		setLayout(new GridLayout(0, 2, 0, 0));
 		add(panelList);
 		
 		JPanel panel_1 = new JPanel();

@@ -19,13 +19,13 @@
 	
 	<update id="updateFuel" parameterType="Fuel">
 		update Fuel
-		set no=#{no}, code#{code}
-		where no=#{no}
+		set code=#{code}
+		where no=#{no};
 	</update>
 	
 	<delete id="deleteFuel" parameterType="Fuel">
 		delete
 		from fuel
-		where code=#{code};
+		where no=#{no};
 	</delete>
 </mapper>

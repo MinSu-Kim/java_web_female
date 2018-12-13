@@ -2,6 +2,8 @@ package kr.or.yi.java_web_female.ui.car;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -10,17 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import javafx.scene.control.SeparatorMenuItem;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class CarTypeListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -40,7 +38,6 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	}
 
 	private void initcomponent() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		panelList = new CarTypeList();
 		
@@ -49,6 +46,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		list = service.selectAllCarType();
 		panelList.setList(list);
 		panelList.loadDatas();
+		setLayout(new GridLayout(0, 2, 0, 0));
 		add(panelList);
 		
 		JPanel panelList_2 = new JPanel();
@@ -87,10 +85,10 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 		
-		panelList.setPopupMenu((JPopupMenu) createDeptPopupMenu());
+		panelList.setPopupMenu(createDeptPopupMenu());
 	}
 
-	private Object createDeptPopupMenu() {
+	private JPopupMenu createDeptPopupMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 		//수정
 		JMenuItem updateItem = new JMenuItem("수정");

@@ -43,7 +43,6 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 	
 
 	private void initcomponents() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		panelList = new CarOptionList();
 				
@@ -51,6 +50,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		list = service.selectAllCarOption();
 		panelList.setList(list);
 		panelList.loadDatas();
+		setLayout(new GridLayout(0, 2, 0, 0));
 		add(panelList);
 		
 
