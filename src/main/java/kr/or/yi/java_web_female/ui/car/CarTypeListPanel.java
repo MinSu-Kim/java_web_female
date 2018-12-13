@@ -16,13 +16,17 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
-public class CarTypeListPanel extends JPanel {
+public class CarTypeListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
 	private JTextField tfType;
 	private CarTypeList panelList;
 	private CarUiService service;
 	private List<CarType> list;
+	private JButton btnOk;
+	private JButton btnCancel;
 
 	/**
 	 * Create the panel.
@@ -72,11 +76,39 @@ public class CarTypeListPanel extends JPanel {
 		JPanel panelBtn = new JPanel();
 		panelList.add(panelBtn, BorderLayout.SOUTH);
 		
-		JButton btnOk = new JButton("추가");
+		btnOk = new JButton("추가");
+		btnOk.addActionListener(this);
 		panelBtn.add(btnOk);
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(e);
+		}
+		if (e.getSource() == btnOk) {
+			do_btnOk_actionPerformed(e);
+		}
+	}
+	protected void do_btnOk_actionPerformed(ActionEvent e) {
+		String code = tfCode.getText();
+		String type = tfType.getText();
+		CarType carType = new CarType();
+		service.insertCarType(carType);
+		panelList.setList(list);
+		panelList.loadDatas();
+		add(panelList);
+		clearTf();
+	}
+	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		clearTf();
+	}
+
+	private void clearTf() {
+		tfCode.setText("");
+		tfType.setText("");
+	}
 }

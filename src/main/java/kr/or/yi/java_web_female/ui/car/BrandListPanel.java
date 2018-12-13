@@ -15,13 +15,17 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.BrandList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class BrandListPanel extends JPanel {
+public class BrandListPanel extends JPanel implements ActionListener {
 	private JTextField tfNo;
 	private JTextField tfName;
 	private CarUiService service;
 	private List<Brand> list;
 	private BrandList panelList;
+	private JButton btnOk;
+	private JButton btnCancel;
 	
 	/**
 	 * Create the panel.
@@ -70,11 +74,39 @@ public class BrandListPanel extends JPanel {
 		JPanel panelBtn = new JPanel();
 		panel.add(panelBtn, BorderLayout.SOUTH);
 		
-		JButton btnOk = new JButton("추가");
+		btnOk = new JButton("추가");
+		btnOk.addActionListener(this);
 		panelBtn.add(btnOk);
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(e);
+		}
+		if (e.getSource() == btnOk) {
+			do_btnOk_actionPerformed(e);
+		}
+	}
+	protected void do_btnOk_actionPerformed(ActionEvent e) {
+		String no = tfNo.getText();
+		String name = tfName.getText();
+		Brand brand = new Brand();
+		service.insertBrand(brand);
+		panelList.setList(list);
+		panelList.loadDatas();
+		add(panelList);
+		clearTf();
+	}
+	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		clearTf();
+	}
+
+	private void clearTf() {
+		tfNo.setText("");
+		tfName.setText("");
+	}
 }

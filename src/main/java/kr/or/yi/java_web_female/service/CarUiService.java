@@ -52,4 +52,12 @@ public class CarUiService {
 		return optionDao.insertCarOption(carOption);
 	}
 	
+	public int insertBrand(Brand brand) {
+		return brandDao.insertBrand(brand);
+	}
+	
+	public int insertCarType(CarType carType) {
+		return typeDao.insertCarType(carType);
+	}
+	
 }

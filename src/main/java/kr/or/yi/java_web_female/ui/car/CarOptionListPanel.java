@@ -109,14 +109,22 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
-		tfNo.setText("");
+		clearTf();
 		
 	}
 	
 	
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
 		//취소버튼 눌렀을시 실행
+		clearTf();
+	}
+
+
+
+	private void clearTf() {
 		tfNo.setText("");
+		tfName.setText("");
+		tfPrice.setText("");
 	}
 	
 
