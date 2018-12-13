@@ -59,6 +59,7 @@ public class CustomerMapperTest extends AbstractTest {
 	public void test04insertCustomer() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Customer customer = new Customer();
+		customer.setCode("c010");
 		customer.setId("psw2701");
 		customer.setPasswd("password");
 		customer.setName("박수완");

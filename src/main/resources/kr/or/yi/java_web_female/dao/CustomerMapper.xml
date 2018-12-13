@@ -33,7 +33,7 @@
 	</select>
 	
 	<insert id="insertCustomer" parameterType="Customer">
-		insert into customer(Id, passwd, Name, address, phone, dob, email)
-		values(#{id}, #{passwd}, #{name}, #{address}, #{phone}, #{dob}, #{email} )
+		insert into customer(code, Id, passwd, Name, address, phone, dob, email)
+		values(#{code}, #{id}, #{passwd}, #{name}, #{address}, #{phone}, #{dob}, #{email} )
 	</insert>
 </mapper>
