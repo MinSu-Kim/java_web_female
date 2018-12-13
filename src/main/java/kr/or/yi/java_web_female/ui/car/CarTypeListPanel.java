@@ -7,12 +7,15 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import javafx.scene.control.SeparatorMenuItem;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
@@ -48,13 +51,13 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		panelList.loadDatas();
 		add(panelList);
 		
-		JPanel panelList = new JPanel();
-		add(panelList);
-		panelList.setLayout(new BorderLayout(0, 0));
+		JPanel panelList_2 = new JPanel();
+		add(panelList_2);
+		panelList_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
 		panelInput.setBorder(new TitledBorder(null, "\uCC28\uC885", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelList.add(panelInput, BorderLayout.CENTER);
+		panelList_2.add(panelInput, BorderLayout.CENTER);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		JLabel lblCode = new JLabel("차종코드");
@@ -74,7 +77,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		tfType.setColumns(10);
 		
 		JPanel panelBtn = new JPanel();
-		panelList.add(panelBtn, BorderLayout.SOUTH);
+		panelList_2.add(panelBtn, BorderLayout.SOUTH);
 		
 		btnOk = new JButton("추가");
 		btnOk.addActionListener(this);
@@ -83,6 +86,36 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
+		
+		panelList.setPopupMenu((JPopupMenu) createDeptPopupMenu());
+	}
+
+	private Object createDeptPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+		//수정
+		JMenuItem updateItem = new JMenuItem("수정");
+		updateItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CarType item = panelList.getSelectedItem();
+				setItem(item);
+				btnOk.setText("수정");
+			}
+		});
+		popMenu.add(updateItem);
+		//삭제
+		JMenuItem delItem = new JMenuItem("삭제");
+		delItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				service.deleteCarType(panelList.getSelectedItem());
+				panelList.setList(service.selectAllCarType());
+				panelList.loadDatas();
+			}
+		});
+		popMenu.add(delItem);
+		
+		return popMenu;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -90,9 +123,31 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 			do_btnCancel_actionPerformed(e);
 		}
 		if (e.getSource() == btnOk) {
-			do_btnOk_actionPerformed(e);
+			if(btnOk.getText()=="추가") {
+				do_btnOk_actionPerformed(e);
+			}else {
+				do_btnUpdate_actionPerformed(e);
+			}
 		}
 	}
+	private void do_btnUpdate_actionPerformed(ActionEvent e) {
+		CarType item = getItem();
+		service.updateCarType(item);
+		panelList.setList(service.selectAllCarType());
+		panelList.loadDatas();
+		clearTf();
+		btnOk.setText("추가");
+	}
+
+	private CarType getItem() {
+		String code = tfCode.getText();
+		String type = tfType.getText();
+		CarType item = new CarType();
+		item.setCode(code);
+		item.setType(type);
+		return item;
+	}
+
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
 		String code = tfCode.getText();
 		String type = tfType.getText();
@@ -111,6 +166,11 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 			btnOk.setText("추가");
 		}
 		clearTf();
+	}
+	
+	private void setItem(CarType item) {
+		tfCode.setText(item.getCode());
+		tfType.setText(item.getType());
 	}
 
 	private void clearTf() {

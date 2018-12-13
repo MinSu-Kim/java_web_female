@@ -57,7 +57,7 @@ public class FuelMapperTest extends AbstractTest {
 	public void test04updateFuel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Fuel fuel = new Fuel();
-		fuel.setCode("수소");
+		fuel.setNo(1);
 		int res = dao.updateFuel(fuel);
 		Assert.assertEquals(1, res);
 	}

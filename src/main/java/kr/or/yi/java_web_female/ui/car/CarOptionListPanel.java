@@ -8,7 +8,9 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -29,6 +31,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 	private CarOptionList panelList;
 	private CarUiService service;
 	private JButton btnOk;
+	private JButton btnCancel;
 	
 
 
@@ -94,8 +97,40 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		
 		JButton btnCancel = new JButton("취소");
 		panelBtn.add(btnCancel);
+		
+		panelList.setPopupMenu(createDeptPopupMenu());
 	}
 	
+	private JPopupMenu createDeptPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+		//수정
+		JMenuItem updateItem = new JMenuItem("수정");
+		updateItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CarOption item = panelList.getSelectedItem();
+				setItem(item);
+				btnOk.setText("수정");
+			}
+		});
+		popMenu.add(updateItem);
+		
+		JMenuItem delItem = new JMenuItem("삭제");
+		delItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				service.deleteCarOption(panelList.getSelectedItem());
+				panelList.setList(service.selectAllCarOption());
+				panelList.loadDatas();
+			}
+		});
+		popMenu.add(delItem);
+		
+		return popMenu;
+	}
+
+
+
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
 		//추가버튼 눌렀을시 실행
 		int no = Integer.parseInt(tfNo.getText());
@@ -122,6 +157,12 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		}
 		clearTf();
 	}
+	
+	private void setItem(CarOption item) {
+		tfNo.setText(item.getNo()+"");
+		tfName.setText(item.getName());
+		tfPrice.setText(item.getPrice()+"");
+	}
 
 
 
@@ -133,8 +174,49 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(e);
+		}
 		if (e.getSource() == btnOk) {
-			do_btnOk_actionPerformed(e);
+			if(btnOk.getText()=="추가") {
+				do_btnOk_actionPerformed(e);
+			}else {
+				do_btnUpdate_actionPerformed(e);
+			}
 		}
 	}
+
+
+
+	private void do_btnUpdate_actionPerformed(ActionEvent e) {
+		CarOption carOption = getItem();
+		service.updateCarOption(carOption);
+		panelList.setList(service.selectAllCarOption());
+		panelList.loadDatas();
+		clearTf();
+		btnOk.setText("추가");
+	}
+
+
+
+	private CarOption getItem() {
+		int no = Integer.parseInt(tfNo.getText());
+		String name = tfName.getText();
+		int price = Integer.parseInt(tfPrice.getText());
+		CarOption item = new CarOption();
+		item.setNo(no);
+		item.setName(name);
+		item.setPrice(price);
+		return item;
+	}
 }
+
+
+
+
+
+
+
+
+
+
