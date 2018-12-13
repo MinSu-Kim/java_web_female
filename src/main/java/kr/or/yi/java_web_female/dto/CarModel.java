@@ -8,7 +8,7 @@ public class CarModel {
 	private String color;
 	private String gear;
 	private Brand brand;
-	private CarType cartype;
+	private CarType carType;
 	private int basicCharge;
 	private int hour6;
 	private int hour10;
@@ -74,18 +74,16 @@ public class CarModel {
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
-	public CarType getCartype() {
-		return cartype;
+
+
+	public CarType getCarType() {
+		return carType;
 	}
-	public void setCartype(CarType cartype) {
-		this.cartype = cartype;
+
+	public void setCarType(CarType carType) {
+		this.carType = carType;
 	}
-	public int getBasic_charge() {
-		return basicCharge;
-	}
-	public void setBasic_charge(int basic_charge) {
-		this.basicCharge = basic_charge;
-	}
+
 	public int getHour6() {
 		return hour6;
 	}
@@ -131,7 +129,7 @@ public class CarModel {
 	@Override
 	public String toString() {
 		return "CarModel [carCode=" + carCode + ", name=" + name + ", color=" + color + ", gear=" + gear + ", brand="
-				+ brand + ", cartype=" + cartype + ", basicCharge=" + basicCharge + ", hour6=" + hour6 + ", hour10="
+				+ brand + ", cartype=" + carType + ", basicCharge=" + basicCharge + ", hour6=" + hour6 + ", hour10="
 				+ hour10 + ", hour12=" + hour12 + ", hourElse=" + hourElse + ", fuel=" + fuel + ", isRent=" + isRent
 				+ ", rentCnt=" + rentCnt + ", carOption=" + carOption + "]";
 	}

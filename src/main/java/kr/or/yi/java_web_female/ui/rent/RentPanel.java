@@ -26,6 +26,8 @@ import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import kr.or.yi.java_web_female.dto.CarModel;
+import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.RentUIService;
@@ -37,6 +39,7 @@ public class RentPanel extends JPanel implements ActionListener {
 	private JTextField textField;
 	private JTextField textField_1;
 	private CustomerSearchFrame cf; // 고객확인프레임
+	private CarSearchFrame csf;	//차량선택프레임
 	private RentUIService service;
 	private Customer rentCustomer;
 	private JTextField tfCstmName;
@@ -45,7 +48,9 @@ public class RentPanel extends JPanel implements ActionListener {
 	private JComboBox<String> comboBoxCar;
 	private List<CarType> list;
 	private JButton btnRent;
-
+	private JButton btnSearchCar;
+	private CarModel selectedCarModel;
+	
 	public RentPanel() {
 		service = new RentUIService();
 		initComponents();
@@ -92,7 +97,8 @@ public class RentPanel extends JPanel implements ActionListener {
 		comboBoxCar = new JComboBox<>();
 		panel.add(comboBoxCar);
 
-		JButton btnSearchCar = new JButton("선택");
+		btnSearchCar = new JButton("선택");
+		btnSearchCar.addActionListener(this);
 		panel.add(btnSearchCar);
 
 		JPanel pInfo = new JPanel();
@@ -265,6 +271,9 @@ public class RentPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearchCar) {
+			do_btnSearchCar_actionPerformed(e);
+		}
 		if (e.getSource() == btnRent) {
 			do_btnRent_actionPerformed(e);
 		}
@@ -331,9 +340,33 @@ public class RentPanel extends JPanel implements ActionListener {
 	protected void do_btnClose_actionPerformed(ActionEvent e) {
 
 	}
+	
+	//대여버튼
 	protected void do_btnRent_actionPerformed(ActionEvent e) {
+		
+	}
+	
+	//선택버튼
+	protected void do_btnSearchCar_actionPerformed(ActionEvent e) {
 		int selectedIndex = comboBoxCar.getSelectedIndex();
 		CarType ct = list.get(selectedIndex);
-		JOptionPane.showMessageDialog(null, selectedIndex + "," + ct);
+		
+		List<CarModel> carModelList = service.selectAllCarModels(ct);
+		JOptionPane.showMessageDialog(null, selectedIndex + "," + ct + "," + carModelList.size());
+		
+		if(csf == null) {
+			csf = new CarSearchFrame();
+		}
+		csf.setRentPanel(this);
+		csf.setCarList(carModelList);
+		csf.setVisible(true);
 	}
+
+	public void setSelectedCarModel(CarModel selectedCarModel) {
+		this.selectedCarModel = selectedCarModel;
+		List<CarOption> arr = selectedCarModel.getCarOption();
+		JOptionPane.showMessageDialog(null, arr);
+	}
+	
+	
 }

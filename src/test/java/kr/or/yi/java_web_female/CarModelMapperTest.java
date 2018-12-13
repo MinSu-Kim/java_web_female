@@ -47,8 +47,8 @@ public class CarModelMapperTest extends AbstractTest {
 		carModel.setColor("wh");
 		carModel.setGear("stick");
 		carModel.setBrand(new Brand("B2"));
-		carModel.setCartype(new CarType("S1"));
-		carModel.setBasic_charge(70000);
+		carModel.setCarType(new CarType("S1"));
+		carModel.setBasicCharge(70000);
 		carModel.setHour6(40000);
 		carModel.setHour10(53000);
 		carModel.setHour12(59000);
@@ -73,8 +73,8 @@ public class CarModelMapperTest extends AbstractTest {
 		carModel.setColor("bl");
 		carModel.setGear("stick");
 		carModel.setBrand(new Brand("B2"));
-		carModel.setCartype(new CarType("S1"));
-		carModel.setBasic_charge(60000);
+		carModel.setCarType(new CarType("S1"));
+		carModel.setBasicCharge(60000);
 		carModel.setHour6(30000);
 		carModel.setHour10(43000);
 		carModel.setHour12(49000);
@@ -112,6 +112,15 @@ public class CarModelMapperTest extends AbstractTest {
 		model.setCarCode("V003");
 		List<CarModel> searchModel = dao.selectCarModelWithCarOptionByCode(model);
 		Assert.assertNotNull(searchModel);
+	}
+	
+	@Test
+	public void test08selectCarModelByCarType() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<CarModel> list = dao.selectCarModelByCarType(new CarType("S2"));
+		Assert.assertNotNull(list);
+		
 	}
 }
 
