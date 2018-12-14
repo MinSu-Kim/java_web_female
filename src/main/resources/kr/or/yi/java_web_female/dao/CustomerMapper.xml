@@ -39,4 +39,7 @@
 	<select id="nextCustomerCode" resultType="java.lang.Integer">
 		select count(*)+1 from customer;
 	</select>
+	<select id="nextCode" resultType="int">
+		select count(*)+1 from customer;
+	</select>
 </mapper>

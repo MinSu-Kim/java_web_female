@@ -15,5 +15,6 @@ public interface CustomerMapper {
 	
 	
 	int nextCustomerCode();
+	String nextCode();
 	/*int selectCustomerByPw*/
 }

@@ -32,6 +32,9 @@ public class CustomerUiService {
 		return cusDao.nextCustomerCode();
 	}
 	
+	public String getNextCustomerCode() {
+		return cusDao.nextCode();
+	}
 	/*public int selectCustomerByPw(Customer customer) {
 		return cusDao.selectCustomerByPw(customer);
 	}

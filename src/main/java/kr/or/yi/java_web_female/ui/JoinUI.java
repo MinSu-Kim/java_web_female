@@ -323,8 +323,9 @@ public class JoinUI extends JFrame implements ActionListener {
 			validCheck();
 
 			Customer customer = getItemCustomer();
-			String code = String.format("C%03d",cusService.nextCustomerCode());
-			customer.setCode(code);
+			customer.setCode(cusService.getNextCustomerCode());
+/*			String code = String.format("C%03d",cusService.nextCustomerCode());
+			customer.setCode(code);*/
 			res = cusService.addcus(customer);
 			if(res==1) {
 				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
