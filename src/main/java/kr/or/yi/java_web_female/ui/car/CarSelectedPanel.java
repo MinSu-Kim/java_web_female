@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+
+import kr.or.yi.java_web_female.service.CarModelService;
+import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -11,13 +14,19 @@ import javax.swing.JTextField;
 import kr.or.yi.java_web_female.ui.list.CarPriceList;
 
 public class CarSelectedPanel extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfCode;
+	private JTextField tfName;
+	private CarModelService service;
 
 	/**
 	 * Create the panel.
 	 */
 	public CarSelectedPanel() {
+		service = new CarModelService();
+		initComponents();
+	}
+
+	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -39,26 +48,29 @@ public class CarSelectedPanel extends JPanel {
 		panel_info.add(panelCode);
 		panelCode.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("차량코드");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panelCode.add(lblNewLabel_1);
+		JLabel lblCode = new JLabel("차량코드");
+		lblCode.setHorizontalAlignment(SwingConstants.CENTER);
+		panelCode.add(lblCode);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		panelCode.add(textField);
-		textField.setColumns(10);
+		tfCode = new JTextField();
+		tfCode.setEditable(false);
+		//선택된 차량코드 자동등록
+		tfCode.setText("");
+		
+		panelCode.add(tfCode);
+		tfCode.setColumns(10);
 		
 		JPanel panelName = new JPanel();
 		panel_info.add(panelName);
 		panelName.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblNewLabel_2 = new JLabel("모델명");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panelName.add(lblNewLabel_2);
+		JLabel lblName = new JLabel("모델명");
+		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		panelName.add(lblName);
 		
-		textField_1 = new JTextField();
-		panelName.add(textField_1);
-		textField_1.setColumns(10);
+		tfName = new JTextField();
+		panelName.add(tfName);
+		tfName.setColumns(10);
 		
 		
 		ComboPanel panelBrand = new ComboPanel();
@@ -76,9 +88,9 @@ public class CarSelectedPanel extends JPanel {
 		panel_info.add(panelRentCnt);
 		panelRentCnt.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panelRentCnt.add(lblNewLabel);
+		JLabel lblCount = new JLabel("New label");
+		lblCount.setHorizontalAlignment(SwingConstants.CENTER);
+		panelRentCnt.add(lblCount);
 		
 		JPanel panelBtn = new JPanel();
 		panel.add(panelBtn, BorderLayout.SOUTH);
@@ -91,7 +103,6 @@ public class CarSelectedPanel extends JPanel {
 		
 		JButton btnCancel = new JButton("취소");
 		panelBtn.add(btnCancel);
-
 	}
 
 }
