@@ -4,13 +4,6 @@ DROP SCHEMA IF EXISTS proj_rentcar;
 -- proj_rentcar
 CREATE SCHEMA proj_rentcar;
 
--- 대여차량옵션
-CREATE TABLE proj_rentcar.rentCar_options (
-	option_id INT(11) NOT NULL COMMENT '옵션번호', -- 옵션번호
-	code      CHAR(5) NULL     COMMENT '차량대여번호' -- 차량대여번호
-)
-COMMENT '추가옵션';
-
 -- 브랜드
 CREATE TABLE proj_rentcar.brand (
 	no   CHAR(2)     NOT NULL COMMENT '브랜드번호', -- 브랜드번호
@@ -210,7 +203,7 @@ COMMENT '주소';
 
 -- 차량대여
 CREATE TABLE proj_rentcar.rent (
-	code           CHAR(5)    NOT NULL COMMENT 'R0001', -- R0001
+	code           CHAR(4)    NOT NULL COMMENT 'R0001', -- R0001
 	start_date     DATE       NOT NULL COMMENT '시작날짜', -- 시작날짜
 	start_time     TIME       NOT NULL COMMENT '시작시간', -- 시작시간
 	end_date       DATE       NOT NULL COMMENT '반납날짜', -- 반납날짜
@@ -232,6 +225,13 @@ ALTER TABLE proj_rentcar.rent
 			code -- R0001
 		);
 
+-- 추가옵션
+CREATE TABLE proj_rentcar.rentcar_options (
+	option_id INT(11) NOT NULL COMMENT '옵션번호', -- 옵션번호
+	code      CHAR(4) NULL     COMMENT '차량대여번호' -- 차량대여번호
+)
+COMMENT '추가옵션';
+
 -- 직책
 CREATE TABLE proj_rentcar.title (
 	code    CHAR(4)     NOT NULL COMMENT '직책코드', -- 직책코드
@@ -246,21 +246,6 @@ ALTER TABLE proj_rentcar.title
 		PRIMARY KEY (
 			code -- 직책코드
 		);
-
--- 대여차량옵션
-ALTER TABLE proj_rentcar.rentCar_options
-	ADD CONSTRAINT FK_car_option_TO_add_option -- FK_car_option_TO_add_option
-		FOREIGN KEY (
-			option_id -- 옵션번호
-		)
-		REFERENCES proj_rentcar.car_option ( -- 차량옵션
-			no -- 옵션번호
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
-	ADD INDEX FK_car_option_TO_add_option (
-		option_id -- 옵션번호
-	);
 
 -- 차(모델)
 ALTER TABLE proj_rentcar.car_model
@@ -412,12 +397,32 @@ ALTER TABLE proj_rentcar.rent
 		insurance_code -- 보험코드
 	);
 
--- 대여차량옵션
-ALTER TABLE proj_rentcar.rentCar_options
-	ADD CONSTRAINT FK_rent_TO_rentCar_options -- 차량대여 -> 대여차량옵션
+-- 추가옵션
+ALTER TABLE proj_rentcar.rentcar_options
+	ADD CONSTRAINT FK_car_option_TO_add_option -- FK_car_option_TO_add_option
+		FOREIGN KEY (
+			option_id -- 옵션번호
+		)
+		REFERENCES proj_rentcar.car_option ( -- 차량옵션
+			no -- 옵션번호
+		)
+		ON DELETE RESTRICT
+		ON UPDATE RESTRICT,
+	ADD INDEX FK_car_option_TO_add_option (
+		option_id -- 옵션번호
+	);
+
+-- 추가옵션
+ALTER TABLE proj_rentcar.rentcar_options
+	ADD CONSTRAINT FK_rent_TO_rentCar_options -- FK_rent_TO_rentCar_options
 		FOREIGN KEY (
 			code -- 차량대여번호
 		)
 		REFERENCES proj_rentcar.rent ( -- 차량대여
 			code -- R0001
-		);
+		)
+		ON DELETE RESTRICT
+		ON UPDATE RESTRICT,
+	ADD INDEX FK_rent_TO_rentCar_options (
+		code -- 차량대여번호
+	);

@@ -6,6 +6,8 @@ import kr.or.yi.java_web_female.dto.CarOption;
 
 @SuppressWarnings("serial")
 public class CarOptionList extends AbstractListPanel<CarOption> {
+	public CarOptionList() {
+	}
 
 
 

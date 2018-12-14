@@ -3,29 +3,29 @@
 <mapper namespace="kr.or.yi.java_web_female.dao.FuelMapper">
 	
 	<select id="selectFuelByNo" parameterType="Fuel" resultType="Fuel">
-		select code
+		select no, code
 		from fuel
 		where code=#{code}
 	</select>
 	
 	<select id="selectFuelByAll" resultType="Fuel">
-		select code
+		select no, code
 		from fuel
 	</select>
 	
 	<insert id="insertFuel" parameterType="Fuel">
-		insert into fuel values(#{code});
+		insert into fuel values(#{no},#{code});
 	</insert>
 	
 	<update id="updateFuel" parameterType="Fuel">
 		update Fuel
 		set code=#{code}
-		where code=#{code}
+		where no=#{no};
 	</update>
 	
 	<delete id="deleteFuel" parameterType="Fuel">
 		delete
 		from fuel
-		where code=#{code};
+		where no=#{no};
 	</delete>
 </mapper>

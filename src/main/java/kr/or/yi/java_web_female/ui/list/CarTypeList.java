@@ -1,13 +1,13 @@
 package kr.or.yi.java_web_female.ui.list;
 
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.CarType;
 
+@SuppressWarnings("serial")
 public class CarTypeList extends AbstractListPanel<CarType> {
-
-
+	public CarTypeList() {
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -17,20 +17,18 @@ public class CarTypeList extends AbstractListPanel<CarType> {
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] {"차종코드","차량유형"};
+		return new String[] { "차종코드", "차량유형" };
 	}
 
 	@Override
 	protected Object[] getItemRows(CarType item) {
-		return new Object[] {
-				item.getCode(),item.getType()
-		};
+		return new Object[] { item.getCode(), item.getType() };
 	}
 
 	@Override
 	protected CarType getItem(int selectedIndex) {
-		String code = (String)table.getValueAt(selectedIndex, 0);
-		String type = (String)table.getValueAt(selectedIndex, 1);
+		String code = (String) table.getValueAt(selectedIndex, 0);
+		String type = (String) table.getValueAt(selectedIndex, 1);
 		CarType carType = new CarType();
 		carType.setCode(code);
 		carType.setType(type);

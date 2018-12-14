@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
-import kr.or.yi.java_web_female.ui.list.CarModelTable;
+import kr.or.yi.java_web_female.ui.list.CarModelListPanel;
 
 public class CarSearchFrame extends JFrame {
 
@@ -52,7 +52,7 @@ public class CarSearchFrame extends JFrame {
 		lblTitle.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		titlePanel.add(lblTitle);
 		
-		carPanel = new CarModelTable();
+		carPanel = new CarModelListPanel();
 		carPanel.getTable().addMouseListener(new MouseAdapter() {
 
 			@Override

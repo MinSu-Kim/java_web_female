@@ -10,6 +10,8 @@ select * from title;
 
 select * from level;
 
+select * from event;
+
 desc `level`;
 
 
@@ -53,7 +55,8 @@ insert into level values ('브론즈',0,5),
 							('골드',11,99999),
 							('블랙리스트',-1,-1);	
 
-
+insert into event values('EVT1', '첫가입', 3),
+						('EVT2', '생일축하', 5);
 
 
 						

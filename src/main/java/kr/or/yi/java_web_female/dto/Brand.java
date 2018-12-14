@@ -31,7 +31,7 @@ public class Brand {
 	
 	@Override
 	public String toString() {
-		return "Brand [no=" + no + ", name=" + name + "]";
+		return name;
 	}
 
 }

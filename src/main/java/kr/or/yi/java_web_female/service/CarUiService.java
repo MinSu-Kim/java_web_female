@@ -40,6 +40,10 @@ public class CarUiService {
 		return optionDao.deleteCarOption(carOption);
 	}
 	
+	public int updateCarOption(CarOption carOption) {
+		return optionDao.updateCarOption(carOption);
+	}
+	
 	//차종
 	public List<CarType> selectAllCarType(){
 		return typeDao.selectCarTypeByAll();
@@ -51,6 +55,10 @@ public class CarUiService {
 	
 	public int deleteCarType(CarType carType) {
 		return typeDao.deleteCarType(carType);
+	}
+	
+	public int updateCarType(CarType carType) {
+		return typeDao.updateCarType(carType);
 	}
 	
 	//연료
@@ -81,6 +89,10 @@ public class CarUiService {
 	
 	public int deleteBrand(Brand brand) {
 		return brandDao.deleteBrand(brand);
+	}
+	
+	public int updateBrand(Brand brand) {
+		return brandDao.updateBrand(brand);
 	}
 	
 	

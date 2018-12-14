@@ -2,6 +2,7 @@ package kr.or.yi.java_web_female.dao;
 
 import java.util.List;
 
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 
 public interface CustomerMapper {
@@ -13,6 +14,7 @@ public interface CustomerMapper {
 	
 	int insertCustomer(Customer customer);
 	
+	int insertCustomEvent(CustomEvent customEvent);
 	
 	int nextCustomerCode();
 	String nextCode();

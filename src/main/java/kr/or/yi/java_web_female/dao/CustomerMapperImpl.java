@@ -6,6 +6,7 @@ import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -60,7 +61,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 
 	@Override
 	public int nextCustomerCode() {
-
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + ".nextCustomerCode");
 		}
@@ -79,6 +79,14 @@ public class CustomerMapperImpl implements CustomerMapper {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			sqlSession.select(namespace + ".nextCode", resultHandler);
 			return sb.toString();
+		}
+	}
+
+	public int insertCustomEvent(CustomEvent customEvent) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.insert(namespace + ".insertCustomEvent", customEvent);
+			sqlSession.commit();
+			return res;
 		}
 	}
 

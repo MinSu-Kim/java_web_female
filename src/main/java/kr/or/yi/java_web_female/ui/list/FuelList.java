@@ -16,27 +16,29 @@ public class FuelList extends AbstractListPanel<Fuel> {
 
 	@Override
 	protected void setAlignWidth() {
-		tableCellAlignment(SwingConstants.CENTER, 0);
-		tableSetWidth(100);
+		tableCellAlignment(SwingConstants.CENTER, 0,1);
+		tableSetWidth(100,100);
 	}
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] {"연료"};
+		return new String[] {"번호","연료"};
 	}
 
 	@Override
 	protected Object[] getItemRows(Fuel item) {
 		return new Object[] {
-				item.getCode()
+				item.getNo(),item.getCode()
 		};
 	}
 
 	@Override
 	protected Fuel getItem(int selectedIndex) {
-		String code = (String)table.getValueAt(selectedIndex, 0);
+		int no = (int)table.getValueAt(selectedIndex, 0);
+		String code = (String)table.getValueAt(selectedIndex, 1);
 		Fuel fuel = new Fuel();
 		fuel.setCode(code);
+		fuel.setNo(no);
 		return fuel;
 	}
 

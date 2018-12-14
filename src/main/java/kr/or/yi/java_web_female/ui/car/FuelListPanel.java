@@ -19,9 +19,11 @@ import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.FuelList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class FuelListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
+	private JTextField tfNo;
 	private CarUiService service;
 	private List<Fuel> list;
 	private FuelList panelList;
@@ -37,7 +39,6 @@ public class FuelListPanel extends JPanel implements ActionListener {
 	}
 
 	private void initcomponent() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		panelList = new FuelList();
 		
@@ -46,6 +47,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();
+		setLayout(new GridLayout(0, 2, 0, 0));
 		add(panelList);
 		
 		JPanel panel_1 = new JPanel();
@@ -55,17 +57,22 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		JPanel panelInput = new JPanel();
 		panelInput.setBorder(new TitledBorder(null, "\uC5F0\uB8CC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.add(panelInput, BorderLayout.CENTER);
-		panelInput.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelInput.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panel_4 = new JPanel();
-		panelInput.add(panel_4);
+		JLabel lblNo = new JLabel("번호");
+		lblNo.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelInput.add(lblNo);
 		
-		JLabel lblCode = new JLabel("연료");
-		panel_4.add(lblCode);
+		tfNo = new JTextField();
+		tfNo.setColumns(10);
+		panelInput.add(tfNo);
+		
+		JLabel lblCode = new JLabel("연료코드");
+		panelInput.add(lblCode);
 		lblCode.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		tfCode = new JTextField();
-		panel_4.add(tfCode);
+		panelInput.add(tfCode);
 		tfCode.setColumns(10);
 		
 		JPanel panelBtn = new JPanel();
@@ -126,31 +133,34 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		}
 	}
 	private void do_btnUpdate_actionPerformed(ActionEvent e) {
-		String code = tfCode.getText();
-		Fuel item = new Fuel(code);
+		Fuel item = getItem();
 		service.updateFuel(item);
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();	
-		tfCode.setText("");
+		clearTf();
 		btnOk.setText("추가");
 	}
 
 	private Fuel getItem() {
-		String code = tfCode.getText().trim();
-		return new Fuel(code);
+		String code = tfCode.getText();
+		String no = tfNo.getText();
+		Fuel item = new Fuel();
+		item.setNo(Integer.parseInt(no));
+		item.setCode(code);
+		
+		return item;
 	}
 
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
 		//추가버튼 눌렀을시 실행
-		String code = tfCode.getText();
-		Fuel newFuel = new Fuel(code);
+		Fuel newFuel = getItem();
 		service.insertFuel(newFuel);
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
-		tfCode.setText("");
+		clearTf();
 		
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
@@ -158,10 +168,16 @@ public class FuelListPanel extends JPanel implements ActionListener {
 			btnOk.setText("추가");
 		}
 		//취소버튼 눌렀을시 실행
+		clearTf();
+	}
+
+	private void clearTf() {
 		tfCode.setText("");
+		tfNo.setText("");
 	}
 	
 	private void setItem(Fuel item) {
 		tfCode.setText(item.getCode());
+		tfNo.setText(item.getNo()+"");
 	}
 }

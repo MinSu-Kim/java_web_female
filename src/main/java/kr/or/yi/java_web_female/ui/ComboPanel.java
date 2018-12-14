@@ -35,7 +35,7 @@ public class ComboPanel<T> extends JPanel {
 	}
 	
 	public void setComboItems(List<T> items) {
-		DefaultComboBoxModel<T> model = new DefaultComboBoxModel<>(new Vector<T>(items));
+		DefaultComboBoxModel<T> model = new DefaultComboBoxModel<>(new Vector<T>(items));//item자리에 service.select
 		comboBox.setModel(model);
 	}
 }

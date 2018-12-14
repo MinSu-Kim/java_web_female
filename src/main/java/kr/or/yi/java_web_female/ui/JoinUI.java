@@ -326,7 +326,8 @@ public class JoinUI extends JFrame implements ActionListener {
 			customer.setCode(cusService.getNextCustomerCode());
 /*			String code = String.format("C%03d",cusService.nextCustomerCode());
 			customer.setCode(code);*/
-			res = cusService.addcus(customer);
+			res = cusService.addcus(customer, null);
+
 			if(res==1) {
 				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
 				cTable.setList(cusService.selectCustomerByAll());
@@ -390,6 +391,7 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfPwd2.requestFocus();
 			throw new Exception("Password를 입력해 주세요");
 		}
+		
 
 //		JOptionPane.showMessageDialog(null, "생년월일"+birthDay.getDate());
 		if (birthDay.getDate() == null) {

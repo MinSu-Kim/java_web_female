@@ -20,7 +20,7 @@ set zipcode=@zipcode, sido=@sido, sigungu=@sigungu, eupmyeon=@eupmyeon, doro=@do
 
 
 
-select *
+/*select *
 from post 
 where doro ='태전로7길'
-order by building1, building2;
+order by building1, building2;*/
