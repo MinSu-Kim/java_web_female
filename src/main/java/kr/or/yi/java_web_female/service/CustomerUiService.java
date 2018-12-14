@@ -28,6 +28,10 @@ public class CustomerUiService {
 		return cusDao.selectCustomerById(customer);
 	}
 
+	public int nextCustomerCode() {
+		return cusDao.nextCustomerCode();
+	}
+	
 	/*public int selectCustomerByPw(Customer customer) {
 		return cusDao.selectCustomerByPw(customer);
 	}

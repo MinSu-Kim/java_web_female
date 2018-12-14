@@ -55,4 +55,12 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
+	@Override
+	public int nextCustomerCode() {
+		
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectOne(namespace + ".nextCustomerCode");
+		}
+	}
+
 }

@@ -13,5 +13,7 @@ public interface CustomerMapper {
 	
 	int insertCustomer(Customer customer);
 	
+	
+	int nextCustomerCode();
 	/*int selectCustomerByPw*/
 }

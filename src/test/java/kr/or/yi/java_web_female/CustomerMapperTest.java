@@ -59,6 +59,8 @@ public class CustomerMapperTest extends AbstractTest {
 	public void test04insertCustomer() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Customer customer = new Customer();
+		String code = String.format("C%03d", dao.nextCustomerCode());
+		customer.setCode(code);
 		customer.setId("psw2701");
 		customer.setPasswd("password");
 		customer.setName("박수완");
@@ -74,5 +76,12 @@ public class CustomerMapperTest extends AbstractTest {
 		Assert.assertEquals(1, res);
 
 	}
+	@Test
+	public void test05nextCustomerCode() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
+		int cnt = dao.nextCustomerCode();
+		
+		Assert.assertNotEquals(0, cnt);
+	}
 }

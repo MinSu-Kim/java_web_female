@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.Provider.Service;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
@@ -322,6 +323,8 @@ public class JoinUI extends JFrame implements ActionListener {
 			validCheck();
 
 			Customer customer = getItemCustomer();
+			String code = String.format("C%03d",cusService.nextCustomerCode());
+			customer.setCode(code);
 			res = cusService.addcus(customer);
 			if(res==1) {
 				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
