@@ -2,17 +2,20 @@ package kr.or.yi.java_web_female.ui.rent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -234,9 +237,10 @@ public class RentPanel extends JPanel implements ActionListener {
 		buttonGroup.add(rBReg);
 		pRb.add(rBReg);
 
-		JPanel pOption = new JPanel();
+		pOption = new JPanel();
 		pOption.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
 				"\uC635\uC158 \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		addCarOption();
 		pContents.add(pOption);
 
 		JPanel pPrice = new JPanel();
@@ -270,6 +274,31 @@ public class RentPanel extends JPanel implements ActionListener {
 		pBtn.add(btnClose);
 	}
 
+	private void addCarOption() {
+		coList = service.selectAllCarOptions();
+		for(CarOption co : coList) {
+			JCheckBox cb = new JCheckBox(co.getName());
+//			cb.addActionListener(chkListener);
+			pOption.add(cb);
+			if(co.getName().equals("driver")) {
+				cb.setEnabled(false);
+			}
+		}
+	}
+
+/*	ActionListener chkListener = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null, e.getActionCommand());
+			
+		}
+	};*/
+	private List<CarOption> coList;
+	private JPanel pOption;
+	private JCheckBox cb;
+	private List<CarOption> selectCoList;
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSearchCar) {
 			do_btnSearchCar_actionPerformed(e);
@@ -343,6 +372,19 @@ public class RentPanel extends JPanel implements ActionListener {
 	
 	//대여버튼
 	protected void do_btnRent_actionPerformed(ActionEvent e) {
+		selectCoList = new ArrayList<>();
+		JOptionPane.showMessageDialog(null, coList.toString());
+		for(Component c : pOption.getComponents()) {
+			cb = (JCheckBox) c;
+			if(cb.isSelected()) {
+				CarOption co = new CarOption();
+				co.setName(cb.getText());
+				CarOption findCo = coList.get(coList.indexOf(co));
+				selectCoList.add(findCo);
+				JOptionPane.showMessageDialog(null, findCo);
+			}
+		}
+		
 		
 	}
 	
@@ -364,8 +406,24 @@ public class RentPanel extends JPanel implements ActionListener {
 
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
-		List<CarOption> arr = selectedCarModel.getCarOption();
-		JOptionPane.showMessageDialog(null, arr);
+//		JOptionPane.showMessageDialog(null, selectedCarModel);
+		if(selectedCarModel.getCarType().getCode().equals("S2")) {
+			chkDriver(true);
+
+		}else {
+			chkDriver(false);
+		}
+		
+	}
+
+	private void chkDriver(boolean isChk) {
+		for(Component c : pOption.getComponents()) {
+			cb = (JCheckBox) c;
+			if (cb.getText().equals("driver")) {
+				cb.setEnabled(isChk);
+				break;
+			}
+		}
 	}
 	
 	

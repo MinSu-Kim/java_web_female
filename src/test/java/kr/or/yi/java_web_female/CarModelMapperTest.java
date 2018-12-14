@@ -98,7 +98,7 @@ public class CarModelMapperTest extends AbstractTest {
 		Assert.assertEquals(1, res);
 	}
 	
-	@Test
+	/*@Test
 	public void test06selectCarModelWithCarOptionByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<CarModel> list = dao.selectCarModelWithCarOptionByAll();
@@ -121,7 +121,7 @@ public class CarModelMapperTest extends AbstractTest {
 		List<CarModel> list = dao.selectCarModelByCarType(new CarType("S2"));
 		Assert.assertNotNull(list);
 		
-	}
+	}*/
 }
 
 

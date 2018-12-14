@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.CarModelMapper">
 	
-	<select id="selectCarModelWithCarOptionByCode" parameterType="CarModel" resultType="CarModel">
+	<!-- <select id="selectCarModelWithCarOptionByCode" parameterType="CarModel" resultType="CarModel">
 		SELECT m.car_code, m.name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt, option_id,co.no ,co.name, co.price
 		FROM car_model m join add_option ao on m.car_code=ao.car_code join car_option co on ao.option_id = co.no
 		where m.car_code=#{carCode}
@@ -11,7 +11,7 @@
 	<select id="selectCarModelWithCarOptionByAll" resultType="CarModel">
 		SELECT m.car_code, m.name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt, option_id,co.no ,co.name, co.price
 		FROM car_model m join add_option ao on m.car_code=ao.car_code join car_option co on ao.option_id = co.no;
-	</select>
+	</select>-->
 	
 
 	<select id="selectCarModelByNo" parameterType="CarModel" resultType="CarModel">
@@ -50,14 +50,33 @@
 		<result column="brandName" property="brand.name"/>
 		<result column="basic_charge" property="basicCharge"/>
 		<result column="fuel_code" property="fuel.code"/>
-		<collection property="carOption" resultMap="kr.or.yi.java_web_female.dao.CarOptionMapper.ResultCarOption"/>
+		<!-- <collection property="carOption" resultMap="kr.or.yi.java_web_female.dao.CarOptionMapper.ResultCarOption"/> -->
 	</resultMap>
-		<select id="selectCarModelByCarType" parameterType="CarType" resultMap="ResultCarModel">
-		select cm.name as carName, color, gear, cartype, b.name as brandName, basic_charge, fuel_code, co.name as optionName, price
-		from car_model cm join brand b join add_option a join car_option co
-		on cm.brand = b.no and cm.car_code = a.car_code and a.option_id = co.no
+	<select id="selectCarModelByCarType" parameterType="CarType" resultMap="ResultCarModel">
+		select cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code
+		from car_model cm join brand b on cm.brand = b.no
 		where cartype = #{code};
 	</select>
+	
+	<!-- 차량관리 where 조건절 select -->
+	<!-- <sql id="selectSql">
+		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt
+		FROM car_model
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="cartype != null">
+				cartype=#{carType}
+			</if>
+			<if test="brand != null">
+				AND brand=#{brand}
+			</if>
+			<if test="fuel != fuel">
+				AND fuel=#{fuel}
+			</if>
+		</where>
+	</sql> -->
 </mapper>
 
 
