@@ -19,3 +19,10 @@ insert into rent values
 
 select * from customer where name = '김영희';
 
+-- 렌트카옵션
+INSERT INTO proj_rentcar.rentcar_options
+(option_id, code)
+values
+(1, 'R001');
+
+-- (1, 'R0002'),(2, 'R0002'),(1, 'R0003'),(2, 'R0003'),(3, 'R0003');

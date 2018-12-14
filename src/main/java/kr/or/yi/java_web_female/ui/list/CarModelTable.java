@@ -6,6 +6,8 @@ import kr.or.yi.java_web_female.dto.CarModel;
 
 @SuppressWarnings("serial")
 public class CarModelTable extends AbstractListPanel<CarModel> {
+	public CarModelTable() {
+	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -28,8 +30,26 @@ public class CarModelTable extends AbstractListPanel<CarModel> {
 
 	@Override
 	protected CarModel getItem(int selectedIndex) {
-		// TODO Auto-generated method stub
+		/*
+		 * String empNo = (String) table.getValueAt(selectedRow, 0);
+		Employee newEmp = new Employee(empNo);
+	 	int index = list.indexOf(newEmp); 
+	 	return list.get(index);
+		 * */
+		
 		return list.get(selectedIndex);
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
