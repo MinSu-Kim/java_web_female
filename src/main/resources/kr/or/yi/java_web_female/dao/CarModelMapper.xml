@@ -58,6 +58,26 @@
 		on cm.brand = b.no and cm.car_code = a.car_code and a.option_id = co.no
 		where cartype = #{code};
 	</select>
+	
+	<!-- 차량관리 where 조건절 select -->
+	<sql id="selectSql">
+		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt
+		FROM car_model
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="cartype != null">
+				cartype=#{carType}
+			</if>
+			<if test="brand != null">
+				AND brand=#{brand}
+			</if>
+			<if test="fuel != fuel">
+				AND fuel=#{fuel}
+			</if>
+		</where>
+	</sql>
 </mapper>
 
 

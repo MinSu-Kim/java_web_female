@@ -27,7 +27,7 @@ public class CarType {
 	
 	@Override
 	public String toString() {
-		return "CarType [code=" + code + ", type=" + type + "]";
+		return type;
 	}
 	
 	

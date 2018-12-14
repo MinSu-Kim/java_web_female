@@ -4,10 +4,9 @@ import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 
+@SuppressWarnings("serial")
 public class CarTotalList extends AbstractListPanel<CarModel> {
-	public CarTotalList() {
-	}
-
+	
 	@Override
 	protected void setAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);

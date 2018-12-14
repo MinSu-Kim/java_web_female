@@ -4,13 +4,17 @@ import javax.swing.JPanel;
 
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarType;
+import kr.or.yi.java_web_female.service.CarUiService;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -23,8 +27,15 @@ import kr.or.yi.java_web_female.ui.list.CarModelListPanel;
 public class CarPanel extends JPanel {
 	private JTextField tfName;
 	private JTextField tfCode;
+	private CarUiService service;
+
 
 	public CarPanel() {
+		service = new CarUiService();
+		initComponents();
+	}
+
+	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelSelect = new JPanel();
@@ -32,13 +43,18 @@ public class CarPanel extends JPanel {
 		panelSelect.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		ComboPanel<CarType> panelCarType = new ComboPanel<>();
-		panelCarType.setTitle("CarType");
-		List<CarType> arr = new ArrayList<>();
-
+		panelCarType.setTitle("차종");
+		List<CarType> arr = service.selectAllCarType();
+		
+		//콤보박스에 차종 불러오기
+		panelCarType.setComboItems(arr);
 		panelSelect.add(panelCarType);
 		
 		ComboPanel<Brand> panelBrand = new ComboPanel<>();
-		panelBrand.setTitle("Brand");
+		panelBrand.setTitle("브랜드");
+		List<Brand> arrBrand = service.selectAllBrand();
+		//콤보박스에 브랜드 불러오기
+		panelBrand.setComboItems(arrBrand);
 		panelSelect.add(panelBrand);
 		
 		JPanel panelName = new JPanel();
@@ -65,7 +81,7 @@ public class CarPanel extends JPanel {
 		panelCode.add(tfCode);
 		tfCode.setColumns(10);
 		
-		CarModelListPanel panel = new CarModelListPanel();
+		CarTotalList panel = new CarTotalList();
 		add(panel, BorderLayout.CENTER);
 		
 		
@@ -77,8 +93,6 @@ public class CarPanel extends JPanel {
 		
 		JButton btnCancel = new JButton("취소");
 		panelBtn.add(btnCancel);
-		
-
 	}
 
 }
