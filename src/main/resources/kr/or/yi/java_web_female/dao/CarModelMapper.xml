@@ -50,12 +50,11 @@
 		<result column="brandName" property="brand.name"/>
 		<result column="basic_charge" property="basicCharge"/>
 		<result column="fuel_code" property="fuel.code"/>
-		<collection property="carOption" resultMap="kr.or.yi.java_web_female.dao.CarOptionMapper.ResultCarOption"/>
+		<!-- <collection property="carOption" resultMap="kr.or.yi.java_web_female.dao.CarOptionMapper.ResultCarOption"/> -->
 	</resultMap>
-		<select id="selectCarModelByCarType" parameterType="CarType" resultMap="ResultCarModel">
-		select cm.name as carName, color, gear, cartype, b.name as brandName, basic_charge, fuel_code, co.name as optionName, price
-		from car_model cm join brand b join add_option a join car_option co
-		on cm.brand = b.no and cm.car_code = a.car_code and a.option_id = co.no
+	<select id="selectCarModelByCarType" parameterType="CarType" resultMap="ResultCarModel">
+		select cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code
+		from car_model cm join brand b on cm.brand = b.no
 		where cartype = #{code};
 	</select>
 </mapper>
