@@ -4,8 +4,8 @@ import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 
-public class CarPanelList extends AbstractListPanel<CarModel> {
-	public CarPanelList() {
+public class CarTotalList extends AbstractListPanel<CarModel> {
+	public CarTotalList() {
 	}
 
 	@Override
