@@ -23,6 +23,10 @@ public class TestFrame extends JFrame {
 	
 	public static void main(String[] args) {
 		// 룩앤필 변경
+		for(int i = 1 ; i < 10 ; i++) {
+			if(i == 5) break;
+			System.out.println(i);
+		}
 		try {
 			UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
