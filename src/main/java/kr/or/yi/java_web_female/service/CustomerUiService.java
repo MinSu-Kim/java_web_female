@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dao.GradeMapperImpl;
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 
 public class CustomerUiService {
@@ -15,9 +16,11 @@ public class CustomerUiService {
 		gradeDao = GradeMapperImpl.getInstance();
 	}
 
-	public int addcus(Customer customer) {
-		return cusDao.insertCustomer(customer);
-
+	public int addcus(Customer customer, CustomEvent customEvent) {
+		int res =  cusDao.insertCustomer(customer);
+		int resw = cusDao.insertCustomEvent(customEvent);
+		return (res + resw)==2?1:0;
+//		return res;
 	}
 
 	public List<Customer> selectCustomerByAll() {

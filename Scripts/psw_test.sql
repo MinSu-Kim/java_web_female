@@ -22,3 +22,6 @@ insert into customer(code, Id, passwd, Name, address, phone, dob, email)
 		values('c015','psw2701', password('aggarg54'), '박수완', '대구', '010-1234-5656', '1977-01-02', 'psw2701@naver.com');
 
 desc customer;
+
+select * from event;
+

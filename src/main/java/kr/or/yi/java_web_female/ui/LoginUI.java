@@ -23,6 +23,7 @@ public class LoginUI extends JFrame implements ActionListener {
    private JButton btnSearch;
 
    public LoginUI() {
+   	setTitle("로그인");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 450, 186);
       contentPane = new JPanel();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -60,6 +61,15 @@ public class CustomerMapperImpl implements CustomerMapper {
 		
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
 			return sqlSession.selectOne(namespace + ".nextCustomerCode");
+		}
+	}
+
+	@Override
+	public int insertCustomEvent(CustomEvent customEvent) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.insert(namespace + ".insertCustomEvent", customEvent);
+			sqlSession.commit();
+			return res;
 		}
 	}
 
