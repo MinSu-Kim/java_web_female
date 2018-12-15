@@ -31,7 +31,7 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 				item.getName(),
 				item.getColor(),
 				item.getGear()/*,
-				item.getBrand().getName(),
+				item.getBrand(),
 				item.getCarType().getType(),
 				item.getBasicCharge(),
 				item.getHour6(),

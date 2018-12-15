@@ -3,8 +3,12 @@ package kr.or.yi.java_web_female.ui.car;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.List;
+
 import javax.swing.JButton;
 
+import kr.or.yi.java_web_female.dto.Brand;
+import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
@@ -17,12 +21,14 @@ public class CarSelectedPanel extends JPanel {
 	private JTextField tfCode;
 	private JTextField tfName;
 	private CarModelService service;
+	private CarUiService carUiService;
 
 	/**
 	 * Create the panel.
 	 */
 	public CarSelectedPanel() {
 		service = new CarModelService();
+		carUiService = new CarUiService();
 		initComponents();
 	}
 
@@ -73,12 +79,19 @@ public class CarSelectedPanel extends JPanel {
 		tfName.setColumns(10);
 		
 		
-		ComboPanel panelBrand = new ComboPanel();
+		ComboPanel<Brand> panelBrand = new ComboPanel<>();
 		panelBrand.setTitle("브랜드");
+		
+		//브랜드 콤보박스
+		List<Brand> arrBrand = carUiService.selectAllBrand();
+		panelBrand.setComboItems(arrBrand);
 		panel_info.add(panelBrand);
 		
-		ComboPanel panelCarType = new ComboPanel();
+		ComboPanel<CarType> panelCarType = new ComboPanel<>();
 		panelCarType.setTitle("차종");
+		//차종콤보박스
+		List<CarType> arrType = carUiService.selectAllCarType();
+		panelCarType.setComboItems(arrType);		
 		panel_info.add(panelCarType);
 		
 		CarPriceList panelPrice = new CarPriceList();

@@ -61,3 +61,15 @@ public class BrandMapperImpl implements BrandMapper {
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
