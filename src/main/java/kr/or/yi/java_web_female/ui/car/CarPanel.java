@@ -26,9 +26,11 @@ import kr.or.yi.java_web_female.ui.list.CarTotalList;
 import kr.or.yi.java_web_female.ui.ComboPanel;
 import kr.or.yi.java_web_female.ui.list.CarOptionList;
 import kr.or.yi.java_web_female.ui.list.CarModelListPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class CarPanel extends JPanel {
+public class CarPanel extends JPanel implements ActionListener {
 	private JTextField tfName;
 	private JTextField tfCode;
 	private CarUiService service;
@@ -36,6 +38,8 @@ public class CarPanel extends JPanel {
 
 	private List<CarModel> list;
 	private CarTotalList panelList;
+	private JButton btnOk;
+	private JButton btnCancel;
 
 
 	public CarPanel() {
@@ -102,14 +106,41 @@ public class CarPanel extends JPanel {
 		JPanel panelBtn = new JPanel();
 		add(panelBtn, BorderLayout.SOUTH);
 		
-		JButton btnOk = new JButton("선택");
+		btnOk = new JButton("선택");
+		btnOk.addActionListener(this);
 		panelBtn.add(btnOk);
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 		
 		
 	
 	}
 
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnOk) {
+			do_btnOk_actionPerformed(arg0);
+		}
+	}
+	protected void do_btnOk_actionPerformed(ActionEvent arg0) {
+		//선택눌렀을시 selected화면으로 이동
+		CarUi frame = new CarUi();
+		frame.setVisible(true);
+	}
+	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
+		//취소눌렀을시 List 선택초기화
+	}
 }
+
+
+
+
+
+
+
+
+
