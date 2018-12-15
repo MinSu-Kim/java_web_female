@@ -19,12 +19,18 @@ import kr.or.yi.java_web_female.ui.ComboPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+
+import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CarPriceList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
+import javax.swing.JRadioButton;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -35,6 +41,17 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JButton btnCancel;
 	private JButton btnDelete;
 	private CarPanel carPanel;//선택된 차량의 정보가 있는 페널
+	private List<CarModel> carList;//모델리스트
+	private AbstractListPanel<CarModel> carListPanel;
+	
+	//이미지 불러오기
+	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
+	
+	public void setCarList(List<CarModel> carList) {//???
+		this.carList = carList;
+		carListPanel.setList(carList);
+		carListPanel.loadDatas();
+	}
 
 	/**
 	 * Create the panel.
@@ -105,11 +122,34 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panel_info.add(panelBrand);
 		
 		ComboPanel<CarType> panelCarType = new ComboPanel<>();
+		GridLayout gridLayout = (GridLayout) panelCarType.getLayout();
+		gridLayout.setColumns(2);
+		gridLayout.setRows(0);
 		panelCarType.setTitle("차종");
 		//차종콤보박스
 		List<CarType> arrType = carUiService.selectAllCarType();
 		panelCarType.setComboItems(arrType);		
 		panel_info.add(panelCarType);
+		
+		JPanel panelGear = new JPanel();
+		panel_info.add(panelGear);
+		panelGear.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblGear = new JLabel("변속기");
+		lblGear.setHorizontalAlignment(SwingConstants.CENTER);
+		panelGear.add(lblGear);
+		
+		JPanel panelRbtn = new JPanel();
+		panelGear.add(panelRbtn);
+		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JRadioButton rdbtnAuto = new JRadioButton("자동");
+		panelRbtn.add(rdbtnAuto);
+		rdbtnAuto.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JRadioButton rdbtnStick = new JRadioButton("수동");
+		panelRbtn.add(rdbtnStick);
+		rdbtnStick.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		CarPriceList panelPrice = new CarPriceList();
 		panel_info.add(panelPrice);
@@ -118,7 +158,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panel_info.add(panelRentCnt);
 		panelRentCnt.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblCount = new JLabel("New label");
+		JLabel lblCount = new JLabel("대여횟수 : ");
 		lblCount.setHorizontalAlignment(SwingConstants.CENTER);
 		panelRentCnt.add(lblCount);
 		
@@ -152,6 +192,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	protected void do_btnUpdate_actionPerformed(ActionEvent arg0) {
 		//수정클릭
 		CarModel model = getItem();
+		service.updateCarModel(model);
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		//취소클릭
