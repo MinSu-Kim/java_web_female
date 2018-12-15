@@ -16,12 +16,21 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import kr.or.yi.java_web_female.ui.list.CarPriceList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import java.awt.Color;
 
-public class CarSelectedPanel extends JPanel {
+public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
 	private JTextField tfName;
 	private CarModelService service;
 	private CarUiService carUiService;
+	private JButton btnUpdate;
+	private JButton btnCancel;
+	private JButton btnDelete;
+	private CarPanel carPanel;//선택된 차량의 정보가 있는 페널
 
 	/**
 	 * Create the panel.
@@ -35,15 +44,16 @@ public class CarSelectedPanel extends JPanel {
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		JPanel container = new JPanel();
+		add(container, BorderLayout.CENTER);
+		container.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel.add(panel_2, BorderLayout.CENTER);
+		container.add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JPanel panel_img = new JPanel();
+		panel_img.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC0AC\uC9C4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_2.add(panel_img);
 		
 		JPanel panel_info = new JPanel();
@@ -75,6 +85,9 @@ public class CarSelectedPanel extends JPanel {
 		panelName.add(lblName);
 		
 		tfName = new JTextField();
+		//선택된 차량이름 자동등록
+		tfName.setText("");
+		
 		panelName.add(tfName);
 		tfName.setColumns(10);
 		
@@ -106,16 +119,60 @@ public class CarSelectedPanel extends JPanel {
 		panelRentCnt.add(lblCount);
 		
 		JPanel panelBtn = new JPanel();
-		panel.add(panelBtn, BorderLayout.SOUTH);
+		container.add(panelBtn, BorderLayout.SOUTH);
 		
-		JButton btnUpdate = new JButton("수정");
+		btnUpdate = new JButton("수정");
+		btnUpdate.addActionListener(this);
 		panelBtn.add(btnUpdate);
 		
-		JButton btnDelete = new JButton("삭제");
+		btnDelete = new JButton("삭제");
+		btnDelete.addActionListener(this);
 		panelBtn.add(btnDelete);
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 	}
+	//버튼
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnDelete) {
+			do_btnDelete_actionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnUpdate) {
+			do_btnUpdate_actionPerformed(arg0);
+		}
+	}
+	protected void do_btnUpdate_actionPerformed(ActionEvent arg0) {
+		//수정클릭
+	}
+	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
+		//취소클릭
+		clearTf();
+	}
 
+	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
+		//삭제선택
+	}
+	
+	private void clearTf() {
+		tfName.setText("");
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
