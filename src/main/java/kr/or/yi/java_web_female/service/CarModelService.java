@@ -20,4 +20,16 @@ public class CarModelService {
 	public List<CarModel> selectCarModelByAll() {
 		return dao.selectCarModelByAll();
 	}
+	
+	public int insertCarModel(CarModel carModel) {
+		return dao.insertCarModel(carModel);
+	}
+	
+	public int updateCarModel(CarModel carModel) {
+		return dao.updateCarModel(carModel);
+	}
+	
+	public int deleteCarModel(CarModel carModel) {
+		return dao.deleteCarModel(carModel);
+	}
 }

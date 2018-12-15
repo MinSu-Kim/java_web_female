@@ -1,6 +1,9 @@
 package kr.or.yi.java_web_female.ui.car;
 
 import javax.swing.JPanel;
+
+import static org.junit.Assert.assertFalse;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 
 import kr.or.yi.java_web_female.dto.Brand;
+import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
@@ -147,6 +151,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 	protected void do_btnUpdate_actionPerformed(ActionEvent arg0) {
 		//수정클릭
+		CarModel model = getItem();
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		//취소클릭
@@ -159,6 +164,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	private void clearTf() {
 		tfName.setText("");
+	}
+	
+	private CarModel getItem() {
+		//getitem작성중!
+		String code = tfCode.getText().trim();
+		String name = tfName.getText().trim();
+		
+		CarModel item = new CarModel();
+		item.setCarCode(code);
+		return item;
 	}
 }
 
