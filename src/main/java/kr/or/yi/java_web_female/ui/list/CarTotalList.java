@@ -32,14 +32,14 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 				item.getColor(),
 				item.getGear(),
 				item.getBrand(),
-				item.getCarType()/*.getType()*/,
+				item.getCarType(),
 				item.getBasicCharge(),
 				item.getHour6(),
 				item.getHour10(),
 				item.getHour12(),
 				item.getHourElse(),
-				item.getFuel()/*.getCode()*/,
-				item.isRent(),
+				item.getFuel(),
+				item.isRent()==true?"대여중":"대여가능",
 				item.getRentCnt()
 		};
 	}
