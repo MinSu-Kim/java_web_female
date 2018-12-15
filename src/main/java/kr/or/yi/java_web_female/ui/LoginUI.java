@@ -123,16 +123,26 @@ public class LoginUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, customer);
 			
 			int res = cusService.selectCustomerById(customer);
-			//int resw = cusService.selectCustomerByPw(customer);
+			int resw = cusService.selectCustomerByPw(customer);
 			JOptionPane.showMessageDialog(null, res);
-			if (res==1) {
+			JOptionPane.showMessageDialog(null, resw);
+			JOptionPane.showMessageDialog(null, res+resw);
+			if (res + resw == 1) {
 				JOptionPane.showMessageDialog(null, "로그인 성공");
 				CarSearchFrame frame = new CarSearchFrame(); // 고객용 화면 UI로 변경 해야됨
 				frame.setVisible(true);
 			}
-			if (res== 0) {
+			if (res + resw == 0) {
 				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
 			}
+			
+			/*if(resw==1) {
+				JOptionPane.showMessageDialog(null, "비밀번호 성공");
+				
+			}
+			if (resw== 0) {
+				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
+			}*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
