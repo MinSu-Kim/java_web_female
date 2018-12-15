@@ -17,6 +17,7 @@ public interface CustomerMapper {
 	int insertCustomEvent(CustomEvent customEvent);
 	
 	int nextCustomerCode();
+	
 	String nextCode();
-	/*int selectCustomerByPw*/
+	int selectCustomerByPw(Customer customer);
 }

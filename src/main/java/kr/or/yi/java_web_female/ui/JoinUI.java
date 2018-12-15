@@ -24,12 +24,14 @@ import javax.swing.border.EmptyBorder;
 import com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource;
 import com.toedter.calendar.JDateChooser;
 
+import javafx.scene.control.ComboBox;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomerUiService;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 
 import javax.swing.JPasswordField;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class JoinUI extends JFrame implements ActionListener {
@@ -125,6 +127,8 @@ public class JoinUI extends JFrame implements ActionListener {
 		panel_2.add(tfPwd2);
 
 		tfConfirm = new JTextField();
+		tfConfirm.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		tfConfirm.setHorizontalAlignment(SwingConstants.CENTER);
 		tfConfirm.setEditable(false);
 		panel_2.add(tfConfirm);
 		tfConfirm.setColumns(10);
@@ -181,12 +185,14 @@ public class JoinUI extends JFrame implements ActionListener {
 		pEmail.add(lblAt);
 
 		tfEmail2 = new JTextField();
+		tfEmail2.setEditable(false);
 		tfEmail2.setColumns(8);
 		pEmail.add(tfEmail2);
 
 		cmbEmail3 = new JComboBox<>();
+		cmbEmail3.addActionListener(this);
 		cmbEmail3.setModel(new DefaultComboBoxModel<String>(
-				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com" }));
+				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
 		pEmail.add(cmbEmail3);
 
 		JLabel lblAddr = new JLabel("우편번호");
@@ -276,6 +282,9 @@ public class JoinUI extends JFrame implements ActionListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cmbEmail3) {
+			do_cmbEmail3_actionPerformed(e);
+		}
 		if (e.getSource() == btnCalcel) {
 			do_btnCalcel_actionPerformed(e);
 		}
@@ -411,5 +420,18 @@ public class JoinUI extends JFrame implements ActionListener {
 	}
 	protected void do_btnCalcel_actionPerformed(ActionEvent e) {
 		clearTf();
+	}
+	protected void do_cmbEmail3_actionPerformed(ActionEvent e) {
+		if(cmbEmail3.getSelectedIndex()<5) {
+			tfEmail2.setEditable(false);
+			tfEmail2.setText((String)cmbEmail3.getSelectedItem());
+		}else {
+			tfEmail2.requestFocus();
+			tfEmail2.setText("");
+			tfEmail2.setEditable(true);
+			
+		}
+		
+		
 	}
 }

@@ -90,4 +90,15 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
+	@Override
+	public int selectCustomerByPw(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerByPw", customer);
+			if (selectedCustomer == null) {
+				return 0;
+			}
+			return 1;
+		}
+	}
+
 }

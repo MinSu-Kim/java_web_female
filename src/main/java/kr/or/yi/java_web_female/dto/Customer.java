@@ -23,6 +23,17 @@ public class Customer {
 	
 	
 	
+	
+
+	public Customer(String id, String passwd) {
+		super();
+		this.id = id;
+		this.passwd = passwd;
+	}
+
+
+
+
 
 	public Customer(String id, String passwd, String name, String address, String phone, java.util.Date cusDob, String email) {
 		super();

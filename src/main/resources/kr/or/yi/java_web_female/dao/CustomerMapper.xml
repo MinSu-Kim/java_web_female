@@ -42,4 +42,10 @@
 	<select id="nextCode" resultType="int">
 		select count(*)+1 from customer;
 	</select>
+	
+	<select id="selectCustomerByPw" resultMap="ResultCustom">
+		select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+		from customer
+		where passwd = password(#{passwd})
+	</select>
 </mapper>

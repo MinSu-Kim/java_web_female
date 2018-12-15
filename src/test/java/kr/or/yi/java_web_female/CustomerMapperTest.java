@@ -94,4 +94,15 @@ public class CustomerMapperTest extends AbstractTest {
 		System.out.println("cnt " + cnt);
 		Assert.assertNotNull(cnt);
 	}
+	
+	@Test
+	public void test07selectCustomerByPw() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Customer searchPw = new Customer();
+		searchPw.setPasswd("rootroot");
+		int list = dao.selectCustomerByPw(searchPw);
+		
+		Assert.assertEquals(1, list);
+	}
 }
