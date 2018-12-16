@@ -34,9 +34,11 @@ import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.RentUIService;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 @SuppressWarnings("serial")
-public class RentPanel extends JPanel implements ActionListener {
+public class RentPanel extends JPanel implements ActionListener{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel contentPane;
 	private JTextField textField;
@@ -263,7 +265,7 @@ public class RentPanel extends JPanel implements ActionListener {
 		add(pBtn, BorderLayout.SOUTH);
 		pBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		btnRent = new JButton("대여");
+		btnRent = new JButton("확인");
 		btnRent.addActionListener(this);
 		btnRent.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pBtn.add(btnRent);
@@ -300,9 +302,6 @@ public class RentPanel extends JPanel implements ActionListener {
 	private List<CarOption> selectCoList;
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSearchCar) {
-			do_btnSearchCar_actionPerformed(e);
-		}
 		if (e.getSource() == btnRent) {
 			do_btnRent_actionPerformed(e);
 		}
@@ -312,12 +311,16 @@ public class RentPanel extends JPanel implements ActionListener {
 		if (e.getSource() == btnSearch) {
 			do_btnSearch_actionPerformed(e);
 		}
+		if (e.getSource() == btnSearchCar) {
+			do_btnSearchCar_actionPerformed(e);
+		}
 	}
 
 	public void setRentCustomer(Customer rentCustomer) {
 		this.rentCustomer = rentCustomer;
 		JOptionPane.showMessageDialog(null, "선택된 고객 " + rentCustomer);
 	}
+	
 
 	// 검색버튼
 	protected void do_btnSearch_actionPerformed(ActionEvent e) {
@@ -384,7 +387,8 @@ public class RentPanel extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(null, findCo);
 			}
 		}
-		
+		/*RentResultFrame frame = new RentResultFrame();
+		frame.setVisible(true);*/
 		
 	}
 	
@@ -425,6 +429,4 @@ public class RentPanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
-	
 }
