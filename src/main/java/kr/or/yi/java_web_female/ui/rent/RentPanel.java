@@ -9,7 +9,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -34,8 +36,6 @@ import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.RentUIService;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 @SuppressWarnings("serial")
 public class RentPanel extends JPanel implements ActionListener{
@@ -149,7 +149,7 @@ public class RentPanel extends JPanel implements ActionListener{
 		lblStartDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pStartDate.add(lblStartDate);
 
-		JDateChooser dateChooser_2 = new JDateChooser();
+		dateChooser_2 = new JDateChooser();
 		pStartDate.add(dateChooser_2);
 
 		JPanel pEndTime_1 = new JPanel();
@@ -160,14 +160,14 @@ public class RentPanel extends JPanel implements ActionListener{
 		lblEndTime_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pEndTime_1.add(lblEndTime_1);
 
-		JSpinner spStartHour = new JSpinner();
+		spStartHour = new JSpinner();
 		pEndTime_1.add(spStartHour);
 
 		JLabel lblStartHour = new JLabel("시");
 		lblStartHour.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pEndTime_1.add(lblStartHour);
 
-		JSpinner spStartMinutes = new JSpinner();
+		spStartMinutes = new JSpinner();
 		pEndTime_1.add(spStartMinutes);
 
 		JLabel lblStartMinutes = new JLabel("분");
@@ -187,7 +187,7 @@ public class RentPanel extends JPanel implements ActionListener{
 		lblEndDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pEndDate.add(lblEndDate);
 
-		JDateChooser dateChooser_3 = new JDateChooser();
+		dateChooser_3 = new JDateChooser();
 		pEndDate.add(dateChooser_3);
 
 		JPanel pEndTime = new JPanel();
@@ -198,14 +198,14 @@ public class RentPanel extends JPanel implements ActionListener{
 		lblEndTime.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pEndTime.add(lblEndTime);
 
-		JSpinner spEndHour = new JSpinner();
+		spEndHour = new JSpinner();
 		pEndTime.add(spEndHour);
 
 		JLabel lblEndHour = new JLabel("시");
 		lblEndHour.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pEndTime.add(lblEndHour);
 
-		JSpinner spEndMinutes = new JSpinner();
+		spEndMinutes = new JSpinner();
 		pEndTime.add(spEndMinutes);
 
 		JLabel lblEndMinutes = new JLabel("분");
@@ -300,6 +300,12 @@ public class RentPanel extends JPanel implements ActionListener{
 	private JPanel pOption;
 	private JCheckBox cb;
 	private List<CarOption> selectCoList;
+	private JDateChooser dateChooser_2;
+	private JSpinner spStartHour;
+	private JSpinner spStartMinutes;
+	private JDateChooser dateChooser_3;
+	private JSpinner spEndMinutes;
+	private JSpinner spEndHour;
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRent) {
@@ -375,6 +381,7 @@ public class RentPanel extends JPanel implements ActionListener{
 	
 	//대여버튼
 	protected void do_btnRent_actionPerformed(ActionEvent e) {
+		//옵션
 		selectCoList = new ArrayList<>();
 		JOptionPane.showMessageDialog(null, coList.toString());
 		for(Component c : pOption.getComponents()) {
@@ -387,6 +394,22 @@ public class RentPanel extends JPanel implements ActionListener{
 				JOptionPane.showMessageDialog(null, findCo);
 			}
 		}
+		//대여날짜
+		Date start = dateChooser_2.getDate();
+		SimpleDateFormat ssdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startDate = ssdf.format(start);
+		//대여시간
+		String sHour = spStartHour.getValue().toString();
+		String sMinutes = spStartMinutes.getValue().toString();
+		//반납날짜
+		Date end = dateChooser_3.getDate();
+		SimpleDateFormat esdf = new SimpleDateFormat("yyyy-MM-dd");
+		String endDate = esdf.format(end);
+		//반납시간
+		String eHour = spEndHour.getValue().toString();
+		String eMinutes = spEndMinutes.getValue().toString();
+		
+		JOptionPane.showMessageDialog(null, startDate + ", " + sHour + ":" + sMinutes + "\n" + endDate + ", " + eHour + ":" + eMinutes);
 		/*RentResultFrame frame = new RentResultFrame();
 		frame.setVisible(true);*/
 		
