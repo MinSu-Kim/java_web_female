@@ -46,6 +46,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	//이미지 불러오기
 	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
+	private JTextField tfBasicCharge;
+	private JTextField tfHour6;
+	private JTextField tfHour10;
+	private JTextField tfHour12;
+	private JTextField tfHourElse;
 	
 	public void setCarList(List<CarModel> carList) {//???
 		this.carList = carList;
@@ -151,8 +156,44 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelRbtn.add(rdbtnStick);
 		rdbtnStick.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		CarPriceList panelPrice = new CarPriceList();
+		JPanel panelPrice = new JPanel();
 		panel_info.add(panelPrice);
+		panelPrice.setLayout(new GridLayout(0, 5, 0, 0));
+		
+		JLabel lblBasicCharge = new JLabel("기본요금");
+		panelPrice.add(lblBasicCharge);
+		
+		JLabel lblHour6 = new JLabel("6시간");
+		panelPrice.add(lblHour6);
+		
+		JLabel lblHour10 = new JLabel("10시간");
+		panelPrice.add(lblHour10);
+		
+		JLabel lblHour12 = new JLabel("12시간");
+		panelPrice.add(lblHour12);
+		
+		JLabel lblHourElse = new JLabel("12시간초과");
+		panelPrice.add(lblHourElse);
+		
+		tfBasicCharge = new JTextField();
+		panelPrice.add(tfBasicCharge);
+		tfBasicCharge.setColumns(10);
+		
+		tfHour6 = new JTextField();
+		tfHour6.setColumns(10);
+		panelPrice.add(tfHour6);
+		
+		tfHour10 = new JTextField();
+		tfHour10.setColumns(10);
+		panelPrice.add(tfHour10);
+		
+		tfHour12 = new JTextField();
+		tfHour12.setColumns(10);
+		panelPrice.add(tfHour12);
+		
+		tfHourElse = new JTextField();
+		tfHourElse.setColumns(10);
+		panelPrice.add(tfHourElse);
 		
 		JPanel panelRentCnt = new JPanel();
 		panel_info.add(panelRentCnt);

@@ -108,6 +108,9 @@ public class CarPanel extends JPanel implements ActionListener {
 		
 		btnOk = new JButton("선택");
 		btnOk.addActionListener(this);
+		
+		JButton btnAdd = new JButton("추가");
+		panelBtn.add(btnAdd);
 		panelBtn.add(btnOk);
 		
 		btnCancel = new JButton("취소");
