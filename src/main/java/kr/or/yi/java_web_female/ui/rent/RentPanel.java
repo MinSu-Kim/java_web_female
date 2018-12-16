@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -296,6 +295,7 @@ public class RentPanel extends JPanel implements ActionListener{
 			
 		}
 	};*/
+	
 	private List<CarOption> coList;
 	private JPanel pOption;
 	private JCheckBox cb;
@@ -381,7 +381,7 @@ public class RentPanel extends JPanel implements ActionListener{
 	
 	//대여버튼
 	protected void do_btnRent_actionPerformed(ActionEvent e) {
-		//옵션
+		/*//옵션
 		selectCoList = new ArrayList<>();
 		JOptionPane.showMessageDialog(null, coList.toString());
 		for(Component c : pOption.getComponents()) {
@@ -393,7 +393,7 @@ public class RentPanel extends JPanel implements ActionListener{
 				selectCoList.add(findCo);
 				JOptionPane.showMessageDialog(null, findCo);
 			}
-		}
+		}*/
 		//대여날짜
 		Date start = dateChooser_2.getDate();
 		SimpleDateFormat ssdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -409,9 +409,8 @@ public class RentPanel extends JPanel implements ActionListener{
 		String eHour = spEndHour.getValue().toString();
 		String eMinutes = spEndMinutes.getValue().toString();
 		
-		JOptionPane.showMessageDialog(null, startDate + ", " + sHour + ":" + sMinutes + "\n" + endDate + ", " + eHour + ":" + eMinutes);
-		/*RentResultFrame frame = new RentResultFrame();
-		frame.setVisible(true);*/
+		RentResultFrame rrf = new RentResultFrame();
+		rrf.setVisible(true);
 		
 	}
 	

@@ -31,7 +31,7 @@ public class RentResultFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public RentResultFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 731, 402);
 		contentPane = new JPanel();
 		contentPane.setBorder(new TitledBorder(null, "\uB300\uC5EC \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -75,6 +75,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(lblCustomer);
 		
 		tfCustomer = new JTextField();
+		tfCustomer.setEditable(false);
 		pInfo.add(tfCustomer);
 		tfCustomer.setColumns(10);
 		
@@ -84,6 +85,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(lblStartDate);
 		
 		tfStartDate = new JTextField();
+		tfStartDate.setEditable(false);
 		pInfo.add(tfStartDate);
 		tfStartDate.setColumns(10);
 		
@@ -93,6 +95,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(lblStartTime);
 		
 		tfStartTime = new JTextField();
+		tfStartTime.setEditable(false);
 		pInfo.add(tfStartTime);
 		tfStartTime.setColumns(10);
 		
@@ -102,6 +105,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(lblEndDate);
 		
 		tfEndDate = new JTextField();
+		tfEndDate.setEditable(false);
 		pInfo.add(tfEndDate);
 		tfEndDate.setColumns(10);
 		
@@ -111,6 +115,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(lblEndTime);
 		
 		tfEndTime = new JTextField();
+		tfEndTime.setEditable(false);
 		pInfo.add(tfEndTime);
 		tfEndTime.setColumns(10);
 		
@@ -120,6 +125,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(lblInsucrance);
 		
 		tfInsurance = new JTextField();
+		tfInsurance.setEditable(false);
 		pInfo.add(tfInsurance);
 		tfInsurance.setColumns(10);
 		
@@ -129,6 +135,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(lblOption);
 		
 		tfOption = new JTextField();
+		tfOption.setEditable(false);
 		pInfo.add(tfOption);
 		tfOption.setColumns(10);
 		
