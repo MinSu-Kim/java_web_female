@@ -1,38 +1,30 @@
 package kr.or.yi.java_web_female.ui.car;
 
-import javax.swing.JPanel;
-
-import kr.or.yi.java_web_female.dto.Brand;
-import kr.or.yi.java_web_female.dto.CarModel;
-import kr.or.yi.java_web_female.dto.CarType;
-import kr.or.yi.java_web_female.service.CarModelService;
-import kr.or.yi.java_web_female.service.CarUiService;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Vector;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import kr.or.yi.java_web_female.ui.list.CarTotalList;
+import kr.or.yi.java_web_female.dto.Brand;
+import kr.or.yi.java_web_female.dto.CarModel;
+import kr.or.yi.java_web_female.dto.CarType;
+import kr.or.yi.java_web_female.dto.Fuel;
+import kr.or.yi.java_web_female.service.CarModelService;
+import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
-import kr.or.yi.java_web_female.ui.list.CarOptionList;
-import kr.or.yi.java_web_female.ui.list.CarModelListPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kr.or.yi.java_web_female.ui.list.CarTotalList;
+import javax.swing.JRadioButton;
 
 @SuppressWarnings("serial")
 public class CarPanel extends JPanel implements ActionListener {
-	private JTextField tfName;
-	private JTextField tfCode;
 	private CarUiService service;
 	private CarModelService modelService;
 
@@ -40,6 +32,7 @@ public class CarPanel extends JPanel implements ActionListener {
 	private CarTotalList panelList;
 	private JButton btnOk;
 	private JButton btnCancel;
+	private CarModel selectedModel;
 
 
 	public CarPanel() {
@@ -47,6 +40,7 @@ public class CarPanel extends JPanel implements ActionListener {
 		modelService = new CarModelService();
 		initComponents();
 	}
+	
 
 	private void initComponents() {
 		
@@ -70,30 +64,31 @@ public class CarPanel extends JPanel implements ActionListener {
 		//콤보박스에 브랜드 불러오기
 		panelBrand.setComboItems(arrBrand);
 		panelSelect.add(panelBrand);
+		//콤보박스에 연료불러오기
+		ComboPanel panelFuel = new ComboPanel();
+		panelFuel.setTitle("연료");
+		List<Fuel> arrFuel = service.selectAllFuel();
+		panelFuel.setComboItems(arrFuel);
+		panelSelect.add(panelFuel);
+		panelFuel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panelName = new JPanel();
-		panelSelect.add(panelName);
-		panelName.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel panelGear = new JPanel();
+		panelSelect.add(panelGear);
+		panelGear.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblName = new JLabel("Name");
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
-		panelName.add(lblName);
+		JLabel lblGear = new JLabel("변속기");
+		lblGear.setHorizontalAlignment(SwingConstants.CENTER);
+		panelGear.add(lblGear);
 		
-		tfName = new JTextField();
-		panelName.add(tfName);
-		tfName.setColumns(10);
+		JPanel panelRbtn = new JPanel();
+		panelGear.add(panelRbtn);
+		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panelCode = new JPanel();
-		panelSelect.add(panelCode);
-		panelCode.setLayout(new GridLayout(0, 2, 0, 0));
+		JRadioButton rdbtnAuto = new JRadioButton("자동");
+		panelRbtn.add(rdbtnAuto);
 		
-		JLabel lblCode = new JLabel("CarCode");
-		lblCode.setHorizontalAlignment(SwingConstants.CENTER);
-		panelCode.add(lblCode);
-		
-		tfCode = new JTextField();
-		panelCode.add(tfCode);
-		tfCode.setColumns(10);
+		JRadioButton rdbtnStick = new JRadioButton("수동");
+		panelRbtn.add(rdbtnStick);
 		//전체 테이블 불러오기
 		panelList = new CarTotalList();
 		
@@ -132,11 +127,15 @@ public class CarPanel extends JPanel implements ActionListener {
 	protected void do_btnOk_actionPerformed(ActionEvent arg0) {
 		//선택눌렀을시 selected화면으로 이동
 		CarUi frame = new CarUi();
+		CarModel carModel = panelList.getSelectedItem();
+		System.out.println(carModel);
+		frame.setCarModel(carModel);
 		frame.setVisible(true);
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		//취소눌렀을시 List 선택초기화
 	}
+	
 }
 
 

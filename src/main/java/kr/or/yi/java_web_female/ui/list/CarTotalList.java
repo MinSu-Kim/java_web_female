@@ -31,8 +31,8 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 				item.getName(),
 				item.getColor(),
 				item.getGear(),
-				item.getBrand(),
-				item.getCarType(),
+				item.getBrand().getName(),
+				item.getCarType().getType(),
 				item.getBasicCharge(),
 				item.getHour6(),
 				item.getHour10(),
@@ -45,41 +45,12 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 	}
 
 	@Override
-	protected CarModel getItem(int selectedIndex) {
-		String code = (String)table.getValueAt(selectedIndex, 0);
-		String name = (String)table.getValueAt(selectedIndex, 1);
-		String color = (String)table.getValueAt(selectedIndex, 2);
-		String gear = (String)table.getValueAt(selectedIndex, 3);
-		Brand brand = (Brand)table.getValueAt(selectedIndex, 4);
-		CarType type = (CarType)table.getValueAt(selectedIndex, 5);
-		int basicCharge = (int)table.getValueAt(selectedIndex, 6);
-		int hour6 = (int)table.getValueAt(selectedIndex, 7);
-		int hour10 = (int)table.getValueAt(selectedIndex, 8);
-		int hour12 = (int)table.getValueAt(selectedIndex, 9);
-		int hourElse = (int)table.getValueAt(selectedIndex, 10);
-		Fuel fuel = (Fuel)table.getValueAt(selectedIndex, 11);
-		boolean isRent = ((int)table.getValueAt(selectedIndex, 12)==1?true:false);
-		int count = (int)table.getValueAt(selectedIndex, 13);
-		
-		CarModel model = new CarModel();
-		
-		model.setCarCode(code);
-		model.setName(name);
-		model.setColor(color);
-		model.setGear(gear);
-		model.setBrand(brand);
-		model.setCarType(type);
-		model.setBasicCharge(basicCharge);
-		model.setHour6(hour6);
-		model.setHour10(hour10);
-		model.setHour10(hour10);
-		model.setHour12(hour12);
-		model.setHourElse(hourElse);
-		model.setFuel(fuel);
-		model.setRent(isRent);
-		model.setRentCnt(count);
-		
-		return model;
+	public CarModel getItem(int selectedIndex) {
+		String carCode = (String)table.getValueAt(selectedIndex, 0);
+		CarModel carModel = new CarModel(carCode);
+		int index = list.indexOf(carModel);
+		System.out.println(selectedIndex +":"+index);
+		return list.get(index);
 	}
 
 }

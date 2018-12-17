@@ -17,10 +17,10 @@ public class EventMapperTest extends AbstractTest{
 	@Test
 	public void testinsertCustomEvent() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		CustomEvent customEvent = new CustomEvent();
-		customEvent.getCustomCode();
-		customEvent.getEventCode();
-		customEvent.setUse(true);
+		CustomEvent customEvent = new CustomEvent(null, null, false);
+		customEvent.setCustomCode("C001");
+		customEvent.setEventCode("EVT2");
+		customEvent.setUse(false);
 		int res = dao.insertCustomEvent(customEvent);
 		Assert.assertEquals(1, res);
 	}

@@ -104,5 +104,6 @@ public class CustomerMapperTest extends AbstractTest {
 		int list = dao.selectCustomerByPw(searchPw);
 		
 		Assert.assertEquals(1, list);
+		//Assertion error 기대 값이 없음 
 	}
 }

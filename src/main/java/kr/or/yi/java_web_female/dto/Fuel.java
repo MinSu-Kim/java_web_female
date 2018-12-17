@@ -31,7 +31,7 @@ public class Fuel {
 
 	@Override
 	public String toString() {
-		return "Fuel [code=" + code + ", no=" + no + "]";
+		return code;
 	}
 
 	

@@ -2,9 +2,10 @@ package kr.or.yi.java_web_female.ui.car;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -17,8 +18,6 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.BrandList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class BrandListPanel extends JPanel implements ActionListener {
 	private JTextField tfNo;

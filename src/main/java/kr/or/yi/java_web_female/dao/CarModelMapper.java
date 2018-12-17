@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -17,4 +18,6 @@ public interface CarModelMapper {
 	List<CarModel> selectCarModelWithCarOptionByCode(CarModel carModel);
 
 	List<CarModel> selectCarModelByCarType(CarType carType);
+	
+	List<CarModel> SelectCarModelWithWhere(Map<String, String> map);
 }

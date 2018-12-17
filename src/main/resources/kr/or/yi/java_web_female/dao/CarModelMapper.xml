@@ -19,10 +19,30 @@
 		FROM car_model
 		where car_code=#{carCode};
 	</select>
-
-	<select id="selectCarModelByAll" resultType="CarModel">
-		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt
-		FROM car_model;
+	
+	<resultMap type="CarModel" id="resultCarModel">
+	<id column="car_code" property="carCode"/>
+		<result column="brand" property="brand.no"/>
+		<result column="bName" property="brand.name"/>
+		<result column="fuel_code" property="fuel.code"/>
+		<result column="cartype" property="carType.code"/>
+		<result column="tType" property="carType.type"/>
+		<result column="car_code" property="carCode"/>
+		<result column="name" property="name"/>
+		<result column="color" property="color"/>
+		<result column="gear" property="gear"/>
+		<result column="basic_charge" property="basicCharge"/>
+		<result column="hour6" property="hour6"/>
+		<result column="hour10" property="hour10"/>
+		<result column="hour12" property="hour12"/>
+		<result column="hour_else" property="hourElse"/>
+		<result column="is_rent" property="isRent"/>
+		<result column="rent_cnt" property="rentCnt"/>
+	</resultMap>
+	
+	<select id="selectCarModelByAll" resultType="CarModel" resultMap="resultCarModel">
+		SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType
+		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code;
 	</select>
 	
 	<insert id="insertCarModel" parameterType="CarModel">
@@ -59,24 +79,32 @@
 	</select>
 	
 	<!-- 차량관리 where 조건절 select -->
-	<!-- <sql id="selectSql">
-		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt
-		FROM car_model
+	<sql id="selectSql">
+		SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType
+		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code;
 	</sql>
 	
 	<sql id="whereSql">
 		<where>
 			<if test="cartype != null">
-				cartype=#{carType}
+				cartype=#{carType.code}
 			</if>
 			<if test="brand != null">
-				AND brand=#{brand}
+				AND bName=#{brand.name}
 			</if>
-			<if test="fuel != fuel">
-				AND fuel=#{fuel}
+			<if test="fuel != null">
+				AND fuel=#{fuel.code}
+			</if>
+			<if test="gear != null">
+				AND gear=#{gear}
 			</if>
 		</where>
-	</sql> -->
+	</sql>
+	
+	<select id="SelectCarModelWithWhere" parameterType="map" resultMap="resultCarModel">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
 </mapper>
 
 
