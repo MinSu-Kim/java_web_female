@@ -10,4 +10,5 @@ public interface EmployeeMapper {
 	int insertEmployee(Employee employee);
 	int deleteEmployee(Employee employee);
 	int selectEmployeeById(Employee employee);
+	int selectEmployeeByPw(Employee employee);
 }

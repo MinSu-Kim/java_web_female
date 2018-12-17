@@ -69,5 +69,17 @@ select code, name, phone, passwd, t_code as tCode
 from employee
 where code='E001';
 
+select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+from customer
+where id = 'qwer12' and passwd =password('root1234');
 
+
+select code, name, phone, passwd, t_code as tCode 
+from employee
+where code='E001' and passwd =password('rootroot');
+
+
+
+
+		
 						
