@@ -118,6 +118,7 @@ public class CarModelMapperTest extends AbstractTest {
 		List<CarModel> searchModel = dao.selectCarModelWithCarOptionByCode(model);
 		Assert.assertNotNull(searchModel);
 	}
+	*/
 	
 	@Test
 	public void test08selectCarModelByCarType() {
@@ -126,9 +127,9 @@ public class CarModelMapperTest extends AbstractTest {
 		List<CarModel> list = dao.selectCarModelByCarType(new CarType("S2"));
 		Assert.assertNotNull(list);
 		
-	}*/
+	}
 	
-	@Test
+/*	@Test
 	public void test09SelectCarModelWithWhere() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Map<String, String> maps = new HashMap<>();
@@ -136,7 +137,7 @@ public class CarModelMapperTest extends AbstractTest {
 //		maps.put("gear", "auto");
 		List<CarModel> list = dao.SelectCarModelWithWhere(maps);
 		Assert.assertNotNull(list);
-	}
+	}*/
 }
 
 

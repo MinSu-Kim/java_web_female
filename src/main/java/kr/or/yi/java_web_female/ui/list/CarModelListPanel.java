@@ -23,7 +23,7 @@ public class CarModelListPanel extends AbstractListPanel<CarModel> {
 	protected Object[] getItemRows(CarModel item) {
 		System.out.println(item);
 		return new Object[] {
-				item.getCarCode(),item.getName(), item.getColor(), item.getGear(), item.getBrand().getName(), item.getBasicCharge(), item.getFuel().getCode()
+				item.getCarCode(), item.getName(), item.getColor(), item.getGear(), item.getBrand().getName(), item.getBasicCharge(), item.getFuel().getCode()
 		};
 	}
 

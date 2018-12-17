@@ -255,9 +255,9 @@ public class RentPanel extends JPanel implements ActionListener{
 		lblPrice.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		pPrice.add(lblPrice);
 
-		JLabel lblResultPrice = new JLabel("New label");
+		lblResultPrice = new JLabel("New label");
 		lblResultPrice.setForeground(Color.RED);
-		lblResultPrice.setFont(new Font("Dialog", Font.BOLD, 14));
+		
 		pPrice.add(lblResultPrice);
 
 		JPanel pBtn = new JPanel();
@@ -306,6 +306,9 @@ public class RentPanel extends JPanel implements ActionListener{
 	private JDateChooser dateChooser_3;
 	private JSpinner spEndMinutes;
 	private JSpinner spEndHour;
+	private JLabel lblResultPrice;
+	private List<CarModel> carModelList;
+	private int selectedIndex;
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRent) {
@@ -414,13 +417,12 @@ public class RentPanel extends JPanel implements ActionListener{
 		
 	}
 	
-	//선택버튼
+	//차량선택버튼
 	protected void do_btnSearchCar_actionPerformed(ActionEvent e) {
-		int selectedIndex = comboBoxCar.getSelectedIndex();
+		selectedIndex = comboBoxCar.getSelectedIndex();
 		CarType ct = list.get(selectedIndex);
 		
-		List<CarModel> carModelList = service.selectAllCarModels(ct);
-		JOptionPane.showMessageDialog(null, selectedIndex + "," + ct + "," + carModelList.size());
+		carModelList = service.selectAllCarModels(ct);
 		
 		if(csf == null) {
 			csf = new CarSearchFrame();
@@ -432,6 +434,10 @@ public class RentPanel extends JPanel implements ActionListener{
 
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
+		
+		//======================> 차량 선택해서 리스트 클릭하면 가격만 가지고 옴.
+		lblResultPrice.setText(selectedCarModel.getBasicCharge()+"");
+		
 //		JOptionPane.showMessageDialog(null, selectedCarModel);
 		if(selectedCarModel.getCarType().getCode().equals("S2")) {
 			chkDriver(true);
@@ -439,6 +445,7 @@ public class RentPanel extends JPanel implements ActionListener{
 		}else {
 			chkDriver(false);
 		}
+		
 		
 	}
 
