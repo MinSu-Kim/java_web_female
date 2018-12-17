@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
@@ -16,6 +17,9 @@ public class TestFrame extends JFrame {
 	
 	public TestFrame() {
 		setTitle(getLoginUser());
+		
+		JOptionPane.showMessageDialog(null, loginCusotmer==null?loginEmployee:loginCusotmer);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 600);
 		contentPane = new ManagerPanel();

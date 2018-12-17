@@ -25,8 +25,14 @@
 	
 	
 	<!-- selectEmployeeByPw -->
-	<select id="selectEmployeeByPw" resultType="Employee">
-		select code, name, phone, passwd, t_code as tCode 
+	<resultMap type="Employee" id="resultEmployee">
+		<id column="code" property="code"/>
+		<result column="name" property="name"/>
+		<result column="phone" property="phone"/>
+		<result column="t_code" property="tCode.code"/>
+	</resultMap>
+	<select id="selectEmployeeByPw" resultMap="resultEmployee">
+		select code, name, phone, passwd, t_code 
 		from employee
 		where code=#{code} and passwd = password(#{passwd});
 	</select>

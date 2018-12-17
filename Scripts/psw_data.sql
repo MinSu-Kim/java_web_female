@@ -76,7 +76,7 @@ where id = 'qwer12' and passwd =password('root1234');
 
 select code, name, phone, passwd, t_code as tCode 
 from employee
-where code='E001' and passwd =password('rootroot');
+where code='E001' and passwd = password('rootroot');
 
 
 

@@ -62,16 +62,6 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 		}
 	}
 
-/*	public int selectEmployeeByPw(Employee employee) {
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			Employee selectedEmployee = sqlSession.selectOne(namespace + ".selectEmployeeByPw", employee);
-			if (selectedEmployee == null) {
-				return 0;
-			}
-			return 1;
-		}
-	}*/
-
 	public Employee selectEmployeeByPw(Employee employee) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + ".selectEmployeeByPw", employee);

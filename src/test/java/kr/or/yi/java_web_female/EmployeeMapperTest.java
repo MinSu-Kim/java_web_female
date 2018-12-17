@@ -53,7 +53,7 @@ public class EmployeeMapperTest extends AbstractTest {
 		searchPw.setCode("E001");
 		searchPw.setPasswd("rootroot");
 		Employee resEmp = dao.selectEmployeeByPw(searchPw);
-		
+		System.out.println(resEmp);
 		Assert.assertNotNull(resEmp);
 		//Assertion error 기대 값이 없음
 	}

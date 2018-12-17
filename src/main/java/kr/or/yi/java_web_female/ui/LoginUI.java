@@ -73,7 +73,6 @@ public class LoginUI extends JFrame implements ActionListener {
 		pContent.add(tfPwd);
 
 		checkManager = new JCheckBox("관리자 모드");
-		checkManager.addActionListener(this);
 		checkManager.setHorizontalAlignment(SwingConstants.CENTER);
 		pContent.add(checkManager);
 
@@ -93,14 +92,12 @@ public class LoginUI extends JFrame implements ActionListener {
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
 		
-		
 		// 테스트용도
 		tfId.setText("asd132");
 		tfPwd.setText("rootroot");
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() == btnLogin) {
 			do_btnLogin_actionPerformed(e);
 		}
@@ -127,8 +124,10 @@ public class LoginUI extends JFrame implements ActionListener {
 	}
 
 	private void isLoginCheck() throws LoginFailException {
-		if (checkManager.isSelected()) {			
+		if (checkManager.isSelected()) {
+			System.out.println(getUser(true));
 			loginEmployee = loginService.selectEmployeeByPw((Employee) getUser(true));
+			System.out.println(loginEmployee);
 		} else {
 			loginCusotmer = loginService.selectCustomerByPw((Customer) getUser(false));
 		}
@@ -139,7 +138,10 @@ public class LoginUI extends JFrame implements ActionListener {
 		String id = tfId.getText().trim();
 		String pwd = new String(tfPwd.getPassword()).trim();
 		if (isEmployee) {
-			return new Employee(id, pwd);
+			Employee emp = new Employee();
+			emp.setCode(id);
+			emp.setPasswd(pwd);
+			return emp;
 		}else {
 			return new Customer(id, pwd);
 		}
