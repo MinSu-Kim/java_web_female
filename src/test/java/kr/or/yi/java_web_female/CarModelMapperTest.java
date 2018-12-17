@@ -2,7 +2,9 @@ package kr.or.yi.java_web_female;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -125,6 +127,16 @@ public class CarModelMapperTest extends AbstractTest {
 		Assert.assertNotNull(list);
 		
 	}*/
+	
+	@Test
+	public void test09SelectCarModelWithWhere() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Map<String, String> maps = new HashMap<>();
+		maps.put("brand.name", "kia");
+//		maps.put("gear", "auto");
+		List<CarModel> list = dao.SelectCarModelWithWhere(maps);
+		Assert.assertNotNull(list);
+	}
 }
 
 

@@ -87,16 +87,24 @@
 	<sql id="whereSql">
 		<where>
 			<if test="cartype != null">
-				cartype=#{carType}
+				cartype=#{carType.code}
 			</if>
 			<if test="brand != null">
-				AND brand=#{brand}
+				AND bName=#{brand.name}
 			</if>
-			<if test="fuel != fuel">
-				AND fuel=#{fuel}
+			<if test="fuel != null">
+				AND fuel=#{fuel.code}
+			</if>
+			<if test="gear != null">
+				AND gear=#{gear}
 			</if>
 		</where>
 	</sql>
+	
+	<select id="SelectCarModelWithWhere" parameterType="map" resultMap="resultCarModel">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
 </mapper>
 
 

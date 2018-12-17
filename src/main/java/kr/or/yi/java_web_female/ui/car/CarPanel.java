@@ -16,6 +16,7 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
+import kr.or.yi.java_web_female.dto.Fuel;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
@@ -63,8 +64,11 @@ public class CarPanel extends JPanel implements ActionListener {
 		//콤보박스에 브랜드 불러오기
 		panelBrand.setComboItems(arrBrand);
 		panelSelect.add(panelBrand);
-		
+		//콤보박스에 연료불러오기
 		ComboPanel panelFuel = new ComboPanel();
+		panelFuel.setTitle("연료");
+		List<Fuel> arrFuel = service.selectAllFuel();
+		panelFuel.setComboItems(arrFuel);
 		panelSelect.add(panelFuel);
 		panelFuel.setLayout(new GridLayout(0, 2, 0, 0));
 		
