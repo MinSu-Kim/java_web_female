@@ -18,7 +18,7 @@ import kr.or.yi.java_web_female.dto.Post;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class PostMapperTest extends AbstractTest{
-   private PostMapper dao = new PostMapperImpl();
+   private PostMapper dao = PostMapperImpl.getInstance();
 
    @Test
    public void test01selectPostByName() {
@@ -28,6 +28,9 @@ public class PostMapperTest extends AbstractTest{
       searchPost.setDoro("태전로7길");
       
       List<Post> searchedPost = dao.selectPostByName(searchPost);
+      for(Post p : searchedPost) {
+    	  System.out.println(p);
+      }
       Assert.assertNotNull(searchedPost);
    }
    

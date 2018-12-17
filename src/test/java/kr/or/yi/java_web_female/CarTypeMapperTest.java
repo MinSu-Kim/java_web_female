@@ -13,7 +13,7 @@ import kr.or.yi.java_web_female.dto.CarType;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CarTypeMapperTest extends AbstractTest {
-	private CarTypeMapper dao = new CarTypeMapperImpl();
+	private CarTypeMapper dao = CarTypeMapperImpl.getInstance();
 	
 	
 	@Test

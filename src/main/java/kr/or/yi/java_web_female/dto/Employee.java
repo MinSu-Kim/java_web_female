@@ -7,9 +7,29 @@ public class Employee {
 	private String passwd; // 비밀번호
 	private Title tCode;// 직책 코드
 	
+/*	public Employee(String empId, String empPw) {
+		// TODO Auto-generated constructor stub
+	}*/
+	
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public Employee(String code, String name) {
+	super();
+	this.code = code;
+	this.name = name;
+}
+
+
+
 	public String getCode() {
 		return code;
 	}
+	
 	public void setCode(String code) {
 		this.code = code;
 	}

@@ -8,7 +8,7 @@ public class CarModel {
 	private String color;
 	private String gear;
 	private Brand brand;
-	private CarType cartype;
+	private CarType carType;
 	private int basicCharge;
 	private int hour6;
 	private int hour10;
@@ -24,6 +24,28 @@ public class CarModel {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public CarModel(String carCode, String name, String color, String gear, Brand brand, CarType carType,
+			int basicCharge, int hour6, int hour10, int hour12, int hourElse, Fuel fuel, boolean isRent, int rentCnt) {
+		super();
+		this.carCode = carCode;
+		this.name = name;
+		this.color = color;
+		this.gear = gear;
+		this.brand = brand;
+		this.carType = carType;
+		this.basicCharge = basicCharge;
+		this.hour6 = hour6;
+		this.hour10 = hour10;
+		this.hour12 = hour12;
+		this.hourElse = hourElse;
+		this.fuel = fuel;
+		this.isRent = isRent;
+		this.rentCnt = rentCnt;
+	}
+
+
 
 	public CarModel(String carCode) {
 		super();
@@ -74,18 +96,16 @@ public class CarModel {
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
-	public CarType getCartype() {
-		return cartype;
+
+
+	public CarType getCarType() {
+		return carType;
 	}
-	public void setCartype(CarType cartype) {
-		this.cartype = cartype;
+
+	public void setCarType(CarType carType) {
+		this.carType = carType;
 	}
-	public int getBasic_charge() {
-		return basicCharge;
-	}
-	public void setBasic_charge(int basic_charge) {
-		this.basicCharge = basic_charge;
-	}
+
 	public int getHour6() {
 		return hour6;
 	}
@@ -131,9 +151,30 @@ public class CarModel {
 	@Override
 	public String toString() {
 		return "CarModel [carCode=" + carCode + ", name=" + name + ", color=" + color + ", gear=" + gear + ", brand="
-				+ brand + ", cartype=" + cartype + ", basicCharge=" + basicCharge + ", hour6=" + hour6 + ", hour10="
+				+ brand + ", cartype=" + carType + ", basicCharge=" + basicCharge + ", hour6=" + hour6 + ", hour10="
 				+ hour10 + ", hour12=" + hour12 + ", hourElse=" + hourElse + ", fuel=" + fuel + ", isRent=" + isRent
 				+ ", rentCnt=" + rentCnt + ", carOption=" + carOption + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((carCode == null) ? 0 : carCode.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		CarModel other = (CarModel) obj;
+		if(other.carCode.equals(carCode)) {
+			return true;
+		}
+		if(other.name.equals(name)) {
+			return true;
+		}
+		return false;
 	}
 	
 	

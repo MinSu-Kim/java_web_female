@@ -10,15 +10,13 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class SearchPannel extends JPanel {
 	private JTextField tfId;
 	private JTextField textField_1;
 	private JTextField tfEmail;
 	private JTextField tfName;
 
-	/**
-	 * Create the panel.
-	 */
 	public SearchPannel() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -74,7 +72,7 @@ public class SearchPannel extends JPanel {
 		panel_2.add(tfEmail);
 		tfEmail.setColumns(10);
 		
-		JComboBox cmbEmail = new JComboBox();
+		JComboBox<String> cmbEmail = new JComboBox<>();
 		panel_2.add(cmbEmail);
 		
 		JPanel pBtn = new JPanel();

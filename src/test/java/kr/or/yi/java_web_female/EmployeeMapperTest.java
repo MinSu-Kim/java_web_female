@@ -9,12 +9,13 @@ import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.EmployeeMapper;
 import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
+import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class EmployeeMapperTest extends AbstractTest {
-	private EmployeeMapper dao = new EmployeeMapperImpl();
+	private EmployeeMapper dao = EmployeeMapperImpl.getInstance();
 
 	@Test
 	public void test01selectEmployeeByNo() {
@@ -33,6 +34,29 @@ public class EmployeeMapperTest extends AbstractTest {
 		Assert.assertNotNull(empList);
 	}
 
+	
+	@Test
+	public void test03selectEmployeeById() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Employee searchId = new Employee();
+		searchId.setCode("E001");
+		int list = dao.selectEmployeeById(searchId);
+		
+		Assert.assertEquals(1, list);
+	}
+	
+	@Test
+	public void test04selectEmployeeByPw() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Employee searchPw = new Employee();
+		searchPw.setPasswd("rootroot");
+		int list = dao.selectEmployeeByPw(searchPw);
+		
+		Assert.assertEquals(1, list);
+		//Assertion error 기대 값이 없음
+	}
 	/*@Test
 	public void test03insertEmployee() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");

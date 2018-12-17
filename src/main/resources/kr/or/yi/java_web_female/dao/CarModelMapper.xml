@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.CarModelMapper">
 	
-	<select id="selectCarModelWithCarOptionByCode" parameterType="CarModel" resultType="CarModel">
+	<!-- <select id="selectCarModelWithCarOptionByCode" parameterType="CarModel" resultType="CarModel">
 		SELECT m.car_code, m.name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt, option_id,co.no ,co.name, co.price
 		FROM car_model m join add_option ao on m.car_code=ao.car_code join car_option co on ao.option_id = co.no
 		where m.car_code=#{carCode}
@@ -11,7 +11,7 @@
 	<select id="selectCarModelWithCarOptionByAll" resultType="CarModel">
 		SELECT m.car_code, m.name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt, option_id,co.no ,co.name, co.price
 		FROM car_model m join add_option ao on m.car_code=ao.car_code join car_option co on ao.option_id = co.no;
-	</select>
+	</select>-->
 	
 
 	<select id="selectCarModelByNo" parameterType="CarModel" resultType="CarModel">
@@ -19,21 +19,41 @@
 		FROM car_model
 		where car_code=#{carCode};
 	</select>
-
-	<select id="selectCarModelByAll" resultType="CarModel">
-		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt
-		FROM car_model;
+	
+	<resultMap type="CarModel" id="resultCarModel">
+	<id column="car_code" property="carCode"/>
+		<result column="brand" property="brand.no"/>
+		<result column="bName" property="brand.name"/>
+		<result column="fuel_code" property="fuel.code"/>
+		<result column="cartype" property="carType.code"/>
+		<result column="tType" property="carType.type"/>
+		<result column="car_code" property="carCode"/>
+		<result column="name" property="name"/>
+		<result column="color" property="color"/>
+		<result column="gear" property="gear"/>
+		<result column="basic_charge" property="basicCharge"/>
+		<result column="hour6" property="hour6"/>
+		<result column="hour10" property="hour10"/>
+		<result column="hour12" property="hour12"/>
+		<result column="hour_else" property="hourElse"/>
+		<result column="is_rent" property="isRent"/>
+		<result column="rent_cnt" property="rentCnt"/>
+	</resultMap>
+	
+	<select id="selectCarModelByAll" resultType="CarModel" resultMap="resultCarModel">
+		SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType
+		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code;
 	</select>
 	
 	<insert id="insertCarModel" parameterType="CarModel">
 		INSERT INTO car_model
 		(car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt)
-		VALUES(#{carCode}, #{name}, #{color}, #{gear},#{brand.no}, #{cartype.code}, #{basicCharge}, #{hour6}, #{hour10}, #{hour12}, #{hourElse}, #{fuel.code}, #{isRent}, #{rentCnt});
+		VALUES(#{carCode}, #{name}, #{color}, #{gear},#{brand.no}, #{carType.code}, #{basicCharge}, #{hour6}, #{hour10}, #{hour12}, #{hourElse}, #{fuel.code}, #{isRent}, #{rentCnt});
 	</insert>
 	
 	<update id="updateCarModel" parameterType="CarModel">
 		UPDATE car_model
-		SET name=#{name}, color=#{color}, gear=#{gear}, brand=#{brand.no}, cartype=#{cartype.code}, basic_charge=#{basicCharge}, hour6=#{hour6}, hour10=#{hour10}, hour12=#{hour12}, hour_else=#{hourElse}, fuel_code=#{fuel.code}, is_rent=#{isRent}, rent_cnt=#{rentCnt}
+		SET name=#{name}, color=#{color}, gear=#{gear}, brand=#{brand.no}, cartype=#{carType.code}, basic_charge=#{basicCharge}, hour6=#{hour6}, hour10=#{hour10}, hour12=#{hour12}, hour_else=#{hourElse}, fuel_code=#{fuel.code}, is_rent=#{isRent}, rent_cnt=#{rentCnt}
 		WHERE car_code=#{carCode};
 	</update>
 	
@@ -41,6 +61,50 @@
 		DELETE FROM car_model
 		WHERE car_code=#{carCode};
 	</delete>
+	
+	<resultMap type="CarModel" id="ResultCarModel">
+		<id column="carName" property="name"/>
+		<result column="color" property="color"/>
+		<result column="gear" property="gear"/>
+		<result column="cartype" property="carType.code"/>
+		<result column="brandName" property="brand.name"/>
+		<result column="basic_charge" property="basicCharge"/>
+		<result column="fuel_code" property="fuel.code"/>
+		<!-- <collection property="carOption" resultMap="kr.or.yi.java_web_female.dao.CarOptionMapper.ResultCarOption"/> -->
+	</resultMap>
+	<select id="selectCarModelByCarType" parameterType="CarType" resultMap="ResultCarModel">
+		select cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code
+		from car_model cm join brand b on cm.brand = b.no
+		where cartype = #{code};
+	</select>
+	
+	<!-- 차량관리 where 조건절 select -->
+	<sql id="selectSql">
+		SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType
+		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code;
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="cartype != null">
+				cartype=#{carType.code}
+			</if>
+			<if test="brand != null">
+				AND bName=#{brand.name}
+			</if>
+			<if test="fuel != null">
+				AND fuel=#{fuel.code}
+			</if>
+			<if test="gear != null">
+				AND gear=#{gear}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="SelectCarModelWithWhere" parameterType="map" resultMap="resultCarModel">
+		<include refid="selectSql"/>
+		<include refid="whereSql"/>
+	</select>
 </mapper>
 
 

@@ -24,13 +24,13 @@ values
 
 -- 차연료
 INSERT INTO proj_rentcar.fuel
-(code)
+(no,code)
 values
-('gasolin'),
-('diesel'),
-('lpg'),
-('hybrid'),
-('electric');
+(1,'gasolin'),
+(2,'diesel'),
+(3,'lpg'),
+(4,'hybrid'),
+(5,'electric');
 
 
 
@@ -61,23 +61,6 @@ INSERT INTO proj_rentcar.car_model
 values
 ('V007', '그랜저','wh', 'auto', 'B1', 'S4' ,210000 ,117600, 151200, 168000, 210000,'gasolin', 0,0),
 ('V008', '스포티지','bk', 'auto', 'B2','S5', 153000,85700,110200, 122400, 153000,'gasolin', 0,0);
-
-
-
-
-INSERT INTO proj_rentcar.add_option
-(option_id, car_code)
-values
-(1, 'V001'),
-(1, 'V002'),
-(2, 'V002'),
-(1, 'V003'),
-(2, 'V003'),
-(3, 'V003');
-
-
-
-
 
 
 

@@ -14,7 +14,7 @@ import kr.or.yi.java_web_female.dto.Title;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TitleMapperTest  extends AbstractTest{
-	private TitleMapper dao = new TitleMapperImpl();
+	private TitleMapper dao = TitleMapperImpl.getInstance();
 	
 	@Test
 	public void test01selectTitleByNo() {

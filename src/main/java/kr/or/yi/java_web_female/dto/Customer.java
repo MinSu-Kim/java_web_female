@@ -1,8 +1,6 @@
 package kr.or.yi.java_web_female.dto;
 
-import java.sql.Date;
-
-
+import java.util.Date;
 
 public class Customer {
 	private String code;
@@ -22,6 +20,34 @@ public class Customer {
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	
+
+	public Customer(String id, String passwd) {
+		super();
+		this.id = id;
+		this.passwd = passwd;
+	}
+
+
+
+
+
+	public Customer(String id, String passwd, String name, String address, String phone, java.util.Date cusDob, String email) {
+		super();
+		this.id = id;
+		this.passwd = passwd;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.dob = cusDob;
+		this.email = email;
+	}
+
+
+
 
 	public Customer(String code, String name, Grade gradeCode, String phone, String email) {
 		this.code = code;
@@ -31,6 +57,10 @@ public class Customer {
 		this.gradeCode = gradeCode;
 	}
 	
+	public Customer( String cusId) {
+		this.id = cusId;
+	}
+
 	public String getCode() {
 		return code;
 	}

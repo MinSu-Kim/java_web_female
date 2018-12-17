@@ -23,6 +23,20 @@ public class CustomEvent {
 	public void setUse(boolean isUse) {
 		this.isUse = isUse;
 	}
+	
+	
+	
+	public CustomEvent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public CustomEvent(String eventCode, String customCode, boolean isUse) {
+		super();
+		this.eventCode = eventCode;
+		this.customCode = customCode;
+		this.isUse = isUse;
+	}
 	@Override
 	public String toString() {
 		return "CustomEvent [eventCode=" + eventCode + ", customCode=" + customCode + ", isUse=" + isUse + "]";

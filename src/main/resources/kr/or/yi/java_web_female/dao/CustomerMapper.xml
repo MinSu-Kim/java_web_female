@@ -22,7 +22,30 @@
 	</select>
 	
 	<select id="selectCustomerByAll" resultMap="ResultCustom">
-		select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt 
+		select code, Id, password(#{passwd}), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt 
 		from customer 
+	</select>
+	
+	<select id="selectCustomerById" resultMap="ResultCustom">
+		select code, Id, password(#{passwd}), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+		from customer
+		where Id = #{id}
+	</select>
+	
+	<insert id="insertCustomer" parameterType="Customer">
+		insert into customer(code, Id, password(#{passwd}), Name, address, phone, dob, email )
+		values(#{code}, #{id},  password(#{passwd}), #{name}, #{address}, #{phone}, #{dob}, #{email} )
+	</insert>
+	<select id="nextCustomerCode" resultType="java.lang.Integer">
+		select count(*)+1 from customer;
+	</select>
+	<select id="nextCode" resultType="int">
+		select count(*)+1 from customer;
+	</select>
+	
+	<select id="selectCustomerByPw" resultMap="ResultCustom">
+		select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+		from customer
+		where Id = #{id} and passwd =password(#{passwd});
 	</select>
 </mapper>

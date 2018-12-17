@@ -1,13 +1,23 @@
 package kr.or.yi.java_web_female.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.CarModel;
+import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class CarModelMapperImpl implements CarModelMapper {
+	private static final CarModelMapperImpl instance = new CarModelMapperImpl();
+	
+	public static CarModelMapperImpl getInstance() {
+		return instance;
+	}
+	
+	private CarModelMapperImpl() {}
+	
 	private static final String namespace = "kr.or.yi.java_web_female.dao.CarModelMapper";
 
 	@Override
@@ -67,6 +77,23 @@ public class CarModelMapperImpl implements CarModelMapper {
 			return sqlSession.selectList(namespace+".selectCarModelWithCarOptionByCode",carModel);
 		}
 	}
+
+	@Override
+	public List<CarModel> selectCarModelByCarType(CarType carType) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace+".selectCarModelByCarType", carType);
+		}
+	}
+
+	@Override
+	public List<CarModel> SelectCarModelWithWhere(Map<String, String> map) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace+".SelectCarModelWithWhere",map);
+		}
+		
+	}
+
+	
 
 }
 

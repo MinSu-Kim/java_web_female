@@ -2,7 +2,9 @@ package kr.or.yi.java_web_female;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -18,7 +20,7 @@ import kr.or.yi.java_web_female.dto.Fuel;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CarModelMapperTest extends AbstractTest {
-	private CarModelMapper dao = new CarModelMapperImpl();
+	private CarModelMapper dao = CarModelMapperImpl.getInstance();
 	
 	@Test
 	public void test01selectCarModelByNo() {
@@ -35,6 +37,9 @@ public class CarModelMapperTest extends AbstractTest {
 	public void test02selectCarModelByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<CarModel> list = dao.selectCarModelByAll();
+		for(CarModel cm : list) {
+			System.out.println(cm+":"+ cm.getCarType().getCode());
+		}
 		Assert.assertNotNull(list);
 	}
 	
@@ -47,8 +52,8 @@ public class CarModelMapperTest extends AbstractTest {
 		carModel.setColor("wh");
 		carModel.setGear("stick");
 		carModel.setBrand(new Brand("B2"));
-		carModel.setCartype(new CarType("S1"));
-		carModel.setBasic_charge(70000);
+		carModel.setCarType(new CarType("S1"));
+		carModel.setBasicCharge(70000);
 		carModel.setHour6(40000);
 		carModel.setHour10(53000);
 		carModel.setHour12(59000);
@@ -73,8 +78,8 @@ public class CarModelMapperTest extends AbstractTest {
 		carModel.setColor("bl");
 		carModel.setGear("stick");
 		carModel.setBrand(new Brand("B2"));
-		carModel.setCartype(new CarType("S1"));
-		carModel.setBasic_charge(60000);
+		carModel.setCarType(new CarType("S1"));
+		carModel.setBasicCharge(60000);
 		carModel.setHour6(30000);
 		carModel.setHour10(43000);
 		carModel.setHour12(49000);
@@ -98,7 +103,7 @@ public class CarModelMapperTest extends AbstractTest {
 		Assert.assertEquals(1, res);
 	}
 	
-	@Test
+	/*@Test
 	public void test06selectCarModelWithCarOptionByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<CarModel> list = dao.selectCarModelWithCarOptionByAll();
@@ -112,6 +117,25 @@ public class CarModelMapperTest extends AbstractTest {
 		model.setCarCode("V003");
 		List<CarModel> searchModel = dao.selectCarModelWithCarOptionByCode(model);
 		Assert.assertNotNull(searchModel);
+	}
+	
+	@Test
+	public void test08selectCarModelByCarType() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<CarModel> list = dao.selectCarModelByCarType(new CarType("S2"));
+		Assert.assertNotNull(list);
+		
+	}*/
+	
+	@Test
+	public void test09SelectCarModelWithWhere() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Map<String, String> maps = new HashMap<>();
+		maps.put("brand.name", "kia");
+//		maps.put("gear", "auto");
+		List<CarModel> list = dao.SelectCarModelWithWhere(maps);
+		Assert.assertNotNull(list);
 	}
 }
 

@@ -12,7 +12,7 @@ public class SearchPostService {
 
    public SearchPostService() {
       super();
-      dao = new PostMapperImpl();
+      dao =  PostMapperImpl.getInstance();
    }
    
    public List<Post> selectPostByName(Post doro) throws SQLException{
