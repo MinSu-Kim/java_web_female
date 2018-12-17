@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female.ui.car;
 
+import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;

@@ -4,15 +4,26 @@
 
 	<!-- selectTitleByNo -->
 	<select id="selectEmployeeByNo" parameterType="Employee" resultType="Employee">
-		select code, name, phone, passwd, t_code as tCode from employee
+		select code, name, phone, passwd, t_code as tCode 
+		from employee
 		where code=#{code}
 	</select>
 
 	<!-- selectEmployeeByAll -->
 	<select id="selectEmployeeByAll" resultType="Employee">
-		select code, name, phone, passwd, t_code as tCode from employee
+		select code, name, phone, passwd, t_code as tCode 
+		from employee
 	</select> 
 
+
+	<!-- selectEmployeeById -->
+	<select id="selectEmployeeById" resultType="Employee">
+		select code, name, phone, passwd, t_code as tCode 
+		from employee
+		where code=#{code}
+	</select>
+	
+	
 	<!-- insert -->
 	  <!-- <insert id="insertEmployee" parameterType="Employee">
 		insert into employee(code, name, phone, passwd, t_code)

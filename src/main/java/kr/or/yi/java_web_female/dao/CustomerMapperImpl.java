@@ -82,14 +82,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-	public int insertCustomEvent(CustomEvent customEvent) {
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			int res = sqlSession.insert(namespace + ".insertCustomEvent", customEvent);
-			sqlSession.commit();
-			return res;
-		}
-	}
-
 	@Override
 	public int selectCustomerByPw(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {

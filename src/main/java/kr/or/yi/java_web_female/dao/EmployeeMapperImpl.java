@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -48,6 +49,27 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 			int res = sqlSession.delete(namespace + ".deleteEmployee", employee);
 			sqlSession.commit();
 			return res;
+		}
+	}
+	
+	@Override
+	public int selectEmployeeById(Employee employee) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			Employee selectedEmployee = sqlSession.selectOne(namespace + ".selectEmployeeById", employee);
+			if (selectedEmployee == null) {
+				return 0;
+			}
+			return 1;
+		}
+	}
+
+	public int selectEmployeeByPw(Employee employee) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			Employee selectedEmployee = sqlSession.selectOne(namespace + ".selectEmployeeByPw", employee);
+			if (selectedEmployee == null) {
+				return 0;
+			}
+			return 1;
 		}
 	}
 

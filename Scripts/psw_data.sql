@@ -57,6 +57,17 @@ insert into level values ('브론즈',0,5),
 
 insert into event values('EVT1', '첫가입', 3),
 						('EVT2', '생일축하', 5);
+					
+select * from custom_event;
+
+select * from event;
+
+insert into custom_event values('EVT1','C001',0);
+
+
+select code, name, phone, passwd, t_code as tCode 
+from employee
+where code='E001';
 
 
 						
