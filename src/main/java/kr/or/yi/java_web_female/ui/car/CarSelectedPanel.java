@@ -251,6 +251,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	public void setCarModel(CarModel carModel) {//set
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
+		
 		panelBrand.setSelectedItem(carModel.getBrand());
 		panelCarType.setSelectedItem(carModel.getCarType());
 		
