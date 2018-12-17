@@ -39,14 +39,30 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfHour12;
 	private JTextField tfHourElse;
 	private ComboPanel<Brand> panelBrand;
+
+	private JRadioButton rdbtnAuto;
+	private JRadioButton rdbtnStick;
+	
 	//이미지 불러오기
 	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
-	
 	
 	public void setCarModel(CarModel carModel) {//set
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
-	
+		//panelBrand.setSelectedIndex(); 브랜드
+		//panelCarType
+		tfHour6.setText(carModel.getHour6()+"");
+		tfHour10.setText(carModel.getHour10()+"");
+		tfHour12.setText(carModel.getHour12()+"");
+		tfHourElse.setText(carModel.getHourElse()+"");
+		tfBasicCharge.setText(carModel.getBasicCharge()+"");
+		//변속기
+		String gear = carModel.getGear();
+		if(gear.equals("auto")) {
+			rdbtnAuto.setSelected(true);
+		}else {
+			rdbtnStick.setSelected(true);
+		}
 	}
 
 	/**
@@ -136,11 +152,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelGear.add(panelRbtn);
 		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JRadioButton rdbtnAuto = new JRadioButton("자동");
+		rdbtnAuto = new JRadioButton("자동");
 		panelRbtn.add(rdbtnAuto);
 		rdbtnAuto.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JRadioButton rdbtnStick = new JRadioButton("수동");
+		rdbtnStick = new JRadioButton("수동");
 		panelRbtn.add(rdbtnStick);
 		rdbtnStick.setHorizontalAlignment(SwingConstants.CENTER);
 		
