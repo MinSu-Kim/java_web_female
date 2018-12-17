@@ -79,9 +79,9 @@
 	</select>
 	
 	<!-- 차량관리 where 조건절 select -->
-	<!-- <sql id="selectSql">
-		SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt
-		FROM car_model
+	<sql id="selectSql">
+		SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType
+		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code;
 	</sql>
 	
 	<sql id="whereSql">
@@ -96,7 +96,7 @@
 				AND fuel=#{fuel}
 			</if>
 		</where>
-	</sql> -->
+	</sql>
 </mapper>
 
 

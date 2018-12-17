@@ -1,38 +1,29 @@
 package kr.or.yi.java_web_female.ui.car;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
-
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.TitledBorder;
-
-import kr.or.yi.java_web_female.ui.list.CarTotalList;
 import kr.or.yi.java_web_female.ui.ComboPanel;
-import kr.or.yi.java_web_female.ui.list.CarOptionList;
-import kr.or.yi.java_web_female.ui.list.CarModelListPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kr.or.yi.java_web_female.ui.list.CarTotalList;
+import javax.swing.JRadioButton;
 
 @SuppressWarnings("serial")
 public class CarPanel extends JPanel implements ActionListener {
-	private JTextField tfName;
-	private JTextField tfCode;
 	private CarUiService service;
 	private CarModelService modelService;
 
@@ -73,29 +64,27 @@ public class CarPanel extends JPanel implements ActionListener {
 		panelBrand.setComboItems(arrBrand);
 		panelSelect.add(panelBrand);
 		
-		JPanel panelName = new JPanel();
-		panelSelect.add(panelName);
-		panelName.setLayout(new GridLayout(0, 2, 0, 0));
+		ComboPanel panelFuel = new ComboPanel();
+		panelSelect.add(panelFuel);
+		panelFuel.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblName = new JLabel("Name");
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
-		panelName.add(lblName);
+		JPanel panelGear = new JPanel();
+		panelSelect.add(panelGear);
+		panelGear.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		tfName = new JTextField();
-		panelName.add(tfName);
-		tfName.setColumns(10);
+		JLabel lblGear = new JLabel("변속기");
+		lblGear.setHorizontalAlignment(SwingConstants.CENTER);
+		panelGear.add(lblGear);
 		
-		JPanel panelCode = new JPanel();
-		panelSelect.add(panelCode);
-		panelCode.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel panelRbtn = new JPanel();
+		panelGear.add(panelRbtn);
+		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblCode = new JLabel("CarCode");
-		lblCode.setHorizontalAlignment(SwingConstants.CENTER);
-		panelCode.add(lblCode);
+		JRadioButton rdbtnAuto = new JRadioButton("자동");
+		panelRbtn.add(rdbtnAuto);
 		
-		tfCode = new JTextField();
-		panelCode.add(tfCode);
-		tfCode.setColumns(10);
+		JRadioButton rdbtnStick = new JRadioButton("수동");
+		panelRbtn.add(rdbtnStick);
 		//전체 테이블 불러오기
 		panelList = new CarTotalList();
 		

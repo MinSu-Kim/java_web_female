@@ -1,7 +1,5 @@
 package kr.or.yi.java_web_female.ui.car;
 
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -25,7 +23,6 @@ import kr.or.yi.java_web_female.dto.Fuel;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
-import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 
 public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
