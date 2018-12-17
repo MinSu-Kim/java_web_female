@@ -4,20 +4,20 @@ import java.util.List;
 
 import kr.or.yi.java_web_female.dao.CustomEventMapperImpl;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
-import kr.or.yi.java_web_female.dao.GradeMapperImpl;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 
-public class CustomerUiService {
+public class JoinUiService {
 	private CustomerMapperImpl cusDao;
 	private CustomEventMapperImpl cEvtDao;
-	private GradeMapperImpl gradeDao;
+/*	private GradeMapperImpl gradeDao;
+	private EmployeeMapperImpl empDao;*/
 	
-	
-	public CustomerUiService() {
+	public JoinUiService() {
 		cusDao = CustomerMapperImpl.getInstance();
-		gradeDao = GradeMapperImpl.getInstance();
 		cEvtDao = CustomEventMapperImpl.getInstance();
+/*		empDao = EmployeeMapperImpl.getInstance();
+		gradeDao = GradeMapperImpl.getInstance();*/
 	}
 
 	public int addcus(Customer customer, CustomEvent customEvent) {
@@ -30,10 +30,6 @@ public class CustomerUiService {
 		return cusDao.selectCustomerByAll();
 	}
 	
-	public int selectCustomerById(Customer customer) {
-		return cusDao.selectCustomerById(customer);
-	}
-
 	public int nextCustomerCode() {
 		return cusDao.nextCustomerCode();
 	}
@@ -41,12 +37,9 @@ public class CustomerUiService {
 	public String getNextCustomerCode() {
 		return cusDao.nextCode();
 	}
-	
-	public int selectCustomerByPw(Customer customer) {
-		return cusDao.selectCustomerByPw(customer);
-	}
-	
 
-	
+	public Customer selectCustomerById(Customer customer) {
+		return cusDao.selectCustomerById(customer);
+	}
 	
 }

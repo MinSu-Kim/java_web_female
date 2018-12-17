@@ -2,7 +2,6 @@ package kr.or.yi.java_web_female.dao;
 
 import java.util.List;
 
-import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 
 public interface CustomerMapper {
@@ -10,12 +9,15 @@ public interface CustomerMapper {
 	
 	List<Customer> selectCustomerByAll();
 	
-	int selectCustomerById(Customer customer);
+//	int selectCustomerById(Customer customer);
+	Customer selectCustomerById(Customer customer);
 	
 	int insertCustomer(Customer customer);
 	
 	int nextCustomerCode();
 	
 	String nextCode();
-	int selectCustomerByPw(Customer customer);
+	
+//	int selectCustomerByPw(Customer customer);
+	Customer selectCustomerByPw(Customer customer);
 }

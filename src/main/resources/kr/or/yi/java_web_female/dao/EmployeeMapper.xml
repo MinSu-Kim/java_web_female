@@ -28,7 +28,7 @@
 	<select id="selectEmployeeByPw" resultType="Employee">
 		select code, name, phone, passwd, t_code as tCode 
 		from employee
-		where code=#{code} and passwd =password(#{passwd});
+		where code=#{code} and passwd = password(#{passwd});
 	</select>
 	
 	

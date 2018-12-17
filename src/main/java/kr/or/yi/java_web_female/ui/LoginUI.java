@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -12,18 +11,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
-import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
+import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.service.CustomerUiService;
-import kr.or.yi.java_web_female.service.EmployeeUiService;
-import kr.or.yi.java_web_female.ui.rent.CarSearchFrame;
-import javax.swing.JPasswordField;
+import kr.or.yi.java_web_female.exception.LoginFailException;
+import kr.or.yi.java_web_female.service.LoginUiService;
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
@@ -32,19 +29,16 @@ public class LoginUI extends JFrame implements ActionListener {
 	private JTextField tfId;
 	private JButton btnSearch;
 	private JButton btnLogin;
-	private CustomerUiService cusService;
-	private EmployeeUiService empService;
+	private LoginUiService loginService;
+	
 	private JPasswordField tfPwd;
 	private JCheckBox checkManager;
-	private CustomerMapperImpl cusDao;
-	private EmployeeMapperImpl empDao;
 	
-
+	public static Customer loginCusotmer;
+	public static Employee loginEmployee;
 
 	public LoginUI() {
-		cusDao = CustomerMapperImpl.getInstance();
-		empDao = EmployeeMapperImpl.getInstance();
-		cusService = new CustomerUiService();
+		loginService = new LoginUiService();
 		
 		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,8 +67,9 @@ public class LoginUI extends JFrame implements ActionListener {
 		JLabel lblPasswd = new JLabel("비밀번호");
 		lblPasswd.setHorizontalAlignment(SwingConstants.CENTER);
 		pContent.add(lblPasswd);
-		
+
 		tfPwd = new JPasswordField();
+		
 		pContent.add(tfPwd);
 
 		checkManager = new JCheckBox("관리자 모드");
@@ -97,10 +92,15 @@ public class LoginUI extends JFrame implements ActionListener {
 		btnSearch = new JButton("ID/PW찾기");
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
+		
+		
+		// 테스트용도
+		tfId.setText("asd132");
+		tfPwd.setText("rootroot");
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == btnLogin) {
 			do_btnLogin_actionPerformed(e);
 		}
@@ -115,102 +115,33 @@ public class LoginUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_btnLogin_actionPerformed(ActionEvent e) {
-		isLoginCheck();
-		/*if(checkManager.isSelected()) {
+		try {
+			isLoginCheck();
+			dispose();
 			TestFrame frame = new TestFrame(); 
 			frame.setVisible(true);
-		}else {
-			CarSearchFrame frame = new CarSearchFrame(); 
-			frame.setVisible(true);
-		}*/
-		
-
-	}
-
-	private void isLoginCheck() {
-		/*String id= tfId.getText().trim();
-		String pw = new String(tfPwd.getPassword()).trim();
-		Customer customer = getItemCustomer(); */
-		
-	
-		try {
-			Customer customer = getItemCustomer(); 
-			Employee employee = getItemEmployee();
-			
-			JOptionPane.showMessageDialog(null, customer);
-			JOptionPane.showMessageDialog(null, employee);
-			
-			if(checkManager.isSelected()) {
-				int empRes = empService.selectEmployeeById(employee)+empService.selectEmployeeByPw(employee);
-				if(empRes == 2) {
-					JOptionPane.showMessageDialog(null, "로그인 성공");
-					TestFrame frame = new TestFrame(); // 고객용 화면 UI로 변경 해야됨
-					frame.setVisible(true);
-				}else {
-					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
-				}
-			}else {
-				int res = cusService.selectCustomerById(customer)+cusService.selectCustomerByPw(customer);
-				if(res == 2) {
-					JOptionPane.showMessageDialog(null, "로그인 성공");
-					TestFrame frame = new TestFrame(); // 고객용 화면 UI로 변경 해야됨
-					frame.setVisible(true);
-				}else {
-					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
-				}
-				
-			}
-			
-/*			int res = cusService.selectCustomerById(customer);
-			int resw = cusService.selectCustomerByPw(customer);
-			
-			int empRes = empService.selectEmployeeById(employee);
-			int empResw = empService.selectEmployeeByPw(employee);
-			
-			JOptionPane.showMessageDialog(null, res);
-			JOptionPane.showMessageDialog(null, resw);
-			//JOptionPane.showMessageDialog(null, res+resw);
-			if (res + resw == 1) {
-				JOptionPane.showMessageDialog(null, "로그인 성공");
-				TestFrame frame = new TestFrame(); // 고객용 화면 UI로 변경 해야됨
-				frame.setVisible(true);
-			}
-			if (res + resw == 0) {
-				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
-			}*/
-			
-			/*if(resw==1) {
-				JOptionPane.showMessageDialog(null, "비밀번호 성공");
-				
-			}
-			if (resw== 0) {
-				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
-			}*/
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (LoginFailException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+			e1.printStackTrace();
 		}
-
-
 	}
 
-	private Employee getItemEmployee() {
-		String empId = tfId.getText().trim();
-		String empPw = new String(tfPwd.getPassword()).trim();
-		
-		return new Employee(empId, empPw);
+	private void isLoginCheck() throws LoginFailException {
+		if (checkManager.isSelected()) {			
+			loginEmployee = loginService.selectEmployeeByPw((Employee) getUser(true));
+		} else {
+			loginCusotmer = loginService.selectCustomerByPw((Customer) getUser(false));
+		}
 	}
 
-	private Customer getItemCustomer() {
-		String cusId = tfId.getText().trim();
-		String cusPw = new String(tfPwd.getPassword()).trim();
-		/*
-		 * String cusPw = new String(tfPwd1.getPassword()).trim(); String cusName =
-		 * tfName.getText().trim(); String cusAddress = tfAddr.getText().trim(); String
-		 * cusPhone = tfTel2.getText().trim() tfTel3.getText().trim() ; Date cusDob =
-		 * birthDay.getDate(); String cusEmail = tfEmail1.getText().trim();
-		 */
-
-		return new Customer(cusId, cusPw);
+	//추가
+	private Object getUser(boolean isEmployee) {
+		String id = tfId.getText().trim();
+		String pwd = new String(tfPwd.getPassword()).trim();
+		if (isEmployee) {
+			return new Employee(id, pwd);
+		}else {
+			return new Customer(id, pwd);
+		}
 	}
-	
 }

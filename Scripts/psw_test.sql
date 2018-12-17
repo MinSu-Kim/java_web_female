@@ -28,4 +28,6 @@ select * from custom_event;
 select c.code, id, passwd, c.name, address, phone, dob, email, event_code, is_use, e.name, e.rate
 from customer c join custom_event ce on c.code=ce.custom_code join event e on ce.event_code=e.code;
 
-
+select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+from customer
+where Id = 'asd132' and passwd = password('rootroot');

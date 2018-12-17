@@ -11,14 +11,13 @@ import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 public class EmployeeMapperImpl implements EmployeeMapper {
 	private static final String namespace = "kr.or.yi.java_web_female.dao.EmployeeMapper";
 	private static final EmployeeMapperImpl instance = new EmployeeMapperImpl();
-	
-	
-	
+
 	public static EmployeeMapperImpl getInstance() {
 		return instance;
 	}
-	
-	private EmployeeMapperImpl() {}
+
+	private EmployeeMapperImpl() {
+	}
 
 	@Override
 	public Employee selectEmployeeByNo(Employee employee) {
@@ -51,7 +50,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 			return res;
 		}
 	}
-	
+
 	@Override
 	public int selectEmployeeById(Employee employee) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -63,7 +62,7 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 		}
 	}
 
-	public int selectEmployeeByPw(Employee employee) {
+/*	public int selectEmployeeByPw(Employee employee) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			Employee selectedEmployee = sqlSession.selectOne(namespace + ".selectEmployeeByPw", employee);
 			if (selectedEmployee == null) {
@@ -71,6 +70,11 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 			}
 			return 1;
 		}
-	}
+	}*/
 
+	public Employee selectEmployeeByPw(Employee employee) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".selectEmployeeByPw", employee);
+		}
+	}
 }

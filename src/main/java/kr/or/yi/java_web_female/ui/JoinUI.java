@@ -1,12 +1,13 @@
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.Provider.Service;
 import java.sql.SQLException;
 import java.util.Date;
+
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -24,11 +26,8 @@ import com.toedter.calendar.JDateChooser;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Post;
-import kr.or.yi.java_web_female.service.CustomerUiService;
+import kr.or.yi.java_web_female.service.JoinUiService;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
-
-import javax.swing.JPasswordField;
-import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class JoinUI extends JFrame implements ActionListener {
@@ -48,7 +47,6 @@ public class JoinUI extends JFrame implements ActionListener {
 	private JButton btnJoin;
 	private JComboBox<String> cmbEmail3;
 	private JDateChooser birthDay;
-	private CustomerUiService cusService;
 	private AbstractListPanel<Customer> cTable;
 	private JTextField tfConfirm;
 	private JButton btnCalcel;
@@ -56,13 +54,16 @@ public class JoinUI extends JFrame implements ActionListener {
 	private String customCode;
 	private boolean isUse;
 	private JComboBox<String> cmbTel1;
-
+	
+	private JoinUiService joinService;
+	
 	public void setcTable(AbstractListPanel<Customer> cTable) {
 		this.cTable = cTable;
 	}
 
 	public JoinUI() {
-		cusService = new CustomerUiService();
+		joinService = new JoinUiService();
+		
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 571, 510);
@@ -296,7 +297,6 @@ public class JoinUI extends JFrame implements ActionListener {
 			try {
 				do_btnDupConfirm_actionPerformed(e);
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -305,15 +305,12 @@ public class JoinUI extends JFrame implements ActionListener {
 	protected void do_btnDupConfirm_actionPerformed(ActionEvent e) throws SQLException {
 		try {
 			Customer customer = getItemCustomer();
-			/* JOptionPane.showMessageDialog(null, customer); */
-			int res = cusService.selectCustomerById(customer); // 1이면 중복 0이면 사용가능
-			/* JOptionPane.showMessageDialog(null, res); */
+			Customer searchCustomer = joinService.selectCustomerById(customer);
 			if (tfId.getText().trim().length() > 1) {
-				if (res == 0) {
+				if (searchCustomer == null) {
 					JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다.");
 					tfPwd1.requestFocus();
-				}
-				if (res == 1) {
+				}else {
 					JOptionPane.showMessageDialog(null, "중복된 아이디입니다.");
 				}
 			} else {
@@ -332,23 +329,15 @@ public class JoinUI extends JFrame implements ActionListener {
 			validCheck();
 
 			Customer customer = getItemCustomer();
-			customer.setCode(cusService.getNextCustomerCode());
+			customer.setCode(joinService.getNextCustomerCode());
 			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-			
-			//JOptionPane.showMessageDialog(null, customer);
-			//JOptionPane.showMessageDialog(null, customEvent);
-
-			/*			String code = String.format("C%03d",cusService.nextCustomerCode());
-			customer.setCode(code);*/
-			
-			res = cusService.addcus(customer, customEvent);
+			res = joinService.addcus(customer, customEvent);
 
 			if(res==1) {
 				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
-				cTable.setList(cusService.selectCustomerByAll());
+				cTable.setList(joinService.selectCustomerByAll());
 				cTable.loadDatas();
 			}
-			
 			clearTf();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -370,11 +359,9 @@ public class JoinUI extends JFrame implements ActionListener {
 		tfEmail2.setText("");
 		tfZipCode.setText("");
 		tfAddr.setText("");
-
 	}
 
 	private Customer getItemCustomer() {
-
 		String cusId = tfId.getText().trim();
 		String cusPw = new String(tfPwd1.getPassword()).trim();
 		String cusName = tfName.getText().trim();
@@ -383,7 +370,6 @@ public class JoinUI extends JFrame implements ActionListener {
 		Date cusDob = birthDay.getDate();
 		String cusEmail = (tfEmail1.getText().trim()) + "@" + (tfEmail2.getText().trim());
 
-		
 		return new Customer(cusId, cusPw, cusName, cusAddress, cusPhone, cusDob, cusEmail);
 	}
 
@@ -399,6 +385,7 @@ public class JoinUI extends JFrame implements ActionListener {
 
 		String pw1 = new String(tfPwd1.getPassword());
 		String pw2 = new String(tfPwd2.getPassword());
+		
 		if (pw1.equals("")) {
 			tfPwd1.requestFocus();
 			throw new Exception("Password를 입력해 주세요");
@@ -408,8 +395,6 @@ public class JoinUI extends JFrame implements ActionListener {
 			throw new Exception("Password를 입력해 주세요");
 		}
 		
-
-//		JOptionPane.showMessageDialog(null, "생년월일"+birthDay.getDate());
 		if (birthDay.getDate() == null) {
 			birthDay.requestFocus();
 			throw new Exception("생년월일을 입력해 주세요.");
@@ -419,15 +404,18 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfTel2.requestFocus();
 			throw new Exception("전화번호 가운데 자리를 입력해 주세요.");
 		}
+		
 		if (tfTel3.getText().equals("")) {
 			tfTel3.requestFocus();
 			throw new Exception("전화번호 마지막 자리를 입력해 주세요.");
 		}
 
 	}
+	
 	protected void do_btnCalcel_actionPerformed(ActionEvent e) {
 		clearTf();
 	}
+	
 	protected void do_cmbEmail3_actionPerformed(ActionEvent e) {
 		if(cmbEmail3.getSelectedIndex()<5) {
 			tfEmail2.setEditable(false);
@@ -436,9 +424,6 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfEmail2.requestFocus();
 			tfEmail2.setText("");
 			tfEmail2.setEditable(true);
-			
 		}
-		
-		
 	}
 }
