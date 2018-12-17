@@ -16,8 +16,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
+import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.service.CustomerUiService;
+import kr.or.yi.java_web_female.service.EmployeeUiService;
 import kr.or.yi.java_web_female.ui.rent.CarSearchFrame;
 import javax.swing.JPasswordField;
 
@@ -29,11 +33,17 @@ public class LoginUI extends JFrame implements ActionListener {
 	private JButton btnSearch;
 	private JButton btnLogin;
 	private CustomerUiService cusService;
+	private EmployeeUiService empService;
 	private JPasswordField tfPwd;
 	private JCheckBox checkManager;
+	private CustomerMapperImpl cusDao;
+	private EmployeeMapperImpl empDao;
+	
+
 
 	public LoginUI() {
-		
+		cusDao = CustomerMapperImpl.getInstance();
+		empDao = EmployeeMapperImpl.getInstance();
 		cusService = new CustomerUiService();
 		
 		setTitle("로그인");
@@ -90,9 +100,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == checkManager) {
-			do_checkManager_actionPerformed(e);
-		}
+		
 		if (e.getSource() == btnLogin) {
 			do_btnLogin_actionPerformed(e);
 		}
@@ -108,6 +116,13 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	protected void do_btnLogin_actionPerformed(ActionEvent e) {
 		isLoginCheck();
+		/*if(checkManager.isSelected()) {
+			TestFrame frame = new TestFrame(); 
+			frame.setVisible(true);
+		}else {
+			CarSearchFrame frame = new CarSearchFrame(); 
+			frame.setVisible(true);
+		}*/
 		
 
 	}
@@ -120,16 +135,23 @@ public class LoginUI extends JFrame implements ActionListener {
 	
 		try {
 			Customer customer = getItemCustomer(); 
+			Employee employee = getItemEmployee();
+			
 			JOptionPane.showMessageDialog(null, customer);
+			JOptionPane.showMessageDialog(null, employee);
 			
 			int res = cusService.selectCustomerById(customer);
 			int resw = cusService.selectCustomerByPw(customer);
+			
+			int empRes = empService.selectEmployeeById(employee);
+			int empResw = empService.selectEmployeeByPw(employee);
+			
 			JOptionPane.showMessageDialog(null, res);
 			JOptionPane.showMessageDialog(null, resw);
-			JOptionPane.showMessageDialog(null, res+resw);
+			//JOptionPane.showMessageDialog(null, res+resw);
 			if (res + resw == 1) {
 				JOptionPane.showMessageDialog(null, "로그인 성공");
-				CarSearchFrame frame = new CarSearchFrame(); // 고객용 화면 UI로 변경 해야됨
+				TestFrame frame = new TestFrame(); // 고객용 화면 UI로 변경 해야됨
 				frame.setVisible(true);
 			}
 			if (res + resw == 0) {
@@ -164,9 +186,16 @@ public class LoginUI extends JFrame implements ActionListener {
 		 */
 	}
 
+	private Employee getItemEmployee() {
+		String empId = tfId.getText().trim();
+		String empPw = new String(tfPwd.getPassword()).trim();
+		
+		return new Employee(empId, empPw);
+	}
+
 	private Customer getItemCustomer() {
 		String cusId = tfId.getText().trim();
-		String cusPW = new String(tfPwd.getPassword()).trim();
+		String cusPw = new String(tfPwd.getPassword()).trim();
 		/*
 		 * String cusPw = new String(tfPwd1.getPassword()).trim(); String cusName =
 		 * tfName.getText().trim(); String cusAddress = tfAddr.getText().trim(); String
@@ -174,9 +203,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		 * birthDay.getDate(); String cusEmail = tfEmail1.getText().trim();
 		 */
 
-		return new Customer(cusId, cusPW);
+		return new Customer(cusId, cusPw);
 	}
-	protected void do_checkManager_actionPerformed(ActionEvent e) {
-		
-	}
+	
 }

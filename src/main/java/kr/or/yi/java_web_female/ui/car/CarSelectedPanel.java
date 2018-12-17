@@ -2,7 +2,7 @@ package kr.or.yi.java_web_female.ui.car;
 
 import javax.swing.JPanel;
 
-import static org.junit.Assert.assertFalse;
+
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

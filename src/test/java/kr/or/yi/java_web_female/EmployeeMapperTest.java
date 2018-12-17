@@ -33,6 +33,17 @@ public class EmployeeMapperTest extends AbstractTest {
 		Assert.assertNotNull(empList);
 	}
 
+	
+	@Test
+	public void test03selectEmployeeById() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Employee searchId = new Employee();
+		searchId.setCode("E001");
+		int list = dao.selectEmployeeById(searchId);
+		
+		Assert.assertEquals(1, list);
+	}
 	/*@Test
 	public void test03insertEmployee() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");

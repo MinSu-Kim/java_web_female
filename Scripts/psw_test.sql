@@ -23,5 +23,9 @@ insert into customer(code, Id, passwd, Name, address, phone, dob, email)
 
 desc customer;
 
-select * from event;
+select * from custom_event;
+
+select c.code, id, passwd, c.name, address, phone, dob, email, event_code, is_use, e.name, e.rate
+from customer c join custom_event ce on c.code=ce.custom_code join event e on ce.event_code=e.code;
+
 

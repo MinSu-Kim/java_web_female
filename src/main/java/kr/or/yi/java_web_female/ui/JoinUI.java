@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import java.security.Provider.Service;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
-
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -21,10 +19,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource;
 import com.toedter.calendar.JDateChooser;
 
-import javafx.scene.control.ComboBox;
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomerUiService;
@@ -55,6 +52,10 @@ public class JoinUI extends JFrame implements ActionListener {
 	private AbstractListPanel<Customer> cTable;
 	private JTextField tfConfirm;
 	private JButton btnCalcel;
+	private String eventCode;
+	private String customCode;
+	private boolean isUse;
+	private JComboBox<String> cmbTel1;
 
 	public void setcTable(AbstractListPanel<Customer> cTable) {
 		this.cTable = cTable;
@@ -148,7 +149,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		pContent.add(pTel);
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
-		JComboBox<String> cmbTel1 = new JComboBox<>();
+		cmbTel1 = new JComboBox<>();
 		cmbTel1.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
 		pTel.add(cmbTel1);
 
@@ -311,7 +312,6 @@ public class JoinUI extends JFrame implements ActionListener {
 				if (res == 0) {
 					JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다.");
 					tfPwd1.requestFocus();
-
 				}
 				if (res == 1) {
 					JOptionPane.showMessageDialog(null, "중복된 아이디입니다.");
@@ -333,9 +333,15 @@ public class JoinUI extends JFrame implements ActionListener {
 
 			Customer customer = getItemCustomer();
 			customer.setCode(cusService.getNextCustomerCode());
-/*			String code = String.format("C%03d",cusService.nextCustomerCode());
+			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
+			
+			//JOptionPane.showMessageDialog(null, customer);
+			//JOptionPane.showMessageDialog(null, customEvent);
+
+			/*			String code = String.format("C%03d",cusService.nextCustomerCode());
 			customer.setCode(code);*/
-			res = cusService.addcus(customer, null);
+			
+			res = cusService.addcus(customer, customEvent);
 
 			if(res==1) {
 				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
@@ -348,6 +354,7 @@ public class JoinUI extends JFrame implements ActionListener {
 			e1.printStackTrace();
 		} catch (Exception e2) {
 			JOptionPane.showMessageDialog(null, e2.getMessage());
+			e2.printStackTrace();
 		}
 	}
 
@@ -372,9 +379,9 @@ public class JoinUI extends JFrame implements ActionListener {
 		String cusPw = new String(tfPwd1.getPassword()).trim();
 		String cusName = tfName.getText().trim();
 		String cusAddress = tfAddr.getText().trim();
-		String cusPhone = tfTel2.getText().trim() /* tfTel3.getText().trim() */;
+		String cusPhone =(cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-" + (tfTel3.getText().trim());
 		Date cusDob = birthDay.getDate();
-		String cusEmail = tfEmail1.getText().trim();
+		String cusEmail = (tfEmail1.getText().trim()) + "@" + (tfEmail2.getText().trim());
 
 		
 		return new Customer(cusId, cusPw, cusName, cusAddress, cusPhone, cusDob, cusEmail);

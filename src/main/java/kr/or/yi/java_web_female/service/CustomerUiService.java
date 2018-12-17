@@ -2,6 +2,7 @@ package kr.or.yi.java_web_female.service;
 
 import java.util.List;
 
+import kr.or.yi.java_web_female.dao.CustomEventMapperImpl;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dao.GradeMapperImpl;
 import kr.or.yi.java_web_female.dto.CustomEvent;
@@ -9,18 +10,20 @@ import kr.or.yi.java_web_female.dto.Customer;
 
 public class CustomerUiService {
 	private CustomerMapperImpl cusDao;
+	private CustomEventMapperImpl cEvtDao;
 	private GradeMapperImpl gradeDao;
+	
 	
 	public CustomerUiService() {
 		cusDao = CustomerMapperImpl.getInstance();
 		gradeDao = GradeMapperImpl.getInstance();
+		cEvtDao = CustomEventMapperImpl.getInstance();
 	}
 
 	public int addcus(Customer customer, CustomEvent customEvent) {
 		int res =  cusDao.insertCustomer(customer);
-		int resw = cusDao.insertCustomEvent(customEvent);
+		int resw = cEvtDao.insertCustomEvent(customEvent);
 		return (res + resw)==2?1:0;
-//		return res;
 	}
 
 	public List<Customer> selectCustomerByAll() {

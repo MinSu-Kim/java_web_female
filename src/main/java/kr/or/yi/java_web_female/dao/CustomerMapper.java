@@ -14,8 +14,6 @@ public interface CustomerMapper {
 	
 	int insertCustomer(Customer customer);
 	
-	int insertCustomEvent(CustomEvent customEvent);
-	
 	int nextCustomerCode();
 	
 	String nextCode();
