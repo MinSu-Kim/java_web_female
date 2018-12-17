@@ -31,8 +31,8 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 				item.getName(),
 				item.getColor(),
 				item.getGear(),
-				item.getBrand(),
-				item.getCarType(),
+				item.getBrand().getName(),
+				item.getCarType().getType(),
 				item.getBasicCharge(),
 				item.getHour6(),
 				item.getHour10(),
@@ -45,7 +45,8 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 	}
 
 	@Override
-	protected CarModel getItem(int selectedIndex) {
+	public CarModel getItem(int selectedIndex) {
+		/*System.out.println(table.getValueAt(selectedIndex, 12));
 		String code = (String)table.getValueAt(selectedIndex, 0);
 		String name = (String)table.getValueAt(selectedIndex, 1);
 		String color = (String)table.getValueAt(selectedIndex, 2);
@@ -58,7 +59,7 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 		int hour12 = (int)table.getValueAt(selectedIndex, 9);
 		int hourElse = (int)table.getValueAt(selectedIndex, 10);
 		Fuel fuel = (Fuel)table.getValueAt(selectedIndex, 11);
-		boolean isRent = ((int)table.getValueAt(selectedIndex, 12)==1?true:false);
+		boolean isRent = (table.getValueAt(selectedIndex, 12).equals("대여가능")?true:false);
 		int count = (int)table.getValueAt(selectedIndex, 13);
 		
 		CarModel model = new CarModel();
@@ -77,9 +78,11 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 		model.setHourElse(hourElse);
 		model.setFuel(fuel);
 		model.setRent(isRent);
-		model.setRentCnt(count);
-		
-		return model;
+		model.setRentCnt(count);*/
+		String carCode = (String)table.getValueAt(selectedIndex, 0);
+		CarModel carModel = new CarModel(carCode);
+		int index = list.indexOf(carModel);
+		return list.get(index);
 	}
 
 }

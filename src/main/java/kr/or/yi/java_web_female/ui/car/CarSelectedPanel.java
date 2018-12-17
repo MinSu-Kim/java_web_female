@@ -1,14 +1,20 @@
 package kr.or.yi.java_web_female.ui.car;
 
-import javax.swing.JPanel;
-
-import static org.junit.Assert.assertFalse;
-
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
@@ -16,21 +22,7 @@ import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
-import kr.or.yi.java_web_female.ui.list.CarPriceList;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-import java.awt.Color;
-import javax.swing.JRadioButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -41,21 +33,22 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JButton btnCancel;
 	private JButton btnDelete;
 	private CarPanel carPanel;//선택된 차량의 정보가 있는 페널
+	private CarUi carUi;
 	private List<CarModel> carList;//모델리스트
 	private AbstractListPanel<CarModel> carListPanel;
 	
-	//이미지 불러오기
-	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
 	private JTextField tfBasicCharge;
 	private JTextField tfHour6;
 	private JTextField tfHour10;
 	private JTextField tfHour12;
 	private JTextField tfHourElse;
+	private CarModel carModel;
 	
-	public void setCarList(List<CarModel> carList) {//???
-		this.carList = carList;
-		carListPanel.setList(carList);
-		carListPanel.loadDatas();
+	//이미지 불러오기
+	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
+	
+	public void setCarModel(CarModel carModel) {//set
+		this.carModel = carModel;
 	}
 
 	/**
@@ -64,10 +57,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	public CarSelectedPanel() {
 		service = new CarModelService();
 		carUiService = new CarUiService();
+		carPanel = new CarPanel();
 		initComponents();
 	}
 
 	private void initComponents() {
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel container = new JPanel();

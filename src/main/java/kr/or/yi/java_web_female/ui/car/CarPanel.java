@@ -40,6 +40,7 @@ public class CarPanel extends JPanel implements ActionListener {
 	private CarTotalList panelList;
 	private JButton btnOk;
 	private JButton btnCancel;
+	private CarModel selectedModel;
 
 
 	public CarPanel() {
@@ -47,6 +48,7 @@ public class CarPanel extends JPanel implements ActionListener {
 		modelService = new CarModelService();
 		initComponents();
 	}
+	
 
 	private void initComponents() {
 		
@@ -132,11 +134,15 @@ public class CarPanel extends JPanel implements ActionListener {
 	protected void do_btnOk_actionPerformed(ActionEvent arg0) {
 		//선택눌렀을시 selected화면으로 이동
 		CarUi frame = new CarUi();
+		CarModel carModel = panelList.getSelectedItem();
+		System.out.println(carModel);
+//		frame.setCarModel();
 		frame.setVisible(true);
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		//취소눌렀을시 List 선택초기화
 	}
+	
 }
 
 
