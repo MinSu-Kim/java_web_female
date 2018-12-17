@@ -9,8 +9,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -27,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DateFormatter;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -34,6 +38,9 @@ import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Event;
+import kr.or.yi.java_web_female.dto.Insurance;
+import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
 
 @SuppressWarnings("serial")
@@ -309,10 +316,23 @@ public class RentPanel extends JPanel implements ActionListener{
 	private JLabel lblResultPrice;
 	private List<CarModel> carModelList;
 	private int selectedIndex;
+	private Customer customer;
+	private String startDate;
+	private String sHour;
+	private String sMinutes;
+	private String endDate;
+	private String eHour;
+	private String eMinutes;
+	private int basicCharge;
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRent) {
-			do_btnRent_actionPerformed(e);
+			try {
+				do_btnRent_actionPerformed(e);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (e.getSource() == btnClose) {
 			do_btnClose_actionPerformed(e);
@@ -333,8 +353,8 @@ public class RentPanel extends JPanel implements ActionListener{
 
 	// 검색버튼
 	protected void do_btnSearch_actionPerformed(ActionEvent e) {
+		customer = new Customer();
 		if (cf == null) {
-			Customer customer = new Customer();
 			if (tfCstmName.getText().trim().length() > 1) {
 				customer.setName(tfCstmName.getText().trim());
 			} else {
@@ -355,7 +375,6 @@ public class RentPanel extends JPanel implements ActionListener{
 				e1.printStackTrace();
 			}
 		} else {
-			Customer customer = new Customer();
 			if (tfCstmName.getText().trim().length() > 1) {
 				customer.setName(tfCstmName.getText().trim());
 			} else {
@@ -383,7 +402,7 @@ public class RentPanel extends JPanel implements ActionListener{
 	}
 	
 	//대여버튼
-	protected void do_btnRent_actionPerformed(ActionEvent e) {
+	protected void do_btnRent_actionPerformed(ActionEvent e) throws ParseException {
 		/*//옵션
 		selectCoList = new ArrayList<>();
 		JOptionPane.showMessageDialog(null, coList.toString());
@@ -399,19 +418,44 @@ public class RentPanel extends JPanel implements ActionListener{
 		}*/
 		//대여날짜
 		Date start = dateChooser_2.getDate();
-		SimpleDateFormat ssdf = new SimpleDateFormat("yyyy-MM-dd");
-		String startDate = ssdf.format(start);
-		//대여시간
-		String sHour = spStartHour.getValue().toString();
-		String sMinutes = spStartMinutes.getValue().toString();
+		SimpleDateFormat ssdf = new SimpleDateFormat("yyyyMMdd");
+		startDate = ssdf.format(start);
+
+		sHour = spStartHour.getValue().toString();
+		sMinutes = spStartMinutes.getValue().toString();
 		//반납날짜
 		Date end = dateChooser_3.getDate();
-		SimpleDateFormat esdf = new SimpleDateFormat("yyyy-MM-dd");
-		String endDate = esdf.format(end);
-		//반납시간
-		String eHour = spEndHour.getValue().toString();
-		String eMinutes = spEndMinutes.getValue().toString();
+		SimpleDateFormat esdf = new SimpleDateFormat("yyyyMMdd");
+		endDate = esdf.format(end);
+		eHour = spEndHour.getValue().toString();
+		eMinutes = spEndMinutes.getValue().toString();
 		
+		Event evt = new Event();
+		Insurance ins = new Insurance();
+		Rent r = new Rent("R004", startDate, sHour+":"+sMinutes+":00", endDate, eHour+":"+eMinutes+":00", false, 60000, selectedCarModel, customer, ins, evt, 0);
+		
+		int shLength = sHour.length();
+		int smLength = sMinutes.length();
+		int ehLength = eHour.length();
+		int emLength = eMinutes.length();
+		
+		if(shLength == 1 || smLength == 1 || ehLength == 1 | emLength == 1) {
+			String startHour = "0" + sHour;
+			String startMinutes = "0" + sMinutes;
+			String endHour = "0" + eHour;
+			String endMinutes = "0" + eMinutes;
+			
+//			JOptionPane.showMessageDialog(null, startHour + ", " + startMinutes + ", " + endHour + ", " + endMinutes);
+			long dd = diffDays(startDate+startHour+startMinutes, endDate+endHour+endMinutes);
+			lblResultPrice.setText((basicCharge*dd)+"");
+			JOptionPane.showMessageDialog(null, dd);
+			
+		} else {
+			// ========= 테스트
+			long dd = diffDays(startDate+sHour+sMinutes, endDate+eHour+eMinutes);
+			JOptionPane.showMessageDialog(null, dd);
+		}
+
 		RentResultFrame rrf = new RentResultFrame();
 		rrf.setVisible(true);
 		
@@ -435,7 +479,7 @@ public class RentPanel extends JPanel implements ActionListener{
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
 		
-		//======================> 차량 선택해서 리스트 클릭하면 가격만 가지고 옴.
+		basicCharge = selectedCarModel.getBasicCharge();
 		lblResultPrice.setText(selectedCarModel.getBasicCharge()+"");
 		
 //		JOptionPane.showMessageDialog(null, selectedCarModel);
@@ -457,5 +501,25 @@ public class RentPanel extends JPanel implements ActionListener{
 				break;
 			}
 		}
+	}
+	
+	//날짜, 시간
+	public long diffDays(String begin, String end) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+		
+		//String 요청시간을 Date로 바꾸기
+		Date beginDate = sdf.parse(begin);
+		long beginDateTime = beginDate.getTime();
+		
+		Date endDate = sdf.parse(end);
+		long endDateTime = endDate.getTime();
+		
+		//차이
+		long diff = endDateTime - beginDateTime;
+		//24시간*60분*60초*1000밀리초 ==> 단위 "일"
+		long diffDays = diff / (24*60*60*1000);
+		
+		
+		return diffDays;
 	}
 }

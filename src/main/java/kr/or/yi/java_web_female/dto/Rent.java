@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Rent {
 	private String code;	//대여코드
-	private Date startDate;	//대여시작일
-	private Date startTime; //대여시작시간
-	private Date endDate;	//대여반납일
-	private Date endTime;	//대여반납시간
+	private String startDate;	//대여시작일
+	private String startTime; //대여시작시간
+	private String endDate;	//대여반납일
+	private String endTime;	//대여반납시간
 	private boolean isReturn;	//반납여부
 	private int totalPrice;	//대여총비용(DB -> basic_price)
 	private CarModel carCode;	//차량코드
-	private Employee customerCode;	//고객코드
+	private Customer customerCode;	//고객코드
 	private Insurance insuranceCode;	//보험코드
 	private Event eRate;	//이벤트 할인율
 	private int optPrice;	//옵션비용
@@ -20,9 +20,10 @@ public class Rent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Rent(String code, Date startDate, Date startTime, Date endDate, Date endTime, boolean isReturn,
-			int totalPrice, CarModel carCode, Employee customerCode, Insurance insuranceCode, Event eRate,
+	public Rent(String code, String startDate, String startTime, String endDate, String endTime, boolean isReturn,
+			int totalPrice, CarModel carCode, Customer customerCode, Insurance insuranceCode, Event eRate,
 			int optPrice) {
+		super();
 		this.code = code;
 		this.startDate = startDate;
 		this.startTime = startTime;
@@ -45,35 +46,35 @@ public class Rent {
 		this.code = code;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -101,11 +102,11 @@ public class Rent {
 		this.carCode = carCode;
 	}
 
-	public Employee getCustomerCode() {
+	public Customer getCustomerCode() {
 		return customerCode;
 	}
 
-	public void setCustomerCode(Employee customerCode) {
+	public void setCustomerCode(Customer customerCode) {
 		this.customerCode = customerCode;
 	}
 
@@ -135,10 +136,9 @@ public class Rent {
 
 	@Override
 	public String toString() {
-		return String.format(
-				"%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
-				code, startDate, startTime, endDate, endTime, isReturn, totalPrice, carCode, customerCode,
-				insuranceCode, eRate, optPrice);
+		return "Rent [code=" + code + ", startDate=" + startDate + ", startTime=" + startTime + ", endDate=" + endDate
+				+ ", endTime=" + endTime + ", isReturn=" + isReturn + ", totalPrice=" + totalPrice + ", carCode="
+				+ carCode + ", customerCode=" + customerCode + ", insuranceCode=" + insuranceCode + ", eRate=" + eRate
+				+ ", optPrice=" + optPrice + "]";
 	}
-
 }
