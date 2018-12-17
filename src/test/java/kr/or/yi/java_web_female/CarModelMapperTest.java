@@ -35,6 +35,9 @@ public class CarModelMapperTest extends AbstractTest {
 	public void test02selectCarModelByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		List<CarModel> list = dao.selectCarModelByAll();
+		for(CarModel cm : list) {
+			System.out.println(cm+":"+ cm.getCarType().getCode());
+		}
 		Assert.assertNotNull(list);
 	}
 	

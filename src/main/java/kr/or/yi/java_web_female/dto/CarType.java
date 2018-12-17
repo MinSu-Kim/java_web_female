@@ -30,5 +30,7 @@ public class CarType {
 		return type;
 	}
 	
+
+	
 	
 }
