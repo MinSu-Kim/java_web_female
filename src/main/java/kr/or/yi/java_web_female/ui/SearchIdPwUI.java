@@ -2,23 +2,23 @@ package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class SearchIdPwUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -32,9 +32,6 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	private JComboBox<String> cmbDomain;
 	private JLabel lblId;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,9 +45,6 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public SearchIdPwUI() {
 		setTitle("ID/PW찾기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

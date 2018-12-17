@@ -3,21 +3,21 @@ package kr.or.yi.java_web_female.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.logging.log4j.CloseableThreadContext.Instance;
 
 import kr.or.yi.java_web_female.dto.Title;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class TitleMapperImpl implements TitleMapper {
 	private static final String namespace = "kr.or.yi.java_web_female.dao.TitleMapper";
-	
+
 	private static final TitleMapperImpl instance = new TitleMapperImpl();
-	
+
 	public static TitleMapperImpl getInstance() {
 		return instance;
 	}
-	
-	private TitleMapperImpl() {}
+
+	private TitleMapperImpl() {
+	}
 
 	@Override
 	public Title selectTitleByNo(Title title) {
@@ -59,14 +59,5 @@ public class TitleMapperImpl implements TitleMapper {
 			return res;
 		}
 	}
-
-	
-	
-
-	
-	
-
-
-
 
 }

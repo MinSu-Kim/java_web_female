@@ -62,6 +62,13 @@ select * from custom_event;
 
 select * from event;
 
+select *
+from custom_event ce join event e on ce.event_code = e.code;
+
+select *
+from customer c join custom_event ce on c.code = ce.custom_code
+where c.code = 'C001';
+
 insert into custom_event values('EVT1','C001',0);
 
 
@@ -77,9 +84,3 @@ where id = 'qwer12' and passwd =password('root1234');
 select code, name, phone, passwd, t_code as tCode 
 from employee
 where code='E001' and passwd = password('rootroot');
-
-
-
-
-		
-						

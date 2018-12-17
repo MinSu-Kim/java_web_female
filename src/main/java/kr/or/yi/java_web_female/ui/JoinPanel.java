@@ -1,13 +1,15 @@
 package kr.or.yi.java_web_female.ui;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
 import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
+
 import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
@@ -23,9 +25,6 @@ public class JoinPanel extends JPanel {
    private JTextField textField_8;
    private JTextField textField_9;
 
-   /**
-    * Create the panel.
-    */
    public JoinPanel() {
       setLayout(new BorderLayout(0, 0));
       

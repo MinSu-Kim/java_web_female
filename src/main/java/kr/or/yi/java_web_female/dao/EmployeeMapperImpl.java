@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 

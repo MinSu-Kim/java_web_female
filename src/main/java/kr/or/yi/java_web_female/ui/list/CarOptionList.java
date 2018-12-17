@@ -6,10 +6,6 @@ import kr.or.yi.java_web_female.dto.CarOption;
 
 @SuppressWarnings("serial")
 public class CarOptionList extends AbstractListPanel<CarOption> {
-	public CarOptionList() {
-	}
-
-
 
 	@Override
 	protected void setAlignWidth() {
@@ -31,12 +27,13 @@ public class CarOptionList extends AbstractListPanel<CarOption> {
 
 	@Override
 	protected CarOption getItem(int selectedIndex) {
-		int no = (int)table.getValueAt(selectedIndex, 0);
+/*		int no = (int)table.getValueAt(selectedIndex, 0);
 		String name = (String)table.getValueAt(selectedIndex, 1);
 		CarOption carOption = new CarOption();
 		carOption.setNo(no);
 		carOption.setName(name);
-		return carOption;
+		return carOption;*/
+		return list.get(selectedIndex);
 	}
 
 }
