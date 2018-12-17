@@ -252,7 +252,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
-		//삭제선택
+		//삭제선택, 디비에는 바로삭제 되지만 테이블 실시간 업데이트 미완성
 		CarModel model = new CarModel();
 		model.setCarCode(tfCode.getText());
 		service.deleteCarModel(model);
@@ -267,17 +267,14 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
 		//브랜드
-		String brandName = cmbBrand.getSelectedItems();
-		Brand brand = new Brand();
-		brand.setName(brandName);
+		Brand brand = cmbBrand.getSelectedItems();
+		
 		//차종
-		String cartypeType = cmbCarType.getSelectedItems();
-		CarType carType = new CarType();
-		carType.setType(cartypeType);
+		CarType cartype = cmbCarType.getSelectedItems();
+
 		//연료
-		String fuelCode = cmbFuel.getSelectedItems();
-		Fuel fuel = new Fuel();
-		fuel.setCode(fuelCode);
+		Fuel fuel = (Fuel)cmbFuel.getSelectedItems();
+
 		
 		String color = tfColor.getText().trim();//색상
 		String gear = "";
@@ -285,7 +282,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		if(selectedGear) {
 			gear = "auto";
 		}else {
-			gear = "stict";
+			gear = "stick";
 		}
 		//isrent,rentCnt 처리중
 		boolean isRent = true;
@@ -296,7 +293,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		int hour12 = Integer.parseInt(tfHour12.getText());
 		int hourElse = Integer.parseInt(tfHourElse.getText());
 		
-		CarModel item = new CarModel(code, name, color, gear, brand, carType, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
+		CarModel item = new CarModel(code, name, color, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
 		return item;
 	}
 	
