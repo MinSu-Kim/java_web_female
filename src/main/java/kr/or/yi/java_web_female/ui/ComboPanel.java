@@ -47,7 +47,8 @@ public class ComboPanel<T> extends JPanel {
 		comboBox.setSelectedItem(item);
 	}
 	
-	public void getSelectedItems() {
-		comboBox.getSelectedItem();
+	public String getSelectedItems() {
+		String item = (String)comboBox.getSelectedItem();;
+		return item;
 	}
 }

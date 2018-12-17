@@ -21,6 +21,7 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
+import kr.or.yi.java_web_female.dto.Fuel;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
@@ -40,14 +41,17 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfHour10;
 	private JTextField tfHour12;
 	private JTextField tfHourElse;
-	private ComboPanel<Brand> panelBrand;
+	private ComboPanel<Brand> cmbBrand;
 
 	private JRadioButton rdbtnAuto;
 	private JRadioButton rdbtnStick;
 	
+	private ComboPanel<CarType> cmbCarType;
+	private JTextField tfColor;
+	private ComboPanel cmbFuel;
 	//이미지 불러오기
 	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
-	private ComboPanel<CarType> panelCarType;
+	
 	
 	/**
 	 * Create the panel.
@@ -106,23 +110,42 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		tfName.setColumns(10);
 		
 		
-		panelBrand = new ComboPanel<>();
-		panelBrand.setTitle("브랜드");
+		cmbBrand = new ComboPanel<>();
+		cmbBrand.setTitle("브랜드");
 		
 		//브랜드 콤보박스
 		List<Brand> arrBrand = carUiService.selectAllBrand();
-		panelBrand.setComboItems(arrBrand);
-		panel_info.add(panelBrand);
+		cmbBrand.setComboItems(arrBrand);
+		panel_info.add(cmbBrand);
 		
-		panelCarType = new ComboPanel<>();
-		GridLayout gridLayout = (GridLayout) panelCarType.getLayout();
-		gridLayout.setColumns(2);
-		gridLayout.setRows(0);
-		panelCarType.setTitle("차종");
+		cmbCarType = new ComboPanel<>();
+		GridLayout gl_cmbCarType = (GridLayout) cmbCarType.getLayout();
+		gl_cmbCarType.setColumns(2);
+		gl_cmbCarType.setRows(0);
+		cmbCarType.setTitle("차종");
 		//차종콤보박스
 		List<CarType> arrType = carUiService.selectAllCarType();
-		panelCarType.setComboItems(arrType);		
-		panel_info.add(panelCarType);
+		cmbCarType.setComboItems(arrType);		
+		panel_info.add(cmbCarType);
+		
+		//연료콤보박스
+		cmbFuel = new ComboPanel();
+		cmbFuel.setTitle("연료");
+		List<Fuel> arrFuel = carUiService.selectAllFuel();
+		cmbFuel.setComboItems(arrFuel);
+		panel_info.add(cmbFuel);
+		
+		JPanel panelColor = new JPanel();
+		panel_info.add(panelColor);
+		panelColor.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblColor = new JLabel("색상");
+		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
+		panelColor.add(lblColor);
+		
+		tfColor = new JTextField();
+		panelColor.add(tfColor);
+		tfColor.setColumns(10);
 		
 		JPanel panelGear = new JPanel();
 		panel_info.add(panelGear);
@@ -240,11 +263,33 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		//getitem작성중!
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
-		/*String brand = panelBrand.getSelectedItems();
-		Brand brand = ;*/
-		CarModel item = new CarModel();
-		item.setCarCode(code);
-		return item;
+		//브랜드
+		String brandName = cmbBrand.getSelectedItems();
+		Brand brand = new Brand();
+		brand.setName(brandName);
+		//차종
+		String cartypeType = cmbCarType.getSelectedItems();
+		CarType carType = new CarType();
+		carType.setType(cartypeType);
+	
+		String color = tfColor.getText().trim();//색상
+		String gear = "";
+		boolean selectedGear = rdbtnAuto.isSelected();
+		if(selectedGear) {
+			gear = "auto";
+		}else {
+			gear = "stict";
+		}
+		
+		//가격
+		int basicCharge = Integer.parseInt(tfBasicCharge.getText());
+		int hour6 = Integer.parseInt(tfHour6.getText());
+		int hour10 = Integer.parseInt(tfHour10.getText());
+		int hour12 = Integer.parseInt(tfHour12.getText());
+		int hourElse = Integer.parseInt(tfHourElse.getText());
+		
+	//	CarModel item = new CarModel(code, name, color, gear, brand, carType, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, rentCnt)
+		return null;
 	}
 	
 
@@ -252,15 +297,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
 		
-		panelBrand.setSelectedItem(carModel.getBrand());
-		panelCarType.setSelectedItem(carModel.getCarType());
+		cmbBrand.setSelectedItem(carModel.getBrand());
+		cmbCarType.setSelectedItem(carModel.getCarType());
 		
+		tfColor.setText(carModel.getColor());
 		tfHour6.setText(carModel.getHour6()+"");
 		tfHour10.setText(carModel.getHour10()+"");
 		tfHour12.setText(carModel.getHour12()+"");
 		tfHourElse.setText(carModel.getHourElse()+"");
 		tfBasicCharge.setText(carModel.getBasicCharge()+"");
-		//변속기
+
 		String gear = carModel.getGear();
 		if(gear.equals("auto")) {
 			rdbtnAuto.setSelected(true);
