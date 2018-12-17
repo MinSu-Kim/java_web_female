@@ -9,6 +9,7 @@ import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.EmployeeMapper;
 import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
+import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -43,6 +44,18 @@ public class EmployeeMapperTest extends AbstractTest {
 		int list = dao.selectEmployeeById(searchId);
 		
 		Assert.assertEquals(1, list);
+	}
+	
+	@Test
+	public void test04selectEmployeeByPw() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Employee searchPw = new Employee();
+		searchPw.setPasswd("rootroot");
+		int list = dao.selectEmployeeByPw(searchPw);
+		
+		Assert.assertEquals(1, list);
+		//Assertion error 기대 값이 없음
 	}
 	/*@Test
 	public void test03insertEmployee() {

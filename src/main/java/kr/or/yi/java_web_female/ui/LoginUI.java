@@ -140,7 +140,28 @@ public class LoginUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, customer);
 			JOptionPane.showMessageDialog(null, employee);
 			
-			int res = cusService.selectCustomerById(customer);
+			if(checkManager.isSelected()) {
+				int empRes = empService.selectEmployeeById(employee)+empService.selectEmployeeByPw(employee);
+				if(empRes == 2) {
+					JOptionPane.showMessageDialog(null, "로그인 성공");
+					TestFrame frame = new TestFrame(); // 고객용 화면 UI로 변경 해야됨
+					frame.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
+				}
+			}else {
+				int res = cusService.selectCustomerById(customer)+cusService.selectCustomerByPw(customer);
+				if(res == 2) {
+					JOptionPane.showMessageDialog(null, "로그인 성공");
+					TestFrame frame = new TestFrame(); // 고객용 화면 UI로 변경 해야됨
+					frame.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
+				}
+				
+			}
+			
+/*			int res = cusService.selectCustomerById(customer);
 			int resw = cusService.selectCustomerByPw(customer);
 			
 			int empRes = empService.selectEmployeeById(employee);
@@ -156,7 +177,7 @@ public class LoginUI extends JFrame implements ActionListener {
 			}
 			if (res + resw == 0) {
 				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 다시 확인해 주세요.");
-			}
+			}*/
 			
 			/*if(resw==1) {
 				JOptionPane.showMessageDialog(null, "비밀번호 성공");
@@ -169,21 +190,7 @@ public class LoginUI extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 
-		/*
-		 * try { Customer customer = getItemCustomer();
-		 * JOptionPane.showMessageDialog(null, customer); int res =
-		 * cusService.selectCustomerById(customer); // 1이면 중복 0이면 사용가능
-		 * JOptionPane.showMessageDialog(null, res); if (tfId.getText().trim().length()
-		 * > 1) { if (res == 0) { JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다.");
-		 * tfPwd1.requestFocus();
-		 * 
-		 * } if (res == 1) { JOptionPane.showMessageDialog(null, "중복된 아이디입니다."); } }
-		 * else { JOptionPane.showMessageDialog(null, "아이디를 입력해주세요"); }
-		 * 
-		 * } catch (Exception e2) { e2.printStackTrace();
-		 * 
-		 * }
-		 */
+
 	}
 
 	private Employee getItemEmployee() {

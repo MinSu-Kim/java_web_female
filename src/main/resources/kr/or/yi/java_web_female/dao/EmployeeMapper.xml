@@ -24,6 +24,14 @@
 	</select>
 	
 	
+	<!-- selectEmployeeByPw -->
+	<select id="selectEmployeeByPw" resultType="Employee">
+		select code, name, phone, passwd, t_code as tCode 
+		from employee
+		where code=#{code} and passwd =password(#{passwd});
+	</select>
+	
+	
 	<!-- insert -->
 	  <!-- <insert id="insertEmployee" parameterType="Employee">
 		insert into employee(code, name, phone, passwd, t_code)

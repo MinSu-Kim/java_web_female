@@ -44,8 +44,8 @@
 	</select>
 	
 	<select id="selectCustomerByPw" resultMap="ResultCustom">
-		select code, Id, password(#{passwd}), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+		select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
 		from customer
-		where passwd = password(#{passwd})
+		where Id = #{id} and passwd =password(#{passwd});
 	</select>
 </mapper>
