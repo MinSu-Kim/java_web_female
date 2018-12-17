@@ -176,8 +176,4 @@ public class CarModel {
 		}
 		return false;
 	}
-	
-	
-	
-	
 }

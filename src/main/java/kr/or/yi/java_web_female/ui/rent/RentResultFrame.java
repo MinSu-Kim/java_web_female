@@ -1,19 +1,19 @@
 package kr.or.yi.java_web_female.ui.rent;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.border.TitledBorder;
+
+import kr.or.yi.java_web_female.dto.Rent;
 
 public class RentResultFrame extends JFrame {
 
@@ -26,6 +26,7 @@ public class RentResultFrame extends JFrame {
 	private JTextField tfEndTime;
 	private JTextField tfOption;
 	private JTextField tfInsurance;
+	private Rent rent;
 
 	/**
 	 * Create the frame.
@@ -56,6 +57,7 @@ public class RentResultFrame extends JFrame {
 		pCarInfo.add(lblCarName);
 		
 		tfCarName = new JTextField();
+		tfCarName.setEditable(false);
 		pCarInfo.add(tfCarName);
 		tfCarName.setColumns(10);
 		
@@ -169,6 +171,15 @@ public class RentResultFrame extends JFrame {
 		JButton btnCancel = new JButton("취소");
 		btnCancel.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		pBtn.add(btnCancel);
+	}
+	
+	public void setRent(Rent rent) {
+		this.rent = rent;
+		setItems();
+	}
+	
+	public void setItems() {
+		tfCustomer.setText(rent.getCustomerCode().getName());
 	}
 
 }

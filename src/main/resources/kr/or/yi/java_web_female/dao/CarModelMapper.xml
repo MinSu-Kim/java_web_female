@@ -64,6 +64,7 @@
 	
 	<resultMap type="CarModel" id="ResultCarModel">
 		<id column="carName" property="name"/>
+		<result column="car_code" property="carCode" />
 		<result column="color" property="color"/>
 		<result column="gear" property="gear"/>
 		<result column="cartype" property="carType.code"/>
@@ -73,7 +74,7 @@
 		<!-- <collection property="carOption" resultMap="kr.or.yi.java_web_female.dao.CarOptionMapper.ResultCarOption"/> -->
 	</resultMap>
 	<select id="selectCarModelByCarType" parameterType="CarType" resultMap="ResultCarModel">
-		select cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code
+		select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code
 		from car_model cm join brand b on cm.brand = b.no
 		where cartype = #{code};
 	</select>
