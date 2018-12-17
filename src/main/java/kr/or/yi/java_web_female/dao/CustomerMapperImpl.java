@@ -6,7 +6,6 @@ import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -39,7 +38,7 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-	@Override
+/*	@Override
 	public int selectCustomerById(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerById", customer);
@@ -48,8 +47,15 @@ public class CustomerMapperImpl implements CustomerMapper {
 			}
 			return 1;
 		}
-	}
+	}*/
 
+	@Override
+	public Customer selectCustomerById(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".selectCustomerById", customer);
+		}
+	}
+	
 	@Override
 	public int insertCustomer(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -82,7 +88,7 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-	@Override
+/*	@Override
 	public int selectCustomerByPw(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerByPw", customer);
@@ -91,6 +97,12 @@ public class CustomerMapperImpl implements CustomerMapper {
 			}
 			return 1;
 		}
-	}
+	}*/
 
+	@Override
+	public Customer selectCustomerByPw(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".selectCustomerByPw", customer);
+		}
+	}
 }

@@ -1,11 +1,10 @@
 package kr.or.yi.java_web_female;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JOptionPane;
 
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.ui.LoginUI;
 import kr.or.yi.java_web_female.ui.ManagerPanel;
 
@@ -13,33 +12,31 @@ import kr.or.yi.java_web_female.ui.ManagerPanel;
 public class TestFrame extends JFrame {
 
 	private ManagerPanel contentPane;
-
+	private Customer loginCusotmer;
+	private Employee loginEmployee;
+	
 	public TestFrame() {
+		setTitle(getLoginUser());
+		
+		JOptionPane.showMessageDialog(null, loginCusotmer==null?loginEmployee:loginCusotmer);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 600);
 		contentPane = new ManagerPanel();
 		setContentPane(contentPane);
 	}
 	
-	public static void main(String[] args) {
-		// 룩앤필 변경
-		try {
-			UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e1) {
-			e1.printStackTrace();
+	private String getLoginUser() {
+		String loginUserName = null;
+		if (LoginUI.loginCusotmer !=null) {
+			loginCusotmer = LoginUI.loginCusotmer;
+			loginUserName = loginCusotmer.getName();
 		}
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TestFrame frame = new TestFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		if (LoginUI.loginEmployee !=null) {
+			loginEmployee = LoginUI.loginEmployee;
+			loginUserName = loginEmployee.getName();
+		}
+		return String.format("%s님", loginUserName);
 	}
 
 }

@@ -3,7 +3,6 @@ package kr.or.yi.java_web_female.dao;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.CustomEvent;
-import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class CustomEventMapperImpl implements CustomEventMapper {

@@ -50,9 +50,10 @@ public class CustomerMapperTest extends AbstractTest {
 		
 		Customer searchId = new Customer();
 		searchId.setId("qwer12");
-		int list = dao.selectCustomerById(searchId);
-		
-		Assert.assertEquals(1, list);
+//		int list = dao.selectCustomerById(searchId);
+		Customer selectCustomer = dao.selectCustomerById(searchId);
+		Assert.assertNotNull(selectCustomer);
+//		Assert.assertEquals(1, list);
 	}
 	
 	@Test
@@ -75,8 +76,8 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setEmail("psw2701@naver.com");
 		int res = dao.insertCustomer(customer);
 		Assert.assertEquals(1, res);
-
 	}
+	
 	@Test
 	public void test05nextCustomerCode() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
@@ -100,10 +101,13 @@ public class CustomerMapperTest extends AbstractTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Customer searchPw = new Customer();
+		searchPw.setId("asd132");
 		searchPw.setPasswd("rootroot");
-		int list = dao.selectCustomerByPw(searchPw);
+		Customer selCustomer = dao.selectCustomerByPw(searchPw);
+		Assert.assertNotNull(selCustomer);
+/*		int list = dao.selectCustomerByPw(searchPw);
 		
-		Assert.assertEquals(1, list);
+		Assert.assertEquals(1, list);*/
 		//Assertion error 기대 값이 없음 
 	}
 }
