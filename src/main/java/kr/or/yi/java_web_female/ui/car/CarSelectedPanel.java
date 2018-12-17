@@ -32,23 +32,21 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JButton btnUpdate;
 	private JButton btnCancel;
 	private JButton btnDelete;
-	private CarPanel carPanel;//선택된 차량의 정보가 있는 페널
-	private CarUi carUi;
-	private List<CarModel> carList;//모델리스트
-	private AbstractListPanel<CarModel> carListPanel;
 	
 	private JTextField tfBasicCharge;
 	private JTextField tfHour6;
 	private JTextField tfHour10;
 	private JTextField tfHour12;
 	private JTextField tfHourElse;
-	private CarModel carModel;
-	
+	private ComboPanel<Brand> panelBrand;
 	//이미지 불러오기
 	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
 	
+	
 	public void setCarModel(CarModel carModel) {//set
-		this.carModel = carModel;
+		tfCode.setText(carModel.getCarCode());
+		tfName.setText(carModel.getName());
+	
 	}
 
 	/**
@@ -57,7 +55,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	public CarSelectedPanel() {
 		service = new CarModelService();
 		carUiService = new CarUiService();
-		carPanel = new CarPanel();
 		initComponents();
 	}
 
@@ -91,8 +88,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		
 		tfCode = new JTextField();
 		tfCode.setEditable(false);
-		//선택된 차량코드 자동등록
-		tfCode.setText("");
 		
 		panelCode.add(tfCode);
 		tfCode.setColumns(10);
@@ -106,14 +101,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelName.add(lblName);
 		
 		tfName = new JTextField();
-		//선택된 차량이름 자동등록
-		tfName.setText("");
 		
 		panelName.add(tfName);
 		tfName.setColumns(10);
 		
 		
-		ComboPanel<Brand> panelBrand = new ComboPanel<>();
+		panelBrand = new ComboPanel<>();
 		panelBrand.setTitle("브랜드");
 		
 		//브랜드 콤보박스

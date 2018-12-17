@@ -38,4 +38,8 @@ public class ComboPanel<T> extends JPanel {
 		DefaultComboBoxModel<T> model = new DefaultComboBoxModel<>(new Vector<T>(items));//item자리에 service.select
 		comboBox.setModel(model);
 	}
+	
+	public void setSelectedIndex(int index) {
+		comboBox.setSelectedIndex(index);
+	}
 }

@@ -136,7 +136,7 @@ public class CarPanel extends JPanel implements ActionListener {
 		CarUi frame = new CarUi();
 		CarModel carModel = panelList.getSelectedItem();
 		System.out.println(carModel);
-//		frame.setCarModel();
+		frame.setCarModel(carModel);
 		frame.setVisible(true);
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {

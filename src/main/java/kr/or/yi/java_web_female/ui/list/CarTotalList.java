@@ -82,7 +82,9 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 		String carCode = (String)table.getValueAt(selectedIndex, 0);
 		CarModel carModel = new CarModel(carCode);
 		int index = list.indexOf(carModel);
+		System.out.println(selectedIndex +":"+index);
 		return list.get(index);
+		/*return model;*/
 	}
 
 }

@@ -13,7 +13,7 @@ public class CarUi extends JFrame {
 
 	private JPanel contentPane;
 	private CarSelectedPanel panel;
-	private CarModel carModel;
+//	private CarModel carModel;
 
 
 	/**
@@ -24,7 +24,7 @@ public class CarUi extends JFrame {
 	}
 	private void initComponents() {
 		setTitle("차량 세부정보관리");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -36,7 +36,8 @@ public class CarUi extends JFrame {
 	}
 	
 	public void setCarModel(CarModel carModel) {
-		this.carModel = carModel;
+//		this.carModel = carModel;
+		panel.setCarModel(carModel);
 	}
 
 }
