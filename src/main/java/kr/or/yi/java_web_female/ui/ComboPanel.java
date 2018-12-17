@@ -42,4 +42,12 @@ public class ComboPanel<T> extends JPanel {
 	public void setSelectedIndex(int index) {
 		comboBox.setSelectedIndex(index);
 	}
+	
+	public void setSelectedItem(T item) {
+		comboBox.setSelectedItem(item);
+	}
+	
+	public void getSelectedItems() {
+		comboBox.getSelectedItem();
+	}
 }

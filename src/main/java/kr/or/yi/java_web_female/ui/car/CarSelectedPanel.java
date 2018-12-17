@@ -45,26 +45,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	//이미지 불러오기
 	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
+	private ComboPanel<CarType> panelCarType;
 	
-	public void setCarModel(CarModel carModel) {//set
-		tfCode.setText(carModel.getCarCode());
-		tfName.setText(carModel.getName());
-		//panelBrand.setSelectedIndex(); 브랜드
-		//panelCarType
-		tfHour6.setText(carModel.getHour6()+"");
-		tfHour10.setText(carModel.getHour10()+"");
-		tfHour12.setText(carModel.getHour12()+"");
-		tfHourElse.setText(carModel.getHourElse()+"");
-		tfBasicCharge.setText(carModel.getBasicCharge()+"");
-		//변속기
-		String gear = carModel.getGear();
-		if(gear.equals("auto")) {
-			rdbtnAuto.setSelected(true);
-		}else {
-			rdbtnStick.setSelected(true);
-		}
-	}
-
 	/**
 	 * Create the panel.
 	 */
@@ -130,7 +112,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelBrand.setComboItems(arrBrand);
 		panel_info.add(panelBrand);
 		
-		ComboPanel<CarType> panelCarType = new ComboPanel<>();
+		panelCarType = new ComboPanel<>();
 		GridLayout gridLayout = (GridLayout) panelCarType.getLayout();
 		gridLayout.setColumns(2);
 		gridLayout.setRows(0);
@@ -256,11 +238,34 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		//getitem작성중!
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
-		
+		/*String brand = panelBrand.getSelectedItems();
+		Brand brand = ;*/
 		CarModel item = new CarModel();
 		item.setCarCode(code);
 		return item;
 	}
+	
+
+	public void setCarModel(CarModel carModel) {//set
+		tfCode.setText(carModel.getCarCode());
+		tfName.setText(carModel.getName());
+		panelBrand.setSelectedItem(carModel.getBrand());
+		panelCarType.setSelectedItem(carModel.getCarType());
+		
+		tfHour6.setText(carModel.getHour6()+"");
+		tfHour10.setText(carModel.getHour10()+"");
+		tfHour12.setText(carModel.getHour12()+"");
+		tfHourElse.setText(carModel.getHourElse()+"");
+		tfBasicCharge.setText(carModel.getBasicCharge()+"");
+		//변속기
+		String gear = carModel.getGear();
+		if(gear.equals("auto")) {
+			rdbtnAuto.setSelected(true);
+		}else {
+			rdbtnStick.setSelected(true);
+		}
+	}
+
 }
 
 
