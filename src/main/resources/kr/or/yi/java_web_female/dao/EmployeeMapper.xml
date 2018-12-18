@@ -39,23 +39,27 @@
 	
 	
 	<!-- insert -->
-	<insert id="insertEmployee" parameterType="Employee">
+	<!-- <insert id="insertEmployee" parameterType="Employee">
 		insert into employee(code, name, phone, passwd, t_code)
 		values(#{code},	#{name}, #{phone}, #{passwd}, #{tCode})
+<<<<<<< HEAD
 	</insert> 
 
+=======
+	</insert> -->
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 
 	<!-- update -->
-	 <update id="updateEmployee" parameterType="Employee">
+	<!--  <update id="updateEmployee" parameterType="Employee">
 		update employee 
 		set code=#{code}, name=#{name},	phone=#{phone}, t_code=#{tCode}
 		where code=#{code}
-	</update> 
+	</update>  -->
 	
 	<!-- delete -->
-	<delete id="deleteEmployee" parameterType="Employee">
+	<!-- <delete id="deleteEmployee" parameterType="Employee">
 		delete from employee
 		where code=#{code}
-	</delete>
+	</delete> -->
 
 </mapper>
