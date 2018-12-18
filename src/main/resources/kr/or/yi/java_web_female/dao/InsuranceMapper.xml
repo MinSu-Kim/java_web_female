@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.java_web_female.dao.InsuranceMapper">
+	
+	<select id="selectInsuranceByAll" resultType="Insurance">
+		select code, car_type, price
+		from insurance;
+	</select>
+
+	<select id="selectInsuranceByCode" resultType="Insurance" parameterType="Insurance">
+		select code, car_type, price
+		from insurance
+		where code = #{code};
+	</select>
+</mapper>

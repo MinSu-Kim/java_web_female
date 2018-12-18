@@ -10,14 +10,12 @@ public class Insurance {
 	}
 
 	public Insurance(String code, String carType, int price) {
-		super();
 		this.code = code;
 		this.carType = carType;
 		this.price = price;
 	}
 
 	public Insurance(String code) {
-		super();
 		this.code = code;
 	}
 

@@ -204,41 +204,44 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 	}
 	
 	protected void do_panelCarTypeComboBox_itemStateChanged(ItemEvent e) {
-		
+		setLoadAddList();
 	}
 
 	protected void do_panelBrandComboBox_itemStateChanged(ItemEvent e) {
-		
+		setLoadAddList();
 	}
 	protected void do_panelFuelComboBox_itemStateChanged(ItemEvent e) {
-		
+		setLoadAddList();
 	}
 	protected void do_rdbtnAuto_itemStateChanged(ItemEvent e) {
-
+		setLoadAddList();
 	}
 	protected void do_rdbtnStick_itemStateChanged(ItemEvent e) {
-		
+		setLoadAddList();
 	}
 	
 
-	private void setLoadAddList(Map<String, String> maps) {
-		Map<String, String> map = new HashMap<>();
+	private void setLoadAddList() {
+		Map<String, String> maps = new HashMap<>();
 		
 		CarType cartype = panelCarType.getSelectedItems();
 		Brand brand = panelBrand.getSelectedItems();
 		Fuel fuel = panelFuel.getSelectedItems();
+		String gear;
 		if(rdbtnStick.isSelected()) {
-			
+			gear = "stick";
+		}else if(rdbtnAuto.isSelected()){
+			gear = "auto";
 		}else {
-			
+			gear = null;
 		}
 
+		maps.put("cartype", cartype.getCode());
+		maps.put("brand", brand.getNo());
+		maps.put("fuel", fuel.getCode());
+		maps.put("gear", gear);
 		
-		map.put("cartype", cartype.getCode());
-		map.put("brand", brand.getNo());
-		map.put("fuel", fuel.getCode());
-		
-		list = modelService.SelectCarModelWithWhere(map);
+		list = modelService.SelectCarModelWithWhere(maps);
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);

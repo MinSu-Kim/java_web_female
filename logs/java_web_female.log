@@ -422,3 +422,2071 @@
 [2018-12-18] ==>  Preparing: delete from title where code=?; 
 [2018-12-18] ==> Parameters: T003(String)
 [2018-12-18] <==    Updates: 1
+<<<<<<< HEAD
+=======
+[2018-12-18] ==>  Preparing: select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? and passwd = password(?); 
+[2018-12-18] ==> Parameters: asd132(String), rootroot(String)
+[2018-12-18] <==    Columns: code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, ê¹€ì² ìˆ˜, ëŒ€êµ¬ ì„œêµ¬, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2ì¢…ë³´í†µ, G001, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = ?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==    Columns: code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, code, name, rate
+[2018-12-18] <==        Row: C001, asd132, *6C362347EBEAA7DF44F6D34884615A35095E80EB, ê¹€ì² ìˆ˜, ëŒ€êµ¬ ì„œêµ¬, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2ì¢…ë³´í†µ, G001, 1, EVT1, C001, 0, EVT1, ì²«ê°€ìž…, 3
+[2018-12-18] <==        Row: C001, asd132, *6C362347EBEAA7DF44F6D34884615A35095E80EB, ê¹€ì² ìˆ˜, ëŒ€êµ¬ ì„œêµ¬, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2ì¢…ë³´í†µ, G001, 1, EVT2, C001, 0, EVT2, ìƒì¼ì¶•í•˜, 5
+[2018-12-18] <==      Total: 2
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] test01selectBrandByNo()
+[2018-12-18] ==>  Preparing: select no, name from brand where no=?; 
+[2018-12-18] ==> Parameters: B1(String)
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectBrandByAll()
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] test03insertBrand()
+[2018-12-18] ==>  Preparing: insert into Brand values(?,?); 
+[2018-12-18] ==> Parameters: B4(String), GM(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateBrand()
+[2018-12-18] ==>  Preparing: update Brand set no=?, name=? where no=?; 
+[2018-12-18] ==> Parameters: B4(String), ¸£³ë(String), B4(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteBrand()
+[2018-12-18] ==>  Preparing: delete from Brand where no=?; 
+[2018-12-18] ==> Parameters: B4(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCarModelByNo()
+[2018-12-18] ==>  Preparing: SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt FROM car_model where car_code=?; 
+[2018-12-18] ==> Parameters: V001(String)
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel, is_rent, rent_cnt
+[2018-12-18] <==        Row: V001, ¸ð´×, wh, auto, B2, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarModelByAll()
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ¸ð´×, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, °æÇü
+[2018-12-18] <==        Row: V002, ¾Æ¹Ý¶¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V004, ÇÁ¶óÀÌµå, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V005, LF½î³ªÅ¸, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ÁßÇü
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ÁßÇü
+[2018-12-18] <==        Row: V007, ±×·£Àú, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ´ëÇü
+[2018-12-18] <==        Row: V008, ½ºÆ÷Æ¼Áö, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ½ÂÇÕ
+[2018-12-18] <==      Total: 8
+[2018-12-18] test03insertCarModel()
+[2018-12-18] ==>  Preparing: INSERT INTO car_model (car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt) VALUES(?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
+[2018-12-18] ==> Parameters: V009(String), ·¹ÀÌ(String), wh(String), stick(String), B2(String), S1(String), 70000(Integer), 40000(Integer), 53000(Integer), 59000(Integer), 70000(Integer), lpg(String), false(Boolean), 0(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarModel()
+[2018-12-18] ==>  Preparing: UPDATE car_model SET name=?, color=?, gear=?, brand=?, cartype=?, basic_charge=?, hour6=?, hour10=?, hour12=?, hour_else=?, fuel_code=?, is_rent=?, rent_cnt=? WHERE car_code=?; 
+[2018-12-18] ==> Parameters: ¸¶Æ¼Áî(String), bl(String), stick(String), B2(String), S1(String), 60000(Integer), 30000(Integer), 43000(Integer), 49000(Integer), 60000(Integer), lpg(String), false(Boolean), 0(Integer), V009(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarModel()
+[2018-12-18] ==>  Preparing: DELETE FROM car_model WHERE car_code=?; 
+[2018-12-18] ==> Parameters: V009(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test08selectCarModelByCarType()
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S2(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V002, ¾Æ¹Ý¶¼AD, bk, auto, hyundai, S2, 108000, gasolin
+[2018-12-18] <==        Row: V004, ÇÁ¶óÀÌµå, wh, stick, kia, S2, 118000, lpg
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, bmw, S2, 204000, diesel
+[2018-12-18] <==      Total: 3
+[2018-12-18] test09SelectCarModelWithWhere()
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code WHERE cartype=? AND brand=? AND gear=? 
+[2018-12-18] ==> Parameters: S2(String), b2(String), auto(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01selectCarOptionByNo()
+[2018-12-18] ==>  Preparing: select no, name, price from car_option where no=?; 
+[2018-12-18] ==> Parameters: 1(Integer)
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarOptionByAll()
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] test03insertCarOption()
+[2018-12-18] ==>  Preparing: insert into Car_option values(?,?,?); 
+[2018-12-18] ==> Parameters: 5(Integer), ³×ºñ°ÔÀÌ¼Ç(String), 5000(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarOption()
+[2018-12-18] ==>  Preparing: update Car_option set no=?, name=?, price=? where no=?; 
+[2018-12-18] ==> Parameters: 5(Integer), ºí·¢¹Ú½º(String), 7000(Integer), 5(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarOption()
+[2018-12-18] ==>  Preparing: delete from Car_option where no=?; 
+[2018-12-18] ==> Parameters: 5(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCarTypeByNo()
+[2018-12-18] ==>  Preparing: select code, type from Car_type where code=?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, °æÇü
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarTypeByAll()
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, °æÇü
+[2018-12-18] <==        Row: S2, ¼ÒÇü
+[2018-12-18] <==        Row: S3, ÁßÇü
+[2018-12-18] <==        Row: S4, ´ëÇü
+[2018-12-18] <==        Row: S5, ½ÂÇÕ
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] test03insertCarType()
+[2018-12-18] ==>  Preparing: insert into Car_type values(?,?); 
+[2018-12-18] ==> Parameters: S7(String), ¹ö½º(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarType()
+[2018-12-18] ==>  Preparing: update Car_type set code=?, type=? where code=?; 
+[2018-12-18] ==> Parameters: S7(String), °í±Þ(String), S7(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarType()
+[2018-12-18] ==>  Preparing: delete from Car_type where code=?; 
+[2018-12-18] ==> Parameters: S7(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCustomEventByCustomCode()
+[2018-12-18] ==>  Preparing: select event_code, custom_code, is_use, code, name, rate from custom_event ce join event e on ce.event_code = e.code where custom_code=?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==    Columns: event_code, custom_code, is_use, code, name, rate
+[2018-12-18] <==        Row: EVT1, C001, 0, EVT1, Ã¹°¡ÀÔ, 3
+[2018-12-18] <==        Row: EVT2, C001, 0, EVT2, »ýÀÏÃàÇÏ, 5
+[2018-12-18] <==      Total: 2
+[2018-12-18] test01SelectCustomerByName()
+[2018-12-18] ==>  Preparing: select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where name = ? 
+[2018-12-18] ==> Parameters: ±è¿µÈñ(String)
+[2018-12-18] <==    Columns: code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C002, qwer12, *7FB1F1B8AD1B4CFD578E76ABC1B6ADFF70D04FA0, ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==        Row: C009, xbmhw325, *72D54E07C75AADFBAFDEEFDC03A3BD7749C5D612, ±è¿µÈñ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==      Total: 2
+[2018-12-18] test02SelectCustomerByAll()
+[2018-12-18] ==>  Preparing: select code, Id, password(?), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer 
+[2018-12-18] ==> Parameters: null
+[2018-12-18] <==    Columns: code, Id, password(null), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, , ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1
+[2018-12-18] <==        Row: C002, qwer12, , ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==        Row: C003, zxcv0523, , ¹ÚÃ¶¹Î, ºÎ»ê µ¿±¸, 010-2222-5555, 1961-10-25, abc@gnaver.com, E002, 1Á¾º¸Åë, G002, 7
+[2018-12-18] <==        Row: C004, gtshv512, , ÀÌ¼ö¹Î, ´ëÀü ¼­±¸, 010-3333-4444, 1987-05-27, abc@gmail.com, E001, 2Á¾º¸Åë, G002, 9
+[2018-12-18] <==        Row: C005, gstjsva12, , ³ª¿µ¼®, ´ë±¸ ¼ö¼º±¸, 010-4444-3333, 1958-12-31, abc@daum.net, E001, 2Á¾º¸Åë, G003, 21
+[2018-12-18] <==        Row: C006, aefvb238, , °­È£µ¿, ´ë±¸ µ¿±¸, 010-5555-2222, 1999-11-04, abc@daum.com, E002, 1Á¾º¸Åë, G003, 30
+[2018-12-18] <==        Row: C007, fkufj12, , ±è¹ÎÁ¤, ¿ï»ê ¼­±¸, 010-6666-1111, 1994-03-16, abc@naver.com, E002, 2Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C008, xbmhw325, , ±èÀç¿µ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C009, xbmhw325, , ±è¿µÈñ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C010, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==      Total: 10
+[2018-12-18] test03selectCustomerById()
+[2018-12-18] ==>  Preparing: select code, Id, password(?), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? 
+[2018-12-18] ==> Parameters: null, qwer12(String)
+[2018-12-18] <==    Columns: code, Id, password(null), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C002, qwer12, , ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==      Total: 1
+[2018-12-18] test04insertCustomer()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 11
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: insert into customer(code, Id, passwd, Name, address, phone, dob, email ) values(?, ?, password(?), ?, ?, ?, ?, ? ) 
+[2018-12-18] ==> Parameters: C011(String), psw2701(String), password(String), ¹Ú¼ö¿Ï(String), ´ë±¸(String), 010-5757-5959(String), 2018-12-13 14:21:00.053(Timestamp), psw2701@naver.com(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05nextCustomerCode()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 12
+[2018-12-18] <==      Total: 1
+[2018-12-18] test06nextCode()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 12
+[2018-12-18] <==      Total: 1
+[2018-12-18] test07selectCustomerByPw()
+[2018-12-18] ==>  Preparing: select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? and passwd = password(?); 
+[2018-12-18] ==> Parameters: asd132(String), rootroot(String)
+[2018-12-18] <==    Columns: code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] test08selectCustomerByCode()
+[2018-12-18] ==>  Preparing: select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = ?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==    Columns: code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, code, name, rate
+[2018-12-18] <==        Row: C001, asd132, *6C362347EBEAA7DF44F6D34884615A35095E80EB, ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1, EVT1, C001, 0, EVT1, Ã¹°¡ÀÔ, 3
+[2018-12-18] <==        Row: C001, asd132, *6C362347EBEAA7DF44F6D34884615A35095E80EB, ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1, EVT2, C001, 0, EVT2, »ýÀÏÃàÇÏ, 5
+[2018-12-18] <==      Total: 2
+[2018-12-18] test01selectEmployeeByNo()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee where code=? 
+[2018-12-18] ==> Parameters: E001(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectEmployeeByAll()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==        Row: E002, ³ÊÀÏ¹Ý»ç¿ø, 010-5678-5678, *C2D24DCA38E9E862098B85BF0AB35CAA52803797, T002
+[2018-12-18] <==      Total: 2
+[2018-12-18] test03selectEmployeeById()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee where code=? 
+[2018-12-18] ==> Parameters: E001(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test04selectEmployeeByPw()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test01selectFuelByNo()
+[2018-12-18] ==>  Preparing: select no, code from fuel where code=? 
+[2018-12-18] ==> Parameters: lpg(String)
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectFuelByAll()
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] test03insertFuel()
+[2018-12-18] ==>  Preparing: insert into fuel values(?,?); 
+[2018-12-18] ==> Parameters: 6(Integer), ¼ö¼Ò(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateFuel()
+[2018-12-18] ==>  Preparing: update Fuel set code=? where no=?; 
+[2018-12-18] ==> Parameters: ¼ö¼Ò2(String), 6(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteFuel()
+[2018-12-18] ==>  Preparing: delete from fuel where no=?; 
+[2018-12-18] ==> Parameters: 6(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] testOpenSession()
+[2018-12-18] session org.apache.ibatis.session.defaults.DefaultSqlSession@486e05d0
+[2018-12-18] test01selectPostByName()
+[2018-12-18] ==>  Preparing: select zipcode, sido, sigungu, eupmyeon, doro, building1 , building2 from post where sido=? and doro=? order by building1, building2; 
+[2018-12-18] ==> Parameters: ´ë±¸±¤¿ª½Ã(String), ÅÂÀü·Î7±æ(String)
+[2018-12-18] <==    Columns: zipcode, sido, sigungu, eupmyeon, doro, building1, building2
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 2, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 2, 1
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 5
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 6
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 8
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 9
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 10
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 12
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 13
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 14
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 15
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 16
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 3, 18
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 6, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 2
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 4
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 5
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 6
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 7
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 9
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 10
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 11
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 12
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 13
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 14
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 15
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 16
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 17
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 7, 18
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 10, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 10, 1
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 10, 6
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 10, 14
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 10, 17
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 10, 20
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 10, 24
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 12, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 12, 1
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 13, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 14, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 16, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 16, 1
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 18, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 18, 1
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 20, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 22, 0
+[2018-12-18] <==        Row: 41456, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 24, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 27, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 27, 7
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 27, 9
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 27, 13
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 27, 17
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 29, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 7
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 9
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 11
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 12
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 13
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 14
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 15
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 16
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 17
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 19
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 20
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 25
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 26
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 28
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 31
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 30, 32
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 31, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 31, 1
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 32, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 33, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 34, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 34, 1
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 35, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 36, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 2
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 4
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 5
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 8
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 9
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 10
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 11
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 13
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 14
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 16
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 18
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 19
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 22
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 37, 23
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 38, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 38, 2
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 40, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 40, 1
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 41, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 3
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 6
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 7
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 10
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 11
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 12
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 16
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 17
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 42, 18
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 43, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 46, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 46, 1
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 48, 0
+[2018-12-18] <==        Row: 41455, ´ë±¸±¤¿ª½Ã, ºÏ±¸, , ÅÂÀü·Î7±æ, 48, 1
+[2018-12-18] <==      Total: 115
+[2018-12-18] test01selectTitleByNo()
+[2018-12-18] ==>  Preparing: select code, name, t_grant as tGrant from title where code=?; 
+[2018-12-18] ==> Parameters: T001(String)
+[2018-12-18] <==    Columns: code, name, tGrant
+[2018-12-18] <==        Row: T001, ¸Å´ÏÀú, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectTitleByAll()
+[2018-12-18] ==>  Preparing: select code, name, t_grant as tGrant from title 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, tGrant
+[2018-12-18] <==        Row: T001, ¸Å´ÏÀú, 1
+[2018-12-18] <==        Row: T002, ÀÏ¹Ý»ç¿ø, 0
+[2018-12-18] <==      Total: 2
+[2018-12-18] test03insertTitle()
+[2018-12-18] ==>  Preparing: insert into Title(code, name, t_grant) values(?, ?, ?) 
+[2018-12-18] ==> Parameters: T003(String), ÀÎÅÏ(String), false(Boolean)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateTitle()
+[2018-12-18] ==>  Preparing: update title set code=?, name=?, t_grant=? where code=?; 
+[2018-12-18] ==> Parameters: T003(String), ¾Ë¹Ù(String), false(Boolean), T003(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteTitle()
+[2018-12-18] ==>  Preparing: delete from title where code=?; 
+[2018-12-18] ==> Parameters: T003(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] ==>  Preparing: select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? and passwd = password(?); 
+[2018-12-18] ==> Parameters: asd132(String), rootroot(String)
+[2018-12-18] <==    Columns: code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, ê¹€ì² ìˆ˜, ëŒ€êµ¬ ì„œêµ¬, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2ì¢…ë³´í†µ, G001, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = ?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==    Columns: code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, code, name, rate
+[2018-12-18] <==        Row: C001, asd132, *6C362347EBEAA7DF44F6D34884615A35095E80EB, ê¹€ì² ìˆ˜, ëŒ€êµ¬ ì„œêµ¬, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2ì¢…ë³´í†µ, G001, 1, EVT1, C001, 0, EVT1, ì²«ê°€ìž…, 3
+[2018-12-18] <==        Row: C001, asd132, *6C362347EBEAA7DF44F6D34884615A35095E80EB, ê¹€ì² ìˆ˜, ëŒ€êµ¬ ì„œêµ¬, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2ì¢…ë³´í†µ, G001, 1, EVT2, C001, 0, EVT2, ìƒì¼ì¶•í•˜, 5
+[2018-12-18] <==      Total: 2
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] test01selectGradeByNo()
+[2018-12-18] test01selectGradeByNo()
+[2018-12-18] test01selectBrandByNo()
+[2018-12-18] test02selectBrandByAll()
+[2018-12-18] test03insertBrand()
+[2018-12-18] test04updateBrand()
+[2018-12-18] test05deleteBrand()
+[2018-12-18] test01selectCarModelByNo()
+[2018-12-18] test02selectCarModelByAll()
+[2018-12-18] test03insertCarModel()
+[2018-12-18] test04updateCarModel()
+[2018-12-18] test05deleteCarModel()
+[2018-12-18] test08selectCarModelByCarType()
+[2018-12-18] test09SelectCarModelWithWhere()
+[2018-12-18] test01selectCarOptionByNo()
+[2018-12-18] test02selectCarOptionByAll()
+[2018-12-18] test03insertCarOption()
+[2018-12-18] test04updateCarOption()
+[2018-12-18] test05deleteCarOption()
+[2018-12-18] test01selectCarTypeByNo()
+[2018-12-18] test02selectCarTypeByAll()
+[2018-12-18] test03insertCarType()
+[2018-12-18] test04updateCarType()
+[2018-12-18] test05deleteCarType()
+[2018-12-18] test01selectCustomEventByCustomCode()
+[2018-12-18] test01SelectCustomerByName()
+[2018-12-18] test02SelectCustomerByAll()
+[2018-12-18] test03selectCustomerById()
+[2018-12-18] test04insertCustomer()
+[2018-12-18] test05nextCustomerCode()
+[2018-12-18] test06nextCode()
+[2018-12-18] test07selectCustomerByPw()
+[2018-12-18] test08selectCustomerByCode()
+[2018-12-18] test01selectEmployeeByNo()
+[2018-12-18] test02selectEmployeeByAll()
+[2018-12-18] test03selectEmployeeById()
+[2018-12-18] test04selectEmployeeByPw()
+[2018-12-18] test01selectFuelByNo()
+[2018-12-18] test02selectFuelByAll()
+[2018-12-18] test03insertFuel()
+[2018-12-18] test04updateFuel()
+[2018-12-18] test05deleteFuel()
+[2018-12-18] test01selectGradeByNo()
+[2018-12-18] testOpenSession()
+[2018-12-18] test01selectPostByName()
+[2018-12-18] test01selectTitleByNo()
+[2018-12-18] test02selectTitleByAll()
+[2018-12-18] test03insertTitle()
+[2018-12-18] test04updateTitle()
+[2018-12-18] test05deleteTitle()
+[2018-12-18] test01selectGradeByNo()
+[2018-12-18] test01selectGradeByNo()
+[2018-12-18] ==>  Preparing: select code, name, rate from grade where code=? 
+[2018-12-18] ==> Parameters: G001(String)
+[2018-12-18] <==    Columns: code, name, rate
+[2018-12-18] <==        Row: G001, ºê·ÐÁî, 5
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectTitleByAll()
+[2018-12-18] test02selectGradeByAll()
+[2018-12-18] test02selectGradeByAll()
+[2018-12-18] ==>  Preparing: select code, name, rate from grade 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, rate
+[2018-12-18] <==        Row: G001, ºê·ÐÁî, 5
+[2018-12-18] <==        Row: G002, ½Ç¹ö, 10
+[2018-12-18] <==        Row: G003, °ñµå, 20
+[2018-12-18] <==        Row: G004, ºí·¢¸®½ºÆ®, 0
+[2018-12-18] <==      Total: 4
+[2018-12-18] test03insertGrade()
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, rate) values(?, ?, rate=?) 
+[2018-12-18] ==> Parameters: G005(String), ´ÙÀÌ¾Æ(String), 25(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateGrade()
+[2018-12-18] test04updateGrade()
+[2018-12-18] ==>  Preparing: update grade set code=?, name=?, rate=? where code=? 
+[2018-12-18] ==> Parameters: G005(String), ´õºí°ñµå(String), 23(Integer), G005(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteGrade()
+[2018-12-18] ==>  Preparing: delete from grade where code=? 
+[2018-12-18] ==> Parameters: G005(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, rate) values(?, ?, rate=?) 
+[2018-12-18] ==> Parameters: G005(String), ´ÙÀÌ¾Æ(String), 25(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectGradeByNo()
+[2018-12-18] ==>  Preparing: select code, name, rate from grade where code=? 
+[2018-12-18] ==> Parameters: G001(String)
+[2018-12-18] <==    Columns: code, name, rate
+[2018-12-18] <==        Row: G001, ºê·ÐÁî, 5
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectGradeByAll()
+[2018-12-18] ==>  Preparing: select code, name, rate from grade 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, rate
+[2018-12-18] <==        Row: G001, ºê·ÐÁî, 5
+[2018-12-18] <==        Row: G002, ½Ç¹ö, 10
+[2018-12-18] <==        Row: G003, °ñµå, 20
+[2018-12-18] <==        Row: G004, ºí·¢¸®½ºÆ®, 0
+[2018-12-18] <==        Row: G005, ´ÙÀÌ¾Æ, 0
+[2018-12-18] <==      Total: 5
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, rate) values(?, ?, rate=?) 
+[2018-12-18] ==> Parameters: G005(String), ´ÙÀÌ¾Æ(String), 25(Integer)
+[2018-12-18] test04updateGrade()
+[2018-12-18] ==>  Preparing: update grade set code=?, name=?, rate=? where code=? 
+[2018-12-18] ==> Parameters: G005(String), ´õºí°ñµå(String), 23(Integer), G005(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteGrade()
+[2018-12-18] ==>  Preparing: delete from grade where code=? 
+[2018-12-18] ==> Parameters: G005(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test01selectEmployeeByNo()
+[2018-12-18] test02selectEmployeeByAll()
+[2018-12-18] test03selectEmployeeById()
+[2018-12-18] test04selectEmployeeByPw()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test01selectEmployeeByNo()
+[2018-12-18] test02selectEmployeeByAll()
+[2018-12-18] test03selectEmployeeById()
+[2018-12-18] test04selectEmployeeByPw()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+=======
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+<<<<<<< HEAD
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: asd132(String), rootroot(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ë‚˜ë§¤ë‹ˆì €, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ë‚˜ë§¤ë‹ˆì €, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ë‚˜ë§¤ë‹ˆì €, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ë‚˜ë§¤ë‹ˆì €, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where name = ? 
+[2018-12-18] ==> Parameters: ê¹€ì² ìˆ˜(String)
+[2018-12-18] <==    Columns: code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, *6C362347EBEAA7DF44F6D34884615A35095E80EB, ê¹€ì² ìˆ˜, ëŒ€êµ¬ ì„œêµ¬, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2ì¢…ë³´í†µ, G001, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S2(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, hyundai, S2, 108000, gasolin
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, kia, S2, 118000, lpg
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, bmw, S2, 204000, diesel
+[2018-12-18] <==      Total: 3
+[2018-12-18] test01selectBrandByNo()
+[2018-12-18] ==>  Preparing: select no, name from brand where no=?; 
+[2018-12-18] ==> Parameters: B1(String)
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectBrandByAll()
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] test03insertBrand()
+[2018-12-18] ==>  Preparing: insert into Brand values(?,?); 
+[2018-12-18] ==> Parameters: B4(String), GM(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateBrand()
+[2018-12-18] ==>  Preparing: update Brand set no=?, name=? where no=?; 
+[2018-12-18] ==> Parameters: B4(String), ¸£³ë(String), B4(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteBrand()
+[2018-12-18] ==>  Preparing: delete from Brand where no=?; 
+[2018-12-18] ==> Parameters: B4(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCarModelByNo()
+[2018-12-18] ==>  Preparing: SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt FROM car_model where car_code=?; 
+[2018-12-18] ==> Parameters: V001(String)
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel, is_rent, rent_cnt
+[2018-12-18] <==        Row: V001, ¸ð´×, wh, auto, B2, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarModelByAll()
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ¸ð´×, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, °æÇü
+[2018-12-18] <==        Row: V002, ¾Æ¹Ý¶¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V004, ÇÁ¶óÀÌµå, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V005, LF½î³ªÅ¸, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ÁßÇü
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ÁßÇü
+[2018-12-18] <==        Row: V007, ±×·£Àú, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ´ëÇü
+[2018-12-18] <==        Row: V008, ½ºÆ÷Æ¼Áö, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ½ÂÇÕ
+[2018-12-18] <==      Total: 8
+[2018-12-18] test03insertCarModel()
+[2018-12-18] ==>  Preparing: INSERT INTO car_model (car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt) VALUES(?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
+[2018-12-18] ==> Parameters: V009(String), ·¹ÀÌ(String), wh(String), stick(String), B2(String), S1(String), 70000(Integer), 40000(Integer), 53000(Integer), 59000(Integer), 70000(Integer), lpg(String), false(Boolean), 0(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarModel()
+[2018-12-18] ==>  Preparing: UPDATE car_model SET name=?, color=?, gear=?, brand=?, cartype=?, basic_charge=?, hour6=?, hour10=?, hour12=?, hour_else=?, fuel_code=?, is_rent=?, rent_cnt=? WHERE car_code=?; 
+[2018-12-18] ==> Parameters: ¸¶Æ¼Áî(String), bl(String), stick(String), B2(String), S1(String), 60000(Integer), 30000(Integer), 43000(Integer), 49000(Integer), 60000(Integer), lpg(String), false(Boolean), 0(Integer), V009(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarModel()
+[2018-12-18] ==>  Preparing: DELETE FROM car_model WHERE car_code=?; 
+[2018-12-18] ==> Parameters: V009(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test08selectCarModelByCarType()
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S2(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V002, ¾Æ¹Ý¶¼AD, bk, auto, hyundai, S2, 108000, gasolin
+[2018-12-18] <==        Row: V004, ÇÁ¶óÀÌµå, wh, stick, kia, S2, 118000, lpg
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, bmw, S2, 204000, diesel
+[2018-12-18] <==      Total: 3
+[2018-12-18] test09SelectCarModelWithWhere()
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code WHERE cartype=? AND brand=? AND gear=? 
+[2018-12-18] ==> Parameters: S2(String), b2(String), auto(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01selectCarOptionByNo()
+[2018-12-18] ==>  Preparing: select no, name, price from car_option where no=?; 
+[2018-12-18] ==> Parameters: 1(Integer)
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarOptionByAll()
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] test03insertCarOption()
+[2018-12-18] ==>  Preparing: insert into Car_option values(?,?,?); 
+[2018-12-18] ==> Parameters: 5(Integer), ³×ºñ°ÔÀÌ¼Ç(String), 5000(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarOption()
+[2018-12-18] ==>  Preparing: update Car_option set no=?, name=?, price=? where no=?; 
+[2018-12-18] ==> Parameters: 5(Integer), ºí·¢¹Ú½º(String), 7000(Integer), 5(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarOption()
+[2018-12-18] ==>  Preparing: delete from Car_option where no=?; 
+[2018-12-18] ==> Parameters: 5(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCarTypeByNo()
+[2018-12-18] ==>  Preparing: select code, type from Car_type where code=?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, °æÇü
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarTypeByAll()
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, °æÇü
+[2018-12-18] <==        Row: S2, ¼ÒÇü
+[2018-12-18] <==        Row: S3, ÁßÇü
+[2018-12-18] <==        Row: S4, ´ëÇü
+[2018-12-18] <==        Row: S5, ½ÂÇÕ
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] test03insertCarType()
+[2018-12-18] ==>  Preparing: insert into Car_type values(?,?); 
+[2018-12-18] ==> Parameters: S7(String), ¹ö½º(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarType()
+[2018-12-18] ==>  Preparing: update Car_type set code=?, type=? where code=?; 
+[2018-12-18] ==> Parameters: S7(String), °í±Þ(String), S7(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarType()
+[2018-12-18] ==>  Preparing: delete from Car_type where code=?; 
+[2018-12-18] ==> Parameters: S7(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCustomEventByCustomCode()
+[2018-12-18] ==>  Preparing: select event_code, custom_code, is_use, code, name, rate from custom_event ce join event e on ce.event_code = e.code where custom_code=?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01SelectCustomerByName()
+[2018-12-18] ==>  Preparing: select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where name = ? 
+[2018-12-18] ==> Parameters: ±è¿µÈñ(String)
+[2018-12-18] <==    Columns: code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C002, qwer12, *7FB1F1B8AD1B4CFD578E76ABC1B6ADFF70D04FA0, ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==        Row: C009, xbmhw325, *72D54E07C75AADFBAFDEEFDC03A3BD7749C5D612, ±è¿µÈñ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==      Total: 2
+[2018-12-18] test02SelectCustomerByAll()
+[2018-12-18] ==>  Preparing: select code, Id, password(?), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer 
+[2018-12-18] ==> Parameters: null
+[2018-12-18] <==    Columns: code, Id, password(null), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, , ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1
+[2018-12-18] <==        Row: C002, qwer12, , ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==        Row: C003, zxcv0523, , ¹ÚÃ¶¹Î, ºÎ»ê µ¿±¸, 010-2222-5555, 1961-10-25, abc@gnaver.com, E002, 1Á¾º¸Åë, G002, 7
+[2018-12-18] <==        Row: C004, gtshv512, , ÀÌ¼ö¹Î, ´ëÀü ¼­±¸, 010-3333-4444, 1987-05-27, abc@gmail.com, E001, 2Á¾º¸Åë, G002, 9
+[2018-12-18] <==        Row: C005, gstjsva12, , ³ª¿µ¼®, ´ë±¸ ¼ö¼º±¸, 010-4444-3333, 1958-12-31, abc@daum.net, E001, 2Á¾º¸Åë, G003, 21
+[2018-12-18] <==        Row: C006, aefvb238, , °­È£µ¿, ´ë±¸ µ¿±¸, 010-5555-2222, 1999-11-04, abc@daum.com, E002, 1Á¾º¸Åë, G003, 30
+[2018-12-18] <==        Row: C007, fkufj12, , ±è¹ÎÁ¤, ¿ï»ê ¼­±¸, 010-6666-1111, 1994-03-16, abc@naver.com, E002, 2Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C008, xbmhw325, , ±èÀç¿µ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C009, xbmhw325, , ±è¿µÈñ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C010, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C011, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C012, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C013, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C014, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==      Total: 14
+[2018-12-18] test03selectCustomerById()
+[2018-12-18] ==>  Preparing: select code, Id, password(?), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? 
+[2018-12-18] ==> Parameters: null, qwer12(String)
+[2018-12-18] <==    Columns: code, Id, password(null), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C002, qwer12, , ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==      Total: 1
+[2018-12-18] test04insertCustomer()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 15
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: insert into customer(code, Id, passwd, Name, address, phone, dob, email ) values(?, ?, password(?), ?, ?, ?, ?, ? ) 
+[2018-12-18] ==> Parameters: C015(String), psw2701(String), password(String), ¹Ú¼ö¿Ï(String), ´ë±¸(String), 010-5757-5959(String), 2018-12-13 14:45:27.519(Timestamp), psw2701@naver.com(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05nextCustomerCode()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 16
+[2018-12-18] <==      Total: 1
+[2018-12-18] test06nextCode()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 16
+[2018-12-18] <==      Total: 1
+[2018-12-18] test07selectCustomerByPw()
+[2018-12-18] ==>  Preparing: select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? and passwd = password(?); 
+[2018-12-18] ==> Parameters: asd132(String), rootroot(String)
+[2018-12-18] <==    Columns: code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] test08selectCustomerByCode()
+[2018-12-18] ==>  Preparing: select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = ?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01selectEmployeeByNo()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee where code=? 
+[2018-12-18] ==> Parameters: E001(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectEmployeeByAll()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==        Row: E002, ³ÊÀÏ¹Ý»ç¿ø, 010-5678-5678, *C2D24DCA38E9E862098B85BF0AB35CAA52803797, T002
+[2018-12-18] <==      Total: 2
+[2018-12-18] test03selectEmployeeById()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee where code=? 
+[2018-12-18] ==> Parameters: E001(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test04selectEmployeeByPw()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test01selectFuelByNo()
+[2018-12-18] ==>  Preparing: select no, code from fuel where code=? 
+[2018-12-18] ==> Parameters: lpg(String)
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectFuelByAll()
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] test03insertFuel()
+[2018-12-18] ==>  Preparing: insert into fuel values(?,?); 
+[2018-12-18] ==> Parameters: 6(Integer), ¼ö¼Ò(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateFuel()
+[2018-12-18] ==>  Preparing: update Fuel set code=? where no=?; 
+[2018-12-18] ==> Parameters: ¼ö¼Ò2(String), 6(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteFuel()
+[2018-12-18] ==>  Preparing: delete from fuel where no=?; 
+[2018-12-18] ==> Parameters: 6(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01SelectInsuranceByAll()
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I000, S0, 0
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==        Row: I002, S2, 6500
+[2018-12-18] <==        Row: I003, S3, 11000
+[2018-12-18] <==        Row: I004, S4, 22000
+[2018-12-18] <==        Row: I005, S5, 22100
+[2018-12-18] <==        Row: I006, S6, 14000
+[2018-12-18] <==        Row: I007, S7, 45000
+[2018-12-18] <==      Total: 8
+[2018-12-18] testOpenSession()
+[2018-12-18] session org.apache.ibatis.session.defaults.DefaultSqlSession@17792aca
+[2018-12-18] test01selectPostByName()
+[2018-12-18] ==>  Preparing: select zipcode, sido, sigungu, eupmyeon, doro, building1 , building2 from post where sido=? and doro=? order by building1, building2; 
+[2018-12-18] ==> Parameters: ´ë±¸±¤¿ª½Ã(String), ÅÂÀü·Î7±æ(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01selectTitleByNo()
+[2018-12-18] ==>  Preparing: select code, name, t_grant as tGrant from title where code=?; 
+[2018-12-18] ==> Parameters: T001(String)
+[2018-12-18] <==    Columns: code, name, tGrant
+[2018-12-18] <==        Row: T001, ¸Å´ÏÀú, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectTitleByAll()
+[2018-12-18] ==>  Preparing: select code, name, t_grant as tGrant from title 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, tGrant
+[2018-12-18] <==        Row: T001, ¸Å´ÏÀú, 1
+[2018-12-18] <==        Row: T002, ÀÏ¹Ý»ç¿ø, 0
+[2018-12-18] <==      Total: 2
+[2018-12-18] test03insertTitle()
+[2018-12-18] ==>  Preparing: insert into Title(code, name, t_grant) values(?, ?, ?) 
+[2018-12-18] ==> Parameters: T003(String), ÀÎÅÏ(String), false(Boolean)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateTitle()
+[2018-12-18] ==>  Preparing: update title set code=?, name=?, t_grant=? where code=?; 
+[2018-12-18] ==> Parameters: T003(String), ¾Ë¹Ù(String), false(Boolean), T003(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteTitle()
+[2018-12-18] ==>  Preparing: delete from title where code=?; 
+[2018-12-18] ==> Parameters: T003(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectBrandByNo()
+[2018-12-18] ==>  Preparing: select no, name from brand where no=?; 
+[2018-12-18] ==> Parameters: B1(String)
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectBrandByAll()
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] test03insertBrand()
+[2018-12-18] ==>  Preparing: insert into Brand values(?,?); 
+[2018-12-18] ==> Parameters: B4(String), GM(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateBrand()
+[2018-12-18] ==>  Preparing: update Brand set no=?, name=? where no=?; 
+[2018-12-18] ==> Parameters: B4(String), ¸£³ë(String), B4(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteBrand()
+[2018-12-18] ==>  Preparing: delete from Brand where no=?; 
+[2018-12-18] ==> Parameters: B4(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCarModelByNo()
+[2018-12-18] ==>  Preparing: SELECT car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code as fuel, is_rent, rent_cnt FROM car_model where car_code=?; 
+[2018-12-18] ==> Parameters: V001(String)
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel, is_rent, rent_cnt
+[2018-12-18] <==        Row: V001, ¸ð´×, wh, auto, B2, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarModelByAll()
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ¸ð´×, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, °æÇü
+[2018-12-18] <==        Row: V002, ¾Æ¹Ý¶¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V004, ÇÁ¶óÀÌµå, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ¼ÒÇü
+[2018-12-18] <==        Row: V005, LF½î³ªÅ¸, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ÁßÇü
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ÁßÇü
+[2018-12-18] <==        Row: V007, ±×·£Àú, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ´ëÇü
+[2018-12-18] <==        Row: V008, ½ºÆ÷Æ¼Áö, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ½ÂÇÕ
+[2018-12-18] <==      Total: 8
+[2018-12-18] test03insertCarModel()
+[2018-12-18] ==>  Preparing: INSERT INTO car_model (car_code, name, color, gear, brand, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt) VALUES(?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?); 
+[2018-12-18] ==> Parameters: V009(String), ·¹ÀÌ(String), wh(String), stick(String), B2(String), S1(String), 70000(Integer), 40000(Integer), 53000(Integer), 59000(Integer), 70000(Integer), lpg(String), false(Boolean), 0(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarModel()
+[2018-12-18] ==>  Preparing: UPDATE car_model SET name=?, color=?, gear=?, brand=?, cartype=?, basic_charge=?, hour6=?, hour10=?, hour12=?, hour_else=?, fuel_code=?, is_rent=?, rent_cnt=? WHERE car_code=?; 
+[2018-12-18] ==> Parameters: ¸¶Æ¼Áî(String), bl(String), stick(String), B2(String), S1(String), 60000(Integer), 30000(Integer), 43000(Integer), 49000(Integer), 60000(Integer), lpg(String), false(Boolean), 0(Integer), V009(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarModel()
+[2018-12-18] ==>  Preparing: DELETE FROM car_model WHERE car_code=?; 
+[2018-12-18] ==> Parameters: V009(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test08selectCarModelByCarType()
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S2(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V002, ¾Æ¹Ý¶¼AD, bk, auto, hyundai, S2, 108000, gasolin
+[2018-12-18] <==        Row: V004, ÇÁ¶óÀÌµå, wh, stick, kia, S2, 118000, lpg
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, bmw, S2, 204000, diesel
+[2018-12-18] <==      Total: 3
+[2018-12-18] test09SelectCarModelWithWhere()
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code WHERE cartype=? AND brand=? AND gear=? 
+[2018-12-18] ==> Parameters: S2(String), b2(String), auto(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01selectCarOptionByNo()
+[2018-12-18] ==>  Preparing: select no, name, price from car_option where no=?; 
+[2018-12-18] ==> Parameters: 1(Integer)
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarOptionByAll()
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] test03insertCarOption()
+[2018-12-18] ==>  Preparing: insert into Car_option values(?,?,?); 
+[2018-12-18] ==> Parameters: 5(Integer), ³×ºñ°ÔÀÌ¼Ç(String), 5000(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarOption()
+[2018-12-18] ==>  Preparing: update Car_option set no=?, name=?, price=? where no=?; 
+[2018-12-18] ==> Parameters: 5(Integer), ºí·¢¹Ú½º(String), 7000(Integer), 5(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarOption()
+[2018-12-18] ==>  Preparing: delete from Car_option where no=?; 
+[2018-12-18] ==> Parameters: 5(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCarTypeByNo()
+[2018-12-18] ==>  Preparing: select code, type from Car_type where code=?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, °æÇü
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectCarTypeByAll()
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, °æÇü
+[2018-12-18] <==        Row: S2, ¼ÒÇü
+[2018-12-18] <==        Row: S3, ÁßÇü
+[2018-12-18] <==        Row: S4, ´ëÇü
+[2018-12-18] <==        Row: S5, ½ÂÇÕ
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] test03insertCarType()
+[2018-12-18] ==>  Preparing: insert into Car_type values(?,?); 
+[2018-12-18] ==> Parameters: S7(String), ¹ö½º(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateCarType()
+[2018-12-18] ==>  Preparing: update Car_type set code=?, type=? where code=?; 
+[2018-12-18] ==> Parameters: S7(String), °í±Þ(String), S7(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteCarType()
+[2018-12-18] ==>  Preparing: delete from Car_type where code=?; 
+[2018-12-18] ==> Parameters: S7(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01selectCustomEventByCustomCode()
+[2018-12-18] ==>  Preparing: select event_code, custom_code, is_use, code, name, rate from custom_event ce join event e on ce.event_code = e.code where custom_code=?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01SelectCustomerByName()
+[2018-12-18] ==>  Preparing: select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where name = ? 
+[2018-12-18] ==> Parameters: ±è¿µÈñ(String)
+[2018-12-18] <==    Columns: code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C002, qwer12, *7FB1F1B8AD1B4CFD578E76ABC1B6ADFF70D04FA0, ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==        Row: C009, xbmhw325, *72D54E07C75AADFBAFDEEFDC03A3BD7749C5D612, ±è¿µÈñ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==      Total: 2
+[2018-12-18] test02SelectCustomerByAll()
+[2018-12-18] ==>  Preparing: select code, Id, password(?), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer 
+[2018-12-18] ==> Parameters: null
+[2018-12-18] <==    Columns: code, Id, password(null), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, , ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1
+[2018-12-18] <==        Row: C002, qwer12, , ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==        Row: C003, zxcv0523, , ¹ÚÃ¶¹Î, ºÎ»ê µ¿±¸, 010-2222-5555, 1961-10-25, abc@gnaver.com, E002, 1Á¾º¸Åë, G002, 7
+[2018-12-18] <==        Row: C004, gtshv512, , ÀÌ¼ö¹Î, ´ëÀü ¼­±¸, 010-3333-4444, 1987-05-27, abc@gmail.com, E001, 2Á¾º¸Åë, G002, 9
+[2018-12-18] <==        Row: C005, gstjsva12, , ³ª¿µ¼®, ´ë±¸ ¼ö¼º±¸, 010-4444-3333, 1958-12-31, abc@daum.net, E001, 2Á¾º¸Åë, G003, 21
+[2018-12-18] <==        Row: C006, aefvb238, , °­È£µ¿, ´ë±¸ µ¿±¸, 010-5555-2222, 1999-11-04, abc@daum.com, E002, 1Á¾º¸Åë, G003, 30
+[2018-12-18] <==        Row: C007, fkufj12, , ±è¹ÎÁ¤, ¿ï»ê ¼­±¸, 010-6666-1111, 1994-03-16, abc@naver.com, E002, 2Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C008, xbmhw325, , ±èÀç¿µ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C009, xbmhw325, , ±è¿µÈñ, ¼­¿ï ¼­ÃÊ±¸, 010-7777-0000, 1977-01-02, abc@gmail.com, E001, 1Á¾º¸Åë, G004, -1
+[2018-12-18] <==        Row: C010, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C011, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C012, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C013, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C014, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==        Row: C015, psw2701, , ¹Ú¼ö¿Ï, ´ë±¸, 010-5757-5959, 2018-12-13, psw2701@naver.com, null, null, null, null
+[2018-12-18] <==      Total: 15
+[2018-12-18] test03selectCustomerById()
+[2018-12-18] ==>  Preparing: select code, Id, password(?), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? 
+[2018-12-18] ==> Parameters: null, qwer12(String)
+[2018-12-18] <==    Columns: code, Id, password(null), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C002, qwer12, , ±è¿µÈñ, ¼­¿ï ¼­±¸, 010-1111-6666, 1972-09-11, abc@naver.com, E002, 1Á¾º¸Åë, G001, 3
+[2018-12-18] <==      Total: 1
+[2018-12-18] test04insertCustomer()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 16
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: insert into customer(code, Id, passwd, Name, address, phone, dob, email ) values(?, ?, password(?), ?, ?, ?, ?, ? ) 
+[2018-12-18] ==> Parameters: C016(String), psw2701(String), password(String), ¹Ú¼ö¿Ï(String), ´ë±¸(String), 010-5757-5959(String), 2018-12-13 14:49:31.439(Timestamp), psw2701@naver.com(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05nextCustomerCode()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 17
+[2018-12-18] <==      Total: 1
+[2018-12-18] test06nextCode()
+[2018-12-18] ==>  Preparing: select count(*)+1 from customer; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: count(*)+1
+[2018-12-18] <==        Row: 17
+[2018-12-18] <==      Total: 1
+[2018-12-18] test07selectCustomerByPw()
+[2018-12-18] ==>  Preparing: select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? and passwd = password(?); 
+[2018-12-18] ==> Parameters: asd132(String), rootroot(String)
+[2018-12-18] <==    Columns: code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
+[2018-12-18] <==        Row: C001, asd132, ±èÃ¶¼ö, ´ë±¸ ¼­±¸, 010-0000-7777, 1988-04-18, abc@gmail.com, E001, 2Á¾º¸Åë, G001, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] test08selectCustomerByCode()
+[2018-12-18] ==>  Preparing: select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = ?; 
+[2018-12-18] ==> Parameters: C001(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01selectEmployeeByNo()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee where code=? 
+[2018-12-18] ==> Parameters: E001(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectEmployeeByAll()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==        Row: E002, ³ÊÀÏ¹Ý»ç¿ø, 010-5678-5678, *C2D24DCA38E9E862098B85BF0AB35CAA52803797, T002
+[2018-12-18] <==      Total: 2
+[2018-12-18] test03selectEmployeeById()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code as tCode from employee where code=? 
+[2018-12-18] ==> Parameters: E001(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, tCode
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test04selectEmployeeByPw()
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ³ª¸Å´ÏÀú, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] test01selectFuelByNo()
+[2018-12-18] ==>  Preparing: select no, code from fuel where code=? 
+[2018-12-18] ==> Parameters: lpg(String)
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectFuelByAll()
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] test03insertFuel()
+[2018-12-18] ==>  Preparing: insert into fuel values(?,?); 
+[2018-12-18] ==> Parameters: 6(Integer), ¼ö¼Ò(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateFuel()
+[2018-12-18] ==>  Preparing: update Fuel set code=? where no=?; 
+[2018-12-18] ==> Parameters: ¼ö¼Ò2(String), 6(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteFuel()
+[2018-12-18] ==>  Preparing: delete from fuel where no=?; 
+[2018-12-18] ==> Parameters: 6(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test01SelectInsuranceByAll()
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I000, S0, 0
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==        Row: I002, S2, 6500
+[2018-12-18] <==        Row: I003, S3, 11000
+[2018-12-18] <==        Row: I004, S4, 22000
+[2018-12-18] <==        Row: I005, S5, 22100
+[2018-12-18] <==        Row: I006, S6, 14000
+[2018-12-18] <==        Row: I007, S7, 45000
+[2018-12-18] <==      Total: 8
+[2018-12-18] test02SelectInsuranceByCode()
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance where code = ?; 
+[2018-12-18] ==> Parameters: I001(String)
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==      Total: 1
+[2018-12-18] testOpenSession()
+[2018-12-18] session org.apache.ibatis.session.defaults.DefaultSqlSession@77b0b6c
+[2018-12-18] test01selectPostByName()
+[2018-12-18] ==>  Preparing: select zipcode, sido, sigungu, eupmyeon, doro, building1 , building2 from post where sido=? and doro=? order by building1, building2; 
+[2018-12-18] ==> Parameters: ´ë±¸±¤¿ª½Ã(String), ÅÂÀü·Î7±æ(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] test01selectTitleByNo()
+[2018-12-18] ==>  Preparing: select code, name, t_grant as tGrant from title where code=?; 
+[2018-12-18] ==> Parameters: T001(String)
+[2018-12-18] <==    Columns: code, name, tGrant
+[2018-12-18] <==        Row: T001, ¸Å´ÏÀú, 1
+[2018-12-18] <==      Total: 1
+[2018-12-18] test02selectTitleByAll()
+[2018-12-18] ==>  Preparing: select code, name, t_grant as tGrant from title 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, name, tGrant
+[2018-12-18] <==        Row: T001, ¸Å´ÏÀú, 1
+[2018-12-18] <==        Row: T002, ÀÏ¹Ý»ç¿ø, 0
+[2018-12-18] <==      Total: 2
+[2018-12-18] test03insertTitle()
+[2018-12-18] ==>  Preparing: insert into Title(code, name, t_grant) values(?, ?, ?) 
+[2018-12-18] ==> Parameters: T003(String), ÀÎÅÏ(String), false(Boolean)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateTitle()
+[2018-12-18] ==>  Preparing: update title set code=?, name=?, t_grant=? where code=?; 
+[2018-12-18] ==> Parameters: T003(String), ¾Ë¹Ù(String), false(Boolean), T003(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteTitle()
+[2018-12-18] ==>  Preparing: delete from title where code=?; 
+[2018-12-18] ==> Parameters: T003(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] ==>  Preparing: select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt from customer where Id = ? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ë‚˜ë§¤ë‹ˆì €, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I000, S0, 0
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==        Row: I002, S2, 6500
+[2018-12-18] <==        Row: I003, S3, 11000
+[2018-12-18] <==        Row: I004, S4, 22000
+[2018-12-18] <==        Row: I005, S5, 22100
+[2018-12-18] <==        Row: I006, S6, 14000
+[2018-12-18] <==        Row: I007, S7, 45000
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I000, S0, 0
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==        Row: I002, S2, 6500
+[2018-12-18] <==        Row: I003, S3, 11000
+[2018-12-18] <==        Row: I004, S4, 22000
+[2018-12-18] <==        Row: I005, S5, 22100
+[2018-12-18] <==        Row: I006, S6, 14000
+[2018-12-18] <==        Row: I007, S7, 45000
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I000, S0, 0
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==        Row: I002, S2, 6500
+[2018-12-18] <==        Row: I003, S3, 11000
+[2018-12-18] <==        Row: I004, S4, 22000
+[2018-12-18] <==        Row: I005, S5, 22100
+[2018-12-18] <==        Row: I006, S6, 14000
+[2018-12-18] <==        Row: I007, S7, 45000
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I000, S0, 0
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==        Row: I002, S2, 6500
+[2018-12-18] <==        Row: I003, S3, 11000
+[2018-12-18] <==        Row: I004, S4, 22000
+[2018-12-18] <==        Row: I005, S5, 22100
+[2018-12-18] <==        Row: I006, S6, 14000
+[2018-12-18] <==        Row: I007, S7, 45000
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, car_type, price from insurance; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, car_type, price
+[2018-12-18] <==        Row: I000, S0, 0
+[2018-12-18] <==        Row: I001, S1, 6500
+[2018-12-18] <==        Row: I002, S2, 6500
+[2018-12-18] <==        Row: I003, S3, 11000
+[2018-12-18] <==        Row: I004, S4, 22000
+[2018-12-18] <==        Row: I005, S5, 22100
+[2018-12-18] <==        Row: I006, S6, 14000
+[2018-12-18] <==        Row: I007, S7, 45000
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S2(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, hyundai, S2, 108000, gasolin
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, kia, S2, 118000, lpg
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, bmw, S2, 204000, diesel
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd, t_code
+[2018-12-18] <==        Row: E001, ë‚˜ë§¤ë‹ˆì €, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB, T001
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, ê²½í˜•
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, ì†Œí˜•
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, ì¤‘í˜•
+[2018-12-18] <==        Row: V007, ê·¸ëžœì €, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ëŒ€í˜•
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, ìŠ¹í•©
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, ê²½í˜•
+[2018-12-18] <==        Row: S2, ì†Œí˜•
+[2018-12-18] <==        Row: S3, ì¤‘í˜•
+[2018-12-18] <==        Row: S4, ëŒ€í˜•
+[2018-12-18] <==        Row: S5, ìŠ¹í•©
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S1(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V001, ëª¨ë‹, wh, auto, kia, S1, 74000, gasolin
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S2(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, hyundai, S2, 108000, gasolin
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, kia, S2, 118000, lpg
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, bmw, S2, 204000, diesel
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S3(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V005, LFì˜ë‚˜íƒ€, wh, auto, hyundai, S3, 155000, gasolin
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, bmw, S3, 266000, diesel
+[2018-12-18] <==      Total: 2
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S2(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V002, ì•„ë°˜ë–¼AD, bk, auto, hyundai, S2, 108000, gasolin
+[2018-12-18] <==        Row: V004, í”„ë¼ì´ë“œ, wh, stick, kia, S2, 118000, lpg
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, bmw, S2, 204000, diesel
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S6(String)
+[2018-12-18] <==      Total: 0
+[2018-12-18] ==>  Preparing: select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code from car_model cm join brand b on cm.brand = b.no where cartype = ?; 
+[2018-12-18] ==> Parameters: S5(String)
+[2018-12-18] <==    Columns: car_code, carName, color, gear, brandName, cartype, basic_charge, fuel_code
+[2018-12-18] <==        Row: V008, ìŠ¤í¬í‹°ì§€, bk, auto, kia, S5, 153000, gasolin
+[2018-12-18] <==      Total: 1
+=======
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+[2018-12-18] test05insertEmployee()
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
