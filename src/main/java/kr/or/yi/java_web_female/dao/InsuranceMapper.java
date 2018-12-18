@@ -7,8 +7,8 @@ import kr.or.yi.java_web_female.dto.Insurance;
 
 public interface InsuranceMapper {
 	List<Insurance> selectInsuranceByAll();
-	
-	Insurance selectInsuranceByCode(CarModel carModel);
+
+	Insurance selectInsuranceByCode(Insurance insurance);
 	
 	int insertInsurance(Insurance insurance);
 	

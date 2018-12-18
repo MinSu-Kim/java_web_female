@@ -24,13 +24,6 @@ public class InsuranceMapperImpl implements InsuranceMapper {
 	}
 
 	@Override
-	public Insurance selectInsuranceByCode(CarModel carModel) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
-			return sqlSession.selectOne(namespace + ".selectInsuranceByCode", carModel);
-		}
-	}
-
-	@Override
 	public int insertInsurance(Insurance insurance) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
 			int res = sqlSession.insert(namespace + ".insertInsurance", insurance);
@@ -60,4 +53,10 @@ public class InsuranceMapperImpl implements InsuranceMapper {
 		}
 	}
 
+	@Override
+	public Insurance selectInsuranceByCode(Insurance insurance) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
+			return sqlSession.selectOne(namespace + ".selectInsuranceByCode", insurance);
+		}
+	}
 }

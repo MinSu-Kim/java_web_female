@@ -491,6 +491,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		basicCharge = selectedCarModel.getBasicCharge();
 		////////////////////////////////////////////
 		carType = selectedCarModel.getCarType();
+		
 		///////////////////////////////////////////
 		lblResultPrice.setText(selectedCarModel.getBasicCharge()+"");
 		

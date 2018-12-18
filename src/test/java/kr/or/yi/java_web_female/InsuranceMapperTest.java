@@ -23,7 +23,7 @@ public class InsuranceMapperTest extends AbstractTest {
 		Assert.assertNotNull(list);
 	}
 	
-/*	@Test
+	@Test
 	public void test02SelectInsuranceByCode() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -32,5 +32,5 @@ public class InsuranceMapperTest extends AbstractTest {
 		Insurance searchInsurance = dao.selectInsuranceByCode(insurance);
 		Assert.assertNotNull(searchInsurance);
 	}
-*/
+
 }

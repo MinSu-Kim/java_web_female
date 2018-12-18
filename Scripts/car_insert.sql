@@ -121,4 +121,8 @@ insert into rent values
 INSERT INTO proj_rentcar.rentcar_options(option_id, code)
 values (1, 'R001'), (2, 'R002'), (1, 'R003'), (2, 'R003'),(3, 'R003');
 
+-- 보험있는 차량
+INSERT INTO rent VALUES
+('R004', '2018-12-18', '12:00:00', '2018-12-19', '12:00:00', 0, 210000, 'V007', 'C004', 'I004', NULL, 11000);
+
 
