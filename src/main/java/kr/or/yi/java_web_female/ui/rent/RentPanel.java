@@ -290,11 +290,13 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	private void addCarOption() {
 		coList = service.selectAllCarOptions();
 		for(CarOption co : coList) {
-			JCheckBox cb = new JCheckBox(co.getName());
+			MyCheckBox mcb = new MyCheckBox(co.getName());
+			mcb.setCo(co);
+			/*JCheckBox cb = new JCheckBox(co.getName());*/
 //			cb.addActionListener(chkListener);
-			pOption.add(cb);
+			pOption.add(mcb);
 			if(co.getName().equals("driver")) {
-				cb.setEnabled(false);
+				mcb.setEnabled(false);
 			}
 		}
 	}
