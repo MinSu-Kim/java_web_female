@@ -62,11 +62,7 @@ values
 ('V007', '그랜저','wh', 'auto', 'B1', 'S4' ,210000 ,117600, 151200, 168000, 210000,'gasolin', 0,0),
 ('V008', '스포티지','bk', 'auto', 'B2','S5', 153000,85700,110200, 122400, 153000,'gasolin', 0,0);
 
--- 등급 insert 
-insert into grade values ('G001', '브론즈', 5),
-						('G002', '실버', 10),
-						('G003', '골드', 20),
-						('G004', '블랙리스트', 0);
+
 			
 
 -- 박수완데이터					
@@ -79,7 +75,11 @@ insert into title values ('T001', '매니저', true),
 insert into employee values ('E001', '나매니저', '010-1234-1234', password('rootroot'), 'T001'),
 							('E002', '너일반사원', '010-5678-5678', password('abcdef'), 'T002');
 						
-
+-- 등급 insert 
+insert into grade values ('G001', '브론즈',0,5, 5),
+						('G002', '실버',6,10, 10),
+						('G003', '골드',11,99999, 20),
+						('G004', '블랙리스트',-1,-1, 0);
 -- 고객 insert
 insert into customer values ('C001', 'asd132', password('rootroot'), '김철수', '대구 서구', '010-0000-7777', '1988-04-18', 'abc@gmail.com' ,'E001' , '2종보통','G001', 1),
 							('C002', 'qwer12', password('root1234'), '김영희', '서울 서구', '010-1111-6666', '1972-09-11', 'abc@naver.com' ,'E002' , '1종보통','G001', 3),
@@ -93,8 +93,7 @@ insert into customer values ('C001', 'asd132', password('rootroot'), '김철수'
 insert into customer values
 ('C009', 'xbmhw325',password('aggarg54'), '김영희', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 
--- 회원등급기준 insert					 
-insert into level values ('브론즈',0,5),('실버',6,10),	('골드',11,99999),('블랙리스트',-1,-1);	
+
 
 insert into event values('EVT1', '첫가입', 3),('EVT2', '생일축하', 5);
 					
