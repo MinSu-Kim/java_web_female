@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.management;
 
 import javax.swing.JPanel;
 
