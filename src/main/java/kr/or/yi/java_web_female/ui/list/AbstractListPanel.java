@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.yi.java_web_female.dto.Event;
+
 @SuppressWarnings("serial")
 public abstract class AbstractListPanel<T> extends JPanel {
 	protected JTable table;
@@ -113,4 +115,6 @@ public abstract class AbstractListPanel<T> extends JPanel {
 		}
 
 	}
+
+
 }

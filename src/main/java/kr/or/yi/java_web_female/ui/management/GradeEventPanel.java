@@ -1,10 +1,15 @@
 package kr.or.yi.java_web_female.ui.management;
 
 import javax.swing.JPanel;
+
+import kr.or.yi.java_web_female.service.GradeEventUiService;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 public class GradeEventPanel extends JPanel {
+	private GradeEventUiService service;
+	
 
 	/**
 	 * Create the panel.
