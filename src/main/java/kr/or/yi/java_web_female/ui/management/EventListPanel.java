@@ -11,7 +11,7 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.service.EventUiService;
 
-public class EventPanel extends JPanel {
+public class EventListPanel extends JPanel {
 	private JTextField tfEventCode;
 	private JTextField tfEventName;
 	private JTextField tfEventRate;
@@ -20,7 +20,7 @@ public class EventPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EventPanel() {
+	public EventListPanel() {
 		setBorder(new TitledBorder(null, "\uC774\uBCA4\uD2B8\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new EventUiService();
 		initcomponents();

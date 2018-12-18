@@ -4,22 +4,22 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
-public class GradeEventMngPanel extends JPanel {
+public class GradeEventPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public GradeEventMngPanel() {
+	public GradeEventPanel() {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		GradePanel panelGrade = new GradePanel();
+		GradeListPanel panelGrade = new GradeListPanel();
 		panel.add(panelGrade);
 		
-		EventPanel panelEvent = new EventPanel();
+		EventListPanel panelEvent = new EventListPanel();
 		panel.add(panelEvent);
 
 	}

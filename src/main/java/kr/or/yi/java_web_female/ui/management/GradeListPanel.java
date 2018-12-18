@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class GradePanel extends JPanel {
+public class GradeListPanel extends JPanel {
 	private JTextField tfGradeCode;
 	private JTextField tfGradeName;
 	private JTextField tfGradeRate;
@@ -18,7 +18,7 @@ public class GradePanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GradePanel() {
+	public GradeListPanel() {
 		setBorder(new TitledBorder(null, "\uB4F1\uAE09\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 2, 0, 0));
 		
