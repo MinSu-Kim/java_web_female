@@ -2588,6 +2588,7 @@
 >>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 >>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 >>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+<<<<<<< HEAD
 [2018-12-18] ==>  Preparing: select code, name, phone, passwd, t_code from employee where code=? and passwd = password(?); 
 [2018-12-18] ==> Parameters: E001(String), rootroot(String)
 [2018-12-18] <==    Columns: code, name, phone, passwd, t_code
@@ -3727,3 +3728,23 @@
 [2018-12-18] <==        Row: V005, LFÏèòÎÇòÌÉÄ, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, Ï§ëÌòï
 [2018-12-18] <==        Row: V007, Í∑∏ÎûúÏ†Ä, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, ÎåÄÌòï
 [2018-12-18] <==      Total: 3
+=======
+[2018-12-18] test04updateGrade()
+[2018-12-18] ==>  Preparing: update grade set code=?, name=?, g_losal=?, g_hisal=?, rate=? where code=? 
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, g_losal, g_hisal, rate) values(?, ?, g_losal=?, g_hisal=?, ?) 
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, g_losal, g_hisal, rate) values(?, ?, g_losal=?, g_hisal=?, ?) 
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, g_losal, g_hisal, rate) values(?, ?, g_losal=?, g_hisal=?, ?) 
+[2018-12-18] ==> Parameters: G005(String), ¥Ÿ¿Ãæ∆(String), 0(Integer), 0(Integer), 25(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateGrade()
+[2018-12-18] ==>  Preparing: update grade set code=?, name=?, g_losal=?, g_hisal=?, rate=? where code=? 
+[2018-12-18] ==> Parameters: G005(String), ¥ı∫Ì∞ÒµÂ(String), 0(Integer), 0(Integer), 23(Integer), G005(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteGrade()
+[2018-12-18] ==>  Preparing: delete from grade where code=? 
+[2018-12-18] ==> Parameters: G005(String)
+[2018-12-18] <==    Updates: 1
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
