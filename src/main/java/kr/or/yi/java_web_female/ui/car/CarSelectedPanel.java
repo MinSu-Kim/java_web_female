@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -156,11 +157,15 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelGear.add(panelRbtn);
 		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 		
+		ButtonGroup group = new ButtonGroup();
+		
 		rdbtnAuto = new JRadioButton("자동");
+		group.add(rdbtnAuto);
 		panelRbtn.add(rdbtnAuto);
 		rdbtnAuto.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		rdbtnStick = new JRadioButton("수동");
+		group.add(rdbtnStick);
 		panelRbtn.add(rdbtnStick);
 		rdbtnStick.setHorizontalAlignment(SwingConstants.CENTER);
 		
