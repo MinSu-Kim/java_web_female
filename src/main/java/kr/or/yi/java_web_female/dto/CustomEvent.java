@@ -1,22 +1,22 @@
 package kr.or.yi.java_web_female.dto;
 
+import java.util.List;
+
 public class CustomEvent {
 	private String eventCode;
 	private String customCode;
 	private boolean isUse;
+	private List<Event> events;
 
 	public CustomEvent() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-	
+
 	public CustomEvent(String eventCode, String customCode, boolean isUse) {
-		super();
 		this.eventCode = eventCode;
 		this.customCode = customCode;
 		this.isUse = isUse;
 	}
-	
+
 	public String getEventCode() {
 		return eventCode;
 	}
@@ -40,7 +40,15 @@ public class CustomEvent {
 	public void setUse(boolean isUse) {
 		this.isUse = isUse;
 	}
-	
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomEvent [eventCode=" + eventCode + ", customCode=" + customCode + ", isUse=" + isUse + "]";

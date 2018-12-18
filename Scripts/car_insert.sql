@@ -3,9 +3,9 @@ use proj_rentcar;
 INSERT INTO proj_rentcar.brand
 (`no`, name)
 values
-("B1",'hyundai'),
-("B2", 'kia'),
-("B3",'bmw');
+('B1','hyundai'),
+('B2', 'kia'),
+('B3','bmw');
 
 
 
@@ -62,11 +62,63 @@ values
 ('V007', '그랜저','wh', 'auto', 'B1', 'S4' ,210000 ,117600, 151200, 168000, 210000,'gasolin', 0,0),
 ('V008', '스포티지','bk', 'auto', 'B2','S5', 153000,85700,110200, 122400, 153000,'gasolin', 0,0);
 
+-- 등급 insert 
+insert into grade values ('G001', '브론즈', 5),
+						('G002', '실버', 10),
+						('G003', '골드', 20),
+						('G004', '블랙리스트', 0);
+			
+
+-- 박수완데이터					
+					
+-- 직책 insert					
+insert into title values ('T001', '매니저', true),
+						('T002', '일반사원', false);
+
+-- 직원 insert					
+insert into employee values ('E001', '나매니저', '010-1234-1234', password('rootroot'), 'T001'),
+							('E002', '너일반사원', '010-5678-5678', password('abcdef'), 'T002');
+						
+
+-- 고객 insert
+insert into customer values ('C001', 'asd132', password('rootroot'), '김철수', '대구 서구', '010-0000-7777', '1988-04-18', 'abc@gmail.com' ,'E001' , '2종보통','G001', 1),
+							('C002', 'qwer12', password('root1234'), '김영희', '서울 서구', '010-1111-6666', '1972-09-11', 'abc@naver.com' ,'E002' , '1종보통','G001', 3),
+							('C003', 'zxcv0523', password('asdfqwer'), '박철민', '부산 동구', '010-2222-5555', '1961-10-25', 'abc@gnaver.com' ,'E002' , '1종보통','G002', 7),
+							('C004', 'gtshv512', password('asdf1234'), '이수민', '대전 서구', '010-3333-4444', '1987-05-27', 'abc@gmail.com' ,'E001' , '2종보통','G002', 9),
+							('C005', 'gstjsva12', password('zxcv4567'), '나영석', '대구 수성구', '010-4444-3333', '1958-12-31', 'abc@daum.net' ,'E001' , '2종보통','G003', 21),
+							('C006', 'aefvb238', password('qwer2573'), '강호동', '대구 동구', '010-5555-2222', '1999-11-04', 'abc@daum.com' ,'E002' , '1종보통','G003', 30),
+							('C007', 'fkufj12', password('dhtdhd5645'), '김민정', '울산 서구', '010-6666-1111', '1994-03-16', 'abc@naver.com' ,'E002' , '2종보통','G004', -1),
+							('C008', 'xbmhw325', password('aggarg54'), '김재영', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
+
+insert into customer values
+('C009', 'xbmhw325',password('aggarg54'), '김영희', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
+
+-- 회원등급기준 insert					 
+insert into level values ('브론즈',0,5),('실버',6,10),	('골드',11,99999),('블랙리스트',-1,-1);	
+
+insert into event values('EVT1', '첫가입', 3),('EVT2', '생일축하', 5);
+					
+insert into custom_event values('EVT1','C001',0),('EVT2','C001',0);
 
 
+-- 김보민
 
+-- I000 : 보험가입X, S7: 외제차
+insert into insurance values
+('I000', 'S0', 0), ('I001', 'S1', 6500), ('I002', 'S2', 6500),
+('I003', 'S3', 11000), ('I004', 'S4', 22000), ('I005', 'S5', 22100),
+('I006', 'S6', 14000), ('I007', 'S7', 45000);
 
+-- 대여코드, 대여 시작 날짜/시간, 대여 반납 날짜/시간, 반납여부(0: 반납X/false), 대여비용, 차량코드, 고객코드, 보험코드, 이벤트할인율, 옵션비용 
+insert into rent values
+('R001', '2018-12-01', '12:00:00', '2018-12-02', '12:00:00', 0, 74000, 'V001', 'C001', 'I000', null, 5000);
 
+insert into rent values
+('R002', '2018-12-03', '12:00:00', '2018-12-04', '12:00:00', 0, 108000, 'V002', 'C002', 'I000', null, 6000),
+('R003', '2018-12-05', '12:00:00', '2018-12-06', '12:00:00', 0, 204000, 'V003', 'C003', 'I000', null, 17000);
 
+-- 렌트카옵션
+INSERT INTO proj_rentcar.rentcar_options(option_id, code)
+values (1, 'R001'), (2, 'R002'), (1, 'R003'), (2, 'R003'),(3, 'R003');
 
 

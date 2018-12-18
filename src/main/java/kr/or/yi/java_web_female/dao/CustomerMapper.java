@@ -9,7 +9,6 @@ public interface CustomerMapper {
 	
 	List<Customer> selectCustomerByAll();
 	
-//	int selectCustomerById(Customer customer);
 	Customer selectCustomerById(Customer customer);
 	
 	int insertCustomer(Customer customer);
@@ -18,6 +17,8 @@ public interface CustomerMapper {
 	
 	String nextCode();
 	
-//	int selectCustomerByPw(Customer customer);
 	Customer selectCustomerByPw(Customer customer);
+	
+	//추가
+	List<Customer> selectCustomerByCode(Customer customer);
 }

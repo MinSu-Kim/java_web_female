@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class Customer {
 	private String code;
@@ -15,6 +16,7 @@ public class Customer {
 	private String license;
 	private Grade gradeCode;
 	private int rentCnt;
+	private List<CustomEvent> events;
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
@@ -146,11 +148,19 @@ public class Customer {
 		this.rentCnt = rentCnt;
 	}
 
+	public List<CustomEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<CustomEvent> events) {
+		this.events = events;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [code=" + code + ", id=" + id + ", passwd=" + passwd + ", name=" + name + ", address="
-				+ address + ", phone=" + phone + ", dob=" + dob + ", email=" + email + ", empCode=" + empCode
-				+ ", license=" + license + ", gradeCode=" + gradeCode + ", rentCnt=" + rentCnt + "]";
+		return String.format(
+				"Customer [code=%s, id=%s, passwd=%s, name=%s, address=%s, phone=%s, dob=%s, email=%s, empCode=%s, license=%s, gradeCode=%s, rentCnt=%s, events=%s]",
+				code, id, passwd, name, address, phone, dob, email, empCode, license, gradeCode, rentCnt, events);
 	}
 
 }
