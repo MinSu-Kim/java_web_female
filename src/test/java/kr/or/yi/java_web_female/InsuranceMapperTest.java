@@ -22,15 +22,5 @@ public class InsuranceMapperTest extends AbstractTest {
 		List<Insurance> list = dao.selectInsuranceByAll();
 		Assert.assertNotNull(list);
 	}
-	
-/*	@Test
-	public void test02SelectInsuranceByCode() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
-		Insurance insurance = new Insurance();
-		insurance.setCode("I001");
-		Insurance searchInsurance = dao.selectInsuranceByCode(insurance);
-		Assert.assertNotNull(searchInsurance);
-	}
-*/
+
 }

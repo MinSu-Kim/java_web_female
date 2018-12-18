@@ -53,6 +53,8 @@ public class RentUIService {
 	public List<CarOption> selectAllCarOptions(){
 		return carOptionDao.selectCarOptionByAll();
 	}
-
 	
+	public List<Insurance> selectInsuranceByCarType(String carType){
+		return insuranceDao.selectInsuranceByCarType(carType);
+	}
 }
