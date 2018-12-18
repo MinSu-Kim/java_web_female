@@ -95,5 +95,14 @@ public class EmployeeMapperTest extends AbstractTest {
 		int res = dao.deleteEmployee(employee);
 		Assert.assertEquals(1, res);
 	}
+	
+	@Test
+	public void test02InsertEmployee() throws SQLException {
+		Employee newEmp = new Employee("E017003","너부장",new Title("T001"),4000000,Gender.FEMALE,new Department("D002"),new Date());
+		int row = dao.insertEmployee(newEmp);
+		LogUtil.prnLog("Insert row :" + row);
+		Assert.assertEquals(1, row);
+		test01selectEmployeeByAll();
+	}
 */
 }
