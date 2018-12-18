@@ -14,16 +14,16 @@ import com.toedter.calendar.JDateChooser;
 
 @SuppressWarnings("serial")
 public class JoinPanel extends JPanel {
-   private JTextField textField;
-   private JTextField textField_1;
-   private JTextField textField_2;
-   private JTextField textField_3;
-   private JTextField textField_4;
-   private JTextField textField_5;
-   private JTextField textField_6;
-   private JTextField textField_7;
-   private JTextField textField_8;
-   private JTextField textField_9;
+   private JTextField tfName;
+   private JTextField tfId;
+   private JTextField tfPsass01;
+   private JTextField tfPass02;
+   private JTextField tfTel02;
+   private JTextField tfTel03;
+   private JTextField tfEmail01;
+   private JTextField tfEmail02;
+   private JTextField tfPost;
+   private JTextField tfAddr;
 
    public JoinPanel() {
       setLayout(new BorderLayout(0, 0));
@@ -32,140 +32,140 @@ public class JoinPanel extends JPanel {
       add(pContent);
       pContent.setLayout(new GridLayout(0, 2, 10, 10));
       
-      JLabel lblNewLabel = new JLabel("이름");
-      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(lblNewLabel);
+      JLabel lblName = new JLabel("이름");
+      lblName.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblName);
       
-      textField = new JTextField();
-      pContent.add(textField);
-      textField.setColumns(10);
+      tfName = new JTextField();
+      pContent.add(tfName);
+      tfName.setColumns(10);
       
-      JLabel lblNewLabel_1 = new JLabel("아이디");
-      lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(lblNewLabel_1);
+      JLabel lblId = new JLabel("아이디");
+      lblId.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblId);
       
-      JPanel panel = new JPanel();
-      pContent.add(panel);
-      panel.setLayout(new GridLayout(0, 2, 0, 0));
+      JPanel pId = new JPanel();
+      pContent.add(pId);
+      pId.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_1 = new JTextField();
-      panel.add(textField_1);
-      textField_1.setColumns(10);
+      tfId = new JTextField();
+      pId.add(tfId);
+      tfId.setColumns(10);
       
-      JButton btnNewButton = new JButton("중복확인");
-      panel.add(btnNewButton);
+      JButton btnIdConfirm = new JButton("중복확인");
+      pId.add(btnIdConfirm);
       
-      JLabel lblNewLabel_2 = new JLabel("비밀번호");
-      lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(lblNewLabel_2);
+      JLabel lblPass01 = new JLabel("비밀번호");
+      lblPass01.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblPass01);
       
-      JPanel panel_1 = new JPanel();
-      pContent.add(panel_1);
-      panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+      JPanel pPass01 = new JPanel();
+      pContent.add(pPass01);
+      pPass01.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_2 = new JTextField();
-      panel_1.add(textField_2);
-      textField_2.setColumns(10);
+      tfPsass01 = new JTextField();
+      pPass01.add(tfPsass01);
+      tfPsass01.setColumns(10);
       
       JLabel lblNewLabel_3 = new JLabel("");
       lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_1.add(lblNewLabel_3);
+      pPass01.add(lblNewLabel_3);
       
-      JLabel lblNewLabel_4 = new JLabel("비밀번호 확인");
-      lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(lblNewLabel_4);
+      JLabel lblPass02 = new JLabel("비밀번호 확인");
+      lblPass02.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblPass02);
       
-      JPanel panel_2 = new JPanel();
-      pContent.add(panel_2);
-      panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+      JPanel pPass02 = new JPanel();
+      pContent.add(pPass02);
+      pPass02.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_3 = new JTextField();
-      textField_3.setColumns(10);
-      panel_2.add(textField_3);
+      tfPass02 = new JTextField();
+      tfPass02.setColumns(10);
+      pPass02.add(tfPass02);
       
       JLabel label = new JLabel("");
       label.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_2.add(label);
+      pPass02.add(label);
       
-      JLabel lblNewLabel_5 = new JLabel("생년월일");
-      lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(lblNewLabel_5);
+      JLabel lblBirth = new JLabel("생년월일");
+      lblBirth.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblBirth);
       
       JDateChooser dateChooser = new JDateChooser();
       pContent.add(dateChooser);
       
-      JLabel label_1 = new JLabel("전화번호");
-      label_1.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_1);
+      JLabel lblTel = new JLabel("전화번호");
+      lblTel.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblTel);
       
-      JPanel panel_4 = new JPanel();
-      pContent.add(panel_4);
-      panel_4.setLayout(new GridLayout(0, 5, 0, 0));
+      JPanel pTel = new JPanel();
+      pContent.add(pTel);
+      pTel.setLayout(new GridLayout(0, 5, 0, 0));
       
-      JComboBox comboBox = new JComboBox();
-      panel_4.add(comboBox);
+      JComboBox<String> cmbTel01 = new JComboBox<>();
+      pTel.add(cmbTel01);
       
-      JLabel label_2 = new JLabel("-");
-      label_2.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_4.add(label_2);
+      JLabel lblDash01 = new JLabel("-");
+      lblDash01.setHorizontalAlignment(SwingConstants.CENTER);
+      pTel.add(lblDash01);
       
-      textField_4 = new JTextField();
-      textField_4.setColumns(10);
-      panel_4.add(textField_4);
+      tfTel02 = new JTextField();
+      tfTel02.setColumns(10);
+      pTel.add(tfTel02);
       
-      JLabel label_3 = new JLabel("-");
-      label_3.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_4.add(label_3);
+      JLabel lblDash02 = new JLabel("-");
+      lblDash02.setHorizontalAlignment(SwingConstants.CENTER);
+      pTel.add(lblDash02);
       
-      textField_5 = new JTextField();
-      textField_5.setColumns(10);
-      panel_4.add(textField_5);
+      tfTel03 = new JTextField();
+      tfTel03.setColumns(10);
+      pTel.add(tfTel03);
       
-      JLabel label_4 = new JLabel("이메일");
-      label_4.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_4);
+      JLabel lblEmail = new JLabel("이메일");
+      lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblEmail);
       
-      JPanel panel_5 = new JPanel();
-      pContent.add(panel_5);
-      panel_5.setLayout(new GridLayout(0, 4, 0, 0));
+      JPanel pEmail = new JPanel();
+      pContent.add(pEmail);
+      pEmail.setLayout(new GridLayout(0, 4, 0, 0));
       
-      textField_6 = new JTextField();
-      textField_6.setColumns(10);
-      panel_5.add(textField_6);
+      tfEmail01 = new JTextField();
+      tfEmail01.setColumns(10);
+      pEmail.add(tfEmail01);
       
-      JLabel label_5 = new JLabel("@");
-      label_5.setHorizontalAlignment(SwingConstants.CENTER);
-      panel_5.add(label_5);
+      JLabel lblAt = new JLabel("@");
+      lblAt.setHorizontalAlignment(SwingConstants.CENTER);
+      pEmail.add(lblAt);
       
-      textField_7 = new JTextField();
-      textField_7.setColumns(10);
-      panel_5.add(textField_7);
+      tfEmail02 = new JTextField();
+      tfEmail02.setColumns(10);
+      pEmail.add(tfEmail02);
       
-      JComboBox comboBox_1 = new JComboBox();
-      panel_5.add(comboBox_1);
+      JComboBox<String> cmbEmail = new JComboBox<>();
+      pEmail.add(cmbEmail);
       
-      JLabel label_6 = new JLabel("주소");
-      label_6.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(label_6);
+      JLabel lblPost = new JLabel("주소");
+      lblPost.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblPost);
       
-      JPanel panel_6 = new JPanel();
-      pContent.add(panel_6);
-      panel_6.setLayout(new GridLayout(0, 2, 0, 0));
+      JPanel pPost = new JPanel();
+      pContent.add(pPost);
+      pPost.setLayout(new GridLayout(0, 2, 0, 0));
       
-      textField_8 = new JTextField();
-      panel_6.add(textField_8);
-      textField_8.setColumns(10);
+      tfPost = new JTextField();
+      pPost.add(tfPost);
+      tfPost.setColumns(10);
       
-      JButton btnNewButton_1 = new JButton("우편번호 검색");
-      panel_6.add(btnNewButton_1);
+      JButton btnPostSearch = new JButton("우편번호 검색");
+      pPost.add(btnPostSearch);
       
-      JLabel lblNewLabel_6 = new JLabel("상세 주소");
-      lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-      pContent.add(lblNewLabel_6);
+      JLabel lblAddress = new JLabel("상세 주소");
+      lblAddress.setHorizontalAlignment(SwingConstants.CENTER);
+      pContent.add(lblAddress);
       
-      textField_9 = new JTextField();
-      pContent.add(textField_9);
-      textField_9.setColumns(10);
+      tfAddr = new JTextField();
+      pContent.add(tfAddr);
+      tfAddr.setColumns(10);
       
       JPanel pBtn = new JPanel();
       add(pBtn, BorderLayout.SOUTH);
