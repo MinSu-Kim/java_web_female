@@ -21,6 +21,17 @@
 		where name = #{name}
 	</select>
 	
+	<resultMap type="Customer" id="ResultCustomExtend" extends="ResultCustom">
+		<collection property="events" resultMap="kr.or.yi.java_web_female.dao.CustomEventMapper.resultCustomEvent"/>
+	</resultMap>
+	
+	<select id="selectCustomerByCode" parameterType="Customer" resultMap="ResultCustomExtend">
+		select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt,
+	           event_code, custom_code, is_use, e.code, e.name, rate 
+		from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code
+		where c.code = #{code};
+	</select>
+	
 	<select id="selectCustomerByAll" resultMap="ResultCustom">
 		select code, Id, password(#{passwd}), Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt 
 		from customer 

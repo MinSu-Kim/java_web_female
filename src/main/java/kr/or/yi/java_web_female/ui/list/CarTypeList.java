@@ -6,8 +6,6 @@ import kr.or.yi.java_web_female.dto.CarType;
 
 @SuppressWarnings("serial")
 public class CarTypeList extends AbstractListPanel<CarType> {
-	public CarTypeList() {
-	}
 
 	@Override
 	protected void setAlignWidth() {
@@ -27,12 +25,12 @@ public class CarTypeList extends AbstractListPanel<CarType> {
 
 	@Override
 	protected CarType getItem(int selectedIndex) {
-		String code = (String) table.getValueAt(selectedIndex, 0);
+/*		String code = (String) table.getValueAt(selectedIndex, 0);
 		String type = (String) table.getValueAt(selectedIndex, 1);
 		CarType carType = new CarType();
 		carType.setCode(code);
-		carType.setType(type);
-		return carType;
+		carType.setType(type);*/
+		return list.get(selectedIndex);
 	}
 
 }

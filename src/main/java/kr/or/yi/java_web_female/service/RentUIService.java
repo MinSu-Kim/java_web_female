@@ -3,8 +3,6 @@ package kr.or.yi.java_web_female.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.logging.log4j.CloseableThreadContext.Instance;
-
 import kr.or.yi.java_web_female.dao.CarModelMapper;
 import kr.or.yi.java_web_female.dao.CarModelMapperImpl;
 import kr.or.yi.java_web_female.dao.CarOptionMapper;

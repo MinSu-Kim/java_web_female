@@ -13,6 +13,13 @@
 							<attribute name="grade"/>
 						</constraint>
 					</entity>
+					<entity name="custom_event">
+						<constraint name="PRIMARY" type="VIRTUAL KEY">
+							<attribute name="event_code"/>
+							<attribute name="custom_code"/>
+							<attribute name="is_use"/>
+						</constraint>
+					</entity>
 				</container>
 			</container>
 		</virtual-meta-data>

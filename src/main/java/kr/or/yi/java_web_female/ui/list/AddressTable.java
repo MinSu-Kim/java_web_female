@@ -29,7 +29,6 @@ public class AddressTable extends AbstractListPanel<Post> {
 
    @Override
    public Post getItem(int selectedIndex) {
-
 	   return list.get(selectedIndex);
    }
 

@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.ui.LoginUI;
 import kr.or.yi.java_web_female.ui.ManagerPanel;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 @SuppressWarnings("serial")
 public class TestFrame extends JFrame {
