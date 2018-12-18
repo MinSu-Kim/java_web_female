@@ -7,9 +7,15 @@
 		from insurance;
 	</select>
 
-	<select id="selectInsuranceByCode" resultType="Insurance" parameterType="Insurance">
+<!-- 	<resultMap type="Insurance" id="ResultInsurance">
+		<id column="code" property="code"/>
+		<result column="car_type" property="carType"/>
+		<result column="price" property="price"/>
+		<result column="car_code" property=""/>
+	</resultMap> -->
+	<select id="selectInsuranceByCarType" resultType="Insurance">
 		select code, car_type, price
 		from insurance
-		where code = #{code};
+		where car_type = #{carType};
 	</select>
 </mapper>

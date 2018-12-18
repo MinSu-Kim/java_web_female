@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.CarModel;
+import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -22,7 +23,14 @@ public class InsuranceMapperImpl implements InsuranceMapper {
 			return sqlSession.selectList(namespace + ".selectInsuranceByAll");
 		}
 	}
-
+	
+	@Override
+	public List<Insurance> selectInsuranceByCarType(String carType) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectInsuranceByCarType", carType);
+		}
+	}
+	
 	@Override
 	public int insertInsurance(Insurance insurance) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
@@ -50,13 +58,6 @@ public class InsuranceMapperImpl implements InsuranceMapper {
 			sqlSession.commit();
 			
 			return res;
-		}
-	}
-
-	@Override
-	public Insurance selectInsuranceByCode(Insurance insurance) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();){
-			return sqlSession.selectOne(namespace + ".selectInsuranceByCode", insurance);
 		}
 	}
 }
