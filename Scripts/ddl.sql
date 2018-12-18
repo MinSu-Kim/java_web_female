@@ -104,6 +104,12 @@ CREATE TABLE proj_rentcar.custom_event (
 	is_use      TINYINT(1) NULL COMMENT '사용유무' -- 사용유무
 )
 COMMENT '고객이벤트';
+ALTER TABLE proj_rentcar.custom_event
+	ADD CONSTRAINT
+		PRIMARY KEY (
+			event_code, -- R0001
+			custom_code
+		);
 
 -- 직원
 CREATE TABLE proj_rentcar.employee (

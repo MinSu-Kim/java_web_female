@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.CustomEvent;
@@ -24,5 +26,12 @@ public class CustomEventMapperImpl implements CustomEventMapper {
 			return res;
 		}
 
+	}
+
+	@Override
+	public List<CustomEvent> selectCustomEventByCustomCode(String customCode) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectCustomEventByCustomCode", customCode);
+		}
 	}
 }

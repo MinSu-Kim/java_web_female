@@ -3,9 +3,9 @@ use proj_rentcar;
 INSERT INTO proj_rentcar.brand
 (`no`, name)
 values
-("B1",'hyundai'),
-("B2", 'kia'),
-("B3",'bmw');
+('B1','hyundai'),
+('B2', 'kia'),
+('B3','bmw');
 
 
 

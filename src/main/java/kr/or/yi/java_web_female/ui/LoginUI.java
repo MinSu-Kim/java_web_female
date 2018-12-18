@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -127,9 +128,10 @@ public class LoginUI extends JFrame implements ActionListener {
 		if (checkManager.isSelected()) {
 			System.out.println(getUser(true));
 			loginEmployee = loginService.selectEmployeeByPw((Employee) getUser(true));
-			System.out.println(loginEmployee);
 		} else {
-			loginCusotmer = loginService.selectCustomerByPw((Customer) getUser(false));
+			Customer customer = loginService.selectCustomerByPw((Customer) getUser(false));
+			List<Customer> fullCustomer= loginService.selectCustomerByCode(customer);
+			loginCusotmer = fullCustomer.get(0);
 		}
 	}
 

@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female.service;
 
+import java.util.List;
+
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
 import kr.or.yi.java_web_female.dto.Customer;
@@ -38,5 +40,9 @@ public class LoginUiService {
 			throw new LoginFailException("아이디와 비밀번호를 다시 확인해 주세요.");
 		}
 		return resEmp;
+	}
+	
+	public List<Customer> selectCustomerByCode(Customer customer) {
+		return cusDao.selectCustomerByCode(customer);
 	}
 }

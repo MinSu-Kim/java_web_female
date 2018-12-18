@@ -31,3 +31,17 @@ from customer c join custom_event ce on c.code=ce.custom_code join event e on ce
 select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
 from customer
 where Id = 'asd132' and passwd = password('rootroot');
+
+select code, name, phone, passwd, t_code as tCode 
+from employee
+where code='E001';
+
+select c.code, Id, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, is_use, e.name, e.rate
+from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code
+where id = 'asd132' and passwd =password('rootroot');
+
+
+select code, name, phone, passwd, t_code as tCode 
+from employee
+where code='E001' and passwd = password('rootroot');
+

@@ -62,8 +62,9 @@ select * from custom_event;
 
 select * from event;
 
-select *
-from custom_event ce join event e on ce.event_code = e.code;
+select event_code, custom_code, is_use, code, name, rate 
+from custom_event ce join event e on ce.event_code = e.code
+where custom_code='C001';
 
 select *
 from customer c join custom_event ce on c.code = ce.custom_code
@@ -72,15 +73,11 @@ where c.code = 'C001';
 insert into custom_event values('EVT1','C001',0);
 
 
-select code, name, phone, passwd, t_code as tCode 
-from employee
-where code='E001';
+select event_code, custom_code, is_use, code, name, rate 
+from custom_event ce join event e on ce.event_code = e.code
+where custom_code='C001';
 
-select code, Id, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt
-from customer
-where id = 'qwer12' and passwd =password('root1234');
-
-
-select code, name, phone, passwd, t_code as tCode 
-from employee
-where code='E001' and passwd = password('rootroot');
+select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt,
+       event_code, custom_code, is_use, e.code, e.name, rate 
+from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code
+where c.code = 'C001';
