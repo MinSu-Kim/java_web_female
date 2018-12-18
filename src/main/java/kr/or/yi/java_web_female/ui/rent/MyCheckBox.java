@@ -4,18 +4,16 @@ import javax.swing.JCheckBox;
 
 import kr.or.yi.java_web_female.dto.CarOption;
 
+@SuppressWarnings("serial")
 public class MyCheckBox extends JCheckBox {
 	private CarOption co;
 	
-	
-
 /*	public MyCheckBox(CarOption co) {
 		this.co = co;
 	}*/
 
 	public MyCheckBox(String text) {
 		super(text);
-		// TODO Auto-generated constructor stub
 	}
 
 	public CarOption getCo() {
@@ -30,6 +28,5 @@ public class MyCheckBox extends JCheckBox {
 	public String toString() {
 		return String.format("MyCheckBox [co=%s]", co.getName());
 	}
-	
 	
 }

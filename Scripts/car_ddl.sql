@@ -435,12 +435,16 @@ ALTER TABLE proj_rentcar.userPic
 		);
 		
 	
--- 고객의 대여횟수가 증가되면 회원등급변경 프로시저 사용법 call update_customer_grade('C007');
+-- 고객의 대여횟수 1증가 후 회원등급변경 프로시저 사용법 call update_customer_grade('C007');
 DROP PROCEDURE IF EXISTS update_customer_grade;
 DELIMITER $$
 CREATE PROCEDURE update_customer_grade (in custom_code char(4))   
 begin
     declare gcode char(4);   
+   
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
    
     select g.code into gcode
 	from customer c , grade g
