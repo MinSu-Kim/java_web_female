@@ -2588,3 +2588,21 @@
 >>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 >>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 >>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+[2018-12-18] test04updateGrade()
+[2018-12-18] ==>  Preparing: update grade set code=?, name=?, g_losal=?, g_hisal=?, rate=? where code=? 
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, g_losal, g_hisal, rate) values(?, ?, g_losal=?, g_hisal=?, ?) 
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, g_losal, g_hisal, rate) values(?, ?, g_losal=?, g_hisal=?, ?) 
+[2018-12-18] test03insertGrade()
+[2018-12-18] ==>  Preparing: insert into grade(code, name, g_losal, g_hisal, rate) values(?, ?, g_losal=?, g_hisal=?, ?) 
+[2018-12-18] ==> Parameters: G005(String), 다이아(String), 0(Integer), 0(Integer), 25(Integer)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test04updateGrade()
+[2018-12-18] ==>  Preparing: update grade set code=?, name=?, g_losal=?, g_hisal=?, rate=? where code=? 
+[2018-12-18] ==> Parameters: G005(String), 더블골드(String), 0(Integer), 0(Integer), 23(Integer), G005(String)
+[2018-12-18] <==    Updates: 1
+[2018-12-18] test05deleteGrade()
+[2018-12-18] ==>  Preparing: delete from grade where code=? 
+[2018-12-18] ==> Parameters: G005(String)
+[2018-12-18] <==    Updates: 1
