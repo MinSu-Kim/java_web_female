@@ -64,11 +64,12 @@ public class EmployeeMapperTest extends AbstractTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Employee employee = new Employee();
 		
+		employee.setCode("E003");
 		employee.setName("나인턴");
 		employee.setPhone("010-4505-8465");
 		employee.setPasswd("zzzzz");
 
-		//employee.settCode(new Title("T001", "매니저", true));
+		employee.settCode(new Title("T001"));
 		int res =dao.insertEmployee(employee);
 		Assert.assertEquals(1, res);
 	}
