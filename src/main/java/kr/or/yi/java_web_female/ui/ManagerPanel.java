@@ -8,6 +8,7 @@ import javax.swing.JTabbedPane;
 import kr.or.yi.java_web_female.ui.car.CarPanel;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
+import kr.or.yi.java_web_female.ui.management.GradeEventMngPanel;
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
@@ -37,7 +38,7 @@ public class ManagerPanel extends JPanel {
 		JPanel panel_03 = new JPanel();
 		tabbedPane.addTab("사원관리", null, panel_03, null);
 		
-		JPanel panel_04 = new JPanel();
+		GradeEventMngPanel panel_04 = new GradeEventMngPanel();
 		tabbedPane.addTab("등급&이벤트관리", null, panel_04, null);
 			
 		CarPanel panel_05 = new CarPanel();
