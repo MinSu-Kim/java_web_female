@@ -66,4 +66,13 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 			return sqlSession.selectOne(namespace + ".selectEmployeeByPw", employee);
 		}
 	}
+
+	@Override
+	public int updateEmployee(Employee employee) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateEmployee", employee);
+			sqlSession.commit();
+			return res;
+		}
+	}
 }

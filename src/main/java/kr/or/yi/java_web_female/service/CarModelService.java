@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.yi.java_web_female.dao.CarModelMapper;
 import kr.or.yi.java_web_female.dao.CarModelMapperImpl;
@@ -31,5 +32,9 @@ public class CarModelService {
 	
 	public int deleteCarModel(CarModel carModel) {
 		return dao.deleteCarModel(carModel);
+	}
+	
+	public List<CarModel> SelectCarModelWithWhere(Map<String, String> maps) {
+		return dao.SelectCarModelWithWhere(maps);
 	}
 }
