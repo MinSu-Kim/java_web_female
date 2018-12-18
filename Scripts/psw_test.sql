@@ -76,6 +76,8 @@ select password('rootroot') = password('rootroot1') from dual;
 select * from grade;
 select * from employee;
 select * from title;
+select * from event;
+
 
 /*select *
 from post 
