@@ -170,5 +170,6 @@ public class EventListPanel extends JPanel implements ActionListener {
 	private void setItem(Event item) {
 		// TODO Auto-generated method stub
 
+		
 	}
 }
