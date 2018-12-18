@@ -59,7 +59,7 @@ public class EmployeeMapperTest extends AbstractTest {
 
 	}*/
 
-	@Test
+	/*@Test
 	public void test05insertEmployee() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Employee employee = new Employee();
@@ -72,7 +72,7 @@ public class EmployeeMapperTest extends AbstractTest {
 		employee.settCode(new Title("T001"));
 		int res =dao.insertEmployee(employee);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 	
 	/*@Test
 	public void test06updateGrade() {
