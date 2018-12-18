@@ -20,6 +20,14 @@ public class Title {
 		this.name = name;
 		this.tGrant = tGrant;
 	}
+	
+	
+
+
+	public Title(String code) {
+		super();
+		this.code = code;
+	}
 
 
 	/*getter & setter*/
