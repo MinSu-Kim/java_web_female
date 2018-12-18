@@ -43,9 +43,28 @@ public class ComboPanel<T> extends JPanel {
 	public void setSelectedItem(T item) {
 		comboBox.setSelectedItem(item);
 	}
+	
 
 	@SuppressWarnings("unchecked")
 	public T getSelectedItems() {
 		return (T) comboBox.getSelectedItem();
 	}
+
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

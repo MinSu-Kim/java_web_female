@@ -45,7 +45,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	private ComboPanel<CarType> cmbCarType;
 	private JTextField tfColor;
-	private ComboPanel cmbFuel;
+	private ComboPanel<Fuel> cmbFuel;
 	//이미지 불러오기
 	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
 	
@@ -126,7 +126,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panel_info.add(cmbCarType);
 		
 		//연료콤보박스
-		cmbFuel = new ComboPanel();
+		cmbFuel = new ComboPanel<>();
 		cmbFuel.setTitle("연료");
 		List<Fuel> arrFuel = carUiService.selectAllFuel();
 		cmbFuel.setComboItems(arrFuel);
