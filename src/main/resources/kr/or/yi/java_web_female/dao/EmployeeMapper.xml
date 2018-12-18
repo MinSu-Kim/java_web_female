@@ -42,7 +42,7 @@
 	<insert id="insertEmployee" parameterType="Employee">
 		insert into employee(code, name, phone, passwd, t_code)
 		values(#{code},	#{name}, #{phone}, #{passwd}, #{tCode})
-	</insert> -->
+	</insert> 
 
 	<!-- update -->
 	 <update id="updateEmployee" parameterType="Employee">
