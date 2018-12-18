@@ -158,6 +158,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pStartDate.add(lblStartDate);
 
 		dateChooser_2 = new JDateChooser();
+		dateChooser_2.getCalendarButton().setEnabled(false);
 		pStartDate.add(dateChooser_2);
 
 		JPanel pEndTime_1 = new JPanel();
@@ -169,6 +170,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pEndTime_1.add(lblEndTime_1);
 
 		spStartHour = new JSpinner();
+		spStartHour.setEnabled(false);
 		pEndTime_1.add(spStartHour);
 
 		JLabel lblStartHour = new JLabel("시");
@@ -176,6 +178,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pEndTime_1.add(lblStartHour);
 
 		spStartMinutes = new JSpinner();
+		spStartMinutes.setEnabled(false);
 		pEndTime_1.add(spStartMinutes);
 
 		JLabel lblStartMinutes = new JLabel("분");
@@ -196,6 +199,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pEndDate.add(lblEndDate);
 
 		dateChooser_3 = new JDateChooser();
+		dateChooser_3.getCalendarButton().setEnabled(false);
 		pEndDate.add(dateChooser_3);
 
 		JPanel pEndTime = new JPanel();
@@ -207,6 +211,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pEndTime.add(lblEndTime);
 
 		spEndHour = new JSpinner();
+		spEndHour.setEnabled(false);
 		pEndTime.add(spEndHour);
 
 		JLabel lblEndHour = new JLabel("시");
@@ -214,6 +219,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pEndTime.add(lblEndHour);
 
 		spEndMinutes = new JSpinner();
+		spEndMinutes.setEnabled(false);
 		pEndTime.add(spEndMinutes);
 
 		JLabel lblEndMinutes = new JLabel("분");
@@ -236,7 +242,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pRb.setLayout(new GridLayout(0, 2, 0, 0));
 
 		rBNotReg = new JRadioButton("가입안함");
-		rBNotReg.setSelected(true);
+		rBNotReg.setEnabled(false);
 		rBNotReg.addItemListener(this);
 		rBNotReg.setHorizontalAlignment(SwingConstants.CENTER);
 		rBNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -244,6 +250,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pRb.add(rBNotReg);
 
 		rBReg = new JRadioButton("일반자차");
+		rBReg.setEnabled(false);
 		rBReg.addItemListener(this);
 		rBReg.setHorizontalAlignment(SwingConstants.CENTER);
 		rBReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -290,8 +297,9 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	private void addCarOption() {
 		coList = service.selectAllCarOptions();
 		for(CarOption co : coList) {
-			MyCheckBox mcb = new MyCheckBox(co.getName());
+			mcb = new MyCheckBox(co.getName());
 			mcb.setCo(co);
+			mcb.setEnabled(false);
 			/*JCheckBox cb = new JCheckBox(co.getName());*/
 //			cb.addActionListener(chkListener);
 			pOption.add(mcb);
@@ -300,6 +308,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 			}
 		}
 	}
+	
 
 /*	ActionListener chkListener = new ActionListener() {
 		
@@ -310,6 +319,8 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		}
 	};*/
 	
+	
+
 	private List<CarOption> coList;
 	private JPanel pOption;
 	private JCheckBox cb;
@@ -334,6 +345,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	private JRadioButton rBReg;
 	private JRadioButton rBNotReg;
 	private CarType carType;
+	private MyCheckBox mcb;
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRent) {
@@ -501,12 +513,24 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 //		JOptionPane.showMessageDialog(null, selectedCarModel);
 		if(selectedCarModel.getCarType().getCode().equals("S2")) {
 			chkDriver(true);
-
 		}else {
 			chkDriver(false);
 		}
 		
-		
+		//CarSEarchFrame에서 테이블에 있는 내용 중 하나 선택하고 나면 enable false->true로 바꾸기
+			// 1.날짜
+			dateChooser_2.getCalendarButton().setEnabled(true);
+			dateChooser_3.getCalendarButton().setEnabled(true);
+			// 2.시간
+			spStartHour.setEnabled(true);
+			spStartMinutes.setEnabled(true);
+			spEndHour.setEnabled(true);
+			spEndMinutes.setEnabled(true);
+			// 3.보험 라디오버튼
+			rBNotReg.setEnabled(true);
+			rBNotReg.setSelected(true);
+			rBReg.setEnabled(true);
+			//4. 옵션 체크박스
 	}
 
 	private void chkDriver(boolean isChk) {
@@ -538,10 +562,10 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		return diffDays;
 	}
 	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == rBNotReg) {
+		if (e.getSource() == rBNotReg) {	//라디오버튼
 			do_rBNotReg_itemStateChanged(e);
 		}
-		if (e.getSource() == rBReg) {
+		if (e.getSource() == rBReg) {	//라디오버튼
 			do_rBReg_itemStateChanged(e);
 		}
 	}
@@ -558,4 +582,6 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	
 	protected void do_rBNotReg_itemStateChanged(ItemEvent e) {
 	}
+	
+
 }
