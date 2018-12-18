@@ -6466,3 +6466,373 @@
 [2018-12-18] ==>  Preparing: delete from title where code=?; 
 [2018-12-18] ==> Parameters: T003(String)
 >>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd
+[2018-12-18] <==        Row: E001, 나매니저, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, 모닝, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, 경형
+[2018-12-18] <==        Row: V002, 아반떼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, 소형
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, 소형
+[2018-12-18] <==        Row: V004, 프라이드, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, 소형
+[2018-12-18] <==        Row: V005, LF쏘나타, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, 중형
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, 중형
+[2018-12-18] <==        Row: V007, 그랜저, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, 대형
+[2018-12-18] <==        Row: V008, 스포티지, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, 승합
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd
+[2018-12-18] <==        Row: E001, 나매니저, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, 모닝, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, 경형
+[2018-12-18] <==        Row: V002, 아반떼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, 소형
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, 소형
+[2018-12-18] <==        Row: V004, 프라이드, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, 소형
+[2018-12-18] <==        Row: V005, LF쏘나타, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, 중형
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, 중형
+[2018-12-18] <==        Row: V007, 그랜저, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, 대형
+[2018-12-18] <==        Row: V008, 스포티지, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, 승합
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd
+[2018-12-18] <==        Row: E001, 나매니저, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, 모닝, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, 경형
+[2018-12-18] <==        Row: V002, 아반떼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, 소형
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, 소형
+[2018-12-18] <==        Row: V004, 프라이드, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, 소형
+[2018-12-18] <==        Row: V005, LF쏘나타, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, 중형
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, 중형
+[2018-12-18] <==        Row: V007, 그랜저, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, 대형
+[2018-12-18] <==        Row: V008, 스포티지, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, 승합
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select code, name, phone, passwd from employee where code=? and passwd = password(?); 
+[2018-12-18] ==> Parameters: E001(String), rootroot(String)
+[2018-12-18] <==    Columns: code, name, phone, passwd
+[2018-12-18] <==        Row: E001, 나매니저, 010-1234-1234, *6C362347EBEAA7DF44F6D34884615A35095E80EB
+[2018-12-18] <==      Total: 1
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: car_code, name, color, gear, brand, bName, cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, tType
+[2018-12-18] <==        Row: V001, 모닝, wh, auto, B2, kia, S1, 74000, 41400, 53300, 59200, 74000, gasolin, 0, 0, 경형
+[2018-12-18] <==        Row: V002, 아반떼AD, bk, auto, B1, hyundai, S2, 108000, 60500, 77800, 86400, 108000, gasolin, 0, 0, 소형
+[2018-12-18] <==        Row: V003, bmw2, bk, auto, B3, bmw, S2, 204000, 114200, 146900, 163200, 204000, diesel, 0, 0, 소형
+[2018-12-18] <==        Row: V004, 프라이드, wh, stick, B2, kia, S2, 118000, 66100, 85000, 94400, 118000, lpg, 0, 0, 소형
+[2018-12-18] <==        Row: V005, LF쏘나타, wh, auto, B1, hyundai, S3, 155000, 86800, 111600, 124000, 155000, gasolin, 0, 0, 중형
+[2018-12-18] <==        Row: V006, bmw3, wh, auto, B3, bmw, S3, 266000, 149000, 191500, 212800, 266000, diesel, 0, 0, 중형
+[2018-12-18] <==        Row: V007, 그랜저, wh, auto, B1, hyundai, S4, 210000, 117600, 151200, 168000, 210000, gasolin, 0, 0, 대형
+[2018-12-18] <==        Row: V008, 스포티지, bk, auto, B2, kia, S5, 153000, 85700, 110200, 122400, 153000, gasolin, 0, 0, 승합
+[2018-12-18] <==      Total: 8
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
+[2018-12-18] ==>  Preparing: select no, name from brand; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name
+[2018-12-18] <==        Row: B1, hyundai
+[2018-12-18] <==        Row: B2, kia
+[2018-12-18] <==        Row: B3, bmw
+[2018-12-18] <==      Total: 3
+[2018-12-18] ==>  Preparing: select no, code from fuel 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, code
+[2018-12-18] <==        Row: 1, gasolin
+[2018-12-18] <==        Row: 2, diesel
+[2018-12-18] <==        Row: 3, lpg
+[2018-12-18] <==        Row: 4, hybrid
+[2018-12-18] <==        Row: 5, electric
+[2018-12-18] <==      Total: 5
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select no, name, price from car_option; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: no, name, price
+[2018-12-18] <==        Row: 1, seat, 5000
+[2018-12-18] <==        Row: 2, blackbox, 6000
+[2018-12-18] <==        Row: 3, sunroof, 6000
+[2018-12-18] <==        Row: 4, driver, 80000
+[2018-12-18] <==      Total: 4
+[2018-12-18] ==>  Preparing: select code, type from Car_type; 
+[2018-12-18] ==> Parameters: 
+[2018-12-18] <==    Columns: code, type
+[2018-12-18] <==        Row: S1, 경형
+[2018-12-18] <==        Row: S2, 소형
+[2018-12-18] <==        Row: S3, 중형
+[2018-12-18] <==        Row: S4, 대형
+[2018-12-18] <==        Row: S5, 승합
+[2018-12-18] <==        Row: S6, suv
+[2018-12-18] <==      Total: 6
