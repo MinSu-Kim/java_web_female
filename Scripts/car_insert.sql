@@ -98,7 +98,19 @@ insert into level values ('브론즈',0,5),('실버',6,10),	('골드',11,99999),
 
 insert into event values('EVT1', '첫가입', 3),('EVT2', '생일축하', 5);
 					
-insert into custom_event values('EVT1','C001',0),('EVT2','C001',0);
+insert into custom_event values
+('EVT1','C001',0),
+('EVT2','C001',0);
+
+insert into custom_event values
+('EVT1','C002',0),
+('EVT1','C003',0),
+('EVT1','C004',0),
+('EVT1','C005',0),
+('EVT1','C006',0),
+('EVT1','C007',0),
+('EVT1','C008',0),
+('EVT1','C009',0);
 
 
 -- 김보민
