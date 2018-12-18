@@ -91,8 +91,9 @@ insert into customer values
 ('C009', 'xbmhw325',password('aggarg54'), '김영희', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 
 
-
-insert into event values('EVT1', '첫가입', 3),('EVT2', '생일축하', 5);
+-- event insert
+insert into event values('EVT1', '첫가입', 3),
+						('EVT2', '생일축하', 5);
 					
 insert into custom_event values
 ('EVT1','C001',0),
