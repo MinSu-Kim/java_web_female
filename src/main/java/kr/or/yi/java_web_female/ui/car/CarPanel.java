@@ -3,11 +3,14 @@ package kr.or.yi.java_web_female.ui.car;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -23,9 +26,11 @@ import kr.or.yi.java_web_female.ui.ComboPanel;
 import kr.or.yi.java_web_female.ui.list.CarTotalList;
 import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 @SuppressWarnings("serial")
-public class CarPanel extends JPanel implements ActionListener{
+public class CarPanel extends JPanel implements ActionListener,ItemListener{
 	private CarUiService service;
 	private CarModelService modelService;
 
@@ -58,15 +63,19 @@ public class CarPanel extends JPanel implements ActionListener{
 		panelSelect.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		panelCarType = new ComboPanel<>();
+		
 		panelCarType.setTitle("차종");
 		List<CarType> arrCarType = service.selectAllCarType();
 		
 		//콤보박스에 차종 불러오기
 		panelCarType.setComboItems(arrCarType);
 		panelCarType.setSelectedIndex(-1);
+		//아이템리스너
+		
 		panelSelect.add(panelCarType);
 		
 		panelBrand = new ComboPanel<>();
+		
 		panelBrand.setTitle("브랜드");
 		List<Brand> arrBrand = service.selectAllBrand();
 		//콤보박스에 브랜드 불러오기
@@ -74,9 +83,10 @@ public class CarPanel extends JPanel implements ActionListener{
 		panelBrand.setSelectedIndex(-1);
 		panelSelect.add(panelBrand);
 		//changeListener 달기
-		
+
 		//콤보박스에 연료불러오기
 		panelFuel = new ComboPanel<>();
+		
 		panelFuel.setTitle("연료");
 		List<Fuel> arrFuel = service.selectAllFuel();
 		panelFuel.setComboItems(arrFuel);
@@ -99,10 +109,12 @@ public class CarPanel extends JPanel implements ActionListener{
 		ButtonGroup group = new ButtonGroup();
 		
 		rdbtnAuto = new JRadioButton("자동");
+		
 		group.add(rdbtnAuto);
 		panelRbtn.add(rdbtnAuto);
 		
 		rdbtnStick = new JRadioButton("수동");
+		
 		group.add(rdbtnStick);
 		panelRbtn.add(rdbtnStick);
 		//전체 테이블 불러오기
@@ -129,11 +141,12 @@ public class CarPanel extends JPanel implements ActionListener{
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 		
-		
-	
+		panelCarType.getComboBox().addItemListener(this);
+		panelBrand.getComboBox().addItemListener(this);
+		panelFuel.getComboBox().addItemListener(this);
+		rdbtnAuto.addItemListener(this);
+		rdbtnStick.addItemListener(this);
 	}
-
-
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnOk) {
@@ -169,6 +182,66 @@ public class CarPanel extends JPanel implements ActionListener{
 		CarModel carModel = panelList.getSelectedItem();
 		frame.setCarModel(carModel);
 		frame.setVisible(true);
+	}
+
+
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == rdbtnStick) {
+			do_rdbtnStick_itemStateChanged(e);
+		}
+		if (e.getSource() == rdbtnAuto) {
+			do_rdbtnAuto_itemStateChanged(e);
+		}
+		if (e.getSource() == panelFuel.getComboBox()) {
+			do_panelFuelComboBox_itemStateChanged(e);
+		}
+		if (e.getSource() == panelBrand.getComboBox()) {
+			do_panelBrandComboBox_itemStateChanged(e);
+		}
+		if (e.getSource() == panelCarType.getComboBox()) {
+			do_panelCarTypeComboBox_itemStateChanged(e);
+		}
+	}
+	
+	protected void do_panelCarTypeComboBox_itemStateChanged(ItemEvent e) {
+		
+	}
+
+	protected void do_panelBrandComboBox_itemStateChanged(ItemEvent e) {
+		
+	}
+	protected void do_panelFuelComboBox_itemStateChanged(ItemEvent e) {
+		
+	}
+	protected void do_rdbtnAuto_itemStateChanged(ItemEvent e) {
+
+	}
+	protected void do_rdbtnStick_itemStateChanged(ItemEvent e) {
+		
+	}
+	
+
+	private void setLoadAddList(Map<String, String> maps) {
+		Map<String, String> map = new HashMap<>();
+		
+		CarType cartype = panelCarType.getSelectedItems();
+		Brand brand = panelBrand.getSelectedItems();
+		Fuel fuel = panelFuel.getSelectedItems();
+		if(rdbtnStick.isSelected()) {
+			
+		}else {
+			
+		}
+
+		
+		map.put("cartype", cartype.getCode());
+		map.put("brand", brand.getNo());
+		map.put("fuel", fuel.getCode());
+		
+		list = modelService.SelectCarModelWithWhere(map);
+		panelList.setList(list);
+		panelList.loadDatas();
+		add(panelList);
 	}
 }
 

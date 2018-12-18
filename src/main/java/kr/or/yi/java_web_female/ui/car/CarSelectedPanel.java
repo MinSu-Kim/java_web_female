@@ -30,7 +30,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfName;
 	private CarModelService service;
 	private CarUiService carUiService;
-	private JButton btnUpdate;
+	private JButton btnOk;
 	private JButton btnCancel;
 	private JButton btnDelete;
 	
@@ -219,9 +219,9 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		JPanel panelBtn = new JPanel();
 		container.add(panelBtn, BorderLayout.SOUTH);
 		
-		btnUpdate = new JButton("수정");
-		btnUpdate.addActionListener(this);
-		panelBtn.add(btnUpdate);
+		btnOk = new JButton("수정");
+		btnOk.addActionListener(this);
+		panelBtn.add(btnOk);
 		
 		btnDelete = new JButton("삭제");
 		btnDelete.addActionListener(this);
@@ -239,18 +239,23 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		if (arg0.getSource() == btnCancel) {
 			do_btnCancel_actionPerformed(arg0);
 		}
-		if (arg0.getSource() == btnUpdate) {
-			do_btnUpdate_actionPerformed(arg0);
+		if (arg0.getSource() == btnOk) {
+			do_btnOk_actionPerformed(arg0);
 		}
 	}
-	protected void do_btnUpdate_actionPerformed(ActionEvent arg0) {
-		//수정클릭
-		CarModel model = getItem();
-		service.updateCarModel(model);
+	protected void do_btnOk_actionPerformed(ActionEvent arg0) {
+		if(btnOk.getText().equals("수정")) {
+			//수정클릭
+			CarModel model = getItem();
+			service.updateCarModel(model);
+		}else {
+			//추가 클릭
+		}
+		
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
-		//취소클릭
-		clearTf();
+		//취소클릭, 지우지 말고 원래값으로 변경(초기화)
+		
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
@@ -260,8 +265,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		service.deleteCarModel(model);
 	}
 	
-	private void clearTf() {
-		tfName.setText("");
+	private void clearTf(CarModel carModel) {//지우지 말고 원래값으로 변경(초기화)
+		setCarModel(carModel);
 	}
 	
 	private CarModel getItem() {
