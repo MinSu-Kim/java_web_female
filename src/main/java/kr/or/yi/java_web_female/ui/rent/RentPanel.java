@@ -42,9 +42,11 @@ import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
-public class RentPanel extends JPanel implements ActionListener{
+public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel contentPane;
 	private JTextField textField;
@@ -233,13 +235,15 @@ public class RentPanel extends JPanel implements ActionListener{
 		pInsurance.add(pRb);
 		pRb.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JRadioButton rBNotReg = new JRadioButton("가입안함");
+		rBNotReg = new JRadioButton("가입안함");
+		rBNotReg.addItemListener(this);
 		rBNotReg.setHorizontalAlignment(SwingConstants.CENTER);
 		rBNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		buttonGroup.add(rBNotReg);
 		pRb.add(rBNotReg);
 
-		JRadioButton rBReg = new JRadioButton("일반자차");
+		rBReg = new JRadioButton("일반자차");
+		rBReg.addItemListener(this);
 		rBReg.setHorizontalAlignment(SwingConstants.CENTER);
 		rBReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		buttonGroup.add(rBReg);
@@ -324,6 +328,9 @@ public class RentPanel extends JPanel implements ActionListener{
 	private String eHour;
 	private String eMinutes;
 	private int basicCharge;
+	private JRadioButton rBReg;
+	private JRadioButton rBNotReg;
+	private CarType carType;
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnRent) {
@@ -431,7 +438,7 @@ public class RentPanel extends JPanel implements ActionListener{
 		eMinutes = spEndMinutes.getValue().toString();
 		
 		Event evt = new Event();
-		Insurance ins = new Insurance();
+		Insurance ins = new Insurance("I000", "S0", 0);
 		Rent r = new Rent("R004", startDate, sHour+":"+sMinutes+":00", endDate, eHour+":"+eMinutes+":00", false, 60000, selectedCarModel, customer, ins, evt, 0);
 		
 		int shLength = sHour.length();
@@ -455,9 +462,11 @@ public class RentPanel extends JPanel implements ActionListener{
 			long dd = diffDays(startDate+sHour+sMinutes, endDate+eHour+eMinutes);
 			JOptionPane.showMessageDialog(null, dd);
 		}
-
+		
 		RentResultFrame rrf = new RentResultFrame();
+		rrf.setRent(r);	//RentResultFrame에서 만든 setter
 		rrf.setVisible(true);
+		
 		
 	}
 	
@@ -480,6 +489,9 @@ public class RentPanel extends JPanel implements ActionListener{
 		this.selectedCarModel = selectedCarModel;
 		
 		basicCharge = selectedCarModel.getBasicCharge();
+		////////////////////////////////////////////
+		carType = selectedCarModel.getCarType();
+		///////////////////////////////////////////
 		lblResultPrice.setText(selectedCarModel.getBasicCharge()+"");
 		
 //		JOptionPane.showMessageDialog(null, selectedCarModel);
@@ -521,5 +533,24 @@ public class RentPanel extends JPanel implements ActionListener{
 		
 		
 		return diffDays;
+	}
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == rBNotReg) {
+			do_rBNotReg_itemStateChanged(e);
+		}
+		if (e.getSource() == rBReg) {
+			do_rBReg_itemStateChanged(e);
+		}
+	}
+	
+	//보험선택했을 때
+	protected void do_rBReg_itemStateChanged(ItemEvent e) {
+		//차량 콤보박스로 선택하고 리스트 선택하면 코드를 들고온다.
+		String ctCode = carType.getCode();
+		
+		JOptionPane.showMessageDialog(null, ctCode);
+	}
+	
+	protected void do_rBNotReg_itemStateChanged(ItemEvent e) {
 	}
 }
