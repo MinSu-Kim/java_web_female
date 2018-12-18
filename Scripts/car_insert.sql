@@ -66,14 +66,11 @@ values
 			
 
 -- 박수완데이터					
-					
--- 직책 insert					
-insert into title values ('T001', '매니저', true),
-						('T002', '일반사원', false);
+
 
 -- 직원 insert					
-insert into employee values ('E001', '나매니저', '010-1234-1234', password('rootroot'), 'T001'),
-							('E002', '너일반사원', '010-5678-5678', password('abcdef'), 'T002');
+insert into employee values ('E001', '나매니저', '010-1234-1234', password('rootroot')),
+							('E002', '너일반사원', '010-5678-5678', password('abcdef'));
 						
 -- 등급 insert 
 insert into grade values ('G001', '브론즈',0,5, 5),

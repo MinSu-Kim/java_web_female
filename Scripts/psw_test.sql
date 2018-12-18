@@ -113,5 +113,10 @@ where month(dob) = month(sysdate()) and code='C005';
 
 select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = 'C005'; 
 
+select code, name, g_losal, g_hisal, rate from grade
+		where code='G001';
+	
+select * from grade;	
 
+select *from employee;
 

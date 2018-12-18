@@ -4,25 +4,27 @@
 
 	<!-- selectGradeByNo -->
 	<select id="selectGradeByNo" parameterType="Grade" resultType="Grade">
-		select code, name, rate from grade
+		select code, name, g_losal, g_hisal, rate 
+		from grade
 		where code=#{code}
 	</select>
 
 	<!-- selectGradeByAll -->
 	<select id="selectGradeByAll" resultType="Grade">
-		select code, name, rate from grade
+		select code, name, g_losal, g_hisal, rate 
+		from grade
 	</select>
 
 	<!-- insert -->
 	<insert id="insertGrade" parameterType="Grade">
-		insert into grade(code, name, rate)
-		values(#{code},	#{name}, rate=#{rate})
+		insert into grade(code, name, g_losal, g_hisal, rate)
+		values(#{code},	#{name}, g_losal=#{gLosal}, g_hisal=#{gHisal}, #{rate})
 	</insert>
 
 	<!-- update -->
 	 <update id="updateGrade" parameterType="Grade">
 		update grade 
-		set code=#{code}, name=#{name},	rate=#{rate}
+		set code=#{code}, name=#{name}, g_losal=#{gLosal}, g_hisal=#{gHisal}, rate=#{rate}
 		where code=#{code}
 	</update>
 	
