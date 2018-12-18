@@ -519,7 +519,6 @@ public class RentPanel extends JPanel implements ActionListener{
 		//24시간*60분*60초*1000밀리초 ==> 단위 "일"
 		long diffDays = diff / (24*60*60*1000);
 		
-		
 		return diffDays;
 	}
 }
