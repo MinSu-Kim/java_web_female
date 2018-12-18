@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,8 +48,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private ComboPanel<CarType> cmbCarType;
 	private JTextField tfColor;
 	private ComboPanel<Fuel> cmbFuel;
+	private ImageIcon img;
 	//이미지 불러오기
-	String imgPath = System.getProperty("user.dir")+"\\images\\";//이미지가 들어있는 경로
+	String imgPath = System.getProperty("user.dir")+"/images/";//이미지가 들어있는 경로
+	private JLabel lbl_img;
 	
 	
 	/**
@@ -74,7 +77,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		
 		JPanel panel_img = new JPanel();
 		panel_img.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC0AC\uC9C4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
 		panel_2.add(panel_img);
+		panel_img.setLayout(new BorderLayout(0, 0));
+		
+		lbl_img = new JLabel("");
+		panel_img.add(lbl_img);
 		
 		JPanel panel_info = new JPanel();
 		panel_2.add(panel_info);
@@ -306,6 +314,9 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 
 	public void setCarModel(CarModel carModel) {//set
+		img = new ImageIcon(imgPath+carModel.getCarType()+"/"+carModel.getName());
+		lbl_img.setIcon(img);
+		
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
 		
