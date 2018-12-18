@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.login;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -22,6 +22,7 @@ import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.exception.LoginFailException;
 import kr.or.yi.java_web_female.service.LoginUiService;
+import kr.or.yi.java_web_female.ui.join.JoinUI;
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
