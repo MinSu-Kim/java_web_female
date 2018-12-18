@@ -3,12 +3,13 @@
 <mapper namespace="kr.or.yi.java_web_female.dao.UserPicMapper">
 
 	<insert id="insertUserPic" parameterType="UserPic">
-		insert into userpic(id,name,pic,bio)
-		values(#{id},#{name},#{pic},#{bio})
+		INSERT INTO userpic(car_code, pic)
+		VALUES(#{carCode}, #{pic})
 	</insert>
 	
 	<select id="getUserPic" resultType="UserPic">
-		select id, name, pic, bio from userpic where id=#{id}
+		select car_code, pic 
+		from userpic where car_code=#{carCode}
 	</select>
 
 </mapper>

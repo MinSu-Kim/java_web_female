@@ -3,22 +3,14 @@ package kr.or.yi.java_web_female.dto;
 import java.util.Arrays;
 
 public class UserPic {
-	private int id;
-	private String name;
+	private String carCode;  
 	private byte[] pic;
-	private String bio;
 	
-	public int getId() {
-		return id;
+	public String getCarCode() {
+		return carCode;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCarCode(String carCode) {
+		this.carCode = carCode;
 	}
 	public byte[] getPic() {
 		return pic;
@@ -26,16 +18,12 @@ public class UserPic {
 	public void setPic(byte[] pic) {
 		this.pic = pic;
 	}
-	public String getBio() {
-		return bio;
-	}
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
+	
 	@Override
 	public String toString() {
-		return String.format("UserPic [id=%s, name=%s, pic=%s, bio=%s]", id, name, Arrays.toString(pic), bio);
+		return String.format("UserPic [carCode=%s, pic=%s]", carCode, pic.length);
 	}
+	
 	
 	
 }

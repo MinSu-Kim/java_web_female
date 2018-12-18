@@ -236,6 +236,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		pRb.setLayout(new GridLayout(0, 2, 0, 0));
 
 		rBNotReg = new JRadioButton("가입안함");
+		rBNotReg.setSelected(true);
 		rBNotReg.addItemListener(this);
 		rBNotReg.setHorizontalAlignment(SwingConstants.CENTER);
 		rBNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
@@ -289,11 +290,13 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	private void addCarOption() {
 		coList = service.selectAllCarOptions();
 		for(CarOption co : coList) {
-			JCheckBox cb = new JCheckBox(co.getName());
+			MyCheckBox mcb = new MyCheckBox(co.getName());
+			mcb.setCo(co);
+			/*JCheckBox cb = new JCheckBox(co.getName());*/
 //			cb.addActionListener(chkListener);
-			pOption.add(cb);
+			pOption.add(mcb);
 			if(co.getName().equals("driver")) {
-				cb.setEnabled(false);
+				mcb.setEnabled(false);
 			}
 		}
 	}
@@ -491,6 +494,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		basicCharge = selectedCarModel.getBasicCharge();
 		////////////////////////////////////////////
 		carType = selectedCarModel.getCarType();
+		
 		///////////////////////////////////////////
 		lblResultPrice.setText(selectedCarModel.getBasicCharge()+"");
 		
@@ -545,10 +549,12 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	
 	//보험선택했을 때
 	protected void do_rBReg_itemStateChanged(ItemEvent e) {
-		//차량 콤보박스로 선택하고 리스트 선택하면 코드를 들고온다.
-		String ctCode = carType.getCode();
-		
-		JOptionPane.showMessageDialog(null, ctCode);
+		//selectInsuranceByCarType(String) ==> 여기서 String은 S1, S2, ...가 와야 함.
+		List<Insurance> insuranceList = service.selectInsuranceByCarType(selectedCarModel.getCarType().getCode());
+		for(Insurance i : insuranceList) {
+			int insurancePrice = i.getPrice();
+			JOptionPane.showMessageDialog(null, insurancePrice);
+		}
 	}
 	
 	protected void do_rBNotReg_itemStateChanged(ItemEvent e) {

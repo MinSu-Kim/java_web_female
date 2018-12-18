@@ -4,5 +4,5 @@ import kr.or.yi.java_web_female.dto.UserPic;
 
 public interface UserPicMapper {
 	int insertUserPic(UserPic userPic);
-	UserPic getUserPic(int id);
+	UserPic getUserPic(String carCode);
 }
