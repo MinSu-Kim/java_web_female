@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.join;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -57,9 +57,9 @@ public class JoinUI extends JFrame implements ActionListener {
 	
 	private JoinUiService joinService;
 	
-	public void setcTable(AbstractListPanel<Customer> cTable) {
+/*	public void setcTable(AbstractListPanel<Customer> cTable) {
 		this.cTable = cTable;
-	}
+	}*/
 
 	public JoinUI() {
 		joinService = new JoinUiService();
@@ -335,8 +335,10 @@ public class JoinUI extends JFrame implements ActionListener {
 
 			if(res==1) {
 				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
-				cTable.setList(joinService.selectCustomerByAll());
-				cTable.loadDatas();
+				JoinUI.this.dispose();
+				
+/*				cTable.setList(joinService.selectCustomerByAll());
+				cTable.loadDatas();*/
 			}
 			clearTf();
 		} catch (SQLException e1) {

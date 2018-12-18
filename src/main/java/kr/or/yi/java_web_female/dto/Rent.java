@@ -1,7 +1,5 @@
 package kr.or.yi.java_web_female.dto;
 
-import java.util.Date;
-
 public class Rent {
 	private String code;	//대여코드
 	private String startDate;	//대여시작일

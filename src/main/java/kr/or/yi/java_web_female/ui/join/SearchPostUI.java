@@ -1,5 +1,5 @@
 
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.join;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

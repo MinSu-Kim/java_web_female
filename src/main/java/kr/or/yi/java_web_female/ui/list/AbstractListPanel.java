@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import kr.or.yi.java_web_female.dto.Event;
+
 @SuppressWarnings("serial")
 public abstract class AbstractListPanel<T> extends JPanel {
 	protected JTable table;
@@ -105,14 +107,14 @@ public abstract class AbstractListPanel<T> extends JPanel {
 
 		public MyTableModel(Object[][] data, Object[] columnNames) {
 			super(data, columnNames);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		public boolean isCellEditable(int row, int column) {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 	}
+
+
 }

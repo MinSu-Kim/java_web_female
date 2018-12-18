@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -65,6 +64,15 @@ public class EmployeeMapperImpl implements EmployeeMapper {
 	public Employee selectEmployeeByPw(Employee employee) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + ".selectEmployeeByPw", employee);
+		}
+	}
+
+	@Override
+	public int updateEmployee(Employee employee) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateEmployee", employee);
+			sqlSession.commit();
+			return res;
 		}
 	}
 }

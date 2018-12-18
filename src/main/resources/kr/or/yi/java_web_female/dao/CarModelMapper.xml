@@ -82,21 +82,21 @@
 	<!-- 차량관리 where 조건절 select -->
 	<sql id="selectSql">
 		SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType
-		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code;
+		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code
 	</sql>
 	
 	<sql id="whereSql">
 		<where>
-			<if test="cartype != null">
-				cartype=#{carType.code}
+			<if test="cartype!=null">
+				cartype=#{cartype}
 			</if>
-			<if test="brand != null">
-				AND bName=#{brand.name}
+			<if test="brand!=null">
+				AND brand=#{brand}
 			</if>
-			<if test="fuel != null">
-				AND fuel=#{fuel.code}
+			<if test="fuel!=null">
+				AND fuel_code=#{fuel}
 			</if>
-			<if test="gear != null">
+			<if test="gear!=null">
 				AND gear=#{gear}
 			</if>
 		</where>

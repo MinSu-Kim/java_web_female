@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.login;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
