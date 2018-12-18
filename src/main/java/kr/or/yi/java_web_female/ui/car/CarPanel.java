@@ -65,6 +65,7 @@ public class CarPanel extends JPanel implements ActionListener {
 		//콤보박스에 브랜드 불러오기
 		panelBrand.setComboItems(arrBrand);
 		panelSelect.add(panelBrand);
+		//changeListener 달기
 		//콤보박스에 연료불러오기
 		ComboPanel panelFuel = new ComboPanel();
 		panelFuel.setTitle("연료");
