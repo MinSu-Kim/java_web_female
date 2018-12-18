@@ -21,7 +21,7 @@ public class UserPic {
 	
 	@Override
 	public String toString() {
-		return String.format("UserPic [carCode=%s, pic=%s]", carCode, Arrays.toString(pic));
+		return String.format("UserPic [carCode=%s, pic=%s]", carCode, pic.length);
 	}
 	
 	
