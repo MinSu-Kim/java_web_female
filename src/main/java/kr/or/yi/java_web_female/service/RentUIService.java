@@ -11,22 +11,27 @@ import kr.or.yi.java_web_female.dao.CarTypeMapper;
 import kr.or.yi.java_web_female.dao.CarTypeMapperImpl;
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
+import kr.or.yi.java_web_female.dao.InsuranceMapper;
+import kr.or.yi.java_web_female.dao.InsuranceMapperImpl;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Insurance;
 
 public class RentUIService {
 	private CustomerMapper customerDao;
 	private CarTypeMapper carTypeDao;
 	private CarModelMapper carModelDao;
 	private CarOptionMapper carOptionDao;
+	private InsuranceMapper insuranceDao;
 	
 	public RentUIService() {
 		customerDao = CustomerMapperImpl.getInstance();
 		carTypeDao = CarTypeMapperImpl.getInstance();
 		carModelDao = CarModelMapperImpl.getInstance();
 		carOptionDao = CarOptionMapperImpl.getInstance();
+		insuranceDao = InsuranceMapperImpl.getInstance();
 	}
 	
 	public List<Customer> selectCustomer(Customer name) throws SQLException{
@@ -48,5 +53,6 @@ public class RentUIService {
 	public List<CarOption> selectAllCarOptions(){
 		return carOptionDao.selectCarOptionByAll();
 	}
+
 	
 }
