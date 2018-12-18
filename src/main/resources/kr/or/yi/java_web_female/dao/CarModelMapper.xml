@@ -94,7 +94,7 @@
 				AND brand=#{brand}
 			</if>
 			<if test="fuel!=null">
-				AND fuel=#{fuel}
+				AND fuel_code=#{fuel}
 			</if>
 			<if test="gear!=null">
 				AND gear=#{gear}

@@ -206,7 +206,6 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 	protected void do_panelCarTypeComboBox_itemStateChanged(ItemEvent e) {
 		setLoadAddList();
 	}
-
 	protected void do_panelBrandComboBox_itemStateChanged(ItemEvent e) {
 		setLoadAddList();
 	}
@@ -222,11 +221,24 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 	
 
 	private void setLoadAddList() {
-		Map<String, String> maps = new HashMap<>();
+		list = modelService.selectCarModelByAll();
+		panelList.setList(list);
+		panelList.loadDatas();
+		add(panelList);
 		
-		CarType cartype = panelCarType.getSelectedItems();
-		Brand brand = panelBrand.getSelectedItems();
-		Fuel fuel = panelFuel.getSelectedItems();
+		Map<String, String> maps = new HashMap<>();
+		if(panelCarType.getSelectedIndex()>=0) {
+			CarType cartype = panelCarType.getSelectedItems();
+			maps.put("cartype", cartype.getCode());
+		}
+		if(panelBrand.getSelectedIndex()>=0) {
+			Brand brand = panelBrand.getSelectedItems();
+			maps.put("brand", brand.getNo());
+		}
+		if(panelFuel.getSelectedIndex()>=0) {
+			Fuel fuel = panelFuel.getSelectedItems();
+			maps.put("fuel", fuel.getCode());
+		}
 		String gear;
 		if(rdbtnStick.isSelected()) {
 			gear = "stick";
@@ -235,10 +247,6 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 		}else {
 			gear = null;
 		}
-
-		maps.put("cartype", cartype.getCode());
-		maps.put("brand", brand.getNo());
-		maps.put("fuel", fuel.getCode());
 		maps.put("gear", gear);
 		
 		list = modelService.SelectCarModelWithWhere(maps);
