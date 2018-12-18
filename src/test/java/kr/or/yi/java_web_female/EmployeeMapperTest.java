@@ -11,7 +11,7 @@ import kr.or.yi.java_web_female.dao.EmployeeMapper;
 import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Grade;
-import kr.or.yi.java_web_female.dto.Title;
+
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -59,7 +59,7 @@ public class EmployeeMapperTest extends AbstractTest {
 
 	}
 
-	/*@Test
+	@Test
 	public void test05insertEmployee() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Employee employee = new Employee();
@@ -69,19 +69,19 @@ public class EmployeeMapperTest extends AbstractTest {
 		employee.setPhone("010-4505-8465");
 		employee.setPasswd("zzzzz");
 
-		employee.settCode(new Title("T001"));
+		
 		int res =dao.insertEmployee(employee);
 		Assert.assertEquals(1, res);
-	}*/
+	}
 	
-	/*@Test
-	public void test06updateGrade() {
+	@Test
+	public void test06updateEmployee() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Employee employee = new Employee();
 		employee.setCode("E003");
-		employee.setName("나인턴");
-		employee.setPhone("010-4505-8465");
-		employee.setPasswd("");
+		employee.setName("나알바");
+		employee.setPhone("010-4514-6245");
+		employee.setPasswd("xxxx");
 
 		int res = dao.updateEmployee(employee);
 		Assert.assertSame(1, res);
@@ -97,13 +97,6 @@ public class EmployeeMapperTest extends AbstractTest {
 		Assert.assertEquals(1, res);
 	}
 	
-	@Test
-	public void test02InsertEmployee() throws SQLException {
-		Employee newEmp = new Employee("E017003","너부장",new Title("T001"),4000000,Gender.FEMALE,new Department("D002"),new Date());
-		int row = dao.insertEmployee(newEmp);
-		LogUtil.prnLog("Insert row :" + row);
-		Assert.assertEquals(1, row);
-		test01selectEmployeeByAll();
-	}
-*/
+	
+
 }

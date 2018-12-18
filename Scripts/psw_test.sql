@@ -118,3 +118,5 @@ select code, name, g_losal, g_hisal, rate from grade
 	
 select * from grade;	
 
+select *from employee;
+
