@@ -14,7 +14,8 @@ SELECT * FROM post;
 select zipcode, sido, sigungu, eupmyeon, doro, building1, building2
 from post;
 
-
+select code, name, rate from grade
+		where code='G001';
 select *
 from customer;
 
@@ -72,7 +73,9 @@ select length(password('root123345')) from dual;
 -- 비밀번호가 같은지 확인
 select password('rootroot') = password('rootroot1') from dual;
 
-
+select * from grade;
+select * from employee;
+select * from title;
 
 /*select *
 from post 

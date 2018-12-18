@@ -9,6 +9,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
 public class ComboPanel<T> extends JPanel {
@@ -43,9 +45,32 @@ public class ComboPanel<T> extends JPanel {
 	public void setSelectedItem(T item) {
 		comboBox.setSelectedItem(item);
 	}
+	
 
 	@SuppressWarnings("unchecked")
 	public T getSelectedItems() {
 		return (T) comboBox.getSelectedItem();
 	}
+
+	public JComboBox<T> getComboBox() {
+		return comboBox;
+	}
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
