@@ -18,7 +18,7 @@ import kr.or.yi.java_web_female.dto.Title;
 public class EmployeeMapperTest extends AbstractTest {
 	private EmployeeMapper dao = EmployeeMapperImpl.getInstance();
 
-	/*@Test
+	@Test
 	public void test01selectEmployeeByNo() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Employee searchEmp = new Employee();
@@ -57,7 +57,7 @@ public class EmployeeMapperTest extends AbstractTest {
 		System.out.println(resEmp);
 		Assert.assertNotNull(resEmp);
 
-	}*/
+	}
 
 	/*@Test
 	public void test05insertEmployee() {
