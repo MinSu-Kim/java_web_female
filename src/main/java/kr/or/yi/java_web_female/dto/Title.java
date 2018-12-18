@@ -6,6 +6,22 @@ public class Title {
 	private boolean tGrant; //권한
 	
 	
+	
+	
+	public Title() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Title(String code, String name, boolean tGrant) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.tGrant = tGrant;
+	}
+
+
 	/*getter & setter*/
 	public String getCode() {
 		return code;

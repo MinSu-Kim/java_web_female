@@ -2,33 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.java_web_female.dao.GradeMapper">
 
-	<!-- selectTitleByNo -->
+	<!-- selectGradeByNo -->
 	<select id="selectGradeByNo" parameterType="Grade" resultType="Grade">
 		select code, name, rate from grade
 		where code=#{code}
 	</select>
 
-	<!-- selectTitleByAll -->
-	<!-- <select id="selectTitleByAll" resultType="Grade">
+	<!-- selectGradeByAll -->
+	<select id="selectGradeByAll" resultType="Grade">
 		select code, name, rate from grade
-	</select> -->
+	</select>
 
 	<!-- insert -->
-	<!-- <insert id="insertTitle" parameterType="Grade">
-		insert into Title(code, name, rate)
+	<insert id="insertGrade" parameterType="Grade">
+		insert into grade(code, name, rate)
 		values(#{code},	#{name}, rate=#{rate})
-	</insert> -->
+	</insert>
 
 	<!-- update -->
-	<!-- <update id="updateTitle" parameterType="Grade">
-		update title 
+	 <update id="updateGrade" parameterType="Grade">
+		update grade 
 		set code=#{code}, name=#{name},	rate=#{rate}
 		where code=#{code}
-	</update> -->
+	</update>
 	
 	<!-- delete -->
-	<!-- <delete id="deleteTitle" parameterType="Title">
-		delete from title
+	<delete id="deleteGrade" parameterType="Grade">
+		delete from grade
 		where code=#{code}
-	</delete> -->
+	</delete>
 </mapper>
