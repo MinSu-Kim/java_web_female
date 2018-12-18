@@ -19,7 +19,8 @@ public class UserPicMapperImpl implements UserPicMapper {
 	public int insertUserPic(UserPic userPic) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
 			int res = sqlSession.insert(namespace+".insertUserPic",userPic);
-			return 0;
+			sqlSession.commit();
+			return res;
 		}
 	}
 
