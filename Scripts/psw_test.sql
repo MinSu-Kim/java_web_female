@@ -45,3 +45,36 @@ select code, name, phone, passwd, t_code as tCode
 from employee
 where code='E001' and passwd = password('rootroot');
 
+select event_code, custom_code, is_use, code, name, rate 
+from custom_event ce join event e on ce.event_code = e.code
+where custom_code='C001';
+
+select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt,
+       event_code, custom_code, is_use, e.code, e.name, rate 
+from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code
+where c.code = 'C001';
+
+select * from custom_event;
+
+select * from event;
+
+select event_code, custom_code, is_use, code, name, rate 
+from custom_event ce join event e on ce.event_code = e.code
+where custom_code='C001';
+
+select *
+from customer c join custom_event ce on c.code = ce.custom_code
+where c.code = 'C001';
+
+-- 비밀번호 길이 확인
+select length(password('root123345')) from dual;
+
+-- 비밀번호가 같은지 확인
+select password('rootroot') = password('rootroot1') from dual;
+
+
+
+/*select *
+from post 
+where doro ='태전로7길'
+order by building1, building2;*/
