@@ -4,21 +4,21 @@
 
 	<!-- selectTitleByNo -->
 	<select id="selectEmployeeByNo" parameterType="Employee" resultType="Employee">
-		select code, name, phone, passwd, t_code as tCode 
+		select code, name, phone, passwd
 		from employee
 		where code=#{code}
 	</select>
 
 	<!-- selectEmployeeByAll -->
 	<select id="selectEmployeeByAll" resultType="Employee">
-		select code, name, phone, passwd, t_code as tCode 
+		select code, name, phone, passwd
 		from employee
 	</select> 
 
 
 	<!-- selectEmployeeById -->
 	<select id="selectEmployeeById" resultType="Employee">
-		select code, name, phone, passwd, t_code as tCode 
+		select code, name, phone, passwd
 		from employee
 		where code=#{code}
 	</select>
@@ -32,7 +32,7 @@
 		<result column="t_code" property="tCode.code"/>
 	</resultMap>
 	<select id="selectEmployeeByPw" resultMap="resultEmployee">
-		select code, name, phone, passwd, t_code 
+		select code, name, phone, passwd 
 		from employee
 		where code=#{code} and passwd = password(#{passwd});
 	</select>
