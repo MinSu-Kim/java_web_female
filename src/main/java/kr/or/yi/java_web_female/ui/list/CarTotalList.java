@@ -2,10 +2,7 @@ package kr.or.yi.java_web_female.ui.list;
 
 import javax.swing.SwingConstants;
 
-import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
-import kr.or.yi.java_web_female.dto.CarType;
-import kr.or.yi.java_web_female.dto.Fuel;
 
 @SuppressWarnings("serial")
 public class CarTotalList extends AbstractListPanel<CarModel> {
@@ -46,22 +43,12 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 
 	@Override
 	public CarModel getItem(int selectedIndex) {
-		String carCode = (String)table.getValueAt(selectedIndex, 0);
+/*		String carCode = (String)table.getValueAt(selectedIndex, 0);
 		CarModel carModel = new CarModel(carCode);
 		int index = list.indexOf(carModel);
 		System.out.println(selectedIndex +":"+index);
-		return list.get(index);
+		return list.get(index);*/
+		return list.get(selectedIndex);
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-

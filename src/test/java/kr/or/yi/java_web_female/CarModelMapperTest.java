@@ -129,15 +129,16 @@ public class CarModelMapperTest extends AbstractTest {
 		
 	}
 	
-/*	@Test
+	@Test
 	public void test09SelectCarModelWithWhere() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Map<String, String> maps = new HashMap<>();
-		maps.put("brand.name", "kia");
-//		maps.put("gear", "auto");
+		maps.put("cartype","S2");
+		maps.put("brand", "b2");
+		maps.put("gear", "auto");
 		List<CarModel> list = dao.SelectCarModelWithWhere(maps);
 		Assert.assertNotNull(list);
-	}*/
+	}
 }
 
 

@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import kr.or.yi.java_web_female.ui.LoginUI;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 public class Main {
 

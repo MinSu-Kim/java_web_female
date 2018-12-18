@@ -1,9 +1,12 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.login;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,10 +20,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.java_web_female.TestFrame;
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.exception.LoginFailException;
 import kr.or.yi.java_web_female.service.LoginUiService;
+import kr.or.yi.java_web_female.ui.join.JoinUI;
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
@@ -93,7 +98,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		pBtn.add(btnSearch);
 		
 		// 테스트용도
-		tfId.setText("asd132");
+		tfId.setText("E001");
 		tfPwd.setText("rootroot");
 	}
 
@@ -127,9 +132,17 @@ public class LoginUI extends JFrame implements ActionListener {
 		if (checkManager.isSelected()) {
 			System.out.println(getUser(true));
 			loginEmployee = loginService.selectEmployeeByPw((Employee) getUser(true));
-			System.out.println(loginEmployee);
 		} else {
-			loginCusotmer = loginService.selectCustomerByPw((Customer) getUser(false));
+			Customer customer = loginService.selectCustomerByPw((Customer) getUser(false));
+			List<Customer> fullCustomer= loginService.selectCustomerByCode(customer);
+			loginCusotmer = fullCustomer.get(0);
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(loginCusotmer.getDob());
+			if (cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
+//				JOptionPane.showMessageDialog(null, "생월이 같음");
+				loginService.insertCustomEvent(new CustomEvent("EVT2", loginCusotmer.getCode(), false));
+			}
 		}
 	}
 

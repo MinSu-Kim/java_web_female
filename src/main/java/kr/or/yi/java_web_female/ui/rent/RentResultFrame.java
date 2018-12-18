@@ -179,7 +179,13 @@ public class RentResultFrame extends JFrame {
 	}
 	
 	public void setItems() {
-		tfCustomer.setText(rent.getCustomerCode().getName());
+		tfCarName.setText(rent.getCarCode().getName()); //차량명
+		tfCustomer.setText(rent.getCustomerCode().getName()); //고객명
+		tfStartDate.setText(rent.getStartDate()); //대여일자
+		tfStartTime.setText(rent.getStartTime()); //대여시간
+		tfEndDate.setText(rent.getEndDate());	//반납일자
+		tfEndTime.setText(rent.getEndTime());	//반납시간
+		tfInsurance.setText(rent.getInsuranceCode().getPrice()+"");	//보험가격
 	}
 
 }

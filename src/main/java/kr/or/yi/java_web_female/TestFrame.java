@@ -5,8 +5,8 @@ import javax.swing.JOptionPane;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.ui.LoginUI;
 import kr.or.yi.java_web_female.ui.ManagerPanel;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 @SuppressWarnings("serial")
 public class TestFrame extends JFrame {
@@ -21,7 +21,7 @@ public class TestFrame extends JFrame {
 		JOptionPane.showMessageDialog(null, loginCusotmer==null?loginEmployee:loginCusotmer);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 600);
+		setBounds(100, 100, 800, 700);
 		contentPane = new ManagerPanel();
 		setContentPane(contentPane);
 	}

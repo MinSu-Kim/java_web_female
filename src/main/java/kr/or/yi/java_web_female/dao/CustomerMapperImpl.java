@@ -105,4 +105,13 @@ public class CustomerMapperImpl implements CustomerMapper {
 			return sqlSession.selectOne(namespace + ".selectCustomerByPw", customer);
 		}
 	}
+
+	
+	// 추가
+	@Override
+	public List<Customer> selectCustomerByCode(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectCustomerByCode", customer);
+		}
+	}
 }

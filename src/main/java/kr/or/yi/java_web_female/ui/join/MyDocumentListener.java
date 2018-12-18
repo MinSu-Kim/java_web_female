@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui;
+package kr.or.yi.java_web_female.ui.join;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
