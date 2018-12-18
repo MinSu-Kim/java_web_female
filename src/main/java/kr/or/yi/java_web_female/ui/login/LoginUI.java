@@ -95,7 +95,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		pBtn.add(btnSearch);
 		
 		// 테스트용도
-		tfId.setText("Es001");
+		tfId.setText("E001");
 		tfPwd.setText("rootroot");
 	}
 
