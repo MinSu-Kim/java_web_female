@@ -32,6 +32,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public BrandListPanel() {
+		setBorder(new TitledBorder(null, "\uBE0C\uB79C\uB4DC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponent();
 	}
@@ -39,8 +40,6 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	private void initcomponent() {
 		
 		panelList = new BrandList();
-		
-		panelList.setBorder(new TitledBorder(null, "\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		list = service.selectAllBrand();
 		panelList.setList(list);
 		panelList.loadDatas();
@@ -52,7 +51,6 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panelInput.setBorder(new TitledBorder(null, "\uBE0C\uB79C\uB4DC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panelInput, BorderLayout.CENTER);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		

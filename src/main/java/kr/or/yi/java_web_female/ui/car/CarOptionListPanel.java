@@ -36,6 +36,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 
 
 	public CarOptionListPanel() {
+		setBorder(new TitledBorder(null, "\uCC28\uB7C9\uC635\uC158", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponents();
 	}
@@ -45,8 +46,6 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 	private void initcomponents() {
 		
 		panelList = new CarOptionList();
-				
-		panelList.setBorder(new TitledBorder(null, "\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		list = service.selectAllCarOption();
 		panelList.setList(list);
 		panelList.loadDatas();
@@ -59,7 +58,6 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panelInput.setBorder(new TitledBorder(null, "\uCC28\uB7C9\uC635\uC158", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panelInput, BorderLayout.CENTER);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
