@@ -34,6 +34,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public FuelListPanel() {
+		setBorder(new TitledBorder(null, "\uC5F0\uB8CC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponent();
 	}
@@ -55,7 +56,6 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panelInput.setBorder(new TitledBorder(null, "\uC5F0\uB8CC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.add(panelInput, BorderLayout.CENTER);
 		panelInput.setLayout(new GridLayout(0, 2, 0, 0));
 		

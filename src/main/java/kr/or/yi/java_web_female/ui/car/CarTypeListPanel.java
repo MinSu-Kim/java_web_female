@@ -33,6 +33,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public CarTypeListPanel() {
+		setBorder(new TitledBorder(null, "\uCC28\uC885", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponent();
 	}
@@ -54,7 +55,6 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		panelList_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panelInput.setBorder(new TitledBorder(null, "\uCC28\uC885", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelList_2.add(panelInput, BorderLayout.CENTER);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
