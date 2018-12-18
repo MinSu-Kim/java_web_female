@@ -10,8 +10,10 @@ import java.util.Map;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -126,6 +128,8 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 		panelList.loadDatas();
 		add(panelList);
 		
+		panelList.setPopupMenu(createDeptPopupMenu());
+		
 		JPanel panelBtn = new JPanel();
 		add(panelBtn, BorderLayout.SOUTH);
 		
@@ -147,6 +151,35 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 		rdbtnAuto.addItemListener(this);
 		rdbtnStick.addItemListener(this);
 	}
+	
+
+
+	private JPopupMenu createDeptPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+		//수정
+		JMenuItem updateItem = new JMenuItem("수정");
+		updateItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				do_btnOk_actionPerformed(e);
+			}
+		});
+		popMenu.add(updateItem);
+		//삭제
+		JMenuItem delItem = new JMenuItem("삭제");
+		delItem.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				modelService.deleteCarModel(panelList.getSelectedItem());
+				panelList.setList(modelService.selectCarModelByAll());
+				panelList.loadDatas();
+			}
+		});
+		popMenu.add(delItem);
+		
+		return popMenu;
+	}
+
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnOk) {
