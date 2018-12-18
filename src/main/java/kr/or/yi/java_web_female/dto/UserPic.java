@@ -3,7 +3,7 @@ package kr.or.yi.java_web_female.dto;
 import java.util.Arrays;
 
 public class UserPic {
-	private String carCode;
+	private String carCode;  
 	private byte[] pic;
 	
 	public String getCarCode() {
