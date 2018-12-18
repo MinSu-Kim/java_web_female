@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -64,6 +65,7 @@ public class CarPanel extends JPanel implements ActionListener {
 		//콤보박스에 브랜드 불러오기
 		panelBrand.setComboItems(arrBrand);
 		panelSelect.add(panelBrand);
+		//changeListener 달기
 		//콤보박스에 연료불러오기
 		ComboPanel panelFuel = new ComboPanel();
 		panelFuel.setTitle("연료");
@@ -84,10 +86,14 @@ public class CarPanel extends JPanel implements ActionListener {
 		panelGear.add(panelRbtn);
 		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 		
+		ButtonGroup group = new ButtonGroup();
+		
 		JRadioButton rdbtnAuto = new JRadioButton("자동");
+		group.add(rdbtnAuto);
 		panelRbtn.add(rdbtnAuto);
 		
 		JRadioButton rdbtnStick = new JRadioButton("수동");
+		group.add(rdbtnStick);
 		panelRbtn.add(rdbtnStick);
 		//전체 테이블 불러오기
 		panelList = new CarTotalList();
