@@ -21,7 +21,7 @@ public class TestFrame extends JFrame {
 		JOptionPane.showMessageDialog(null, loginCusotmer==null?loginEmployee:loginCusotmer);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 700);
+		setBounds(100, 100, 570, 700);
 		contentPane = new ManagerPanel();
 		setContentPane(contentPane);
 	}
