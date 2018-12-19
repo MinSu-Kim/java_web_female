@@ -122,13 +122,12 @@ public class RentPanel extends JPanel implements ActionListener{
 	private void do_btnTotalPrice_actionPerformed(ActionEvent e) throws ParseException {
 		// TODO Auto-generated method stub
 		getTotalRentPrice();
-		JOptionPane.showMessageDialog(null, "테스트");
 		lblResultPrice.setText("totalPrice : " + totalPrice);
 	}
 	
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
-		JOptionPane.showMessageDialog(null, selectedCarModel);
+//		JOptionPane.showMessageDialog(null, selectedCarModel);
 		
 		pInsurance.setSelectedCarModel(selectedCarModel);
 		int price = pOption.getTotalOptionPrice();

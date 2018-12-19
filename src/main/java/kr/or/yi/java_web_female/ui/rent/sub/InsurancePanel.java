@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
 import java.awt.Font;
 import javax.swing.ButtonGroup;
@@ -22,6 +23,9 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton rbReg;
 	private CarModel selectedCarModel;
+	private JRadioButton rbNotReg;
+	private RentPanel rentPanel;
+	private int insurancePrice;
 		
 	/**
 	 * Create the panel.
@@ -44,7 +48,8 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 		add(pChkInsurance);
 		pChkInsurance.setLayout(new GridLayout(0, 2, 10, 10));
 		
-		JRadioButton rbNotReg = new JRadioButton("가입안함");
+		rbNotReg = new JRadioButton("가입안함");
+		rbNotReg.addItemListener(this);
 		buttonGroup.add(rbNotReg);
 		rbNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		rbNotReg.setHorizontalAlignment(SwingConstants.CENTER);
@@ -59,22 +64,35 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 	}
 
 	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == rbNotReg) {
+			do_rbNotReg_itemStateChanged(e);
+		}
 		if (e.getSource() == rbReg) {
 			do_rbReg_itemStateChanged(e);
 		}
 	}
 	
 	//일반자차를 선택했을 때
-	protected void do_rbReg_itemStateChanged(ItemEvent e) {
+	protected int do_rbReg_itemStateChanged(ItemEvent e) {
 		// selectInsuranceByCarType(String) ==> 여기서 String은 S1, S2, ...가 와야 함.
 		List<Insurance> insuranceList = service.selectInsuranceByCarType(selectedCarModel.getCarType().getCode());
 		for (Insurance i : insuranceList) {
-			int insurancePrice = i.getPrice();
-			JOptionPane.showMessageDialog(null, insurancePrice);
+			insurancePrice = i.getPrice();
+//			JOptionPane.showMessageDialog(null, insurancePrice);
 		}
+		return insurancePrice;
+	}
+	
+	//가입안함을 선택했을 때
+	protected void do_rbNotReg_itemStateChanged(ItemEvent e) {
+		
 	}
 
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
-	}	
+	}
+
+	public void setRentPanel(RentPanel rentPanel) {
+		this.rentPanel = rentPanel;
+	}
 }
