@@ -189,6 +189,26 @@ public class GradeListPanel extends JPanel implements ActionListener {
 		return item;
 	}
 	protected void do_btnGradeOk_actionPerformed(ActionEvent arg0) {
+		String gCode = tfGradeCode.getText();
+		String gName = tfGradeName.getText();
+		int gRate = Integer.parseInt(tfGradeRate.getText());
+		int gLosal = Integer.parseInt(tfLosal.getText());
+		int gHisal = Integer.parseInt(tfHisal.getText());
+		
+		Grade grade = new Grade();
+		grade.setCode(gCode);
+		grade.setName(gName);
+		grade.setRate(gRate);
+		grade.setgLosal(gLosal);
+		grade.setgHisal(gHisal);
+		
+		service.insertGrade(grade);
+		list = service.selectGradeByAll();
+		panelList.setList(list);
+		panelList.loadDatas();
+		add(panelList);
+		
+		clearTf();
 	}
 	protected void do_btnGradeCancel_actionPerformed(ActionEvent arg0) {
 		if(btnGradeOk.getText()=="수정") {
@@ -197,11 +217,11 @@ public class GradeListPanel extends JPanel implements ActionListener {
 		clearTf();
 	}
 	private void setItem(Grade item) {
-		tfGradeCode.setText("");
-		tfGradeName.setText("");
-		tfGradeRate.setText("");
-		tfLosal.setText("");
-		tfHisal.setText("");
+		tfGradeCode.setText(item.getCode()+"");
+		tfGradeName.setText(item.getName()+"");
+		tfGradeRate.setText(item.getRate()+"");
+		tfLosal.setText(item.getgLosal()+"");
+		tfHisal.setText(item.getgHisal()+"");
 		
 		
 	}

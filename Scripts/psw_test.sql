@@ -24,7 +24,7 @@ insert into customer(code, Id, passwd, Name, address, phone, dob, email)
 
 desc customer;
 
-select * from custom_event;
+select * from employee;
 
 select c.code, id, passwd, c.name, address, phone, dob, email, event_code, is_use, e.name, e.rate
 from customer c join custom_event ce on c.code=ce.custom_code join event e on ce.event_code=e.code;
@@ -92,6 +92,8 @@ select * from event;
 select * from custom_event;
 select * from customer;
 
+select * from grade;
+
 select * from `level`;
 select * from grade;
 
@@ -136,7 +138,13 @@ select grade_code from customer where code='C007';
 
 select * from grade;
 
+insert into grade(code, name, g_losal, g_hisal, rate) values('G007', 'xxx', g_losal=?, g_hisal=?, ?)
+
+desc grade;
+
 select g.name, g.code
 from customer c , grade g
 where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
+
+
 

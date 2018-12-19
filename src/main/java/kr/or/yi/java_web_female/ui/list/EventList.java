@@ -6,6 +6,8 @@ import kr.or.yi.java_web_female.dto.Event;
 
 @SuppressWarnings("serial")
 public class EventList extends AbstractListPanel<Event>{
+	public EventList() {
+	}
 
 	@Override
 	protected void setAlignWidth() {

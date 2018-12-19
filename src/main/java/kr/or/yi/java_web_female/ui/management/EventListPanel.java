@@ -151,29 +151,32 @@ public class EventListPanel extends JPanel implements ActionListener {
 	}
 
 	private Event getItem() {
-		String eCode = tfEventCode.getText();
-		String eName = tfEventName.getText();
-		int eRate = Integer.parseInt(tfEventRate.getText());
+		String etCode = tfEventCode.getText();
+		String etName = tfEventName.getText();
+		int etRate = Integer.parseInt(tfEventRate.getText());
 		Event item = new Event();
-		item.setCode(eCode);
-		item.setName(eName);
-		item.setRate(eRate);
+		item.setCode(etCode);
+		item.setName(etName);
+		item.setRate(etRate);
 		return item;
 	}
 
 	protected void do_btnEventOk_actionPerformed(ActionEvent arg0) {
-		String eCode = tfEventCode.getText();
-		String eName = tfEventName.getText();
-		int eRate = Integer.parseInt(tfEventRate.getText());
+		String etCode = tfEventCode.getText();
+		String etName = tfEventName.getText();
+		int etRate = Integer.parseInt(tfEventRate.getText());
+		
 		Event event = new Event();
-		event.setCode(eCode);
-		event.setName(eName);
-		event.setRate(eRate);
+		event.setCode(etCode);
+		event.setName(etName);
+		event.setRate(etRate);
+		
 		service.insertEvent(event);
 		list = service.selectEventByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		
 		clearTf();
 	}
 
@@ -192,9 +195,9 @@ public class EventListPanel extends JPanel implements ActionListener {
 	}
 
 	private void setItem(Event item) {
-		tfEventCode.setText("");
-		tfEventName.setText("");
-		tfEventRate.setText("");
+		tfEventCode.setText(item.getCode() + "");
+		tfEventName.setText(item.getName() + "");
+		tfEventRate.setText(item.getRate() + "");
 	}
 
 }

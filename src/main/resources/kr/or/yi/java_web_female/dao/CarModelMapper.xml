@@ -106,6 +106,10 @@
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
+	
+	<select id="nextCarCode" resultType="String">
+		select max(car_code) nextto from car_model
+	</select>
 </mapper>
 
 

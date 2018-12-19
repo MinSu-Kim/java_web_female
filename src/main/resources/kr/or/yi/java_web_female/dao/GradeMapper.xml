@@ -18,7 +18,7 @@
 	<!-- insert -->
 	<insert id="insertGrade" parameterType="Grade">
 		insert into grade(code, name, g_losal, g_hisal, rate)
-		values(#{code},	#{name}, g_losal=#{gLosal}, g_hisal=#{gHisal}, #{rate})
+		values(#{code},	#{name}, #{gLosal}, #{gHisal}, #{rate})
 	</insert>
 
 	<!-- update -->

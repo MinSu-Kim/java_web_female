@@ -39,8 +39,8 @@ public class GradeMapperTest extends AbstractTest {
 		Grade grade = new Grade();
 		grade.setCode("G005");
 		grade.setName("다이아");
-		grade.setgLosal(0);
-		grade.setgHisal(0);
+		grade.setgLosal(15);
+		grade.setgHisal(20);
 		grade.setRate(25);
 		int res = dao.insertGrade(grade);
 		Assert.assertEquals(1, res);
