@@ -17,7 +17,7 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 	@Override
 	protected String[] getColumnNames() {
 		return new String[] {
-				"차코드","모델명",/*"색상",*/"기어","브랜드","차종","기본료",/*"6시간","10시간","12시간","12시간이상",*/"연료","렌트여부","렌트횟수"
+				"차코드","모델명","색상","기어","브랜드","차종"/*,"기본료","6시간","10시간","12시간","12시간이상"*/,"연료","렌트여부","렌트횟수"
 		};
 	}
 
@@ -26,12 +26,12 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 		return new Object[] {
 				item.getCarCode(),
 				item.getName(),
-				/*item.getColor(),*/
+				item.getColor(),
 				item.getGear(),
 				item.getBrand().getName(),
 				item.getCarType().getType(),
-				item.getBasicCharge(),
-				/*item.getHour6(),
+				/*item.getBasicCharge(),
+				item.getHour6(),
 				item.getHour10(),
 				item.getHour12(),
 				item.getHourElse(),*/
