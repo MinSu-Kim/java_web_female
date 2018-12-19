@@ -6,6 +6,10 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -23,6 +27,7 @@ import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Fuel;
+import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
@@ -292,8 +297,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		}else {
 			//추가 클릭
 			CarModel model = getItem();
-			service.insertCarModel(model);
-			carUi.reloadDataCarPanel();
+			service.insertCarModel(model);//디비에 추가완료
+//			carUi.reloadDataCarPanel();//널포인트에러 발생ㅠㅠ
 			carUi.close();
 		}
 		
@@ -364,6 +369,17 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		String strImg = imgPath+carModel.getCarCode()+".png";
 		strImg = strImg.replace("\\", "/");
 		ImageIcon img = new ImageIcon(strImg);
+		//사진이 없을 경우 파일 insert
+		if(img.getImage()==null) {
+			UserPic userpic = new UserPic();
+			userpic.setCarCode(tfCode.getText());		
+			try {
+				userpic.setPic(getPicFile());
+				service.insertUserPic(userpic);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		Image image = img.getImage();
 		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
 		ImageIcon resimg = new ImageIcon(changedImg);
@@ -400,6 +416,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 
 	public void setCarUi(CarUi carUi) {
 		this.carUi = carUi;
+	}
+	
+	private byte[] getPicFile() throws IOException{
+		byte[] pic = null;
+		File file = new File(System.getProperty("user.dir")+"/images/"+tfCode.getText());
+		try(InputStream is = new FileInputStream(file)){
+			pic = new byte[is.available()];
+			is.read(pic);
+		}
+		return pic;
 	}
 
 

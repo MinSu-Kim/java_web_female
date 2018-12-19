@@ -48,4 +48,8 @@ public class CarModelService {
 	public String nextCarCode() {
 		return dao.nextCarCode();
 	}
+	
+	public int insertUserPic(UserPic userPic) {
+		return picDao.insertUserPic(userPic);
+	}
 }
