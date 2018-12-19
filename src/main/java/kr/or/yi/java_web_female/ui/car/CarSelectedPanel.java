@@ -82,7 +82,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panel_2.add(panel_img);
 		panel_img.setLayout(new BorderLayout(0, 0));
 		
-//		panel_img.add(lbl_img);
+		lbl_img = new JLabel();
+		panel_img.add(lbl_img);
 		
 		JPanel panel_info = new JPanel();
 		panel_2.add(panel_info);
@@ -314,10 +315,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 
 	public void setCarModel(CarModel carModel) {//set
-		ImageIcon img = new ImageIcon(imgPath+carModel.getCarType().getCode()+"\\"+carModel.getCarCode()+".png");
-		System.out.println(img);//java_web_female\images\S1\V001.png 출력
-//		lbl_img.setIcon(img); //널포인트에러
-//		panel_img.add(lbl_img);
+		String strImg = imgPath+carModel.getCarType().getCode()+"\\"+carModel.getCarCode()+".png";
+		strImg = strImg.replace("\\", "/");
+		ImageIcon img = new ImageIcon(strImg);
+		lbl_img.setIcon(img);
+		panel_img.add(lbl_img);
 		
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
