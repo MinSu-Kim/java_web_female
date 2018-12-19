@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ import kr.or.yi.java_web_female.ui.ComboPanel;
 import kr.or.yi.java_web_female.ui.list.CarTotalList;
 
 @SuppressWarnings("serial")
-public class CarPanel extends JPanel implements ActionListener, ItemListener, MouseListener {
+public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private CarUiService service;
 	private CarModelService modelService;
 
@@ -118,7 +119,17 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener, Mo
 		panelRbtn.add(rdbtnStick);
 		// 전체 테이블 불러오기
 		panelList = new CarTotalList();
-		panelList.getTable().addMouseListener(this);
+		
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					showCarUi();
+				}
+			}
+
+			
+		});
 
 		panelList.setBorder(new TitledBorder(null, "\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		list = modelService.selectCarModelByAll();
@@ -211,55 +222,28 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener, Mo
 
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
 		// 선택눌렀을시 selected화면으로 이동
+		showCarUi();
+	}
+	private void showCarUi() {
 		CarUi frame = new CarUi(false);
 		CarModel carModel = panelList.getSelectedItem();
 		frame.setCarModel(carModel);
+		frame.setCarPanel(this);
 		frame.setVisible(true);
 	}
-
 	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == rdbtnStick) {
-			do_rdbtnStick_itemStateChanged(e);
-		}
-		if (e.getSource() == rdbtnAuto) {
-			do_rdbtnAuto_itemStateChanged(e);
-		}
-		if (e.getSource() == panelFuel.getComboBox()) {
-			do_panelFuelComboBox_itemStateChanged(e);
-		}
-		if (e.getSource() == panelBrand.getComboBox()) {
-			do_panelBrandComboBox_itemStateChanged(e);
-		}
-		if (e.getSource() == panelCarType.getComboBox()) {
-			do_panelCarTypeComboBox_itemStateChanged(e);
-		}
-	}
-
-	protected void do_panelCarTypeComboBox_itemStateChanged(ItemEvent e) {
 		setLoadAddList();
 	}
-
-	protected void do_panelBrandComboBox_itemStateChanged(ItemEvent e) {
-		setLoadAddList();
-	}
-
-	protected void do_panelFuelComboBox_itemStateChanged(ItemEvent e) {
-		setLoadAddList();
-	}
-
-	protected void do_rdbtnAuto_itemStateChanged(ItemEvent e) {
-		setLoadAddList();
-	}
-
-	protected void do_rdbtnStick_itemStateChanged(ItemEvent e) {
-		setLoadAddList();
-	}
-
-	public void setLoadAddList() {
+	
+	public void setLoadDatas() {
 		list = modelService.selectCarModelByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+	}
+
+	private void setLoadAddList() {
+		setLoadDatas();
 
 		Map<String, String> maps = new HashMap<>();
 		if (panelCarType.getSelectedIndex() >= 0) {
@@ -290,30 +274,5 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener, Mo
 		add(panelList);
 	}
 
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == panelList.getTable()) {
-			do_panelListTable_mouseClicked(e);
-		}
-	}
 
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	public void mouseExited(MouseEvent e) {
-	}
-
-	public void mousePressed(MouseEvent e) {
-	}
-
-	public void mouseReleased(MouseEvent e) {
-	}
-
-	protected void do_panelListTable_mouseClicked(MouseEvent e) {
-		if (e.getClickCount() == 2) {
-			CarUi frame = new CarUi(false);
-			CarModel carModel = panelList.getSelectedItem();
-			frame.setCarModel(carModel);
-			frame.setVisible(true);
-		}
-	}
 }

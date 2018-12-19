@@ -23,7 +23,6 @@ import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Fuel;
-import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
@@ -55,12 +54,18 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JLabel lbl_img;
 	private JPanel panel_img;
 	private boolean isAdd;
-	private CarPanel carPanel;
+//	private CarPanel carPanel;
+	private CarUi carUi;
 	/**
 	 * Create the panel.
 	 */
 	public CarSelectedPanel(boolean isAdd) {
-		carPanel = new CarPanel();
+//		carPanel = new CarPanel();
+/*		if(isAdd) {
+			carUi = new CarUi(true);
+		}else {
+			carUi = new CarUi(false);
+		}*/
 		this.isAdd = isAdd;
 		service = new CarModelService();
 		carUiService = new CarUiService();
@@ -289,16 +294,18 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			//수정클릭
 			CarModel model = getItem();			
 			service.updateCarModel(model);
-			carPanel.setLoadAddList();
-			CarUi frame = new CarUi(false);
-			frame.setVisible(false);
+			carUi.reloadDataCarPanel();
+			carUi.close();
+//			carPanel.setLoadDatas();
+//			carUi.setVisible(false);
 		}else {
 			//추가 클릭
 			CarModel model = getItem();
 			service.insertCarModel(model);
-			carPanel.setLoadAddList();
-			CarUi frame = new CarUi(true);
-			frame.setVisible(false);
+			carUi.reloadDataCarPanel();
+			carUi.close();
+//			carPanel.setLoadDatas();
+//			carUi.setVisible(false);
 		}
 		
 	}
@@ -377,7 +384,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			rdbtnStick.setSelected(true);
 		}
 	}
-	
+
+	public void setCarUi(CarUi carUi) {
+		this.carUi = carUi;
+	}
+
 
 }
 
