@@ -45,3 +45,13 @@ from car_model cm join brand b on cm.brand = b.no
 where cartype = 'S2';
 
 select no, name, price from car_option;
+
+select * from event;
+select * from rent;
+
+-- 회원 소유 이벤트
+select concat('R', LPAD(count(*)+1,3,'0')) from rent;
+
+from custom_event ce join event e on ce.event_code = e.code
+where custom_code = 'C005';
+

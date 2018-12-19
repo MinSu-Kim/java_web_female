@@ -51,7 +51,8 @@ public class CustomEvent {
 
 	@Override
 	public String toString() {
-		return "CustomEvent [eventCode=" + eventCode + ", customCode=" + customCode + ", isUse=" + isUse + "]";
+		return String.format("CustomEvent [eventCode=%s, customCode=%s, isUse=%s, events=%s]", eventCode, customCode,
+				isUse, events);
 	}
 
 }

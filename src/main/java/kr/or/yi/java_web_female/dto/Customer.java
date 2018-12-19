@@ -19,7 +19,6 @@ public class Customer {
 	private List<CustomEvent> events;
 
 	public Customer() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Customer(String id, String passwd) {
