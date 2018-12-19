@@ -65,4 +65,17 @@
 		from customer
 		where Id = #{id} and passwd = password(#{passwd});
 	</select>
+	
+	<!-- update -->
+	<!--  <update id="updateCustomer" parameterType="Customer">
+		update customer 
+		set code=#{code}, Id=#{id}, passwd=password(#{passwd}), name=#{name}, address=#{address}, phone=#{phone}, dob=#{dob}, email=#{email}, emp_code=#{empCode} ,license=#{license}, grade_code=#{gradeCode}, rent_cnt=#{rentCnt}
+		where code=#{code}
+	</update> -->
+	
+	<!-- delete -->
+	<!-- <delete id="deleteCustomer" parameterType="Customer">
+		delete from customer
+		where code=#{code}
+	</delete> -->
 </mapper>

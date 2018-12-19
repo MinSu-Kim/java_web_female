@@ -83,7 +83,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		panel_img = new JPanel();
-		panel_img.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC0AC\uC9C4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_img.setBorder(new TitledBorder(null, "\uC0AC\uC9C4", TitledBorder.CENTER, TitledBorder.BOTTOM, null, null));
 		
 		panel_2.add(panel_img);
 		panel_img.setLayout(new BorderLayout(0, 0));
@@ -332,6 +332,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		CarModel model = new CarModel();
 		model.setCarCode(tfCode.getText());
 		service.deleteCarModel(model);
+		carUi.reloadDataCarPanel();
+		carUi.close();
 	}
 	
 	private CarModel getItem() {
@@ -354,11 +356,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		//isrent,rentCnt 처리중
 		boolean isRent = false;
 		//가격
-		int basicCharge = Integer.parseInt(tfBasicCharge.getText());
-		int hour6 = Integer.parseInt(tfHour6.getText());
-		int hour10 = Integer.parseInt(tfHour10.getText());
-		int hour12 = Integer.parseInt(tfHour12.getText());
-		int hourElse = Integer.parseInt(tfHourElse.getText());
+		int basicCharge = Integer.parseInt(tfBasicCharge.getText().replaceAll(",", ""));
+		int hour6 = Integer.parseInt(tfHour6.getText().replaceAll(",", ""));
+		int hour10 = Integer.parseInt(tfHour10.getText().replaceAll(",", ""));
+		int hour12 = Integer.parseInt(tfHour12.getText().replaceAll(",", ""));
+		int hourElse = Integer.parseInt(tfHourElse.getText().replaceAll(",", ""));
 		
 		CarModel item = new CarModel(code, name, color, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
 		return item;

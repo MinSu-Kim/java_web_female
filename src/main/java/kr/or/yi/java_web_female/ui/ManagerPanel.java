@@ -10,6 +10,7 @@ import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
 import kr.or.yi.java_web_female.ui.management.GradeEventPanel;
 import kr.or.yi.java_web_female.ui.management.EmployeeListPanel;
+import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
@@ -30,7 +31,7 @@ public class ManagerPanel extends JPanel {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		panel.add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel panel_01 = new JPanel();
+		CustommerListPannel panel_01 = new CustommerListPannel();
 		tabbedPane.addTab("고객관리", null, panel_01, null);
 		
 		JPanel panel_02 = new JPanel();
