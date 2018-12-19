@@ -30,9 +30,12 @@ import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 @SuppressWarnings("serial")
-public class CarPanel extends JPanel implements ActionListener,ItemListener{
+public class CarPanel extends JPanel implements ActionListener,ItemListener, MouseListener{
 	private CarUiService service;
 	private CarModelService modelService;
 
@@ -121,6 +124,7 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 		panelRbtn.add(rdbtnStick);
 		//전체 테이블 불러오기
 		panelList = new CarTotalList();
+		panelList.getTable().addMouseListener(this);
 		
 		panelList.setBorder(new TitledBorder(null, "\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		list = modelService.selectCarModelByAll();
@@ -150,7 +154,10 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 		panelFuel.getComboBox().addItemListener(this);
 		rdbtnAuto.addItemListener(this);
 		rdbtnStick.addItemListener(this);
+		
+	
 	}
+	
 	
 
 
@@ -286,6 +293,27 @@ public class CarPanel extends JPanel implements ActionListener,ItemListener{
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == panelList.getTable()) {
+			do_panelListTable_mouseClicked(e);
+		}
+	}
+	public void mouseEntered(MouseEvent e) {
+	}
+	public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void do_panelListTable_mouseClicked(MouseEvent e) {
+		if(e.getClickCount() == 2) {
+			CarUi frame = new CarUi();
+			CarModel carModel = panelList.getSelectedItem();
+			frame.setCarModel(carModel);
+			frame.setVisible(true);
+		}
 	}
 }
 
