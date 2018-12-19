@@ -20,6 +20,8 @@ import kr.or.yi.java_web_female.ui.list.EmployeeList;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import java.awt.FlowLayout;
 
 public class EmployeeListPanel extends JPanel implements ActionListener {
 	protected List<Employee> list;
@@ -31,6 +33,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 	private EmployeeList panelList;
 	private JButton btnEmpOk;
 	private JButton btnEmpCancel;
+	//private JPasswordField ptfEmpPw;
 
 	/**
 	 * Create the panel.
@@ -56,17 +59,18 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.EAST);
-		
-				btnEmpOk = new JButton("추가");
-				panel_1.add(btnEmpOk);
-				
-						btnEmpCancel = new JButton("취소");
-						panel_1.add(btnEmpCancel);
-						btnEmpCancel.addActionListener(this);
-						btnEmpOk.addActionListener(this);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		btnEmpOk = new JButton("추가");
+		panel_1.add(btnEmpOk);
+
+		btnEmpCancel = new JButton("취소");
+		panel_1.add(btnEmpCancel);
+		btnEmpCancel.addActionListener(this);
+		btnEmpOk.addActionListener(this);
 
 		JPanel panelInput = new JPanel();
 		panel.add(panelInput, BorderLayout.CENTER);
@@ -96,6 +100,13 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		panelInput.add(tfEmpPhone);
 		tfEmpPhone.setColumns(10);
 
+		/*JLabel lblEmpPw = new JLabel("비밀번호");
+		lblEmpPw.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelInput.add(lblEmpPw);
+
+		ptfEmpPw = new JPasswordField();
+		panelInput.add(ptfEmpPw);*/
+
 		panelList.setPopupMenu(createDeptPopupMenu());
 
 	}
@@ -110,8 +121,6 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 				setItem(item);
 				btnEmpOk.setText("수정");
 			}
-
-		
 
 		});
 		popMenu.add(updateItem);
@@ -150,17 +159,19 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		panelList.loadDatas();
 		clearTf();
 		btnEmpOk.setText("추가");
-		
+
 	}
 
 	private Employee getItem() {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
 		String ePhone = tfEmpPhone.getText();
+		//String ePassword = new String(ptfEmpPw.getPassword());
 		Employee item = new Employee();
 		item.setCode(eCode);
 		item.setName(eName);
 		item.setPhone(ePhone);
+		//item.setPasswd(ePassword);
 		return item;
 	}
 
@@ -168,10 +179,12 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
 		String ePhone = tfEmpPhone.getText();
+		//String ePassword = new String(ptfEmpPw.getPassword());
 		Employee employee = new Employee();
 		employee.setCode(eCode);
 		employee.setName(eName);
 		employee.setPhone(ePhone);
+		//employee.setPasswd(ePassword);
 		service.insertEmployee(employee);
 		list = service.selectEmployeeByAll();
 		panelList.setList(list);
@@ -184,7 +197,8 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		tfEmpCode.setText("");
 		tfEmpName.setText("");
 		tfEmpPhone.setText("");
-		
+		//ptfEmpPw.setText("");
+
 	}
 
 	protected void do_btnEmpCancel_actionPerformed(ActionEvent e) {
@@ -193,11 +207,13 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		}
 		clearTf();
 	}
+
 	private void setItem(Employee item) {
 		tfEmpCode.setText(item.getCode() + "");
 		tfEmpName.setText(item.getName() + "");
 		tfEmpPhone.setText(item.getPhone() + "");
-		
+		//ptfEmpPw.setText(item.getPasswd() + "");
+
 	}
-	
+
 }

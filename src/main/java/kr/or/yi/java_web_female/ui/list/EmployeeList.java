@@ -12,18 +12,18 @@ public class EmployeeList extends AbstractListPanel<Employee> {
 
 	@Override
 	protected void setAlignWidth() {
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2/*, 3*/);
 		tableSetWidth(100, 100, 100);
 	}
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] { "직원코드", "직원명", "연락처" };
+		return new String[] { "직원코드", "직원명", "연락처"/*, "비밀번호" */};
 	}
 
 	@Override
 	protected Object[] getItemRows(Employee item) {
-		return new Object[] { item.getCode(), item.getName(), item.getPhone() };
+		return new Object[] { item.getCode(), item.getName(), item.getPhone(), item.getPasswd() };
 	}
 
 	@Override
