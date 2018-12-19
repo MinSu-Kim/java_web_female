@@ -9,15 +9,15 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 	
 	@Override
 	protected void setAlignWidth() {
-		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-		tableSetWidth(100, 100, 100,100,100,100,100,100,100,100,100,100,100,100);
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8/*, 9, 10, 11, 12, 13*/);
+		tableSetWidth(100, 100, 100,100,100,100,100,100,100/*,100,100,100,100,100*/);
 		
 	}
 
 	@Override
 	protected String[] getColumnNames() {
 		return new String[] {
-				"차코드","모델명","색상","기어","브랜드","차종","기본료","6시간","10시간","12시간","12시간이상","연료","렌트여부","렌트횟수"
+				"차코드","모델명",/*"색상",*/"기어","브랜드","차종","기본료",/*"6시간","10시간","12시간","12시간이상",*/"연료","렌트여부","렌트횟수"
 		};
 	}
 
@@ -26,15 +26,15 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 		return new Object[] {
 				item.getCarCode(),
 				item.getName(),
-				item.getColor(),
+				/*item.getColor(),*/
 				item.getGear(),
 				item.getBrand().getName(),
 				item.getCarType().getType(),
 				item.getBasicCharge(),
-				item.getHour6(),
+				/*item.getHour6(),
 				item.getHour10(),
 				item.getHour12(),
-				item.getHourElse(),
+				item.getHourElse(),*/
 				item.getFuel(),
 				item.isRent()==true?"대여중":"대여가능",
 				item.getRentCnt()
