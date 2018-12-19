@@ -14,7 +14,7 @@ public class CarUi extends JFrame {
 	private JPanel contentPane;
 	private CarSelectedPanel panelUpdate;
 	private boolean isAdd;
-
+	private CarPanel carPanel;
 	/**
 	 * Create the frame.
 	 */
@@ -37,12 +37,23 @@ public class CarUi extends JFrame {
 		setContentPane(contentPane);
 		
 		panelUpdate = new CarSelectedPanel(isAdd);
+		panelUpdate.setCarUi(this);
 		contentPane.add(panelUpdate, BorderLayout.CENTER);
 	}
 	
+	public void setCarPanel(CarPanel carPanel) {
+		this.carPanel = carPanel;
+	}
 	public void setCarModel(CarModel carModel) {
 //		this.carModel = carModel;
 		panelUpdate.setCarModel(carModel);
+	}
+	public void reloadDataCarPanel() {
+		carPanel.setLoadDatas();
+		
+	}
+	public void close() {
+		dispose();
 	}
 
 }
