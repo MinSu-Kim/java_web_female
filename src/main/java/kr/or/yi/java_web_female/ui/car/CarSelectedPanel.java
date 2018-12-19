@@ -378,11 +378,13 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbFuel.setSelectedItem(carModel.getFuel());
 		
 		tfColor.setText(carModel.getColor());
-		tfHour6.setText(carModel.getHour6()+"");
-		tfHour10.setText(carModel.getHour10()+"");
-		tfHour12.setText(carModel.getHour12()+"");
-		tfHourElse.setText(carModel.getHourElse()+"");
-		tfBasicCharge.setText(carModel.getBasicCharge()+"");
+		
+		//천단위 콤마찍기
+		tfHour6.setText(String.format("%,d",carModel.getHour6()));
+		tfHour10.setText(String.format("%,d",carModel.getHour10()));
+		tfHour12.setText(String.format("%,d",carModel.getHour12()));
+		tfHourElse.setText(String.format("%,d",carModel.getHourElse()));
+		tfBasicCharge.setText(String.format("%,d",carModel.getBasicCharge()));
 
 		String gear = carModel.getGear();
 		System.out.println(gear);
