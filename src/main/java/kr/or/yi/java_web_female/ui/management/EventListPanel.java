@@ -113,7 +113,7 @@ public class EventListPanel extends JPanel implements ActionListener {
 
 		});
 		popMenu.add(updateItem);
-		
+
 		JMenuItem delItem = new JMenuItem("삭제");
 		delItem.addActionListener(new ActionListener() {
 			@Override
@@ -124,7 +124,7 @@ public class EventListPanel extends JPanel implements ActionListener {
 			}
 		});
 		popMenu.add(delItem);
-		
+
 		return popMenu;
 	}
 
@@ -133,8 +133,32 @@ public class EventListPanel extends JPanel implements ActionListener {
 			do_btnEventCancel_actionPerformed(arg0);
 		}
 		if (arg0.getSource() == btnEventOk) {
-			do_btnEventOk_actionPerformed(arg0);
+			if (btnEventOk.getText() == "추가") {
+				do_btnEventOk_actionPerformed(arg0);
+			} else {
+				do_btnUpdate_actionPerformed(arg0);
+			}
 		}
+	}
+
+	private void do_btnUpdate_actionPerformed(ActionEvent arg0) {
+		Event event = getItem();
+		service.updateEvent(event);
+		panelList.setList(service.selectEventByAll());
+		panelList.loadDatas();
+		clearTf();
+		btnEventOk.setText("추가");
+	}
+
+	private Event getItem() {
+		String eCode = tfEventCode.getText();
+		String eName = tfEventName.getText();
+		int eRate = Integer.parseInt(tfEventRate.getText());
+		Event item = new Event();
+		item.setCode(eCode);
+		item.setName(eName);
+		item.setRate(eRate);
+		return item;
 	}
 
 	protected void do_btnEventOk_actionPerformed(ActionEvent arg0) {
@@ -157,19 +181,20 @@ public class EventListPanel extends JPanel implements ActionListener {
 		tfEventCode.setText("");
 		tfEventName.setText("");
 		tfEventRate.setText("");
-		
+
 	}
 
 	protected void do_btnEventCancel_actionPerformed(ActionEvent arg0) {
-		if(btnEventOk.getText()=="수정") {
+		if (btnEventOk.getText() == "수정") {
 			btnEventOk.setText("추가");
 		}
 		clearTf();
 	}
 
 	private void setItem(Event item) {
-		// TODO Auto-generated method stub
-
-		
+		tfEventCode.setText("");
+		tfEventName.setText("");
+		tfEventRate.setText("");
 	}
+
 }
