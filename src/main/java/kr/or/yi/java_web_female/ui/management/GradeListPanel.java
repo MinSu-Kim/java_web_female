@@ -202,7 +202,6 @@ public class GradeListPanel extends JPanel implements ActionListener {
 		grade.setgLosal(gLosal);
 		grade.setgHisal(gHisal);
 		
-		System.out.println("=================================="+grade);
 		service.insertGrade(grade);
 		list = service.selectGradeByAll();
 		panelList.setList(list);

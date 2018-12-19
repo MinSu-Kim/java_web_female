@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class EmployeeListPanel extends JPanel implements ActionListener {
 	protected List<Employee> list;
@@ -74,7 +75,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 
 		JPanel panelInput = new JPanel();
 		panel.add(panelInput, BorderLayout.CENTER);
-		panelInput.setLayout(new GridLayout(0, 6, 10, 10));
+		panelInput.setLayout(new BoxLayout(panelInput, BoxLayout.X_AXIS));
 
 		JLabel lblEmpCode = new JLabel("직원코드");
 		lblEmpCode.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -98,7 +99,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 
 		tfEmpPhone = new JTextField();
 		panelInput.add(tfEmpPhone);
-		tfEmpPhone.setColumns(10);
+		tfEmpPhone.setColumns(15);
 
 		/*JLabel lblEmpPw = new JLabel("비밀번호");
 		lblEmpPw.setHorizontalAlignment(SwingConstants.RIGHT);
