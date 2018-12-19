@@ -20,4 +20,6 @@ public interface CarModelMapper {
 	List<CarModel> selectCarModelByCarType(CarType carType);
 	
 	List<CarModel> SelectCarModelWithWhere(Map<String, String> map);
+	
+	String nextCarCode();
 }

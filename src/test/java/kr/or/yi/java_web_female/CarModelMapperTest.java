@@ -139,6 +139,14 @@ public class CarModelMapperTest extends AbstractTest {
 		List<CarModel> list = dao.SelectCarModelWithWhere(maps);
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void test10nextCarCode() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		String carCode = dao.nextCarCode();
+		Assert.assertNotNull(carCode);
+	}
+	
 }
 
 
