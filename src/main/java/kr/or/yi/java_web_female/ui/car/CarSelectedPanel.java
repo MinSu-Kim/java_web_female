@@ -55,12 +55,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JLabel lbl_img;
 	private JPanel panel_img;
 	private boolean isAdd;
-	private CarPanel listPanel;
+	private CarPanel carPanel;
 	/**
 	 * Create the panel.
 	 */
 	public CarSelectedPanel(boolean isAdd) {
-		listPanel = new CarPanel();
+		carPanel = new CarPanel();
 		this.isAdd = isAdd;
 		service = new CarModelService();
 		carUiService = new CarUiService();
@@ -108,7 +108,9 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		
 		tfCode = new JTextField();
 		if(isAdd) {
-			String nextCode = service.nextCarCode();
+			String maxCode = service.nextCarCode();
+			int numCode = (Integer.parseInt(maxCode.substring(1)))+1;
+			String nextCode = String.format("V%03d", numCode);
 			tfCode.setText(nextCode);
 		}
 		tfCode.setEditable(false);
@@ -287,13 +289,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			//수정클릭
 			CarModel model = getItem();			
 			service.updateCarModel(model);
-			listPanel.setLoadAddList();
-			
+			carPanel.setLoadAddList();
+			CarUi frame = new CarUi(false);
+			frame.setVisible(false);
 		}else {
 			//추가 클릭
 			CarModel model = getItem();
 			service.insertCarModel(model);
-			listPanel.setLoadAddList();
+			carPanel.setLoadAddList();
+			CarUi frame = new CarUi(true);
+			frame.setVisible(false);
 		}
 		
 	}
