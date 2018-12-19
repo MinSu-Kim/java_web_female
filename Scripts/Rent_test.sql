@@ -3,6 +3,7 @@ select * from insurance;
 
 -- S1: 경차, S2: 소형, S3: 중형, S4: 대형, S5: 승합, S6: SUV
 select * from car_type;
+select * from car_option;
 
 -- I000 : 보험가입X, S7: 외제차
 /*insert into insurance values
