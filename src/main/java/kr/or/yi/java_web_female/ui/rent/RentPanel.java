@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -34,6 +35,8 @@ public class RentPanel extends JPanel implements ActionListener{
 	private JLabel lblResultPrice;
 	private InsurancePanel pInsurance;
 	private OptionInfoPanel pOption;
+	private int totalPrice;
+	private RentInfoPanel pRentInfo;
 	
 	public RentPanel() {
 		service = new RentUIService();
@@ -61,7 +64,7 @@ public class RentPanel extends JPanel implements ActionListener{
 		CustomerInfoPanel pInfo = new CustomerInfoPanel(service);
 		pContents.add(pInfo);
 
-		RentInfoPanel pRentInfo = new RentInfoPanel(service);
+		pRentInfo = new RentInfoPanel(service);
 		pContents.add(pRentInfo);
 
 		pInsurance = new InsurancePanel(service);
@@ -84,8 +87,8 @@ public class RentPanel extends JPanel implements ActionListener{
 		pPrice.add(lblPrice);
 
 		lblResultPrice = new JLabel("New label");
+		lblResultPrice.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblResultPrice.setForeground(Color.RED);
-		
 		pPrice.add(lblResultPrice);
 
 		JPanel pBtn = new JPanel();
@@ -105,19 +108,43 @@ public class RentPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (e.getSource() == btnTotalPrice) {
+			try {
+				do_btnTotalPrice_actionPerformed(e);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 
+	//최종요금계산하기
+	private void do_btnTotalPrice_actionPerformed(ActionEvent e) throws ParseException {
+		// TODO Auto-generated method stub
+		getTotalRentPrice();
+		lblResultPrice.setText("totalPrice : " + totalPrice);
+	}
+	
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
-		JOptionPane.showMessageDialog(null, selectedCarModel);
+//		JOptionPane.showMessageDialog(null, selectedCarModel);
 		
 		pInsurance.setSelectedCarModel(selectedCarModel);
 		int price = pOption.getTotalOptionPrice();
 		JOptionPane.showMessageDialog(null, price);
-		lblResultPrice.setText(selectedCarModel.getName() + " option price" + price);
 	}
 	
+	//요금
+	public int getTotalRentPrice() throws ParseException {
+		totalPrice = 0;
+		
+		//차량기본비용
+		int basicCharge = selectedCarModel.getBasicCharge();
+		int diff = (int) pRentInfo.totalRentDate();
+		
+		totalPrice = (basicCharge * diff);
+		
+		return totalPrice;
+	}
 	
 }
