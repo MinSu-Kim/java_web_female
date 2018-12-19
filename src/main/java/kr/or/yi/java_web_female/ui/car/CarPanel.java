@@ -59,6 +59,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panelSelect = new JPanel();
+		panelSelect.setBorder(new TitledBorder(null, "\uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(panelSelect, BorderLayout.NORTH);
 		panelSelect.setLayout(new GridLayout(0, 2, 0, 0));
 
