@@ -24,7 +24,7 @@ insert into customer(code, Id, passwd, Name, address, phone, dob, email)
 
 desc customer;
 
-select * from custom_event;
+select * from employee;
 
 select c.code, id, passwd, c.name, address, phone, dob, email, event_code, is_use, e.name, e.rate
 from customer c join custom_event ce on c.code=ce.custom_code join event e on ce.event_code=e.code;
@@ -73,52 +73,66 @@ select length(password('root123345')) from dual;
 -- 비밀번호가 같은지 확인
 select password('rootroot') = password('rootroot1') from dual;
 
-select * from grade;
-select * from employee;
-select * from title;
-select * from event;
-
-
-/*select *
-from post 
-where doro ='태전로7길'
-order by building1, building2;*/
-select * from employee;
-select * from title;
-
-
-
 select * from event;
 select * from custom_event;
 select * from customer;
 
+select * from grade;
+
 select * from `level`;
 select * from grade;
 
--- 대여횟수에 따른 등급조정은 대여횟수가 변경될때마다 고객의 level을 체크하여 변경되도록 
-select c.code, c.rent_cnt, l.grade
-from customer c, `level` l
-where rent_cnt between l.g_losal and l.g_hisal
 
-select c.code, c.rent_cnt, c.grade_code, 
-      (select grade_code 
-       from customer c join `level` l on c. )
-from customer c;
+/*
+DROP PROCEDURE IF EXISTS update_customer_grade;
+DELIMITER $$
+CREATE PROCEDURE update_customer_grade (in custom_code char(4))   
+begin
+    declare gcode char(4);   
+   
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
+   
+    select g.code into gcode
+	from customer c , grade g
+	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
 
--- 로그인 했을 경우 해당 월과 일치할 경우 해당 고객에게 생일 쿠폰 지급 중복지급불가(event_code와 custom_code가 기본키) duplicate 발생(중복)
-insert into custom_event 
-select 'EVT2', 'C005' , 0 from customer 
-where month(dob) = month(sysdate()) and code='C005';
+	update customer
+	set grade_code = gcode
+	where code = custom_code;
+end $$
+DELIMITER ;
+*/
+
+call update_customer_grade('C007');
+
+select grade_code, rent_cnt
+from customer
+where code = 'C007';
+/*
+select g.code
+from customer c , grade g
+where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
+
+update customer
+set grade_code = '아래 select 한값'
+where code = 'C007' -- '고객코드';
+*/
+
+
+select grade_code from customer where code='C007';
+
+select * from grade;
+
+insert into grade(code, name, g_losal, g_hisal, rate) values('G007', 'xxx', g_losal=?, g_hisal=?, ?)
+
+desc grade;
+
+select g.name, g.code
+from customer c , grade g
+where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
 
 
 
-
-select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = 'C005'; 
-
-select code, name, g_losal, g_hisal, rate from grade
-		where code='G001';
-	
-select * from grade;	
-
-select *from employee;
 

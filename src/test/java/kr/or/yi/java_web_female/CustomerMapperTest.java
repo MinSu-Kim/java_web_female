@@ -1,21 +1,27 @@
 package kr.or.yi.java_web_female;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.w3c.dom.css.CSSUnknownRule;
 
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerMapperTest extends AbstractTest {
 
 	private CustomerMapper dao = CustomerMapperImpl.getInstance();
+	private String orderDate;
 
 	@Test
 	public void test01SelectCustomerByName() {
@@ -112,4 +118,52 @@ public class CustomerMapperTest extends AbstractTest {
 		}
 		Assert.assertNotNull(cusList);
 	}
+	
+	
+	/*@Test
+	public void test04updateCustomer() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Customer customer = new Customer();
+		
+		customer.setCode(dao.nextCode());
+		customer.setId("psw2701");
+		customer.setPasswd("password");
+		customer.setName("박수완");
+		customer.setAddress("대구");
+		customer.setPhone("010-5757-5959");
+		
+		
+		
+		Employee employee = new Employee();
+		Grade grade = new Grade();
+		
+		String strDate = "2017-10-17 23:20:00.123";
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = sdf.parse(strDate);
+
+		date.getDate("1990-12-28");
+		customer.setDob(date);
+		
+		
+		
+		customer.setEmail("qwerasdf@naver.com");
+		
+		employee.setCode("E001");
+		grade.setCode("G001");
+		
+		customer.setLicense("2종 보통");
+		customer.setRentCnt(5);
+		int res = dao.updateCustomer(customer);
+		Assert.assertSame(1, res);
+
+	}*/
+	/*@Test
+	public void test10deleteCustomer() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Customer customer = new Customer();
+		customer.setCode("C010");
+		int res = dao.deleteCustomer(customer);
+		Assert.assertEquals(1, res);
+	}*/
 }
