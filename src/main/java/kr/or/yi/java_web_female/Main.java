@@ -14,7 +14,8 @@ public class Main {
 		try {
 			UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e1) {
+				|
+				UnsupportedLookAndFeelException e1) {
 			e1.printStackTrace();
 		}
 		

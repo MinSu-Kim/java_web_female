@@ -92,6 +92,8 @@ select * from event;
 select * from custom_event;
 select * from customer;
 
+select * from grade;
+
 select * from `level`;
 select * from grade;
 
@@ -136,7 +138,13 @@ select grade_code from customer where code='C007';
 
 select * from grade;
 
+insert into grade(code, name, g_losal, g_hisal, rate) values('G007', 'xxx', g_losal=?, g_hisal=?, ?)
+
+desc grade;
+
 select g.name, g.code
 from customer c , grade g
 where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
+
+
 

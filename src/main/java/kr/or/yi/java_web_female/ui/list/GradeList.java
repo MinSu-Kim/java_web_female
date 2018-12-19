@@ -5,11 +5,9 @@ import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.Grade;
 
+@SuppressWarnings("serial")
 public class GradeList extends AbstractListPanel<Grade> {
 
-	/**
-	 * Create the panel.
-	 */
 	public GradeList() {
 
 	}
