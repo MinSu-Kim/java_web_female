@@ -114,4 +114,22 @@ public class CustomerMapperImpl implements CustomerMapper {
 			return sqlSession.selectList(namespace + ".selectCustomerByCode", customer);
 		}
 	}
+
+	@Override
+	public int updateCustomer(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateCustomer", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteCustomer(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".deleteCustomer", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
 }
