@@ -44,4 +44,8 @@ public class CarModelService {
 	public UserPic getUserPic(String carCode) {
 		return picDao.getUserPic(carCode);
 	}
+	
+	public String nextCarCode() {
+		return dao.nextCarCode();
+	}
 }

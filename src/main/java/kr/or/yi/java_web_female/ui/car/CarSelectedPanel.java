@@ -105,6 +105,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelCode.add(lblCode);
 		
 		tfCode = new JTextField();
+		if(isAdd) {
+			String nextCode = service.nextCarCode();
+			tfCode.setText(nextCode);
+		}
 		tfCode.setEditable(false);
 		
 		panelCode.add(tfCode);
