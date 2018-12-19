@@ -3,8 +3,13 @@ package kr.or.yi.java_web_female.ui.car;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -22,6 +27,7 @@ import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Fuel;
+import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
@@ -48,17 +54,17 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private ComboPanel<CarType> cmbCarType;
 	private JTextField tfColor;
 	private ComboPanel<Fuel> cmbFuel;
-//	private ImageIcon img;
-	//이미지 불러오기
+
 	String imgPath = System.getProperty("user.dir")+"\\images\\"; //이미지가 들어있는 경로
 	private JLabel lbl_img;
 	private JPanel panel_img;
-	
-	
+	private boolean isAdd;
+	private CarUi carUi;
 	/**
 	 * Create the panel.
 	 */
-	public CarSelectedPanel() {
+	public CarSelectedPanel(boolean isAdd) {
+		this.isAdd = isAdd;
 		service = new CarModelService();
 		carUiService = new CarUiService();
 		initComponents();
@@ -82,8 +88,14 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panel_2.add(panel_img);
 		panel_img.setLayout(new BorderLayout(0, 0));
 		
-		lbl_img = new JLabel();
-		panel_img.add(lbl_img);
+		if(isAdd) {
+			lbl_img = new JLabel();//새로 추가되는 사진 띄우기
+			panel_img.add(lbl_img);
+		}else {
+			lbl_img = new JLabel();
+			panel_img.add(lbl_img);
+		}
+		
 		
 		JPanel panel_info = new JPanel();
 		panel_2.add(panel_info);
@@ -98,6 +110,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelCode.add(lblCode);
 		
 		tfCode = new JTextField();
+		if(isAdd) {
+			String maxCode = service.nextCarCode();
+			int numCode = (Integer.parseInt(maxCode.substring(1)))+1;
+			String nextCode = String.format("V%03d", numCode);
+			tfCode.setText(nextCode);
+		}
 		tfCode.setEditable(false);
 		
 		panelCode.add(tfCode);
@@ -123,6 +141,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		//브랜드 콤보박스
 		List<Brand> arrBrand = carUiService.selectAllBrand();
 		cmbBrand.setComboItems(arrBrand);
+		cmbBrand.setSelectedIndex(-1);
 		panel_info.add(cmbBrand);
 		
 		cmbCarType = new ComboPanel<>();
@@ -132,7 +151,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbCarType.setTitle("차종");
 		//차종콤보박스
 		List<CarType> arrType = carUiService.selectAllCarType();
-		cmbCarType.setComboItems(arrType);		
+		cmbCarType.setComboItems(arrType);	
+		cmbCarType.setSelectedIndex(-1);
 		panel_info.add(cmbCarType);
 		
 		//연료콤보박스
@@ -140,6 +160,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbFuel.setTitle("연료");
 		List<Fuel> arrFuel = carUiService.selectAllFuel();
 		cmbFuel.setComboItems(arrFuel);
+		cmbFuel.setSelectedIndex(-1);
 		panel_info.add(cmbFuel);
 		
 		JPanel panelColor = new JPanel();
@@ -220,15 +241,29 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		JPanel panelRentCnt = new JPanel();
 		panel_info.add(panelRentCnt);
 		panelRentCnt.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblCount = new JLabel("대여횟수 : ");
-		lblCount.setHorizontalAlignment(SwingConstants.CENTER);
-		panelRentCnt.add(lblCount);
+		if(isAdd) {
+			JButton imgbtn = new JButton("사진추가");
+			imgbtn.addActionListener(new ActionListener() {			
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+			panelRentCnt.add(imgbtn);
+		}else {
+			JLabel lblCount = new JLabel("대여횟수 : ");
+			lblCount.setHorizontalAlignment(SwingConstants.CENTER);
+			panelRentCnt.add(lblCount);
+		}
 		
 		JPanel panelBtn = new JPanel();
 		container.add(panelBtn, BorderLayout.SOUTH);
 		
-		btnOk = new JButton("수정");
+		if(isAdd) {
+			btnOk = new JButton("추가");
+		}else {
+			btnOk = new JButton("수정");
+		}
 		btnOk.addActionListener(this);
 		panelBtn.add(btnOk);
 		
@@ -236,7 +271,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		btnDelete.addActionListener(this);
 		panelBtn.add(btnDelete);
 		
-		btnCancel = new JButton("취소");
+		btnCancel = new JButton("초기화");
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 	}
@@ -255,16 +290,41 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	protected void do_btnOk_actionPerformed(ActionEvent arg0) {
 		if(btnOk.getText().equals("수정")) {
 			//수정클릭
-			CarModel model = getItem();
+			CarModel model = getItem();			
 			service.updateCarModel(model);
+			carUi.reloadDataCarPanel();
+			carUi.close();
 		}else {
 			//추가 클릭
+			CarModel model = getItem();
+			service.insertCarModel(model);//디비에 추가완료
+//			carUi.reloadDataCarPanel();//널포인트에러 발생ㅠㅠ
+			carUi.close();
 		}
 		
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		//취소클릭, 지우지 말고 원래값으로 변경(초기화)
+		if(btnOk.getText().equals("수정")) {
+			String code = tfCode.getText();
+			CarModel model = new CarModel();
+			model.setCarCode(code);
+			setCarModel(model);
+		}else {
+			cleartf();
+		}
 		
+	}
+
+	private void cleartf() {
+		tfName.setText("");
+		cmbBrand.setSelectedIndex(-1);
+		cmbCarType.setSelectedIndex(-1);
+		cmbFuel.setSelectedIndex(-1);
+		tfHour6.setText("");
+		tfHour10.setText("");
+		tfHour12.setText("");
+		tfHourElse.setText("");
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
@@ -274,24 +334,15 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		service.deleteCarModel(model);
 	}
 	
-	private void clearTf(CarModel carModel) {//지우지 말고 원래값으로 변경(초기화)
-		setCarModel(carModel);
-	}
-	
 	private CarModel getItem() {
 		//getitem작성중!
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
-		//브랜드
-		Brand brand = cmbBrand.getSelectedItems();
-		
-		//차종
+
+		Brand brand = cmbBrand.getSelectedItems();	
 		CarType cartype = cmbCarType.getSelectedItems();
+		Fuel fuel = cmbFuel.getSelectedItems();
 
-		//연료
-		Fuel fuel = (Fuel)cmbFuel.getSelectedItems();
-
-		
 		String color = tfColor.getText().trim();//색상
 		String gear = "";
 		boolean selectedGear = rdbtnAuto.isSelected();
@@ -301,7 +352,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			gear = "stick";
 		}
 		//isrent,rentCnt 처리중
-		boolean isRent = true;
+		boolean isRent = false;
 		//가격
 		int basicCharge = Integer.parseInt(tfBasicCharge.getText());
 		int hour6 = Integer.parseInt(tfHour6.getText());
@@ -315,10 +366,24 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 
 	public void setCarModel(CarModel carModel) {//set
-		String strImg = imgPath+carModel.getCarType().getCode()+"\\"+carModel.getCarCode()+".png";
+		String strImg = imgPath+carModel.getCarCode()+".png";
 		strImg = strImg.replace("\\", "/");
 		ImageIcon img = new ImageIcon(strImg);
-		lbl_img.setIcon(img);
+		//사진이 없을 경우 파일 insert
+		if(img.getImage()==null) {
+			UserPic userpic = new UserPic();
+			userpic.setCarCode(tfCode.getText());		
+			try {
+				userpic.setPic(getPicFile());
+				service.insertUserPic(userpic);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		Image image = img.getImage();
+		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+		ImageIcon resimg = new ImageIcon(changedImg);
+		lbl_img.setIcon(resimg);
 		panel_img.add(lbl_img);
 		
 		tfCode.setText(carModel.getCarCode());
@@ -329,19 +394,40 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbFuel.setSelectedItem(carModel.getFuel());
 		
 		tfColor.setText(carModel.getColor());
-		tfHour6.setText(carModel.getHour6()+"");
-		tfHour10.setText(carModel.getHour10()+"");
-		tfHour12.setText(carModel.getHour12()+"");
-		tfHourElse.setText(carModel.getHourElse()+"");
-		tfBasicCharge.setText(carModel.getBasicCharge()+"");
+		
+		//천단위 콤마찍기
+		tfHour6.setText(String.format("%,d",carModel.getHour6()));
+		tfHour10.setText(String.format("%,d",carModel.getHour10()));
+		tfHour12.setText(String.format("%,d",carModel.getHour12()));
+		tfHourElse.setText(String.format("%,d",carModel.getHourElse()));
+		tfBasicCharge.setText(String.format("%,d",carModel.getBasicCharge()));
 
 		String gear = carModel.getGear();
-		if(gear.equals("auto")) {
+		System.out.println(gear);
+		if(gear==null) {
+			rdbtnAuto.setSelected(false);
+			rdbtnStick.setSelected(false);
+		}else if(gear.equalsIgnoreCase("auto")) {
 			rdbtnAuto.setSelected(true);
 		}else {
 			rdbtnStick.setSelected(true);
 		}
 	}
+
+	public void setCarUi(CarUi carUi) {
+		this.carUi = carUi;
+	}
+	
+	private byte[] getPicFile() throws IOException{
+		byte[] pic = null;
+		File file = new File(System.getProperty("user.dir")+"/images/"+tfCode.getText());
+		try(InputStream is = new FileInputStream(file)){
+			pic = new byte[is.available()];
+			is.read(pic);
+		}
+		return pic;
+	}
+
 
 }
 

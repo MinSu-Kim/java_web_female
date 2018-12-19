@@ -16,13 +16,14 @@ import javax.swing.border.EmptyBorder;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CarModelListPanel;
+import kr.or.yi.java_web_female.ui.rent.sub.CarInfoPanel;
 
 public class CarSearchFrame extends JFrame {
 
 	private JPanel contentPane;
 	private AbstractListPanel<CarModel> carPanel;
 	private List<CarModel> carList;
-	private RentPanel rentPanel;
+	private CarInfoPanel carInfoPanel;
 	
 	public void setCarList(List<CarModel> carList) {
 		this.carList = carList;
@@ -58,15 +59,14 @@ public class CarSearchFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				CarModel c = carPanel.getSelectedItem();
-				rentPanel.setSelectedCarModel(c);
+				carInfoPanel.setSelectedCarModel(c);
 				CarSearchFrame.this.dispose();
 			}
 		});
 		contentPane.add(carPanel, BorderLayout.CENTER);
 	}
-	
-	public void setRentPanel(RentPanel rentPanel) {
-		this.rentPanel = rentPanel;
-	}
 
+	public void setCarInfoPanel(CarInfoPanel carInfoPanel) {
+		this.carInfoPanel = carInfoPanel;
+	}
 }

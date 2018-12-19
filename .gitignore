@@ -1,6 +1,6 @@
 /.gradle/
 /bin/
-
+logs/
 # Created by https://www.gitignore.io/api/git,java,gradle,windows,eclipse
 # Edit at https://www.gitignore.io/?templates=git,java,gradle,windows,eclipse
 
@@ -162,4 +162,4 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/git,java,gradle,windows,eclipse
 /.dbeaver-data-sources.xml
 
-java_web_female.log
+logs/java_web_female.log

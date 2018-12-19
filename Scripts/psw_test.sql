@@ -73,21 +73,6 @@ select length(password('root123345')) from dual;
 -- 비밀번호가 같은지 확인
 select password('rootroot') = password('rootroot1') from dual;
 
-select * from grade;
-select * from employee;
-select * from title;
-select * from event;
-
-
-/*select *
-from post 
-where doro ='태전로7길'
-order by building1, building2;*/
-select * from employee;
-select * from title;
-
-
-
 select * from event;
 select * from custom_event;
 select * from customer;
@@ -97,26 +82,17 @@ select * from grade;
 select * from `level`;
 select * from grade;
 
--- 대여횟수에 따른 등급조정은 대여횟수가 변경될때마다 고객의 level을 체크하여 변경되도록 
-select *
-from customer;
 
-select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = 'C005'; 
-
-select code, name, g_losal, g_hisal, rate from grade
-		where code='G001';
-	
-select * from grade;
-
-select c.code , rent_cnt, grade_code , g.name, g_losal, g.g_hisal
-from customer c , grade g
-where rent_cnt between g.g_losal and g.g_hisal;
-
+/*
 DROP PROCEDURE IF EXISTS update_customer_grade;
 DELIMITER $$
 CREATE PROCEDURE update_customer_grade (in custom_code char(4))   
 begin
     declare gcode char(4);   
+   
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
    
     select g.code into gcode
 	from customer c , grade g
@@ -127,12 +103,23 @@ begin
 	where code = custom_code;
 end $$
 DELIMITER ;
+*/
 
 call update_customer_grade('C007');
+
+select grade_code, rent_cnt
+from customer
+where code = 'C007';
+/*
+select g.code
+from customer c , grade g
+where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
 
 update customer
 set grade_code = '아래 select 한값'
 where code = 'C007' -- '고객코드';
+*/
+
 
 select grade_code from customer where code='C007';
 
@@ -145,6 +132,7 @@ desc grade;
 select g.name, g.code
 from customer c , grade g
 where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
+
 
 
 

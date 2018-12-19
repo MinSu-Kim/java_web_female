@@ -2,82 +2,42 @@ package kr.or.yi.java_web_female.ui.rent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Formatter;
-import java.util.List;
 
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.text.DateFormatter;
-
-import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.CarModel;
-import kr.or.yi.java_web_female.dto.CarOption;
-import kr.or.yi.java_web_female.dto.CarType;
-import kr.or.yi.java_web_female.dto.Customer;
-import kr.or.yi.java_web_female.dto.Event;
-import kr.or.yi.java_web_female.dto.Insurance;
-import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
+import kr.or.yi.java_web_female.ui.rent.sub.CarInfoPanel;
+import kr.or.yi.java_web_female.ui.rent.sub.CustomerInfoPanel;
+import kr.or.yi.java_web_female.ui.rent.sub.InsurancePanel;
+import kr.or.yi.java_web_female.ui.rent.sub.OptionInfoPanel;
+import kr.or.yi.java_web_female.ui.rent.sub.RentInfoPanel;
 
 @SuppressWarnings("serial")
-public class RentPanel extends JPanel implements ActionListener, ItemListener{
+public class RentPanel extends JPanel implements ActionListener{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private CustomerSearchFrame cf; // 고객확인프레임
-	private CarSearchFrame csf;	//차량선택프레임
 	private RentUIService service;
-	private Customer rentCustomer;
-	private JTextField tfCstmName;
-	private JButton btnSearch;
-	private JButton btnClose;
-	private JComboBox<String> comboBoxCar;
-	private List<CarType> list;
-	private JButton btnRent;
-	private JButton btnSearchCar;
+	private JButton btnOk;
+	private JButton btnTotalPrice;
 	private CarModel selectedCarModel;
+	private JLabel lblResultPrice;
+	private InsurancePanel pInsurance;
+	private OptionInfoPanel pOption;
 	
 	public RentPanel() {
 		service = new RentUIService();
 		initComponents();
-		loadComboCarType();
-		
-	}
-
-	private void loadComboCarType() {
-		list = service.selectAllCarTypes();
-		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-		for(CarType ct : list) {
-			model.addElement(ct.getType());
-		}
-		comboBoxCar.setModel(model);
 	}
 
 	private void initComponents() {
@@ -94,173 +54,22 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		add(pContents, BorderLayout.CENTER);
 		pContents.setLayout(new GridLayout(0, 1, 0, 10));
 
-		JPanel pCarInfo = new JPanel();
-		pCarInfo.setBorder(new TitledBorder(null, "\uCC28\uB7C9 \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP,
-				null, null));
+		CarInfoPanel pCarInfo = new CarInfoPanel(service);
+		pCarInfo.setRentPanel(this);
 		pContents.add(pCarInfo);
-		pCarInfo.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JPanel panel = new JPanel();
-		pCarInfo.add(panel);
-
-		JLabel lblChoiceCar = new JLabel("차종 선택");
-		panel.add(lblChoiceCar);
-
-		
-		comboBoxCar = new JComboBox<>();
-		panel.add(comboBoxCar);
-
-		btnSearchCar = new JButton("선택");
-		btnSearchCar.addActionListener(this);
-		panel.add(btnSearchCar);
-
-		JPanel pInfo = new JPanel();
-		pInfo.setBorder(new TitledBorder(null, "\uAC1C\uC778 \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP,
-				null, null));
+		CustomerInfoPanel pInfo = new CustomerInfoPanel(service);
 		pContents.add(pInfo);
-		pInfo.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JLabel lblCstmName = new JLabel("고객명");
-		lblCstmName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCstmName.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pInfo.add(lblCstmName);
-
-		JPanel pSearchCstm = new JPanel();
-		pInfo.add(pSearchCstm);
-		pSearchCstm.setLayout(new GridLayout(0, 2, 10, 0));
-
-		tfCstmName = new JTextField();
-		tfCstmName.setColumns(10);
-		pSearchCstm.add(tfCstmName);
-
-		btnSearch = new JButton("검색");
-		btnSearch.addActionListener(this);
-		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pSearchCstm.add(btnSearch);
-
-		JPanel pRentInfo = new JPanel();
-		pRentInfo.setBorder(new TitledBorder(null, "\uB300\uC5EC \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP,
-				null, null));
+		RentInfoPanel pRentInfo = new RentInfoPanel(service);
 		pContents.add(pRentInfo);
-		pRentInfo.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JPanel pStart = new JPanel();
-		pRentInfo.add(pStart);
-		pStart.setLayout(new GridLayout(0, 2, 10, 0));
-
-		JPanel pStartDate = new JPanel();
-		pStart.add(pStartDate);
-		pStartDate.setLayout(new GridLayout(0, 2, 10, 0));
-
-		JLabel lblStartDate = new JLabel("대여일자");
-		lblStartDate.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStartDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pStartDate.add(lblStartDate);
-
-		dateChooser_2 = new JDateChooser();
-		dateChooser_2.getCalendarButton().setEnabled(false);
-		pStartDate.add(dateChooser_2);
-
-		JPanel pEndTime_1 = new JPanel();
-		pStart.add(pEndTime_1);
-		pEndTime_1.setLayout(new GridLayout(0, 5, 0, 0));
-
-		JLabel lblEndTime_1 = new JLabel("대여시간");
-		lblEndTime_1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pEndTime_1.add(lblEndTime_1);
-
-		spStartHour = new JSpinner();
-		spStartHour.setEnabled(false);
-		pEndTime_1.add(spStartHour);
-
-		JLabel lblStartHour = new JLabel("시");
-		lblStartHour.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pEndTime_1.add(lblStartHour);
-
-		spStartMinutes = new JSpinner();
-		spStartMinutes.setEnabled(false);
-		pEndTime_1.add(spStartMinutes);
-
-		JLabel lblStartMinutes = new JLabel("분");
-		lblStartMinutes.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pEndTime_1.add(lblStartMinutes);
-
-		JPanel pEnd = new JPanel();
-		pRentInfo.add(pEnd);
-		pEnd.setLayout(new GridLayout(0, 2, 10, 0));
-
-		JPanel pEndDate = new JPanel();
-		pEnd.add(pEndDate);
-		pEndDate.setLayout(new GridLayout(0, 2, 10, 0));
-
-		JLabel lblEndDate = new JLabel("반납일자");
-		lblEndDate.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEndDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pEndDate.add(lblEndDate);
-
-		dateChooser_3 = new JDateChooser();
-		dateChooser_3.getCalendarButton().setEnabled(false);
-		pEndDate.add(dateChooser_3);
-
-		JPanel pEndTime = new JPanel();
-		pEnd.add(pEndTime);
-		pEndTime.setLayout(new GridLayout(0, 5, 0, 0));
-
-		JLabel lblEndTime = new JLabel("반납시간");
-		lblEndTime.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pEndTime.add(lblEndTime);
-
-		spEndHour = new JSpinner();
-		spEndHour.setEnabled(false);
-		pEndTime.add(spEndHour);
-
-		JLabel lblEndHour = new JLabel("시");
-		lblEndHour.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pEndTime.add(lblEndHour);
-
-		spEndMinutes = new JSpinner();
-		spEndMinutes.setEnabled(false);
-		pEndTime.add(spEndMinutes);
-
-		JLabel lblEndMinutes = new JLabel("분");
-		lblEndMinutes.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pEndTime.add(lblEndMinutes);
-
-		JPanel pInsurance = new JPanel();
-		pInsurance.setBorder(new TitledBorder(null, "\uBCF4\uD5D8 \uAC00\uC785\uC5EC\uBD80", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
+		pInsurance = new InsurancePanel(service);
 		pContents.add(pInsurance);
-		pInsurance.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JLabel lblInsurance = new JLabel("자차손해 면책 제도");
-		lblInsurance.setHorizontalAlignment(SwingConstants.CENTER);
-		lblInsurance.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pInsurance.add(lblInsurance);
-
-		JPanel pRb = new JPanel();
-		pInsurance.add(pRb);
-		pRb.setLayout(new GridLayout(0, 2, 0, 0));
-
-		rBNotReg = new JRadioButton("가입안함");
-		rBNotReg.setEnabled(false);
-		rBNotReg.addItemListener(this);
-		rBNotReg.setHorizontalAlignment(SwingConstants.CENTER);
-		rBNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		buttonGroup.add(rBNotReg);
-		pRb.add(rBNotReg);
-
-		rBReg = new JRadioButton("일반자차");
-		rBReg.setEnabled(false);
-		rBReg.addItemListener(this);
-		rBReg.setHorizontalAlignment(SwingConstants.CENTER);
-		rBReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		buttonGroup.add(rBReg);
-		pRb.add(rBReg);
-
-		pOption = new JPanel();
-		pOption.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
-				"\uC635\uC158 \uC815\uBCF4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		addCarOption();
+		pOption = new OptionInfoPanel(service);
+		
+		pOption.addCarOption();
 		pContents.add(pOption);
 
 		JPanel pPrice = new JPanel();
@@ -283,305 +92,32 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		add(pBtn, BorderLayout.SOUTH);
 		pBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		btnRent = new JButton("확인");
-		btnRent.addActionListener(this);
-		btnRent.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pBtn.add(btnRent);
+		btnTotalPrice = new JButton("최종 요금 계산하기");
+		btnTotalPrice.addActionListener(this);
+		btnTotalPrice.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		pBtn.add(btnTotalPrice);
 
-		btnClose = new JButton("닫기");
-		btnClose.addActionListener(this);
-		btnClose.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pBtn.add(btnClose);
+		btnOk = new JButton("확인");
+		btnOk.addActionListener(this);
+		btnOk.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		pBtn.add(btnOk);
 	}
 
-	private void addCarOption() {
-		coList = service.selectAllCarOptions();
-		for(CarOption co : coList) {
-			mcb = new MyCheckBox(co.getName());
-			mcb.setCo(co);
-			mcb.setEnabled(false);
-			/*JCheckBox cb = new JCheckBox(co.getName());*/
-//			cb.addActionListener(chkListener);
-			pOption.add(mcb);
-			if(co.getName().equals("driver")) {
-				mcb.setEnabled(false);
-			}
-		}
-	}
-	
-
-/*	ActionListener chkListener = new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null, e.getActionCommand());
-			
-		}
-	};*/
-	
-	
-
-	private List<CarOption> coList;
-	private JPanel pOption;
-	private JCheckBox cb;
-	private List<CarOption> selectCoList;
-	private JDateChooser dateChooser_2;
-	private JSpinner spStartHour;
-	private JSpinner spStartMinutes;
-	private JDateChooser dateChooser_3;
-	private JSpinner spEndMinutes;
-	private JSpinner spEndHour;
-	private JLabel lblResultPrice;
-	private List<CarModel> carModelList;
-	private int selectedIndex;
-	private Customer customer;
-	private String startDate;
-	private String sHour;
-	private String sMinutes;
-	private String endDate;
-	private String eHour;
-	private String eMinutes;
-	private int basicCharge;
-	private JRadioButton rBReg;
-	private JRadioButton rBNotReg;
-	private CarType carType;
-	private MyCheckBox mcb;
-	
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnRent) {
-			try {
-				do_btnRent_actionPerformed(e);
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		if (e.getSource() == btnClose) {
-			do_btnClose_actionPerformed(e);
-		}
-		if (e.getSource() == btnSearch) {
-			do_btnSearch_actionPerformed(e);
-		}
-		if (e.getSource() == btnSearchCar) {
-			do_btnSearchCar_actionPerformed(e);
-		}
-	}
-
-	public void setRentCustomer(Customer rentCustomer) {
-		this.rentCustomer = rentCustomer;
-		JOptionPane.showMessageDialog(null, "선택된 고객 " + rentCustomer);
-	}
-	
-
-	// 검색버튼
-	protected void do_btnSearch_actionPerformed(ActionEvent e) {
-		customer = new Customer();
-		if (cf == null) {
-			if (tfCstmName.getText().trim().length() > 1) {
-				customer.setName(tfCstmName.getText().trim());
-			} else {
-				JOptionPane.showMessageDialog(null, "이름을 입력해주세요.");
-			}
-			try {
-				List<Customer> cList = service.selectCustomer(customer);
-				if (cList.size() > 1) {
-					cf = new CustomerSearchFrame();
-					cf.setRentPanel(this);
-					cf.setcList(cList);
-					cf.setVisible(true);
-				} else {
-					setRentCustomer(cList.get(0));
-				}
-
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		} else {
-			if (tfCstmName.getText().trim().length() > 1) {
-				customer.setName(tfCstmName.getText().trim());
-			} else {
-				JOptionPane.showMessageDialog(null, "이름을 입력해주세요.");
-			}
-			try {
-				List<Customer> cList = service.selectCustomer(customer);
-				if (cList.size() > 1) {
-					cf.setRentPanel(this);
-					cf.setcList(cList);
-					cf.setVisible(true);
-				} else {
-					setRentCustomer(cList.get(0));
-				}
-
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
-
-	// 닫기버튼
-	protected void do_btnClose_actionPerformed(ActionEvent e) {
-
-	}
-	
-	//대여버튼
-	protected void do_btnRent_actionPerformed(ActionEvent e) throws ParseException {
-		/*//옵션
-		selectCoList = new ArrayList<>();
-		JOptionPane.showMessageDialog(null, coList.toString());
-		for(Component c : pOption.getComponents()) {
-			cb = (JCheckBox) c;
-			if(cb.isSelected()) {
-				CarOption co = new CarOption();
-				co.setName(cb.getText());
-				CarOption findCo = coList.get(coList.indexOf(co));
-				selectCoList.add(findCo);
-				JOptionPane.showMessageDialog(null, findCo);
-			}
-		}*/
-		//대여날짜
-		Date start = dateChooser_2.getDate();
-		SimpleDateFormat ssdf = new SimpleDateFormat("yyyyMMdd");
-		startDate = ssdf.format(start);
-
-		sHour = spStartHour.getValue().toString();
-		sMinutes = spStartMinutes.getValue().toString();
-		//반납날짜
-		Date end = dateChooser_3.getDate();
-		SimpleDateFormat esdf = new SimpleDateFormat("yyyyMMdd");
-		endDate = esdf.format(end);
-		eHour = spEndHour.getValue().toString();
-		eMinutes = spEndMinutes.getValue().toString();
+		// TODO Auto-generated method stub
 		
-		Event evt = new Event();
-		Insurance ins = new Insurance("I000", "S0", 0);
-		Rent r = new Rent("R004", startDate, sHour+":"+sMinutes+":00", endDate, eHour+":"+eMinutes+":00", false, 60000, selectedCarModel, customer, ins, evt, 0);
-		
-		int shLength = sHour.length();
-		int smLength = sMinutes.length();
-		int ehLength = eHour.length();
-		int emLength = eMinutes.length();
-		
-		if(shLength == 1 || smLength == 1 || ehLength == 1 | emLength == 1) {
-			String startHour = "0" + sHour;
-			String startMinutes = "0" + sMinutes;
-			String endHour = "0" + eHour;
-			String endMinutes = "0" + eMinutes;
-			
-//			JOptionPane.showMessageDialog(null, startHour + ", " + startMinutes + ", " + endHour + ", " + endMinutes);
-			long dd = diffDays(startDate+startHour+startMinutes, endDate+endHour+endMinutes);
-			lblResultPrice.setText((basicCharge*dd)+"");
-			JOptionPane.showMessageDialog(null, dd);
-			
-		} else {
-			// ========= 테스트
-			long dd = diffDays(startDate+sHour+sMinutes, endDate+eHour+eMinutes);
-			JOptionPane.showMessageDialog(null, dd);
-		}
-		
-		RentResultFrame rrf = new RentResultFrame();
-		rrf.setRent(r);	//RentResultFrame에서 만든 setter
-		rrf.setVisible(true);
-		
-		
-	}
-	
-	//차량선택버튼
-	protected void do_btnSearchCar_actionPerformed(ActionEvent e) {
-		selectedIndex = comboBoxCar.getSelectedIndex();
-		CarType ct = list.get(selectedIndex);
-		
-		carModelList = service.selectAllCarModels(ct);
-		
-		if(csf == null) {
-			csf = new CarSearchFrame();
-		}
-		csf.setRentPanel(this);
-		csf.setCarList(carModelList);
-		csf.setVisible(true);
 	}
 
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
+		JOptionPane.showMessageDialog(null, selectedCarModel);
 		
-		basicCharge = selectedCarModel.getBasicCharge();
-		////////////////////////////////////////////
-		carType = selectedCarModel.getCarType();
-		
-		///////////////////////////////////////////
-		lblResultPrice.setText(selectedCarModel.getBasicCharge()+"");
-		
-//		JOptionPane.showMessageDialog(null, selectedCarModel);
-		if(selectedCarModel.getCarType().getCode().equals("S2")) {
-			chkDriver(true);
-		}else {
-			chkDriver(false);
-		}
-		
-		//CarSEarchFrame에서 테이블에 있는 내용 중 하나 선택하고 나면 enable false->true로 바꾸기
-			// 1.날짜
-			dateChooser_2.getCalendarButton().setEnabled(true);
-			dateChooser_3.getCalendarButton().setEnabled(true);
-			// 2.시간
-			spStartHour.setEnabled(true);
-			spStartMinutes.setEnabled(true);
-			spEndHour.setEnabled(true);
-			spEndMinutes.setEnabled(true);
-			// 3.보험 라디오버튼
-			rBNotReg.setEnabled(true);
-			rBNotReg.setSelected(true);
-			rBReg.setEnabled(true);
-			//4. 옵션 체크박스
-	}
-
-	private void chkDriver(boolean isChk) {
-		for(Component c : pOption.getComponents()) {
-			cb = (JCheckBox) c;
-			if (cb.getText().equals("driver")) {
-				cb.setEnabled(isChk);
-				break;
-			}
-		}
+		pInsurance.setSelectedCarModel(selectedCarModel);
+		int price = pOption.getTotalOptionPrice();
+		JOptionPane.showMessageDialog(null, price);
+		lblResultPrice.setText(selectedCarModel.getName() + " option price" + price);
 	}
 	
-	//날짜, 시간
-	public long diffDays(String begin, String end) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-		
-		//String 요청시간을 Date로 바꾸기
-		Date beginDate = sdf.parse(begin);
-		long beginDateTime = beginDate.getTime();
-		
-		Date endDate = sdf.parse(end);
-		long endDateTime = endDate.getTime();
-		
-		//차이
-		long diff = endDateTime - beginDateTime;
-		//24시간*60분*60초*1000밀리초 ==> 단위 "일"
-		long diffDays = diff / (24*60*60*1000);
-		
-		return diffDays;
-	}
-	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == rBNotReg) {	//라디오버튼
-			do_rBNotReg_itemStateChanged(e);
-		}
-		if (e.getSource() == rBReg) {	//라디오버튼
-			do_rBReg_itemStateChanged(e);
-		}
-	}
 	
-	//보험선택했을 때
-	protected void do_rBReg_itemStateChanged(ItemEvent e) {
-		//selectInsuranceByCarType(String) ==> 여기서 String은 S1, S2, ...가 와야 함.
-		List<Insurance> insuranceList = service.selectInsuranceByCarType(selectedCarModel.getCarType().getCode());
-		for(Insurance i : insuranceList) {
-			int insurancePrice = i.getPrice();
-			JOptionPane.showMessageDialog(null, insurancePrice);
-		}
-	}
-	
-	protected void do_rBNotReg_itemStateChanged(ItemEvent e) {
-	}
-	
-
 }
