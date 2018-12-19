@@ -28,8 +28,8 @@ import kr.or.yi.java_web_female.ui.rent.sub.RentInfoPanel;
 public class RentPanel extends JPanel implements ActionListener{
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private RentUIService service;
-	private JButton btnClose;
-	private JButton btnRent;
+	private JButton btnOk;
+	private JButton btnTotalPrice;
 	private CarModel selectedCarModel;
 	private JLabel lblResultPrice;
 	private InsurancePanel pInsurance;
@@ -92,15 +92,15 @@ public class RentPanel extends JPanel implements ActionListener{
 		add(pBtn, BorderLayout.SOUTH);
 		pBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		btnRent = new JButton("확인");
-		btnRent.addActionListener(this);
-		btnRent.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pBtn.add(btnRent);
+		btnTotalPrice = new JButton("최종 요금 계산하기");
+		btnTotalPrice.addActionListener(this);
+		btnTotalPrice.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		pBtn.add(btnTotalPrice);
 
-		btnClose = new JButton("닫기");
-		btnClose.addActionListener(this);
-		btnClose.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		pBtn.add(btnClose);
+		btnOk = new JButton("확인");
+		btnOk.addActionListener(this);
+		btnOk.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		pBtn.add(btnOk);
 	}
 
 	@Override
