@@ -3,6 +3,7 @@ package kr.or.yi.java_web_female.ui.car;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -48,7 +49,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private ComboPanel<CarType> cmbCarType;
 	private JTextField tfColor;
 	private ComboPanel<Fuel> cmbFuel;
-//	private ImageIcon img;
 	//이미지 불러오기
 	String imgPath = System.getProperty("user.dir")+"\\images\\"; //이미지가 들어있는 경로
 	private JLabel lbl_img;
@@ -289,7 +289,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		CarType cartype = cmbCarType.getSelectedItems();
 
 		//연료
-		Fuel fuel = (Fuel)cmbFuel.getSelectedItems();
+		Fuel fuel = cmbFuel.getSelectedItems();
 
 		
 		String color = tfColor.getText().trim();//색상
@@ -318,7 +318,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		String strImg = imgPath+carModel.getCarType().getCode()+"\\"+carModel.getCarCode()+".png";
 		strImg = strImg.replace("\\", "/");
 		ImageIcon img = new ImageIcon(strImg);
-		lbl_img.setIcon(img);
+		Image image = img.getImage();
+		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+		ImageIcon resimg = new ImageIcon(changedImg);
+		lbl_img.setIcon(resimg);
 		panel_img.add(lbl_img);
 		
 		tfCode.setText(carModel.getCarCode());
@@ -327,6 +330,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbBrand.setSelectedItem(carModel.getBrand());
 		cmbCarType.setSelectedItem(carModel.getCarType());
 		cmbFuel.setSelectedItem(carModel.getFuel());
+		System.out.println(carModel.getFuel());//출력은 정상
 		
 		tfColor.setText(carModel.getColor());
 		tfHour6.setText(carModel.getHour6()+"");
