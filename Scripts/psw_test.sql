@@ -24,7 +24,7 @@ insert into customer(code, Id, passwd, Name, address, phone, dob, email)
 
 desc customer;
 
-select * from custom_event;
+select * from employee;
 
 select c.code, id, passwd, c.name, address, phone, dob, email, event_code, is_use, e.name, e.rate
 from customer c join custom_event ce on c.code=ce.custom_code join event e on ce.event_code=e.code;
@@ -72,12 +72,18 @@ select length(password('root123345')) from dual;
 
 -- 비밀번호가 같은지 확인
 select password('rootroot') = password('rootroot1') from dual;
-/*select *
-from post 
-where doro ='태전로7길'
-order by building1, building2;*/
 
--- 대여횟수에 따른 등급조정 프로시저 
+select * from event;
+select * from custom_event;
+select * from customer;
+
+select * from grade;
+
+select * from `level`;
+select * from grade;
+
+
+/*
 DROP PROCEDURE IF EXISTS update_customer_grade;
 DELIMITER $$
 CREATE PROCEDURE update_customer_grade (in custom_code char(4))   
@@ -97,6 +103,7 @@ begin
 	where code = custom_code;
 end $$
 DELIMITER ;
+*/
 
 call update_customer_grade('C007');
 
@@ -112,4 +119,20 @@ update customer
 set grade_code = '아래 select 한값'
 where code = 'C007' -- '고객코드';
 */
+
+
+select grade_code from customer where code='C007';
+
+select * from grade;
+
+insert into grade(code, name, g_losal, g_hisal, rate) values('G007', 'xxx', g_losal=?, g_hisal=?, ?)
+
+desc grade;
+
+select g.name, g.code
+from customer c , grade g
+where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
+
+
+
 

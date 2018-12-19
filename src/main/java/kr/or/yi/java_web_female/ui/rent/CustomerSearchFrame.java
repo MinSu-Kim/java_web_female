@@ -14,14 +14,14 @@ import javax.swing.border.EmptyBorder;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CustmConfirmTable;
+import kr.or.yi.java_web_female.ui.rent.sub.CustomerInfoPanel;
 
 public class CustomerSearchFrame extends JFrame {
 
 	private JPanel contentPane;
 	private AbstractListPanel<Customer> cPanel;
 	private List<Customer> cList;
-	private RentPanel rentPanel;
-
+	private CustomerInfoPanel customerInfoPanel;
 	
 	public void setcList(List<Customer> cList) {
 		this.cList = cList;
@@ -58,7 +58,7 @@ public class CustomerSearchFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Customer i = cPanel.getSelectedItem();
-				rentPanel.setRentCustomer(i);
+				customerInfoPanel.setRentCustomer(i);
 				CustomerSearchFrame.this.dispose();
 			}
 			
@@ -67,8 +67,7 @@ public class CustomerSearchFrame extends JFrame {
 		contentPane.add(cPanel, BorderLayout.CENTER);
 	}
 
-	public void setRentPanel(RentPanel rentPanel) {
-		this.rentPanel = rentPanel;
+	public void setCustomerInfoPanel(CustomerInfoPanel customerInfoPanel) {
+		this.customerInfoPanel = customerInfoPanel;
 	}
-
 }

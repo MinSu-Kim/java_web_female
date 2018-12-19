@@ -93,6 +93,13 @@ public class CarModelMapperImpl implements CarModelMapper {
 		
 	}
 
+	@Override
+	public String nextCarCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(namespace+".nextCarCode");
+		}
+	}
+
 	
 
 }
