@@ -55,10 +55,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JLabel lbl_img;
 	private JPanel panel_img;
 	private boolean isAdd;
+	private CarPanel listPanel;
 	/**
 	 * Create the panel.
 	 */
 	public CarSelectedPanel(boolean isAdd) {
+		listPanel = new CarPanel();
 		this.isAdd = isAdd;
 		service = new CarModelService();
 		carUiService = new CarUiService();
@@ -239,17 +241,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			imgbtn.addActionListener(new ActionListener() {			
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					CarModel carModel = new CarModel();
-					carModel.setCarCode(tfCode.getText().trim());
-					UserPic pic = service.getUserPic(carModel.getCarCode());
-					String strImg = imgPath+carModel.getCarType().getCode()+"\\"+carModel.getCarCode()+".png";
-					strImg = strImg.replace("\\", "/");
-					ImageIcon img = new ImageIcon(strImg);
-					Image image = img.getImage();
-					Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
-					ImageIcon resimg = new ImageIcon(changedImg);
-					lbl_img.setIcon(resimg);
-					panel_img.add(lbl_img);
+					
 				}
 			});
 			panelRentCnt.add(imgbtn);
@@ -295,10 +287,13 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			//수정클릭
 			CarModel model = getItem();			
 			service.updateCarModel(model);
+			listPanel.setLoadAddList();
+			
 		}else {
 			//추가 클릭
 			CarModel model = getItem();
 			service.insertCarModel(model);
+			listPanel.setLoadAddList();
 		}
 		
 	}
@@ -314,21 +309,13 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		service.deleteCarModel(model);
 	}
 	
-	private void clearTf(CarModel carModel) {//지우지 말고 원래값으로 변경(초기화)
-		
-	}
-	
 	private CarModel getItem() {
 		//getitem작성중!
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
-		//브랜드
-		Brand brand = cmbBrand.getSelectedItems();
-		
-		//차종
-		CarType cartype = cmbCarType.getSelectedItems();
 
-		//연료
+		Brand brand = cmbBrand.getSelectedItems();	
+		CarType cartype = cmbCarType.getSelectedItems();
 		Fuel fuel = cmbFuel.getSelectedItems();
 
 		String color = tfColor.getText().trim();//색상
@@ -340,7 +327,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			gear = "stick";
 		}
 		//isrent,rentCnt 처리중
-		boolean isRent = true;
+		boolean isRent = false;
 		//가격
 		int basicCharge = Integer.parseInt(tfBasicCharge.getText());
 		int hour6 = Integer.parseInt(tfHour6.getText());

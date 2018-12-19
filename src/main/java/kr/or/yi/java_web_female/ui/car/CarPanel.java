@@ -139,7 +139,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener, Mo
 		panelBtn.add(btnAdd);
 		panelBtn.add(btnOk);
 
-		btnCancel = new JButton("새로고침");
+		btnCancel = new JButton("초기화");
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
 
@@ -255,7 +255,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener, Mo
 		setLoadAddList();
 	}
 
-	private void setLoadAddList() {
+	public void setLoadAddList() {
 		list = modelService.selectCarModelByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
