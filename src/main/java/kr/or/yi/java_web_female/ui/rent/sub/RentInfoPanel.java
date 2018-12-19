@@ -10,6 +10,7 @@ import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentResultFrame;
 
 import java.awt.Font;
@@ -24,7 +25,12 @@ import javax.swing.border.TitledBorder;
 import javax.swing.SpinnerNumberModel;
 
 public class RentInfoPanel extends CarSubPanel {
-	
+	private JDateChooser dateChooserEnd;	//대여일시	
+	private JDateChooser dateChooserStart;	//반납일시
+	private JSpinner spStartHour;	//대여시간
+	private JSpinner spEndHour;		//반납시간
+	private RentPanel rentPanel;
+
 	/**
 	 * Create the panel.
 	 */
@@ -52,7 +58,7 @@ public class RentInfoPanel extends CarSubPanel {
 		lblStartDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pStartDate.add(lblStartDate);
 
-		JDateChooser dateChooserStart = new JDateChooser();
+		dateChooserStart = new JDateChooser();
 		pStartDate.add(dateChooserStart);
 		
 		//대여시간
@@ -65,7 +71,7 @@ public class RentInfoPanel extends CarSubPanel {
 		lblStartTime.setHorizontalAlignment(SwingConstants.CENTER);
 		pStartTime.add(lblStartTime);
 		
-		JSpinner spStartHour = new JSpinner();
+		spStartHour = new JSpinner();
 		spStartHour.setModel(new SpinnerNumberModel(10, 1, 24, 1));
 		// ======== 01, 02, .., 09로 표시하기
 		JSpinner.NumberEditor nEditorStartHour = new JSpinner.NumberEditor(spStartHour, "00");
@@ -91,7 +97,7 @@ public class RentInfoPanel extends CarSubPanel {
 		lblEndDate.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pEndDate.add(lblEndDate);
 
-		JDateChooser dateChooserEnd = new JDateChooser();
+		dateChooserEnd = new JDateChooser();
 		pEndDate.add(dateChooserEnd);
 
 		//반납시간
@@ -104,7 +110,7 @@ public class RentInfoPanel extends CarSubPanel {
 		lblEndTime.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		pEndTime.add(lblEndTime);
 
-		JSpinner spEndHour = new JSpinner();
+		spEndHour = new JSpinner();
 		spEndHour.setModel(new SpinnerNumberModel(10, 1, 24, 1));
 		// ======== 01, 02, .., 09로 표시하기
 		JSpinner.NumberEditor nEditorEndHour = new JSpinner.NumberEditor(spEndHour, "00");
@@ -118,9 +124,10 @@ public class RentInfoPanel extends CarSubPanel {
 		pEndTime.add(lblEndHour);
 	}
 	
-	//날짜, 시간
+	// 반납일-대여일[단위 : 일]
 	public long diffDays(String begin, String end) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+		// yyyyMMddHH : 연월일시
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
 
 		// String 요청시간을 Date로 바꾸기
 		Date beginDate = sdf.parse(begin);
@@ -136,47 +143,33 @@ public class RentInfoPanel extends CarSubPanel {
 
 		return diffDays;
 	}
-
-	/*//================================== 시간정보 =======================
-	//대여날짜
-	Date start = dateChooser_2.getDate();
-	SimpleDateFormat ssdf = new SimpleDateFormat("yyyyMMdd");startDate=ssdf.format(start);
-
-	sHour=spStartHour.getValue().toString();sMinutes=spStartMinutes.getValue().toString();
-	// 반납날짜
-	Date end = dateChooser_3.getDate();
-	SimpleDateFormat esdf = new SimpleDateFormat(
-			"yyyyMMdd");endDate=esdf.format(end);eHour=spEndHour.getValue().toString();eMinutes=spEndMinutes.getValue().toString();
-
-	Event evt = new Event();
-	Insurance ins = new Insurance("I000", "S0", 0);
-	Rent r = new Rent("R004", startDate, sHour + ":" + sMinutes + ":00", endDate, eHour + ":" + eMinutes + ":00", false,
-			60000, selectedCarModel, customer, ins, evt, 0);
-
-	int shLength = sHour.length();
-	int smLength = sMinutes.length();
-	int ehLength = eHour.length();
-	int emLength = eMinutes.length();
-
-	if(shLength==1||smLength==1||ehLength==1|emLength==1)
-	{
-		String startHour = "0" + sHour;
-		String startMinutes = "0" + sMinutes;
-		String endHour = "0" + eHour;
-		String endMinutes = "0" + eMinutes;
-
-//				JOptionPane.showMessageDialog(null, startHour + ", " + startMinutes + ", " + endHour + ", " + endMinutes);
-		long dd = diffDays(startDate + startHour + startMinutes, endDate + endHour + endMinutes);
-		lblResultPrice.setText((basicCharge * dd) + "");
-		JOptionPane.showMessageDialog(null, dd);
-
-	}else
-	{
-		// ========= 테스트
-		long dd = diffDays(startDate + sHour + sMinutes, endDate + eHour + eMinutes);
-		JOptionPane.showMessageDialog(null, dd);
+	
+	public long totalRentDate() throws ParseException {
+		// ===================== 대여일시, 대여시간 ====================
+		//1. 대여일시 가져오기
+		Date start = dateChooserStart.getDate();
+		//date를 simpledateformat으로 바꾸기
+		SimpleDateFormat startSdf = new SimpleDateFormat("yyyyMMdd");
+		//diffDays에서 매개변수 타입이 String이므로 String으로 받아준다.
+		String startDate = startSdf.format(start);
+		//2. 대여시간 가져오기
+		String sHour = spStartHour.getValue() + "";
+		
+		// ===================== 반납일시, 반납시간 ====================
+		Date end = dateChooserEnd.getDate();
+		SimpleDateFormat endSdf = new SimpleDateFormat("yyyyMMdd");
+		String endDate = endSdf.format(end);
+		String eHour = spEndHour.getValue() + "";
+		
+		//
+		long diff = diffDays(startDate + sHour, endDate + eHour);
+		if(diff == 0) {
+			JOptionPane.showMessageDialog(null, "대여기간은 최소 1일입니다. 다시 선택해주세요.");
+		}
+		return diff;
 	}
 
-	RentResultFrame rrf = new RentResultFrame();rrf.setRent(r); // RentResultFrame에서 만든 setter
-	rrf.setVisible(true);*/
+	public void setRentPanel(RentPanel rentPanel) {
+		this.rentPanel = rentPanel;
+	}
 }
