@@ -54,18 +54,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JLabel lbl_img;
 	private JPanel panel_img;
 	private boolean isAdd;
-//	private CarPanel carPanel;
 	private CarUi carUi;
 	/**
 	 * Create the panel.
 	 */
 	public CarSelectedPanel(boolean isAdd) {
-//		carPanel = new CarPanel();
-/*		if(isAdd) {
-			carUi = new CarUi(true);
-		}else {
-			carUi = new CarUi(false);
-		}*/
 		this.isAdd = isAdd;
 		service = new CarModelService();
 		carUiService = new CarUiService();
@@ -296,22 +289,37 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			service.updateCarModel(model);
 			carUi.reloadDataCarPanel();
 			carUi.close();
-//			carPanel.setLoadDatas();
-//			carUi.setVisible(false);
 		}else {
 			//추가 클릭
 			CarModel model = getItem();
 			service.insertCarModel(model);
 			carUi.reloadDataCarPanel();
 			carUi.close();
-//			carPanel.setLoadDatas();
-//			carUi.setVisible(false);
 		}
 		
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		//취소클릭, 지우지 말고 원래값으로 변경(초기화)
+		if(btnOk.getText().equals("수정")) {
+			String code = tfCode.getText();
+			CarModel model = new CarModel();
+			model.setCarCode(code);
+			setCarModel(model);
+		}else {
+			cleartf();
+		}
 		
+	}
+
+	private void cleartf() {
+		tfName.setText("");
+		cmbBrand.setSelectedIndex(-1);
+		cmbCarType.setSelectedIndex(-1);
+		cmbFuel.setSelectedIndex(-1);
+		tfHour6.setText("");
+		tfHour10.setText("");
+		tfHour12.setText("");
+		tfHourElse.setText("");
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
@@ -353,7 +361,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 
 	public void setCarModel(CarModel carModel) {//set
-		String strImg = imgPath+carModel.getCarType().getCode()+"\\"+carModel.getCarCode()+".png";
+		String strImg = imgPath+carModel.getCarCode()+".png";
 		strImg = strImg.replace("\\", "/");
 		ImageIcon img = new ImageIcon(strImg);
 		Image image = img.getImage();
@@ -368,7 +376,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbBrand.setSelectedItem(carModel.getBrand());
 		cmbCarType.setSelectedItem(carModel.getCarType());
 		cmbFuel.setSelectedItem(carModel.getFuel());
-		System.out.println(carModel.getFuel());//출력은 정상
 		
 		tfColor.setText(carModel.getColor());
 		tfHour6.setText(carModel.getHour6()+"");
@@ -378,7 +385,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		tfBasicCharge.setText(carModel.getBasicCharge()+"");
 
 		String gear = carModel.getGear();
-		if(gear.equals("auto")) {
+		System.out.println(gear);
+		if(gear==null) {
+			rdbtnAuto.setSelected(false);
+			rdbtnStick.setSelected(false);
+		}else if(gear.equalsIgnoreCase("auto")) {
 			rdbtnAuto.setSelected(true);
 		}else {
 			rdbtnStick.setSelected(true);

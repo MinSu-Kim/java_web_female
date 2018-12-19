@@ -45,7 +45,6 @@ public class CarUi extends JFrame {
 		this.carPanel = carPanel;
 	}
 	public void setCarModel(CarModel carModel) {
-//		this.carModel = carModel;
 		panelUpdate.setCarModel(carModel);
 	}
 	public void reloadDataCarPanel() {
