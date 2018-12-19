@@ -65,12 +65,16 @@ public class RentInfoPanel extends CarSubPanel {
 		lblStartTime.setHorizontalAlignment(SwingConstants.CENTER);
 		pStartTime.add(lblStartTime);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(10, 1, 24, 1));
-		pStartTime.add(spinner);
+		JSpinner spStartHour = new JSpinner();
+		spStartHour.setModel(new SpinnerNumberModel(10, 1, 24, 1));
+		// ======== 01, 02, .., 09로 표시하기
+		JSpinner.NumberEditor nEditorStartHour = new JSpinner.NumberEditor(spStartHour, "00");
+		spStartHour.setEditor(nEditorStartHour);
+		//
+		pStartTime.add(spStartHour);
 		
-		JLabel lblNewLabel = new JLabel("시");
-		pStartTime.add(lblNewLabel);
+		JLabel lblStartHour = new JLabel("시");
+		pStartTime.add(lblStartHour);
 		
 		//반납
 		JPanel pEnd = new JPanel();
@@ -102,6 +106,10 @@ public class RentInfoPanel extends CarSubPanel {
 
 		JSpinner spEndHour = new JSpinner();
 		spEndHour.setModel(new SpinnerNumberModel(10, 1, 24, 1));
+		// ======== 01, 02, .., 09로 표시하기
+		JSpinner.NumberEditor nEditorEndHour = new JSpinner.NumberEditor(spEndHour, "00");
+		spEndHour.setEditor(nEditorEndHour);
+		//
 		pEndTime.add(spEndHour);
 
 		JLabel lblEndHour = new JLabel("시");

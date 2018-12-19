@@ -105,6 +105,13 @@ public class RentPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnTotalPrice) {
+			do_btnTotalPrice_actionPerformed(e);
+		}
+	}
+
+	//최종요금계산하기
+	private void do_btnTotalPrice_actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
