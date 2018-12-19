@@ -308,7 +308,7 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 			}
 		}
 	}
-	
+
 
 /*	ActionListener chkListener = new ActionListener() {
 		
@@ -344,7 +344,6 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 	private int basicCharge;
 	private JRadioButton rBReg;
 	private JRadioButton rBNotReg;
-	private CarType carType;
 	private MyCheckBox mcb;
 	
 	public void actionPerformed(ActionEvent e) {
@@ -504,10 +503,6 @@ public class RentPanel extends JPanel implements ActionListener, ItemListener{
 		this.selectedCarModel = selectedCarModel;
 		
 		basicCharge = selectedCarModel.getBasicCharge();
-		////////////////////////////////////////////
-		carType = selectedCarModel.getCarType();
-		
-		///////////////////////////////////////////
 		lblResultPrice.setText(selectedCarModel.getBasicCharge()+"");
 		
 //		JOptionPane.showMessageDialog(null, selectedCarModel);
