@@ -356,11 +356,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		//isrent,rentCnt 처리중
 		boolean isRent = false;
 		//가격
-		int basicCharge = Integer.parseInt(tfBasicCharge.getText());
-		int hour6 = Integer.parseInt(tfHour6.getText());
-		int hour10 = Integer.parseInt(tfHour10.getText());
-		int hour12 = Integer.parseInt(tfHour12.getText());
-		int hourElse = Integer.parseInt(tfHourElse.getText());
+		int basicCharge = Integer.parseInt(tfBasicCharge.getText().replaceAll(",", ""));
+		int hour6 = Integer.parseInt(tfHour6.getText().replaceAll(",", ""));
+		int hour10 = Integer.parseInt(tfHour10.getText().replaceAll(",", ""));
+		int hour12 = Integer.parseInt(tfHour12.getText().replaceAll(",", ""));
+		int hourElse = Integer.parseInt(tfHourElse.getText().replaceAll(",", ""));
 		
 		CarModel item = new CarModel(code, name, color, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
 		return item;
