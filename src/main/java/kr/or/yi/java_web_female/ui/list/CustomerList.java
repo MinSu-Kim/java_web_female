@@ -26,7 +26,7 @@ public class CustomerList extends AbstractListPanel<Customer>{
 	@Override
 	protected Object[] getItemRows(Customer item) {
 		return new Object[] {
-				item.getCode(),item.getId(), item.getName(), item.getAddress(), item.getPhone(), item.getDob(), item.getEmail(), item.getLicense(), item.getGradeCode(), item.getRentCnt() 
+				item.getCode(),item.getId(), item.getName(), item.getAddress(), item.getPhone(), String.format("%tF", item.getDob()), item.getEmail(), item.getLicense(), item.getGradeCode(), item.getRentCnt() 
 		};
 	}
 
