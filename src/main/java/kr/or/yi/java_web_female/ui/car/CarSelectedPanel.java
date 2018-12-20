@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -15,7 +17,9 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -246,7 +250,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			imgbtn.addActionListener(new ActionListener() {			
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					 do_fileOpen_actionPerformed(e);
 				}
 			});
 			panelRentCnt.add(imgbtn);
@@ -365,6 +369,46 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		CarModel item = new CarModel(code, name, color, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
 		return item;
 	}
+	
+	//파일 읽어오기
+		protected void do_fileOpen_actionPerformed(ActionEvent e) {
+			String loadDirectoryPath = System.getProperty("user.dir") + "\\images\\test";
+			String currentDirectoryPath = System.getProperty("user.dir") + "\\images\\";
+			JFileChooser chooser = new JFileChooser(currentDirectoryPath);
+			
+			int ret = chooser.showSaveDialog(null);
+			//X버튼 누르거나 취소 => 1, 파일 열었을 때 => 0
+			if( ret != JFileChooser.APPROVE_OPTION) {	//열기버튼 말고 다른 버튼 눌렀으면
+				JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.", "경고", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			
+			// 경로 가져오기
+			String filePath = chooser.getSelectedFile().getPath();
+			//고른 이미지 디스플레이
+			ImageIcon img = new ImageIcon(filePath);
+			Image image = img.getImage();
+			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+			ImageIcon resimg = new ImageIcon(changedImg);
+			lbl_img.setIcon(resimg);
+			panel_img.add(lbl_img);
+			//파일복사하기
+	        
+	        try(FileInputStream inputStream = new FileInputStream(filePath);
+	        		FileOutputStream outputStream = new FileOutputStream(currentDirectoryPath+tfCode.getText()+".png")){
+	              
+	            int i = 0;
+	            byte [] buffer = new byte[512];
+	            while((i = inputStream.read(buffer)) != -1) {
+	            	outputStream.write(buffer, 0, i);
+	            }
+	            System.out.println("파일이 복사되었습니다.");
+	        } catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
 	
 
 	public void setCarModel(CarModel carModel) {//set
