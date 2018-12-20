@@ -34,4 +34,13 @@ public class CustomEventMapperImpl implements CustomEventMapper {
 			return sqlSession.selectList(namespace + ".selectCustomEventByCustomCode", customCode);
 		}
 	}
+
+	@Override
+	public int deleteCustomEvent(CustomEvent customEvent) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".deleteCustomEvent", customEvent);
+			sqlSession.commit();
+			return res;
+		}
+	}
 }

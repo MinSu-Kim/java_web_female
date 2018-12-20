@@ -44,10 +44,12 @@ public class GradeListPanel extends JPanel implements ActionListener {
 		
 	}
 		private void initcomponents() {
+			
 			panelList= new GradeList();
 			list = service.selectGradeByAll();
 			panelList.setList(list);
-			panelList.loadDatas();
+			panelList.loadDatas();	
+			
 			setLayout(new GridLayout(0, 2, 0, 0));
 			add(panelList);
 			

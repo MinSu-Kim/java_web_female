@@ -38,16 +38,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-/*	@Override
-	public int selectCustomerById(Customer customer) {
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerById", customer);
-			if (selectedCustomer == null) {
-				return 0;
-			}
-			return 1;
-		}
-	}*/
 
 	@Override
 	public Customer selectCustomerById(Customer customer) {
