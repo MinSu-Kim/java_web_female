@@ -42,7 +42,11 @@ public class RentUIService {
 		return customerDao.selectCustomerByName(name);
 	}
 	
-	//이벤트 포함된 회원정보검색
+	//이벤트
+	public List<Customer> selectCustomerByCode(Customer customer){
+		return customerDao.selectCustomerByCode(customer);
+	}
+	
 	public List<Customer> selectCustomerFullByCode(Customer customer){
 		return customerDao.selectCustomerByCode(customer);
 	}

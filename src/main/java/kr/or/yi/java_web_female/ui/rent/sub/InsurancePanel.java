@@ -19,13 +19,15 @@ import java.util.List;
 import java.awt.event.ItemEvent;
 import javax.swing.border.TitledBorder;
 
+import javafx.scene.control.RadioButton;
+
 public class InsurancePanel extends CarSubPanel implements ItemListener {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton rbReg;
 	private CarModel selectedCarModel;
 	private JRadioButton rbNotReg;
 	private RentPanel rentPanel;
-	private int insurancePrice;
+	private Insurance insurance;
 		
 	/**
 	 * Create the panel.
@@ -64,30 +66,32 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 	}
 
 	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == rbNotReg) {
-			do_rbNotReg_itemStateChanged(e);
+
+		if (e.getSource() == rbNotReg && rbNotReg.isSelected()) {
+			 insurance = new Insurance("I000", "S0", 0);
 		}
-		if (e.getSource() == rbReg) {
-			do_rbReg_itemStateChanged(e);
+		if (e.getSource() == rbReg && rbReg.isSelected()) {
+			List<Insurance> insuranceList = service.selectInsuranceByCarType(selectedCarModel.getCarType().getCode());
+			insurance = insuranceList.get(0);
 		}
+		rentPanel.setInsurance(insurance);
 	}
 	
-	//일반자차를 선택했을 때
-	protected int do_rbReg_itemStateChanged(ItemEvent e) {
+/*	//일반자차를 선택했을 때
+	protected void do_rbReg_itemStateChanged(ItemEvent e) {
 		// selectInsuranceByCarType(String) ==> 여기서 String은 S1, S2, ...가 와야 함.
-		List<Insurance> insuranceList = service.selectInsuranceByCarType(selectedCarModel.getCarType().getCode());
-		for (Insurance i : insuranceList) {
-			insurancePrice = i.getPrice();
-//			JOptionPane.showMessageDialog(null, insurancePrice);
-		}
-		return insurancePrice;
+		getInsurancePrice();
 	}
 	
 	//가입안함을 선택했을 때
 	protected void do_rbNotReg_itemStateChanged(ItemEvent e) {
-		
-	}
+		getInsurancePrice();
+	}*/
 
+	public Insurance getInsurance() {
+		return insurance;
+	}
+	
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
 	}
