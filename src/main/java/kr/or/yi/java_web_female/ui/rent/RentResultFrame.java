@@ -28,6 +28,7 @@ public class RentResultFrame extends JFrame {
 	private JTextField tfInsurance;
 	private Rent rent;
 
+
 	/**
 	 * Create the frame.
 	 */
@@ -141,7 +142,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(tfOption);
 		tfOption.setColumns(10);
 		
-		JLabel lblTitleDiscount = new JLabel("할인");
+		JLabel lblTitleDiscount = new JLabel("할인율");
 		lblTitleDiscount.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		lblTitleDiscount.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblTitleDiscount);
@@ -172,20 +173,21 @@ public class RentResultFrame extends JFrame {
 		btnCancel.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		pBtn.add(btnCancel);
 	}
-	
+
 	public void setRent(Rent rent) {
 		this.rent = rent;
 		setItems();
 	}
 	
+
 	public void setItems() {
-		tfCarName.setText(rent.getCarCode().getName()); //차량명
+		/*tfCarName.setText(rent.getCarCode().getName()); //차량명
 		tfCustomer.setText(rent.getCustomerCode().getName()); //고객명
 		tfStartDate.setText(rent.getStartDate()); //대여일자
 		tfStartTime.setText(rent.getStartTime()); //대여시간
 		tfEndDate.setText(rent.getEndDate());	//반납일자
 		tfEndTime.setText(rent.getEndTime());	//반납시간
 		tfInsurance.setText(rent.getInsuranceCode().getPrice()+"");	//보험가격
-	}
+*/	}
 
 }

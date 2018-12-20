@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -23,6 +22,7 @@ import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Insurance;
+import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.sub.CarInfoPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.CustomerInfoPanel;
@@ -47,6 +47,7 @@ public class RentPanel extends JPanel implements ActionListener {
 	private int maxEventRate;
 	private RentDateDto rentDateDto;
 	private JLabel lblPriceInfo;
+	private RentResultFrame rentResultFrame;
 
 	public RentPanel() {
 		service = new RentUIService();
@@ -109,7 +110,7 @@ public class RentPanel extends JPanel implements ActionListener {
 
 		lblResultPrice = new JLabel("New label");
 		panel.add(lblResultPrice);
-		lblResultPrice.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblResultPrice.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		lblResultPrice.setForeground(Color.RED);
 
 		JPanel pBtn = new JPanel();
@@ -174,8 +175,10 @@ public class RentPanel extends JPanel implements ActionListener {
 		totalPrice = ((basicCharge * diff) + (insurance == null ? 0 : insurance.getPrice()) + optionPrice)
 				* (100 - maxEventRate) / 100;
 
-		// Rent r = new Rent(code, startDate, startTime, endDate, endTime, isReturn,
-		// diff, carCode, customerCode, insuranceCode, eRate, optPrice)
+		
+		// ================ 테스트		
+		//Rent rent = new Rent("R005", rentDateDto.getStartDate(), rentDateDto.getStartHour(), rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel, selectedCustomer, insurance, new Event(), optionPrice);
+		//
 		String msg = String.format("차량 기본비용 %d, 대여일 %s, 보험가격 %d, 옵션가격 %d(%s), 할인율 %d", basicCharge, rentDateDto,
 				(insurance == null ? 0 : insurance.getPrice()), optionPrice, sb.length() == 0 ? "" : sb, maxEventRate);
 
@@ -210,8 +213,10 @@ public class RentPanel extends JPanel implements ActionListener {
 
 	//확인버튼
 	private void do_btnCstmSearch_actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(rentResultFrame == null) {
+			rentResultFrame = new RentResultFrame();
+		}
+		rentResultFrame.setVisible(true);
 	}
 
 }
