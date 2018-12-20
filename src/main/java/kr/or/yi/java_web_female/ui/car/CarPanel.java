@@ -218,6 +218,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	protected void do_btnAdd_actionPerformed(ActionEvent e) {
 		// 추가
 		CarUi frame = new CarUi(true);
+		frame.setCarPanel(this);
 		frame.setVisible(true);
 	}
 

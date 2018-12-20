@@ -302,7 +302,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			//추가 클릭
 			CarModel model = getItem();
 			service.insertCarModel(model);//디비에 추가완료
-//			carUi.reloadDataCarPanel();//널포인트에러 발생ㅠㅠ
+			carUi.reloadDataCarPanel();
 			carUi.close();
 		}
 		
