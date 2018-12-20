@@ -1,25 +1,22 @@
 package kr.or.yi.java_web_female.ui.rent.sub;
 
-import javax.swing.JPanel;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
-
-import java.awt.Font;
-import javax.swing.ButtonGroup;
-import java.awt.event.ItemListener;
-import java.util.List;
-import java.awt.event.ItemEvent;
-import javax.swing.border.TitledBorder;
-
-import javafx.scene.control.RadioButton;
 
 public class InsurancePanel extends CarSubPanel implements ItemListener {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
