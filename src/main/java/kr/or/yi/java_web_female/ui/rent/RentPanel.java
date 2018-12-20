@@ -189,10 +189,11 @@ public class RentPanel extends JPanel implements ActionListener{
 				sb.append(",");
 				sb.append(co.getPrice());
 			}
+		}
 
 //		JOptionPane.showMessageDialog(null, optionPrice);
 //		int diff = (int) rentDateDto.getDiff();
-		totalPrice = ((basicCharge) + (insurance==null?0:insurance.getPrice()) + optionPrice) * (100-maxEventRate)/100;
+		totalPrice = ((basicCharge) + (insurance==null?0:insurance.getPrice()) + optionPrice) * (1-maxEventRate)/100;
 		
 		//Rent r = new Rent(code, startDate, startTime, endDate, endTime, isReturn, diff, carCode, customerCode, insuranceCode, eRate, optPrice)
 		String msg = String.format("자동차 기본비용%d, 보험가격%d, 옵션가격%d(%s), 할인율%d, 대여일정보%s", basicCharge,(insurance==null?0:insurance.getPrice()), optionPrice, sb.length()==0?"":sb, maxEventRate, rentDateDto);
