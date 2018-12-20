@@ -85,9 +85,7 @@ public class CarInfoPanel extends CarSubPanel implements ActionListener {
 
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
-		rentPanel.setSelectedCarModel(selectedCarModel);
-		//리스트 선택했을 때 차량 정보가 들어오는 지 확인하기
-		
+		rentPanel.setSelectedCarModel(selectedCarModel);		
 	}
 
 	public void setRentPanel(RentPanel rentPanel) {
