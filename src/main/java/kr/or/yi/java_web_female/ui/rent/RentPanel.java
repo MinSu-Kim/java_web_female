@@ -1,4 +1,4 @@
-package kr.or.yi.java_web_female.ui.rent;
+ package kr.or.yi.java_web_female.ui.rent;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,7 +44,6 @@ public class RentPanel extends JPanel implements ActionListener{
 	private InsurancePanel pInsurance;
 	private OptionInfoPanel pOption;
 	private List<CarOption> optionPriceList;
-	private int totalPrice;
 	private RentInfoPanel pRentInfo;
 	private Insurance insurance;
 	private Customer selectedCustomer;
@@ -143,7 +142,7 @@ public class RentPanel extends JPanel implements ActionListener{
 	//최종요금계산하기
 	private void do_btnTotalPrice_actionPerformed(ActionEvent e) throws ParseException {
 		// TODO Auto-generated method stub
-		getTotalRentPrice();
+		long totalPrice = getTotalRentPrice();
 		lblResultPrice.setText(totalPrice + "원");
 	}
 	
@@ -175,8 +174,8 @@ public class RentPanel extends JPanel implements ActionListener{
 	}
 	
 	//요금
-	public int getTotalRentPrice() {
-		totalPrice = 0;
+	public long getTotalRentPrice() {
+		long totalPrice = 0;
 		
 		//차량기본비용
 		int basicCharge = selectedCarModel.getBasicCharge();
@@ -192,8 +191,11 @@ public class RentPanel extends JPanel implements ActionListener{
 		}
 
 //		JOptionPane.showMessageDialog(null, optionPrice);
-//		int diff = (int) rentDateDto.getDiff();
-		totalPrice = ((basicCharge) + (insurance==null?0:insurance.getPrice()) + optionPrice) * (1-maxEventRate)/100;
+		long diff = 1;
+		if(rentDateDto != null) {
+			diff =  rentDateDto.getDiff();
+		}
+		totalPrice = ((basicCharge * diff) + (insurance==null?0:insurance.getPrice()) + optionPrice) * (100-maxEventRate)/100;
 		
 		//Rent r = new Rent(code, startDate, startTime, endDate, endTime, isReturn, diff, carCode, customerCode, insuranceCode, eRate, optPrice)
 		String msg = String.format("자동차 기본비용%d, 보험가격%d, 옵션가격%d(%s), 할인율%d, 대여일정보%s", basicCharge,(insurance==null?0:insurance.getPrice()), optionPrice, sb.length()==0?"":sb, maxEventRate, rentDateDto);
