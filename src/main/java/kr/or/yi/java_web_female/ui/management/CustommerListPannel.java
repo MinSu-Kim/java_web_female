@@ -58,174 +58,174 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		setLayout(new BorderLayout(0, 0));
+		
+				JPanel panel_4 = new JPanel();
+				add(panel_4, BorderLayout.NORTH);
+				panel_4.setLayout(new BorderLayout(0, 0));
+				
+						JPanel panel = new JPanel();
+						panel_4.add(panel, BorderLayout.CENTER);
+						panel.setLayout(new GridLayout(0, 2, 0, 0));
+						
+								JPanel panel_2 = new JPanel();
+								panel.add(panel_2);
+								panel_2.setLayout(new GridLayout(0, 2, 10, 10));
+								
+										JLabel label = new JLabel("고객코드");
+										label.setHorizontalAlignment(SwingConstants.RIGHT);
+										panel_2.add(label);
+										
+												textField = new JTextField();
+												textField.setColumns(10);
+												panel_2.add(textField);
+												
+														JLabel label_1 = new JLabel("고객명");
+														label_1.setHorizontalAlignment(SwingConstants.RIGHT);
+														panel_2.add(label_1);
+														
+																textField_1 = new JTextField();
+																textField_1.setColumns(10);
+																panel_2.add(textField_1);
+																
+																		JLabel label_2 = new JLabel("고객아이디");
+																		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
+																		panel_2.add(label_2);
+																		
+																				textField_2 = new JTextField();
+																				textField_2.setColumns(10);
+																				panel_2.add(textField_2);
+																				
+																						JLabel label_3 = new JLabel("생년월일");
+																						label_3.setHorizontalAlignment(SwingConstants.RIGHT);
+																						panel_2.add(label_3);
+																						
+																								JDateChooser dateChooser = new JDateChooser();
+																								panel_2.add(dateChooser);
+																								
+																										JLabel label_4 = new JLabel("연락처");
+																										label_4.setHorizontalAlignment(SwingConstants.RIGHT);
+																										panel_2.add(label_4);
+																										
+																												JPanel panel_1 = new JPanel();
+																												panel_2.add(panel_1);
+																												panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
+																												
+																														JComboBox comboBox = new JComboBox();
+																														panel_1.add(comboBox);
+																														
+																																JLabel label_5 = new JLabel("-");
+																																label_5.setHorizontalAlignment(SwingConstants.CENTER);
+																																label_5.setEnabled(false);
+																																panel_1.add(label_5);
+																																
+																																		textField_3 = new JTextField();
+																																		textField_3.setColumns(10);
+																																		panel_1.add(textField_3);
+																																		
+																																				JLabel label_6 = new JLabel("-");
+																																				label_6.setHorizontalAlignment(SwingConstants.CENTER);
+																																				label_6.setEnabled(false);
+																																				panel_1.add(label_6);
+																																				
+																																						textField_4 = new JTextField();
+																																						textField_4.setColumns(10);
+																																						panel_1.add(textField_4);
+																																						
+																																								JLabel label_7 = new JLabel("이메일");
+																																								label_7.setHorizontalAlignment(SwingConstants.RIGHT);
+																																								panel_2.add(label_7);
+																																								
+																																										JPanel panel_3 = new JPanel();
+																																										panel_2.add(panel_3);
+																																										panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
+																																										
+																																												textField_5 = new JTextField();
+																																												textField_5.setColumns(15);
+																																												panel_3.add(textField_5);
+																																												
+																																														JLabel label_8 = new JLabel("@");
+																																														label_8.setHorizontalAlignment(SwingConstants.CENTER);
+																																														panel_3.add(label_8);
+																																														
+																																																textField_6 = new JTextField();
+																																																textField_6.setEditable(false);
+																																																textField_6.setColumns(15);
+																																																panel_3.add(textField_6);
+																																																
+																																																		JComboBox<String> comboBox_1 = new JComboBox<String>();
+																																																		panel_3.add(comboBox_1);
+																																																		
+																																																				JPanel panelInput = new JPanel();
+																																																				panel.add(panelInput);
+																																																				panelInput.setLayout(new GridLayout(0, 2, 10, 10));
+																																																				
+																																																						JLabel lblAddr = new JLabel("우편번호");
+																																																						lblAddr.setHorizontalAlignment(SwingConstants.RIGHT);
+																																																						panelInput.add(lblAddr);
+																																																						
+																																																								JPanel pAddr = new JPanel();
+																																																								panelInput.add(pAddr);
+																																																								pAddr.setLayout(new BoxLayout(pAddr, BoxLayout.X_AXIS));
+																																																								
+																																																										tfZipCode = new JTextField();
+																																																										tfZipCode.setColumns(10);
+																																																										pAddr.add(tfZipCode);
+																																																										
+																																																												JButton btnSearchAddr = new JButton("우편번호 검색");
+																																																												pAddr.add(btnSearchAddr);
+																																																												
+																																																														JLabel lblAddrDetail = new JLabel("주소");
+																																																														lblAddrDetail.setHorizontalAlignment(SwingConstants.RIGHT);
+																																																														panelInput.add(lblAddrDetail);
+																																																														
+																																																																tfAddr = new JTextField();
+																																																																panelInput.add(tfAddr);
+																																																																tfAddr.setColumns(10);
+																																																																
+																																																																		JLabel lblEmpCode = new JLabel("직원코드");
+																																																																		lblEmpCode.setHorizontalAlignment(SwingConstants.RIGHT);
+																																																																		panelInput.add(lblEmpCode);
+																																																																		
+																																																																				tfEmpCode = new JTextField();
+																																																																				panelInput.add(tfEmpCode);
+																																																																				tfEmpCode.setColumns(10);
+																																																																				
+																																																																						JLabel lblLicence = new JLabel("면허종류");
+																																																																						lblLicence.setHorizontalAlignment(SwingConstants.RIGHT);
+																																																																						panelInput.add(lblLicence);
+																																																																						
+																																																																								JComboBox cmbLicence = new JComboBox();
+																																																																								panelInput.add(cmbLicence);
+																																																																								
+																																																																										JLabel lblGradeName = new JLabel("등급명");
+																																																																										lblGradeName.setHorizontalAlignment(SwingConstants.RIGHT);
+																																																																										panelInput.add(lblGradeName);
+																																																																										
+																																																																												tfGradeName = new JTextField();
+																																																																												panelInput.add(tfGradeName);
+																																																																												tfGradeName.setColumns(10);
+																																																																												
+																																																																														JLabel lblRentCnt = new JLabel("대여횟수");
+																																																																														lblRentCnt.setHorizontalAlignment(SwingConstants.RIGHT);
+																																																																														panelInput.add(lblRentCnt);
+																																																																														
+																																																																																tfRentCnt = new JTextField();
+																																																																																panelInput.add(tfRentCnt);
+																																																																																tfRentCnt.setColumns(10);
+																																																																																
+																																																																																		JPanel panelBtn = new JPanel();
+																																																																																		panel_4.add(panelBtn, BorderLayout.SOUTH);
+																																																																																		
+																																																																																				btnCusOk = new JButton("추가");
+																																																																																				btnCusOk.addActionListener(this);
+																																																																																				panelBtn.add(btnCusOk);
+																																																																																				
+																																																																																						btnCusCancel = new JButton("취소");
+																																																																																						btnCusCancel.addActionListener(this);
+																																																																																						panelBtn.add(btnCusCancel);
 		add(panelList, BorderLayout.CENTER);
 
 		panelList.setPopupMenu(createDeptPopupMenu());
-
-		JPanel panel_4 = new JPanel();
-		add(panel_4, BorderLayout.NORTH);
-		panel_4.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel = new JPanel();
-		panel_4.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
-
-		JPanel panel_2 = new JPanel();
-		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 2, 10, 10));
-
-		JLabel label = new JLabel("고객코드");
-		label.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(label);
-
-		textField = new JTextField();
-		textField.setColumns(10);
-		panel_2.add(textField);
-
-		JLabel label_1 = new JLabel("고객명");
-		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(label_1);
-
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panel_2.add(textField_1);
-
-		JLabel label_2 = new JLabel("고객아이디");
-		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(label_2);
-
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panel_2.add(textField_2);
-
-		JLabel label_3 = new JLabel("생년월일");
-		label_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(label_3);
-
-		JDateChooser dateChooser = new JDateChooser();
-		panel_2.add(dateChooser);
-
-		JLabel label_4 = new JLabel("연락처");
-		label_4.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(label_4);
-
-		JPanel panel_1 = new JPanel();
-		panel_2.add(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
-
-		JComboBox comboBox = new JComboBox();
-		panel_1.add(comboBox);
-
-		JLabel label_5 = new JLabel("-");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setEnabled(false);
-		panel_1.add(label_5);
-
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		panel_1.add(textField_3);
-
-		JLabel label_6 = new JLabel("-");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setEnabled(false);
-		panel_1.add(label_6);
-
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		panel_1.add(textField_4);
-
-		JLabel label_7 = new JLabel("이메일");
-		label_7.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_2.add(label_7);
-
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.X_AXIS));
-
-		textField_5 = new JTextField();
-		textField_5.setColumns(15);
-		panel_3.add(textField_5);
-
-		JLabel label_8 = new JLabel("@");
-		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(label_8);
-
-		textField_6 = new JTextField();
-		textField_6.setEditable(false);
-		textField_6.setColumns(15);
-		panel_3.add(textField_6);
-
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		panel_3.add(comboBox_1);
-
-		JPanel panelInput = new JPanel();
-		panel.add(panelInput);
-		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
-
-		JLabel lblAddr = new JLabel("우편번호");
-		lblAddr.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblAddr);
-
-		JPanel pAddr = new JPanel();
-		panelInput.add(pAddr);
-		pAddr.setLayout(new BoxLayout(pAddr, BoxLayout.X_AXIS));
-
-		tfZipCode = new JTextField();
-		tfZipCode.setColumns(10);
-		pAddr.add(tfZipCode);
-
-		JButton btnSearchAddr = new JButton("우편번호 검색");
-		pAddr.add(btnSearchAddr);
-
-		JLabel lblAddrDetail = new JLabel("주소");
-		lblAddrDetail.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblAddrDetail);
-
-		tfAddr = new JTextField();
-		panelInput.add(tfAddr);
-		tfAddr.setColumns(10);
-
-		JLabel lblEmpCode = new JLabel("직원코드");
-		lblEmpCode.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblEmpCode);
-
-		tfEmpCode = new JTextField();
-		panelInput.add(tfEmpCode);
-		tfEmpCode.setColumns(10);
-
-		JLabel lblLicence = new JLabel("면허종류");
-		lblLicence.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblLicence);
-
-		JComboBox cmbLicence = new JComboBox();
-		panelInput.add(cmbLicence);
-
-		JLabel lblGradeName = new JLabel("등급명");
-		lblGradeName.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblGradeName);
-
-		tfGradeName = new JTextField();
-		panelInput.add(tfGradeName);
-		tfGradeName.setColumns(10);
-
-		JLabel lblRentCnt = new JLabel("대여횟수");
-		lblRentCnt.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblRentCnt);
-
-		tfRentCnt = new JTextField();
-		panelInput.add(tfRentCnt);
-		tfRentCnt.setColumns(10);
-
-		JPanel panelBtn = new JPanel();
-		panel_4.add(panelBtn, BorderLayout.SOUTH);
-
-		btnCusOk = new JButton("추가");
-		btnCusOk.addActionListener(this);
-		panelBtn.add(btnCusOk);
-
-		btnCusCancel = new JButton("취소");
-		btnCusCancel.addActionListener(this);
-		panelBtn.add(btnCusCancel);
 	}
 
 	private JPopupMenu createDeptPopupMenu() {
@@ -282,7 +282,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	}
 
 	private void clearTf() {
-		tfCusId.setText("");
+/*		tfCusId.setText("");
 		tfAddr.setText("");
 		tfCusCode.setText("");
 		tfCusEmail1.setText("");
@@ -291,8 +291,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		// tfEmpCode.setText("");
 		tfTel2.setText("");
 		tfTel3.setText("");
-		tfZipCode.setText("");
-
+		tfZipCode.setText("");*/
 	}
 
 	private Customer getItem() {

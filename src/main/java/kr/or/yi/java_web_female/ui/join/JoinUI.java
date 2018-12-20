@@ -47,7 +47,7 @@ public class JoinUI extends JFrame implements ActionListener {
 	private JButton btnJoin;
 	private JComboBox<String> cmbEmail3;
 	private JDateChooser birthDay;
-	private AbstractListPanel<Customer> cTable;
+//	private AbstractListPanel<Customer> cTable;
 	private JTextField tfConfirm;
 	private JButton btnCalcel;
 	private String eventCode;
@@ -324,22 +324,28 @@ public class JoinUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_btnJoin_actionPerformed(ActionEvent e) {
-		int res;
+		
 		try {
 			validCheck();
 
 			Customer customer = getItemCustomer();
 			customer.setCode(joinService.getNextCustomerCode());
 			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-			res = joinService.addcus(customer, customEvent);
+			
+			
+///////////////////////// 트랜잭션 처리 //////////////////////////
+			
+			joinService.joinCustomer(customer, customEvent);
+			
+///////////////////////// 트랜잭션 처리 //////////////////////////
+/*			트랜잭션처리 전 
+			int res = joinService.addcus(customer, customEvent);
 
 			if(res==1) {
 				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
 				JoinUI.this.dispose();
-				
-/*				cTable.setList(joinService.selectCustomerByAll());
-				cTable.loadDatas();*/
-			}
+			}*/
+/////////////////////////////////////// 
 			clearTf();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

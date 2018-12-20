@@ -1,22 +1,17 @@
 package kr.or.yi.java_web_female;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.w3c.dom.css.CSSUnknownRule;
 
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
-import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.dto.Grade;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerMapperTest extends AbstractTest {
@@ -60,10 +55,6 @@ public class CustomerMapperTest extends AbstractTest {
 	public void test04insertCustomer() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Customer customer = new Customer();
-		/*
-		 * String code = String.format("C%03d", dao.nextCustomerCode());
-		 * customer.setCode(code);
-		 */
 		customer.setCode(dao.nextCode());
 		customer.setId("psw2701");
 		customer.setPasswd("password");
@@ -131,36 +122,101 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setName("박수완");
 		customer.setAddress("대구");
 		customer.setPhone("010-5757-5959");
-		
+
 		Grade grade = new Grade();
 		grade.setCode("G001");
 		customer.setGradeCode(grade);
-		
+
 		String strDate = "2017-10-17";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdf.parse(strDate);
 		customer.setDob(date);
 
 		customer.setEmail("qwerasdf@naver.com");
-		
+
 		Employee employee = new Employee();
 		employee.setCode("E001");
 		customer.setEmpCode(employee);
-		
-		
-		
 
 		customer.setLicense("2종 보통");
 		customer.setRentCnt(5);
 		int res = dao.updateCustomer(customer);
 		Assert.assertSame(1, res);
 
-	}*/
+	}
+*/
+	@Test
+	public void test10deleteCustomer() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Customer customer = new Customer();
+		customer.setCode("C005");
+		int res = dao.deleteCustomer(customer);
+		Assert.assertEquals(1, res);
+	}
+
+	@Test(expected=RuntimeException.class)
+	public void test11JoinTransactionTest01() {
+		// 고객 추가 에러 rollback
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Customer customer = new Customer();
+		customer.setCode("C017");
+		customer.setId("java");
+		customer.setPasswd("rootroot");
+		customer.setName("자바");
+		customer.setAddress("대구");
+		customer.setPhone("053-555-1333");
+		customer.setEmail("psw2701@naver.com");
+		Calendar cal = Calendar.getInstance();
+		cal.set(2018, 12, 20);
+		customer.setDob(cal.getTime());
+
+		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
+				
+		dao.insertCustomerJoin(customer, customEvent);
+	}
 	
-	  @Test public void test10deleteCustomer() {
-	  log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-	  Customer customer = new Customer(); 
-	  customer.setCode("C005"); 
-	  int res = dao.deleteCustomer(customer); Assert.assertEquals(1, res); }
+	@Test(expected=RuntimeException.class)
+	public void test12JoinTransactionTest02() {
+		// 고객이벤트 추가 에러 rollback
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Customer customer = new Customer();
+		customer.setCode(dao.nextCode());
+		customer.setId("java");
+		customer.setPasswd("rootroot");
+		customer.setName("자바");
+		customer.setAddress("대구");
+		customer.setPhone("053-555-1333");
+		customer.setEmail("psw2701@naver.com");
+		Calendar cal = Calendar.getInstance();
+		cal.set(2018, 12, 20);
+		customer.setDob(cal.getTime());
+		
+		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
+				
+		dao.insertCustomerJoin(customer, customEvent);
+	}
 	
+	@Test
+	public void test12JoinTransactionTest03() {
+		// 고객이벤트 추가 에러 rollback
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Customer customer = new Customer();
+		customer.setCode(dao.nextCode());
+		customer.setId("java");
+		customer.setPasswd("rootroot");
+		customer.setName("자바");
+		customer.setAddress("대구");
+		customer.setPhone("053-555-1333");
+		customer.setEmail("psw2701@naver.com");
+		Calendar cal = Calendar.getInstance();
+		cal.set(2018, 12, 20);
+		customer.setDob(cal.getTime());
+		
+		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
+				
+		dao.insertCustomerJoin(customer, customEvent);
+	}
 }
