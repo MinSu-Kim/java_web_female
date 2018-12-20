@@ -106,9 +106,13 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				service.deleteCarType(panelList.getSelectedItem());
-				panelList.setList(service.selectAllCarType());
-				panelList.loadDatas();
+				/*try{
+					service.deleteCarType(panelList.getSelectedItem());
+					panelList.setList(service.selectAllCarType());
+					panelList.loadDatas();
+				}catch() {
+				
+				}*/
 			}
 		});
 		popMenu.add(delItem);
