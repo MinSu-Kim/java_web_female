@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -102,9 +103,14 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				service.deleteBrand(panelList.getSelectedItem());
-				panelList.setList(service.selectAllBrand());
-				panelList.loadDatas();
+				try {
+					service.deleteBrand(panelList.getSelectedItem());
+					panelList.setList(service.selectAllBrand());
+					panelList.loadDatas();
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "해당 브랜드에 속하는 차량을 보유 중 (삭제 불가능)");
+				}
+				
 			}
 		});
 		popMenu.add(delItem);

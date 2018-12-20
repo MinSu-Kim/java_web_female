@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -109,9 +110,13 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		delItem.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				service.deleteFuel(panelList.getSelectedItem());
-				panelList.setList(service.selectAllFuel());
-				panelList.loadDatas();
+				try {
+					service.deleteFuel(panelList.getSelectedItem());
+					panelList.setList(service.selectAllFuel());
+					panelList.loadDatas();
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "해당 연료를 사용하는 차량 보유 중 (삭제 불가능)");//외래키 걸려있지 않기에 다른방법 필요
+				}
 			}
 		});
 		popMenu.add(delItem);
