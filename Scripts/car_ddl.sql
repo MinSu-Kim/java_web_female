@@ -435,12 +435,15 @@ ALTER TABLE proj_rentcar.userPic
 		);
 		
 	
--- 고객의 대여횟수 1증가 후 회원등급변경 프로시저 사용법 call update_customer_grade('C007');
-DROP PROCEDURE IF EXISTS update_customer_grade;
+-- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
+DROP PROCEDURE proj_rentcar.update_customer_grade;
+
 DELIMITER $$
-CREATE PROCEDURE update_customer_grade (in custom_code char(4))   
+CREATE PROCEDURE update_customer_grade (in custom_code char(4), in rent_code char(4))   
 begin
-    declare gcode char(4);   
+    declare gcode char(4);
+	declare ecode char(4);
+
    
     update customer
     set rent_cnt = rent_cnt + 1
@@ -453,5 +456,14 @@ begin
 	update customer
 	set grade_code = gcode
 	where code = custom_code;
+
+    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
+	select rent.e_rate into ecode
+	from rent where code = rent_code;
+
+	update custom_event
+	set is_use = 1
+	where event_code = ecode and custom_code = custom_code;
+
 end $$
 DELIMITER ;

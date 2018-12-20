@@ -55,3 +55,58 @@ select concat('R', LPAD(count(*)+1,3,'0')) from rent;
 from custom_event ce join event e on ce.event_code = e.code
 where custom_code = 'C005';
 
+
+
+-- 
+DROP PROCEDURE proj_rentcar.update_customer_grade;
+
+DELIMITER $$
+CREATE PROCEDURE update_customer_grade (in custom_code char(4), in rent_code char(4))   
+begin
+    declare gcode char(4);
+	declare ecode char(4);
+
+   
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
+   
+    select g.code into gcode
+	from customer c , grade g
+	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
+
+	update customer
+	set grade_code = gcode
+	where code = custom_code;
+
+    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
+	select rent.e_rate into ecode
+	from rent where code = rent_code;
+
+	update custom_event
+	set is_use = 1
+	where event_code = ecode and custom_code = custom_code;
+
+end $$
+DELIMITER ;
+
+select rent_cnt, grade_code from customer where code = 'C001';
+select * from custom_event where custom_code = 'C001';
+
+call update_customer_grade('C001', 'R001');
+
+select rent_cnt, grade_code from customer where code = 'C001';
+select * from custom_event where custom_code = 'C001';
+
+
+select c.code, ce.custom_code, ce.event_code
+from customer c join custom_event ce on c.code = ce.custom_code 
+where c.code = 'C001' and event_code='EVT1';
+
+select costomer_code, rent.e_rate 
+from rent where code = 'R001';
+
+update custom_event
+set is_use = 1
+where event_code = 'EVT1' and custom_code = 'C001';
+
