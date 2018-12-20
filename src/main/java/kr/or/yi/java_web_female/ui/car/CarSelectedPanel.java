@@ -64,6 +64,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JPanel panel_img;
 	private boolean isAdd;
 	private CarUi carUi;
+	private JLabel lblCount;
 	/**
 	 * Create the panel.
 	 */
@@ -255,7 +256,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			});
 			panelRentCnt.add(imgbtn);
 		}else {
-			JLabel lblCount = new JLabel("대여횟수 : ");
+			lblCount = new JLabel("대여횟수 : ");
 			lblCount.setHorizontalAlignment(SwingConstants.CENTER);
 			panelRentCnt.add(lblCount);
 		}
@@ -458,6 +459,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		}else {
 			rdbtnStick.setSelected(true);
 		}
+		
+		lblCount.setText("대여횟수 : "+ carModel.getRentCnt() +"번");
 	}
 
 	public void setCarUi(CarUi carUi) {
