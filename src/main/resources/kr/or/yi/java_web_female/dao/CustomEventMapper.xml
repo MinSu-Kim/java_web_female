@@ -19,4 +19,8 @@
 		where custom_code=#{customCode};
 	</select>
 	
+	<!-- <delete id="deleteCustomEvent" parameterType="CustomEvent" >
+		
+	</delete> -->
+	
 </mapper>

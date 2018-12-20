@@ -15,12 +15,19 @@ import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.MyCheckBox;
+import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
 public class OptionInfoPanel extends CarSubPanel {
 	private List<CarOption> coList;
 	private MyCheckBox mcb;
 	private CarModel selectedCarModel;
-	private ArrayList<Integer> optionPriceList= new ArrayList<>();
+	private List<CarOption> carOptionList= new ArrayList<>();
+	private RentPanel rentPanel;
+	
+	public void setRentPanel(RentPanel rentPanel) {
+		this.rentPanel = rentPanel;
+	}
+
 	/**
 	 * Create the panel.
 	 */
@@ -51,8 +58,8 @@ public class OptionInfoPanel extends CarSubPanel {
 
 	public int getTotalOptionPrice() {
 		int result = 0;
-		for(int price : optionPriceList) {
-			result += price;
+		for(CarOption co : carOptionList) {
+			result += co.getPrice();
 		}
 		return result;
 	}
@@ -63,11 +70,12 @@ public class OptionInfoPanel extends CarSubPanel {
 		public void actionPerformed(ActionEvent e) {
 			MyCheckBox mb = (MyCheckBox) e.getSource();
 			if (mb.isSelected()) {
-				optionPriceList.add(mb.getCo().getPrice());
+				carOptionList.add(mb.getCo());
 			} else {
-				optionPriceList.remove(optionPriceList.indexOf(mb.getCo().getPrice()));
+				carOptionList.remove(carOptionList.indexOf(mb.getCo()));
 			}
-			JOptionPane.showMessageDialog(null, optionPriceList);
+//			JOptionPane.showMessageDialog(null, optionPriceList);
+			rentPanel.setOptionPriceList(carOptionList);
 
 		}
 	};

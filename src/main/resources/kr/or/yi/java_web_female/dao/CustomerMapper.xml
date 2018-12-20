@@ -15,6 +15,7 @@
 		<result column="grade_code" property="gradeCode.code"/>
 		<result column="rent_cnt" property="rentCnt"/>
 	</resultMap>
+	
 	<select id="selectCustomerByName" parameterType="Customer" resultMap="ResultCustom">
 		select code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt 
 		from customer 
@@ -24,6 +25,8 @@
 	<resultMap type="Customer" id="ResultCustomExtend" extends="ResultCustom">
 		<collection property="events" resultMap="kr.or.yi.java_web_female.dao.CustomEventMapper.resultCustomEvent"/>
 	</resultMap>
+	
+	
 	
 	<select id="selectCustomerByCode" parameterType="Customer" resultMap="ResultCustomExtend">
 		select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt,
@@ -42,12 +45,7 @@
 		from customer
 		where Id = #{id}
 	</select>
-	
-<!-- 	<insert id="insertCustomer" parameterType="Customer">
-		insert into customer(code, Id, password(#{passwd}), Name, address, phone, dob, email )
-		values(#{code}, #{id},  password(#{passwd}), #{name}, #{address}, #{phone}, #{dob}, #{email} )
-	</insert> -->
-	
+		
 	<insert id="insertCustomer" parameterType="Customer">
 		insert into customer(code, Id, passwd, Name, address, phone, dob, email )
 		values(#{code}, #{id},  password(#{passwd}), #{name}, #{address}, #{phone}, #{dob}, #{email} )
@@ -69,13 +67,20 @@
 	<!-- update -->
 	<!--  <update id="updateCustomer" parameterType="Customer">
 		update customer 
-		set code=#{code}, Id=#{id}, passwd=password(#{passwd}), name=#{name}, address=#{address}, phone=#{phone}, dob=#{dob}, email=#{email}, emp_code=#{empCode} ,license=#{license}, grade_code=#{gradeCode}, rent_cnt=#{rentCnt}
+		set code=#{code}, Id=#{id}, passwd=password(#{passwd}), name=#{name}, address=#{address}, phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license}, grade_code=#{gradeCode}, rent_cnt=#{rentCnt}
 		where code=#{code}
-	</update> -->
+	</update>  -->
 	
 	<!-- delete -->
-	<!-- <delete id="deleteCustomer" parameterType="Customer">
+<!-- 	<delete id="deleteCustomer" parameterType="Customer">
+		
+		delete from custom_event
+		where custom_code = #{code}
+		
 		delete from customer
 		where code=#{code}
+		
 	</delete> -->
+	
+	<!-- <delete id=""></delete> -->
 </mapper>

@@ -1,31 +1,39 @@
 package kr.or.yi.java_web_female.ui.list;
 
+import javax.swing.SwingConstants;
+
 import kr.or.yi.java_web_female.dto.Customer;
 
 public class CustomerList extends AbstractListPanel<Customer>{
 
-	@Override
-	protected void setAlignWidth() {
-		// TODO Auto-generated method stub
+	
+	
+	public CustomerList() {
 		
 	}
 
 	@Override
+	protected void setAlignWidth() {
+		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+		tableSetWidth(100, 100, 100);
+	}
+
+	@Override
 	protected String[] getColumnNames() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] {"고객코드","아이디", "고객이름", "주소", "연락처", "생년월일", "이메일","면허종류", "등급명", "대여횟수"};
 	}
 
 	@Override
 	protected Object[] getItemRows(Customer item) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Object[] {
+				item.getCode(),item.getId(), item.getName(), item.getAddress(), item.getPhone(), String.format("%tF", item.getDob()), item.getEmail(), item.getLicense(), item.getGradeCode(), item.getRentCnt() 
+		};
 	}
 
 	@Override
 	protected Customer getItem(int selectedIndex) {
 		// TODO Auto-generated method stub
-		return null;
+		return list.get(selectedIndex);
 	}
 
 }

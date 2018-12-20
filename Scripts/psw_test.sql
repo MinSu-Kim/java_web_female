@@ -134,5 +134,34 @@ from customer c , grade g
 where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
 
 
+select c.code, Id, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, is_use, e.name, e.rate
+from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code
+where id = 'asd132' and passwd =password('rootroot');
 
+delete from custom_event
+where custom_code = 'C009';
+
+delete from customer
+where code = 'C009';
+
+select * from custom_event
+where custom_code = 'C005';
+
+start transaction;
+delete from custom_event
+where custom_code = 'C008';
+delete from customer
+where code = 'C008';
+COMMIT;
+
+
+
+delete from customer
+where code = 'C008';
+
+select * from customer;
+
+select * from event;
+
+select * from custom_event;
 
