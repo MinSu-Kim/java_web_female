@@ -19,4 +19,13 @@
 		where custom_code=#{customCode};
 	</select>
 	
+	<delete id="deleteCustomEvent" parameterType="CustomEvent" >
+		start transaction;
+		delete from custom_event
+		where custom_code = #{code}
+		delete from customer
+		where code=#{code}
+		COMMIT
+	</delete>
+	
 </mapper>

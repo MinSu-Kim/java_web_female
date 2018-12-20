@@ -48,6 +48,7 @@ public class EventListPanel extends JPanel implements ActionListener {
 		list = service.selectEventByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
+		
 		setLayout(new GridLayout(0, 2, 0, 0));
 		add(panelList);
 
