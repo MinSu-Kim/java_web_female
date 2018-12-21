@@ -3,8 +3,8 @@
 <mapper namespace="kr.or.yi.java_web_female.dao.EventMapper">
 	<resultMap type="Event" id="resultEvent">
 		<id column="code" property="code"/>
-		<result column="name" property="name"/>
-		<result column="rate" property="rate"/>
+		<result column="eName" property="name"/>
+		<result column="eRate" property="rate"/>
 	</resultMap>
 	
 	

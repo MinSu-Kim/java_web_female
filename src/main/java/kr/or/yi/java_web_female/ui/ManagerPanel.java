@@ -49,6 +49,9 @@ public class ManagerPanel extends JPanel {
 			
 			CarManagementPanel panel_05 = new CarManagementPanel();
 			tabbedPane.addTab("차량옵션관리", null, panel_05, null);
+
+			RentPanel panel_06 = new RentPanel();
+			tabbedPane.addTab("대여관리", null, panel_06, null);
 			
 			JPanel panel_07 = new JPanel();
 			tabbedPane.addTab("대여현황", null, panel_07, null);
@@ -67,7 +70,7 @@ public class ManagerPanel extends JPanel {
 			RentPanel panel_01 = new RentPanel();
 			tabbedPane.addTab("대여관리", null, panel_01, null);
 
-			JPanel panel_02 = new JPanel();
+			JPanel panel_02 = new CustommerListPannel();
 			tabbedPane.addTab("개인정보관리", null, panel_02, null);
 		}
 		

@@ -24,4 +24,5 @@ public interface CustomerMapper {
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 	int insertCustomerJoin(Customer customer, CustomEvent customEvent);
 ///////////////////////// 트랜잭션 처리 //////////////////////////
+	int deleteCustomerEvent(Customer customer, CustomEvent customEvent);
 }

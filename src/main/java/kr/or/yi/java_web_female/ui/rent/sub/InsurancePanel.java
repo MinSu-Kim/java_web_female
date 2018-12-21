@@ -1,25 +1,23 @@
 package kr.or.yi.java_web_female.ui.rent.sub;
 
-import javax.swing.JPanel;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
-
-import java.awt.Font;
-import javax.swing.ButtonGroup;
-import java.awt.event.ItemListener;
-import java.util.List;
-import java.awt.event.ItemEvent;
-import javax.swing.border.TitledBorder;
-
-import javafx.scene.control.RadioButton;
 
 public class InsurancePanel extends CarSubPanel implements ItemListener {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -51,7 +49,9 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 		pChkInsurance.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		rbNotReg = new JRadioButton("가입안함");
+		
 		rbNotReg.addItemListener(this);
+		
 		buttonGroup.add(rbNotReg);
 		rbNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		rbNotReg.setHorizontalAlignment(SwingConstants.CENTER);
@@ -68,12 +68,15 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 
 		if (e.getSource() == rbNotReg && rbNotReg.isSelected()) {
+//			JOptionPane.showMessageDialog(null, "테스트");
 			 insurance = new Insurance("I000", "S0", 0);
 		}
 		if (e.getSource() == rbReg && rbReg.isSelected()) {
 			List<Insurance> insuranceList = service.selectInsuranceByCarType(selectedCarModel.getCarType().getCode());
 			insurance = insuranceList.get(0);
 		}
+		System.out.println(insurance);
+//		System.out.println("----" + rentPanel);
 		rentPanel.setInsurance(insurance);
 	}
 	
@@ -98,5 +101,9 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 
 	public void setRentPanel(RentPanel rentPanel) {
 		this.rentPanel = rentPanel;
+	}
+	
+	public void setSelectedDefault() {
+		rbNotReg.setSelected(true);
 	}
 }

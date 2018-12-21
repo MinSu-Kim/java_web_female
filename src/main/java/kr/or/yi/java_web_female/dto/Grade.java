@@ -7,6 +7,8 @@ public class Grade {
 	private int gHisal; // 등급 최대범위
 	private int rate; // 등급별 할인율
 
+
+
 	public String getCode() {
 		return code;
 	}
@@ -76,7 +78,8 @@ public class Grade {
 
 	@Override
 	public String toString() {
-		return String.format("%s", name);
+//		return String.format("%s", name);
+		return String.format("%s, %s", name, rate);
 	}
 
 }

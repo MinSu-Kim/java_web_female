@@ -60,8 +60,7 @@ public class RentDateDto {
 
 	@Override
 	public String toString() {
-		return String.format("RentDateDto [startDate=%s, startHour=%s, endDate=%s, endHour=%s, diff=%s]", startDate,
-				startHour, endDate, endHour, diff);
+		return String.format("%s", diff);
 	}
 	
 	

@@ -18,13 +18,74 @@ public class Customer {
 	private int rentCnt;
 	private List<CustomEvent> events;
 
+
+	
+	
 	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
+
+
 
 	public Customer(String id, String passwd) {
 		super();
 		this.id = id;
 		this.passwd = passwd;
+	}
+	
+	
+
+	public Customer( String id, String passwd, String name, String address, String phone, Date dob,
+			String email, Employee empCode, String license, Grade gradeCode, int rentCnt) {
+
+		this.id = id;
+		this.passwd = passwd;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.dob = dob;
+		this.email = email;
+		this.empCode = empCode;
+		this.license = license;
+		this.gradeCode = gradeCode;
+		this.rentCnt = rentCnt;
+	}
+
+
+
+	public Customer(String code, String id, String passwd, String name, String address, String phone, Date dob,
+			String email, Employee empCode, String license, Grade gradeCode, int rentCnt, List<CustomEvent> events) {
+		super();
+		this.code = code;
+		this.id = id;
+		this.passwd = passwd;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.dob = dob;
+		this.email = email;
+		this.empCode = empCode;
+		this.license = license;
+		this.gradeCode = gradeCode;
+		this.rentCnt = rentCnt;
+		this.events = events;
+	}
+	
+	
+
+	public Customer( String id, String passwd, String name, String address, String phone, Date dob,
+			String email, String license) {
+		super();
+		
+		this.id = id;
+		this.passwd = passwd;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.dob = dob;
+		this.email = email;
+		this.license = license;
 	}
 
 	public Customer(String id, String passwd, String name, String address, String phone, java.util.Date cusDob,
@@ -46,18 +107,26 @@ public class Customer {
 		this.email = email;
 		this.gradeCode = gradeCode;
 	}
+	
+	
+
 
 	public Customer(String cusId) {
 		this.id = cusId;
 	}
 
+	
 	public String getCode() {
 		return code;
 	}
 
+
+
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+
 
 	public String getId() {
 		return id;
