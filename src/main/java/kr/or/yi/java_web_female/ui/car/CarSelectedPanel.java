@@ -292,10 +292,14 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			do_btnCancel_actionPerformed(arg0);
 		}
 		if (arg0.getSource() == btnOk) {
-			do_btnOk_actionPerformed(arg0);
+			try {
+				do_btnOk_actionPerformed(arg0);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	protected void do_btnOk_actionPerformed(ActionEvent arg0) {
+	protected void do_btnOk_actionPerformed(ActionEvent arg0) throws IOException {
 		if(btnOk.getText().equals("수정")) {
 			//수정클릭
 			CarModel model = getItem();			
@@ -308,26 +312,13 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			service.insertCarModel(model);//디비에 추가완료
 			
 			//선택한 이미지 바이트로 변환하여 테이블에 저장하기
-			byte[] pic = null;
-			File file = new File(filePath);
-			try(InputStream is = new FileInputStream(file)){
-				pic = new byte[is.available()];
-				is.read(pic);
-				
-				UserPic userpic = new UserPic();
-				userpic.setCarCode(tfCode.getText());
-				userpic.setPic(pic);
-				if(userpic==null) {
-					JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
-				}else {
-					service.insertUserPic(userpic);
-					JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
-				}
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			UserPic userpic = new UserPic();
+			userpic.setCarCode(model.getCarCode());
+			userpic.setPic(getPicFile());
+			System.out.println(userpic.getPic());//빈배열주소
+			service.insertUserPic(userpic);//널포인트ㅠㅠ
+			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
+			
 			carUi.reloadDataCarPanel();
 			carUi.close();
 		}
@@ -486,7 +477,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	private byte[] getPicFile() throws IOException{
 		byte[] pic = null;
-		File file = new File(System.getProperty("user.dir")+"/images/"+tfCode.getText());
+		File file = new File(filePath);
+		System.out.println(filePath);
 		try(InputStream is = new FileInputStream(file)){
 			pic = new byte[is.available()];
 			is.read(pic);
