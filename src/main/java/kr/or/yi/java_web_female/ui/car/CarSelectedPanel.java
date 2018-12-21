@@ -338,14 +338,14 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 
 	private void cleartf() {
-		tfName.setText("");
-		cmbBrand.setSelectedIndex(-1);
-		cmbCarType.setSelectedIndex(-1);
-		cmbFuel.setSelectedIndex(-1);
-		tfHour6.setText("");
-		tfHour10.setText("");
-		tfHour12.setText("");
-		tfHourElse.setText("");
+		tfName.setText("new");
+		cmbBrand.setSelectedIndex(0);
+		cmbCarType.setSelectedIndex(0);
+		cmbFuel.setSelectedIndex(0);
+		tfHour6.setText("10000");
+		tfHour10.setText("15000");
+		tfHour12.setText("20000");
+		tfHourElse.setText("30000");
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
@@ -428,10 +428,15 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 
 
 	public void setCarModel(CarModel carModel) {//set
+		
+		/*파일에 있는 이미지 불러오기
 		String strImg = imgPath+carModel.getCarCode()+".png";
 		strImg = strImg.replace("\\", "/");
-		ImageIcon img = new ImageIcon(strImg);
-		//사진이 없을 경우 파일 insert
+		*/
+		UserPic userimg = new UserPic();
+		userimg.setCarCode(carModel.getCarCode());
+		ImageIcon img = new ImageIcon(userimg.getPic());
+		//사진이 없을 경우 파일 no_image 디스플레이
 		if(img.getImage()==null) {
 			img = new ImageIcon(currentDirectoryPath+"no_image.png");
 		}
