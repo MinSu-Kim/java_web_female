@@ -342,10 +342,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbBrand.setSelectedIndex(0);
 		cmbCarType.setSelectedIndex(0);
 		cmbFuel.setSelectedIndex(0);
+		tfColor.setText("bl");
 		tfHour6.setText("10000");
 		tfHour10.setText("15000");
 		tfHour12.setText("20000");
-		tfHourElse.setText("30000");
+		tfHourElse.setText("50000");
+		tfBasicCharge.setText("50000");
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
@@ -429,17 +431,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 
 	public void setCarModel(CarModel carModel) {//set
 		
-		/*파일에 있는 이미지 불러오기
+		//파일에 있는 이미지 불러오기
 		String strImg = imgPath+carModel.getCarCode()+".png";
 		strImg = strImg.replace("\\", "/");
-		*/
-		UserPic userimg = new UserPic();
-		userimg.setCarCode(carModel.getCarCode());
-		ImageIcon img = new ImageIcon(userimg.getPic());
+		
+		/*UserPic userimg = new UserPic();
+		userimg.setCarCode(carModel.getCarCode());*/
+		UserPic userpic = service.getUserPic(carModel.getCarCode());
+		
+		ImageIcon img =new ImageIcon(userpic.getPic());
 		//사진이 없을 경우 파일 no_image 디스플레이
-		if(img.getImage()==null) {
-			img = new ImageIcon(currentDirectoryPath+"no_image.png");
-		}
 		Image image = img.getImage();
 		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
 		ImageIcon resimg = new ImageIcon(changedImg);
