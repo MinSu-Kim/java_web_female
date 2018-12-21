@@ -11,7 +11,7 @@ public class Rent {
 	private CarModel carCode;	//차량코드
 	private Customer customerCode;	//고객코드
 	private Insurance insuranceCode;	//보험코드
-	private Event eRate;	//이벤트 할인율
+	private int eRate;	// 할인율
 	private int optPrice;	//옵션비용
 	
 	public Rent() {
@@ -19,7 +19,7 @@ public class Rent {
 	}
 
 	public Rent(String code, String startDate, String startTime, String endDate, String endTime, boolean isReturn,
-			long totalPrice, CarModel carCode, Customer customerCode, Insurance insuranceCode, Event eRate,
+			long totalPrice, CarModel carCode, Customer customerCode, Insurance insuranceCode, int eRate,
 			int optPrice) {
 		this.code = code;
 		this.startDate = startDate;
@@ -115,11 +115,11 @@ public class Rent {
 		this.insuranceCode = insuranceCode;
 	}
 
-	public Event geteRate() {
+	public int geteRate() {
 		return eRate;
 	}
 
-	public void seteRate(Event eRate) {
+	public void seteRate(int eRate) {
 		this.eRate = eRate;
 	}
 

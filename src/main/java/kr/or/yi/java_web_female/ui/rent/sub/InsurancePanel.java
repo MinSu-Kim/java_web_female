@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
@@ -48,7 +49,9 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 		pChkInsurance.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		rbNotReg = new JRadioButton("가입안함");
+		
 		rbNotReg.addItemListener(this);
+		
 		buttonGroup.add(rbNotReg);
 		rbNotReg.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		rbNotReg.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,12 +68,15 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 
 		if (e.getSource() == rbNotReg && rbNotReg.isSelected()) {
+//			JOptionPane.showMessageDialog(null, "테스트");
 			 insurance = new Insurance("I000", "S0", 0);
 		}
 		if (e.getSource() == rbReg && rbReg.isSelected()) {
 			List<Insurance> insuranceList = service.selectInsuranceByCarType(selectedCarModel.getCarType().getCode());
 			insurance = insuranceList.get(0);
 		}
+		System.out.println(insurance);
+//		System.out.println("----" + rentPanel);
 		rentPanel.setInsurance(insurance);
 	}
 	
@@ -95,5 +101,9 @@ public class InsurancePanel extends CarSubPanel implements ItemListener {
 
 	public void setRentPanel(RentPanel rentPanel) {
 		this.rentPanel = rentPanel;
+	}
+	
+	public void setSelectedDefault() {
+		rbNotReg.setSelected(true);
 	}
 }

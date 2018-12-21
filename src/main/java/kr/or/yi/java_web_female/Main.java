@@ -9,7 +9,7 @@ import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		// 룩앤필 변경
 		try {
 			UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
@@ -18,6 +18,7 @@ public class Main {
 				UnsupportedLookAndFeelException e1) {
 			e1.printStackTrace();
 		}
+		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -48,6 +48,11 @@ public class RentPanel extends JPanel implements ActionListener {
 	private RentDateDto rentDateDto;
 	private JLabel lblPriceInfo;
 	private RentResultFrame rentResultFrame;
+	private int cGradeRate;
+	private boolean isEventRate;
+	private Rent rent;
+	private long totalPrice;
+	private int optionPrice;
 
 	public RentPanel() {
 		service = new RentUIService();
@@ -82,6 +87,7 @@ public class RentPanel extends JPanel implements ActionListener {
 
 		pInsurance = new InsurancePanel(service);
 		pInsurance.setRentPanel(this);
+		
 		pContents.add(pInsurance);
 
 		pOption = new OptionInfoPanel(service);
@@ -126,7 +132,7 @@ public class RentPanel extends JPanel implements ActionListener {
 	public void setSelectedCarModel(CarModel selectedCarModel) {
 		this.selectedCarModel = selectedCarModel;
 //		JOptionPane.showMessageDialog(null, selectedCarModel);
-
+		pInsurance.setSelectedDefault();
 		pInsurance.setSelectedCarModel(selectedCarModel);
 		getTotalRentPrice();
 	}
@@ -145,6 +151,12 @@ public class RentPanel extends JPanel implements ActionListener {
 				}
 			}
 		}
+		cGradeRate = selectedCustomer.getGradeCode().getRate();
+		
+		isEventRate = maxEventRate > cGradeRate ? true : false;
+		
+		
+//		System.out.println("등급 할인율" + selectedCustomer.getGradeCode().getRate());
 		//이벤트 할인율 중 가장 높은 값 들고오기
 //		JOptionPane.showMessageDialog(null, maxEventRate);
 		getTotalRentPrice();
@@ -152,12 +164,11 @@ public class RentPanel extends JPanel implements ActionListener {
 
 	// 요금
 	public long getTotalRentPrice() {
-		long totalPrice = 0;
+		totalPrice = 0;
 
 		// 차량기본비용
 		int basicCharge = selectedCarModel.getBasicCharge();
-//		int diff = (int) pRentInfo.totalRentDate();
-		int optionPrice = pOption.getTotalOptionPrice();
+optionPrice = pOption.getTotalOptionPrice();
 		StringBuilder sb = new StringBuilder();
 		if (optionPriceList != null) {
 			for (CarOption co : optionPriceList) {
@@ -175,9 +186,8 @@ public class RentPanel extends JPanel implements ActionListener {
 		totalPrice = ((basicCharge * diff) + (insurance == null ? 0 : insurance.getPrice()) + optionPrice)
 				* (100 - maxEventRate) / 100;
 
-		
-		// ================ 테스트		
-		//Rent rent = new Rent("R005", rentDateDto.getStartDate(), rentDateDto.getStartHour(), rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel, selectedCustomer, insurance, new Event(), optionPrice);
+		System.out.println("rentDate" + rentDateDto);
+//		rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour(), rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel, selectedCustomer, insurance, isEventRate?maxEventRate:cGradeRate ,optionPrice);
 		//
 		String msg = String.format("차량 기본비용 %d, 대여일 %s, 보험가격 %d, 옵션가격 %d(%s), 할인율 %d", basicCharge, rentDateDto,
 				(insurance == null ? 0 : insurance.getPrice()), optionPrice, sb.length() == 0 ? "" : sb, maxEventRate);
@@ -213,9 +223,12 @@ public class RentPanel extends JPanel implements ActionListener {
 
 	//확인버튼
 	private void do_btnCstmSearch_actionPerformed(ActionEvent e) {
+		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour(), rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel, selectedCustomer, insurance, isEventRate?maxEventRate:cGradeRate ,optionPrice);
 		if(rentResultFrame == null) {
 			rentResultFrame = new RentResultFrame();
 		}
+		rentResultFrame.setRent(rent);
+		rentResultFrame.setLblPrice(getTotalRentPrice());
 		rentResultFrame.setVisible(true);
 	}
 
