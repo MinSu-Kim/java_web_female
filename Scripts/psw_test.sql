@@ -77,6 +77,8 @@ select * from event;
 select * from custom_event;
 select * from customer;
 
+desc customer;
+
 select * from grade;
 
 select * from `level`;
@@ -165,3 +167,5 @@ select * from event;
 
 select * from custom_event;
 
+delete from custom_event
+where custom_code='C017';

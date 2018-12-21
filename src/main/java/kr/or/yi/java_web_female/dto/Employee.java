@@ -11,12 +11,17 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 	
+
 	public String getCode() {
 		return code;
 	}
+
+
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+
 	public String getName() {
 		return name;
 	}

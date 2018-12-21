@@ -84,7 +84,7 @@ CREATE TABLE proj_rentcar.customer (
 	dob        DATE        NOT NULL COMMENT '생년월일', -- 생년월일
 	email      VARCHAR(30) NOT NULL COMMENT '이메일', -- 이메일
 	emp_code   CHAR(4)     NULL     COMMENT '직원코드', -- 직원코드
-	license    VARCHAR(4)  NULL     COMMENT '면허종류', -- 면허종류
+	license    VARCHAR(40) NULL     COMMENT '면허종류', -- 면허종류
 	grade_code CHAR(4)     NULL     COMMENT '등급코드', -- 등급코드
 	rent_cnt   INT(11)     NULL     COMMENT '대여횟수' -- 대여횟수
 )
@@ -246,15 +246,15 @@ CREATE TABLE proj_rentcar.rentcar_options (
 COMMENT '추가옵션';
 
 -- 사진
-CREATE TABLE proj_rentcar.userPic (
+CREATE TABLE proj_rentcar.userpic (
 	car_code CHAR(4) NOT NULL COMMENT 'C001', -- C001
-	pic      longBLOB    NOT NULL COMMENT '사진' -- 사진
+	pic      BLOB    NOT NULL COMMENT '사진' -- 사진
 )
 COMMENT '사진';
 
 -- 사진
-ALTER TABLE proj_rentcar.userPic
-	ADD CONSTRAINT PK_userPic -- 사진 기본키
+ALTER TABLE proj_rentcar.userpic
+	ADD CONSTRAINT
 		PRIMARY KEY (
 			car_code -- C001
 		);
@@ -267,9 +267,7 @@ ALTER TABLE proj_rentcar.car_model
 		)
 		REFERENCES proj_rentcar.brand ( -- 브랜드
 			no -- 브랜드번호
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_brand_TO_car_model (
 		brand -- 브랜드
 	);
@@ -282,9 +280,7 @@ ALTER TABLE proj_rentcar.car_model
 		)
 		REFERENCES proj_rentcar.car_type ( -- 차종(소 중 대)
 			code -- 차종
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_car_type_TO_car_model (
 		cartype -- 차종
 	);
@@ -297,9 +293,7 @@ ALTER TABLE proj_rentcar.customer
 		)
 		REFERENCES proj_rentcar.employee ( -- 직원
 			code -- 직원코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_employee_TO_customer (
 		emp_code -- 직원코드
 	);
@@ -312,9 +306,7 @@ ALTER TABLE proj_rentcar.customer
 		)
 		REFERENCES proj_rentcar.grade ( -- 회원등급
 			code -- 등급코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_grade_TO_customer (
 		grade_code -- 등급코드
 	);
@@ -327,9 +319,7 @@ ALTER TABLE proj_rentcar.custom_event
 		)
 		REFERENCES proj_rentcar.customer ( -- 고객
 			code -- 고객코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_customer_TO_custom_event (
 		custom_code -- 고객코드
 	);
@@ -342,9 +332,7 @@ ALTER TABLE proj_rentcar.custom_event
 		)
 		REFERENCES proj_rentcar.event ( -- 이벤트
 			code -- 이벤트코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_event_TO_custom_event (
 		event_code -- 이벤트코드
 	);
@@ -357,9 +345,7 @@ ALTER TABLE proj_rentcar.rent
 		)
 		REFERENCES proj_rentcar.car_model ( -- 차(모델)
 			car_code -- C001
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_car_model_TO_rent (
 		car_code -- 차코드
 	);
@@ -372,9 +358,7 @@ ALTER TABLE proj_rentcar.rent
 		)
 		REFERENCES proj_rentcar.customer ( -- 고객
 			code -- 고객코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_customer_TO_rent (
 		costomer_code -- 고객코드
 	);
@@ -387,9 +371,7 @@ ALTER TABLE proj_rentcar.rent
 		)
 		REFERENCES proj_rentcar.insurance ( -- 보험
 			code -- 보험코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_insurance_TO_rent (
 		insurance_code -- 보험코드
 	);
@@ -402,9 +384,7 @@ ALTER TABLE proj_rentcar.rentcar_options
 		)
 		REFERENCES proj_rentcar.car_option ( -- 차량옵션
 			no -- 옵션번호
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_car_option_TO_add_option (
 		option_id -- 옵션번호
 	);
@@ -417,53 +397,17 @@ ALTER TABLE proj_rentcar.rentcar_options
 		)
 		REFERENCES proj_rentcar.rent ( -- 차량대여
 			code -- R0001
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_rent_TO_rentCar_options (
 		code -- 차량대여번호
 	);
 
 -- 사진
-ALTER TABLE proj_rentcar.userPic
-	ADD CONSTRAINT FK_car_model_TO_userPic -- 차(모델) -> 사진
+ALTER TABLE proj_rentcar.userpic
+	ADD CONSTRAINT FK_car_model_TO_userPic -- FK_car_model_TO_userPic
 		FOREIGN KEY (
 			car_code -- C001
 		)
 		REFERENCES proj_rentcar.car_model ( -- 차(모델)
 			car_code -- C001
 		);
-		
-	
--- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
-DROP procedure if exists proj_rentcar.update_customer_grade;
-
-DELIMITER $$
-CREATE PROCEDURE proj_rentcar.update_customer_grade (in custom_code char(4), in rent_code char(4))   
-begin
-    declare gcode char(4);
-	declare ecode char(4);
-
-   
-    update customer
-    set rent_cnt = rent_cnt + 1
-    where code=custom_code;
-   
-    select g.code into gcode
-	from customer c , grade g
-	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
-
-	update customer
-	set grade_code = gcode
-	where code = custom_code;
-
-    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
-	select rent.e_rate into ecode
-	from rent where code = rent_code;
-
-	update custom_event
-	set is_use = 1
-	where event_code = ecode and custom_code = custom_code;
-
-end $$
-DELIMITER ;
