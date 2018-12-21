@@ -88,7 +88,7 @@ public class RentPanel extends JPanel implements ActionListener {
 
 		pInsurance = new InsurancePanel(service);
 		pInsurance.setRentPanel(this);
-		
+
 		pContents.add(pInsurance);
 
 		pOption = new OptionInfoPanel(service);
@@ -145,23 +145,22 @@ public class RentPanel extends JPanel implements ActionListener {
 		for (CustomEvent ce : selectedCustomer.getEvents()) {
 //			JOptionPane.showMessageDialog(null, ce);
 			for (Event e : ce.getEvents()) {
-				JOptionPane.showMessageDialog(null, e);
+//				JOptionPane.showMessageDialog(null, e);
 				// 가장 큰 이벤트 할인율 가져오기
 				if (e.getRate() > maxEventRate) {
 					maxEventRate = e.getRate();
 				}
 			}
 		}
-		cGradeRate = selectedCustomer.getGradeCode().getRate();
-		
+		cGradeRate = this.selectedCustomer.getGradeCode().getRate();
+
 		isEventRate = maxEventRate > cGradeRate ? true : false;
-		
-		
+
 //		System.out.println("등급 할인율" + selectedCustomer.getGradeCode().getRate());
-		//이벤트 할인율 중 가장 높은 값 들고오기
+		// 이벤트 할인율 중 가장 높은 값 들고오기
 //		JOptionPane.showMessageDialog(null, maxEventRate);
 		getTotalRentPrice();
-		
+
 	}
 
 	// 요금
@@ -170,7 +169,7 @@ public class RentPanel extends JPanel implements ActionListener {
 
 		// 차량기본비용
 		int basicCharge = selectedCarModel.getBasicCharge();
-optionPrice = pOption.getTotalOptionPrice();
+		optionPrice = pOption.getTotalOptionPrice();
 		StringBuilder sb = new StringBuilder();
 		if (optionPriceList != null) {
 			for (CarOption co : optionPriceList) {
@@ -192,11 +191,11 @@ optionPrice = pOption.getTotalOptionPrice();
 //		rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour(), rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel, selectedCustomer, insurance, isEventRate?maxEventRate:cGradeRate ,optionPrice);
 		//
 		String msg = String.format("차량 기본비용 %d, 대여일 %s, 보험가격 %d, 옵션가격 %d(%s), 할인율 %d", basicCharge, rentDateDto,
-				(insurance == null ? 0 : insurance.getPrice()), optionPrice, sb.length() == 0 ? "" : sb, maxEventRate);
+				(insurance == null ? 0 : insurance.getPrice()), optionPrice, sb.length() == 0 ? "" : sb, isEventRate ? maxEventRate : cGradeRate);
 
 		lblPriceInfo.setText(msg);
 		lblResultPrice.setText(totalPrice + "원");
-		
+
 		return totalPrice;
 	}
 
@@ -215,7 +214,6 @@ optionPrice = pOption.getTotalOptionPrice();
 		getTotalRentPrice();
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnOk) {
@@ -223,19 +221,21 @@ optionPrice = pOption.getTotalOptionPrice();
 		}
 	}
 
-	//확인버튼
+	// 확인버튼
 	private void do_btnCstmSearch_actionPerformed(ActionEvent e) {
-		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour(), rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel, selectedCustomer, insurance, isEventRate?maxEventRate:cGradeRate ,optionPrice);
-		if(rentResultFrame == null) {
+		
+		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour(),
+				rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel,
+				selectedCustomer, insurance, isEventRate ? maxEventRate : cGradeRate, optionPrice);
+		System.out.println(rent);
+		if (rentResultFrame == null) {
 			rentResultFrame = new RentResultFrame();
 		}
 		rentResultFrame.setService(service);
 		rentResultFrame.setRent(rent);
-		
-		rentResultFrame.setLblPrice(getTotalRentPrice());
+
+//		rentResultFrame.setLblPrice(getTotalRentPrice());
 		rentResultFrame.setVisible(true);
 	}
-
-
 
 }

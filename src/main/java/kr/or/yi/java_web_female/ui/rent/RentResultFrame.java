@@ -203,8 +203,8 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		tfStartTime.setText(rent.getStartTime() + "시"); //대여시간
 		tfEndDate.setText(rent.getEndDate());	//반납일자
 		tfEndTime.setText(rent.getEndTime() + "시");	//반납시간
-		tfInsurance.setText(rent.getInsuranceCode().getPrice() + "");	//보험가격
-		tfOption.setText(rent.getOptPrice() + "");
+		tfInsurance.setText(rent.getInsuranceCode().getPrice() + "원");	//보험가격
+		tfOption.setText(rent.getOptPrice() + "원");
 		tfDiscount.setText(String.format("%s", rent.geteRate()+"%"));
 	}
 
