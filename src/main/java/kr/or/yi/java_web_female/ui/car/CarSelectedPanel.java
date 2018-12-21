@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -432,21 +433,21 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	public void setCarModel(CarModel carModel) {//set
 		
 		//파일에 있는 이미지 불러오기
-		String strImg = imgPath+carModel.getCarCode()+".png";
-		strImg = strImg.replace("\\", "/");
+		/*String strImg = imgPath+carModel.getCarCode()+".png";
+		strImg = strImg.replace("\\", "/");*/
 		
-		/*UserPic userimg = new UserPic();
-		userimg.setCarCode(carModel.getCarCode());*/
-		UserPic userpic = service.getUserPic(carModel.getCarCode());
-		try {
-			ImageIcon img =new ImageIcon(userpic.getPic());
+		//테이블에 저장되있는 이미지 불러오기
+		System.out.println(carModel.getCarCode());//V012정상출력
+		UserPic userpic = service.getUserPic(carModel.getCarCode());//null
+		if(userpic.getPic()!=null) {
+			ImageIcon img = new ImageIcon(userpic.getPic());
 			Image image = img.getImage();
 			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
 			ImageIcon resimg = new ImageIcon(changedImg);
 			lbl_img.setIcon(resimg);
-			lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
 			panel_img.add(lbl_img);
-		}catch(Exception e) {
+			lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
+		}else {
 			//사진이 없을 경우 파일 no_image 디스플레이
 			ImageIcon img =new ImageIcon(imgPath+"V000.png");
 			Image image = img.getImage();
@@ -456,8 +457,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
 			panel_img.add(lbl_img);
 		}
-		
-		
+
 
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
