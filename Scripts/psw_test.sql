@@ -77,6 +77,7 @@ select * from event;
 select * from custom_event;
 select * from customer;
 
+
 desc customer;
 
 select * from grade;

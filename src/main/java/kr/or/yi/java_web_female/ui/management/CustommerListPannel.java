@@ -12,7 +12,8 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.Customer;
-
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.service.CustomUiService;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
@@ -127,7 +128,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pTel.add(lblTel1);
 
 		tfTel2 = new JTextField();
-		tfTel2.setEditable(false);
 		tfTel2.setColumns(10);
 		pTel.add(tfTel2);
 
@@ -137,7 +137,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pTel.add(lblTel2);
 
 		tfTel3 = new JTextField();
-		tfTel3.setEditable(false);
 		tfTel3.setColumns(10);
 		pTel.add(tfTel3);
 
@@ -150,7 +149,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
 
 		tfCusEmail1 = new JTextField();
-		tfCusEmail1.setEditable(false);
 		tfCusEmail1.setColumns(15);
 		pEmail.add(tfCusEmail1);
 
@@ -322,11 +320,77 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	}
 
 	private Customer getItem() {
-		// TODO Auto-generated method stub
-		return null;
+		String cId = tfCusId.getText();
+		String cAddr = tfAddr.getText();
+		String cCode = tfCusCode.getText();
+		String cEmail1 = tfCusEmail1.getText();
+		String cEmail2 =  tfCusEmail2.getText();
+		String cName = tfCusName.getText();
+		String eCode = tfEmpCode.getText();
+		String cTel2 = tfTel2.getText();
+		String cTel3 = tfTel3.getText();
+		String zipCode = tfZipCode.getText();
+		String gradeName = tfGradeName.getText();
+		int rentCnt = Integer.parseInt(tfRentCnt.getText()); 
+
+		Customer item = new Customer();
+		item.setId(cId);
+		item.setAddress(cAddr);
+		item.setCode(cCode);
+		item.setEmail(cEmail1);
+		item.setEmail(cEmail2);
+		item.setName(cName);
+		
+		Employee empCode = new Employee("E001");
+		Grade gradeCode = new Grade("G001");
+		
+		item.setEmpCode(empCode);
+		item.setPhone(cTel2);
+		item.setPhone(cTel3);
+		item.setAddress(zipCode);
+		item.setGradeCode(gradeCode);
+		item.setRentCnt(rentCnt);
+		return item;
 	}
 
 	protected void do_btnCusOk_actionPerformed(ActionEvent arg0) {
+		String cId = tfCusId.getText();
+		String cAddr = tfAddr.getText();
+		String cCode = tfCusCode.getText();
+		String cEmail1 = tfCusEmail1.getText();
+		String cEmail2 =  tfCusEmail2.getText();
+		String cName = tfCusName.getText();
+		String eCode = tfEmpCode.getText();
+		String cTel2 = tfTel2.getText();
+		String cTel3 = tfTel3.getText();
+		String zipCode = tfZipCode.getText();
+		String gradeName = tfGradeName.getText();
+		int rentCnt = Integer.parseInt(tfRentCnt.getText()); 
+		
+		Customer customer = new Customer();
+		customer.setId(cId);
+		customer.setAddress(cAddr);
+		customer.setCode(cCode);
+		customer.setEmail(cEmail1);
+		customer.setEmail(cEmail2);
+		customer.setName(cName);
+		
+		Employee empCode = new Employee("E001");
+		Grade gradeCode = new Grade("G001");
+		
+		customer.setEmpCode(empCode);
+		customer.setPhone(cTel2);
+		customer.setPhone(cTel3);
+		customer.setAddress(zipCode);
+		customer.setGradeCode(gradeCode);
+		customer.setRentCnt(rentCnt);
+		
+		service.insertCustomer(customer);
+		list = service.selectCustomerByAll();
+		panelList.setList(list);
+		panelList.loadDatas();
+		add(panelList);
+		clearTf();
 	}
 
 	protected void do_btnCusCancel_actionPerformed(ActionEvent arg0) {
@@ -337,7 +401,20 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	}
 
 	private void setItem(Customer item) {
-		// TODO Auto-generated method stub
+		tfCusId.setText(item.getId() + "");
+		tfAddr.setText(item.getAddress() + "");
+		tfCusCode.setText(item.getCode() + "");
+		tfCusEmail1.setText(item.getEmail() + "");
+		tfCusEmail2.setText(item.getEmail() + "");
+		tfCusName.setText(item.getName() + "");
+		tfEmpCode.setText(item.getEmpCode() + "");
+		tfTel2.setText(item.getPhone() + "");
+		tfTel3.setText(item.getPhone() + "");
+		tfZipCode.setText(item.getAddress() + "");
+		tfGradeName.setText(item.getGradeCode() + "");
+		tfRentCnt.setText(item.getRentCnt() + "");
+		
+		
 
 	}
 
