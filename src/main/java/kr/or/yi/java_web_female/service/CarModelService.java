@@ -6,6 +6,7 @@ import java.util.Map;
 import kr.or.yi.java_web_female.dao.CarModelMapper;
 import kr.or.yi.java_web_female.dao.CarModelMapperImpl;
 import kr.or.yi.java_web_female.dao.UserPicMapper;
+import kr.or.yi.java_web_female.dao.UserPicMapperImpl;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.UserPic;
 
@@ -15,6 +16,7 @@ public class CarModelService {
 	
 	public CarModelService() {
 		dao = CarModelMapperImpl.getInstance();
+		picDao = UserPicMapperImpl.getInstance();
 	}
 	
 	public CarModel selectCarModelByNo(CarModel carModel) {
