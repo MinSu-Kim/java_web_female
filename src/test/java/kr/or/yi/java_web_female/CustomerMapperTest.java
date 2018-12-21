@@ -12,6 +12,8 @@ import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerMapperTest extends AbstractTest {
@@ -61,12 +63,24 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setName("박수완");
 		customer.setAddress("대구");
 		customer.setPhone("010-5757-5959");
-
 		Calendar cal = Calendar.getInstance();
 		cal.set(2018, 11, 13);
 		customer.setDob(cal.getTime());
 
 		customer.setEmail("psw2701@naver.com");
+		
+		Employee employee = new Employee(); 
+		employee.setCode("E001");
+		customer.setEmpCode(employee);
+		
+		customer.setLicense("2종보통");
+		
+		Grade grade = new Grade(); 
+		grade.setCode("G001");
+		customer.setGradeCode(grade);
+		
+		customer.setRentCnt(0);
+		
 		int res = dao.insertCustomer(customer);
 		Assert.assertEquals(1, res);
 	}
@@ -111,50 +125,42 @@ public class CustomerMapperTest extends AbstractTest {
 		Assert.assertNotNull(cusList);
 	}
 
-/*	@Test
-	public void test04updateCustomer() throws ParseException {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Customer customer = new Customer();
-
-		customer.setCode(dao.nextCode());
-		customer.setId("psw2701");
-		customer.setPasswd("password");
-		customer.setName("박수완");
-		customer.setAddress("대구");
-		customer.setPhone("010-5757-5959");
-
-		Grade grade = new Grade();
-		grade.setCode("G001");
-		customer.setGradeCode(grade);
-
-		String strDate = "2017-10-17";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdf.parse(strDate);
-		customer.setDob(date);
-
-		customer.setEmail("qwerasdf@naver.com");
-
-		Employee employee = new Employee();
-		employee.setCode("E001");
-		customer.setEmpCode(employee);
-
-		customer.setLicense("2종 보통");
-		customer.setRentCnt(5);
-		int res = dao.updateCustomer(customer);
-		Assert.assertSame(1, res);
-
-	}
-*/
-	@Test
+	/*
+	 * @Test public void test04updateCustomer() throws ParseException {
+	 * log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+	 * Customer customer = new Customer();
+	 * 
+	 * customer.setCode(dao.nextCode()); customer.setId("psw2701");
+	 * customer.setPasswd("password"); customer.setName("박수완");
+	 * customer.setAddress("대구"); customer.setPhone("010-5757-5959");
+	 * 
+	 * Grade grade = new Grade(); grade.setCode("G001");
+	 * customer.setGradeCode(grade);
+	 * 
+	 * String strDate = "2017-10-17"; SimpleDateFormat sdf = new
+	 * SimpleDateFormat("yyyy-MM-dd"); Date date = sdf.parse(strDate);
+	 * customer.setDob(date);
+	 * 
+	 * customer.setEmail("qwerasdf@naver.com");
+	 * 
+	 * Employee employee = new Employee(); employee.setCode("E001");
+	 * customer.setEmpCode(employee);
+	 * 
+	 * customer.setLicense("2종 보통"); customer.setRentCnt(5); int res =
+	 * dao.updateCustomer(customer); Assert.assertSame(1, res);
+	 * 
+	 * }
+	 */
+	/*@Test
 	public void test10deleteCustomer() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Customer customer = new Customer();
-		customer.setCode("C005");
+		customer.setCode(dao.nextCode());
 		int res = dao.deleteCustomer(customer);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 
-	@Test(expected=RuntimeException.class)
+	@Test(expected = RuntimeException.class)
 	public void test11JoinTransactionTest01() {
 		// 고객 추가 에러 rollback
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
@@ -172,12 +178,12 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setDob(cal.getTime());
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-				
+
 		dao.insertCustomerJoin(customer, customEvent);
 	}
-	
-	@Test(expected=RuntimeException.class)
-	public void test12JoinTransactionTest02() {
+
+	@Test(expected = RuntimeException.class)
+	public void test11JoinTransactionTest02() {
 		// 고객이벤트 추가 에러 rollback
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
@@ -192,15 +198,15 @@ public class CustomerMapperTest extends AbstractTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(2018, 12, 20);
 		customer.setDob(cal.getTime());
-		
+
 		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
-				
+
 		dao.insertCustomerJoin(customer, customEvent);
 	}
-	
+
 	@Test
-	public void test12JoinTransactionTest03() {
-		// 고객이벤트 추가 에러 rollback
+	public void test11JoinTransactionTest03() {
+
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
 		Customer customer = new Customer();
@@ -214,9 +220,47 @@ public class CustomerMapperTest extends AbstractTest {
 		Calendar cal = Calendar.getInstance();
 		cal.set(2018, 12, 20);
 		customer.setDob(cal.getTime());
-		
+
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-				
+
 		dao.insertCustomerJoin(customer, customEvent);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void test12DeleteTransactionTestTest01() {
+		// 고객 추가 에러 rollback
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Customer customer = new Customer();
+		customer.setCode("C017");
+		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
+
+		dao.deleteCustomerEvent(customer, customEvent);
+	}
+
+	@Test(expected = RuntimeException.class)
+	public void test12DeleteTransactionTest02() {
+		// 고객이벤트 추가 에러 rollback
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Customer customer = new Customer();
+		customer.setCode(dao.nextCode());
+
+		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
+
+		dao.deleteCustomerEvent(customer, customEvent);
+	}
+
+	@Test
+	public void test12DeleteTransactionTest03() {
+
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+
+		Customer customer = new Customer();
+		customer.setCode(dao.nextCode());
+
+		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
+
+		dao.deleteCustomerEvent(customer, customEvent);
 	}
 }

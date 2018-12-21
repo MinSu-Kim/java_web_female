@@ -132,4 +132,23 @@ public class CustomerMapperImpl implements CustomerMapper {
 		return res;
 	}
 ///////////////////////// 트랜잭션 처리 //////////////////////////
+
+	@Override
+	public int deleteCustomerEvent(Customer customer, CustomEvent customEvent) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		int res = -1;
+		try {
+			res = sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
+			res +=sqlSession.delete(namespace + ".deleteCustomer", customer);
+			sqlSession.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		}finally {
+			sqlSession.close();
+		}
+		return res;
+	}
 }

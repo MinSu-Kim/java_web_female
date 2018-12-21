@@ -58,10 +58,9 @@
 	</select>
 
 	<insert id="insertCustomer" parameterType="Customer">
-		insert into
-		customer(code, Id, passwd, Name, address, phone, dob, email )
-		values(#{code}, #{id}, password(#{passwd}), #{name}, #{address},
-		#{phone}, #{dob}, #{email} )
+
+		insert into customer(code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt  )
+		values(#{code}, #{id}, password(#{passwd}), #{name}, #{address}, #{phone}, #{dob}, #{email},#{empCode.code}, #{license}, #{gradeCode.code}, #{rentCnt})
 	</insert>
 
 	<select id="nextCustomerCode" resultType="java.lang.Integer">
@@ -87,8 +86,12 @@
 		rent_cnt=#{rentCnt} where code=#{code} </update> -->
 
 	<!-- delete -->
-	<!-- <delete id="deleteCustomer" parameterType="Customer"> delete from custom_event 
-		where custom_code = #{code} delete from customer where code=#{code} </delete> -->
 
-	<!-- <delete id=""></delete> -->
+	<delete id="deleteCustomer" parameterType="Customer">
+
+		delete from customer
+		where code=#{code}
+		
+	</delete> 
+
 </mapper>

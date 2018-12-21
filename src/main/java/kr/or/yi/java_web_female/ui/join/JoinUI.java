@@ -25,6 +25,8 @@ import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.JoinUiService;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
@@ -54,16 +56,19 @@ public class JoinUI extends JFrame implements ActionListener {
 	private String customCode;
 	private boolean isUse;
 	private JComboBox<String> cmbTel1;
-	
+
 	private JoinUiService joinService;
-	
-/*	public void setcTable(AbstractListPanel<Customer> cTable) {
-		this.cTable = cTable;
-	}*/
+	private JComboBox<String> cmbLicense;
+	private String license;
+
+	/*
+	 * public void setcTable(AbstractListPanel<Customer> cTable) { this.cTable =
+	 * cTable; }
+	 */
 
 	public JoinUI() {
 		joinService = new JoinUiService();
-		
+
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 571, 510);
@@ -151,7 +156,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel1 = new JComboBox<>();
-		cmbTel1.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
+		cmbTel1.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "010", "011", "017" }));
 		pTel.add(cmbTel1);
 
 		JLabel lbl1 = new JLabel("-");
@@ -208,23 +213,23 @@ public class JoinUI extends JFrame implements ActionListener {
 		tfZipCode = new JTextField();
 		tfZipCode.setColumns(10);
 		pAddr.add(tfZipCode);
-		
+
 		tfPwd2.getDocument().addDocumentListener(new MyDocumentListener() {
 
 			@Override
 			public void msg() {
-				
+
 				String pw1 = new String(tfPwd1.getPassword());
 				String pw2 = new String(tfPwd2.getPassword());
-				
+
 				if (pw1.equals(pw2)) {
-					tfConfirm.setText("비밀번호가 일치합니다.");
-				}else{
-					tfConfirm.setText("비밀번호가 일치하지 않습니다.");
+					tfConfirm.setText("비밀번호 일치.");
+				} else {
+					tfConfirm.setText("비밀번호 불일치.");
 				}
-				
+
 			}
-			
+
 		});
 
 		JButton btnSearchAddr = new JButton("우편번호 검색");
@@ -245,6 +250,15 @@ public class JoinUI extends JFrame implements ActionListener {
 		pContent.add(tfAddr);
 		tfAddr.setColumns(10);
 
+		JLabel lblLicense = new JLabel("면허종류");
+		lblLicense.setHorizontalAlignment(SwingConstants.CENTER);
+		pContent.add(lblLicense);
+
+		cmbLicense = new JComboBox<>();
+		cmbLicense.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종 보통", "2종 보통" }));
+
+		pContent.add(cmbLicense);
+
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn, BorderLayout.SOUTH);
 
@@ -263,25 +277,21 @@ public class JoinUI extends JFrame implements ActionListener {
 		this.tfAddr.setText(post.toString());
 		tfAddr.requestFocus();
 	}
-	
-	/*public void setEmail() {
-		cmbEmail3.setSelectedItem(cmbEmail3);
-		tfEmail2.setText();
-	}*/
-	
-	
-	/*pList = new AddressTable();
-	
-	클릭리스너추가
-	pList.getTable().addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			Post post = pList.getSelectedItem();
-			joinUi.setAddress(post);
-			SearchPostUI.this.dispose();
-		}
-	});*/
-	
+
+	/*
+	 * public void setEmail() { cmbEmail3.setSelectedItem(cmbEmail3);
+	 * tfEmail2.setText(); }
+	 */
+
+	/*
+	 * pList = new AddressTable();
+	 * 
+	 * 클릭리스너추가 pList.getTable().addMouseListener(new MouseAdapter() {
+	 * 
+	 * @Override public void mouseClicked(MouseEvent e) { Post post =
+	 * pList.getSelectedItem(); joinUi.setAddress(post);
+	 * SearchPostUI.this.dispose(); } });
+	 */
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbEmail3) {
@@ -310,7 +320,7 @@ public class JoinUI extends JFrame implements ActionListener {
 				if (searchCustomer == null) {
 					JOptionPane.showMessageDialog(null, "사용가능한 아이디 입니다.");
 					tfPwd1.requestFocus();
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "중복된 아이디입니다.");
 				}
 			} else {
@@ -324,27 +334,26 @@ public class JoinUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_btnJoin_actionPerformed(ActionEvent e) {
-		
+
 		try {
 			validCheck();
 
 			Customer customer = getItemCustomer();
 			customer.setCode(joinService.getNextCustomerCode());
 			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-			
-			
+			JOptionPane.showMessageDialog(null, customer);
+			JOptionPane.showMessageDialog(null, customEvent);
 ///////////////////////// 트랜잭션 처리 //////////////////////////
-			
-			joinService.joinCustomer(customer, customEvent);
-			
-///////////////////////// 트랜잭션 처리 //////////////////////////
-/*			트랜잭션처리 전 
-			int res = joinService.addcus(customer, customEvent);
 
-			if(res==1) {
-				JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
-				JoinUI.this.dispose();
-			}*/
+			joinService.joinCustomer(customer, customEvent);
+
+///////////////////////// 트랜잭션 처리 //////////////////////////
+			/*
+			 * 트랜잭션처리 전 int res = joinService.addcus(customer, customEvent);
+			 * 
+			 * if(res==1) { JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
+			 * JoinUI.this.dispose(); }
+			 */
 /////////////////////////////////////// 
 			clearTf();
 		} catch (SQLException e1) {
@@ -374,11 +383,24 @@ public class JoinUI extends JFrame implements ActionListener {
 		String cusPw = new String(tfPwd1.getPassword()).trim();
 		String cusName = tfName.getText().trim();
 		String cusAddress = tfAddr.getText().trim();
-		String cusPhone =(cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-" + (tfTel3.getText().trim());
+		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
+				+ (tfTel3.getText().trim());
 		Date cusDob = birthDay.getDate();
 		String cusEmail = (tfEmail1.getText().trim()) + "@" + (tfEmail2.getText().trim());
 
-		return new Customer(cusId, cusPw, cusName, cusAddress, cusPhone, cusDob, cusEmail);
+		String license = null;
+		if (cmbLicense.getSelectedIndex() == 0) {
+			cmbLicense.setSelectedIndex(2);
+			license = (cmbLicense.getSelectedItem() + "").trim();
+		} else {
+			license = (String) cmbLicense.getSelectedItem();
+		}
+
+		Employee empCode = new Employee("E001");
+		Grade gradeCode = new Grade("G001");
+
+		return new Customer(cusId, cusPw, cusName, cusAddress, cusPhone, cusDob, cusEmail, empCode, license, gradeCode,
+				0);
 	}
 
 	private void validCheck() throws Exception {
@@ -393,7 +415,7 @@ public class JoinUI extends JFrame implements ActionListener {
 
 		String pw1 = new String(tfPwd1.getPassword());
 		String pw2 = new String(tfPwd2.getPassword());
-		
+
 		if (pw1.equals("")) {
 			tfPwd1.requestFocus();
 			throw new Exception("Password를 입력해 주세요");
@@ -402,33 +424,46 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfPwd2.requestFocus();
 			throw new Exception("Password를 입력해 주세요");
 		}
-		
+
 		if (birthDay.getDate() == null) {
 			birthDay.requestFocus();
 			throw new Exception("생년월일을 입력해 주세요.");
+		}
+		if (cmbTel1.getSelectedItem().equals("선택하세요")) {
+			cmbTel1.requestFocus();
+			throw new Exception("전화번호 첫자리를 선택해 주세요.");
 		}
 
 		if (tfTel2.getText().equals("")) {
 			tfTel2.requestFocus();
 			throw new Exception("전화번호 가운데 자리를 입력해 주세요.");
 		}
-		
+
 		if (tfTel3.getText().equals("")) {
 			tfTel3.requestFocus();
 			throw new Exception("전화번호 마지막 자리를 입력해 주세요.");
 		}
+		if (cmbEmail3.getSelectedItem().equals("선택하세요")) {
+			cmbEmail3.requestFocus();
+			throw new Exception("이메일 첫자리를 선택해 주세요.");
+		}
+
+		/*
+		 * if (cmbLicense.getSelectedItem().equals("선택하세요")) {
+		 * cmbLicense.requestFocus(); throw new Exception("면허종류를  선택해 주세요."); }
+		 */
 
 	}
-	
+
 	protected void do_btnCalcel_actionPerformed(ActionEvent e) {
 		clearTf();
 	}
-	
+
 	protected void do_cmbEmail3_actionPerformed(ActionEvent e) {
-		if(cmbEmail3.getSelectedIndex()<5) {
+		if (cmbEmail3.getSelectedIndex() < 5) {
 			tfEmail2.setEditable(false);
-			tfEmail2.setText((String)cmbEmail3.getSelectedItem());
-		}else {
+			tfEmail2.setText((String) cmbEmail3.getSelectedItem());
+		} else {
 			tfEmail2.requestFocus();
 			tfEmail2.setText("");
 			tfEmail2.setEditable(true);
