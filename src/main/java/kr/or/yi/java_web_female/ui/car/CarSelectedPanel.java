@@ -65,6 +65,9 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private boolean isAdd;
 	private CarUi carUi;
 	private JLabel lblCount;
+	private String filePath;
+	private String currentDirectoryPath;
+	private JFileChooser chooser;
 	/**
 	 * Create the panel.
 	 */
@@ -303,6 +306,28 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			//추가 클릭
 			CarModel model = getItem();
 			service.insertCarModel(model);//디비에 추가완료
+			
+			//선택한 이미지 바이트로 변환하여 테이블에 저장하기
+			byte[] pic = null;
+			File file = new File(filePath);
+			try(InputStream is = new FileInputStream(file)){
+				pic = new byte[is.available()];
+				is.read(pic);
+				
+				UserPic userpic = new UserPic();
+				userpic.setCarCode(tfCode.getText());
+				userpic.setPic(pic);
+				if(userpic==null) {
+					JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
+				}else {
+					service.insertUserPic(userpic);
+					JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
+				}
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			carUi.reloadDataCarPanel();
 			carUi.close();
 		}
@@ -333,7 +358,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
-		//삭제선택, 디비에는 바로삭제 되지만 테이블 실시간 업데이트 미완성
 		CarModel model = new CarModel();
 		model.setCarCode(tfCode.getText());
 		service.deleteCarModel(model);
@@ -342,7 +366,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 	
 	private CarModel getItem() {
-		//getitem작성중!
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
 
@@ -371,11 +394,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		return item;
 	}
 	
-	//파일 읽어오기
+	//파일 읽어오기(폴더에 있는 파일)
 		protected void do_fileOpen_actionPerformed(ActionEvent e) {
-			String loadDirectoryPath = System.getProperty("user.dir") + "\\images\\test";
-			String currentDirectoryPath = System.getProperty("user.dir") + "\\images\\";
-			JFileChooser chooser = new JFileChooser(currentDirectoryPath);
+			currentDirectoryPath = System.getProperty("user.dir") + "\\images\\";
+			chooser = new JFileChooser(currentDirectoryPath);
 			
 			int ret = chooser.showSaveDialog(null);
 			//X버튼 누르거나 취소 => 1, 파일 열었을 때 => 0
@@ -384,18 +406,18 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 				return;
 			}
 			
-			// 경로 가져오기
-			String filePath = chooser.getSelectedFile().getPath();
+			filePath = chooser.getSelectedFile().getPath();
+			
 			//고른 이미지 디스플레이
 			ImageIcon img = new ImageIcon(filePath);
 			Image image = img.getImage();
+			
 			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
 			ImageIcon resimg = new ImageIcon(changedImg);
 			lbl_img.setIcon(resimg);
 			panel_img.add(lbl_img);
-			//파일복사하기
-	        
-	        try(FileInputStream inputStream = new FileInputStream(filePath);
+			//파일복사하기(디비이용안하는 방법)
+	       /* try(FileInputStream inputStream = new FileInputStream(filePath);
 	        		FileOutputStream outputStream = new FileOutputStream(currentDirectoryPath+tfCode.getText()+".png")){
 	              
 	            int i = 0;
@@ -408,9 +430,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				e1.printStackTrace();
-			}
+			}*/
+			
+			
 		}
-	
+
 
 	public void setCarModel(CarModel carModel) {//set
 		String strImg = imgPath+carModel.getCarCode()+".png";
@@ -418,14 +442,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		ImageIcon img = new ImageIcon(strImg);
 		//사진이 없을 경우 파일 insert
 		if(img.getImage()==null) {
-			UserPic userpic = new UserPic();
-			userpic.setCarCode(tfCode.getText());		
-			try {
-				userpic.setPic(getPicFile());
-				service.insertUserPic(userpic);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			img = new ImageIcon(currentDirectoryPath+"no_image.png");
 		}
 		Image image = img.getImage();
 		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );

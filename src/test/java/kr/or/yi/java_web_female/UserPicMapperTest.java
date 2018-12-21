@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,16 +24,21 @@ public class UserPicMapperTest extends AbstractTest {
 	@Test
 	public void test01insertUserPic() throws IOException {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		UserPic userpic = new UserPic();
-		userpic.setCarCode("V001");
-		userpic.setPic(getPicFile());
-		int res = dao.insertUserPic(userpic);
-		Assert.assertEquals(1, res);
+		String[] arr = {"V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012","V013","V014","V015"};
+		for(String name : arr) {
+			UserPic userpic = new UserPic();
+			userpic.setCarCode(name);
+			userpic.setPic(getPicFile(name));
+			int res = dao.insertUserPic(userpic);
+			Assert.assertEquals(1, res);
+		}
+
+		
 	}
 
-	private byte[] getPicFile() throws IOException {
+	private byte[] getPicFile(String fileName) throws IOException {
 		byte[] pic = null;
-		File file = new File(System.getProperty("user.dir")+"/images/S1/V001.png");
+		File file = new File(System.getProperty("user.dir")+"/images/"+fileName+".png");
 		try(InputStream is = new FileInputStream(file)){
 			pic = new byte[is.available()];
 			is.read(pic);
@@ -44,7 +48,7 @@ public class UserPicMapperTest extends AbstractTest {
 	
 	@Test
 	public void test02getUserPic() throws IOException {
-		UserPic userPic = dao.getUserPic("V001");
+		UserPic userPic = dao.getUserPic("V002");
 		if(userPic.getPic()!=null) {
 			File file = getPicFile(userPic);
 			System.out.println("file path"+file.getAbsolutePath());
@@ -53,7 +57,7 @@ public class UserPicMapperTest extends AbstractTest {
 	}
 
 	private File getPicFile(UserPic userPic) throws IOException {
-		File pics = new File(System.getProperty("user.dir")+"\\images\\test\\");
+		File pics = new File(System.getProperty("user.dir")+"/images/test/");
 		if(!pics.exists()) {
 			pics.mkdirs();
 		}
