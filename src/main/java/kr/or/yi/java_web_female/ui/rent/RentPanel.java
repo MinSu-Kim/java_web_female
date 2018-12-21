@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -144,7 +145,7 @@ public class RentPanel extends JPanel implements ActionListener {
 		for (CustomEvent ce : selectedCustomer.getEvents()) {
 //			JOptionPane.showMessageDialog(null, ce);
 			for (Event e : ce.getEvents()) {
-//				JOptionPane.showMessageDialog(null, e);
+				JOptionPane.showMessageDialog(null, e);
 				// 가장 큰 이벤트 할인율 가져오기
 				if (e.getRate() > maxEventRate) {
 					maxEventRate = e.getRate();
@@ -160,6 +161,7 @@ public class RentPanel extends JPanel implements ActionListener {
 		//이벤트 할인율 중 가장 높은 값 들고오기
 //		JOptionPane.showMessageDialog(null, maxEventRate);
 		getTotalRentPrice();
+		
 	}
 
 	// 요금
@@ -227,9 +229,13 @@ optionPrice = pOption.getTotalOptionPrice();
 		if(rentResultFrame == null) {
 			rentResultFrame = new RentResultFrame();
 		}
+		rentResultFrame.setService(service);
 		rentResultFrame.setRent(rent);
+		
 		rentResultFrame.setLblPrice(getTotalRentPrice());
 		rentResultFrame.setVisible(true);
 	}
+
+
 
 }

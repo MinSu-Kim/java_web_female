@@ -15,11 +15,14 @@ import kr.or.yi.java_web_female.dao.InsuranceMapper;
 import kr.or.yi.java_web_female.dao.InsuranceMapperImpl;
 import kr.or.yi.java_web_female.dao.RentMapper;
 import kr.or.yi.java_web_female.dao.RentMapperImpl;
+import kr.or.yi.java_web_female.dao.UserPicMapper;
+import kr.or.yi.java_web_female.dao.UserPicMapperImpl;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Insurance;
+import kr.or.yi.java_web_female.dto.UserPic;
 
 public class RentUIService {
 	private CustomerMapper customerDao;
@@ -28,6 +31,7 @@ public class RentUIService {
 	private CarOptionMapper carOptionDao;
 	private InsuranceMapper insuranceDao;
 	private RentMapper rentDao;
+	private UserPicMapper userPicDao;
 	
 	public RentUIService() {
 		customerDao = CustomerMapperImpl.getInstance();
@@ -36,6 +40,7 @@ public class RentUIService {
 		carOptionDao = CarOptionMapperImpl.getInstance();
 		insuranceDao = InsuranceMapperImpl.getInstance();
 		rentDao = RentMapperImpl.getInstance();
+		userPicDao = UserPicMapperImpl.getInstance();
 	}
 	
 	public List<Customer> selectCustomer(Customer name) throws SQLException{
@@ -73,5 +78,9 @@ public class RentUIService {
 	
 	public String nextRentNo() {
 		return rentDao.getNextRentNo();
+	}
+	
+	public UserPic getUserPic(String carCode) {
+		return userPicDao.getUserPic(carCode);
 	}
 }

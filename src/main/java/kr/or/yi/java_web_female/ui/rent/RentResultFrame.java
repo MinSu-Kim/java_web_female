@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,8 +18,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Rent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kr.or.yi.java_web_female.dto.UserPic;
+import kr.or.yi.java_web_female.service.RentUIService;
+import java.awt.Dimension;
 
 public class RentResultFrame extends JFrame implements ActionListener {
 
@@ -32,7 +37,12 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	private JLabel lblPrice;
 	private JTextField tfDiscount;
 	private JButton btnCancel;
+	private JLabel lblCarImg;
+	private RentUIService service;
 
+	public void setService(RentUIService service) {
+		this.service = service;
+	}
 
 	/**
 	 * Create the frame.
@@ -67,11 +77,10 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		pCarInfo.add(tfCarName);
 		tfCarName.setColumns(10);
 		
-		JPanel pCarImg = new JPanel();
-		FlowLayout fl_pCarImg = (FlowLayout) pCarImg.getLayout();
-		fl_pCarImg.setVgap(10);
-		fl_pCarImg.setHgap(10);
-		pCar.add(pCarImg, BorderLayout.CENTER);
+		lblCarImg = new JLabel("");
+		lblCarImg.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCarImg.setPreferredSize(new Dimension(250, 150));
+		pCar.add(lblCarImg, BorderLayout.CENTER);
 		
 		JPanel pInfo = new JPanel();
 		pWrap.add(pInfo);
@@ -183,6 +192,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	public void setRent(Rent rent) {
 		this.rent = rent;
 		setItems();
+		loadImages();
 	}
 	
 
@@ -212,5 +222,21 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	//취소버튼
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
 		dispose();
+	}
+	
+	public void loadImages() {
+		UserPic userPic = service.getUserPic(rent.getCarCode().getCarCode());
+		
+		ImageIcon img = new ImageIcon(userPic.getPic());
+		Image image = img.getImage();
+		Image changedImg= image.getScaledInstance(350, 250, Image.SCALE_SMOOTH );
+		ImageIcon resimg = new ImageIcon(changedImg);
+		lblCarImg.setIcon(resimg);
+	/*	ImageIcon img = new ImageIcon(filePath);
+		Image image = img.getImage();
+		
+		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+		ImageIcon resimg = new ImageIcon(changedImg);
+		lblCarImg.setIcon(resimg);*/
 	}
 }
