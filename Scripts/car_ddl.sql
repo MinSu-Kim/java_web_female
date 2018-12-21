@@ -246,15 +246,15 @@ CREATE TABLE proj_rentcar.rentcar_options (
 COMMENT '추가옵션';
 
 -- 사진
-CREATE TABLE proj_rentcar.userPic (
-	car_code CHAR(4) NOT NULL COMMENT 'C001', -- C001
-	pic      longBLOB    NOT NULL COMMENT '사진' -- 사진
+CREATE TABLE proj_rentcar.userpic (
+	car_code CHAR(4)  NOT NULL COMMENT 'C001', -- C001
+	pic      LONGBLOB NOT NULL COMMENT '사진' -- 사진
 )
 COMMENT '사진';
 
 -- 사진
-ALTER TABLE proj_rentcar.userPic
-	ADD CONSTRAINT PK_userPic -- 사진 기본키
+ALTER TABLE proj_rentcar.userpic
+	ADD CONSTRAINT
 		PRIMARY KEY (
 			car_code -- C001
 		);
@@ -425,15 +425,16 @@ ALTER TABLE proj_rentcar.rentcar_options
 	);
 
 -- 사진
-ALTER TABLE proj_rentcar.userPic
-	ADD CONSTRAINT FK_car_model_TO_userPic -- 차(모델) -> 사진
+ALTER TABLE proj_rentcar.userpic
+	ADD CONSTRAINT FK_car_model_TO_userPic -- FK_car_model_TO_userPic
 		FOREIGN KEY (
 			car_code -- C001
 		)
 		REFERENCES proj_rentcar.car_model ( -- 차(모델)
 			car_code -- C001
-		);
-		
+		)
+		ON DELETE RESTRICT
+		ON UPDATE RESTRICT;
 	
 -- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
 DROP procedure if exists proj_rentcar.update_customer_grade;
