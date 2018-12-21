@@ -315,8 +315,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			UserPic userpic = new UserPic();
 			userpic.setCarCode(model.getCarCode());
 			userpic.setPic(getPicFile());
-			System.out.println(userpic.getPic());//빈배열주소
-			service.insertUserPic(userpic);//널포인트ㅠㅠ
+			service.insertUserPic(userpic);
 			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
 			
 			carUi.reloadDataCarPanel();
@@ -409,10 +408,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			ImageIcon resimg = new ImageIcon(changedImg);
 			lbl_img.setIcon(resimg);
 			panel_img.add(lbl_img);
+			
+			
 			//파일복사하기(디비이용안하는 방법)
 	       /* try(FileInputStream inputStream = new FileInputStream(filePath);
-	        		FileOutputStream outputStream = new FileOutputStream(currentDirectoryPath+tfCode.getText()+".png")){
-	              
+	        		FileOutputStream outputStream = new FileOutputStream(currentDirectoryPath+tfCode.getText()+".png")){	              
 	            int i = 0;
 	            byte [] buffer = new byte[512];
 	            while((i = inputStream.read(buffer)) != -1) {
@@ -438,15 +438,27 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		/*UserPic userimg = new UserPic();
 		userimg.setCarCode(carModel.getCarCode());*/
 		UserPic userpic = service.getUserPic(carModel.getCarCode());
+		try {
+			ImageIcon img =new ImageIcon(userpic.getPic());
+			Image image = img.getImage();
+			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+			ImageIcon resimg = new ImageIcon(changedImg);
+			lbl_img.setIcon(resimg);
+			lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
+			panel_img.add(lbl_img);
+		}catch(Exception e) {
+			//사진이 없을 경우 파일 no_image 디스플레이
+			ImageIcon img =new ImageIcon(imgPath+"V000.png");
+			Image image = img.getImage();
+			Image changedImg= image.getScaledInstance(200, 150, Image.SCALE_SMOOTH );
+			ImageIcon resimg = new ImageIcon(changedImg);
+			lbl_img.setIcon(resimg);
+			lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
+			panel_img.add(lbl_img);
+		}
 		
-		ImageIcon img =new ImageIcon(userpic.getPic());
-		//사진이 없을 경우 파일 no_image 디스플레이
-		Image image = img.getImage();
-		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
-		ImageIcon resimg = new ImageIcon(changedImg);
-		lbl_img.setIcon(resimg);
-		panel_img.add(lbl_img);
 		
+
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
 		
