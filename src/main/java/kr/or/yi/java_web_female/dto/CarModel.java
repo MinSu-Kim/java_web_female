@@ -26,6 +26,14 @@ public class CarModel {
 	}
 	
 
+	public CarModel(String carCode, String name, int rentCnt) {
+		super();
+		this.carCode = carCode;
+		this.name = name;
+		this.rentCnt = rentCnt;
+	}
+
+
 	public CarModel(String carCode, String name, String color, String gear, Brand brand, CarType carType,
 			int basicCharge, int hour6, int hour10, int hour12, int hourElse, Fuel fuel, boolean isRent, int rentCnt) {
 		super();

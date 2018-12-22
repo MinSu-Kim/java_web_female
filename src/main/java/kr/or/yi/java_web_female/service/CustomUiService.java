@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 
 
@@ -23,10 +24,11 @@ public class CustomUiService {
 	public int updateCustomer(Customer customer){
 		return customerDao.updateCustomer(customer);
 	}
-	public int deleteCustomer(Customer customer){
-		return customerDao.deleteCustomer(customer);
+	public int deleteCustomerEvent(Customer customer, CustomEvent customEvent){
+		return customerDao.deleteCustomerEvent(customer, customEvent);
 	}
 
+	
 	
 }
 

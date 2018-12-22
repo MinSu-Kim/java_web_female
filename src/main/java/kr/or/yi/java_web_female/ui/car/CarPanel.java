@@ -8,7 +8,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +19,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
@@ -52,6 +54,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		service = new CarUiService();
 		modelService = new CarModelService();
 		initComponents();
+		/* 테이블 정렬
+		JTable table = new JTable(model); 
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model); 
+		table.setRowSorter(sorter);*/
+
 	}
 
 	private void initComponents() {
@@ -160,6 +167,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelFuel.getComboBox().addItemListener(this);
 		rdbtnAuto.addItemListener(this);
 		rdbtnStick.addItemListener(this);
+		
+		/*테이블 컬럼색상변경
+		TableCellRenderer renderer = new MyTableCellRenderer();
+		table.setDefaultRenderer(Class.forName("java.lang.Object"), renderer);*/
+
 
 	}
 
@@ -270,10 +282,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		}
 		maps.put("gear", gear);
 
-		list = modelService.SelectCarModelWithWhere(maps);
-		panelList.setList(list);
-		panelList.loadDatas();
-		add(panelList);
+		setLoadDatas();
 	}
 
 

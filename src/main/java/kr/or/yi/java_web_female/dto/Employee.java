@@ -57,10 +57,13 @@ public class Employee {
 		this.code = code;
 	}
 
+
 	@Override
 	public String toString() {
-		return String.format("Employee [code=%s, name=%s, phone=%s, passwd=%s]", code, name, phone, passwd);
+		return String.format("%s", code);
 	}
+
+	
 	
 
 
