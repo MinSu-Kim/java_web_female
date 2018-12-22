@@ -5,7 +5,9 @@ import javax.swing.SwingConstants;
 import kr.or.yi.java_web_female.dto.Customer;
 
 @SuppressWarnings("serial")
-public class CustmConfirmTable extends AbstractListPanel<Customer> {
+public class CustomConfirmTable extends AbstractListPanel<Customer> {
+	public CustomConfirmTable() {
+	}
 
 	@Override
 	protected void setAlignWidth() {

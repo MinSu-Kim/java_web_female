@@ -227,7 +227,7 @@ public class CustomerMapperTest extends AbstractTest {
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void test12DeleteTransactionTestTest01() {
+	public void test12DeleteTransactionTest01() {
 		// 고객 추가 에러 rollback
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
