@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
-import kr.or.yi.java_web_female.ui.list.CustmConfirmTable;
+import kr.or.yi.java_web_female.ui.list.CustomConfirmTable;
 import kr.or.yi.java_web_female.ui.rent.sub.CustomerInfoPanel;
 
 public class CustomerSearchFrame extends JFrame {
@@ -52,7 +52,7 @@ public class CustomerSearchFrame extends JFrame {
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		panel.add(lblNewLabel);
 		
-		cPanel = new CustmConfirmTable();
+		cPanel = new CustomConfirmTable();
 		cPanel.getTable().addMouseListener(new MouseAdapter() {
 
 			@Override
