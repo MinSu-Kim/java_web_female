@@ -32,20 +32,6 @@ public class ChartMain extends JFrame implements ActionListener {
 	private JButton btnLineAdd;
 	private CarModelService service;
 
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChartMain frame = new ChartMain();
-					frame.setVisible(true);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-
 	public ChartMain() {
 		service = new CarModelService();
 		initComponents();
@@ -53,7 +39,7 @@ public class ChartMain extends JFrame implements ActionListener {
 	
 	private void initComponents() {
 		setTitle("통계");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 50, 520, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
