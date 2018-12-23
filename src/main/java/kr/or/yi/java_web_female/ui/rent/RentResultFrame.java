@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -193,6 +194,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		this.rent = rent;
 		setItems();
 		loadImages();
+		JOptionPane.showMessageDialog(null, rent.isReturn());
 	}
 	
 
