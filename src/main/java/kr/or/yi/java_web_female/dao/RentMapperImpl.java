@@ -36,11 +36,18 @@ public class RentMapperImpl implements RentMapper {
 	}
 
 	@Override
-	public void procedureRent(Map<String, String> map) {
+	public void procedureRent(Map<String, Object> map) {
 		
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			sqlSession.selectList(namespace + ".procedureRent", map);
+			sqlSession.selectOne(namespace + ".procedureRent", map);
 //			sqlSession.commit();
+		}
+	}
+
+	@Override
+	public void procedureRent2(Map<String, Object> map) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			sqlSession.selectList(namespace + ".procedureRent2", map);
 		}
 	}
 

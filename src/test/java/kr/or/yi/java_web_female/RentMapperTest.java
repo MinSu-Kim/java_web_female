@@ -40,9 +40,9 @@ public class RentMapperTest extends AbstractTest {
 		rent.setEndTime("12:00:00");
 		rent.setReturn(false);
 		rent.setTotalPrice(40000);
-		rent.setCarCode(new CarModel("V001"));
+		rent.setCarCode(new CarModel("V002"));
 		Customer customer = new Customer();
-		customer.setCode("C001");
+		customer.setCode("C006");
 		rent.setCustomerCode(customer);
 		rent.setInsuranceCode(new Insurance("I000"));
 		rent.seteRate(5);
@@ -56,13 +56,28 @@ public class RentMapperTest extends AbstractTest {
 	public void test03Procedure() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Map<String, String> map = new HashMap<>();
-		map.put("custom_code", "C005");
-		map.put("rent_code", "R006");
+		Map<String, Object> map = new HashMap<>();
+		map.put("custom_code", "C006");
+		map.put("rent_code", "R005");
 		map.put("carCode", "V002");
+		map.put("isGrade", 0);
 		
 		dao.procedureRent(map);
 //		Assert.assertNotNull(map);
 	}
+	
+/*	@Test
+	public void test04Procedure2() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("custom_code", "C005");
+		map.put("rent_code", "R005");
+		map.put("carCode", "V002");
+		map.put("isGrade", 1);
+		
+		dao.procedureRent2(map);
+//		Assert.assertNotNull(map);
+	}*/
 
 }

@@ -226,7 +226,7 @@ CREATE TABLE proj_rentcar.rent (
 	car_code       CHAR(4)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  CHAR(4)    NOT NULL COMMENT '고객코드', -- 고객코드
 	insurance_code CHAR(4)    NOT NULL COMMENT '보험코드', -- 보험코드
-	e_rate         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트코드
+	e_rate         int(11)    NULL     COMMENT '이벤트코드', -- 이벤트코드
 	opt_price      INT(11)    NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';
@@ -419,15 +419,12 @@ ALTER TABLE proj_rentcar.userpic
 		ON UPDATE cascade;
 	
 -- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
-DROP procedure proj_rentcar.update_customer_grade;
-
 DELIMITER $$
-CREATE PROCEDURE proj_rentcar.update_customer_grade (in custom_code char(4), in rent_code char(4), in carCode char(4))   
+$$
+CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4), in isGrade int)
 begin
     declare gcode char(4);
-	declare ecode char(4);
 
-   
     update customer
     set rent_cnt = rent_cnt + 1
     where code=custom_code;
@@ -440,64 +437,26 @@ begin
 	set grade_code = gcode
 	where code = custom_code;
 
-    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
-	select e_rate into ecode
-	from rent where code = rent_code;
-
-	update custom_event
-	set is_use = 1
-	where event_code = ecode and custom_code = custom_code;
-
 	update car_model
 	set is_rent = 1, rent_cnt = rent_cnt + 1
 	where car_code = carCode;
-
-
-end $$
-DELIMITER ;
-
-DROP PROCEDURE IF EXISTS proj_rentcar.update_customer_grade;
-
-DELIMITER $$
-$$
-CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4), in isGrade int)
-begin
-    declare gcode char(4);
-	declare ecode char(4);
-	declare ccode char(4);
-   	set ccode = custom_code;
-   
-    update customer
-    set rent_cnt = rent_cnt + 1
-    where code=ccode;
-   
-    select g.code into gcode
-	from customer c , grade g
-	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=ccode;
-
-	update customer
-	set grade_code = gcode
-	where code = ccode;
 
     /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
 	if isGrade = 0 then
-		/*select event_code into ecode
-		from custom_event ce join event on ce.event_code = event_code where custom_code = ccode order by rate desc limit 1;*/
-	 
-		select event_code
-		from custom_event ce join event on ce.event_code = code 
-		where custom_code = ccode order by rate desc limit 1;
-	 
-		select ecode, ccode from dual;
-
-		update custom_event
-		set is_use = 1
-		where custom_code = ccode and event_code = ecode;
+		call custom_event_use(custom_code);
 	end if;
-	
-	update car_model
-	set is_rent = 1, rent_cnt = rent_cnt + 1
-	where car_code = carCode;
 
 end$$
+DELIMITER ;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.custom_event_use(in c_code char(4))
+begin
+	update custom_event
+		set is_use = 1
+		where custom_code = c_code and event_code = (select e.code
+															from rent r join event e on r.e_rate = e.rate
+															where r.costomer_code = c_code);
+end $$
 DELIMITER ;
