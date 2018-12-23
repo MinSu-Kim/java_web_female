@@ -455,3 +455,41 @@ begin
 
 end $$
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS proj_rentcar.update_customer_grade;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4))
+begin
+    declare gcode char(4);
+	declare ecode char(4);
+
+   
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
+   
+    select g.code into gcode
+	from customer c , grade g
+	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
+
+	update customer
+	set grade_code = gcode
+	where code = custom_code;
+
+    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
+	select e_rate into ecode
+	from rent where code = rent_code;
+
+	update custom_event
+	set is_use = 1
+	where event_code = ecode and custom_code = custom_code;
+
+	update car_model
+	set is_rent = 1, rent_cnt = rent_cnt + 1
+	where car_code = carCode;
+
+end$$
+DELIMITER ;
+

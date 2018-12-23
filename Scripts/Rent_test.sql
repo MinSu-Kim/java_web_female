@@ -112,3 +112,5 @@ where event_code = 'EVT1' and custom_code = 'C001';
 
 select * from rent;
 select concat('R', LPAD(count(*)+1,3,'0')) from rent;
+
+call update_customer_grade('C007');
