@@ -58,7 +58,7 @@ public class RentMapperTest extends AbstractTest {
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("custom_code", "C006");
-		map.put("rent_code", "R005");
+		map.put("rent_code", "R006");
 		map.put("carCode", "V002");
 		map.put("isGrade", 0);
 		

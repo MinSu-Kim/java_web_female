@@ -103,8 +103,11 @@ begin
 end $$
 DELIMITER ;
 
-call update_customer_grade('C005', 'R005', 'V002', 0);
+call update_customer_grade('C006', 'R005', 'V002', 0);
 
+select *
+from rent r join event e on r.e_rate = e.rate
+where r.costomer_code = 'C006';
 
 -- 변경 전 EVT1이 검색됨 C005가 가지고 있는 이벤트가 EVT1 rate=3, EVT2 rate=5가 있으며, 조건의의해 rate가 높은 EVT2가 나와야 되는데 EVT1이 검색됨
 -- select * from event; 해보면 event 테이블에는 code가 있으므로  ce.event_code = event_code 해버리면 

@@ -109,6 +109,7 @@ insert into custom_event values
 ('EVT1','C005',0),
 ('EVT2','C005',0),
 ('EVT1','C006',0),
+('EVT2','C006',0),
 ('EVT1','C007',0),
 ('EVT1','C008',0),
 ('EVT1','C009',0);
