@@ -416,7 +416,7 @@ ALTER TABLE proj_rentcar.userpic
 			car_code -- C001
 		)
 		ON DELETE cascade
-		ON UPDATE cascade,
+		ON UPDATE cascade;
 	
 -- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
 DROP procedure proj_rentcar.update_customer_grade;

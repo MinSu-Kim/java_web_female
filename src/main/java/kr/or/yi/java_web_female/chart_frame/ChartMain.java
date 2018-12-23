@@ -122,13 +122,29 @@ public class ChartMain extends JFrame implements ActionListener {
 	
 	protected void do_btnDel_actionPerformed(ActionEvent e) {
 		Platform.runLater(() -> {
-			pBarChart.delChartData(new CarModel("V003", "벤틀리", 25));
+//			pBarChart.delChartData(new CarModel("V003", "벤틀리", 25));
+			String nextCode = service.nextCarCode();
+			int max = (Integer.parseInt(nextCode.substring(1, 3)));
+			String code = String.format("V%03d", max);
+			CarModel model = new  CarModel();
+			model.setCarCode(code);
+			model = service.selectCarModelByNo(model);
+			System.out.println(model);
+			pBarChart.delChartData(new CarModel(model.getCarCode(), model.getName(), model.getRentCnt()));
 		});
 	}
 	
 	protected void do_btnUpdate_actionPerformed(ActionEvent e) {
 		Platform.runLater(() -> {
-			pBarChart.updateChartData(new CarModel("V003", "벤틀리", 25));
+//			pBarChart.updateChartData(new CarModel("V003", "벤틀리", 25));
+			String nextCode = service.nextCarCode();
+			int max = (Integer.parseInt(nextCode.substring(1, 3)));
+			String code = String.format("V%03d", max);
+			CarModel model = new  CarModel();
+			model.setCarCode(code);
+			model = service.selectCarModelByNo(model);
+			System.out.println(model);
+			pBarChart.updateChartData(new CarModel(model.getCarCode(), model.getName(), model.getRentCnt()));
 		});
 	}
 	
