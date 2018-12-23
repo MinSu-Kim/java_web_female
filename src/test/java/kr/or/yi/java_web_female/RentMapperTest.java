@@ -1,5 +1,8 @@
 package kr.or.yi.java_web_female;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -7,6 +10,10 @@ import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.RentMapper;
 import kr.or.yi.java_web_female.dao.RentMapperImpl;
+import kr.or.yi.java_web_female.dto.CarModel;
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Insurance;
+import kr.or.yi.java_web_female.dto.Rent;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RentMapperTest extends AbstractTest {
@@ -21,5 +28,41 @@ public class RentMapperTest extends AbstractTest {
 		Assert.assertNotNull(nextRentNo);
 	}
 	
+	@Test
+	public void test02InsertRent() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Rent rent = new Rent();
+		rent.setCode(dao.getNextRentNo());
+		rent.setStartDate("2018-12-23");
+		rent.setStartTime("12:00:00");
+		rent.setEndDate("2018-12-24");
+		rent.setEndTime("12:00:00");
+		rent.setReturn(false);
+		rent.setTotalPrice(40000);
+		rent.setCarCode(new CarModel("V001"));
+		Customer customer = new Customer();
+		customer.setCode("C001");
+		rent.setCustomerCode(customer);
+		rent.setInsuranceCode(new Insurance("I000"));
+		rent.seteRate(5);
+		rent.setOptPrice(5000);
+		
+		int res = dao.insertRent(rent);
+		Assert.assertEquals(1, res);
+	}
+	
+	@Test
+	public void test03Procedure() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("custom_code", "C005");
+		map.put("rent_code", "R006");
+		map.put("carCode", "V002");
+		
+		dao.procedureRent(map);
+//		Assert.assertNotNull(map);
+	}
 
 }

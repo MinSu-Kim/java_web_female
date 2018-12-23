@@ -1,7 +1,10 @@
 package kr.or.yi.java_web_female.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class RentMapperImpl implements RentMapper {
@@ -20,6 +23,24 @@ public class RentMapperImpl implements RentMapper {
 	public String getNextRentNo() {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
 			return sqlSession.selectOne(namespace+".getNextRentNo");
+		}
+	}
+
+	@Override
+	public int insertRent(Rent rent) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.insert(namespace + ".insertRent", rent);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public void procedureRent(Map<String, String> map) {
+		
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			sqlSession.selectList(namespace + ".procedureRent", map);
+//			sqlSession.commit();
 		}
 	}
 
