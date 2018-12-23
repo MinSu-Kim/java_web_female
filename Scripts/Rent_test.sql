@@ -104,13 +104,31 @@ begin
 end$$
 DELIMITER ;
 
+
+
+-- 변경 전 EVT1이 검색됨 C005가 가지고 있는 이벤트가 EVT1 rate=3, EVT2 rate=5가 있으며, 조건의의해 rate가 높은 EVT2가 나와야 되는데 EVT1이 검색됨
+-- select * from event; 해보면 event 테이블에는 code가 있으므로  ce.event_code = event_code 해버리면 
+-- select event_code
+-- from custom_event ce join event on ce.event_code = event_code ==> on ce.event_code = event_code 조건이 자기 자신의 event_code와 비교 되어 카티션 곱이 됨
+-- where custom_code = 'C005' order by rate desc limit 1;
+
+select /*event_code, */*
+from custom_event ce join event on ce.event_code = event_code 
+where custom_code = 'C005' order by rate desc limit 1;
+
+-- 변경 후
 select event_code
-	from custom_event ce join event on ce.event_code = event_code where custom_code = 'C005' order by rate desc limit 1;
+from custom_event ce join event on ce.event_code = code 
+where custom_code = 'C005' order by rate desc limit 1;
+	
+
+
+
 call update_customer_grade('C009', 'R007', 'V002', 0);
 
 update custom_event
-		set is_use = 1
-		where c and custom_code = 'C005';
+set is_use = 1
+where c and custom_code = 'C005';
 
 select event_code from custom_event ce join event on ce.event_code = event_code where custom_code = 'C001' order by rate desc limit 1;
 	
