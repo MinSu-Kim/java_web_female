@@ -1,3 +1,8 @@
+DROP USER 'user_rentCar'@'%';
+DROP USER 'user_rentCar'@'localhost';
+FLUSH PRIVILEGES;
+
+
 CREATE USER 'user_rentCar'@'%';
 ALTER USER 'user_rentCar'@'%'
 IDENTIFIED BY 'rootroot' ;

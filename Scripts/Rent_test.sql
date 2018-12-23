@@ -83,10 +83,14 @@ begin
 
     /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
 	if isGrade = 0 then
-		select event_code into ecode
-	from custom_event ce join event on ce.event_code = event_code where custom_code = ccode order by rate desc limit 1;
+		/*select event_code into ecode
+		from custom_event ce join event on ce.event_code = event_code where custom_code = ccode order by rate desc limit 1;*/
 	 
-	select ecode, ccode from dual;
+		select event_code
+		from custom_event ce join event on ce.event_code = code 
+		where custom_code = ccode order by rate desc limit 1;
+
+		select ecode, ccode from dual;
 
 		update custom_event
 		set is_use = 1
@@ -134,6 +138,7 @@ where event_code = 'EVT1' and custom_code = 'C001';
 select * from rent;
 select concat('R', LPAD(count(*)+1,3,'0')) from rent;
 
-call update_customer_grade('C007');
 
 call update_customer_grade('C005', 'R007', 'V002', 0);
+
+
