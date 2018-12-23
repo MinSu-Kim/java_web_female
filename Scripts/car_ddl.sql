@@ -481,10 +481,14 @@ begin
 
     /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
 	if isGrade = 0 then
-		select event_code into ecode
-	from custom_event ce join event on ce.event_code = event_code where custom_code = ccode order by rate desc limit 1;
+		/*select event_code into ecode
+		from custom_event ce join event on ce.event_code = event_code where custom_code = ccode order by rate desc limit 1;*/
 	 
-	select ecode, ccode from dual;
+		select event_code
+		from custom_event ce join event on ce.event_code = code 
+		where custom_code = ccode order by rate desc limit 1;
+	 
+		select ecode, ccode from dual;
 
 		update custom_event
 		set is_use = 1
