@@ -282,7 +282,10 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		}
 		maps.put("gear", gear);
 
-		setLoadDatas();
+		list = modelService.SelectCarModelWithWhere(maps);
+		panelList.setList(list);
+		panelList.loadDatas();
+		add(panelList);
 	}
 
 
