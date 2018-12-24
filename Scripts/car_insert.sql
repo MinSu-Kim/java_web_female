@@ -81,17 +81,17 @@ insert into grade values ('G001', '브론즈',0,5, 5),
 						('G003', '골드',11,99999, 20),
 						('G004', '블랙리스트',-1,-1, 0);
 -- 고객 insert
-insert into customer values ('C001', 'asd132', password('rootroot'), '김철수', '대구 서구', '010-0000-7777', '1988-04-18', 'abc@gmail.com' ,'E001' , '2종보통','G001', 1),
-							('C002', 'qwer12', password('root1234'), '김영희', '서울 서구', '010-1111-6666', '1972-09-11', 'abc@naver.com' ,'E002' , '1종보통','G001', 3),
-							('C003', 'zxcv0523', password('asdfqwer'), '박철민', '부산 동구', '010-2222-5555', '1961-10-25', 'abc@gnaver.com' ,'E002' , '1종보통','G002', 7),
-							('C004', 'gtshv512', password('asdf1234'), '이수민', '대전 서구', '010-3333-4444', '1987-05-27', 'abc@gmail.com' ,'E001' , '2종보통','G002', 9),
-							('C005', 'gstjsva12', password('zxcv4567'), '나영석', '대구 수성구', '010-4444-3333', '1958-12-31', 'abc@daum.net' ,'E001' , '2종보통','G003', 21),
-							('C006', 'aefvb238', password('qwer2573'), '강호동', '대구 동구', '010-5555-2222', '1999-11-04', 'abc@daum.com' ,'E002' , '1종보통','G003', 30),
-							('C007', 'fkufj12', password('dhtdhd5645'), '김민정', '울산 서구', '010-6666-1111', '1994-03-16', 'abc@naver.com' ,'E002' , '2종보통','G004', -1),
-							('C008', 'xbmhw325', password('aggarg54'), '김재영', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
+insert into customer values ('C001', 'asd132', password('rootroot'), '김철수', '41456', '대구 서구', '010-0000-7777', '1988-04-18', 'abc@gmail.com' ,'E001' , '2종보통','G001', 1),
+							('C002', 'qwer12', password('root1234'), '김영희', '25356','서울 서구', '010-1111-6666', '1972-09-11', 'abc@naver.com' ,'E002' , '1종보통','G001', 3),
+							('C003', 'zxcv0523', password('asdfqwer'), '박철민', '15245','부산 동구', '010-2222-5555', '1961-10-25', 'abc@naver.com' ,'E002' , '1종보통','G002', 7),
+							('C004', 'gtshv512', password('asdf1234'), '이수민', '84562','대전 서구', '010-3333-4444', '1987-05-27', 'abc@gmail.com' ,'E001' , '2종보통','G002', 9),
+							('C005', 'gstjsva12', password('zxcv4567'), '나영석', '75425','대구 수성구', '010-4444-3333', '1958-12-31', 'abc@daum.net' ,'E001' , '2종보통','G003', 21),
+							('C006', 'aefvb238', password('qwer2573'), '강호동', '62589','대구 동구', '010-5555-2222', '1999-11-04', 'abc@daum.com' ,'E002' , '1종보통','G003', 30),
+							('C007', 'fkufj12', password('dhtdhd5645'), '김민정', '13265','울산 서구', '010-6666-1111', '1994-03-16', 'abc@naver.com' ,'E002' , '2종보통','G004', -1),
+							('C008', 'xbmhw325', password('aggarg54'), '김재영', '95625','서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 
 insert into customer values
-('C009', 'xbmhw325',password('aggarg54'), '김영희', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
+('C009', 'xbmhw325',password('aggarg54'), '김영희','45236', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 
 
 -- event insert
@@ -109,6 +109,7 @@ insert into custom_event values
 ('EVT1','C005',0),
 ('EVT2','C005',0),
 ('EVT1','C006',0),
+('EVT2','C006',0),
 ('EVT1','C007',0),
 ('EVT1','C008',0),
 ('EVT1','C009',0);
@@ -142,3 +143,56 @@ INSERT INTO rent VALUES
 insert into rent values
 ('R005', '2018-12-21', '12:00:00', '2018-12-20', '12:00:00', 0, 108000, 'V002', 'C005', 'I000', 5, 5000);
 
+
+-- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4), in isGrade int)
+begin
+    declare gcode char(4);
+	declare ecode char(4);
+
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
+   
+    select g.code into gcode
+	from customer c , grade g
+	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
+
+	update customer
+	set grade_code = gcode
+	where code = custom_code;
+
+	update car_model
+	set is_rent = 1, rent_cnt = rent_cnt + 1
+	where car_code = carCode;
+
+    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
+	if isGrade = 0 then
+		call custom_event_use(custom_code, rent_code);
+	end if;
+
+end$$
+DELIMITER ;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.custom_event_use(in c_code char(4), in r_code char(4))
+begin
+	declare ecode char(4);
+
+	select event_code into ecode
+	from custom_event ce join event e on ce.event_code = e.code 
+	where custom_code = c_code and rate = (	select e_rate
+											from rent r 
+											where r.costomer_code = c_code and code = r_code);
+	select ecode from dual;
+
+	update custom_event
+	set is_use = 1
+	where custom_code = c_code and event_code = ecode;
+
+end $$
+DELIMITER ;

@@ -16,7 +16,10 @@ import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Grade;
+import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
+import kr.or.yi.java_web_female.ui.join.JoinUI;
+import kr.or.yi.java_web_female.ui.join.SearchPostUI;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
 
@@ -28,6 +31,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
@@ -35,8 +39,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private List<Customer> list;
 	private JTextField tfZipCode;
 	private JTextField tfAddr;
-	private JTextField tfEmpCode;
-	private JTextField tfGradeName;
 	private JTextField tfRentCnt;
 	private CustomUiService service;
 	private JButton btnCusOk;
@@ -53,6 +55,8 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private JComboBox<String> cmbCusEmail2;
 	private JComboBox<String> cmbLicense;
 	private JDateChooser birthday;
+	private JComboBox<Employee> cmbEmpCode;
+	private JComboBox<Grade> cmbGrade;
 
 	public CustommerListPannel() {
 		setBorder(
@@ -94,7 +98,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput1.add(tfCusName_1);
 
 		tfCusName = new JTextField();
-		tfCusName.setEditable(false);
 		tfCusName.setColumns(10);
 		panelInput1.add(tfCusName);
 
@@ -103,7 +106,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput1.add(lblCusId);
 
 		tfCusId = new JTextField();
-		tfCusId.setEditable(false);
 		tfCusId.setColumns(10);
 		panelInput1.add(tfCusId);
 
@@ -167,7 +169,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		cmbCusEmail2 = new JComboBox<String>();
 		cmbCusEmail2.addActionListener(this);
-		
+
 		cmbCusEmail2.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
 		pEmail.add(cmbCusEmail2);
@@ -185,12 +187,17 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pAddr.setLayout(new BoxLayout(pAddr, BoxLayout.X_AXIS));
 
 		tfZipCode = new JTextField();
-		tfZipCode.setEditable(false);
 		tfZipCode.setColumns(10);
 		pAddr.add(tfZipCode);
 
 		JButton btnSearchAddr = new JButton("우편번호 검색");
-		
+		btnSearchAddr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchPostUI frame = new SearchPostUI();
+				frame.setJoinUi(CustommerListPannel.this); // 추가해줌. setAddress()호출하기 위핸
+				frame.setVisible(true);
+			}
+		});
 		pAddr.add(btnSearchAddr);
 
 		JLabel lblAddrDetail = new JLabel("주소");
@@ -198,7 +205,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput2.add(lblAddrDetail);
 
 		tfAddr = new JTextField();
-		tfAddr.setEditable(false);
 		panelInput2.add(tfAddr);
 		tfAddr.setColumns(10);
 
@@ -206,34 +212,34 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		lblEmpCode.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelInput2.add(lblEmpCode);
 
-		tfEmpCode = new JTextField();
-		tfEmpCode.setEditable(false);
-		panelInput2.add(tfEmpCode);
-		tfEmpCode.setColumns(10);
+		List<Employee> empList = service.getEmpList();
+		DefaultComboBoxModel<Employee> empModel = new DefaultComboBoxModel<>(new Vector<>(empList));
+		cmbEmpCode = new JComboBox<>(empModel);
+		panelInput2.add(cmbEmpCode);
 
 		JLabel lblLicence = new JLabel("면허종류");
 		lblLicence.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelInput2.add(lblLicence);
 
 		cmbLicense = new JComboBox<>();
-		cmbLicense.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종 보통", "2종 보통" }));
 		panelInput2.add(cmbLicense);
+		cmbLicense.addActionListener(this);
+		cmbLicense.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종보통", "2종보통" }));
 
 		JLabel lblGradeName = new JLabel("등급명");
 		lblGradeName.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelInput2.add(lblGradeName);
 
-		tfGradeName = new JTextField();
-		tfGradeName.setEditable(false);
-		panelInput2.add(tfGradeName);
-		tfGradeName.setColumns(10);
+		List<Grade> gradeList = service.getGradeList();
+		DefaultComboBoxModel<Grade> gradeModel = new DefaultComboBoxModel<>(new Vector<>(gradeList));
+		cmbGrade = new JComboBox<>(gradeModel);
+		panelInput2.add(cmbGrade);
 
 		JLabel lblRentCnt = new JLabel("대여횟수");
 		lblRentCnt.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelInput2.add(lblRentCnt);
 
 		tfRentCnt = new JTextField();
-		tfRentCnt.setEditable(false);
 		panelInput2.add(tfRentCnt);
 		tfRentCnt.setColumns(10);
 
@@ -252,6 +258,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelList.setPopupMenu(createDeptPopupMenu());
 	}
 
+	/* 추가해줌 */
+	public void setAddress(Post post) {
+		this.tfZipCode.setText(post.getZipcode());
+		this.tfAddr.setText(post.toString());
+		tfAddr.requestFocus();
+	}
+
 	private JPopupMenu createDeptPopupMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 
@@ -268,28 +281,29 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		popMenu.add(updateItem);
 
 		JMenuItem delItem = new JMenuItem("삭제");
-		delItem.addActionListener(new ActionListener() {
+/*		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*service.deleteGrade(panelList.getSelectedItem());
-				panelList.setList(service.selectGradeByAll());
-				panelList.loadDatas();
-				*/
-				/*
-				service.deleteCustomerEvent(panelList.getSelectedItem(), null);
-				panelList.setList(service.selectCustomerByAll());
-				panelList.loadDatas();*/
-				//CustomEvent customEvent = new CustomEvent();
-			/*	Customer customer = getItem();
-				CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-				service.deleteCustomerEvent(customer, customEvent);
-				JOptionPane.showMessageDialog(null,customer);
 				
-				JOptionPane.showMessageDialog(null, customEvent);
-				panelList.setList(service.selectCustomerByAll());
-				panelList.loadDatas();*/
+				 * service.deleteGrade(panelList.getSelectedItem());
+				 * panelList.setList(service.selectGradeByAll()); panelList.loadDatas();
+				 
+				
+				 * service.deleteCustomerEvent(panelList.getSelectedItem(), null);
+				 * panelList.setList(service.selectCustomerByAll()); panelList.loadDatas();
+				 
+				// CustomEvent customEvent = new CustomEvent();
+				
+				 * Customer customer = getItem(); CustomEvent customEvent = new
+				 * CustomEvent("EVT1", customer.getCode(), false);
+				 * service.deleteCustomerEvent(customer, customEvent);
+				 * JOptionPane.showMessageDialog(null,customer);
+				 * 
+				 * JOptionPane.showMessageDialog(null, customEvent);
+				 * panelList.setList(service.selectCustomerByAll()); panelList.loadDatas();
+				 
 			}
-		});
+		});*/
 		popMenu.add(delItem);
 
 		return popMenu;
@@ -314,6 +328,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 	private void do_btnUpdate_actionPerformed(ActionEvent arg0) {
 		Customer customer = getItem();
+		
 		service.updateCustomer(customer);
 		panelList.setList(service.selectCustomerByAll());
 		panelList.loadDatas();
@@ -326,97 +341,93 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		tfCusId.setText("");
 		tfAddr.setText("");
+		tfZipCode.setText("");
 		tfCusCode.setText("");
 		tfCusEmail1.setText("");
 		tfCusEmail2.setText("");
 		tfCusName.setText("");
-		tfEmpCode.setText("");
+		cmbEmpCode.setSelectedIndex(-1);
 		tfTel2.setText("");
 		tfTel3.setText("");
 		tfZipCode.setText("");
-		tfGradeName.setText("");
+		cmbGrade.setSelectedIndex(-1);
 		tfRentCnt.setText("");
 		birthday.setDate(null);
-		
+		cmbCusEmail2.setSelectedItem("선택하세요");
+		cmbLicense.setSelectedItem("선택하세요");
+		cmbTel1.setSelectedItem("010");
 
 	}
 
 	private Customer getItem() {
-		String cCode = tfCusCode.getText();
-		String cId = tfCusId.getText();
-		String cName = tfCusName.getText();
-		String cAddr = tfAddr.getText();
-		String zipCode = tfZipCode.getText();
+		Customer item = new Customer();
+		item.setCode(tfCusCode.getText().trim());
+		
+		Customer updateCustomer  = list.get(list.indexOf(item));
+		
+		String cId = tfCusId.getText().trim();
+		String cName = tfCusName.getText().trim();
+		String cAddr = tfAddr.getText().trim();
+		String zipCode = tfZipCode.getText().trim();
 		Date cusDob = birthday.getDate();
 		String cTel1 = (String) cmbTel1.getSelectedItem();
-		String cTel2 = tfTel2.getText();
-		String cTel3 = tfTel3.getText();
-		String cEmail1 = tfCusEmail1.getText();
-		String cEmail2 =  tfCusEmail2.getText();
+		String cTel2 = tfTel2.getText().trim();
+		String cTel3 = tfTel3.getText().trim();
+		String cEmail1 = tfCusEmail1.getText().trim();
+		String cEmail2 = tfCusEmail2.getText().trim();
 		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();
-		
-		//String eCode = tfEmpCode.getText();
-		
-		//String gradeName = tfGradeName.getText();
-		//int rentCnt = Integer.parseInt(tfRentCnt.getText()); 
 
-		Customer item = new Customer();
-		item.setId(cId);
-		item.setAddress(cAddr);
-		item.setCode(cCode);
-		item.setEmail(cEmail1);
-		item.setEmail(cEmail2);
-		item.setEmail(cEmail3);
-		item.setName(cName);
-		item.setDob(cusDob);
-		
-		//Employee empCode = new Employee("E001");
-		//Grade gradeCode = new Grade("G001");
-		
-		//item.setEmpCode(empCode);
-		item.setPhone(cTel1);
-		item.setPhone(cTel2);
-		item.setPhone(cTel3);
-		item.setAddress(zipCode);
-		//item.setGradeCode(gradeCode);
-	//	item.setRentCnt(rentCnt);
-		return item;
+		updateCustomer.setId(cId);
+		updateCustomer.setAddress(cAddr);
+		updateCustomer.setZipCode(zipCode);
+		updateCustomer.setEmail(cEmail1);
+		updateCustomer.setEmail(cEmail2);
+		updateCustomer.setEmail(cEmail3);
+		updateCustomer.setName(cName);
+		updateCustomer.setDob(cusDob);
+		updateCustomer.setPhone(cTel1);
+		updateCustomer.setPhone(cTel2);
+		updateCustomer.setPhone(cTel3);
+		updateCustomer.setAddress(zipCode);
+		return updateCustomer;
 	}
 
 	protected void do_btnCusOk_actionPerformed(ActionEvent arg0) {
+		JOptionPane.showMessageDialog(null, "do_btnCusOk_actionPerformed 추가");
 		String cId = tfCusId.getText();
 		String cAddr = tfAddr.getText();
 		String cCode = tfCusCode.getText();
 		Date cusDob = birthday.getDate();
 		String cEmail1 = tfCusEmail1.getText();
-		String cEmail2 =  tfCusEmail2.getText();
+		String cEmail2 = tfCusEmail2.getText();
 		String cName = tfCusName.getText();
-		String eCode = tfEmpCode.getText();
+		Employee eCode = (Employee) cmbEmpCode.getSelectedItem();
 		String cTel2 = tfTel2.getText();
 		String cTel3 = tfTel3.getText();
 		String zipCode = tfZipCode.getText();
-		String gradeName = tfGradeName.getText();
-		int rentCnt = Integer.parseInt(tfRentCnt.getText()); 
-		
+		Grade gradeName = (Grade) cmbGrade.getSelectedItem();
+		int rentCnt = Integer.parseInt(tfRentCnt.getText());
+
 		Customer customer = new Customer();
 		customer.setId(cId);
+		customer.setZipCode(zipCode);
 		customer.setAddress(cAddr);
 		customer.setCode(cCode);
 		customer.setDob(cusDob);
-		customer.setEmail(cEmail1);
-		customer.setEmail(cEmail2);
-		customer.setName(cName);	
-		
-		Employee empCode = new Employee("E001");
-		Grade gradeCode = new Grade("G001");
-		
+		customer.setEmail(String.format("%s@%s", cEmail1, cEmail2));
+
+		customer.setName(cName);
+
+		Employee empCode = service.getEmployeeByNo(eCode);
+		Grade gradeCode = service.getGradeByName(gradeName);
+
 		customer.setEmpCode(empCode);
 		customer.setPhone(cTel2);
 		customer.setPhone(cTel3);
 		customer.setAddress(zipCode);
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
-		
+
 		service.insertCustomer(customer);
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
@@ -434,31 +445,38 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 	private void setItem(Customer item) {
 		tfCusId.setText(item.getId() + "");
-		tfAddr.setText(item.getAddress() + "");
+
 		tfCusCode.setText(item.getCode() + "");
-	//	birthday.set(item.getDob()+"");
-		tfCusEmail1.setText(item.getEmail() + "");
-		tfCusEmail2.setText(item.getEmail() + "");
+		birthday.setDate(item.getDob());
+
+		String[] array1 = item.getEmail().split("@");
+		tfCusEmail1.setText(array1[0] + "");
+		tfCusEmail2.setText(array1[1] + "");
 		tfCusName.setText(item.getName() + "");
-		tfEmpCode.setText(item.getEmpCode() + "");
-		tfTel2.setText(item.getPhone() + "");
-		tfTel3.setText(item.getPhone() + "");
-		tfZipCode.setText(item.getAddress() + "");
-		tfGradeName.setText(item.getGradeCode() + "");
+		cmbEmpCode.setSelectedItem(item.getEmpCode());
+		cmbGrade.setSelectedItem(item.getGradeCode());
+
+		String[] array2 = item.getPhone().split("-");
+		cmbTel1.setSelectedItem(array2[0] + "");
+		tfTel2.setText(array2[1] + "");
+		tfTel3.setText(array2[2] + "");
+
+		tfZipCode.setText(item.getZipCode() + "");
+		tfAddr.setText(item.getAddress() + "");
+		cmbLicense.setSelectedItem(item.getLicense());
 		tfRentCnt.setText(item.getRentCnt() + "");
-		
-		
 
 	}
 
 	protected void do_cmbCusEmail2_actionPerformed(ActionEvent arg0) {
-		if(cmbCusEmail2.getSelectedIndex()<5) {
+		if (cmbCusEmail2.getSelectedIndex() < 5) {
 			tfCusEmail2.setEditable(false);
-			tfCusEmail2.setText((String)cmbCusEmail2.getSelectedItem());
-		}else {
+			tfCusEmail2.setText((String) cmbCusEmail2.getSelectedItem());
+		} else {
 			tfCusEmail2.requestFocus();
 			tfCusEmail2.setText("");
 			tfCusEmail2.setEditable(true);
 		}
 	}
+
 }

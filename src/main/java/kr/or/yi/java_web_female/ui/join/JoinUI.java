@@ -391,6 +391,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		String cusId = tfId.getText().trim();
 		String cusPw = new String(tfPwd1.getPassword()).trim();
 		String cusName = tfName.getText().trim();
+		String zipCode = tfZipCode.getText().trim();
 		String cusAddress = tfAddr.getText().trim();
 		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
 				+ (tfTel3.getText().trim());
@@ -408,7 +409,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		Employee empCode = new Employee("E001");
 		Grade gradeCode = new Grade("G001");
 
-		return new Customer(cusId, cusPw, cusName, cusAddress, cusPhone, cusDob, cusEmail, empCode, license, gradeCode,
+		return new Customer(cusId, cusPw, cusName, zipCode, cusAddress, cusPhone, cusDob, cusEmail, empCode, license, gradeCode,
 				0);
 	}
 

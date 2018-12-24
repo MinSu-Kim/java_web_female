@@ -47,10 +47,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		Customer searchId = new Customer();
 		searchId.setId("qwer12");
-//		int list = dao.selectCustomerById(searchId);
 		Customer selectCustomer = dao.selectCustomerById(searchId);
 		Assert.assertNotNull(selectCustomer);
-//		Assert.assertEquals(1, list);
 	}
 
 	@Test
@@ -61,6 +59,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("psw2701");
 		customer.setPasswd("password");
 		customer.setName("박수완");
+		customer.setZipCode("21236");
 		customer.setAddress("대구");
 		customer.setPhone("010-5757-5959");
 		Calendar cal = Calendar.getInstance();
@@ -68,19 +67,19 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setDob(cal.getTime());
 
 		customer.setEmail("psw2701@naver.com");
-		
-		Employee employee = new Employee(); 
+
+		Employee employee = new Employee();
 		employee.setCode("E001");
 		customer.setEmpCode(employee);
-		
+
 		customer.setLicense("2종보통");
-		
-		Grade grade = new Grade(); 
+
+		Grade grade = new Grade();
 		grade.setCode("G001");
 		customer.setGradeCode(grade);
-		
+
 		customer.setRentCnt(0);
-		
+
 		int res = dao.insertCustomer(customer);
 		Assert.assertEquals(1, res);
 	}
@@ -125,40 +124,44 @@ public class CustomerMapperTest extends AbstractTest {
 		Assert.assertNotNull(cusList);
 	}
 
-	/*
-	 * @Test public void test04updateCustomer() throws ParseException {
-	 * log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-	 * Customer customer = new Customer();
-	 * 
-	 * customer.setCode(dao.nextCode()); customer.setId("psw2701");
-	 * customer.setPasswd("password"); customer.setName("박수완");
-	 * customer.setAddress("대구"); customer.setPhone("010-5757-5959");
-	 * 
-	 * Grade grade = new Grade(); grade.setCode("G001");
-	 * customer.setGradeCode(grade);
-	 * 
-	 * String strDate = "2017-10-17"; SimpleDateFormat sdf = new
-	 * SimpleDateFormat("yyyy-MM-dd"); Date date = sdf.parse(strDate);
-	 * customer.setDob(date);
-	 * 
-	 * customer.setEmail("qwerasdf@naver.com");
-	 * 
-	 * Employee employee = new Employee(); employee.setCode("E001");
-	 * customer.setEmpCode(employee);
-	 * 
-	 * customer.setLicense("2종 보통"); customer.setRentCnt(5); int res =
-	 * dao.updateCustomer(customer); Assert.assertSame(1, res);
-	 * 
-	 * }
-	 */
-	/*@Test
-	public void test10deleteCustomer() {
+	@Test
+	public void test04updateCustomer() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		Customer customer = new Customer();
-		customer.setCode(dao.nextCode());
-		int res = dao.deleteCustomer(customer);
-		Assert.assertEquals(1, res);
-	}*/
+
+		customer.setCode("C009");
+		customer.setId("psw2701");
+		customer.setPasswd("password");
+		customer.setName("박수완");
+		customer.setZipCode("15426");
+		customer.setAddress("대구");
+		customer.setPhone("010-5757-5959");
+		Calendar cal = Calendar.getInstance();
+		cal.set(2018, 12, 20);
+		customer.setDob(cal.getTime());
+		customer.setEmail("qwerasdf@naver.com");
+		
+		Employee employee = new Employee();
+		employee.setCode("E001");
+		customer.setEmpCode(employee);
+		
+		customer.setLicense("2종 보통");
+		
+		Grade grade = new Grade();
+		grade.setCode("G001");
+		customer.setGradeCode(grade);
+		customer.setRentCnt(5);
+		
+		int res = dao.updateCustomer(customer);
+		Assert.assertSame(1, res);
+
+	}
+	/*
+	 * @Test public void test10deleteCustomer() {
+	 * log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+	 * Customer customer = new Customer(); customer.setCode(dao.nextCode()); int res
+	 * = dao.deleteCustomer(customer); Assert.assertEquals(1, res); }
+	 */
 
 	@Test(expected = RuntimeException.class)
 	public void test11JoinTransactionTest01() {
@@ -170,6 +173,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("java");
 		customer.setPasswd("rootroot");
 		customer.setName("자바");
+		customer.setZipCode("51689");
 		customer.setAddress("대구");
 		customer.setPhone("053-555-1333");
 		customer.setEmail("psw2701@naver.com");
@@ -179,7 +183,9 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.insertCustomerJoin(customer, customEvent);
+		int res = dao.insertCustomerJoin(customer, customEvent);
+		System.out.println("res : " + res);
+		Assert.assertEquals(-1, res);
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -192,6 +198,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("java");
 		customer.setPasswd("rootroot");
 		customer.setName("자바");
+		customer.setZipCode("51689");
 		customer.setAddress("대구");
 		customer.setPhone("053-555-1333");
 		customer.setEmail("psw2701@naver.com");
@@ -201,7 +208,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
 
-		dao.insertCustomerJoin(customer, customEvent);
+		int res = dao.insertCustomerJoin(customer, customEvent);
+		Assert.assertEquals(0, res);
 	}
 
 	@Test
@@ -214,6 +222,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("java");
 		customer.setPasswd("rootroot");
 		customer.setName("자바");
+		customer.setZipCode("51689");
 		customer.setAddress("대구");
 		customer.setPhone("053-555-1333");
 		customer.setEmail("psw2701@naver.com");
@@ -223,7 +232,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.insertCustomerJoin(customer, customEvent);
+		int res = dao.insertCustomerJoin(customer, customEvent);
+		Assert.assertEquals(1, res);
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -235,7 +245,9 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setCode("C017");
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.deleteCustomerEvent(customer, customEvent);
+		int res = dao.deleteCustomerEvent(customer, customEvent);
+		System.out.println("res : " + res);
+		Assert.assertEquals(-1, res);
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -248,7 +260,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
 
-		dao.deleteCustomerEvent(customer, customEvent);
+		int res = dao.deleteCustomerEvent(customer, customEvent);
+		Assert.assertEquals(0, res);
 	}
 
 	@Test
@@ -261,6 +274,7 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.deleteCustomerEvent(customer, customEvent);
+		int res = dao.deleteCustomerEvent(customer, customEvent);
+		Assert.assertEquals(1, res);
 	}
 }
