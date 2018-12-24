@@ -51,7 +51,7 @@ public class CarModelMapperTest extends AbstractTest {
 		carModel.setName("벤츠");
 		carModel.setColor("wh");
 		carModel.setGear("auto");
-		carModel.setBrand(new Brand("B4"));
+		carModel.setBrand(new Brand("B3"));
 		carModel.setCarType(new CarType("S2"));
 		carModel.setBasicCharge(70000);
 		carModel.setHour6(40000);

@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -42,9 +43,16 @@ public class UserPicMapperTest extends AbstractTest {
 		cds.setProperties(properties);
 		DataSource ds = cds.getDataSource();
 		
+		String delSql = "delete from userpic";
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(delSql);){
+			pstmt.executeUpdate();
+		}
+		
 		String sql = "INSERT INTO userpic(car_code, pic) VALUES(?, ?)";
 		try (Connection con = ds.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
 			pstmt.addBatch("SET FOREIGN_KEY_CHECKS = 0");
 
 			for(String name : arr) {
@@ -104,6 +112,17 @@ public class UserPicMapperTest extends AbstractTest {
 		return file;
 	}
 
+	
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		File pics = new File(System.getProperty("user.dir")+"/images/test/");
+		if(pics.exists()) {
+			for(File f : pics.listFiles()) {
+				f.delete();
+			}
+			pics.delete();
+		}
+	}
 }
 
 
