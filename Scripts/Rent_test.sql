@@ -137,6 +137,14 @@ where customer_code = 'C006';
 
 call update_customer_grade('C005', 'R005', 'V002', 0);
 
+
+--
+select * from customer;
+select * from custom_event;
+select * from car_model;
+
+
+
 update custom_event
 set is_use = 1
 where custom_code = 'C006' and event_code = 'EVT2';
