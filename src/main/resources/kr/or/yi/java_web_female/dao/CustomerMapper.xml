@@ -6,6 +6,7 @@
 		<result column="Id" property="id" />
 		<result column="passwd" property="passwd" />
 		<result column="Name" property="name" />
+		<result column="zip_code" property="zipCode"/>
 		<result column="address" property="address" />
 		<result column="phone" property="phone" />
 		<result column="dob" property="dob" />
@@ -18,7 +19,7 @@
 
 	<select id="selectCustomerByName" parameterType="Customer"
 		resultMap="ResultCustom">
-		select code, Id, passwd, Name, address, phone, dob, email,
+		select code, Id, passwd, Name, zip_code ,address, phone, dob, email,
 		emp_code, license, grade_code, rent_cnt
 		from customer
 		where name = #{name}
@@ -35,7 +36,7 @@
 
 	<select id="selectCustomerByCode" parameterType="Customer"
 		resultMap="ResultCustomExtend">
-		select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, 
+		select c.code, Id, passwd, c.Name, zip_code ,address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, 
 		custom_code, is_use, e.name as eName, e.rate as eRate, g.rate as gRate
 		from customer c join custom_event ce on c.code = ce.custom_code join event e 
 		on ce.event_code = e.code join grade g on c.grade_code = g.code
@@ -44,14 +45,14 @@
 
 	<select id="selectCustomerByAll" resultMap="ResultCustom">
 		select code, Id,
-		password(#{passwd}), Name, address, phone, dob, email, emp_code,
+		password(#{passwd}), Name, zip_code ,address, phone, dob, email, emp_code,
 		license, grade_code, rent_cnt
 		from customer
 	</select>
 
 	<select id="selectCustomerById" resultMap="ResultCustom">
 		select code, Id,
-		password(#{passwd}), Name, address, phone, dob, email, emp_code,
+		password(#{passwd}), Name, zip_code ,address, phone, dob, email, emp_code,
 		license, grade_code, rent_cnt
 		from customer
 		where Id = #{id}
@@ -59,8 +60,8 @@
 
 	<insert id="insertCustomer" parameterType="Customer">
 
-		insert into customer(code, Id, passwd, Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt  )
-		values(#{code}, #{id}, password(#{passwd}), #{name}, #{address}, #{phone}, #{dob}, #{email},#{empCode.code}, #{license}, #{gradeCode.code}, #{rentCnt})
+		insert into customer(code, Id, passwd, Name, zip_code, address, phone, dob, email, emp_code, license, grade_code, rent_cnt  )
+		values(#{code}, #{id}, password(#{passwd}), #{name},  #{zipCode} ,#{address}, #{phone}, #{dob}, #{email},#{empCode.code}, #{license}, #{gradeCode.code}, #{rentCnt})
 	</insert>
 
 	<select id="nextCustomerCode" resultType="java.lang.Integer">
@@ -73,7 +74,7 @@
 	</select>
 
 	<select id="selectCustomerByPw" resultMap="ResultCustom">
-		select code, Id, Name,
+		select code, Id, Name,zip_code,
 		address, phone, dob, email, emp_code, license, grade_code, rent_cnt
 		from customer
 		where Id = #{id} and passwd = password(#{passwd});

@@ -11,7 +11,7 @@ building2 int(5) NULL
 /*create index idx_post_sido on post(sido);
 create index idx_post_doro on post(doro);*/
 
-load data local infile 'D:/workspace_javafx/java_web_female/DataFiles/대구광역시.txt' into table post
+load data local infile 'D:/workspace-proj/java_web_female/DataFiles/대구광역시.txt' into table post
 character set'euckr'
 fields terminated by'|'
 ignore 1 lines

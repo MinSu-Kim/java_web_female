@@ -16,7 +16,10 @@ import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Grade;
+import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
+import kr.or.yi.java_web_female.ui.join.JoinUI;
+import kr.or.yi.java_web_female.ui.join.SearchPostUI;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
 
@@ -53,6 +56,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private JComboBox<String> cmbCusEmail2;
 	private JComboBox<String> cmbLicense;
 	private JDateChooser birthday;
+	private JTextField tfLicense;
 
 	public CustommerListPannel() {
 		setBorder(
@@ -190,7 +194,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pAddr.add(tfZipCode);
 
 		JButton btnSearchAddr = new JButton("우편번호 검색");
-		
+		btnSearchAddr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchPostUI frame = new SearchPostUI();
+				frame.setJoinUi(CustommerListPannel.this); // 추가해줌. setAddress()호출하기 위핸
+				frame.setVisible(true);
+			}
+		});
 		pAddr.add(btnSearchAddr);
 
 		JLabel lblAddrDetail = new JLabel("주소");
@@ -214,10 +224,20 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		JLabel lblLicence = new JLabel("면허종류");
 		lblLicence.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelInput2.add(lblLicence);
-
-		cmbLicense = new JComboBox<>();
-		cmbLicense.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종 보통", "2종 보통" }));
-		panelInput2.add(cmbLicense);
+		
+		JPanel License = new JPanel();
+		panelInput2.add(License);
+		License.setLayout(new BorderLayout(0, 0));
+				
+				tfLicense = new JTextField();
+				tfLicense.setEditable(false);
+				License.add(tfLicense, BorderLayout.NORTH);
+				tfLicense.setColumns(10);
+		
+				cmbLicense = new JComboBox<>();
+				cmbLicense.addActionListener(this);
+				License.add(cmbLicense, BorderLayout.SOUTH);
+				cmbLicense.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종 보통", "2종 보통" }));
 
 		JLabel lblGradeName = new JLabel("등급명");
 		lblGradeName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -250,6 +270,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		add(panelList, BorderLayout.CENTER);
 
 		panelList.setPopupMenu(createDeptPopupMenu());
+	}
+	
+	/* 추가해줌 */
+	public void setAddress(Post post) {
+		this.tfZipCode.setText(post.getZipcode());
+		this.tfAddr.setText(post.toString());
+		tfAddr.requestFocus();
 	}
 
 	private JPopupMenu createDeptPopupMenu() {
@@ -296,6 +323,9 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == cmbLicense) {
+			do_cmbLicense_actionPerformed(arg0);
+		}
 		if (arg0.getSource() == cmbCusEmail2) {
 			do_cmbCusEmail2_actionPerformed(arg0);
 		}
@@ -326,6 +356,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		tfCusId.setText("");
 		tfAddr.setText("");
+		tfZipCode.setText("");
 		tfCusCode.setText("");
 		tfCusEmail1.setText("");
 		tfCusEmail2.setText("");
@@ -337,6 +368,9 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		tfGradeName.setText("");
 		tfRentCnt.setText("");
 		birthday.setDate(null);
+		cmbCusEmail2.setSelectedItem("선택하세요");
+		cmbLicense.setSelectedItem("선택하세요");
+		cmbTel1.setSelectedItem("010");
 		
 
 	}
@@ -363,6 +397,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		Customer item = new Customer();
 		item.setId(cId);
 		item.setAddress(cAddr);
+		item.setZipCode(zipCode);
 		item.setCode(cCode);
 		item.setEmail(cEmail1);
 		item.setEmail(cEmail2);
@@ -400,6 +435,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		
 		Customer customer = new Customer();
 		customer.setId(cId);
+		customer.setZipCode(zipCode);
 		customer.setAddress(cAddr);
 		customer.setCode(cCode);
 		customer.setDob(cusDob);
@@ -434,16 +470,30 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 	private void setItem(Customer item) {
 		tfCusId.setText(item.getId() + "");
-		tfAddr.setText(item.getAddress() + "");
+	
 		tfCusCode.setText(item.getCode() + "");
-	//	birthday.set(item.getDob()+"");
-		tfCusEmail1.setText(item.getEmail() + "");
-		tfCusEmail2.setText(item.getEmail() + "");
+		birthday.setDate(item.getDob());
+		
+		String email;
+		String [] array1;
+		email = item.getEmail();
+		array1 = email.split("@");
+		tfCusEmail1.setText(array1[0] + "");
+		tfCusEmail2.setText(array1[1] + "");
 		tfCusName.setText(item.getName() + "");
 		tfEmpCode.setText(item.getEmpCode() + "");
-		tfTel2.setText(item.getPhone() + "");
-		tfTel3.setText(item.getPhone() + "");
-		tfZipCode.setText(item.getAddress() + "");
+		
+		String tel;
+		String[] array2;
+		tel = item.getPhone();
+		array2 = tel.split("-");
+		cmbTel1.setSelectedItem(array2[0] + "");
+		tfTel2.setText(array2[1] + "");
+		tfTel3.setText(array2[2] + "");
+		
+		tfZipCode.setText(item.getZipCode() + "");
+		tfAddr.setText(item.getAddress() + "");
+		tfLicense.setText(item.getLicense()+"");
 		tfGradeName.setText(item.getGradeCode() + "");
 		tfRentCnt.setText(item.getRentCnt() + "");
 		
@@ -460,5 +510,16 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 			tfCusEmail2.setText("");
 			tfCusEmail2.setEditable(true);
 		}
+	}
+	protected void do_cmbLicense_actionPerformed(ActionEvent arg0) {
+		if(cmbLicense.getSelectedIndex()<3) {
+			tfLicense.setEditable(false);
+			tfLicense.setText((String)cmbLicense.getSelectedItem());
+		}else {
+			tfLicense.requestFocus();
+			tfLicense.setText("");
+			tfLicense.setEditable(true);
+		}
+	
 	}
 }

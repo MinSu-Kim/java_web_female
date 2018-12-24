@@ -61,6 +61,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("psw2701");
 		customer.setPasswd("password");
 		customer.setName("박수완");
+		customer.setZipCode("21236");
 		customer.setAddress("대구");
 		customer.setPhone("010-5757-5959");
 		Calendar cal = Calendar.getInstance();
@@ -170,6 +171,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("java");
 		customer.setPasswd("rootroot");
 		customer.setName("자바");
+		customer.setZipCode("51689");
 		customer.setAddress("대구");
 		customer.setPhone("053-555-1333");
 		customer.setEmail("psw2701@naver.com");
@@ -192,6 +194,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("java");
 		customer.setPasswd("rootroot");
 		customer.setName("자바");
+		customer.setZipCode("51689");
 		customer.setAddress("대구");
 		customer.setPhone("053-555-1333");
 		customer.setEmail("psw2701@naver.com");
@@ -214,6 +217,7 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setId("java");
 		customer.setPasswd("rootroot");
 		customer.setName("자바");
+		customer.setZipCode("51689");
 		customer.setAddress("대구");
 		customer.setPhone("053-555-1333");
 		customer.setEmail("psw2701@naver.com");
