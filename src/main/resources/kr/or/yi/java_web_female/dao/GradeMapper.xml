@@ -9,6 +9,12 @@
 		where code=#{code}
 	</select>
 
+	<select id="selectGradeByName" resultType="Grade">
+		select code, name, g_losal, g_hisal, rate 
+		from grade
+		where name=#{name}
+	</select>
+
 	<!-- selectGradeByAll -->
 	<select id="selectGradeByAll" resultType="Grade">
 		select code, name, g_losal, g_hisal, rate 

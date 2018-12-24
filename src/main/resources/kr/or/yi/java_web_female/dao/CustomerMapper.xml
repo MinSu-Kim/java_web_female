@@ -82,10 +82,13 @@
 	</select>
 
 	<!-- update -->
-	<!-- <update id="updateCustomer" parameterType="Customer"> update customer 
-		set code=#{code}, Id=#{id}, passwd=password(#{passwd}), name=#{name}, address=#{address}, 
-		phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license}, grade_code=#{gradeCode}, 
-		rent_cnt=#{rentCnt} where code=#{code} </update> -->
+	<update id="updateCustomer" parameterType="Customer">
+		update customer
+		set Id=#{id}, passwd=password(#{passwd}), Name=#{name}, address=#{address}, zip_code=#{zipCode},
+		phone=#{phone}, dob=#{dob}, email=#{email}, emp_code=#{empCode.code}, license=#{license}, grade_code=#{gradeCode.code}, 
+		rent_cnt=#{rentCnt}
+		where code=#{code}
+	</update>
 
 	<!-- delete -->
 

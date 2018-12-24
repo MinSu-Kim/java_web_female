@@ -18,39 +18,27 @@ public class Customer {
 	private Grade gradeCode;
 	private int rentCnt;
 	private List<CustomEvent> events;
-	
 
-
-	
-	
 	public String getZipCode() {
 		return zipCode;
 	}
 
-
-
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-
-
 
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-
 	public Customer(String id, String passwd) {
 		super();
 		this.id = id;
 		this.passwd = passwd;
 	}
-	
-	
 
-	public Customer( String id, String passwd, String name, String zipCode,  String address, String phone, Date dob,
+	public Customer(String id, String passwd, String name, String zipCode, String address, String phone, Date dob,
 			String email, Employee empCode, String license, Grade gradeCode, int rentCnt) {
 
 		this.id = id;
@@ -66,8 +54,6 @@ public class Customer {
 		this.gradeCode = gradeCode;
 		this.rentCnt = rentCnt;
 	}
-
-
 
 	public Customer(String code, String id, String passwd, String name, String address, String phone, Date dob,
 			String email, Employee empCode, String license, Grade gradeCode, int rentCnt, List<CustomEvent> events) {
@@ -86,13 +72,11 @@ public class Customer {
 		this.rentCnt = rentCnt;
 		this.events = events;
 	}
-	
-	
 
-	public Customer( String id, String passwd, String name, String address, String phone, Date dob,
-			String email, String license) {
+	public Customer(String id, String passwd, String name, String address, String phone, Date dob, String email,
+			String license) {
 		super();
-		
+
 		this.id = id;
 		this.passwd = passwd;
 		this.name = name;
@@ -122,26 +106,18 @@ public class Customer {
 		this.email = email;
 		this.gradeCode = gradeCode;
 	}
-	
-	
-
 
 	public Customer(String cusId) {
 		this.id = cusId;
 	}
 
-	
 	public String getCode() {
 		return code;
 	}
 
-
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-
 
 	public String getId() {
 		return id;
@@ -239,8 +215,6 @@ public class Customer {
 		this.events = events;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return String.format(
@@ -249,6 +223,31 @@ public class Customer {
 				events);
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		return true;
+	}
+	
 	
 
 }
