@@ -34,8 +34,8 @@ public class CustomUiService {
 	public int updateCustomer(Customer customer){
 		return customerDao.updateCustomer(customer);
 	}
-	public int deleteCustomerEvent(Customer customer, CustomEvent customEvent){
-		return customerDao.deleteCustomerEvent(customer, customEvent);
+	public void deleteCustomerEvent(Customer customer, CustomEvent customEvent){
+		customerDao.deleteCustomerEvent(customer, customEvent);
 	}
 
 	public Grade getGradeByName(Grade gradeName) {

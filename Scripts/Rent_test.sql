@@ -135,6 +135,12 @@ where custom_code = 'C005' and rate = (	select e_rate
 select * from rent;
 select concat('R', LPAD(count(*)+1,3,'0')) from rent;
 
+select max(code) from rent;
+select round(substring(max(code), 2,3)) + 1 from rent;
+
+select concat('R', lpad((round(substring(max(code), 2,3)) + 1), 3, '0')) from rent;
+
+select concat('R', LPAD(substring(max(code), 2,3)*1+1, 3,'0') from rent;
 
 call update_customer_grade('C006', 'R007', 'V002', 0);
 

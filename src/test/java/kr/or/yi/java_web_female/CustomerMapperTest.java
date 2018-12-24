@@ -8,6 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dto.CustomEvent;
@@ -156,61 +158,6 @@ public class CustomerMapperTest extends AbstractTest {
 		Assert.assertSame(1, res);
 
 	}
-	/*
-	 * @Test public void test10deleteCustomer() {
-	 * log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-	 * Customer customer = new Customer(); customer.setCode(dao.nextCode()); int res
-	 * = dao.deleteCustomer(customer); Assert.assertEquals(1, res); }
-	 */
-
-	@Test(expected = RuntimeException.class)
-	public void test11JoinTransactionTest01() {
-		// 고객 추가 에러 rollback
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-
-		Customer customer = new Customer();
-		customer.setCode("C017");
-		customer.setId("java");
-		customer.setPasswd("rootroot");
-		customer.setName("자바");
-		customer.setZipCode("51689");
-		customer.setAddress("대구");
-		customer.setPhone("053-555-1333");
-		customer.setEmail("psw2701@naver.com");
-		Calendar cal = Calendar.getInstance();
-		cal.set(2018, 12, 20);
-		customer.setDob(cal.getTime());
-
-		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-
-		int res = dao.insertCustomerJoin(customer, customEvent);
-		System.out.println("res : " + res);
-		Assert.assertEquals(-1, res);
-	}
-
-	@Test(expected = RuntimeException.class)
-	public void test11JoinTransactionTest02() {
-		// 고객이벤트 추가 에러 rollback
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-
-		Customer customer = new Customer();
-		customer.setCode(dao.nextCode());
-		customer.setId("java");
-		customer.setPasswd("rootroot");
-		customer.setName("자바");
-		customer.setZipCode("51689");
-		customer.setAddress("대구");
-		customer.setPhone("053-555-1333");
-		customer.setEmail("psw2701@naver.com");
-		Calendar cal = Calendar.getInstance();
-		cal.set(2018, 12, 20);
-		customer.setDob(cal.getTime());
-
-		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
-
-		int res = dao.insertCustomerJoin(customer, customEvent);
-		Assert.assertEquals(0, res);
-	}
 
 	@Test
 	public void test11JoinTransactionTest03() {
@@ -232,36 +179,7 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		int res = dao.insertCustomerJoin(customer, customEvent);
-		Assert.assertEquals(1, res);
-	}
-
-	@Test(expected = RuntimeException.class)
-	public void test12DeleteTransactionTest01() {
-		// 고객 추가 에러 rollback
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-
-		Customer customer = new Customer();
-		customer.setCode("C017");
-		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-
-		int res = dao.deleteCustomerEvent(customer, customEvent);
-		System.out.println("res : " + res);
-		Assert.assertEquals(-1, res);
-	}
-
-	@Test(expected = RuntimeException.class)
-	public void test12DeleteTransactionTest02() {
-		// 고객이벤트 추가 에러 rollback
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-
-		Customer customer = new Customer();
-		customer.setCode(dao.nextCode());
-
-		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
-
-		int res = dao.deleteCustomerEvent(customer, customEvent);
-		Assert.assertEquals(0, res);
+		dao.insertCustomerJoin(customer, customEvent);
 	}
 
 	@Test
@@ -274,7 +192,6 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		int res = dao.deleteCustomerEvent(customer, customEvent);
-		Assert.assertEquals(1, res);
+		dao.deleteCustomerEvent(customer, customEvent);
 	}
 }

@@ -11,7 +11,7 @@ import kr.or.yi.java_web_female.dto.Rent;
 
 public interface RentMapper {
 	
-	@Select("select concat('R', LPAD(count(*)+1,3,'0')) from rent")
+	@Select("select concat('R', lpad((round(substring(max(code), 2,3)) + 1), 3, '0')) from rent")
 	String getNextRentNo();
 	
 	@Insert("insert into rent values (#{code}, #{startDate}, #{startTime}, #{endDate}, #{endTime}, #{isReturn}, #{totalPrice}, #{carCode.carCode}, #{customerCode.code}, #{insuranceCode.code}, #{eRate}, #{optPrice})")
