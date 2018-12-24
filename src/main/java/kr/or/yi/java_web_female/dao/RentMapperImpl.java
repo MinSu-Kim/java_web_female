@@ -50,4 +50,29 @@ public class RentMapperImpl implements RentMapper {
 		}
 	}
 
+	@Override
+	public void insertRent(Rent rent, Map<String, Object> map) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		
+		try {
+			sqlSession.insert(namespace + ".insertRent", rent);
+			sqlSession.insert(namespace + ".procedureRent2", map);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+
+	@Override
+	public void deleteRent(Rent rent) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

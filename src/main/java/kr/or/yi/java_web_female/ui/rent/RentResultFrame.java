@@ -22,6 +22,7 @@ import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.RentUIService;
 import java.awt.Dimension;
+import java.awt.Color;
 
 public class RentResultFrame extends JFrame implements ActionListener {
 
@@ -40,6 +41,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	private JLabel lblCarImg;
 	private RentUIService service;
+	private JButton btnRent;
 
 	public void setService(RentUIService service) {
 		this.service = service;
@@ -173,14 +175,16 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		pInfo.add(lblPriceTitle);
 		
 		lblPrice = new JLabel("");
-		lblPrice.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		lblPrice.setForeground(Color.RED);
+		lblPrice.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblPrice);
 		
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn, BorderLayout.SOUTH);
 		
-		JButton btnRent = new JButton("대여");
+		btnRent = new JButton("대여");
+		btnRent.addActionListener(this);
 		btnRent.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		pBtn.add(btnRent);
 		
@@ -194,7 +198,8 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		this.rent = rent;
 		setItems();
 		loadImages();
-		JOptionPane.showMessageDialog(null, rent.isReturn());
+		///////isReturn : false 반납X true : 반납O ==> 대여버튼 누르면 true로 변경되게 하기
+//		JOptionPane.showMessageDialog(null, rent.isReturn());
 	}
 	
 
@@ -208,6 +213,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		tfInsurance.setText(rent.getInsuranceCode().getPrice() + "원");	//보험가격
 		tfOption.setText(rent.getOptPrice() + "원");
 		tfDiscount.setText(String.format("%s", rent.geteRate()+"%"));
+		lblPrice.setText(rent.getTotalPrice() + "원");
 	}
 
 	public void setLblPrice(long lblPrice) {
@@ -216,6 +222,9 @@ public class RentResultFrame extends JFrame implements ActionListener {
 
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnRent) {
+			do_btnRent_actionPerformed(e);
+		}
 		if (e.getSource() == btnCancel) {
 			do_btnCancel_actionPerformed(e);
 		}
@@ -240,5 +249,10 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
 		ImageIcon resimg = new ImageIcon(changedImg);
 		lblCarImg.setIcon(resimg);*/
+	}
+	
+	
+	//대여버튼 ==> rent 테이블에 데이터 들어가게 하기
+	protected void do_btnRent_actionPerformed(ActionEvent e) {
 	}
 }

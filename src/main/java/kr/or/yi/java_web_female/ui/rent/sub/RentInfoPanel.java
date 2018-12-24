@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -68,6 +69,9 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 		pStartDate.add(lblStartDate);
 
 		dateChooserStart = new JDateChooser();
+		//
+		dateChooserStart.setDate(new Date());
+		//
 		pStartDate.add(dateChooserStart);
 
 		// 대여시간
@@ -107,6 +111,11 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 		pEndDate.add(lblEndDate);
 
 		dateChooserEnd = new JDateChooser();
+		//
+		Date endDate = new Date();
+		Date tomorrow = new Date(endDate.getTime() + (1000*60*60*24));
+		dateChooserEnd.setDate(tomorrow);
+		//
 		pEndDate.add(dateChooserEnd);
 
 		// 반납시간

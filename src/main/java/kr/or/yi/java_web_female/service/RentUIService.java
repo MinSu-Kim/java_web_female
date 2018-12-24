@@ -22,6 +22,7 @@ import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Insurance;
+import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.UserPic;
 
 public class RentUIService {

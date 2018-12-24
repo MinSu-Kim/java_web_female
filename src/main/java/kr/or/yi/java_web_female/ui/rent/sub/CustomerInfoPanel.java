@@ -64,6 +64,7 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 		add(lblCstmName);
 
 		tfCstmName = new JTextField();
+		tfCstmName.setText("김철수");
 		add(tfCstmName);
 		tfCstmName.setColumns(10);
 

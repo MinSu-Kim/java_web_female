@@ -28,7 +28,7 @@ public class RentMapperTest extends AbstractTest {
 		Assert.assertNotNull(nextRentNo);
 	}
 	
-	@Test
+	/*@Test
 	public void test02InsertRent() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -50,9 +50,9 @@ public class RentMapperTest extends AbstractTest {
 		
 		int res = dao.insertRent(rent);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 	
-/*	@Test
+	/*@Test
 	public void test03Procedure() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -64,7 +64,7 @@ public class RentMapperTest extends AbstractTest {
 		
 		dao.procedureRent(map);
 //		Assert.assertNotNull(map);
-	}*/
+	}
 	
 	@Test
 	public void test04Procedure2() {
@@ -78,6 +78,68 @@ public class RentMapperTest extends AbstractTest {
 		
 		int res = dao.procedureRent2(map);
 		Assert.assertEquals(-1, res);
-	}
+	}*/
 
+	@Test
+	public void test05insertTransaction01() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Rent rent = new Rent();
+		rent.setCode("R007");	//이미 있는 코드
+		rent.setStartDate("2018-12-25");
+		rent.setStartTime("12:00:00");
+		rent.setEndDate("2018-12-26");
+		rent.setEndTime("12:00:00");
+		rent.setReturn(false);
+		rent.setTotalPrice(127000);
+		rent.setCarCode(new CarModel("V002"));
+		Customer customer = new Customer();
+		customer.setCode("C006");
+		rent.setCustomerCode(customer);
+		rent.setInsuranceCode(new Insurance("I000"));
+		rent.seteRate(5);
+		rent.setOptPrice(5000);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("custom_code", "C006");
+		map.put("rent_code", "R006");
+		map.put("carCode", "V002");
+		map.put("isGrade", 0);
+		
+		dao.insertRent(rent, map);
+	}
+	
+	@Test
+	public void test05insertTransaction02() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Rent rent = new Rent();
+		rent.setCode(dao.getNextRentNo());
+		rent.setStartDate("2018-12-25");
+		rent.setStartTime("12:00:00");
+		rent.setEndDate("2018-12-26");
+		rent.setEndTime("12:00:00");
+		rent.setReturn(false);
+		rent.setTotalPrice(127000);
+		rent.setCarCode(new CarModel("V002"));
+		Customer customer = new Customer();
+		customer.setCode("C006");
+		rent.setCustomerCode(customer);
+		rent.setInsuranceCode(new Insurance("I000"));
+		rent.seteRate(5);
+		rent.setOptPrice(5000);
+		
+		Map<String, Object> map = new HashMap<>();
+		//고객 코드 빠졌을 때
+		map.put("custom_code", "C006");
+		map.put("rent_code", "R006");
+		map.put("carCode", "V002");
+		map.put("isGrade", 0);
+		
+		map.put("custom_code", "C006");
+		
+		dao.insertRent(rent, map);
+		
+	}
+	
 }
