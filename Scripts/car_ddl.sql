@@ -249,7 +249,7 @@ COMMENT '추가옵션';
 -- 사진
 CREATE TABLE proj_rentcar.userpic (
 	car_code CHAR(4) NOT NULL COMMENT 'C001', -- C001
-	pic      BLOB    NOT NULL COMMENT '사진' -- 사진
+	pic      LONGBLOB    NOT NULL COMMENT '사진' -- 사진
 )
 COMMENT '사진';
 

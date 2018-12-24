@@ -118,8 +118,8 @@ public class CustomerMapperImpl implements CustomerMapper {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		int res = -1;
 		try {
-			res = sqlSession.insert(namespace + ".insertCustomer", customer);
-			res +=sqlSession.insert("kr.or.yi.java_web_female.dao.CustomEventMapper.insertCustomEvent", customEvent);
+			res += sqlSession.insert(namespace + ".insertCustomer", customer);
+			res += sqlSession.insert("kr.or.yi.java_web_female.dao.CustomEventMapper.insertCustomEvent", customEvent);
 			sqlSession.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -138,8 +138,8 @@ public class CustomerMapperImpl implements CustomerMapper {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		int res = -1;
 		try {
-			res = sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
-			res +=sqlSession.delete(namespace + ".deleteCustomer", customer);
+			res += sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
+			res += sqlSession.delete(namespace + ".deleteCustomer", customer);
 			sqlSession.commit();
 		}catch (Exception e) {
 			e.printStackTrace();

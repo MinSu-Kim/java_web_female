@@ -181,7 +181,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.insertCustomerJoin(customer, customEvent);
+		int res = dao.insertCustomerJoin(customer, customEvent);
+		Assert.assertEquals(-1, res);
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -204,7 +205,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
 
-		dao.insertCustomerJoin(customer, customEvent);
+		int res = dao.insertCustomerJoin(customer, customEvent);
+		Assert.assertEquals(0, res);
 	}
 
 	@Test
@@ -227,7 +229,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.insertCustomerJoin(customer, customEvent);
+		int res = dao.insertCustomerJoin(customer, customEvent);
+		Assert.assertEquals(1, res);
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -239,7 +242,8 @@ public class CustomerMapperTest extends AbstractTest {
 		customer.setCode("C017");
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.deleteCustomerEvent(customer, customEvent);
+		int res = dao.deleteCustomerEvent(customer, customEvent);
+		Assert.assertEquals(-1, res);
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -252,7 +256,8 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", "C017", false);
 
-		dao.deleteCustomerEvent(customer, customEvent);
+		int res = dao.deleteCustomerEvent(customer, customEvent);
+		Assert.assertEquals(0, res);
 	}
 
 	@Test
@@ -265,6 +270,7 @@ public class CustomerMapperTest extends AbstractTest {
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
-		dao.deleteCustomerEvent(customer, customEvent);
+		int res = dao.deleteCustomerEvent(customer, customEvent);
+		Assert.assertEquals(1, res);
 	}
 }
