@@ -182,6 +182,7 @@ public class CustomerMapperTest extends AbstractTest {
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
 		int res = dao.insertCustomerJoin(customer, customEvent);
+		System.out.println("res : "  + res);
 		Assert.assertEquals(-1, res);
 	}
 
@@ -243,6 +244,7 @@ public class CustomerMapperTest extends AbstractTest {
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 
 		int res = dao.deleteCustomerEvent(customer, customEvent);
+		System.out.println("res : "  + res);
 		Assert.assertEquals(-1, res);
 	}
 
