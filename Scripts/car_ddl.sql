@@ -79,6 +79,7 @@ CREATE TABLE proj_rentcar.customer (
 	Id         VARCHAR(40) NOT NULL COMMENT '아이디', -- 아이디
 	passwd     CHAR(42)    NOT NULL COMMENT '비밀번호', -- 비밀번호
 	Name       VARCHAR(20) NOT NULL COMMENT '고객이름', -- 고객이름
+	zip_code   CHAR(5)     NOT NULL COMMENT '우편번호', -- 우편번호
 	address    VARCHAR(50) NOT NULL COMMENT '주소', -- 주소
 	phone      VARCHAR(13) NOT NULL COMMENT '연락처', -- 연락처
 	dob        DATE        NOT NULL COMMENT '생년월일', -- 생년월일
@@ -226,7 +227,7 @@ CREATE TABLE proj_rentcar.rent (
 	car_code       CHAR(4)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  CHAR(4)    NOT NULL COMMENT '고객코드', -- 고객코드
 	insurance_code CHAR(4)    NOT NULL COMMENT '보험코드', -- 보험코드
-	e_rate         int(11)    NULL     COMMENT '이벤트코드', -- 이벤트코드
+	e_rate         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트코드
 	opt_price      INT(11)    NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';
@@ -247,8 +248,8 @@ COMMENT '추가옵션';
 
 -- 사진
 CREATE TABLE proj_rentcar.userpic (
-	car_code CHAR(4)  NOT NULL COMMENT 'C001', -- C001
-	pic      LONGBLOB NOT NULL COMMENT '사진' -- 사진
+	car_code CHAR(4) NOT NULL COMMENT 'C001', -- C001
+	pic      BLOB    NOT NULL COMMENT '사진' -- 사진
 )
 COMMENT '사진';
 
@@ -293,9 +294,7 @@ ALTER TABLE proj_rentcar.customer
 		)
 		REFERENCES proj_rentcar.employee ( -- 직원
 			code -- 직원코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_employee_TO_customer (
 		emp_code -- 직원코드
 	);
@@ -308,9 +307,7 @@ ALTER TABLE proj_rentcar.customer
 		)
 		REFERENCES proj_rentcar.grade ( -- 회원등급
 			code -- 등급코드
-		)
-		ON DELETE RESTRICT
-		ON UPDATE RESTRICT,
+		),
 	ADD INDEX FK_grade_TO_customer (
 		grade_code -- 등급코드
 	);
@@ -470,3 +467,4 @@ begin
 
 end $$
 DELIMITER ;
+

@@ -8,6 +8,7 @@ public class Customer {
 	private String id;
 	private String passwd;
 	private String name;
+	private String zipCode;
 	private String address;
 	private String phone;
 	private Date dob;
@@ -17,10 +18,23 @@ public class Customer {
 	private Grade gradeCode;
 	private int rentCnt;
 	private List<CustomEvent> events;
+	
 
 
 	
 	
+	public String getZipCode() {
+		return zipCode;
+	}
+
+
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+
+
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -36,12 +50,13 @@ public class Customer {
 	
 	
 
-	public Customer( String id, String passwd, String name, String address, String phone, Date dob,
+	public Customer( String id, String passwd, String name, String zipCode,  String address, String phone, Date dob,
 			String email, Employee empCode, String license, Grade gradeCode, int rentCnt) {
 
 		this.id = id;
 		this.passwd = passwd;
 		this.name = name;
+		this.zipCode = zipCode;
 		this.address = address;
 		this.phone = phone;
 		this.dob = dob;
@@ -224,11 +239,16 @@ public class Customer {
 		this.events = events;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return String.format(
-				"Customer [code=%s, id=%s, passwd=%s, name=%s, address=%s, phone=%s, dob=%s, email=%s, empCode=%s, license=%s, gradeCode=%s, rentCnt=%s, events=%s]",
-				code, id, passwd, name, address, phone, dob, email, empCode, license, gradeCode, rentCnt, events);
+				"Customer [code=%s, id=%s, passwd=%s, name=%s, zipCode=%s, address=%s, phone=%s, dob=%s, email=%s, empCode=%s, license=%s, gradeCode=%s, rentCnt=%s, events=%s]",
+				code, id, passwd, name, zipCode, address, phone, dob, email, empCode, license, gradeCode, rentCnt,
+				events);
 	}
+
+	
 
 }

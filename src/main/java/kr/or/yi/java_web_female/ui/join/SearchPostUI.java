@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.SearchPostService;
 import kr.or.yi.java_web_female.ui.list.AddressTable;
+import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
 
 @SuppressWarnings("serial")
 public class SearchPostUI extends JFrame implements ActionListener {
@@ -34,9 +35,9 @@ public class SearchPostUI extends JFrame implements ActionListener {
 	private AddressTable pList;
 	private Post doro;
 	
-	private JoinUI joinUi; //추가
+	private ActionListener joinUi; //추가
 	
-	public void setJoinUi(JoinUI joinUi) {  //추가
+	public void setJoinUi(ActionListener joinUi) {  //추가
 		this.joinUi = joinUi;
 	}
 
@@ -89,7 +90,12 @@ public class SearchPostUI extends JFrame implements ActionListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Post post = pList.getSelectedItem();
-				joinUi.setAddress(post);
+				if(joinUi instanceof JoinUI) {
+					((JoinUI)joinUi).setAddress(post);
+				}else if(joinUi instanceof CustommerListPannel) {
+					((CustommerListPannel)joinUi).setAddress(post);
+				}
+				
 				SearchPostUI.this.dispose();
 			}
 		});
