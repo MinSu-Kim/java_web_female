@@ -65,6 +65,7 @@ $$
 CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4), in isGrade int)
 begin
     declare gcode char(4);
+	declare ecode char(4);
 
     update customer
     set rent_cnt = rent_cnt + 1
@@ -84,7 +85,17 @@ begin
 
     /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
 	if isGrade = 0 then
-		call custom_event_use(custom_code);
+		call custom_event_use(custom_code, rent_code);
+		/*select event_code into ecode
+		from custom_event ce join event e on ce.event_code = e.code 
+		where custom_code = custom_code and rate = (	select e_rate
+												from rent r 
+												where r.costomer_code = custom_code and code = rent_code);
+		select ecode from dual;
+	
+		update custom_event
+		set is_use = 1
+		where custom_code = custom_code and event_code = ecode;*/
 	end if;
 
 end$$
@@ -93,87 +104,37 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS proj_rentcar.custom_event_use;
 DELIMITER $$
 $$
-CREATE PROCEDURE proj_rentcar.custom_event_use(in c_code char(4))
+CREATE PROCEDURE proj_rentcar.custom_event_use(in c_code char(4), in r_code char(4))
 begin
+	declare ecode char(4);
+
+	select event_code into ecode
+	from custom_event ce join event e on ce.event_code = e.code 
+	where custom_code = c_code and rate = (	select e_rate
+											from rent r 
+											where r.costomer_code = c_code and code = r_code);
+	select ecode from dual;
+
 	update custom_event
-		set is_use = 1
-		where custom_code = c_code and event_code = (select e.code
-															from rent r join event e on r.e_rate = e.rate
-															where r.costomer_code = c_code);
+	set is_use = 1
+	where custom_code = c_code and event_code = ecode;
+
 end $$
 DELIMITER ;
 
-call update_customer_grade('C006', 'R005', 'V002', 0);
-
-select *
-from rent r join event e on r.e_rate = e.rate
-where r.costomer_code = 'C006';
-
--- 변경 전 EVT1이 검색됨 C005가 가지고 있는 이벤트가 EVT1 rate=3, EVT2 rate=5가 있으며, 조건의의해 rate가 높은 EVT2가 나와야 되는데 EVT1이 검색됨
--- select * from event; 해보면 event 테이블에는 code가 있으므로  ce.event_code = event_code 해버리면 
--- select event_code
--- from custom_event ce join event on ce.event_code = event_code ==> on ce.event_code = event_code 조건이 자기 자신의 event_code와 비교 되어 카티션 곱이 됨
--- where custom_code = 'C005' order by rate desc limit 1;
-select e.code
-from rent r join event e on r.e_rate = e.rate
-where r.costomer_code = 'C005' ;
-
-;
-
-update custom_event
-set is_use = 1
-where custom_code = 'C005' and event_code = ();
+call update_customer_grade('C005', 'R006', 'V002', 0);
 
 
 select event_code
-from custom_event ce join event on ce.event_code = event_code 
-where custom_code = 'C005' order by rate desc limit 1;
+from custom_event ce join event e on ce.event_code = e.code 
+where custom_code = 'C005' and rate = (	select e_rate
+										from rent r 
+										where r.costomer_code = 'C005' and r.code='R006');
 
--- 변경 후
-select event_code
-from custom_event ce join event on ce.event_code = code 
-where custom_code = 'C005' order by rate desc limit 1;
-	
-select e.code
-from event e on rent r on e.rate = r.e_rate
-where customer_code = 'C006';
-
-call update_customer_grade('C005', 'R005', 'V002', 0);
-
-update custom_event
-set is_use = 1
-where custom_code = 'C006' and event_code = 'EVT2';
-	
-update custom_event
-set is_use = 1
-where c and custom_code = 'C005';
-
-select event_code from custom_event ce join event on ce.event_code = event_code where custom_code = 'C001' order by rate desc limit 1;
-	
-select rent_cnt, grade_code from customer where code = 'C001';
-select * from custom_event where custom_code = 'C009';
-
-call update_customer_grade('C001', 'R001');
-
-select rent_cnt, grade_code from customer where code = 'C001';
-
-select * from custom_event where event_code = 'EVT1' and custom_code = 'C009';
-
-
-select c.code, ce.custom_code, ce.event_code
-from customer c join custom_event ce on c.code = ce.custom_code 
-where c.code = 'C001' and event_code='EVT1';
-
-select costomer_code, rent.e_rate 
-from rent where code = 'R001';
-
-update custom_event
-set is_use = 1
-where event_code = 'EVT1' and custom_code = 'C001';
-
+															
 select * from rent;
 select concat('R', LPAD(count(*)+1,3,'0')) from rent;
 
 
-
+call update_customer_grade('C006', 'R007', 'V002', 0);
 

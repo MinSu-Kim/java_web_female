@@ -52,7 +52,7 @@ public class RentMapperTest extends AbstractTest {
 		Assert.assertEquals(1, res);
 	}
 	
-	@Test
+/*	@Test
 	public void test03Procedure() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -64,20 +64,20 @@ public class RentMapperTest extends AbstractTest {
 		
 		dao.procedureRent(map);
 //		Assert.assertNotNull(map);
-	}
+	}*/
 	
-/*	@Test
+	@Test
 	public void test04Procedure2() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("custom_code", "C005");
-		map.put("rent_code", "R005");
+		map.put("custom_code", "C006");
+		map.put("rent_code", "R006");
 		map.put("carCode", "V002");
-		map.put("isGrade", 1);
+		map.put("isGrade", 0);
 		
-		dao.procedureRent2(map);
-//		Assert.assertNotNull(map);
-	}*/
+		int res = dao.procedureRent2(map);
+		Assert.assertEquals(1, res);
+	}
 
 }

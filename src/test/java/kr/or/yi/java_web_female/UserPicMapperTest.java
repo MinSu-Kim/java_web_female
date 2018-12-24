@@ -24,7 +24,7 @@ public class UserPicMapperTest extends AbstractTest {
 	@Test
 	public void test01insertUserPic() throws IOException {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		String[] arr = {"V000","V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012","V013"};
+		String[] arr = {"V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012","V013"};
 		for(String name : arr) {
 			UserPic userpic = new UserPic();
 			userpic.setCarCode(name);

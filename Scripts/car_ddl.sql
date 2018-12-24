@@ -411,4 +411,60 @@ ALTER TABLE proj_rentcar.userpic
 		)
 		REFERENCES proj_rentcar.car_model ( -- 차(모델)
 			car_code -- C001
-		);
+		)
+		ON DELETE cascade
+		ON UPDATE cascade;
+	
+-- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4), in isGrade int)
+begin
+    declare gcode char(4);
+	declare ecode char(4);
+
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
+   
+    select g.code into gcode
+	from customer c , grade g
+	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
+
+	update customer
+	set grade_code = gcode
+	where code = custom_code;
+
+	update car_model
+	set is_rent = 1, rent_cnt = rent_cnt + 1
+	where car_code = carCode;
+
+    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
+	if isGrade = 0 then
+		call custom_event_use(custom_code, rent_code);
+	end if;
+
+end$$
+DELIMITER ;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.custom_event_use(in c_code char(4), in r_code char(4))
+begin
+	declare ecode char(4);
+
+	select event_code into ecode
+	from custom_event ce join event e on ce.event_code = e.code 
+	where custom_code = c_code and rate = (	select e_rate
+											from rent r 
+											where r.costomer_code = c_code and code = r_code);
+	select ecode from dual;
+
+	update custom_event
+	set is_use = 1
+	where custom_code = c_code and event_code = ecode;
+
+end $$
+DELIMITER ;
+

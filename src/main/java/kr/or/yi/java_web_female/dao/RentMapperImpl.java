@@ -40,14 +40,13 @@ public class RentMapperImpl implements RentMapper {
 		
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
 			sqlSession.selectOne(namespace + ".procedureRent", map);
-//			sqlSession.commit();
 		}
 	}
 
 	@Override
-	public void procedureRent2(Map<String, Object> map) {
+	public int procedureRent2(Map<String, Object> map) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			sqlSession.selectList(namespace + ".procedureRent2", map);
+			return sqlSession.insert(namespace + ".procedureRent2", map);
 		}
 	}
 
