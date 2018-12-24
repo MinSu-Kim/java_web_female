@@ -22,7 +22,7 @@ public interface CustomerMapper {
 	List<Customer> selectCustomerByCode(Customer customer);
 	
 ///////////////////////// 트랜잭션 처리 //////////////////////////
-	int insertCustomerJoin(Customer customer, CustomEvent customEvent);
+	void insertCustomerJoin(Customer customer, CustomEvent customEvent);
 ///////////////////////// 트랜잭션 처리 //////////////////////////
-	int deleteCustomerEvent(Customer customer, CustomEvent customEvent);
+	void deleteCustomerEvent(Customer customer, CustomEvent customEvent);
 }

@@ -114,12 +114,11 @@ public class CustomerMapperImpl implements CustomerMapper {
 
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 	@Override
-	public int insertCustomerJoin(Customer customer, CustomEvent customEvent) {
+	public void insertCustomerJoin(Customer customer, CustomEvent customEvent) {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		int res = -1;
 		try {
-			res += sqlSession.insert(namespace + ".insertCustomer", customer);
-			res += sqlSession.insert("kr.or.yi.java_web_female.dao.CustomEventMapper.insertCustomEvent", customEvent);
+			sqlSession.insert(namespace + ".insertCustomer", customer);
+			sqlSession.insert("kr.or.yi.java_web_female.dao.CustomEventMapper.insertCustomEvent", customEvent);
 			sqlSession.commit();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -129,17 +128,15 @@ public class CustomerMapperImpl implements CustomerMapper {
 		} finally {
 			sqlSession.close();
 		}
-		return res;
 	}
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 
 	@Override
-	public int deleteCustomerEvent(Customer customer, CustomEvent customEvent) {
+	public void deleteCustomerEvent(Customer customer, CustomEvent customEvent) {
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		int res = -1;
 		try {
-			res += sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
-			res += sqlSession.delete(namespace + ".deleteCustomer", customer);
+			sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
+			sqlSession.delete(namespace + ".deleteCustomer", customer);
 			sqlSession.commit();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -149,6 +146,5 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}finally {
 			sqlSession.close();
 		}
-		return res;
 	}
 }
