@@ -47,12 +47,12 @@ public class CarModelMapperTest extends AbstractTest {
 	public void test03insertCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
-		carModel.setCarCode("V009");
-		carModel.setName("레이");
+		carModel.setCarCode("V019");
+		carModel.setName("벤츠");
 		carModel.setColor("wh");
-		carModel.setGear("stick");
-		carModel.setBrand(new Brand("B2"));
-		carModel.setCarType(new CarType("S1"));
+		carModel.setGear("auto");
+		carModel.setBrand(new Brand("B4"));
+		carModel.setCarType(new CarType("S2"));
 		carModel.setBasicCharge(70000);
 		carModel.setHour6(40000);
 		carModel.setHour10(53000);
@@ -69,11 +69,11 @@ public class CarModelMapperTest extends AbstractTest {
 	}
 	
 	@Test
-	public void test01updateCarModel() {
+	public void test04updateCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
 		
-		carModel.setCarCode("V009");
+		carModel.setCarCode("V019");
 		carModel.setName("마티즈");
 		carModel.setColor("bl");
 		carModel.setGear("stick");
@@ -95,10 +95,10 @@ public class CarModelMapperTest extends AbstractTest {
 	}
 	
 	@Test
-	public void test02deleteCarModel() {
+	public void test05deleteCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
-		carModel.setCarCode("V014");
+		carModel.setCarCode("V019");
 		int res = dao.deleteCarModel(carModel);
 		Assert.assertEquals(1, res);
 	}

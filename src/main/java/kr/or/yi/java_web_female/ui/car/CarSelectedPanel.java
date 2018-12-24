@@ -430,16 +430,13 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		}
 
 
-	public void setCarModel(CarModel carModel) {//set
-		
-		//파일에 있는 이미지 불러오기
-		/*String strImg = imgPath+carModel.getCarCode()+".png";
-		strImg = strImg.replace("\\", "/");*/
+	public void setCarModel(CarModel carModel) {
 		
 		//테이블에 저장되있는 이미지 불러오기
 		System.out.println(carModel.getCarCode());//V012정상출력
-		UserPic userpic = service.getUserPic(carModel.getCarCode());//null
-		if(userpic!=null) {
+		UserPic userpic = service.getUserPic(carModel.getCarCode());//결과0
+		System.out.println(userpic);
+		if(userpic.getPic()!=null) {
 			ImageIcon img = new ImageIcon(userpic.getPic());
 			Image image = img.getImage();
 			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
