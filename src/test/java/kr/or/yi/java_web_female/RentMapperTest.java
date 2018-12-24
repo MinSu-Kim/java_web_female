@@ -77,7 +77,7 @@ public class RentMapperTest extends AbstractTest {
 		map.put("isGrade", 0);
 		
 		int res = dao.procedureRent2(map);
-		Assert.assertEquals(1, res);
+		Assert.assertEquals(-1, res);
 	}
 
 }
