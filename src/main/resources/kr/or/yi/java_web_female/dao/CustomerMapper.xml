@@ -14,6 +14,7 @@
 		<result column="emp_code" property="empCode.code" />
 		<result column="license" property="license" />
 		<result column="grade_code" property="gradeCode.code" />
+		<result column="gname" property="gradeCode.name" />
 		<result column="rent_cnt" property="rentCnt" />
 	</resultMap>
 
@@ -44,10 +45,10 @@
 	</select>
 
 	<select id="selectCustomerByAll" resultMap="ResultCustom">
-		select code, Id,
-		password(#{passwd}), Name, zip_code ,address, phone, dob, email, emp_code,
-		license, grade_code, rent_cnt
-		from customer
+<!-- 		select code, Id, password(#{passwd}), Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, rent_cnt
+		from customer -->
+		select c.code, Id,c.Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, g.name as gname, rent_cnt
+		from customer c join grade g on c.grade_code = g.code;
 	</select>
 
 	<select id="selectCustomerById" resultMap="ResultCustom">

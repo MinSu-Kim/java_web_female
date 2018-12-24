@@ -170,3 +170,7 @@ select * from custom_event;
 
 delete from custom_event
 where custom_code='C017';
+
+
+select c.code, Id,c.Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, g.name as gname, rent_cnt
+from customer c join grade g on c.grade_code = g.code;
