@@ -124,56 +124,19 @@ update custom_event
 set is_use = 1
 where custom_code = 'C005' and event_code = ();
 
+select *
+from custem_event
+where custom_code = 'C005' and event_code = (select e.code
+															from rent r join event e on r.e_rate = e.rate join custom_event ce on e.code=ce.event_code
+															where r.costomer_code = 'C005' and ce.is_use <> 1);
 
-select event_code
-from custom_event ce join event on ce.event_code = event_code 
-where custom_code = 'C005' order by rate desc limit 1;
-
--- 변경 후
-select event_code
-from custom_event ce join event on ce.event_code = code 
-where custom_code = 'C005' order by rate desc limit 1;
-	
-select e.code
-from event e on rent r on e.rate = r.e_rate
-where customer_code = 'C006';
-
-call update_customer_grade('C005', 'R005', 'V002', 0);
-
-update custom_event
-set is_use = 1
-where custom_code = 'C006' and event_code = 'EVT2';
-	
-update custom_event
-set is_use = 1
-where c and custom_code = 'C005';
-
-select event_code from custom_event ce join event on ce.event_code = event_code where custom_code = 'C001' order by rate desc limit 1;
-	
-select rent_cnt, grade_code from customer where code = 'C001';
-select * from custom_event where custom_code = 'C009';
-
-call update_customer_grade('C001', 'R001');
-
-select rent_cnt, grade_code from customer where code = 'C001';
-
-select * from custom_event where event_code = 'EVT1' and custom_code = 'C009';
-
-
-select c.code, ce.custom_code, ce.event_code
-from customer c join custom_event ce on c.code = ce.custom_code 
-where c.code = 'C001' and event_code='EVT1';
-
-select costomer_code, rent.e_rate 
-from rent where code = 'R001';
-
-update custom_event
-set is_use = 1
-where event_code = 'EVT1' and custom_code = 'C001';
-
+select *
+from rent r join event e on r.e_rate = e.rate 
+where r.costomer_code = 'C005';
+															
 select * from rent;
 select concat('R', LPAD(count(*)+1,3,'0')) from rent;
 
 
-
+call update_customer_grade('C006', 'R007', 'V002', 0);
 

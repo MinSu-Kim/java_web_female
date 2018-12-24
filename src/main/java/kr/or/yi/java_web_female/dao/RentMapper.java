@@ -17,7 +17,7 @@ public interface RentMapper {
 	@Insert("insert into rent values (#{code}, #{startDate}, #{startTime}, #{endDate}, #{endTime}, #{isReturn}, #{totalPrice}, #{carCode.carCode}, #{customerCode.code}, #{insuranceCode.code}, #{eRate}, #{optPrice})")
 	int insertRent(Rent rent);
 	
-	@Select("{call update_customer_grade(#{custom_code, mode=IN, jdbcType=CHAR}, #{rent_code, mode=IN, jdbcType=CHAR}, #{carCode, mode=IN, jdbcType=CHAR}, #{isGrade, mode = IN, jdbcType=INTEGER})}")
+	@Insert("{call update_customer_grade(#{custom_code, mode=IN, jdbcType=CHAR}, #{rent_code, mode=IN, jdbcType=CHAR}, #{carCode, mode=IN, jdbcType=CHAR}, #{isGrade, mode = IN, jdbcType=INTEGER})}")
 	@Options(statementType = StatementType.CALLABLE)
 	void procedureRent2(Map<String, Object> map);
 	
