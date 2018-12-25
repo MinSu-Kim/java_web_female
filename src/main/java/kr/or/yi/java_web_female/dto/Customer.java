@@ -3,7 +3,7 @@ package kr.or.yi.java_web_female.dto;
 import java.util.Date;
 import java.util.List;
 
-public class Customer{
+public class Customer {
 	private String code;
 	private String id;
 	private String passwd;
@@ -28,6 +28,8 @@ public class Customer{
 	}
 
 	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Customer(String id, String passwd) {

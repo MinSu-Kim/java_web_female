@@ -20,7 +20,6 @@ import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-@SuppressWarnings("serial")
 public class CarInfoPanel extends CarSubPanel implements ActionListener {
 	private JComboBox<String> comboBoxCar;
 	private JButton btnSearchCar;

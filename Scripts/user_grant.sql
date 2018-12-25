@@ -50,3 +50,7 @@ GRANT Execute ON proj_rentcar.* TO 'user_rentCar'@'localhost';
 GRANT Lock tables ON proj_rentcar.* TO 'user_rentCar'@'localhost';
 FLUSH PRIVILEGES;
 
+
+GRANT SELECT ON mysql.proc to 'user_rentCar'@'localhost';
+GRANT SELECT ON mysql.proc to 'user_rentCar'@'%';
+

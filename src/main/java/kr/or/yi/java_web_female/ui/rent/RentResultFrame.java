@@ -207,12 +207,9 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		tfEndTime.setText(rent.getEndTime() + "시");	//반납시간
 		tfInsurance.setText(rent.getInsuranceCode().getPrice() + "원");	//보험가격
 		tfOption.setText(rent.getOptPrice() + "원");
+		tfDiscount.setText(String.format("%s", rent.geteRate()+"%"));
 	}
 
-	public void setDisCount(int discount) {
-		tfDiscount.setText(String.format("%s", discount+"%"));
-	}
-	
 	public void setLblPrice(long lblPrice) {
 		this.lblPrice.setText(String.format("%,d원", lblPrice));
 	}
@@ -237,5 +234,11 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		Image changedImg= image.getScaledInstance(350, 250, Image.SCALE_SMOOTH );
 		ImageIcon resimg = new ImageIcon(changedImg);
 		lblCarImg.setIcon(resimg);
+	/*	ImageIcon img = new ImageIcon(filePath);
+		Image image = img.getImage();
+		
+		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+		ImageIcon resimg = new ImageIcon(changedImg);
+		lblCarImg.setIcon(resimg);*/
 	}
 }

@@ -8,6 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dto.CustomEvent;
@@ -19,6 +21,7 @@ import kr.or.yi.java_web_female.dto.Grade;
 public class CustomerMapperTest extends AbstractTest {
 
 	private CustomerMapper dao = CustomerMapperImpl.getInstance();
+	private String orderDate;
 
 	@Test
 	public void test01SelectCustomerByName() {
@@ -191,37 +194,4 @@ public class CustomerMapperTest extends AbstractTest {
 
 		dao.deleteCustomerEvent(customer, customEvent);
 	}
-	
-	
-	@Test
-	public void test13updateCustomerRentCnt() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Customer customer = new Customer();
-		customer.setCode("C005");
-		int res = dao.updateCustomerRentCnt(customer);
-		Assert.assertSame(1, res);
-	}
-	
-	@Test
-	public void test14selectGradeCustomer() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Customer customer = new Customer();
-		customer.setCode("C005");
-		String grade = dao.selectGradeCustomer(customer);
-		System.out.println("grade : " + grade);
-		Assert.assertNotNull(grade);
-	}
-	
-	@Test
-	public void test15updateCustomerGrade() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Customer customer = new Customer();
-		customer.setCode("C005");
-		String gradeCode = dao.selectGradeCustomer(customer);
-		Grade grade = new Grade(gradeCode);
-		customer.setGradeCode(grade);
-		int res = dao.updateCustomerGrade(customer);
-		Assert.assertSame(1, res);
-	}
-
 }

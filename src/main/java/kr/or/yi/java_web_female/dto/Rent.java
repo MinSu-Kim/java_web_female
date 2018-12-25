@@ -11,7 +11,7 @@ public class Rent {
 	private CarModel carCode;	//차량코드
 	private Customer customerCode;	//고객코드
 	private Insurance insuranceCode;	//보험코드
-	private String eCode;
+	private int eRate;	// 할인율
 	private int optPrice;	//옵션비용
 	
 	public Rent() {
@@ -19,25 +19,26 @@ public class Rent {
 	}
 
 	public Rent(String code, String startDate, String startTime, String endDate, String endTime, boolean isReturn,
-		long totalPrice, CarModel carCode, Customer customerCode, Insurance insuranceCode, String eCode, int optPrice) {
-	this.code = code;
-	this.startDate = startDate;
-	this.startTime = startTime;
-	this.endDate = endDate;
-	this.endTime = endTime;
-	this.isReturn = isReturn;
-	this.totalPrice = totalPrice;
-	this.carCode = carCode;
-	this.customerCode = customerCode;
-	this.insuranceCode = insuranceCode;
-	this.eCode = eCode;
-	this.optPrice = optPrice;
+			long totalPrice, CarModel carCode, Customer customerCode, Insurance insuranceCode, int eRate,
+			int optPrice) {
+		this.code = code;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endDate = endDate;
+		this.endTime = endTime;
+		this.isReturn = isReturn;
+		this.totalPrice = totalPrice;
+		this.carCode = carCode;
+		this.customerCode = customerCode;
+		this.insuranceCode = insuranceCode;
+		this.eRate = eRate;
+		this.optPrice = optPrice;
 	}
 
-	
 	public String getCode() {
 		return code;
 	}
+
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -114,16 +115,16 @@ public class Rent {
 		this.insuranceCode = insuranceCode;
 	}
 
+	public int geteRate() {
+		return eRate;
+	}
+
+	public void seteRate(int eRate) {
+		this.eRate = eRate;
+	}
+
 	public int getOptPrice() {
 		return optPrice;
-	}
-
-	public String geteCode() {
-		return eCode;
-	}
-
-	public void seteCode(String eCode) {
-		this.eCode = eCode;
 	}
 
 	public void setOptPrice(int optPrice) {
@@ -135,7 +136,7 @@ public class Rent {
 		return String.format(
 				"Rent [code=%s, startDate=%s, startTime=%s, endDate=%s, endTime=%s, isReturn=%s, totalPrice=%s, carCode=%s, customerCode=%s, insuranceCode=%s, eRate=%s, optPrice=%s]",
 				code, startDate, startTime, endDate, endTime, isReturn, totalPrice, carCode, customerCode,
-				insuranceCode, eCode, optPrice);
+				insuranceCode, eRate, optPrice);
 	}
 
 	

@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female;
 
+import static org.junit.Assert.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,12 +147,6 @@ public class CarModelMapperTest extends AbstractTest {
 		Assert.assertNotNull(carCode);
 	}
 	
-	@Test
-	public void test11updateCarModelRent() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		int res = dao.updateCarModelRent(new CarModel("V001"));
-		Assert.assertEquals(1, res);
-	}
 }
 
 

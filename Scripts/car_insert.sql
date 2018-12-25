@@ -76,10 +76,9 @@ insert into employee values ('E001', '나매니저', '010-1234-1234', password('
 							('E002', '너일반사원', '010-5678-5678', password('abcdef'));
 						
 -- 등급 insert 
--- 등급 수정 처음부터 5%는 이상함....0->5->10으로 수정
-insert into grade values ('G001', '브론즈',0,5, 0),
-						('G002', '실버',6,10, 5),
-						('G003', '골드',11,99999, 10),
+insert into grade values ('G001', '브론즈',0,5, 5),
+						('G002', '실버',6,10, 10),
+						('G003', '골드',11,99999, 20),
 						('G004', '블랙리스트',-1,-1, 0);
 -- 고객 insert
 insert into customer values ('C001', 'asd132', password('rootroot'), '김철수', '41456', '대구 서구', '010-0000-7777', '1988-04-18', 'abc@gmail.com' ,'E001' , '2종보통','G001', 1),
@@ -87,7 +86,7 @@ insert into customer values ('C001', 'asd132', password('rootroot'), '김철수'
 							('C003', 'zxcv0523', password('asdfqwer'), '박철민', '15245','부산 동구', '010-2222-5555', '1961-10-25', 'abc@naver.com' ,'E002' , '1종보통','G002', 7),
 							('C004', 'gtshv512', password('asdf1234'), '이수민', '84562','대전 서구', '010-3333-4444', '1987-05-27', 'abc@gmail.com' ,'E001' , '2종보통','G002', 9),
 							('C005', 'gstjsva12', password('zxcv4567'), '나영석', '75425','대구 수성구', '010-4444-3333', '1958-12-31', 'abc@daum.net' ,'E001' , '2종보통','G003', 21),
-							('C006', 'aefvb238', password('qwer2573'), '강호동', '62589','대구 동구', '010-5555-2222', '1999-11-04', 'abc@daum.com' ,'E002' , '1종보통','G001', 4),
+							('C006', 'aefvb238', password('qwer2573'), '강호동', '62589','대구 동구', '010-5555-2222', '1999-11-04', 'abc@daum.com' ,'E002' , '1종보통','G003', 30),
 							('C007', 'fkufj12', password('dhtdhd5645'), '김민정', '13265','울산 서구', '010-6666-1111', '1994-03-16', 'abc@naver.com' ,'E002' , '2종보통','G004', -1),
 							('C008', 'xbmhw325', password('aggarg54'), '김재영', '95625','서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 
@@ -126,11 +125,11 @@ insert into insurance values
 
 -- 대여코드, 대여 시작 날짜/시간, 대여 반납 날짜/시간, 반납여부(0: 반납X/false), 대여비용, 차량코드, 고객코드, 보험코드, 이벤트할인율, 옵션비용 
 insert into rent values
-('R001', '2018-12-01', '12:00:00', '2018-12-02', '12:00:00', 0, 74000, 'V001', 'C001', 'I000', 'EVT2', 5000);
+('R001', '2018-12-01', '12:00:00', '2018-12-02', '12:00:00', 0, 74000, 'V001', 'C001', 'I000', 5, 5000);
 
 insert into rent values
-('R002', '2018-12-03', '12:00:00', '2018-12-04', '12:00:00', 0, 108000, 'V002', 'C002', 'I000', 'EVT2', 6000),
-('R003', '2018-12-05', '12:00:00', '2018-12-06', '12:00:00', 0, 204000, 'V003', 'C003', 'I000', 'EVT1', 17000);
+('R002', '2018-12-03', '12:00:00', '2018-12-04', '12:00:00', 0, 108000, 'V002', 'C002', 'I000', 5, 6000),
+('R003', '2018-12-05', '12:00:00', '2018-12-06', '12:00:00', 0, 204000, 'V003', 'C003', 'I000', 5, 17000);
 
 -- 렌트카옵션
 INSERT INTO proj_rentcar.rentcar_options(option_id, code)
@@ -138,10 +137,62 @@ values (1, 'R001'), (2, 'R002'), (1, 'R003'), (2, 'R003'),(3, 'R003');
 
 -- 보험있는 차량
 INSERT INTO rent VALUES
-('R004', '2018-12-18', '12:00:00', '2018-12-19', '12:00:00', 0, 210000, 'V007', 'C004', 'I004', 'EVT2', 11000);
+('R004', '2018-12-18', '12:00:00', '2018-12-19', '12:00:00', 0, 210000, 'V007', 'C004', 'I004', 5, 11000);
 
 -- 할인이 적용된 차량
 insert into rent values
-('R005', '2018-12-21', '12:00:00', '2018-12-20', '12:00:00', 0, 108000, 'V002', 'C005', 'I000', 'EVT2', 5000);
+('R005', '2018-12-21', '12:00:00', '2018-12-20', '12:00:00', 0, 108000, 'V002', 'C005', 'I000', 5, 5000);
 
 
+-- 고객의 대여횟수 1증가 후 회원등급변경 그리고 이벤트 사용을 1로 Setting 프로시저 사용법 call update_customer_grade('C007');
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4), in isGrade int)
+begin
+    declare gcode char(4);
+	declare ecode char(4);
+
+    update customer
+    set rent_cnt = rent_cnt + 1
+    where code=custom_code;
+   
+    select g.code into gcode
+	from customer c , grade g
+	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
+
+	update customer
+	set grade_code = gcode
+	where code = custom_code;
+
+	update car_model
+	set is_rent = 1, rent_cnt = rent_cnt + 1
+	where car_code = carCode;
+
+    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
+	if isGrade = 0 then
+		call custom_event_use(custom_code, rent_code);
+	end if;
+
+end$$
+DELIMITER ;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE proj_rentcar.custom_event_use(in c_code char(4), in r_code char(4))
+begin
+	declare ecode char(4);
+
+	select event_code into ecode
+	from custom_event ce join event e on ce.event_code = e.code 
+	where custom_code = c_code and rate = (	select e_rate
+											from rent r 
+											where r.costomer_code = c_code and code = r_code);
+	select ecode from dual;
+
+	update custom_event
+	set is_use = 1
+	where custom_code = c_code and event_code = ecode;
+
+end $$
+DELIMITER ;
