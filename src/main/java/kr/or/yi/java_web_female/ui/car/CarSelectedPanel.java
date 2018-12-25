@@ -8,14 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -60,6 +65,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JPanel panel_img;
 	private boolean isAdd;
 	private CarUi carUi;
+	private JLabel lblCount;
+	private String filePath;
+	private String currentDirectoryPath;
+	private JFileChooser chooser;
 	/**
 	 * Create the panel.
 	 */
@@ -83,7 +92,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		panel_img = new JPanel();
-		panel_img.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\uC0AC\uC9C4", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_img.setBorder(new TitledBorder(null, "\uC0AC\uC9C4", TitledBorder.CENTER, TitledBorder.BOTTOM, null, null));
 		
 		panel_2.add(panel_img);
 		panel_img.setLayout(new BorderLayout(0, 0));
@@ -246,12 +255,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			imgbtn.addActionListener(new ActionListener() {			
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					 do_fileOpen_actionPerformed(e);
 				}
 			});
 			panelRentCnt.add(imgbtn);
 		}else {
-			JLabel lblCount = new JLabel("대여횟수 : ");
+			lblCount = new JLabel("대여횟수 : ");
 			lblCount.setHorizontalAlignment(SwingConstants.CENTER);
 			panelRentCnt.add(lblCount);
 		}
@@ -284,10 +293,14 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			do_btnCancel_actionPerformed(arg0);
 		}
 		if (arg0.getSource() == btnOk) {
-			do_btnOk_actionPerformed(arg0);
+			try {
+				do_btnOk_actionPerformed(arg0);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	protected void do_btnOk_actionPerformed(ActionEvent arg0) {
+	protected void do_btnOk_actionPerformed(ActionEvent arg0) throws IOException {
 		if(btnOk.getText().equals("수정")) {
 			//수정클릭
 			CarModel model = getItem();			
@@ -298,7 +311,15 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			//추가 클릭
 			CarModel model = getItem();
 			service.insertCarModel(model);//디비에 추가완료
-//			carUi.reloadDataCarPanel();//널포인트에러 발생ㅠㅠ
+			
+			//선택한 이미지 바이트로 변환하여 테이블에 저장하기
+			UserPic userpic = new UserPic();
+			userpic.setCarCode(model.getCarCode());
+			userpic.setPic(getPicFile());
+			service.insertUserPic(userpic);
+			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
+			
+			carUi.reloadDataCarPanel();
 			carUi.close();
 		}
 		
@@ -317,25 +338,27 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 
 	private void cleartf() {
-		tfName.setText("");
-		cmbBrand.setSelectedIndex(-1);
-		cmbCarType.setSelectedIndex(-1);
-		cmbFuel.setSelectedIndex(-1);
-		tfHour6.setText("");
-		tfHour10.setText("");
-		tfHour12.setText("");
-		tfHourElse.setText("");
+		tfName.setText("new");
+		cmbBrand.setSelectedIndex(0);
+		cmbCarType.setSelectedIndex(0);
+		cmbFuel.setSelectedIndex(0);
+		tfColor.setText("bl");
+		tfHour6.setText("10000");
+		tfHour10.setText("15000");
+		tfHour12.setText("20000");
+		tfHourElse.setText("50000");
+		tfBasicCharge.setText("50000");
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
-		//삭제선택, 디비에는 바로삭제 되지만 테이블 실시간 업데이트 미완성
 		CarModel model = new CarModel();
 		model.setCarCode(tfCode.getText());
 		service.deleteCarModel(model);
+		carUi.reloadDataCarPanel();
+		carUi.close();
 	}
 	
 	private CarModel getItem() {
-		//getitem작성중!
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
 
@@ -354,38 +377,85 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		//isrent,rentCnt 처리중
 		boolean isRent = false;
 		//가격
-		int basicCharge = Integer.parseInt(tfBasicCharge.getText());
-		int hour6 = Integer.parseInt(tfHour6.getText());
-		int hour10 = Integer.parseInt(tfHour10.getText());
-		int hour12 = Integer.parseInt(tfHour12.getText());
-		int hourElse = Integer.parseInt(tfHourElse.getText());
+		int basicCharge = Integer.parseInt(tfBasicCharge.getText().replaceAll(",", ""));
+		int hour6 = Integer.parseInt(tfHour6.getText().replaceAll(",", ""));
+		int hour10 = Integer.parseInt(tfHour10.getText().replaceAll(",", ""));
+		int hour12 = Integer.parseInt(tfHour12.getText().replaceAll(",", ""));
+		int hourElse = Integer.parseInt(tfHourElse.getText().replaceAll(",", ""));
 		
 		CarModel item = new CarModel(code, name, color, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
 		return item;
 	}
 	
-
-	public void setCarModel(CarModel carModel) {//set
-		String strImg = imgPath+carModel.getCarCode()+".png";
-		strImg = strImg.replace("\\", "/");
-		ImageIcon img = new ImageIcon(strImg);
-		//사진이 없을 경우 파일 insert
-		if(img.getImage()==null) {
-			UserPic userpic = new UserPic();
-			userpic.setCarCode(tfCode.getText());		
-			try {
-				userpic.setPic(getPicFile());
-				service.insertUserPic(userpic);
-			} catch (IOException e) {
-				e.printStackTrace();
+	//파일 읽어오기(폴더에 있는 파일)
+		protected void do_fileOpen_actionPerformed(ActionEvent e) {
+			currentDirectoryPath = System.getProperty("user.dir") + "\\images\\";
+			chooser = new JFileChooser(currentDirectoryPath);
+			
+			int ret = chooser.showSaveDialog(null);
+			//X버튼 누르거나 취소 => 1, 파일 열었을 때 => 0
+			if( ret != JFileChooser.APPROVE_OPTION) {	//열기버튼 말고 다른 버튼 눌렀으면
+				JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.", "경고", JOptionPane.WARNING_MESSAGE);
+				return;
 			}
+			
+			filePath = chooser.getSelectedFile().getPath();
+			
+			//고른 이미지 디스플레이
+			ImageIcon img = new ImageIcon(filePath);
+			Image image = img.getImage();
+			
+			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+			ImageIcon resimg = new ImageIcon(changedImg);
+			lbl_img.setIcon(resimg);
+			panel_img.add(lbl_img);
+			
+			
+			//파일복사하기(디비이용안하는 방법)
+	       /* try(FileInputStream inputStream = new FileInputStream(filePath);
+	        		FileOutputStream outputStream = new FileOutputStream(currentDirectoryPath+tfCode.getText()+".png")){	              
+	            int i = 0;
+	            byte [] buffer = new byte[512];
+	            while((i = inputStream.read(buffer)) != -1) {
+	            	outputStream.write(buffer, 0, i);
+	            }
+	            System.out.println("파일이 복사되었습니다.");
+	        } catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}*/
+			
+			
 		}
-		Image image = img.getImage();
-		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
-		ImageIcon resimg = new ImageIcon(changedImg);
-		lbl_img.setIcon(resimg);
-		panel_img.add(lbl_img);
+
+
+	public void setCarModel(CarModel carModel) {
 		
+		//테이블에 저장되있는 이미지 불러오기
+		System.out.println(carModel.getCarCode());//V012정상출력
+		UserPic userpic = service.getUserPic(carModel.getCarCode());//결과0
+		System.out.println(userpic);
+		if(userpic.getPic()!=null) {
+			ImageIcon img = new ImageIcon(userpic.getPic());
+			Image image = img.getImage();
+			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+			ImageIcon resimg = new ImageIcon(changedImg);
+			lbl_img.setIcon(resimg);
+			panel_img.add(lbl_img);
+			lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
+		}else {
+			//사진이 없을 경우 파일 no_image 디스플레이
+			ImageIcon img =new ImageIcon(imgPath+"V000.png");
+			Image image = img.getImage();
+			Image changedImg= image.getScaledInstance(200, 150, Image.SCALE_SMOOTH );
+			ImageIcon resimg = new ImageIcon(changedImg);
+			lbl_img.setIcon(resimg);
+			lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
+			panel_img.add(lbl_img);
+		}
+
+
 		tfCode.setText(carModel.getCarCode());
 		tfName.setText(carModel.getName());
 		
@@ -412,6 +482,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		}else {
 			rdbtnStick.setSelected(true);
 		}
+		
+		lblCount.setText("대여횟수 : "+ carModel.getRentCnt() +"번");
 	}
 
 	public void setCarUi(CarUi carUi) {
@@ -420,7 +492,8 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	private byte[] getPicFile() throws IOException{
 		byte[] pic = null;
-		File file = new File(System.getProperty("user.dir")+"/images/"+tfCode.getText());
+		File file = new File(filePath);
+		System.out.println(filePath);
 		try(InputStream is = new FileInputStream(file)){
 			pic = new byte[is.available()];
 			is.read(pic);

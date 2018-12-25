@@ -77,6 +77,9 @@ select * from event;
 select * from custom_event;
 select * from customer;
 
+
+desc customer;
+
 select * from grade;
 
 select * from `level`;
@@ -134,5 +137,48 @@ from customer c , grade g
 where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C007';
 
 
+select c.code, Id, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, is_use, e.name, e.rate
+from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code
+where id = 'asd132' and passwd =password('rootroot');
+
+delete from custom_event
+where custom_code = 'C009';
+
+delete from customer
+where code = 'C009';
+
+select * from custom_event
+where custom_code = 'C005';
+
+start transaction;
+delete from custom_event
+where custom_code = 'C008';
+delete from customer
+where code = 'C008';
+COMMIT;
 
 
+
+delete from customer
+where code = 'C008';
+
+select * from customer;
+
+select * from event;
+
+select * from custom_event;
+
+delete from custom_event
+where custom_code='C017';
+
+
+select c.code, Id,c.Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, g.name as gname, rent_cnt
+from customer c join grade g on c.grade_code = g.code;
+
+select * from customer;
+
+update customer
+		set code='C011', Id='swan2701', passwd=password('rootroot'), name='안녕', address='대구', 
+		phone='010-5152-5468', dob='2018-12-13', email='acdv@naver.com', emp_code='E001', license='1종보통', grade_code='G001', 
+		rent_cnt=2 
+		where code='C011';

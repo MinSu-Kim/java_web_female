@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -117,9 +118,14 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				service.deleteCarOption(panelList.getSelectedItem());
-				panelList.setList(service.selectAllCarOption());
-				panelList.loadDatas();
+				try {
+					service.deleteCarOption(panelList.getSelectedItem());
+					panelList.setList(service.selectAllCarOption());
+					panelList.loadDatas();
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "해당 옵션이 포함된 차량 보유 중 (삭제 불가능)");
+				}
+				
 			}
 		});
 		popMenu.add(delItem);

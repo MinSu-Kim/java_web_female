@@ -6,6 +6,7 @@ import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -37,17 +38,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 			return sqlSession.selectList(namespace + ".selectCustomerByAll");
 		}
 	}
-
-/*	@Override
-	public int selectCustomerById(Customer customer) {
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerById", customer);
-			if (selectedCustomer == null) {
-				return 0;
-			}
-			return 1;
-		}
-	}*/
 
 	@Override
 	public Customer selectCustomerById(Customer customer) {
@@ -88,17 +78,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-/*	@Override
-	public int selectCustomerByPw(Customer customer) {
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerByPw", customer);
-			if (selectedCustomer == null) {
-				return 0;
-			}
-			return 1;
-		}
-	}*/
-
 	@Override
 	public Customer selectCustomerByPw(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -130,6 +109,42 @@ public class CustomerMapperImpl implements CustomerMapper {
 			int res = sqlSession.delete(namespace + ".deleteCustomer", customer);
 			sqlSession.commit();
 			return res;
+		}
+	}
+
+///////////////////////// 트랜잭션 처리 //////////////////////////
+	@Override
+	public void insertCustomerJoin(Customer customer, CustomEvent customEvent) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			sqlSession.insert(namespace + ".insertCustomer", customer);
+			sqlSession.insert("kr.or.yi.java_web_female.dao.CustomEventMapper.insertCustomEvent", customEvent);
+			sqlSession.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		} finally {
+			sqlSession.close();
+		}
+	}
+///////////////////////// 트랜잭션 처리 //////////////////////////
+
+	@Override
+	public void deleteCustomerEvent(Customer customer, CustomEvent customEvent) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
+			sqlSession.delete(namespace + ".deleteCustomer", customer);
+			sqlSession.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		}finally {
+			sqlSession.close();
 		}
 	}
 }

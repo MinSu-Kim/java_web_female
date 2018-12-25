@@ -4,18 +4,26 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.dto.UserPic;
+import kr.or.yi.java_web_female.service.RentUIService;
+import java.awt.Dimension;
 
-public class RentResultFrame extends JFrame {
+public class RentResultFrame extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField tfCustomer;
@@ -27,6 +35,15 @@ public class RentResultFrame extends JFrame {
 	private JTextField tfOption;
 	private JTextField tfInsurance;
 	private Rent rent;
+	private JLabel lblPrice;
+	private JTextField tfDiscount;
+	private JButton btnCancel;
+	private JLabel lblCarImg;
+	private RentUIService service;
+
+	public void setService(RentUIService service) {
+		this.service = service;
+	}
 
 	/**
 	 * Create the frame.
@@ -61,11 +78,10 @@ public class RentResultFrame extends JFrame {
 		pCarInfo.add(tfCarName);
 		tfCarName.setColumns(10);
 		
-		JPanel pCarImg = new JPanel();
-		FlowLayout fl_pCarImg = (FlowLayout) pCarImg.getLayout();
-		fl_pCarImg.setVgap(10);
-		fl_pCarImg.setHgap(10);
-		pCar.add(pCarImg, BorderLayout.CENTER);
+		lblCarImg = new JLabel("");
+		lblCarImg.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCarImg.setPreferredSize(new Dimension(250, 150));
+		pCar.add(lblCarImg, BorderLayout.CENTER);
 		
 		JPanel pInfo = new JPanel();
 		pWrap.add(pInfo);
@@ -121,7 +137,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(tfEndTime);
 		tfEndTime.setColumns(10);
 		
-		JLabel lblInsucrance = new JLabel("보험 선택");
+		JLabel lblInsucrance = new JLabel("보험 가격");
 		lblInsucrance.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		lblInsucrance.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblInsucrance);
@@ -131,7 +147,7 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(tfInsurance);
 		tfInsurance.setColumns(10);
 		
-		JLabel lblOption = new JLabel("옵션 선택");
+		JLabel lblOption = new JLabel("옵션 가격");
 		lblOption.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		lblOption.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblOption);
@@ -141,22 +157,22 @@ public class RentResultFrame extends JFrame {
 		pInfo.add(tfOption);
 		tfOption.setColumns(10);
 		
-		JLabel lblTitleDiscount = new JLabel("할인");
+		JLabel lblTitleDiscount = new JLabel("할인율");
 		lblTitleDiscount.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		lblTitleDiscount.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblTitleDiscount);
 		
-		JLabel lblDiscount = new JLabel("New label");
-		lblDiscount.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		lblDiscount.setHorizontalAlignment(SwingConstants.CENTER);
-		pInfo.add(lblDiscount);
+		tfDiscount = new JTextField();
+		tfDiscount.setEditable(false);
+		pInfo.add(tfDiscount);
+		tfDiscount.setColumns(10);
 		
 		JLabel lblPriceTitle = new JLabel("최종 대여요금");
 		lblPriceTitle.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		lblPriceTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblPriceTitle);
 		
-		JLabel lblPrice = new JLabel("New label");
+		lblPrice = new JLabel("");
 		lblPrice.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblPrice);
@@ -168,24 +184,61 @@ public class RentResultFrame extends JFrame {
 		btnRent.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		pBtn.add(btnRent);
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		btnCancel.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		pBtn.add(btnCancel);
 	}
-	
+
 	public void setRent(Rent rent) {
 		this.rent = rent;
 		setItems();
+		loadImages();
+		JOptionPane.showMessageDialog(null, rent.isReturn());
 	}
 	
+
 	public void setItems() {
 		tfCarName.setText(rent.getCarCode().getName()); //차량명
 		tfCustomer.setText(rent.getCustomerCode().getName()); //고객명
 		tfStartDate.setText(rent.getStartDate()); //대여일자
-		tfStartTime.setText(rent.getStartTime()); //대여시간
+		tfStartTime.setText(rent.getStartTime() + "시"); //대여시간
 		tfEndDate.setText(rent.getEndDate());	//반납일자
-		tfEndTime.setText(rent.getEndTime());	//반납시간
-		tfInsurance.setText(rent.getInsuranceCode().getPrice()+"");	//보험가격
+		tfEndTime.setText(rent.getEndTime() + "시");	//반납시간
+		tfInsurance.setText(rent.getInsuranceCode().getPrice() + "원");	//보험가격
+		tfOption.setText(rent.getOptPrice() + "원");
+		tfDiscount.setText(String.format("%s", rent.geteRate()+"%"));
 	}
 
+	public void setLblPrice(long lblPrice) {
+		this.lblPrice.setText(String.format("%,d원", lblPrice));
+	}
+
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(e);
+		}
+	}
+	
+	//취소버튼
+	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		dispose();
+	}
+	
+	public void loadImages() {
+		UserPic userPic = service.getUserPic(rent.getCarCode().getCarCode());
+		
+		ImageIcon img = new ImageIcon(userPic.getPic());
+		Image image = img.getImage();
+		Image changedImg= image.getScaledInstance(350, 250, Image.SCALE_SMOOTH );
+		ImageIcon resimg = new ImageIcon(changedImg);
+		lblCarImg.setIcon(resimg);
+	/*	ImageIcon img = new ImageIcon(filePath);
+		Image image = img.getImage();
+		
+		Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );
+		ImageIcon resimg = new ImageIcon(changedImg);
+		lblCarImg.setIcon(resimg);*/
+	}
 }

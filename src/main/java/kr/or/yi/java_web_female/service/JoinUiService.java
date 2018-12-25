@@ -42,4 +42,10 @@ public class JoinUiService {
 		return cusDao.selectCustomerById(customer);
 	}
 	
+	
+///////////////////////// 트랜잭션 처리 //////////////////////////
+	public void joinCustomer(Customer customer, CustomEvent customEvent) {
+		cusDao.insertCustomerJoin(customer, customEvent);
+	}
+///////////////////////// 트랜잭션 처리 //////////////////////////
 }

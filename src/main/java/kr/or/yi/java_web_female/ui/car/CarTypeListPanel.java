@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -106,9 +107,13 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				service.deleteCarType(panelList.getSelectedItem());
-				panelList.setList(service.selectAllCarType());
-				panelList.loadDatas();
+				try {
+					service.deleteCarType(panelList.getSelectedItem());
+					panelList.setList(service.selectAllCarType());
+					panelList.loadDatas();
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "해당 차종의 차량을 보유 중 (삭제 불가능)");
+				}
 			}
 		});
 		popMenu.add(delItem);

@@ -38,5 +38,12 @@ public class TestFrame extends JFrame {
 		}
 		return String.format("%s님", loginUserName);
 	}
-
+	
+	public static boolean loginEmployee() {
+		if(LoginUI.loginEmployee !=null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
