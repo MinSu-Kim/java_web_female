@@ -2,7 +2,7 @@ package kr.or.yi.java_web_female.dto;
 
 import java.util.List;
 
-public class CarModel {
+public class CarModel{
 	private String carCode;
 	private String name;
 	private String color;

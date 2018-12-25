@@ -24,15 +24,6 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 	private CustomerSearchFrame cf; // 고객확인프레임
 	private RentPanel rentPanel;
 	
-	
-
-/*	
-	public void setRentCustomer(List<Customer> rentCustomer) {
-		this.rentCustomer = setRentCustomer(service.selectCustomerByCode(rentCustomer));
-		
-		JOptionPane.showMessageDialog(null, "선택된 고객 " + rentCustomer);
-	}*/
-
 	public void setRentPanel(RentPanel rentPanel) {
 		this.rentPanel = rentPanel;
 	}

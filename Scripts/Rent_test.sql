@@ -56,91 +56,49 @@ from custom_event ce join event e on ce.event_code = e.code
 where custom_code = 'C005';
 
 
-
--- 
-DROP PROCEDURE IF EXISTS proj_rentcar.update_customer_grade;
-
-DELIMITER $$
-$$
-CREATE PROCEDURE proj_rentcar.update_customer_grade(in custom_code char(4), in rent_code char(4), in carCode char(4), in isGrade int)
-begin
-    declare gcode char(4);
-	declare ecode char(4);
-
-    update customer
-    set rent_cnt = rent_cnt + 1
-    where code=custom_code;
-   
-    select g.code into gcode
-	from customer c , grade g
-	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
-
-	update customer
-	set grade_code = gcode
-	where code = custom_code;
-
-	update car_model
-	set is_rent = 1, rent_cnt = rent_cnt + 1
-	where car_code = carCode;
-
-    /*고객 이벤트 사용유무를 사용으로 변경하기 추가 */
-	if isGrade = 0 then
-		call custom_event_use(custom_code, rent_code);
-		/*select event_code into ecode
-		from custom_event ce join event e on ce.event_code = e.code 
-		where custom_code = custom_code and rate = (	select e_rate
-												from rent r 
-												where r.costomer_code = custom_code and code = rent_code);
-		select ecode from dual;
-	
-		update custom_event
-		set is_use = 1
-		where custom_code = custom_code and event_code = ecode;*/
-	end if;
-
-end$$
-DELIMITER ;
-
-DROP PROCEDURE IF EXISTS proj_rentcar.custom_event_use;
-DELIMITER $$
-$$
-CREATE PROCEDURE proj_rentcar.custom_event_use(in c_code char(4), in r_code char(4))
-begin
-	declare ecode char(4);
-
-	select event_code into ecode
-	from custom_event ce join event e on ce.event_code = e.code 
-	where custom_code = c_code and rate = (	select e_rate
-											from rent r 
-											where r.costomer_code = c_code and code = r_code);
-	select ecode from dual;
-
-	update custom_event
-	set is_use = 1
-	where custom_code = c_code and event_code = ecode;
-
-end $$
-DELIMITER ;
-
-call update_customer_grade('C005', 'R006', 'V002', 0);
-
-
-select event_code
-from custom_event ce join event e on ce.event_code = e.code 
-where custom_code = 'C005' and rate = (	select e_rate
-										from rent r 
-										where r.costomer_code = 'C005' and r.code='R006');
-
-															
-select * from rent;
-select concat('R', LPAD(count(*)+1,3,'0')) from rent;
-
 select max(code) from rent;
 select round(substring(max(code), 2,3)) + 1 from rent;
 
 select concat('R', lpad((round(substring(max(code), 2,3)) + 1), 3, '0')) from rent;
 
-select concat('R', LPAD(substring(max(code), 2,3)*1+1, 3,'0') from rent;
-
 call update_customer_grade('C006', 'R007', 'V002', 0);
 
+
+
+
+-- rent insert 후 동작
+
+-- 1. customer에 대여횟수 1 증가
+-- CustomerMapper.updateCustomerRentCnt(Customer customer);
+update customer
+set rent_cnt = rent_cnt + 1
+where code=custom_code;
+
+
+-- 2. customer의 대여횟수에 따른 등급 조정
+-- 	CustomerMapper.selectGradeCustomer(Customer customer);
+select g.code from customer c , grade g where (rent_cnt between g.g_losal and g.g_hisal) and c.code='C005';
+
+-- CustomerMapper.updateCustomerGrade(Customer customer); 
+update customer set grade_code = gcode where code = custom_code;
+
+
+
+-- 3. 해당 대여된 자동차(car_model에서 대여중으로 변경)
+-- CarModelMapper.updateCarModelRent(CarModel carModel)
+update car_model set is_rent = 1, rent_cnt = rent_cnt + 1 where car_code = carCode;
+
+
+
+-- 4. 고객 이벤트 사용유무(가장 높은 것으로) 고객이 가지고 있는 이벤트 , 등급에 따른 이벤트 e_code = EVT1, EVT2, G002, G003
+-- CustomEventMapper.updateSetUse(Rent rent)
+update custom_event set is_use = 1
+where custom_code = 'C005' and event_code = 'EVT1';
+
+
+-- 5. rent 정보 추가
+-- Rent 클래스에서 int e_rate 를 String eCode;로 수정(고객이벤트 및 등급에 따른 이벤트적용인지 구분)
+-- eCode에 저장되는  정보는 EVT1(첫가입 3%) EVT2(생일 5%), 
+--               등급에 따를 경우 G001(0%), G002(5%), G003(10%) 
+-- eCode 변경에 따라 RentPanel에서 setSelectedCustomer()부분과 getTotalRentPrice() 수정 
+-- RentMapper.insertRent() 에서 e_rate-> eCode로 수정하고 RentMapperImpl에서 1~5번 트랜잭션 적용
