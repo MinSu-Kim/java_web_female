@@ -28,6 +28,7 @@ public class Event {
 	public String toString() {
 		return String.format("Event [code=%s, name=%s, rate=%s]", code, name, rate);
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

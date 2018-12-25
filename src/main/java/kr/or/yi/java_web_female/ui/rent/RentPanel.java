@@ -142,13 +142,14 @@ public class RentPanel extends JPanel implements ActionListener {
 		maxEventRate = -1;
 		eCode = null;
 		for (CustomEvent ce : selectedCustomer.getEvents()) {
-//			JOptionPane.showMessageDialog(null, ce);
+			JOptionPane.showMessageDialog(null, ce);
 			for (Event e : ce.getEvents()) {
 				JOptionPane.showMessageDialog(null, e);
 				// 가장 큰 이벤트 할인율 가져오기
 				if (e.getRate() > maxEventRate) {
 					maxEventRate = e.getRate();
 					eCode = e.getCode();
+					JOptionPane.showMessageDialog(null, eCode);
 				}
 			}
 		}
@@ -223,12 +224,12 @@ public class RentPanel extends JPanel implements ActionListener {
 	// 확인버튼
 	private void do_btnCstmSearch_actionPerformed(ActionEvent e) {
 		
-		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour(),
-				rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel,
+		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour() + ":00:00",
+				rentDateDto.getEndDate(), rentDateDto.getEndHour() + ":00:00", false, totalPrice, selectedCarModel,
 				selectedCustomer, insurance, eCode, optionPrice);
-				
-		JOptionPane.showMessageDialog(null, rent);
-		
+
+		JOptionPane.showMessageDialog(null, eCode);
+
 		if (rentResultFrame == null) {
 			rentResultFrame = new RentResultFrame();
 		}
