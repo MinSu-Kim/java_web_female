@@ -12,5 +12,7 @@ public interface RentMapper {
 	
 	@Insert("insert into rent values (#{code}, #{startDate}, #{startTime}, #{endDate}, #{endTime}, #{isReturn}, #{totalPrice}, #{carCode.carCode}, #{customerCode.code}, #{insuranceCode.code}, #{eCode}, #{optPrice})")
 	int insertRent(Rent rent);
+
+	void deleteRent(Rent rent);
 	
 }
