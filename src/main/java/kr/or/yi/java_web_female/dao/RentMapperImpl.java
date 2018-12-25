@@ -58,40 +58,6 @@ public class RentMapperImpl implements RentMapper {
 		return res;
 	}
 
-/*	@Override
-	public void procedureRent(Map<String, Object> map) {
-		
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			sqlSession.selectOne(namespace + ".procedureRent", map);
-		}
-	}
-
-	@Override
-	public int procedureRent2(Map<String, Object> map) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			return sqlSession.insert(namespace + ".procedureRent2", map);
-		}
-	}
-
-	@Override
-	public void insertRent(Rent rent) {
-		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
-		
-		try {
-			sqlSession.insert(namespace + ".insertRent", rent);
-			sqlSession.insert(namespace + ".procedureRent2", map);
-			sqlSession.commit();
-		} catch (Exception e) {
-			e.printStackTrace();
-			sqlSession.rollback();
-			System.err.println("sqlSession.rollback()");
-			throw new RuntimeException(e.getCause());
-		} finally {
-			sqlSession.close();
-		}
-		
-	}
-*/
 	@Override
 	public void deleteRent(Rent rent) {
 		// TODO Auto-generated method stub

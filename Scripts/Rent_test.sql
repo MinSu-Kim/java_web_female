@@ -92,3 +92,10 @@ where custom_code = 'C005' and event_code = 'EVT1';
 --               등급에 따를 경우 G001(0%), G002(5%), G003(10%) 
 -- eCode 변경에 따라 RentPanel에서 setSelectedCustomer()부분과 getTotalRentPrice() 수정 
 -- RentMapper.insertRent() 에서 e_rate-> eCode로 수정하고 RentMapperImpl에서 1~5번 트랜잭션 적용
+
+
+select c.code, Id, passwd, c.Name, zip_code ,address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, 
+		custom_code, is_use, e.name as eName, e.code eCode , e.rate as eRate, g.rate as gRate
+		from customer c join custom_event ce on c.code = ce.custom_code join event e 
+		on ce.event_code = e.code join grade g on c.grade_code = g.code
+		where c.code = 'C005'

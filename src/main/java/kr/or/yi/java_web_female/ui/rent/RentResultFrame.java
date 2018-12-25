@@ -1,14 +1,13 @@
 package kr.or.yi.java_web_female.ui.rent;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,8 +22,6 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.RentUIService;
-import java.awt.Dimension;
-import java.awt.Color;
 
 public class RentResultFrame extends JFrame implements ActionListener {
 
@@ -260,6 +257,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		map.put("isGrade", rent.geteRate() < rent.getCustomerCode().getGradeCode().getRate() ? 1 : 0);
 		
 		service.insertRent(rent, map);*/
+		
 		service.insertRent(rent);
 		dispose();
 	}
