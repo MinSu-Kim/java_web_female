@@ -80,7 +80,7 @@ public class RentMapperTest extends AbstractTest {
 		Assert.assertEquals(-1, res);
 	}*/
 
-	@Test
+/*	@Test
 	public void test05insertTransaction01() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -107,7 +107,7 @@ public class RentMapperTest extends AbstractTest {
 		map.put("isGrade", 0);
 		
 		dao.insertRent(rent, map);
-	}
+	}*/
 	
 	@Test
 	public void test05insertTransaction02() {
@@ -115,31 +115,27 @@ public class RentMapperTest extends AbstractTest {
 		
 		Rent rent = new Rent();
 		rent.setCode(dao.getNextRentNo());
-		rent.setStartDate("2018-12-25");
+		rent.setStartDate("2018-12-27");
 		rent.setStartTime("12:00:00");
-		rent.setEndDate("2018-12-26");
+		rent.setEndDate("2018-12-28");
 		rent.setEndTime("12:00:00");
 		rent.setReturn(false);
-		rent.setTotalPrice(127000);
+		rent.setTotalPrice(200000);
 		rent.setCarCode(new CarModel("V002"));
 		Customer customer = new Customer();
-		customer.setCode("C006");
+		customer.setCode("C001");
 		rent.setCustomerCode(customer);
 		rent.setInsuranceCode(new Insurance("I000"));
 		rent.seteRate(5);
-		rent.setOptPrice(5000);
+		rent.setOptPrice(11000);
 		
 		Map<String, Object> map = new HashMap<>();
-		//고객 코드 빠졌을 때
-		map.put("custom_code", "C006");
+		map.put("custom_code", "C001");
 		map.put("rent_code", "R006");
 		map.put("carCode", "V002");
 		map.put("isGrade", 0);
 		
-		map.put("custom_code", "C006");
-		
-		dao.insertRent(rent, map);
-		
+		dao.insertRent(rent, map);		
 	}
 	
 }
