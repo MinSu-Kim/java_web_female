@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.Customer;
@@ -28,11 +30,6 @@ public class RentMapperImpl implements RentMapper {
 
 	@Override
 	public int insertRent(Rent rent) {
-/*		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			int res = sqlSession.insert(namespace + ".insertRent", rent);
-			sqlSession.commit();
-			return res;
-		}*/
 		int res = 0;
 		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
 		try {
@@ -74,6 +71,31 @@ public class RentMapperImpl implements RentMapper {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
 			return sqlSession.insert(namespace + ".procedureRent2", map);
 		}
-	}*/
+	}
+
+	@Override
+	public void insertRent(Rent rent) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		
+		try {
+			sqlSession.insert(namespace + ".insertRent", rent);
+			sqlSession.insert(namespace + ".procedureRent2", map);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+*/
+	@Override
+	public void deleteRent(Rent rent) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

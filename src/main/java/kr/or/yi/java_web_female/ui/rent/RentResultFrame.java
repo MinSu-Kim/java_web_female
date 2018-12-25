@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +24,7 @@ import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.RentUIService;
 import java.awt.Dimension;
+import java.awt.Color;
 
 public class RentResultFrame extends JFrame implements ActionListener {
 
@@ -40,6 +43,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	private JLabel lblCarImg;
 	private RentUIService service;
+	private JButton btnRent;
 
 	public void setService(RentUIService service) {
 		this.service = service;
@@ -173,14 +177,16 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		pInfo.add(lblPriceTitle);
 		
 		lblPrice = new JLabel("");
-		lblPrice.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		lblPrice.setForeground(Color.RED);
+		lblPrice.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		pInfo.add(lblPrice);
 		
 		JPanel pBtn = new JPanel();
 		contentPane.add(pBtn, BorderLayout.SOUTH);
 		
-		JButton btnRent = new JButton("대여");
+		btnRent = new JButton("대여");
+		btnRent.addActionListener(this);
 		btnRent.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		pBtn.add(btnRent);
 		
@@ -194,7 +200,8 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		this.rent = rent;
 		setItems();
 		loadImages();
-		JOptionPane.showMessageDialog(null, rent.isReturn());
+		///////isReturn : false 반납X true : 반납O ==> 대여버튼 누르면 true로 변경되게 하기
+//		JOptionPane.showMessageDialog(null, rent.isReturn());
 	}
 	
 
@@ -202,11 +209,12 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		tfCarName.setText(rent.getCarCode().getName()); //차량명
 		tfCustomer.setText(rent.getCustomerCode().getName()); //고객명
 		tfStartDate.setText(rent.getStartDate()); //대여일자
-		tfStartTime.setText(rent.getStartTime() + "시"); //대여시간
+		tfStartTime.setText(rent.getStartTime()); //대여시간
 		tfEndDate.setText(rent.getEndDate());	//반납일자
-		tfEndTime.setText(rent.getEndTime() + "시");	//반납시간
+		tfEndTime.setText(rent.getEndTime());	//반납시간
 		tfInsurance.setText(rent.getInsuranceCode().getPrice() + "원");	//보험가격
 		tfOption.setText(rent.getOptPrice() + "원");
+
 	}
 
 	public void setDisCount(int discount) {
@@ -219,6 +227,9 @@ public class RentResultFrame extends JFrame implements ActionListener {
 
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnRent) {
+			do_btnRent_actionPerformed(e);
+		}
 		if (e.getSource() == btnCancel) {
 			do_btnCancel_actionPerformed(e);
 		}
@@ -237,5 +248,19 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		Image changedImg= image.getScaledInstance(350, 250, Image.SCALE_SMOOTH );
 		ImageIcon resimg = new ImageIcon(changedImg);
 		lblCarImg.setIcon(resimg);
+	}
+	
+	
+	//대여버튼 ==> rent 테이블에 데이터 들어가게 하기
+	protected void do_btnRent_actionPerformed(ActionEvent e) {
+/*		Map<String, Object> map = new HashMap<>();
+		map.put("custom_code", rent.getCustomerCode().getCode());
+		map.put("rent_code", service.nextRentNo());
+		map.put("carCode", rent.getCarCode().getCarCode());
+		map.put("isGrade", rent.geteRate() < rent.getCustomerCode().getGradeCode().getRate() ? 1 : 0);
+		
+		service.insertRent(rent, map);*/
+		service.insertRent(rent);
+		dispose();
 	}
 }

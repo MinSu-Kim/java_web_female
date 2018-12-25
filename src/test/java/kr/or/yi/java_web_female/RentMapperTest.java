@@ -56,71 +56,7 @@ public class RentMapperTest extends AbstractTest {
 		
 	}
 	
-/*
-	public Rent getNewRent() {
-		Rent rent = new Rent();
-		rent.setCode(dao.getNextRentNo());
-		rent.setStartDate("2018-12-23");
-		rent.setStartTime("12:00:00");
-		rent.setEndDate("2018-12-24");
-		rent.setEndTime("12:00:00");
-		rent.setReturn(false);
-		rent.setTotalPrice(40000);
-		rent.setCarCode(new CarModel("V004"));
-		Customer customer = new Customer();
-		customer.setCode("C006");
-		rent.setCustomerCode(customer);
-		rent.setInsuranceCode(new Insurance("I000"));
-		rent.seteCode("EVT1");
-//		rent.seteRate(5);
-		rent.setOptPrice(5000);
-		return rent;
-	}
-	
-	@Test
-	public void test03Procedure() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
-		Rent rent = getNewRent();
-		Customer customer = new Customer();
-		customer.setCode("C006"); //R007  C006 V002 G1 6 c_event 3 브론즈 5적용
-		rent.setCustomerCode(customer);
-		rent.setCarCode(new CarModel("V002"));
-		rent.seteRate(3);
-		dao.insertRent(rent);
-		
-		Map<String, Object> map = getParamterMap(rent);
-		
-		dao.procedureRent(map);
-	}
 
-	public Map<String, Object> getParamterMap(Rent rent) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("custom_code", rent.getCustomerCode());
-		map.put("rent_code", rent.getCode());
-		map.put("carCode", rent.getCarCode());
-		map.put("isGrade", 0);
-		return map;
-	}
-	
-	@Test
-	public void test04Procedure2() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
-		Rent rent = getNewRent();//R008
-		Customer customer = new Customer();
-		customer.setCode("C006"); //R008  C006 V002 G1 7 c_event 3 브론즈 5적용		
-		rent.setCustomerCode(customer);
-		rent.setCarCode(new CarModel("V003"));
-		rent.seteRate(5);
-		dao.insertRent(rent);
-		
-		Map<String, Object> map = getParamterMap(rent);
-		
-		int res = dao.procedureRent2(map);
-		Assert.assertEquals(-1, res);
-	}
-*/
 /*	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		C3P0DataSourceFactory cds = new C3P0DataSourceFactory();
@@ -138,4 +74,5 @@ public class RentMapperTest extends AbstractTest {
 			pstmt.executeUpdate();
 		}
 	}*/
+
 }

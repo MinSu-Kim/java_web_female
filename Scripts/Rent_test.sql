@@ -56,16 +56,6 @@ from custom_event ce join event e on ce.event_code = e.code
 where custom_code = 'C005';
 
 
-select max(code) from rent;
-select round(substring(max(code), 2,3)) + 1 from rent;
-
-select concat('R', lpad((round(substring(max(code), 2,3)) + 1), 3, '0')) from rent;
-
-call update_customer_grade('C006', 'R007', 'V002', 0);
-
-
-
-
 -- rent insert 후 동작
 
 -- 1. customer에 대여횟수 1 증가

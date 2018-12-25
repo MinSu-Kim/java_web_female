@@ -55,8 +55,9 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 		add(lblCstmName);
 
 		tfCstmName = new JTextField();
-		add(tfCstmName);
 		tfCstmName.setColumns(10);
+		tfCstmName.setText("김영희");
+		add(tfCstmName);
 
 		btnCstmSearch = new JButton("검색");
 		btnCstmSearch.addActionListener(this);
@@ -82,6 +83,7 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 			cf = new CustomerSearchFrame();
 		}
 		try {
+			
 			List<Customer> cList = service.selectCustomer(customer);
 			if (cList.size() > 1) {
 

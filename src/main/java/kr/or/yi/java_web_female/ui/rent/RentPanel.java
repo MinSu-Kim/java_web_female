@@ -114,7 +114,7 @@ public class RentPanel extends JPanel implements ActionListener {
 		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPrice.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 
-		lblResultPrice = new JLabel("New label");
+		lblResultPrice = new JLabel("");
 		panel.add(lblResultPrice);
 		lblResultPrice.setFont(new Font("맑은 고딕", Font.BOLD, 12));
 		lblResultPrice.setForeground(Color.RED);
@@ -226,6 +226,7 @@ public class RentPanel extends JPanel implements ActionListener {
 				rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel,
 				selectedCustomer, insurance, eCode, optionPrice);
 				
+
 		if (rentResultFrame == null) {
 			rentResultFrame = new RentResultFrame();
 		}
