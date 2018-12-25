@@ -224,8 +224,8 @@ public class RentPanel extends JPanel implements ActionListener {
 	// 확인버튼
 	private void do_btnCstmSearch_actionPerformed(ActionEvent e) {
 		
-		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour(),
-				rentDateDto.getEndDate(), rentDateDto.getEndHour(), false, totalPrice, selectedCarModel,
+		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour() + ":00:00",
+				rentDateDto.getEndDate(), rentDateDto.getEndHour() + ":00:00", false, totalPrice, selectedCarModel,
 				selectedCustomer, insurance, isEventRate ? maxEventRate : cGradeRate, optionPrice);
 		System.out.println(rent);
 		if (rentResultFrame == null) {

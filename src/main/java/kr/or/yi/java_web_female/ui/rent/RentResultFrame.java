@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -207,9 +209,9 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		tfCarName.setText(rent.getCarCode().getName()); //차량명
 		tfCustomer.setText(rent.getCustomerCode().getName()); //고객명
 		tfStartDate.setText(rent.getStartDate()); //대여일자
-		tfStartTime.setText(rent.getStartTime() + "시"); //대여시간
+		tfStartTime.setText(rent.getStartTime()); //대여시간
 		tfEndDate.setText(rent.getEndDate());	//반납일자
-		tfEndTime.setText(rent.getEndTime() + "시");	//반납시간
+		tfEndTime.setText(rent.getEndTime());	//반납시간
 		tfInsurance.setText(rent.getInsuranceCode().getPrice() + "원");	//보험가격
 		tfOption.setText(rent.getOptPrice() + "원");
 		tfDiscount.setText(String.format("%s", rent.geteRate()+"%"));
@@ -254,5 +256,13 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	
 	//대여버튼 ==> rent 테이블에 데이터 들어가게 하기
 	protected void do_btnRent_actionPerformed(ActionEvent e) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("custom_code", rent.getCustomerCode().getCode());
+		map.put("rent_code", service.nextRentNo());
+		map.put("carCode", rent.getCarCode().getCarCode());
+		map.put("isGrade", rent.geteRate() < rent.getCustomerCode().getGradeCode().getRate() ? 1 : 0);
+		
+		service.insertRent(rent, map);
+		dispose();
 	}
 }

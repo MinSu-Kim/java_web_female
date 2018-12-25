@@ -2,6 +2,7 @@ package kr.or.yi.java_web_female.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.yi.java_web_female.dao.CarModelMapper;
 import kr.or.yi.java_web_female.dao.CarModelMapperImpl;
@@ -83,5 +84,9 @@ public class RentUIService {
 	
 	public UserPic getUserPic(String carCode) {
 		return userPicDao.getUserPic(carCode);
+	}
+	
+	public void insertRent(Rent rent, Map<String, Object> map) {
+		rentDao.insertRent(rent, map);
 	}
 }
