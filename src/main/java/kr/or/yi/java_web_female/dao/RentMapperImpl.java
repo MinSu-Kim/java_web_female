@@ -1,9 +1,12 @@
 package kr.or.yi.java_web_female.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
@@ -28,25 +31,44 @@ public class RentMapperImpl implements RentMapper {
 
 	@Override
 	public int insertRent(Rent rent) {
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			int res = sqlSession.insert(namespace + ".insertRent", rent);
+		int res = 0;
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			String custom_namespace = "kr.or.yi.java_web_female.dao.CustomerMapper";
+			Customer customer = rent.getCustomerCode();
+			sqlSession.update(custom_namespace + ".updateCustomerRentCnt", customer);
+			String gradeCode = sqlSession.selectOne(custom_namespace+".selectGradeCustomer", customer);
+			customer.setGradeCode(new Grade(gradeCode));
+			sqlSession.update(custom_namespace + ".updateCustomerGrade",  customer);
+			
+			sqlSession.update("kr.or.yi.java_web_female.dao.CarModelMapper.updateCarModelRent", rent.getCarCode());
+			
+			sqlSession.update("kr.or.yi.java_web_female.dao.CustomEventMapper.updateSetUse", rent);
+			
+			res = sqlSession.insert(namespace + ".insertRent", rent);
+			
 			sqlSession.commit();
-			return res;
+		} catch(Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		} finally {
+			sqlSession.close();
 		}
+		return res;
 	}
 
 	@Override
-	public void procedureRent(Map<String, Object> map) {
+	public void deleteRent(Rent rent) {
+		// TODO Auto-generated method stub
 		
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			sqlSession.selectOne(namespace + ".procedureRent", map);
-		}
 	}
 
 	@Override
-	public int procedureRent2(Map<String, Object> map) {
+	public List<Rent> selectRentByAll() {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			return sqlSession.insert(namespace + ".procedureRent2", map);
+			return sqlSession.selectList(namespace + ".selectRentByAll");
 		}
 	}
 

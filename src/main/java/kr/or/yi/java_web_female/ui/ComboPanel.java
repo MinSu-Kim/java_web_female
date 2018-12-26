@@ -9,6 +9,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import kr.or.yi.java_web_female.TestFrame;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
@@ -60,7 +63,7 @@ public class ComboPanel<T> extends JPanel {
 		return comboBox;
 	}
 	
-
+	
 }
 
 

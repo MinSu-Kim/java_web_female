@@ -6,9 +6,9 @@ repositories {
 }
 
 
-tasks.withType(JavaCompile){
-    options.encoding= 'UTF-8'
-}
+//tasks.withType(JavaCompile){
+//    options.encoding= 'UTF-8'
+//}
 
 dependencies {
    // https://mvnrepository.com/artifact/org.mybatis/mybatis

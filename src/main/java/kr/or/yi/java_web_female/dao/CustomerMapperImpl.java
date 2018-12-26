@@ -147,4 +147,31 @@ public class CustomerMapperImpl implements CustomerMapper {
 			sqlSession.close();
 		}
 	}
+
+	@Override
+	public int updateCustomerRentCnt(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".updateCustomerRentCnt", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public String selectGradeCustomer(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".selectGradeCustomer", customer);
+		}
+	}
+
+	@Override
+	public int updateCustomerGrade(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".updateCustomerGrade", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+
 }

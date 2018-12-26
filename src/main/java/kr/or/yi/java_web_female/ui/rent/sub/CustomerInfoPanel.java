@@ -9,6 +9,7 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 import kr.or.yi.java_web_female.ui.rent.CustomerSearchFrame;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
@@ -24,15 +25,6 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 	private CustomerSearchFrame cf; // 고객확인프레임
 	private RentPanel rentPanel;
 	
-	
-
-/*	
-	public void setRentCustomer(List<Customer> rentCustomer) {
-		this.rentCustomer = setRentCustomer(service.selectCustomerByCode(rentCustomer));
-		
-		JOptionPane.showMessageDialog(null, "선택된 고객 " + rentCustomer);
-	}*/
-
 	public void setRentPanel(RentPanel rentPanel) {
 		this.rentPanel = rentPanel;
 	}
@@ -44,7 +36,8 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 		
 
 		// 고객 정보가 들어오는 지 확인하기
-		//JOptionPane.showMessageDialog(null, "선택된 고객 " + this.rentCustomer);
+/*		JOptionPane.showMessageDialog(null, "선택된 고객 " + this.rentCustomer);
+		JOptionPane.showMessageDialog(null, "rentPanel " + rentPanel);*/
 		rentPanel.setSelectedCustomer(this.rentCustomer);
 	}
 
@@ -64,12 +57,22 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 		add(lblCstmName);
 
 		tfCstmName = new JTextField();
-		add(tfCstmName);
 		tfCstmName.setColumns(10);
-
-		btnCstmSearch = new JButton("검색");
-		btnCstmSearch.addActionListener(this);
-		add(btnCstmSearch);
+		
+		add(tfCstmName);
+		
+		if(LoginUI.loginCusotmer == null) {
+			tfCstmName.setText("김영희");
+			btnCstmSearch = new JButton("검색");
+			btnCstmSearch.addActionListener(this);
+			add(btnCstmSearch);
+			
+		} else {
+			tfCstmName.setText(LoginUI.loginCusotmer.getName());
+			tfCstmName.setEditable(false);
+			
+		}
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -91,6 +94,7 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 			cf = new CustomerSearchFrame();
 		}
 		try {
+			
 			List<Customer> cList = service.selectCustomer(customer);
 			if (cList.size() > 1) {
 
