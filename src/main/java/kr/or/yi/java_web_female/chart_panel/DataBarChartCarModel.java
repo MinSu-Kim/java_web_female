@@ -46,7 +46,7 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("차량별 대여 횟수 통계");
 		
-		barChart.setPrefSize(500, 250);
+		barChart.setPrefSize(400, 250);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);//getChildren : Gets the list of children of this Group
@@ -81,46 +81,7 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		return dataSeries;
 	}
 	
-	//데이터 지우기
-	public void deleteAllData() {
-		barChart.getData().clear();
-	}
 	
-	//데이터 하나 지우기
-	public void delChartData(CarModel model) {
-		ObservableList<Series<String, Number>> list = barChart.getData();
-		Iterator<Series<String, Number>>  it = list.iterator();
-		while(it.hasNext()) {
-			Series<String, Number> s = it.next();
-			if (s.getName().equals(model.getName())) {
-				barChart.getData().remove(s);
-				break;
-			}
-		}
-	}
-	
-	//데이터 추가
-	public void updateChartData(CarModel model) {
-		ObservableList<Series<String, Number>> list = barChart.getData();
-		
-		for(int i = 0; i<list.size(); i++) {
-			Series<String, Number> s = list.get(i);
-			if (s.getName().equals(model.getName())) {
-				s.getData().set(0, new XYChart.Data<>("대여횟수", model.getRentCnt()));
-				break;
-			}
-		}
-	}
-	
-	//데이터 추가
-	public void addChartData(CarModel model) {
-		barChart.getData().add(getChartData(model));
-	}
-	
-	//데이터 모두 추가
-	public void addAllChartData() {
-		barChart.setData(getChartData());
-	}
 }
 
 

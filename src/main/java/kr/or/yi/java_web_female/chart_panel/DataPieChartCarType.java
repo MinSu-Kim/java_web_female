@@ -48,44 +48,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 		return list;
 	}
 	
-	public void addChartData(String title, int count) {
-		Data d = new PieChart.Data(title, count);
-		pieChart.getData().add(d);
-		d.nameProperty().bind(Bindings.concat(d.getName(), " ", d.pieValueProperty(), " %"));
-	}
 	
-	public void delChartData(String title) {
-		ObservableList<Data> list =  pieChart.getData();
-		for(int i=0; i<list.size(); i++) {
-			Data d = list.get(i);
-			String[] strD = d.getName().split(" ");
-			if (strD[0].equals(title)) {
-				pieChart.getData().remove(i);
-				break;
-			}
-		}
-	}
-	
-	public void updateChartData(String title, int count) {
-		ObservableList<Data> list =  pieChart.getData();
-		
-		for(int i = 0; i<list.size(); i++) {
-			Data s = list.get(i);
-			String[] strD = s.getName().split(" ");
-			if (strD[0].equals(title)) {
-				s.setPieValue(count);
-				break;
-			}
-		}
-	}
-	
-	public void addAllChartData() {
-		pieChart.setData(getChartData());
-	}
-	
-	public void deleteAllData() {
-		pieChart.getData().clear();
-	}
 
 }
 
