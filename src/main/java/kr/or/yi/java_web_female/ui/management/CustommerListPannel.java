@@ -474,10 +474,11 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		JOptionPane.showMessageDialog(null, customer);
 		service.insertCustomer(customer);
+		
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-		add(panelList);
+//		add(panelList);
 		clearTf();
 	}
 

@@ -211,3 +211,5 @@ where code = 'C001';
 update rent
 	set costomer_code = 'C000'
 	where costomer_code ='C001';
+	
+select * from customer;
