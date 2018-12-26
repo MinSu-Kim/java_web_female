@@ -52,10 +52,12 @@ public class ManagerPanel extends JPanel {
 			CarManagementPanel panel_05 = new CarManagementPanel();
 			tabbedPane.addTab("차량옵션관리", null, panel_05, null);
 
+			RentListPanel panel_07 = new RentListPanel();
 			RentPanel panel_06 = new RentPanel();
+			panel_06.setRentListPanel(panel_07);
 			tabbedPane.addTab("대여관리", null, panel_06, null);
 			
-			RentListPanel panel_07 = new RentListPanel();
+			
 			tabbedPane.addTab("대여현황", null, panel_07, null);
 			
 			ChartTotalPanel panel_9 = new ChartTotalPanel();
