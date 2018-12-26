@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,4 +17,6 @@ public interface RentMapper {
 
 	void deleteRent(Rent rent);
 	
+	//
+	List<Rent> selectRentByAll();
 }
