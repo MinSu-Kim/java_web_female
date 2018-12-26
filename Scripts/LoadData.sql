@@ -20,3 +20,6 @@ set zipcode=@zipcode, sido=@sido, sigungu=@sigungu, eupmyeon=@eupmyeon, doro=@do
 
 /*create index idx_post_sido on post(sido);
 create index idx_post_doro on post(doro);*/
+
+
+-- C:/program/workspace-proj/java_web_female/DataFiles/대구광역시.txt
