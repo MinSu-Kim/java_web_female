@@ -281,29 +281,31 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		popMenu.add(updateItem);
 
 		JMenuItem delItem = new JMenuItem("삭제");
-/*		delItem.addActionListener(new ActionListener() {
+		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				 * service.deleteGrade(panelList.getSelectedItem());
-				 * panelList.setList(service.selectGradeByAll()); panelList.loadDatas();
-				 
-				
-				 * service.deleteCustomerEvent(panelList.getSelectedItem(), null);
-				 * panelList.setList(service.selectCustomerByAll()); panelList.loadDatas();
-				 
+//				Customer customer = getItem();
+				Customer customer = panelList.getSelectedItem();
+				CustomEvent customEvent = new CustomEvent();
+				System.out.println(customer.getCode());
+				customEvent.setCustomCode(customer.getCode());
+
+
+				service.deleteCustomerEvent(customer, customEvent);
+				panelList.setList(service.selectCustomerByAll());
+				panelList.loadDatas();
+
 				// CustomEvent customEvent = new CustomEvent();
+				//CustomEvent("EVT1", customer.getCode(), false);
+
 				
-				 * Customer customer = getItem(); CustomEvent customEvent = new
-				 * CustomEvent("EVT1", customer.getCode(), false);
-				 * service.deleteCustomerEvent(customer, customEvent);
-				 * JOptionPane.showMessageDialog(null,customer);
-				 * 
-				 * JOptionPane.showMessageDialog(null, customEvent);
-				 * panelList.setList(service.selectCustomerByAll()); panelList.loadDatas();
-				 
+				JOptionPane.showMessageDialog(null, customer);
+				JOptionPane.showMessageDialog(null, customEvent);
+				
+
 			}
-		});*/
+
+		});
 		popMenu.add(delItem);
 
 		return popMenu;
@@ -328,7 +330,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 	private void do_btnUpdate_actionPerformed(ActionEvent arg0) {
 		Customer customer = getItem();
-		
+
 		service.updateCustomer(customer);
 		panelList.setList(service.selectCustomerByAll());
 		panelList.loadDatas();
@@ -362,9 +364,9 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private Customer getItem() {
 		Customer item = new Customer();
 		item.setCode(tfCusCode.getText().trim());
-		
-		Customer updateCustomer  = list.get(list.indexOf(item));
-		
+
+		Customer updateCustomer = list.get(list.indexOf(item));
+
 		String cId = tfCusId.getText().trim();
 		String cName = tfCusName.getText().trim();
 		String cAddr = tfAddr.getText().trim();
