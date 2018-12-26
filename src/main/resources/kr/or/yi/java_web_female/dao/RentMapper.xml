@@ -7,4 +7,21 @@
 	</select>
 
 	
+	<resultMap type="Rent" id="resultRent">
+		<id column="rentCode" property="code" />
+		<result column="carModelName" property="carCode.name" />
+		<result column="customerCode" property="customerCode.code" />
+		<result column="customerName" property="customerCode.name" />
+		<result column="start_date" property="startDate"/>
+		<result column="start_time" property="startTime" />
+		<result column="end_date" property="endDate" />
+		<result column="end_time" property="endTime" />
+		<result column="is_return" property="isReturn" />
+		<result column="insurance_code" property="insuranceCode.code" />
+	</resultMap>
+	
+	<select id="selectRentByAll" resultType="Rent" resultMap="resultRent">
+		select r.code as rentCode, cm.name as carModelName, c.code as customerCode, c.name as customerName, start_date, start_time, end_date, end_time, is_return, insurance_code
+		from rent r join car_model cm on r.car_code = cm.car_code join customer c on r.costomer_code = c.code; 
+	</select>
 </mapper>

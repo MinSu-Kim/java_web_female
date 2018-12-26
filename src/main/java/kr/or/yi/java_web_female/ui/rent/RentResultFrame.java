@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,6 +23,7 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.list.RentList;
 
 public class RentResultFrame extends JFrame implements ActionListener {
 
@@ -41,7 +43,8 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	private JLabel lblCarImg;
 	private RentUIService service;
 	private JButton btnRent;
-
+	private RentListPanel rentListPanel;
+	
 	public void setService(RentUIService service) {
 		this.service = service;
 	}
@@ -261,4 +264,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		service.insertRent(rent);
 		dispose();
 	}
+	
+	
+	
 }
