@@ -182,3 +182,34 @@ update customer
 		phone='010-5152-5468', dob='2018-12-13', email='acdv@naver.com', emp_code='E001', license='1종보통', grade_code='G001', 
 		rent_cnt=2 
 		where code='C011';
+
+
+drop trigger tri_customer_delete;
+
+delimiter $
+create trigger tri_customer_delete
+before delete on customer 
+for each row
+begin
+	update rent
+	set costomer_code = 'C000'
+	where costomer_code = old.code;
+
+	delete from custom_event
+	where custom_code = old.code;
+end
+delimiter ;
+
+select code, costomer_code from rent;
+
+select * from custom_event
+where custom_code = 'C001';
+
+delete  from customer
+where code = 'C001';
+
+update rent
+	set costomer_code = 'C000'
+	where costomer_code ='C001';
+	
+select * from customer;

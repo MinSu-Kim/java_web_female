@@ -227,7 +227,7 @@ CREATE TABLE proj_rentcar.rent (
 	car_code       CHAR(4)    NOT NULL COMMENT '차코드', -- 차코드
 	costomer_code  CHAR(4)    NOT NULL COMMENT '고객코드', -- 고객코드
 	insurance_code CHAR(4)    NOT NULL COMMENT '보험코드', -- 보험코드
-	e_rate         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트코드
+	e_code         CHAR(4)    NULL     COMMENT '이벤트코드', -- 이벤트코드
 	opt_price      INT(11)    NOT NULL COMMENT '옵션비용' -- 옵션비용
 )
 COMMENT '차량대여';

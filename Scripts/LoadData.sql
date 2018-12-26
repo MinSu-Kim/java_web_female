@@ -1,16 +1,16 @@
 create table if not exists post (
-zipcode CHAR(5) NULL,
-sido VARCHAR(20) NULL,
-sigungu VARCHAR(20) NULL,
-eupmyeon varchar(20) NULL,
-doro VARCHAR(80) NULL,
-building1 int(5) NULL,
-building2 int(5) NULL
+	zipcode CHAR(5) NULL,
+	sido VARCHAR(20) NULL,
+	sigungu VARCHAR(20) NULL,
+	eupmyeon varchar(20) NULL,
+	doro VARCHAR(80) NULL,
+	building1 int(5) NULL,
+	building2 int(5) NULL
 );
 
 
 
-load data local infile 'D:/workspace-proj/java_web_female/DataFiles/대구광역시.txt' into table post
+load data local infile 'D:/workspace_proj/java_web_female/DataFiles/대구광역시.txt' into table post
 character set'euckr'
 fields terminated by'|'
 ignore 1 lines

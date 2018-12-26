@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -246,6 +247,32 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		tfHourElse = new JTextField();
 		tfHourElse.setColumns(10);
 		panelPrice.add(tfHourElse);
+		//고객은 수정불가능, 직원은 가능
+		if(TestFrame.loginEmployee()) {
+			tfName.setEditable(true);
+			tfBasicCharge.setEditable(true);
+			tfHour6.setEditable(true);
+			tfHour10.setEditable(true);
+			tfHour12.setEditable(true);
+			tfHourElse.setEditable(true);
+			tfColor.setEditable(true);
+			cmbBrand.getComboBox().setEnabled(true);
+			cmbCarType.getComboBox().setEnabled(true);
+			cmbFuel.getComboBox().setEnabled(true);
+		}else {
+			tfName.setEditable(false);
+			tfBasicCharge.setEditable(false);
+			tfHour6.setEditable(false);
+			tfHour10.setEditable(false);
+			tfHour12.setEditable(false);
+			tfHourElse.setEditable(false);
+			tfColor.setEditable(false);
+			cmbBrand.getComboBox().setEnabled(false);
+			cmbCarType.getComboBox().setEnabled(false);
+			cmbFuel.getComboBox().setEnabled(false);
+			rdbtnAuto.setEnabled(false);
+			rdbtnStick.setEnabled(false);
+	}
 		
 		JPanel panelRentCnt = new JPanel();
 		panel_info.add(panelRentCnt);
@@ -264,25 +291,27 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			lblCount.setHorizontalAlignment(SwingConstants.CENTER);
 			panelRentCnt.add(lblCount);
 		}
-		
-		JPanel panelBtn = new JPanel();
-		container.add(panelBtn, BorderLayout.SOUTH);
-		
-		if(isAdd) {
-			btnOk = new JButton("추가");
-		}else {
-			btnOk = new JButton("수정");
+		if(TestFrame.loginEmployee()) {
+			JPanel panelBtn = new JPanel();
+			container.add(panelBtn, BorderLayout.SOUTH);
+			
+			if(isAdd) {
+				btnOk = new JButton("추가");
+			}else {
+				btnOk = new JButton("수정");
+			}
+			btnOk.addActionListener(this);
+			panelBtn.add(btnOk);
+			
+			btnDelete = new JButton("삭제");
+			btnDelete.addActionListener(this);
+			panelBtn.add(btnDelete);
+			
+			btnCancel = new JButton("초기화");
+			btnCancel.addActionListener(this);
+			panelBtn.add(btnCancel);
 		}
-		btnOk.addActionListener(this);
-		panelBtn.add(btnOk);
 		
-		btnDelete = new JButton("삭제");
-		btnDelete.addActionListener(this);
-		panelBtn.add(btnDelete);
-		
-		btnCancel = new JButton("초기화");
-		btnCancel.addActionListener(this);
-		panelBtn.add(btnCancel);
 	}
 	//버튼
 	public void actionPerformed(ActionEvent arg0) {
@@ -436,7 +465,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		System.out.println(carModel.getCarCode());//V012정상출력
 		UserPic userpic = service.getUserPic(carModel.getCarCode());//결과0
 		System.out.println(userpic);
-		if(userpic.getPic()!=null) {
+		if(userpic!=null) {
 			ImageIcon img = new ImageIcon(userpic.getPic());
 			Image image = img.getImage();
 			Image changedImg= image.getScaledInstance(250, 150, Image.SCALE_SMOOTH );

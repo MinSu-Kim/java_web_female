@@ -1,7 +1,6 @@
 package kr.or.yi.java_web_female;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -28,9 +27,14 @@ public class RentMapperTest extends AbstractTest {
 		Assert.assertNotNull(nextRentNo);
 	}
 	
-	@Test
+	/*@Test
 	public void test02InsertRent() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		// Customer rent_cnt++
+		// Customer grade_code G001, 횟수따른 등급 변경
+		// Carmodel is_rent = 1, rent_cnt++
+		// Custom_event is_use = 1
+		// Rent 추가
 		
 		Rent rent = new Rent();
 		rent.setCode(dao.getNextRentNo());
@@ -40,44 +44,47 @@ public class RentMapperTest extends AbstractTest {
 		rent.setEndTime("12:00:00");
 		rent.setReturn(false);
 		rent.setTotalPrice(40000);
-		rent.setCarCode(new CarModel("V002"));
-		Customer customer = new Customer();
+		rent.setCarCode(new CarModel("V004"));  // is_rent = 0, rent_cnt= 7
+		Customer customer = new Customer();     // grade_code = G001, rent_cnt = 4
 		customer.setCode("C006");
-		rent.setCustomerCode(customer);
+		rent.setCustomerCode(customer);        
 		rent.setInsuranceCode(new Insurance("I000"));
-		rent.seteRate(5);
+		rent.seteCode("EVT1");                  // custom_event EVT1, C006 is_use = 0
+//		rent.seteRate(5);
 		rent.setOptPrice(5000);
 		
-		int res = dao.insertRent(rent);
+		int res = dao.insertRent(rent);//R006 C006 V004 G1 5 c_event 5
 		Assert.assertEquals(1, res);
-	}
-	
-/*	@Test
-	public void test03Procedure() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("custom_code", "C006");
-		map.put("rent_code", "R006");
-		map.put("carCode", "V002");
-		map.put("isGrade", 0);
-		
-		dao.procedureRent(map);
-//		Assert.assertNotNull(map);
 	}*/
 	
+
+/*	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		C3P0DataSourceFactory cds = new C3P0DataSourceFactory();
+		Properties properties = new Properties();
+		properties.put("password", "rootroot");
+		properties.put("url", "jdbc:mysql://localhost/proj_rentcar?useSSL=false");
+		properties.put("username", "root");
+		properties.put("driver", "com.mysql.jdbc.Driver");
+		cds.setProperties(properties);
+		DataSource ds = cds.getDataSource();
+		
+		String delSql = "delete from rent where code in ('R006', 'R007', 'R008')";
+		try (Connection con = ds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(delSql);){
+			pstmt.executeUpdate();
+		}
+	}*/
+
 	@Test
-	public void test04Procedure2() {
+	public void test03SelectRentByAll() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("custom_code", "C006");
-		map.put("rent_code", "R006");
-		map.put("carCode", "V002");
-		map.put("isGrade", 0);
-		
-		int res = dao.procedureRent2(map);
-		Assert.assertEquals(-1, res);
+		List<Rent> list = dao.selectRentByAll();
+		for(Rent r : list) {
+			System.out.println(r);
+		}
+		Assert.assertNotNull(list);
 	}
-
 }

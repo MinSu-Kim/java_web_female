@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.CustomEvent;
+import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class CustomEventMapperImpl implements CustomEventMapper {
@@ -39,6 +40,15 @@ public class CustomEventMapperImpl implements CustomEventMapper {
 	public int deleteCustomEvent(CustomEvent customEvent) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			int res = sqlSession.delete(namespace + ".deleteCustomEvent", customEvent);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int updateSetUse(Rent rent) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateSetUse", rent);
 			sqlSession.commit();
 			return res;
 		}

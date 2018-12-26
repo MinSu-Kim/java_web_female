@@ -17,20 +17,26 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class SearchIdPwUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JTextField tfId;
-	private JTextField tfName;
 	private JTextField tfEmail;
 	private JTextField tfDomain;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton rbtnSearchId;
 	private JRadioButton rbtnSearchPw;
 	private JComboBox<String> cmbDomain;
-	private JLabel lblId;
+	private JLabel lblPhone;
+	private JPanel pTel;
+	private JComboBox<String> cmbTel;
+	private JLabel label;
+	private JTextField tfTel2;
+	private JLabel label_1;
+	private JTextField tfTel23;
+	private JButton btnSearch;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -48,89 +54,100 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	public SearchIdPwUI() {
 		setTitle("ID/PW찾기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(0, 2, 10, 10));
 
 		rbtnSearchId = new JRadioButton("아이디 찾기");
 		rbtnSearchId.addActionListener(this);
 		buttonGroup.add(rbtnSearchId);
 		rbtnSearchId.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(rbtnSearchId);
+		panel.add(rbtnSearchId);
 
 		rbtnSearchPw = new JRadioButton("비밀번호 찾기");
 		rbtnSearchPw.addActionListener(this);
 		buttonGroup.add(rbtnSearchPw);
 
 		rbtnSearchPw.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(rbtnSearchPw);
+		panel.add(rbtnSearchPw);
 
-		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3);
-		panel_3.setLayout(new GridLayout(0, 1, 0, 0));
+		lblPhone = new JLabel("연락처");
+		panel.add(lblPhone);
+		lblPhone.setHorizontalAlignment(SwingConstants.CENTER);
 
-		lblId = new JLabel("아이디");
-		lblId.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(lblId);
+		pTel = new JPanel();
+		panel.add(pTel);
+		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
-		tfId = new JTextField();
-		tfId.setColumns(10);
-		panel_2.add(tfId);
+		cmbTel = new JComboBox<String>();
+		cmbTel.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
+		pTel.add(cmbTel);
 
-		JLabel lblName = new JLabel("이름");
-		lblName.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblName);
+		label = new JLabel("-");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setEnabled(false);
+		pTel.add(label);
 
-		tfName = new JTextField();
-		tfName.setColumns(10);
-		panel_2.add(tfName);
+		tfTel2 = new JTextField();
+		tfTel2.setColumns(10);
+		pTel.add(tfTel2);
+
+		label_1 = new JLabel("-");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setEnabled(false);
+		pTel.add(label_1);
+
+		tfTel23 = new JTextField();
+		tfTel23.setColumns(10);
+		pTel.add(tfTel23);
 
 		JLabel lblEmail = new JLabel("이메일");
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblEmail);
+		panel.add(lblEmail);
 
-		JPanel panel_4 = new JPanel();
-		panel_2.add(panel_4);
-		panel_4.setLayout(new GridLayout(0, 4, 0, 0));
+		JPanel pEmail = new JPanel();
+		panel.add(pEmail);
+		pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
 
 		tfEmail = new JTextField();
-		tfEmail.setColumns(10);
-		panel_4.add(tfEmail);
+		tfEmail.setColumns(15);
+		pEmail.add(tfEmail);
 
 		JLabel label_3 = new JLabel("@");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(label_3);
+		pEmail.add(label_3);
 
 		tfDomain = new JTextField();
-		tfDomain.setColumns(10);
-		panel_4.add(tfDomain);
+		tfDomain.setColumns(15);
+		pEmail.add(tfDomain);
 
 		cmbDomain = new JComboBox<String>();
 		cmbDomain.addActionListener(this);
 		cmbDomain.setModel(new DefaultComboBoxModel<String>(
-				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com" }));
-		panel_4.add(cmbDomain);
+				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
+		pEmail.add(cmbDomain);
 
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.SOUTH);
+		JPanel pBtn = new JPanel();
+		contentPane.add(pBtn, BorderLayout.SOUTH);
 
-		JButton btnSearchId = new JButton("아이디 찾기");
-		panel.add(btnSearchId);
-
-		JButton btnSearchPw = new JButton("비밀번호 찾기");
-		panel.add(btnSearchPw);
+		btnSearch = new JButton("아이디 찾기");
+		btnSearch.addActionListener(this);
+		pBtn.add(btnSearch);
 
 		JButton btnCancel = new JButton("나가기");
-		panel.add(btnCancel);
+		pBtn.add(btnCancel);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearch) {
+			do_btnSearch_actionPerformed(e);
+		}
 		if (e.getSource() == rbtnSearchId) {
 			do_rbtnSearchId_actionPerformed(e);
 		}
@@ -143,27 +160,32 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_cmbDomain_actionPerformed(ActionEvent e) {
-		if(cmbDomain.getSelectedIndex()<5) {
+		if (cmbDomain.getSelectedIndex() < 5) {
 			tfDomain.setEditable(false);
-			tfDomain.setText((String)cmbDomain.getSelectedItem());
-		}else {
+			tfDomain.setText((String) cmbDomain.getSelectedItem());
+		} else {
 			tfDomain.requestFocus();
 			tfDomain.setText("");
 			tfDomain.setEditable(true);
-			
+
 		}
 	}
+
 	protected void do_rbtnSearchPw_actionPerformed(ActionEvent e) {
-	/*	if(rbtnSearchId.isSelected()) {
-			lblId.setVisible(true);
-			tfId.setVisible(true);
-		}*/
-	
+		/*
+		 * if(rbtnSearchId.isSelected()) { lblId.setVisible(true);
+		 * tfId.setVisible(true); }
+		 */
+
 	}
+
 	protected void do_rbtnSearchId_actionPerformed(ActionEvent e) {
-	/*	if(rbtnSearchPw.) {
-			lblId.setVisible(false);
-			tfId.setVisible(false);
-		}*/
+		/*
+		 * if(rbtnSearchPw.) { lblId.setVisible(false); tfId.setVisible(false); }
+		 */
+	}
+
+	protected void do_btnSearch_actionPerformed(ActionEvent e) {
+
 	}
 }
