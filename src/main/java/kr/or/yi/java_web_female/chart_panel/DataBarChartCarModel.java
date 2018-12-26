@@ -19,14 +19,14 @@ import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.service.CarModelService;
 
 @SuppressWarnings("serial")
-public class PanelBarChart extends JFXPanel implements InitScene {
+public class DataBarChartCarModel extends JFXPanel implements InitScene {
 	
 	//바차트 배열 선언
 	private BarChart<String, Number> barChart;
 	private CarModelService service;
 	
 	//슈퍼생성
-	public PanelBarChart() {
+	public DataBarChartCarModel() {
 		service = new CarModelService();
 	}
 
