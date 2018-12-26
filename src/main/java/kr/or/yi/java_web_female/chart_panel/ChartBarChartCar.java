@@ -1,58 +1,47 @@
-package kr.or.yi.java_web_female.chart_frame;
+package kr.or.yi.java_web_female.chart_panel;
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.security.Provider.Service;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
-import kr.or.yi.java_web_female.chart_panel.PanelBarChart;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.service.CarModelService;
 
-@SuppressWarnings("serial")
-public class ChartMain extends JFrame implements ActionListener {
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+public class ChartBarChartCar extends JPanel implements ActionListener{
+	
 	private JPanel contentPane;
+	private CarModelService service;
 	private PanelBarChart pBarChart;
 	private JButton btnDel;
 	private JButton btnUpdate;
 	private JButton btnAllClear;
 	private JButton btnClearAfterAdd;
-	private JButton btnLineAdd;
-	private CarModelService service;
-
-	public ChartMain() {
+	/**
+	 * Create the panel.
+	 */
+	public ChartBarChartCar() {
 		service = new CarModelService();
 		initComponents();
 	}
-	
 	private void initComponents() {
-		setTitle("통계");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 50, 520, 500);
+		setLayout(new BorderLayout(0, 0));
+		
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		add(contentPane);
 		
 		//바차트 패널 붙임
 		pBarChart = new PanelBarChart();
 		contentPane.add(pBarChart);
 		
-		
 		Platform.runLater(() -> initFX(pBarChart));
-
 		
 		JPanel pBtn = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPane.add(pBtn);
@@ -76,10 +65,7 @@ public class ChartMain extends JFrame implements ActionListener {
 		btnClearAfterAdd = new JButton("삭제후추가");
 		btnClearAfterAdd.addActionListener(this);
 		pBtn.add(btnClearAfterAdd);
-		
-		btnLineAdd = new JButton("라인항목추가");
-		btnLineAdd.addActionListener(this);
-		pBtn.add(btnLineAdd);
+	
 	}
 	
 	public void initFX(InitScene fxPanel) {
@@ -87,8 +73,7 @@ public class ChartMain extends JFrame implements ActionListener {
 		JFXPanel panel = (JFXPanel) fxPanel;
 		panel.setScene(scene);
 	}
-
-
+	
 	private class BtnAddActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Platform.runLater(() -> {
@@ -104,8 +89,8 @@ public class ChartMain extends JFrame implements ActionListener {
 		}
 	}
 	
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource() == btnClearAfterAdd) {
 			do_btnClearAfterAdd_actionPerformed(e);
 		}
@@ -118,11 +103,11 @@ public class ChartMain extends JFrame implements ActionListener {
 		if (e.getSource() == btnDel) {
 			do_btnDel_actionPerformed(e);
 		}
+		
 	}
 	
 	protected void do_btnDel_actionPerformed(ActionEvent e) {
 		Platform.runLater(() -> {
-//			pBarChart.delChartData(new CarModel("V003", "벤틀리", 25));
 			String nextCode = service.nextCarCode();
 			int max = (Integer.parseInt(nextCode.substring(1, 3)));
 			String code = String.format("V%03d", max);
@@ -136,7 +121,6 @@ public class ChartMain extends JFrame implements ActionListener {
 	
 	protected void do_btnUpdate_actionPerformed(ActionEvent e) {
 		Platform.runLater(() -> {
-//			pBarChart.updateChartData(new CarModel("V003", "벤틀리", 25));
 			String nextCode = service.nextCarCode();
 			int max = (Integer.parseInt(nextCode.substring(1, 3)));
 			String code = String.format("V%03d", max);
@@ -160,6 +144,6 @@ public class ChartMain extends JFrame implements ActionListener {
 			pBarChart.addAllChartData();
 		});
 	}
-	
+
 
 }

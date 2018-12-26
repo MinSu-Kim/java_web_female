@@ -90,7 +90,8 @@ insert into customer values ('C001', 'asd132', password('rootroot'), '김철수'
 							('C006', 'aefvb238', password('qwer2573'), '강호동', '62589','대구 동구', '010-5555-2222', '1999-11-04', 'abc@daum.com' ,'E002' , '1종보통','G001', 4),
 							('C007', 'fkufj12', password('dhtdhd5645'), '김민정', '13265','울산 서구', '010-6666-1111', '1994-03-16', 'abc@naver.com' ,'E002' , '2종보통','G004', -1),
 							('C008', 'xbmhw325', password('aggarg54'), '김재영', '95625','서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
-
+						
+insert into customer values ('C000', 'C000', password('rootroot'), '탈퇴계정', '00000', '대구', '010-0000-0000', '1988-04-18', 'abc@gmail.com' ,null , null,null, null);
 insert into customer values
 ('C009', 'xbmhw325',password('aggarg54'), '김영희','45236', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 
@@ -145,3 +146,20 @@ insert into rent values
 ('R005', '2018-12-21', '12:00:00', '2018-12-20', '12:00:00', 0, 108000, 'V002', 'C005', 'I000', 'EVT2', 5000);
 
 
+-- triger 적용 고객삭제시 외래키 무결성 위배를 해결하기 위해 렌트 고객코드를 C000로 변경하고 고객이 가지고 있는 이벤트를 삭제
+
+drop trigger if exists tri_customer_delete;
+
+delimiter $
+create trigger tri_customer_delete
+before delete on customer 
+for each row
+begin
+	update rent
+	set costomer_code = 'C000'
+	where costomer_code = old.code;
+
+	delete from custom_event
+	where custom_code = old.code;
+end
+delimiter ;

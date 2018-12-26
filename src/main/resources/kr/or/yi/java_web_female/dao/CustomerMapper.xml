@@ -89,6 +89,7 @@
 		where code=#{code}
 	</update>
 
+	
 	<!-- delete -->
 
 	<delete id="deleteCustomer" parameterType="Customer">

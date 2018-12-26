@@ -89,7 +89,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput1.add(lblCusCode);
 
 		tfCusCode = new JTextField();
-		tfCusCode.setEditable(false);
 		tfCusCode.setColumns(10);
 		panelInput1.add(tfCusCode);
 
@@ -233,6 +232,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		List<Grade> gradeList = service.getGradeList();
 		DefaultComboBoxModel<Grade> gradeModel = new DefaultComboBoxModel<>(new Vector<>(gradeList));
 		cmbGrade = new JComboBox<>(gradeModel);
+		cmbGrade.setEnabled(false);
 		panelInput2.add(cmbGrade);
 
 		JLabel lblRentCnt = new JLabel("대여횟수");
@@ -241,6 +241,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		tfRentCnt = new JTextField();
 		panelInput2.add(tfRentCnt);
+		tfRentCnt.setEditable(false);
 		tfRentCnt.setColumns(10);
 
 		JPanel panelBtn = new JPanel();
@@ -256,6 +257,18 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		add(panelList, BorderLayout.CENTER);
 
 		panelList.setPopupMenu(createDeptPopupMenu());
+		
+		enableField();
+	}
+
+	private void enableField() {
+		if(btnCusOk.getText().equals("수정")) {
+			cmbGrade.setEnabled(true);
+			tfRentCnt.setEditable(true);
+		}else {
+			cmbGrade.setEnabled(false);
+			tfRentCnt.setEditable(false);
+		}
 	}
 
 	/* 추가해줌 */
@@ -275,35 +288,35 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				Customer item = panelList.getSelectedItem();
 				setItem(item);
 				btnCusOk.setText("수정");
+				enableField();
 			}
 
 		});
 		popMenu.add(updateItem);
 
 		JMenuItem delItem = new JMenuItem("삭제");
-/*		delItem.addActionListener(new ActionListener() {
+		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				 * service.deleteGrade(panelList.getSelectedItem());
-				 * panelList.setList(service.selectGradeByAll()); panelList.loadDatas();
-				 
-				
-				 * service.deleteCustomerEvent(panelList.getSelectedItem(), null);
-				 * panelList.setList(service.selectCustomerByAll()); panelList.loadDatas();
-				 
+
+				Customer customer = panelList.getSelectedItem();
+				CustomEvent customEvent = new CustomEvent();
+				System.out.println(customer.getCode());
+				customEvent.setCustomCode(customer.getCode());
+
+				service.deleteCustomerEvent(customer, customEvent);
+				panelList.setList(service.selectCustomerByAll());
+				panelList.loadDatas();
+
 				// CustomEvent customEvent = new CustomEvent();
-				
-				 * Customer customer = getItem(); CustomEvent customEvent = new
-				 * CustomEvent("EVT1", customer.getCode(), false);
-				 * service.deleteCustomerEvent(customer, customEvent);
-				 * JOptionPane.showMessageDialog(null,customer);
-				 * 
-				 * JOptionPane.showMessageDialog(null, customEvent);
-				 * panelList.setList(service.selectCustomerByAll()); panelList.loadDatas();
-				 
+				// CustomEvent("EVT1", customer.getCode(), false);
+
+				JOptionPane.showMessageDialog(null, customer);
+				JOptionPane.showMessageDialog(null, customEvent);
+
 			}
-		});*/
+
+		});
 		popMenu.add(delItem);
 
 		return popMenu;
@@ -328,13 +341,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 	private void do_btnUpdate_actionPerformed(ActionEvent arg0) {
 		Customer customer = getItem();
-		
+
 		service.updateCustomer(customer);
 		panelList.setList(service.selectCustomerByAll());
 		panelList.loadDatas();
 		clearTf();
 		btnCusOk.setText("추가");
-
+		enableField();
 	}
 
 	private void clearTf() {
@@ -362,21 +375,33 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private Customer getItem() {
 		Customer item = new Customer();
 		item.setCode(tfCusCode.getText().trim());
-		
-		Customer updateCustomer  = list.get(list.indexOf(item));
-		
+
+		Customer updateCustomer = list.get(list.indexOf(item));
+
 		String cId = tfCusId.getText().trim();
 		String cName = tfCusName.getText().trim();
 		String cAddr = tfAddr.getText().trim();
 		String zipCode = tfZipCode.getText().trim();
 		Date cusDob = birthday.getDate();
-		String cTel1 = (String) cmbTel1.getSelectedItem();
+		/*String cTel1 = (String) cmbTel1.getSelectedItem();
 		String cTel2 = tfTel2.getText().trim();
-		String cTel3 = tfTel3.getText().trim();
+		String cTel3 = tfTel3.getText().trim();*/
 		String cEmail1 = tfCusEmail1.getText().trim();
 		String cEmail2 = tfCusEmail2.getText().trim();
 		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();
+		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
+				+ (tfTel3.getText().trim());
+		
+		String license = null;
+		if (cmbLicense.getSelectedIndex() == 0) {
+			cmbLicense.setSelectedIndex(2);
+			license = (cmbLicense.getSelectedItem() + "").trim();
+		} else {
+			license = (String) cmbLicense.getSelectedItem();
+		}
 
+		Employee empCode = new Employee("E001");
+		Grade gradeCode = new Grade("G001");
 		updateCustomer.setId(cId);
 		updateCustomer.setAddress(cAddr);
 		updateCustomer.setZipCode(zipCode);
@@ -385,49 +410,69 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		updateCustomer.setEmail(cEmail3);
 		updateCustomer.setName(cName);
 		updateCustomer.setDob(cusDob);
-		updateCustomer.setPhone(cTel1);
-		updateCustomer.setPhone(cTel2);
-		updateCustomer.setPhone(cTel3);
+		updateCustomer.setPhone(cusPhone);
+		
 		updateCustomer.setAddress(zipCode);
+		updateCustomer.setLicense(license);
+		updateCustomer.setEmpCode(empCode);
+		updateCustomer.setGradeCode(gradeCode);
 		return updateCustomer;
 	}
 
 	protected void do_btnCusOk_actionPerformed(ActionEvent arg0) {
 		JOptionPane.showMessageDialog(null, "do_btnCusOk_actionPerformed 추가");
-		String cId = tfCusId.getText();
-		String cAddr = tfAddr.getText();
-		String cCode = tfCusCode.getText();
+		String cId = tfCusId.getText().trim();
+		String cName = tfCusName.getText().trim();
+		String cCode = tfCusCode.getText().trim();
+		String cAddr = tfAddr.getText().trim();
 		Date cusDob = birthday.getDate();
-		String cEmail1 = tfCusEmail1.getText();
-		String cEmail2 = tfCusEmail2.getText();
-		String cName = tfCusName.getText();
+		String cEmail1 = tfCusEmail1.getText().trim();
+		String cEmail2 = tfCusEmail2.getText().trim();
+		
 		Employee eCode = (Employee) cmbEmpCode.getSelectedItem();
-		String cTel2 = tfTel2.getText();
-		String cTel3 = tfTel3.getText();
+		Grade gradeName=(Grade) cmbGrade.getSelectedItem();
+		String license = null;
+		if (cmbLicense.getSelectedIndex() == 0) {
+			cmbLicense.setSelectedIndex(2);
+			license = (cmbLicense.getSelectedItem() + "").trim();
+		} else {
+			license = (String) cmbLicense.getSelectedItem();
+		}
 		String zipCode = tfZipCode.getText();
-		Grade gradeName = (Grade) cmbGrade.getSelectedItem();
-		int rentCnt = Integer.parseInt(tfRentCnt.getText());
+
+//		Grade gradeName = (Grade) cmbGrade.getSelectedItem();
+		int rentCnt = 0;
 
 		Customer customer = new Customer();
+		//Grade gradeCode = new Grade("G001");
+		
 		customer.setId(cId);
+		customer.setPasswd("1234");
+		customer.setGradeCode(new Grade("G001"));
+		customer.setName(cName);
+		customer.setLicense(license);
 		customer.setZipCode(zipCode);
 		customer.setAddress(cAddr);
 		customer.setCode(cCode);
 		customer.setDob(cusDob);
-		customer.setEmail(String.format("%s@%s", cEmail1, cEmail2));
 
-		customer.setName(cName);
+		customer.setEmail(String.format("%s@%s", cEmail1, cEmail2));
+		
+		
 
 		Employee empCode = service.getEmployeeByNo(eCode);
 		Grade gradeCode = service.getGradeByName(gradeName);
 
 		customer.setEmpCode(empCode);
-		customer.setPhone(cTel2);
-		customer.setPhone(cTel3);
-		customer.setAddress(zipCode);
+		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
+				+ (tfTel3.getText().trim());
+
+		customer.setPhone(cusPhone);
+		customer.setAddress(cAddr);
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
 
+		JOptionPane.showMessageDialog(null, customer);
 		service.insertCustomer(customer);
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
@@ -439,6 +484,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	protected void do_btnCusCancel_actionPerformed(ActionEvent arg0) {
 		if (btnCusOk.getText() == "수정") {
 			btnCusOk.setText("추가");
+			enableField();
 		}
 		clearTf();
 	}
