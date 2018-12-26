@@ -1,37 +1,27 @@
 package kr.or.yi.java_web_female.chart_frame;
 
 import javax.swing.JPanel;
+
+import kr.or.yi.java_web_female.service.CarModelService;
+
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class ChartTotalPanel extends JPanel implements ActionListener {
+public class ChartTotalPanel extends JPanel{
 	private JButton btnNewButton;
-
+	private CarModelService service;
 	/**
 	 * Create the panel.
 	 */
 	public ChartTotalPanel() {
-
+		service = new CarModelService();
 		initComponents();
 	}
 	private void initComponents() {
 		
-		JPanel panel = new JPanel();
-		add(panel);
 		
-		btnNewButton = new JButton("차량별 통계");
-		btnNewButton.addActionListener(this);
-		panel.add(btnNewButton);
 	}
+	
 
-	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == btnNewButton) {
-			do_btnNewButton_actionPerformed(arg0);
-		}
-	}
-	protected void do_btnNewButton_actionPerformed(ActionEvent arg0) {
-		ChartMain frame = new ChartMain();
-		frame.setVisible(true);
-	}
+	
+	
 }
