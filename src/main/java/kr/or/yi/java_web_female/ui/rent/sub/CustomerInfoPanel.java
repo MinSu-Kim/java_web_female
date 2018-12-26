@@ -9,6 +9,7 @@ import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 import kr.or.yi.java_web_female.ui.rent.CustomerSearchFrame;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
@@ -35,7 +36,8 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 		
 
 		// 고객 정보가 들어오는 지 확인하기
-		//JOptionPane.showMessageDialog(null, "선택된 고객 " + this.rentCustomer);
+/*		JOptionPane.showMessageDialog(null, "선택된 고객 " + this.rentCustomer);
+		JOptionPane.showMessageDialog(null, "rentPanel " + rentPanel);*/
 		rentPanel.setSelectedCustomer(this.rentCustomer);
 	}
 
@@ -56,12 +58,21 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 
 		tfCstmName = new JTextField();
 		tfCstmName.setColumns(10);
-		tfCstmName.setText("김영희");
+		
 		add(tfCstmName);
-
-		btnCstmSearch = new JButton("검색");
-		btnCstmSearch.addActionListener(this);
-		add(btnCstmSearch);
+		
+		if(LoginUI.loginCusotmer == null) {
+			tfCstmName.setText("김영희");
+			btnCstmSearch = new JButton("검색");
+			btnCstmSearch.addActionListener(this);
+			add(btnCstmSearch);
+			
+		} else {
+			tfCstmName.setText(LoginUI.loginCusotmer.getName());
+			tfCstmName.setEditable(false);
+			
+		}
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {

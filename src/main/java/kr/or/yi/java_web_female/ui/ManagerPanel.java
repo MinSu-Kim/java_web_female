@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import kr.or.yi.java_web_female.ui.car.CarPanel;
+import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.chart_panel.BarChartCarModel;
@@ -53,14 +54,13 @@ public class ManagerPanel extends JPanel {
 			CarManagementPanel panel_05 = new CarManagementPanel();
 			tabbedPane.addTab("차량옵션관리", null, panel_05, null);
 
+			RentListPanel panel_07 = new RentListPanel();
 			RentPanel panel_06 = new RentPanel();
+			panel_06.setRentListPanel(panel_07);
 			tabbedPane.addTab("대여관리", null, panel_06, null);
 			
-			JPanel panel_07 = new JPanel();
-			tabbedPane.addTab("대여현황", null, panel_07, null);
 			
-			JPanel panel_08 = new JPanel();
-			tabbedPane.addTab("반납관리", null, panel_08, null);
+			tabbedPane.addTab("대여현황", null, panel_07, null);
 			
 			TotalChartPanel panel_9 = new TotalChartPanel();
 			tabbedPane.addTab("전체통계", null, panel_9, null);

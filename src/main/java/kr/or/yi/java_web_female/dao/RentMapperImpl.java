@@ -1,5 +1,6 @@
 package kr.or.yi.java_web_female.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -62,6 +63,13 @@ public class RentMapperImpl implements RentMapper {
 	public void deleteRent(Rent rent) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Rent> selectRentByAll() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectRentByAll");
+		}
 	}
 
 }

@@ -93,4 +93,8 @@ public class RentUIService {
 /*	public void insertRent(Rent rent, Map<String, Object> map) {
 		rentDao.insertRent(rent, map);
 	}*/
+	
+	public List<Rent> selectRentByAll(){
+		return rentDao.selectRentByAll();
+	}
 }

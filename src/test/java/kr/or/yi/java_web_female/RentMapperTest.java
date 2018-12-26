@@ -1,5 +1,7 @@
 package kr.or.yi.java_web_female;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -25,7 +27,7 @@ public class RentMapperTest extends AbstractTest {
 		Assert.assertNotNull(nextRentNo);
 	}
 	
-	@Test
+	/*@Test
 	public void test02InsertRent() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		// Customer rent_cnt++
@@ -54,7 +56,7 @@ public class RentMapperTest extends AbstractTest {
 		int res = dao.insertRent(rent);//R006 C006 V004 G1 5 c_event 5
 		Assert.assertEquals(1, res);
 		
-	}
+	}*/
 	
 
 /*	@AfterClass
@@ -75,4 +77,14 @@ public class RentMapperTest extends AbstractTest {
 		}
 	}*/
 
+	@Test
+	public void test03SelectRentByAll() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<Rent> list = dao.selectRentByAll();
+		for(Rent r : list) {
+			System.out.println(r);
+		}
+		Assert.assertNotNull(list);
+	}
 }

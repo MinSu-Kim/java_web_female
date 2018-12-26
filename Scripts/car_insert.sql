@@ -148,7 +148,7 @@ insert into rent values
 
 -- triger 적용 고객삭제시 외래키 무결성 위배를 해결하기 위해 렌트 고객코드를 C000로 변경하고 고객이 가지고 있는 이벤트를 삭제
 
-drop trigger tri_customer_delete;
+drop trigger if exists tri_customer_delete;
 
 delimiter $
 create trigger tri_customer_delete

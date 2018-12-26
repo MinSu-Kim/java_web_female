@@ -25,6 +25,7 @@ import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 import kr.or.yi.java_web_female.ui.rent.sub.CarInfoPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.CustomerInfoPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.InsurancePanel;
@@ -54,6 +55,12 @@ public class RentPanel extends JPanel implements ActionListener {
 	private long totalPrice;
 	private int optionPrice;
 	private String eCode;
+	private RentListPanel rentListPanel;
+	
+	
+	public void setRentListPanel(RentListPanel rentListPanel) {
+		this.rentListPanel = rentListPanel;
+	}
 
 	public RentPanel() {
 		service = new RentUIService();
@@ -135,6 +142,10 @@ public class RentPanel extends JPanel implements ActionListener {
 		pInsurance.setSelectedDefault();
 		pInsurance.setSelectedCarModel(selectedCarModel);
 		getTotalRentPrice();
+		
+		if(LoginUI.loginCusotmer != null) {
+			setSelectedCustomer(LoginUI.loginCusotmer);
+		}
 	}
 
 	public void setSelectedCustomer(Customer selectedCustomer) {
@@ -142,14 +153,14 @@ public class RentPanel extends JPanel implements ActionListener {
 		maxEventRate = -1;
 		eCode = null;
 		for (CustomEvent ce : selectedCustomer.getEvents()) {
-			JOptionPane.showMessageDialog(null, ce);
+//			JOptionPane.showMessageDialog(null, ce);
 			for (Event e : ce.getEvents()) {
-				JOptionPane.showMessageDialog(null, e);
+//				JOptionPane.showMessageDialog(null, e);
 				// 가장 큰 이벤트 할인율 가져오기
 				if (e.getRate() > maxEventRate) {
 					maxEventRate = e.getRate();
 					eCode = e.getCode();
-					JOptionPane.showMessageDialog(null, eCode);
+//					JOptionPane.showMessageDialog(null, eCode);
 				}
 			}
 		}
@@ -228,13 +239,17 @@ public class RentPanel extends JPanel implements ActionListener {
 				rentDateDto.getEndDate(), rentDateDto.getEndHour() + ":00:00", false, totalPrice, selectedCarModel,
 				selectedCustomer, insurance, eCode, optionPrice);
 
-		JOptionPane.showMessageDialog(null, eCode);
+//		JOptionPane.showMessageDialog(null, eCode);
 
 		if (rentResultFrame == null) {
 			rentResultFrame = new RentResultFrame();
 		}
 		rentResultFrame.setService(service);
 		rentResultFrame.setRent(rent);
+		if(LoginUI.loginCusotmer == null) {
+			rentResultFrame.setRentListPanel(rentListPanel);
+		}
+
 		rentResultFrame.setDisCount(isEventRate ? maxEventRate : cGradeRate);
 		rentResultFrame.setLblPrice(getTotalRentPrice());
 		rentResultFrame.setVisible(true);
