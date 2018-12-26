@@ -20,6 +20,17 @@
 							<attribute name="is_use"/>
 						</constraint>
 					</entity>
+					<entity name="post">
+						<constraint name="PRIMARY" type="VIRTUAL KEY">
+							<attribute name="zipcode"/>
+							<attribute name="sido"/>
+							<attribute name="sigungu"/>
+							<attribute name="eupmyeon"/>
+							<attribute name="doro"/>
+							<attribute name="building1"/>
+							<attribute name="building2"/>
+						</constraint>
+					</entity>
 				</container>
 			</container>
 		</virtual-meta-data>
