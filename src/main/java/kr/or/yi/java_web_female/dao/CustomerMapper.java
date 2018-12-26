@@ -29,6 +29,7 @@ public interface CustomerMapper {
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 	void deleteCustomerEvent(Customer customer, CustomEvent customEvent);
 	
+	
 	// rent 등록시 customer의 대여횟수 1증가
 	@Update("update customer set rent_cnt = rent_cnt + 1 where code=#{code}")
 	int updateCustomerRentCnt(Customer customer);

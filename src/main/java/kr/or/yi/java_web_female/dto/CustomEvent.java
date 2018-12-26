@@ -10,6 +10,8 @@ public class CustomEvent {
 
 	public CustomEvent() {
 	}
+	
+	
 
 	public CustomEvent(String eventCode, String customCode, boolean isUse) {
 		this.eventCode = eventCode;
