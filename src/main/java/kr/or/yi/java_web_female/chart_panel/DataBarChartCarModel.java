@@ -57,12 +57,11 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 	//1번 - 차트에 데이터 넣기
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {//매개변수 없는것
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		List<CarModel> clist = service.selectCarModelByAll();//널포인트
+		List<CarModel> clist = service.selectCarModelByAll();
 		
-		for(int i = 1;i<clist.size();i++) {//있는 숫자만 반복문 돌리도록 바꾸기ㅠㅠ!
+		for(int i = 1;i<clist.size();i++) {
 			CarModel model = new CarModel();
-			String str = String.format("V%03d", i);
-			model.setCarCode(str);
+			model = clist.get(i);
 			model = service.selectCarModelByNo(model);
 			
 			list.add(getChartData(model));
