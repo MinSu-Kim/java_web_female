@@ -31,7 +31,7 @@ public class RentListPanel extends JPanel {
 	}
 
 	private void initComponents() {
-//		reloadList();
+//		reloadList(); pList가 45번라인에서 생성되는데 먼저 호출되면 67라인에서 에러뜨지 않을까?
 
 		pRentInfo = new RentListInfoPanel();
 		pRentInfo.setRentListPanel(this);
@@ -58,6 +58,8 @@ public class RentListPanel extends JPanel {
 			
 		});
 		add(pList);
+		
+		reloadList();
 	}
 
 	public void reloadList() {

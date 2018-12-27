@@ -108,9 +108,9 @@ public class CustomerMapperTest extends AbstractTest {
 
 		Customer searchPw = new Customer();
 		searchPw.setId("asd132");
-		searchPw.setPasswd("rootroot");
+		searchPw.setPasswd("rootroot");//틀린 비밀번호
 		Customer selCustomer = dao.selectCustomerByPw(searchPw);
-		Assert.assertNotNull(selCustomer);
+		Assert.assertNull(selCustomer);
 	}
 
 	@Test
