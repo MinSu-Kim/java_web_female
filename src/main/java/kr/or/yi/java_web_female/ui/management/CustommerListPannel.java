@@ -311,8 +311,8 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				// CustomEvent customEvent = new CustomEvent();
 				// CustomEvent("EVT1", customer.getCode(), false);
 
-				JOptionPane.showMessageDialog(null, customer);
-				JOptionPane.showMessageDialog(null, customEvent);
+//				JOptionPane.showMessageDialog(null, customer);
+//				JOptionPane.showMessageDialog(null, customEvent);
 
 			}
 
@@ -420,7 +420,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	}
 
 	protected void do_btnCusOk_actionPerformed(ActionEvent arg0) {
-		JOptionPane.showMessageDialog(null, "do_btnCusOk_actionPerformed 추가");
+//		JOptionPane.showMessageDialog(null, "do_btnCusOk_actionPerformed 추가");
 		String cId = tfCusId.getText().trim();
 		String cName = tfCusName.getText().trim();
 		String cCode = tfCusCode.getText().trim();
@@ -472,7 +472,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
 
-		JOptionPane.showMessageDialog(null, customer);
+		//JOptionPane.showMessageDialog(null, customer);
 		service.insertCustomer(customer);
 		
 		list = service.selectCustomerByAll();

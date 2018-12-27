@@ -12,7 +12,7 @@ public interface CustomerMapper {
 	List<Customer> selectCustomerByName(Customer customer);
 	List<Customer> selectCustomerByAll();
 	Customer selectCustomerById(Customer customer);
-
+	
 	int insertCustomer(Customer customer);
 	int updateCustomer(Customer customer);
 	int deleteCustomer(Customer customer);
@@ -39,4 +39,8 @@ public interface CustomerMapper {
 	// 등급 조정
 	@Update("update customer set grade_code = #{gradeCode.code} where code = #{code}")
 	int updateCustomerGrade(Customer customer);
+	
+	Customer searchId (Customer customer);
+	
+	int changePw (Customer customer);
 }
