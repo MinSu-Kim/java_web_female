@@ -42,7 +42,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	}
 
 
-	private ObservableList<Data> getChartData() {
+	private ObservableList<Data> getChartData() {//데이터 넣을때 count포함된 select문 이용할 것
 		ObservableList<Data> list = FXCollections.observableArrayList();
 		list.addAll(new PieChart.Data("경형", 2), new PieChart.Data("소형", 4), new PieChart.Data("중형", 4), new PieChart.Data("대형",2), new PieChart.Data("suv",2));
 		return list;
