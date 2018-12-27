@@ -6,10 +6,15 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -26,6 +31,7 @@ public class RentListInfoPanel extends JPanel {
 	private JTextField tfEndDate;
 	private JTextField tfEndTime;
 	private Rent rent;
+	private JLabel lblResult;
 	
 	public Rent getRent() {
 		return rent;
@@ -42,6 +48,7 @@ public class RentListInfoPanel extends JPanel {
 		tfStartTime.setText(rent.getEndTime());
 		tfEndDate.setText(rent.getEndDate());
 		tfEndTime.setText(rent.getEndTime());
+		lblResult.setText(getOverdueFee() + "");
 	}
 
 	/**
@@ -138,12 +145,12 @@ public class RentListInfoPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("");
 		pRentInfo.add(lblNewLabel);
 		
-		JLabel lblExcessCosts = new JLabel("초과 비용");
-		lblExcessCosts.setFont(new Font("굴림", Font.BOLD, 12));
-		lblExcessCosts.setHorizontalAlignment(SwingConstants.CENTER);
-		pRentInfo.add(lblExcessCosts);
+		JLabel lblOverdue = new JLabel("초과 비용");
+		lblOverdue.setFont(new Font("굴림", Font.BOLD, 12));
+		lblOverdue.setHorizontalAlignment(SwingConstants.CENTER);
+		pRentInfo.add(lblOverdue);
 		
-		JLabel lblResult = new JLabel("");
+		lblResult = new JLabel("");
 		lblResult.setFont(new Font("굴림", Font.BOLD, 12));
 		lblResult.setForeground(Color.RED);
 		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
@@ -158,6 +165,60 @@ public class RentListInfoPanel extends JPanel {
 		JButton btnReturn = new JButton("반납");
 		pBtn.add(btnReturn);
 
+	}
+	
+	public long getOverdueFee() {
+		long overdueFee = 0;
+		
+		//연체료구하기
+		//오늘날짜시간 - 반납일 ==> 단위 : 시간으로 구하기 ==> car_model 테이블에 있는 초과비용
+		long exceed = ExceedHours();
+		JOptionPane.showMessageDialog(null, exceed);
+		
+		return overdueFee;
+	}
+	
+	public long ExceedHours() {
+		//오늘 날짜
+		Date start = new Date();
+		SimpleDateFormat todaySdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String today = todaySdf.format(start);
+		JOptionPane.showMessageDialog(null, "today " + today);
+		
+		//반납일
+		String endDate = rent.getEndDate();
+		String endHour = rent.getEndTime();
+		
+		long diff = diffHours(today, endDate + endHour);
+		
+		return diff;
+	} 
+	
+	public long diffHours(String today, String end) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		long diffHours = 0;
+		
+		
+		try {
+			Date todayDate = sdf.parse(today);
+			JOptionPane.showMessageDialog(null, "today" + today);
+			JOptionPane.showMessageDialog(null, "todayDate yyyyMMddHH " + todayDate);
+			long todayTime = todayDate.getTime();
+			
+			Date endDate = sdf.parse(end);
+			long endTime = endDate.getTime();
+			
+			long diff = todayTime - endTime;
+			JOptionPane.showMessageDialog(null, "todayTime " + todayTime + "endTime " + endTime);
+			diffHours = diff / ( 1000 * 60 * 60 );
+			JOptionPane.showMessageDialog(null, diffHours);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return diffHours;
 	}
 
 }

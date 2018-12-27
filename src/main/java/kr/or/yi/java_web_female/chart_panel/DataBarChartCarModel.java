@@ -46,7 +46,7 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("차량별 대여 횟수 통계");
 		
-		barChart.setPrefSize(500, 250);
+		barChart.setPrefSize(400, 250);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);//getChildren : Gets the list of children of this Group
@@ -57,12 +57,11 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 	//1번 - 차트에 데이터 넣기
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {//매개변수 없는것
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		List<CarModel> clist = service.selectCarModelByAll();//널포인트
+		List<CarModel> clist = service.selectCarModelByAll();
 		
-		for(int i = 1;i<clist.size();i++) {//있는 숫자만 반복문 돌리도록 바꾸기ㅠㅠ!
+		for(int i = 1;i<clist.size();i++) {
 			CarModel model = new CarModel();
-			String str = String.format("V%03d", i);
-			model.setCarCode(str);
+			model = clist.get(i);
 			model = service.selectCarModelByNo(model);
 			
 			list.add(getChartData(model));
@@ -81,46 +80,7 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		return dataSeries;
 	}
 	
-	//데이터 지우기
-	public void deleteAllData() {
-		barChart.getData().clear();
-	}
 	
-	//데이터 하나 지우기
-	public void delChartData(CarModel model) {
-		ObservableList<Series<String, Number>> list = barChart.getData();
-		Iterator<Series<String, Number>>  it = list.iterator();
-		while(it.hasNext()) {
-			Series<String, Number> s = it.next();
-			if (s.getName().equals(model.getName())) {
-				barChart.getData().remove(s);
-				break;
-			}
-		}
-	}
-	
-	//데이터 추가
-	public void updateChartData(CarModel model) {
-		ObservableList<Series<String, Number>> list = barChart.getData();
-		
-		for(int i = 0; i<list.size(); i++) {
-			Series<String, Number> s = list.get(i);
-			if (s.getName().equals(model.getName())) {
-				s.getData().set(0, new XYChart.Data<>("대여횟수", model.getRentCnt()));
-				break;
-			}
-		}
-	}
-	
-	//데이터 추가
-	public void addChartData(CarModel model) {
-		barChart.getData().add(getChartData(model));
-	}
-	
-	//데이터 모두 추가
-	public void addAllChartData() {
-		barChart.setData(getChartData());
-	}
 }
 
 

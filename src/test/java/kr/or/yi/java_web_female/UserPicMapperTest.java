@@ -101,7 +101,7 @@ public class UserPicMapperTest extends AbstractTest {
 	}
 
 	private File getPicFile(UserPic userPic) throws IOException {
-		File pics = new File(System.getProperty("user.dir")+"/images/test/");
+		File pics = new File(System.getProperty("user.dir")+"/images/");
 		if(!pics.exists()) {
 			pics.mkdirs();
 		}
@@ -113,16 +113,16 @@ public class UserPicMapperTest extends AbstractTest {
 	}
 
 	
-	@AfterClass
+/*	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		File pics = new File(System.getProperty("user.dir")+"/images/test/");
+		File pics = new File(System.getProperty("user.dir")+"/images/");
 		if(pics.exists()) {
 			for(File f : pics.listFiles()) {
 				f.delete();
 			}
 			pics.delete();
 		}
-	}
+	}*/
 }
 
 
