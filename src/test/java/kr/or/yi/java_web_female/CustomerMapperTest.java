@@ -194,4 +194,25 @@ public class CustomerMapperTest extends AbstractTest {
 
 		dao.deleteCustomerEvent(customer, customEvent);
 	}
+	@Test
+	public void test13searchId() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Customer searchId = new Customer();
+		searchId.setPhone("010-0000-7777");
+		searchId.setEmail("abc@gmail.com");
+		int res = dao.searchId(searchId);
+		
+		Assert.assertEquals(1, res);
+	}
+	@Test
+	public void test14changePw() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		Customer customer = new Customer();
+		customer.setPhone("010-0000-7777");
+		customer.setEmail("abc@gmail.com");
+		customer.setPasswd("password");
+		int res = dao.changePw(customer);
+		Assert.assertEquals(1, res);
+	}
 }

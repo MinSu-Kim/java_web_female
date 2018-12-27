@@ -47,7 +47,9 @@
 <!-- 		select code, Id, password(#{passwd}), Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, rent_cnt
 		from customer -->
 		select c.code, Id,c.Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, g.name as gname, rent_cnt
-		from customer c join grade g on c.grade_code = g.code;
+		from customer c left join grade g on c.grade_code = g.code 
+		where c.code !='C000'
+		order by c.code;
 	</select>
 
 	<select id="selectCustomerById" resultMap="ResultCustom">
@@ -80,6 +82,8 @@
 		where Id = #{id} and passwd = password(#{passwd});
 	</select>
 
+
+
 	<!-- update -->
 	<update id="updateCustomer" parameterType="Customer">
 		update customer
@@ -98,5 +102,18 @@
 		where code=#{code}
 		
 	</delete> 
+	
+ 	<select id="searchId" parameterType="Customer" resultType="String">
+		select Id
+		from customer c 
+		where c.phone = #{phone}
+		and c.email = #{email}
+	</select>
 
+	<update id="changePw" parameterType="Customer">
+		update customer c
+		set passwd=password('12341234')
+		where c.phone = #{phone}
+		and c.email = #{email}
+	</update>
 </mapper>

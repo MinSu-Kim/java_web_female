@@ -5,17 +5,17 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
-public class TotalChartPanel extends JPanel {
+public class CarChartPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public TotalChartPanel() {
-		setLayout(new GridLayout(3, 1, 0, 0));
+	public CarChartPanel() {
+		setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JPanel panelCar = new JPanel();
 		add(panelCar);
-		panelCar.setLayout(new GridLayout(0, 3, 0, 0));
+		panelCar.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		BarChartCarModel panel_BarChart = new BarChartCarModel();
 		panelCar.add(panel_BarChart);
@@ -23,11 +23,15 @@ public class TotalChartPanel extends JPanel {
 		PieChartCarType panel_PieChart = new PieChartCarType();
 		panelCar.add(panel_PieChart);
 		
-		JPanel panelCustomer = new JPanel();
-		add(panelCustomer);
+		JPanel panelCar2 = new JPanel();
+		add(panelCar2);
+		panelCar2.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panelRent = new JPanel();
-		add(panelRent);
+		PieChartBrand panel = new PieChartBrand();
+		panelCar2.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panelCar2.add(panel_1);
 
 	}
 
