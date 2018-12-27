@@ -196,8 +196,8 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		try {
 			if (rbtnSearchId.isSelected()) {
 				Customer customer = getItem();
-				String id = searchService.searchId(customer);
-				if (id==null) {
+				Customer findCustomer = searchService.searchId(customer);
+				if (findCustomer==null) {
 					JOptionPane.showMessageDialog(null, "연락처와 이메일을 다시 확인해 주세요.");
 					return;
 				}
@@ -208,8 +208,8 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 			}
 			if (rbtnSearchPw.isSelected()) {
 				Customer customer = getItem();
-				String id = searchService.searchId(customer);
-				if (id==null) {
+				Customer findCustomer = searchService.searchId(customer);
+				if (findCustomer==null) {
 					JOptionPane.showMessageDialog(null, "연락처와 이메일을 다시 확인해 주세요.");
 					return;
 				}

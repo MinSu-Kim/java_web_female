@@ -131,8 +131,8 @@
 		
 	</resultMap>
 
-	<select id="searchId" resultMap="Result">
-		SELECT Id
+	<select id="searchId" parameterType="Customer" resultType="Customer">
+		SELECT Id as id
 		FROM proj_rentcar.customer
 		where phone = #{phone}
 		and email =	#{email}

@@ -41,7 +41,7 @@ public interface CustomerMapper {
 	int updateCustomerGrade(Customer customer);
 	
 	/*@Select("select Id from customer c where c.phone = #{phone} and c.email = #{email}")*/
-	String searchId(Customer customer);
+	Customer searchId(Customer customer);
 	
 	int changePw(Customer customer);
 }
