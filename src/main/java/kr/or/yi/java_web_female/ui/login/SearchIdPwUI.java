@@ -44,7 +44,6 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	private JTextField tfTel3;
 	private JButton btnSearch;
 	private SearchIdPwService searchService;
-	private JButton btnCancel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -151,16 +150,9 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		btnSearch = new JButton("아이디 찾기");
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
-
-		btnCancel = new JButton("나가기");
-		btnCancel.addActionListener(this);
-		pBtn.add(btnCancel);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCancel) {
-			do_btnCancel_actionPerformed(e);
-		}
 		if (e.getSource() == btnSearch) {
 			do_btnSearch_actionPerformed(e);
 		}
@@ -188,10 +180,6 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_rbtnSearchPw_actionPerformed(ActionEvent e) {
-		/*
-		 * if(rbtnSearchId.isSelected()) { lblId.setVisible(true);
-		 * tfId.setVisible(true); }
-		 */
 		if (rbtnSearchPw.isSelected()) {
 			btnSearch.setText("비밀번호 변경");
 		}
@@ -199,9 +187,6 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_rbtnSearchId_actionPerformed(ActionEvent e) {
-		/*
-		 * if(rbtnSearchPw.) { lblId.setVisible(false); tfId.setVisible(false); }
-		 */
 		if (rbtnSearchId.isSelected()) {
 			btnSearch.setText("아이디 찾기");
 		}
@@ -209,40 +194,57 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 
 	protected void do_btnSearch_actionPerformed(ActionEvent e) {
 		try {
-			if(rbtnSearchId.isSelected()) {
+			if (rbtnSearchId.isSelected()) {
 				Customer customer = getItem();
-				Customer searchId = searchService.searchId(customer);
+				int res = searchService.searchId(customer);
+				if (res == 0) {
+					JOptionPane.showMessageDialog(null, "연락처와 이메일을 다시 확인해 주세요.");
+					return;
+				}
+				LoginUI frame = new LoginUI();
+				frame.setVisible(true);
+				dispose();
 
-				JOptionPane.showMessageDialog(null, searchId);
 			}
-			if(rbtnSearchPw.isSelected()) {
+			if (rbtnSearchPw.isSelected()) {
 				Customer customer = getItem();
-				int changePw = searchService.changePw(customer);
-				
+				int res = searchService.searchId(customer);
+				if (res == 0) {
+					JOptionPane.showMessageDialog(null, "연락처와 이메일을 다시 확인해 주세요.");
+					return;
+				}
+				searchService.changePw(customer);
 				JOptionPane.showMessageDialog(null, "비밀번호가 '12341234'로 변경되었습니다. 환경설정에서 비밀번호를 변경해 주세요");
+
+				LoginUI frame = new LoginUI();
+				frame.setVisible(true);
+				dispose();
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
 	}
 
-	private Customer getItem() {
+	private Customer getItem() throws Exception {
+
+		if (tfTel2.getText().trim().equals("") || tfTel3.getText().trim().equals("")
+				|| tfEmail.getText().trim().equals("") || tfDomain.getText().trim().equals("")) {
+
+			throw new Exception("연락처와 이메일을 다시 확인해 주세요.");
+		}
 		String cusPhone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
 				+ (tfTel3.getText().trim());
 
 		String cusEmail = (tfEmail.getText().trim()) + "@" + (tfDomain.getText().trim());
+
 		Customer customer = new Customer();
 		customer.setPhone(cusPhone);
 		customer.setEmail(cusEmail);
 
 		return customer;
 	}
-	protected void do_btnCancel_actionPerformed(ActionEvent e) {
-		LoginUI frame = new LoginUI();
-		frame.setVisible(true);
-		dispose();
-	}
-	
+
 	public void close() {
 		dispose();
 	}

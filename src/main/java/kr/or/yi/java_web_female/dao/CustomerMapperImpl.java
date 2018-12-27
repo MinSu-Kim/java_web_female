@@ -174,7 +174,7 @@ public class CustomerMapperImpl implements CustomerMapper {
 	}
 
 	@Override
-	public Customer searchId(Customer customer) {
+	public int searchId(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + ".searchId", customer);
 		}

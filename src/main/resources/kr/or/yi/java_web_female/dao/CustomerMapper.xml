@@ -103,8 +103,8 @@
 		
 	</delete> 
 	
-	<select id="searchId" resultMap="ResultCustom">
-		select  Id
+ 	<select id="searchId" parameterType="Customer" resultType="String">
+		select Id
 		from customer c 
 		where c.phone = #{phone}
 		and c.email = #{email}

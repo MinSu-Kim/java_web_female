@@ -221,6 +221,8 @@ and c.email = 'abc@gmail.com';
 
 update customer c
 set passwd = password('root1234')
-where c.phone = '010-0000-7777'
-and c.email = 'abc@gmail.com';
+where c.phone = '010-0000-7777' and c.email = 'abc@gmail.com';
 
+select  Id
+from customer c 
+where c.phone = '010-0000-7777' and c.email ='abc@gmail.com';

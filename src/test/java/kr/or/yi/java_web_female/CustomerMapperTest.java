@@ -201,9 +201,9 @@ public class CustomerMapperTest extends AbstractTest {
 		Customer searchId = new Customer();
 		searchId.setPhone("010-0000-7777");
 		searchId.setEmail("abc@gmail.com");
-		Customer selectCustomer = dao.searchId(searchId);
-		Assert.assertNotNull(selectCustomer);
+		int res = dao.searchId(searchId);
 		
+		Assert.assertEquals(1, res);
 	}
 	@Test
 	public void test14changePw() {

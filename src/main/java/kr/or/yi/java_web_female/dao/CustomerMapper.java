@@ -40,7 +40,8 @@ public interface CustomerMapper {
 	@Update("update customer set grade_code = #{gradeCode.code} where code = #{code}")
 	int updateCustomerGrade(Customer customer);
 	
-	Customer searchId (Customer customer);
+	/*@Select("select Id from customer c where c.phone = #{phone} and c.email = #{email}")*/
+	int searchId(Customer customer);
 	
-	int changePw (Customer customer);
+	int changePw(Customer customer);
 }
