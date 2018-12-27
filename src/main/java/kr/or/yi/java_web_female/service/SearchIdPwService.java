@@ -10,7 +10,7 @@ public class SearchIdPwService {
 		cusDao = CustomerMapperImpl.getInstance();
 	}
 	
-	public int searchId(Customer customer) {
+	public String searchId(Customer customer) {
 		return cusDao.searchId(customer);
 	}
 	
