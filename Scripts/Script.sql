@@ -37,3 +37,5 @@ select * from employee;
 
 delete from department
 where deptno = 2;
+
+select * from cus

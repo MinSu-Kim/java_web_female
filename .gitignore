@@ -108,7 +108,7 @@ local.properties
 *.war
 *.nar
 *.ear
-*.zip
+#*.zip
 *.tar.gz
 *.rar
 
@@ -163,4 +163,4 @@ gradle-app.setting
 /.dbeaver-data-sources.xml
 
 logs/java_web_female.log
-/images/
+*.png

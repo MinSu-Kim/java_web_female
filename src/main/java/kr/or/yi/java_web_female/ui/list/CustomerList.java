@@ -15,7 +15,7 @@ public class CustomerList extends AbstractListPanel<Customer>{
 	@Override
 	protected void setAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		tableSetWidth(100, 100, 100);
+		tableSetWidth(80, 150, 100, 100, 400, 150, 200, 100, 100, 100, 80);
 	}
 
 	@Override
