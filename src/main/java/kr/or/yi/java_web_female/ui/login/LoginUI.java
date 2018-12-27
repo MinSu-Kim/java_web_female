@@ -114,6 +114,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	protected void do_btnSearch_actionPerformed(ActionEvent e) {
 		SearchIdPwUI frame = new SearchIdPwUI();
 		frame.setVisible(true);
+		dispose();
 	}
 
 	protected void do_btnLogin_actionPerformed(ActionEvent e) {
@@ -158,5 +159,8 @@ public class LoginUI extends JFrame implements ActionListener {
 		}else {
 			return new Customer(id, pwd);
 		}
+	}
+	public void close() {
+		dispose();
 	}
 }

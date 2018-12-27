@@ -44,6 +44,7 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	private JTextField tfTel3;
 	private JButton btnSearch;
 	private SearchIdPwService searchService;
+	private JButton btnCancel;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -151,11 +152,15 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
 
-		JButton btnCancel = new JButton("나가기");
+		btnCancel = new JButton("나가기");
+		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(e);
+		}
 		if (e.getSource() == btnSearch) {
 			do_btnSearch_actionPerformed(e);
 		}
@@ -231,5 +236,14 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		customer.setEmail(cusEmail);
 
 		return customer;
+	}
+	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		LoginUI frame = new LoginUI();
+		frame.setVisible(true);
+		dispose();
+	}
+	
+	public void close() {
+		dispose();
 	}
 }
