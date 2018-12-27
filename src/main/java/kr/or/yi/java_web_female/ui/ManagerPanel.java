@@ -60,7 +60,7 @@ public class ManagerPanel extends JPanel {
 			tabbedPane.addTab("대여관리", null, panel_06, null);
 			
 			
-			tabbedPane.addTab("대여현황", null, panel_07, null);
+			tabbedPane.addTab("반납현황", null, panel_07, null);
 			
 			TotalChartPanel panel_9 = new TotalChartPanel();
 			tabbedPane.addTab("전체통계", null, panel_9, null);

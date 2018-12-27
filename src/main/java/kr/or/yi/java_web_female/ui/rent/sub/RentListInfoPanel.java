@@ -5,7 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.java_web_female.dao.RentMapper;
+import kr.or.yi.java_web_female.dao.RentMapperImpl;
 import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.dto.RentHour;
+import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 
 import javax.swing.UIManager;
@@ -14,14 +19,18 @@ import java.awt.GridLayout;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class RentListInfoPanel extends JPanel {
+public class RentListInfoPanel extends JPanel implements ActionListener {
 	private JTextField tfRentCode;
 	private JTextField tfCarName;
 	private JTextField tfCstmCode;
@@ -32,14 +41,26 @@ public class RentListInfoPanel extends JPanel {
 	private JTextField tfEndTime;
 	private Rent rent;
 	private JLabel lblResult;
+	private JButton btnReturn;
+	private RentUIService service;
+	private RentListPanel rentListPanel;
 	
+	
+	public void setRentListPanel(RentListPanel rentListPanel) {
+		this.rentListPanel = rentListPanel;
+	}
+
+	public void setService(RentUIService service) {
+		this.service = service;
+	}
+
 	public Rent getRent() {
 		return rent;
 	}
 
 	public void setRent(Rent rent) {
 		this.rent = rent;
-		JOptionPane.showMessageDialog(null, rent);
+//		JOptionPane.showMessageDialog(null, rent);
 		tfRentCode.setText(rent.getCode());
 		tfCarName.setText(rent.getCarCode().getName());
 		tfCstmCode.setText(rent.getCustomerCode().getCode());
@@ -48,7 +69,14 @@ public class RentListInfoPanel extends JPanel {
 		tfStartTime.setText(rent.getEndTime());
 		tfEndDate.setText(rent.getEndDate());
 		tfEndTime.setText(rent.getEndTime());
-		lblResult.setText(getOverdueFee() + "");
+		RentMapper dao = RentMapperImpl.getInstance();
+		Map<String, String> map = new HashMap<>();
+		map.put("carCode", rent.getCarCode().getCarCode());
+		map.put("rCode", rent.getCode());
+		
+		RentHour result = dao.selectRentHours(map);
+//		JOptionPane.showMessageDialog(null, result);
+		lblResult.setText(result.getAddPrice() + "원");
 	}
 
 	/**
@@ -162,63 +190,26 @@ public class RentListInfoPanel extends JPanel {
 		JPanel pBtn = new JPanel();
 		add(pBtn, BorderLayout.SOUTH);
 		
-		JButton btnReturn = new JButton("반납");
+		btnReturn = new JButton("반납");
+		btnReturn.addActionListener(this);
 		pBtn.add(btnReturn);
 
 	}
-	
-	public long getOverdueFee() {
-		long overdueFee = 0;
-		
-		//연체료구하기
-		//오늘날짜시간 - 반납일 ==> 단위 : 시간으로 구하기 ==> car_model 테이블에 있는 초과비용
-		long exceed = ExceedHours();
-		JOptionPane.showMessageDialog(null, exceed);
-		
-		return overdueFee;
-	}
-	
-	public long ExceedHours() {
-		//오늘 날짜
-		Date start = new Date();
-		SimpleDateFormat todaySdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String today = todaySdf.format(start);
-		JOptionPane.showMessageDialog(null, "today " + today);
-		
-		//반납일
-		String endDate = rent.getEndDate();
-		String endHour = rent.getEndTime();
-		
-		long diff = diffHours(today, endDate + endHour);
-		
-		return diff;
-	} 
-	
-	public long diffHours(String today, String end) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		
-		long diffHours = 0;
-		
-		
-		try {
-			Date todayDate = sdf.parse(today);
-			JOptionPane.showMessageDialog(null, "today" + today);
-			JOptionPane.showMessageDialog(null, "todayDate yyyyMMddHH " + todayDate);
-			long todayTime = todayDate.getTime();
-			
-			Date endDate = sdf.parse(end);
-			long endTime = endDate.getTime();
-			
-			long diff = todayTime - endTime;
-			JOptionPane.showMessageDialog(null, "todayTime " + todayTime + "endTime " + endTime);
-			diffHours = diff / ( 1000 * 60 * 60 );
-			JOptionPane.showMessageDialog(null, diffHours);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return diffHours;
-	}
 
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnReturn) {
+			do_btnReturn_actionPerformed(e);
+		}
+	}
+	
+	//반납버튼
+	protected void do_btnReturn_actionPerformed(ActionEvent e) {
+		service.changeIsReturn(rent);
+		JOptionPane.showMessageDialog(null, "반납되었습니다.");
+		
+		if(LoginUI.loginCusotmer == null) {
+			rentListPanel.reloadList();
+		}
+	}
 }
