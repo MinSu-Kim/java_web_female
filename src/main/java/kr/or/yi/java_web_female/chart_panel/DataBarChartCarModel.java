@@ -1,7 +1,14 @@
 package kr.or.yi.java_web_female.chart_panel;
 
+import java.awt.GridLayout;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +31,11 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 	//바차트 배열 선언
 	private BarChart<String, Number> barChart;
 	private CarModelService service;
-	
+
+	public BarChart<String, Number> getBarChart() {
+		return barChart;
+	}
+
 	//슈퍼생성
 	public DataBarChartCarModel() {
 		service = new CarModelService();
@@ -47,17 +58,22 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		barChart.setTitle("차량별 대여 횟수 통계");
 		
 		barChart.setPrefSize(400, 250);
-		barChart.setData(getChartData());
+		Map<String, String> maps = new HashMap<>();
+		barChart.setData(getChartData(maps));
 		
 		root.getChildren().add(barChart);//getChildren : Gets the list of children of this Group
+		
+		
+		
 		
 		return scene;
 	}
 	
 	//1번 - 차트에 데이터 넣기
-	private ObservableList<XYChart.Series<String, Number>> getChartData() {//매개변수 없는것
+	public ObservableList<XYChart.Series<String, Number>> getChartData(Map<String, String> maps) {//매개변수를 map으로 받음
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		List<CarModel> clist = service.selectCarModelByAll();
+		
+		List<CarModel> clist = service.SelectCarModelWithWhere(maps);
 		
 		for(int i = 1;i<clist.size();i++) {
 			CarModel model = new CarModel();

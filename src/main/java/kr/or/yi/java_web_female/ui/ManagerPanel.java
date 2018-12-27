@@ -11,7 +11,7 @@ import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.chart_panel.BarChartCarModel;
 import kr.or.yi.java_web_female.chart_panel.PieChartCarType;
-import kr.or.yi.java_web_female.chart_panel.TotalChartPanel;
+import kr.or.yi.java_web_female.chart_panel.CarChartPanel;
 import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
 import kr.or.yi.java_web_female.ui.management.GradeEventPanel;
 import kr.or.yi.java_web_female.ui.management.EmployeeListPanel;
@@ -62,8 +62,14 @@ public class ManagerPanel extends JPanel {
 			
 			tabbedPane.addTab("대여현황", null, panel_07, null);
 			
-			TotalChartPanel panel_9 = new TotalChartPanel();
-			tabbedPane.addTab("전체통계", null, panel_9, null);
+			CarChartPanel panel_9 = new CarChartPanel();
+			tabbedPane.addTab("차량통계", null, panel_9, null);
+			
+			JPanel panel_10 = new JPanel();
+			tabbedPane.addTab("고객통계", null, panel_10, null);
+			
+			JPanel panel_11 = new JPanel();
+			tabbedPane.addTab("렌트통계", null, panel_11, null);
 
 		}
 		
