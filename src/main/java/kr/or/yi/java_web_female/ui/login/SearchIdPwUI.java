@@ -12,11 +12,17 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.service.JoinUiService;
+import kr.or.yi.java_web_female.service.SearchIdPwService;
+
 import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
@@ -35,8 +41,9 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	private JLabel label;
 	private JTextField tfTel2;
 	private JLabel label_1;
-	private JTextField tfTel23;
+	private JTextField tfTel3;
 	private JButton btnSearch;
+	private SearchIdPwService searchService;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,6 +59,9 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	}
 
 	public SearchIdPwUI() {
+
+		searchService = new SearchIdPwService();
+
 		setTitle("ID/PW찾기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 550, 200);
@@ -65,6 +75,7 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		panel.setLayout(new GridLayout(0, 2, 10, 10));
 
 		rbtnSearchId = new JRadioButton("아이디 찾기");
+		rbtnSearchId.setSelected(true);
 		rbtnSearchId.addActionListener(this);
 		buttonGroup.add(rbtnSearchId);
 		rbtnSearchId.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,9 +114,9 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		label_1.setEnabled(false);
 		pTel.add(label_1);
 
-		tfTel23 = new JTextField();
-		tfTel23.setColumns(10);
-		pTel.add(tfTel23);
+		tfTel3 = new JTextField();
+		tfTel3.setColumns(10);
+		pTel.add(tfTel3);
 
 		JLabel lblEmail = new JLabel("이메일");
 		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
@@ -176,6 +187,9 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		 * if(rbtnSearchId.isSelected()) { lblId.setVisible(true);
 		 * tfId.setVisible(true); }
 		 */
+		if (rbtnSearchPw.isSelected()) {
+			btnSearch.setText("비밀번호 변경");
+		}
 
 	}
 
@@ -183,9 +197,39 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 		/*
 		 * if(rbtnSearchPw.) { lblId.setVisible(false); tfId.setVisible(false); }
 		 */
+		if (rbtnSearchId.isSelected()) {
+			btnSearch.setText("아이디 찾기");
+		}
 	}
 
 	protected void do_btnSearch_actionPerformed(ActionEvent e) {
+		try {
+			if(rbtnSearchId.isSelected()) {
+				Customer customer = getItem();
+				Customer searchId = searchService.searchId(customer);
 
+				JOptionPane.showMessageDialog(null, searchId);
+			}
+			if(rbtnSearchPw.isSelected()) {
+				Customer customer = getItem();
+				int changePw = searchService.changePw(customer);
+				
+				JOptionPane.showMessageDialog(null, "비밀번호가 '12341234'로 변경되었습니다. 환경설정에서 비밀번호를 변경해 주세요");
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	private Customer getItem() {
+		String cusPhone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
+				+ (tfTel3.getText().trim());
+
+		String cusEmail = (tfEmail.getText().trim()) + "@" + (tfDomain.getText().trim());
+		Customer customer = new Customer();
+		customer.setPhone(cusPhone);
+		customer.setEmail(cusEmail);
+
+		return customer;
 	}
 }

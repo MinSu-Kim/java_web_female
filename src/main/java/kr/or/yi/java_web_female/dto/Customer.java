@@ -215,13 +215,15 @@ public class Customer {
 		this.events = events;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return String.format(
 				"Customer [code=%s, id=%s, passwd=%s, name=%s, zipCode=%s, address=%s, phone=%s, dob=%s, email=%s, empCode=%s, license=%s, gradeCode=%s, rentCnt=%s, events=%s]",
 				code, id, passwd, name, zipCode, address, phone, dob, email, empCode, license, gradeCode, rentCnt,
 				events);
-	}
+	}*/
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -229,6 +231,11 @@ public class Customer {
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("id = %s", id);
 	}
 
 	@Override
