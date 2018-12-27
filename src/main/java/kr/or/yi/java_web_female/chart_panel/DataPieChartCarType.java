@@ -12,18 +12,26 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import kr.or.yi.java_web_female.InitScene;
+import kr.or.yi.java_web_female.dto.CarModel;
+import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.StateCar;
+import kr.or.yi.java_web_female.service.CarModelService;
+import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.service.StateCarChartService;
 
 public class DataPieChartCarType extends JFXPanel implements InitScene{
 
 	
 	private PieChart pieChart;
-	private StateCarChartService service;
+	private StateCarChartService chartService;
+	private CarModelService modelService;
+	private CarUiService carService;
 	
 	@Override
 	public Scene createScene() {
-		service = new StateCarChartService();
+		chartService = new StateCarChartService();
+		modelService = new CarModelService();
+		carService = new CarUiService();
 		
 		Group root = new Group();
 		Scene scene = new Scene(root);
@@ -32,7 +40,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 		pieChart = new PieChart();
 		pieChart.setPrefSize(450, 275);
 		pieChart.setData(getChartData());
-		pieChart.setTitle("Pie Chart");
+		pieChart.setTitle("차종별 보유차량");
 		pieChart.setLegendVisible(true);	// 범례 표시 유무
 		pieChart.setLegendSide(Side.BOTTOM);// 범례 위치
 		pieChart.setLabelLineLength(30);	// 원의 둘레 가장자리와 라벨간의 거리 지정
@@ -52,11 +60,21 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	private ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
 
-		List<StateCar> slist = service.selectCountByCarType();
+		List<StateCar> slist = chartService.selectCountByCarType();
+		List<CarModel> clist = modelService.selectCarModelByAll();
+		int totalCount = clist.size();
 		
 		for(int i=0;i<slist.size();i++) {
+
 			StateCar sCar = slist.get(i);
-			list.add(new PieChart.Data(sCar.getTitle(), sCar.getCount()));
+
+			CarType type = new CarType();
+			type.setCode(sCar.getTitle());
+			//코드로 차종이름 검색
+			CarType resType = carService.selectByCarCode(type);
+			
+			double rate = Math.round((sCar.getCount()*100.0)/totalCount);
+			list.add(new PieChart.Data(resType.getType(),rate ));
 		}
 		return list;
 	}
