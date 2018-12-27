@@ -99,3 +99,13 @@ select c.code, Id, passwd, c.Name, zip_code ,address, phone, dob, email, emp_cod
 		from customer c join custom_event ce on c.code = ce.custom_code join event e 
 		on ce.event_code = e.code join grade g on c.grade_code = g.code
 		where c.code = 'C005'
+		
+select * from rent;
+
+select hour6, hour10, hour12, hour_else, basic_charge, timestampdiff(hour, concat(end_date, ' ', end_time), now()) as overHour
+from rent r join car_model cm on r.car_code = cm.car_code 
+where cm.car_code = 'V002' and r.code = 'R005';
+
+select * 
+from rent, (select hour6, hour10, hour12, hour_else from car_model where car_code = 'V010') as t
+where timestampdiff(hour, concat(end_date, ' ', end_time), now())

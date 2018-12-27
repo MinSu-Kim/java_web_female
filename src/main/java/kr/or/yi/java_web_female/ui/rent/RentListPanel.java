@@ -1,29 +1,25 @@
 package kr.or.yi.java_web_female.ui.rent;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.util.Date;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.list.RentList;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import kr.or.yi.java_web_female.ui.rent.sub.RentListInfoPanel;
+import kr.or.yi.java_web_female.ui.rent.sub.RentSearchPanel;
 
 public class RentListPanel extends JPanel {
 	private RentUIService service;
 	private List<Rent> list;
 	private RentList pList;
 	private RentListInfoPanel pRentInfo;
+	private RentSearchPanel pSearch;
 	
 	/**
 	 * Create the panel.
@@ -35,12 +31,18 @@ public class RentListPanel extends JPanel {
 	}
 
 	private void initComponents() {
-		setLayout(new BorderLayout(5, 5));
-		
-		pList = new RentList();
-		reloadList();
+//		reloadList();
 
 		pRentInfo = new RentListInfoPanel();
+		pRentInfo.setRentListPanel(this);
+		pRentInfo.setService(service);
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		pSearch = new RentSearchPanel();
+		add(pSearch);
+		add(pRentInfo);
+		
+		pList = new RentList();
 		
 		/////////////////////
 		pList.getTable().addMouseListener(new MouseAdapter() {
@@ -55,8 +57,7 @@ public class RentListPanel extends JPanel {
 			}
 			
 		});
-		add(pRentInfo, BorderLayout.NORTH);
-		add(pList, BorderLayout.CENTER);
+		add(pList);
 	}
 
 	public void reloadList() {

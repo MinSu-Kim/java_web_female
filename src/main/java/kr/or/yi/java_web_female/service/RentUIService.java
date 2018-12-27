@@ -97,4 +97,9 @@ public class RentUIService {
 	public List<Rent> selectRentByAll(){
 		return rentDao.selectRentByAll();
 	}
+	
+	//반납
+	public int changeIsReturn(Rent rent) {
+		return rentDao.changeisReturn(rent);
+	}
 }

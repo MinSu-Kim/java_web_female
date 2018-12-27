@@ -1,11 +1,15 @@
 package kr.or.yi.java_web_female.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.dto.RentHour;
 
 public interface RentMapper {
 	
@@ -19,4 +23,11 @@ public interface RentMapper {
 	
 	//
 	List<Rent> selectRentByAll();
+	
+	//초과 시간
+	RentHour selectRentHours(Map<String, String> map);
+	
+	//반납 처리하기
+	@Update("update rent set is_return = 1 where code = #{code}")
+	int changeisReturn(Rent rent);
 }
