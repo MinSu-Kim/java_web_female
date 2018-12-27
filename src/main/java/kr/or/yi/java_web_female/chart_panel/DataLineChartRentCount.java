@@ -13,7 +13,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import kr.or.yi.java_web_female.InitScene;
 
-public class LineChartCarModelCount extends JFXPanel implements InitScene {
+public class DataLineChartRentCount extends JFXPanel implements InitScene {
 
 	private LineChart<String, Number> lineChart;
 	private CategoryAxis xAxis;
@@ -31,9 +31,9 @@ public class LineChartCarModelCount extends JFXPanel implements InitScene {
 		yAxis.setLabel(" 렌트회수");
 		
 		lineChart = new LineChart<>(xAxis, yAxis);
-		lineChart.setPrefSize(500, 250);
+		lineChart.setPrefSize(430, 250);
 		lineChart.setData(getChartData());
-		lineChart.setTitle("Line Chart");
+		lineChart.setTitle("기간별 렌트회수");
 		lineChart.setLegendVisible(true);	// 범례 표시 유무
 		lineChart.setLegendSide(Side.BOTTOM);// 범례 위치
 		
@@ -42,8 +42,9 @@ public class LineChartCarModelCount extends JFXPanel implements InitScene {
 
 	private ObservableList<Series<String, Number>> getChartData() {
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		//CarModel model1 = new CarModel(CarModel.getCarCode,CarModel.getCarName,)
-		return null;
+		/*CarModel model1 = new CarModel(CarModel.getCarCode,CarModel.getCarName,기간1의 렌트수, 기간2의 렌트수, ... );
+		list.add(getChartData(model1));*/
+		return list;
 	}
 
 }

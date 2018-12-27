@@ -57,7 +57,7 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("차량별 대여 횟수 통계");
 		
-		barChart.setPrefSize(400, 250);
+		barChart.setPrefSize(450, 250);
 		Map<String, String> maps = new HashMap<>();
 		barChart.setData(getChartData(maps));
 		

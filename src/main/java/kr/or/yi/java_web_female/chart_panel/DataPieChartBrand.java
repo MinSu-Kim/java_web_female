@@ -15,7 +15,7 @@ import kr.or.yi.java_web_female.InitScene;
 import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.service.StateCarChartService;
 
-public class DataPieChartCarType extends JFXPanel implements InitScene{
+public class DataPieChartBrand extends JFXPanel implements InitScene{
 
 	
 	private PieChart pieChart;
@@ -52,7 +52,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	private ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
 
-		List<StateCar> slist = service.selectCountByCarType();
+		List<StateCar> slist = service.selectCountByBrand();
 		
 		for(int i=0;i<slist.size();i++) {
 			StateCar sCar = slist.get(i);

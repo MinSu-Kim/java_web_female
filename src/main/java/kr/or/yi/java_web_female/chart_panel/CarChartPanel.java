@@ -22,6 +22,16 @@ public class CarChartPanel extends JPanel {
 		
 		PieChartCarType panel_PieChart = new PieChartCarType();
 		panelCar.add(panel_PieChart);
+		
+		JPanel panelCar2 = new JPanel();
+		add(panelCar2);
+		panelCar2.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		PieChartBrand panel = new PieChartBrand();
+		panelCar2.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		panelCar2.add(panel_1);
 
 	}
 
