@@ -14,8 +14,10 @@ import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
 import kr.or.yi.java_web_female.ui.join.MyDocumentListener;
+import kr.or.yi.java_web_female.ui.join.SearchPostUI;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 
@@ -44,6 +46,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private JPasswordField pwfNewPw;
 	private JPasswordField pwfConfirmPw;
 	private JTextField tfConfirm;
+	private JButton btnCancel;
 
 	/**
 	 * Create the panel.
@@ -107,9 +110,11 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel = new JComboBox<String>();
+		String[] arrayT1 = loginCustomer.getPhone().split("-");
 		cmbTel.setPreferredSize(new Dimension(100, 22));
 		cmbTel.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
 		cmbTel.setSelectedIndex(-1);
+		cmbTel.setSelectedItem(arrayT1[0] + "");
 		pTel.add(cmbTel);
 
 		JLabel lblTel1 = new JLabel("-");
@@ -118,6 +123,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.add(lblTel1);
 
 		tfTel2 = new JTextField();
+		String[] arrayT2 = loginCustomer.getPhone().split("-");
+		tfTel2.setText(arrayT2[1] + "");
 		tfTel2.setColumns(10);
 		pTel.add(tfTel2);
 
@@ -127,6 +134,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.add(lblTel2);
 
 		tfTel3 = new JTextField();
+		String[] arrayT3 = loginCustomer.getPhone().split("-");
+		tfTel3.setText(arrayT3[2] + "");
 		tfTel3.setColumns(10);
 		pTel.add(tfTel3);
 
@@ -139,6 +148,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
 
 		tfEmail = new JTextField();
+		String[] arrayE1 = loginCustomer.getEmail().split("@");
+		tfEmail.setText(arrayE1[0] + "");
 		tfEmail.setColumns(15);
 		pEmail.add(tfEmail);
 
@@ -147,6 +158,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pEmail.add(labelAt);
 
 		tfDomain = new JTextField();
+		String[] arrayE2 = loginCustomer.getEmail().split("@");
+		tfDomain.setText(arrayE2[1] + "");
 		tfDomain.setEditable(false);
 		tfDomain.setColumns(15);
 		pEmail.add(tfDomain);
@@ -172,6 +185,13 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		tfZipcode.setColumns(10);
 
 		JButton btnZipcode = new JButton("우편번호 검색");
+		btnZipcode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SearchPostUI frame = new SearchPostUI();
+				frame.setJoinUi(CustommerUpdate.this); // 추가해줌. setAddress()호출하기 위핸
+				frame.setVisible(true);
+			}
+		});
 		pAddr.add(btnZipcode);
 
 		JLabel lblAddress = new JLabel("주소");
@@ -245,11 +265,21 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		JButton btnUpdate = new JButton("수정");
 		pBtn.add(btnUpdate);
 
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		pBtn.add(btnCancel);
+	}
+	/* 추가해줌 */
+	public void setAddress(Post post) {
+		this.tfZipcode.setText(post.getZipcode());
+		this.tfAddress.setText(post.toString());
+		tfAddress.requestFocus();
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnCancel) {
+			do_btnCancel_actionPerformed(arg0);
+		}
 		if (arg0.getSource() == cmbDomain) {
 			do_cmbDomain_actionPerformed(arg0);
 		}
@@ -264,5 +294,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 			tfDomain.setText("");
 			tfDomain.setEditable(true);
 		}
+	}
+	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
+	
+	/*	clearTf();*/
 	}
 }

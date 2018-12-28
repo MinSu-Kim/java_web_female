@@ -26,10 +26,14 @@ public class TestFrame extends JFrame {
 		}else {
 			setBounds(100, 100, 600, 700);
 		}
+		
 		contentPane = new ManagerPanel();
+		contentPane.setTestFrame(this);
 		setContentPane(contentPane);
 	}
-	
+	public void dispose() {
+		this.setVisible(false);
+	}
 	private String getLoginUser() {
 		String loginUserName = null;
 		if (LoginUI.loginCusotmer !=null) {
