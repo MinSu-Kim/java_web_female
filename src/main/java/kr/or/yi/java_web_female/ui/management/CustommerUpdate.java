@@ -46,7 +46,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private JPasswordField pwfNewPw;
 	private JPasswordField pwfConfirmPw;
 	private JTextField tfConfirm;
-	private JButton btnCancel;
+	private JButton btnSave;
+	private JButton btnUpdate;
+	private JButton btnZipcode;
 
 	/**
 	 * Create the panel.
@@ -79,6 +81,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblName);
 
 		tfName = new JTextField();
+		tfName.setEditable(false);
 		tfName.setText(loginCustomer.getName());
 		panelInput1.add(tfName);
 		tfName.setColumns(10);
@@ -98,6 +101,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblDob);
 
 		dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().setEnabled(false);
 		dateChooser.setDate(loginCustomer.getDob());
 		panelInput1.add(dateChooser);
 
@@ -110,6 +114,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel = new JComboBox<String>();
+		cmbTel.setEnabled(false);
 		String[] arrayT1 = loginCustomer.getPhone().split("-");
 		cmbTel.setPreferredSize(new Dimension(100, 22));
 		cmbTel.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
@@ -123,6 +128,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.add(lblTel1);
 
 		tfTel2 = new JTextField();
+		tfTel2.setEditable(false);
 		String[] arrayT2 = loginCustomer.getPhone().split("-");
 		tfTel2.setText(arrayT2[1] + "");
 		tfTel2.setColumns(10);
@@ -134,6 +140,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.add(lblTel2);
 
 		tfTel3 = new JTextField();
+		tfTel3.setEditable(false);
 		String[] arrayT3 = loginCustomer.getPhone().split("-");
 		tfTel3.setText(arrayT3[2] + "");
 		tfTel3.setColumns(10);
@@ -148,6 +155,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
 
 		tfEmail = new JTextField();
+		tfEmail.setEditable(false);
 		String[] arrayE1 = loginCustomer.getEmail().split("@");
 		tfEmail.setText(arrayE1[0] + "");
 		tfEmail.setColumns(15);
@@ -165,6 +173,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pEmail.add(tfDomain);
 
 		cmbDomain = new JComboBox<String>();
+		cmbDomain.setEnabled(false);
 		cmbDomain.setPreferredSize(new Dimension(150, 22));
 		cmbDomain.addActionListener(this);
 		cmbDomain.setModel(new DefaultComboBoxModel<String>(
@@ -180,11 +189,13 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pAddr.setLayout(new BoxLayout(pAddr, BoxLayout.X_AXIS));
 
 		tfZipcode = new JTextField();
+		tfZipcode.setEditable(false);
 		tfZipcode.setText(loginCustomer.getZipCode());
 		pAddr.add(tfZipcode);
 		tfZipcode.setColumns(10);
 
-		JButton btnZipcode = new JButton("우편번호 검색");
+		btnZipcode = new JButton("우편번호 검색");
+		btnZipcode.setEnabled(false);
 		btnZipcode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SearchPostUI frame = new SearchPostUI();
@@ -199,6 +210,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblAddress);
 
 		tfAddress = new JTextField();
+		tfAddress.setEditable(false);
 		tfAddress.setText(loginCustomer.getAddress());
 		panelInput1.add(tfAddress);
 		tfAddress.setColumns(10);
@@ -208,6 +220,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblNowPw);
 		
 		pwfNowPw = new JPasswordField();
+		pwfNowPw.setEditable(false);
 		pwfNowPw.setText(loginCustomer.getPasswd());
 		panelInput1.add(pwfNowPw);
 
@@ -220,6 +233,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pPw.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		pwfNewPw = new JPasswordField();
+		pwfNewPw.setEditable(false);
 		pPw.add(pwfNewPw);
 
 		JLabel lblConfirmPw = new JLabel("비밀번호확인");
@@ -231,6 +245,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		pwfConfirmPw = new JPasswordField();
+		pwfConfirmPw.setEditable(false);
 		panel_1.add(pwfConfirmPw);
 		
 		tfConfirm = new JTextField();
@@ -262,12 +277,13 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		JPanel pBtn = new JPanel();
 		panel.add(pBtn, BorderLayout.SOUTH);
 
-		JButton btnUpdate = new JButton("수정");
+		btnUpdate = new JButton("수정");
+		btnUpdate.addActionListener(this);
 		pBtn.add(btnUpdate);
 
-		btnCancel = new JButton("취소");
-		btnCancel.addActionListener(this);
-		pBtn.add(btnCancel);
+		btnSave = new JButton("저장");
+		btnSave.addActionListener(this);
+		pBtn.add(btnSave);
 	}
 	/* 추가해줌 */
 	public void setAddress(Post post) {
@@ -277,13 +293,18 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == btnCancel) {
-			do_btnCancel_actionPerformed(arg0);
+		if (arg0.getSource() == btnUpdate) {
+			do_btnUpdate_actionPerformed(arg0);
+		}
+		if (arg0.getSource() == btnSave) {
+			do_btnSave_actionPerformed(arg0);
 		}
 		if (arg0.getSource() == cmbDomain) {
 			do_cmbDomain_actionPerformed(arg0);
 		}
 	}
+
+
 
 	protected void do_cmbDomain_actionPerformed(ActionEvent arg0) {
 		if (cmbDomain.getSelectedIndex() < 5) {
@@ -295,8 +316,26 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 			tfDomain.setEditable(true);
 		}
 	}
-	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 	
-	/*	clearTf();*/
+	protected void do_btnUpdate_actionPerformed(ActionEvent arg0) {
+		tfName.setEditable(true);
+		dateChooser.getCalendarButton().setEnabled(true);
+		cmbTel.setEnabled(true);
+		tfTel2.setEditable(true);
+		tfTel3.setEditable(true);
+		tfEmail.setEditable(true);
+		tfDomain.setEditable(true);
+		cmbDomain.setEnabled(true);
+		btnZipcode.setEnabled(true);
+		tfZipcode.setEditable(true);
+		tfAddress.setEditable(true);
+		pwfNowPw.setEditable(true);
+		pwfNewPw.setEditable(true);
+		pwfConfirmPw.setEditable(true);
+	}
+	
+	protected void do_btnSave_actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
