@@ -39,7 +39,7 @@ public class CarInfoPanel extends CarSubPanel implements ActionListener {
 	}
 	
 	//콤보박스에 차종 추가하기
-	private void loadComboCarType() {
+	public void loadComboCarType() {
 		list = service.selectAllCarTypes();
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
 		for(CarType ct : list) {

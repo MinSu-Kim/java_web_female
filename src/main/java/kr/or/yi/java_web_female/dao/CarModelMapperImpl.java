@@ -109,6 +109,13 @@ public class CarModelMapperImpl implements CarModelMapper {
 		}
 	}
 
+	@Override
+	public List<CarModel> selectCarModel() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectCarModel");
+		}
+	}
+
 
 }
 

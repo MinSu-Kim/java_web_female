@@ -102,4 +102,9 @@ public class RentUIService {
 	public int changeIsReturn(Rent rent) {
 		return rentDao.changeisReturn(rent);
 	}
+	
+	//////////////
+	public List<CarModel> selectCarModel(){
+		return carModelDao.selectCarModel();
+	}
 }
