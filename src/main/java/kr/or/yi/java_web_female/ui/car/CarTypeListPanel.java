@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -22,6 +24,8 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
+import javax.swing.UIManager;
+import java.awt.Color;
 @SuppressWarnings("serial")
 public class CarTypeListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -36,7 +40,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public CarTypeListPanel() {
-		setBorder(new TitledBorder(null, "\uCC28\uC885", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		service = new CarUiService();
 		initcomponent();
 	}
@@ -44,12 +48,23 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	private void initcomponent() {
 		
 		panelList = new CarTypeList();
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		list = service.selectAllCarType();
 		panelList.setList(list);
 		panelList.loadDatas();
+		//더블클릭시 수정 구현
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					CarType item = panelList.getSelectedItem();
+					setItem(item);
+					btnOk.setText("수정");
+				}
+			}
+		});
+		
 		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		

@@ -39,7 +39,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 
 
 	public CarOptionListPanel() {
-		setBorder(new TitledBorder(null, "\uCC28\uB7C9\uC635\uC158", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Option", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponents();
 	}

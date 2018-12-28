@@ -121,13 +121,16 @@ public abstract class AbstractListPanel<T> extends JPanel {
 		}
 
 		public Class<?> getColumnClass(int column) {
+
 			Class<?> returnValue;
-			if ((column >= 0) && (column < getColumnCount())) {
+			if ((column >= 0) && (column < getColumnCount()) && (getRowCount() > 0) ) {
 				returnValue = getValueAt(0, column).getClass();
 			} else {
 				returnValue = Object.class;
 			}
 			return returnValue;
+			
+
 		}
 	}
 

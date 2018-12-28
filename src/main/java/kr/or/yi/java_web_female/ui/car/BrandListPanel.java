@@ -35,7 +35,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public BrandListPanel() {
-		setBorder(new TitledBorder(null, "\uBE0C\uB79C\uB4DC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Brand", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponent();
 	}
