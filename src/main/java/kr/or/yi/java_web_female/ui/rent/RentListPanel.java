@@ -31,11 +31,7 @@ public class RentListPanel extends JPanel {
 	}
 
 	private void initComponents() {
-<<<<<<< HEAD
-		reloadList();
-=======
 //		reloadList(); pList가 45번라인에서 생성되는데 먼저 호출되면 67라인에서 에러뜨지 않을까?
->>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 
 		pRentInfo = new RentListInfoPanel();
 		pRentInfo.setRentListPanel(this);
