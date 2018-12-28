@@ -58,6 +58,8 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		JTable table = new JTable(model); 
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model); 
 		table.setRowSorter(sorter);*/
+		
+		
 
 	}
 
