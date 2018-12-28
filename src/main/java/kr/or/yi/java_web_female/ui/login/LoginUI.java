@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -43,9 +44,9 @@ public class LoginUI extends JFrame implements ActionListener {
 	public static Employee loginEmployee;
 
 	public static LoginUI loginUI;
-	
+
 	public LoginUI() {
-		loginUI=this;
+		loginUI = this;
 		loginService = new LoginUiService();
 
 		setTitle("로그인");
@@ -122,9 +123,16 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	protected void do_btnLogin_actionPerformed(ActionEvent e) {
 		try {
+			String day = "";
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+			day = sdf.format(date);
+
 			isLoginCheck();
 			dispose();
-			TestFrame frame = new TestFrame();
+			TestFrame frame = new TestFrame(day);
+
 			frame.setVisible(true);
 		} catch (LoginFailException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
