@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
@@ -48,15 +50,15 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		list = service.selectAllCarType();
 		panelList.setList(list);
 		panelList.loadDatas();
-		setLayout(new GridLayout(0, 2, 0, 0));
+		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		
 		JPanel panelList_2 = new JPanel();
-		add(panelList_2);
+		add(panelList_2, BorderLayout.EAST);
 		panelList_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panelList_2.add(panelInput, BorderLayout.CENTER);
+		panelList_2.add(panelInput);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		JLabel lblCode = new JLabel("차종코드");
@@ -111,7 +113,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 					service.deleteCarType(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarType());
 					panelList.loadDatas();
-				} catch (Exception e2) {
+				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 차종의 차량을 보유 중 (삭제 불가능)");
 				}
 			}
