@@ -134,7 +134,7 @@
 	<select id="searchId" parameterType="Customer" resultType="Customer">
 		SELECT Id as id
 		FROM proj_rentcar.customer
-		where phone = #{phone}
+		where phone = #{phone
 		and email =	#{email}
 
 	</select>
