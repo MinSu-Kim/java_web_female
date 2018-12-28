@@ -28,6 +28,13 @@ dependencies {
     // libs폴더 생성 후 jar파일 추가
     compile fileTree(dir:'libs', include:['*.jar'])
     
+    // look and feel 
+    // https://mvnrepository.com/artifact/com.seaglasslookandfeel/seaglasslookandfeel
+	compile group: 'com.seaglasslookandfeel', name: 'seaglasslookandfeel', version: '0.2.1'
+	// https://mvnrepository.com/artifact/com.jtattoo/JTattoo
+	compile group: 'com.jtattoo', name: 'JTattoo', version: '1.6.11'
+    
+    
     // LookAndFeel 파일 추가(jar 파일 추가)
 	compile files('libs/liquidlnf.jar')
 }

@@ -8,11 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
-import kr.or.yi.java_web_female.dto.Event;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 @SuppressWarnings("serial")
 public abstract class AbstractListPanel<T> extends JPanel {
@@ -66,7 +67,12 @@ public abstract class AbstractListPanel<T> extends JPanel {
 	
 	//데이터 불러오기
 	public void loadDatas() {
-		table.setModel(new MyTableModel(getDatas(), getColumnNames()));
+		MyTableModel model = new MyTableModel(getDatas(), getColumnNames());
+		table.setModel(model);
+		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+		table.setRowSorter(sorter);
+		
 		setAlignWidth();	//table.setModel 다음에 데이터가 들어오기 때문에 그 다음에 setAlignWidth() 호출해야 함.
 	}
 
@@ -114,6 +120,15 @@ public abstract class AbstractListPanel<T> extends JPanel {
 			return false;
 		}
 
+		public Class<?> getColumnClass(int column) {
+			Class<?> returnValue;
+			if ((column >= 0) && (column < getColumnCount())) {
+				returnValue = getValueAt(0, column).getClass();
+			} else {
+				returnValue = Object.class;
+			}
+			return returnValue;
+		}
 	}
 
 
