@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -14,6 +15,8 @@ import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
 import kr.or.yi.java_web_female.ui.join.MyDocumentListener;
@@ -22,6 +25,7 @@ import kr.or.yi.java_web_female.ui.list.CustomerList;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -49,6 +53,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private JButton btnSave;
 	private JButton btnUpdate;
 	private JButton btnZipcode;
+	private JTextField tfCode;
+	private JComboBox<String> cmbLicence;
+	private Customer loginCustomer;
 
 	/**
 	 * Create the panel.
@@ -63,7 +70,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private void initcomponents() {
 		setLayout(new BorderLayout(0, 0));
 
-		Customer loginCustomer = LoginUI.loginCusotmer;
+		loginCustomer = LoginUI.loginCusotmer;
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
@@ -75,6 +82,16 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 
 		panel.add(panelInput1, BorderLayout.CENTER);
 		panelInput1.setLayout(new GridLayout(0, 2, 10, 10));
+
+		JLabel lblCode = new JLabel("고객코드");
+		lblCode.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInput1.add(lblCode);
+
+		tfCode = new JTextField();
+		tfCode.setText(loginCustomer.getCode());
+		tfCode.setEditable(false);
+		panelInput1.add(tfCode);
+		tfCode.setColumns(10);
 
 		JLabel lblName = new JLabel("이름");
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -216,6 +233,15 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(tfAddress);
 		tfAddress.setColumns(10);
 
+		JLabel lblLicence = new JLabel("면허종류");
+		lblLicence.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInput1.add(lblLicence);
+
+		cmbLicence = new JComboBox<>();
+		cmbLicence.setEnabled(false);
+		cmbLicence.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종보통", "2종보통" }));
+		panelInput1.add(cmbLicence);
+
 		JLabel lblNowPw = new JLabel("현재비밀번호");
 		lblNowPw.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInput1.add(lblNowPw);
@@ -330,10 +356,62 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pwfNowPw.setEditable(true);
 		pwfNewPw.setEditable(true);
 		pwfConfirmPw.setEditable(true);
+		cmbLicence.setEnabled(true);
 	}
 
 	protected void do_btnSave_actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		Customer customer = getItem();
+		service.updateCustomer(customer);
 
 	}
+
+	private Customer getItem() {
+
+		String code = tfCode.getText().trim();
+		String name = tfName.getText().trim();
+		String id = tfId.getText().trim();
+		Date dob = dateChooser.getDate();
+		String phone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-" + (tfTel3.getText().trim());
+
+		String email = (tfEmail.getText().trim()) + "@" + (tfDomain.getText().trim());
+		/*
+		 * String email1 = tfEmail.getText().trim(); String domain =
+		 * tfDomain.getText().trim(); String cmbdomain =(String)
+		 * cmbDomain.getSelectedItem();
+		 */
+		String zipCode = tfZipcode.getText().trim();
+		String addr = tfAddress.getText().trim();
+		String nowPw = new String(pwfNowPw.getPassword());
+		String newPw = new String(pwfNewPw.getPassword());
+		String confirmPw = new String(pwfConfirmPw.getPassword());
+
+		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
+		// Grade gradeCode = new Grade("G001");
+		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
+		//JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
+
+		String license = null;
+		if (cmbLicence.getSelectedIndex() == 0) {
+			cmbLicence.setSelectedIndex(2);
+			license = (cmbLicence.getSelectedItem() + "").trim();
+		} else {
+			license = (String) cmbLicence.getSelectedItem();
+		}
+
+		Customer item = new Customer();
+		item.setCode(code);
+		item.setName(name);
+		item.setId(id);
+		item.setDob(dob);
+		item.setPhone(phone);
+		item.setEmail(email);
+		item.setZipCode(zipCode);
+		item.setAddress(addr);
+		item.setPasswd(nowPw);
+		item.setLicense(license);
+		item.setEmpCode(empCode);
+		item.setGradeCode(gradeCode);
+		return item;
+	}
+
 }

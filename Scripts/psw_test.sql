@@ -226,3 +226,5 @@ where c.phone = '010-0000-7777' and c.email = 'abc@gmail.com';
 select  Id
 from customer c 
 where c.phone = '010-0000-7777' and c.email ='abc@gmail.com';
+
+select * from customer;

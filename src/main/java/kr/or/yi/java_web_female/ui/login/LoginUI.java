@@ -103,7 +103,7 @@ public class LoginUI extends JFrame implements ActionListener {
 
 		// 테스트용도
 		tfId.setText("asd132");
-		tfPwd.setText("12341234");
+		tfPwd.setText("rootroot");
 	}
 
 	public void actionPerformed(ActionEvent e) {
