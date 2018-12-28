@@ -32,6 +32,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JPanel panel;
 	private JButton btnLogout;
 	private TestFrame testFrame;
+	private JLabel lblName;
 	/**
 	 * Create the panel.
 	 */
@@ -40,15 +41,22 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		
 		JPanel pLoginInfo = new JPanel();
 		add(pLoginInfo, BorderLayout.NORTH);
+
+		lblName = new JLabel("");
+		if(LoginUI.loginCusotmer==null) {
+			lblName.setText(LoginUI.loginEmployee.getName()+"님");
+		}else {
+			lblName.setText(LoginUI.loginCusotmer.getName()+"님");
+		}
 		
-		JLabel lblNewLabel = new JLabel("심철수님");
-		pLoginInfo.add(lblNewLabel);
+		lblName.setToolTipText("");
+		pLoginInfo.add(lblName);
 		
-		JLabel lblNewLabel_1 = new JLabel("년월일 (로그인시간)");
-		pLoginInfo.add(lblNewLabel_1);
+		JLabel lblLoginTime = new JLabel("년월일 (로그인시간)");
+		pLoginInfo.add(lblLoginTime);
 		
-		JLabel lblNewLabel_2 = new JLabel("현재대여중인것이 있으면 보여줌");
-		pLoginInfo.add(lblNewLabel_2);
+		JLabel lblRent = new JLabel("현재대여중인것이 있으면 보여줌");
+		pLoginInfo.add(lblRent);
 		
 		btnLogout = new JButton("로그아웃");
 		btnLogout.addActionListener(this);
