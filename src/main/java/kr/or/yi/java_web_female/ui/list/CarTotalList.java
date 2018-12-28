@@ -29,9 +29,14 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 		return new Object[] {
 				item.getCarCode(),
 				item.getName(),
-				item.getColor(),
-				item.getGear(),
-				item.getBrand().getName(),
+				item.getColor().equals("wh")==true?"하양":
+					item.getColor().equals("bk")==true?"검정":
+						item.getColor().equals("bl")==true?"파랑":
+							item.getColor().equals("gr")==true?"회색":item.getColor(),
+				item.getGear().equals("auto")==true?"자동":"수동",
+				item.getBrand().getName().equals("hyundai")==true?"현대":
+					item.getBrand().getName().equals("kia")==true?"기아":
+						item.getBrand().getName(),
 				item.getCarType().getType(),
 				item.getFuel(),
 				item.isRent()==true?"대여중":"대여가능",

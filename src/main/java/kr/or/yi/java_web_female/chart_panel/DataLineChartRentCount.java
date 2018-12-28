@@ -29,7 +29,7 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 		root.setAutoSizeChildren(true);
 		
 		xAxis = new CategoryAxis();
-		xAxis.setLabel("모델별 렌트추이");
+		xAxis.setLabel("차종별 렌트추이");
 		
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setLabel(" 렌트 수");
