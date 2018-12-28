@@ -15,11 +15,14 @@ import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.service.CustomUiService;
+import kr.or.yi.java_web_female.ui.join.MyDocumentListener;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class CustommerUpdate extends JPanel implements ActionListener {
 	private List<Customer> list;
@@ -31,13 +34,15 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private JTextField tfDomain;
 	private JTextField tfTel2;
 	private JTextField tfTel3;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
 	private JComboBox<String> cmbDomain;
 	private JComboBox<String> cmbTel;
 	private CustomerList panelList;
 	private CustomUiService service;
+	private JDateChooser dateChooser;
+	private JPasswordField pwfNowPw;
+	private JPasswordField pwfNewPw;
+	private JPasswordField pwfConfirmPw;
+	private JTextField tfConfirm;
 
 	/**
 	 * Create the panel.
@@ -52,6 +57,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private void initcomponents() {
 		setLayout(new BorderLayout(0, 0));
 
+		Customer loginCustomer = LoginUI.loginCusotmer;
+		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
@@ -60,7 +67,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.setBorder(new TitledBorder(null, "\uAE30\uBCF8\uC815\uBCF4\uC218\uC815", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 
-		panel.add(panelInput1, BorderLayout.NORTH);
+		panel.add(panelInput1, BorderLayout.CENTER);
 		panelInput1.setLayout(new GridLayout(0, 2, 10, 10));
 
 		JLabel lblName = new JLabel("이름");
@@ -68,6 +75,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblName);
 
 		tfName = new JTextField();
+		tfName.setText(loginCustomer.getName());
 		panelInput1.add(tfName);
 		tfName.setColumns(10);
 
@@ -76,6 +84,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblId);
 
 		tfId = new JTextField();
+		tfId.setText(loginCustomer.getId());
 		tfId.setEditable(false);
 		panelInput1.add(tfId);
 		tfId.setColumns(10);
@@ -84,7 +93,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		lblDob.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInput1.add(lblDob);
 
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
+		dateChooser.setDate(loginCustomer.getDob());
 		panelInput1.add(dateChooser);
 
 		JLabel lblPhone = new JLabel("연락처");
@@ -153,6 +163,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pAddr.setLayout(new BoxLayout(pAddr, BoxLayout.X_AXIS));
 
 		tfZipcode = new JTextField();
+		tfZipcode.setText(loginCustomer.getZipCode());
 		pAddr.add(tfZipcode);
 		tfZipcode.setColumns(10);
 
@@ -164,38 +175,64 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblAddress);
 
 		tfAddress = new JTextField();
+		tfAddress.setText(loginCustomer.getAddress());
 		panelInput1.add(tfAddress);
 		tfAddress.setColumns(10);
 
-		JLabel label = new JLabel("현재비밀번호");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		panelInput1.add(label);
+		JLabel lblNowPw = new JLabel("현재비밀번호");
+		lblNowPw.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInput1.add(lblNowPw);
+		
+		pwfNowPw = new JPasswordField();
+		pwfNowPw.setText(loginCustomer.getPasswd());
+		panelInput1.add(pwfNowPw);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		panelInput1.add(textField);
+		JLabel lblNewPw = new JLabel("새비밀번호");
+		lblNewPw.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInput1.add(lblNewPw);
+		
+		JPanel pPw = new JPanel();
+		panelInput1.add(pPw);
+		pPw.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		pwfNewPw = new JPasswordField();
+		pPw.add(pwfNewPw);
 
-		JLabel label_1 = new JLabel("새비밀번호");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panelInput1.add(label_1);
+		JLabel lblConfirmPw = new JLabel("비밀번호확인");
+		lblConfirmPw.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInput1.add(lblConfirmPw);
+		
+		JPanel panel_1 = new JPanel();
+		panelInput1.add(panel_1);
+		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		pwfConfirmPw = new JPasswordField();
+		panel_1.add(pwfConfirmPw);
+		
+		tfConfirm = new JTextField();
+		tfConfirm.setEditable(false);
+		panel_1.add(tfConfirm);
+		tfConfirm.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panelInput1.add(textField_1);
+		pwfConfirmPw.getDocument().addDocumentListener(new MyDocumentListener() {
 
-		JLabel label_2 = new JLabel("비밀번호확인");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panelInput1.add(label_2);
+			@Override
+			public void msg() {
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panelInput1.add(textField_2);
+				String pw1 = new String(pwfNewPw.getPassword());
+				String pw2 = new String(pwfConfirmPw.getPassword());
 
-		panelList = new CustomerList();
-		list = service.selectCustomerByAll();
-		panelList.setList(list);
-		panelList.loadDatas();
-		panel.add(panelList, BorderLayout.CENTER);
+				if (pw1.equals(pw2)) {
+					tfConfirm.setText("비밀번호 일치.");
+				} else {
+					tfConfirm.setText("비밀번호 불일치.");
+				}
+
+			}
+
+		});
+
+	
 		//setLayout(new BorderLayout(0, 0));
 
 		JPanel pBtn = new JPanel();
