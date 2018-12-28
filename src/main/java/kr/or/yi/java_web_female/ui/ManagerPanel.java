@@ -33,10 +33,16 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JButton btnLogout;
 	private TestFrame testFrame;
 	private JLabel lblName;
+	
+	private JLabel lblLoginTime;
+	
+	
+	
+
 	/**
 	 * Create the panel.
 	 */
-	public ManagerPanel() {
+	public ManagerPanel(String today) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel pLoginInfo = new JPanel();
@@ -52,7 +58,14 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		lblName.setToolTipText("");
 		pLoginInfo.add(lblName);
 		
-		JLabel lblLoginTime = new JLabel("년월일 (로그인시간)");
+		lblLoginTime = new JLabel("로그인 시간");
+		if(LoginUI.loginCusotmer==null) {
+			lblLoginTime.setText(today);
+			
+		}else {
+			lblLoginTime.setText(today);
+			
+		}
 		pLoginInfo.add(lblLoginTime);
 		
 		JLabel lblRent = new JLabel("현재대여중인것이 있으면 보여줌");

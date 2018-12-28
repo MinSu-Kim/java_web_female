@@ -15,7 +15,11 @@ public class TestFrame extends JFrame {
 	private Customer loginCusotmer;
 	private Employee loginEmployee;
 	
-	public TestFrame() {
+	
+	
+	
+	
+	public TestFrame(String today) {
 		setTitle(getLoginUser());
 		
 		JOptionPane.showMessageDialog(null, loginCusotmer==null?loginEmployee:loginCusotmer);
@@ -27,7 +31,9 @@ public class TestFrame extends JFrame {
 			setBounds(100, 100, 600, 700);
 		}
 		
-		contentPane = new ManagerPanel();
+		contentPane = new ManagerPanel(today);
+		
+		
 		contentPane.setTestFrame(this);
 		setContentPane(contentPane);
 	}
