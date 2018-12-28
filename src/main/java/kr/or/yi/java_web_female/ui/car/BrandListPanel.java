@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.BrandList;
@@ -44,15 +46,17 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		list = service.selectAllBrand();
 		panelList.setList(list);
 		panelList.loadDatas();
-		setLayout(new GridLayout(0, 2, 0, 0));
+		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		
+		panelList.setPopupMenu(createDeptPopupMenu());
+		
 		JPanel panel = new JPanel();
-		add(panel);
+		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panel.add(panelInput, BorderLayout.CENTER);
+		panel.add(panelInput);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		JLabel lblNo = new JLabel("브랜드번호");
@@ -81,8 +85,6 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
-		
-		panelList.setPopupMenu(createDeptPopupMenu());
 	}
 
 	private JPopupMenu createDeptPopupMenu() {
@@ -107,7 +109,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 					service.deleteBrand(panelList.getSelectedItem());
 					panelList.setList(service.selectAllBrand());
 					panelList.loadDatas();
-				} catch (Exception e2) {
+				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 브랜드에 속하는 차량을 보유 중 (삭제 불가능)");
 				}
 				

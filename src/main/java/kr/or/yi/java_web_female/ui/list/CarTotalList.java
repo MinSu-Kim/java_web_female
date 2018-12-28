@@ -45,6 +45,5 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 	}
 	
 	
-	
 
 }

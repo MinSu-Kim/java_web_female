@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import kr.or.yi.java_web_female.dto.Fuel;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.FuelList;
@@ -49,15 +51,15 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();
-		setLayout(new GridLayout(0, 2, 0, 0));
-		add(panelList);
+		setLayout(new BorderLayout(0, 0));
+		add(panelList, BorderLayout.CENTER);
 		
 		JPanel panel_1 = new JPanel();
-		add(panel_1);
+		add(panel_1, BorderLayout.EAST);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panel_1.add(panelInput, BorderLayout.CENTER);
+		panel_1.add(panelInput);
 		panelInput.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblNo = new JLabel("번호");
@@ -114,7 +116,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 					service.deleteFuel(panelList.getSelectedItem());
 					panelList.setList(service.selectAllFuel());
 					panelList.loadDatas();
-				} catch (Exception e2) {
+				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 연료를 사용하는 차량 보유 중 (삭제 불가능)");//외래키 걸려있지 않기에 다른방법 필요
 				}
 			}

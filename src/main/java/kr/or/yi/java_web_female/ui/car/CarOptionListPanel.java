@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarOptionList;
@@ -50,16 +52,16 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		list = service.selectAllCarOption();
 		panelList.setList(list);
 		panelList.loadDatas();
-		setLayout(new GridLayout(0, 2, 0, 0));
+		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		
 
 		JPanel panel = new JPanel();
-		add(panel);
+		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panel.add(panelInput, BorderLayout.CENTER);
+		panel.add(panelInput);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		JLabel lblNo = new JLabel("옵션번호");
@@ -122,7 +124,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 					service.deleteCarOption(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarOption());
 					panelList.loadDatas();
-				} catch (Exception e2) {
+				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 옵션이 포함된 차량 보유 중 (삭제 불가능)");
 				}
 				

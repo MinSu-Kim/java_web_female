@@ -71,7 +71,6 @@ public class DataPieChartBrand extends JFXPanel implements InitScene{
 			brand.setNo(sCar.getTitle());
 			Brand resBrand = carService.selectByBrandNo(brand);
 			double rate = Math.round((sCar.getCount()*100.0)/totalCount);
-			
 			list.add(new PieChart.Data(resBrand.getName(), rate));
 		}
 		return list;
