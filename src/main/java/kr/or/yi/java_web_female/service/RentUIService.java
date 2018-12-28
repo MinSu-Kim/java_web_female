@@ -107,4 +107,8 @@ public class RentUIService {
 	public List<CarModel> selectCarModel(){
 		return carModelDao.selectCarModel();
 	}
+	
+	public List<Rent> FilterRentInfo(Map<String, String> map){
+		return rentDao.FilterRentInfo(map);
+	}
 }

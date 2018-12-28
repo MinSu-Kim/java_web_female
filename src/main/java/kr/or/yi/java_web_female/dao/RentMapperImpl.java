@@ -90,4 +90,11 @@ public class RentMapperImpl implements RentMapper {
 		}
 	}
 
+	@Override
+	public List<Rent> FilterRentInfo(Map<String, String> map) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".FilterRentInfo", map);
+		}
+	}
+
 }
