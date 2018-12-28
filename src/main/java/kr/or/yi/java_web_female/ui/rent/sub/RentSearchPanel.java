@@ -22,6 +22,7 @@ import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.list.RentList;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -39,10 +40,8 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 	private Map<String, String> map;
 	private JComboBox cmbCarModel;
 	private JButton btnSearch;
+	private RentList rentList;
 
-	public void setRentListPanel(RentListPanel rentListPanel) {
-		this.rentListPanel = rentListPanel;
-	}
 
 	/**
 	 * Create the panel.
@@ -51,7 +50,7 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 		service = new RentUIService();
 		map = new HashMap<>();
 		// is_return을 0으로
-		map.put("isReturn", "기본값");
+		
 		initComponents();
 	}
 
@@ -155,11 +154,29 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 
 	// 고객명 검색버튼
 	protected void do_btnSearch_actionPerformed(ActionEvent e) {
+		String name = tfCstmName.getText();
+//		JOptionPane.showMessageDialog(null, name);
+		
+		if(name.equals("")) {
+			map.remove("customerName");
+		} else{
+			map.put("customerName", name);
+		}
+		filterReLoad();
+		tfCstmName.requestFocus();
+		tfCstmName.setSelectionStart(0);
 	}
 
 	private void filterReLoad() {
 		List<Rent> rList = service.FilterRentInfo(map);
-		rentListPanel.reloadList(rList);
+		if(rentListPanel != null) {
+			rentListPanel.reloadList(rList);
+		} else {
+			rentList.setList(rList);
+			rentList.loadDatas();
+			
+		}
+		
 	}
 
 	public void setSelectedCarTypeIndex(int i) {
@@ -171,5 +188,16 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 			do_btnSearch_actionPerformed(e);
 		}
 	}
+
+	public void setRentList(RentList rentList) {
+		// TODO Auto-generated method stub
+		this.rentList = rentList;
+	}
+	
+	public void setRentListPanel(RentListPanel rentListPanel) {
+		this.rentListPanel = rentListPanel;
+		map.put("isReturn", "기본값");
+	}
+
 
 }

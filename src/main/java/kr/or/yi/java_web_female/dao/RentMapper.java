@@ -24,6 +24,8 @@ public interface RentMapper {
 	//
 	List<Rent> selectRentByAll();
 	
+	List<Rent> selectRentAll();
+	
 	//초과 시간
 	RentHour selectRentHours(Map<String, String> map);
 	

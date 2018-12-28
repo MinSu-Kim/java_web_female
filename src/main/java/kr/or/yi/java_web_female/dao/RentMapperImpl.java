@@ -97,4 +97,11 @@ public class RentMapperImpl implements RentMapper {
 		}
 	}
 
+	@Override
+	public List<Rent> selectRentAll() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectRentAll");
+		}
+	}
+
 }

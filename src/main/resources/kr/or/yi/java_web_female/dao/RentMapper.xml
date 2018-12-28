@@ -25,10 +25,14 @@
 	</resultMap>
 	
 	<!-- 반납여부가 N인 차량만 가지고 오기 -->
-	<select id="selectRentByAll" resultType="Rent" resultMap="resultRent">
-		select r.code as rentCode, ct.code as carTypeCode, ct.type as carTypeName, cm.car_code as carCode, cm.name as carModelName, c.code as customerCode, c.name as customerName, start_date, start_time, end_date, end_time, is_return, insurance_code, basic_price 
-		from rent r join car_model cm on r.car_code = cm.car_code join customer c on r.costomer_code = c.code join car_type ct on cm.cartype = ct.code
+	<select id="selectRentByAll" resultMap="resultRent">
+		<include refid="selectSql" />
 		where r.is_return = 0;
+	</select>
+	
+	<select id="selectRentAll" resultMap="resultRent">
+		<include refid="selectSql" />
+		order by is_return;
 	</select>
 	
 	<select id="selectRentHours" resultType="RentHour" parameterType="map">
