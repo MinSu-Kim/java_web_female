@@ -31,7 +31,7 @@ public class RentListPanel extends JPanel {
 	}
 
 	private void initComponents() {
-//		reloadList();
+		reloadList();
 
 		pRentInfo = new RentListInfoPanel();
 		pRentInfo.setRentListPanel(this);
