@@ -18,10 +18,13 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 
+import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarOptionList;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class CarOptionListPanel extends JPanel implements ActionListener {
@@ -52,6 +55,17 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		list = service.selectAllCarOption();
 		panelList.setList(list);
 		panelList.loadDatas();
+		//더블클릭시 구현
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					CarOption item = panelList.getSelectedItem();
+					setItem(item);
+					btnOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		
