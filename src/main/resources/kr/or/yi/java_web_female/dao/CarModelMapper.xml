@@ -111,6 +111,11 @@
 		select max(car_code) nextto from car_model
 	</select>
 	
+	
+	<!-- rent -->
+	<select id="selectCarModel" resultType="CarModel">
+		select car_code, name from car_model;
+	</select>
 
 </mapper>
 

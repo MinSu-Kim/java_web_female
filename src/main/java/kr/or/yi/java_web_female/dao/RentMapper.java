@@ -24,10 +24,15 @@ public interface RentMapper {
 	//
 	List<Rent> selectRentByAll();
 	
+	List<Rent> selectRentAll();
+	
 	//초과 시간
 	RentHour selectRentHours(Map<String, String> map);
 	
 	//반납 처리하기
 	@Update("update rent set is_return = 1 where code = #{code}")
 	int changeisReturn(Rent rent);
+	
+	//
+	List<Rent> FilterRentInfo(Map<String, String> map);
 }

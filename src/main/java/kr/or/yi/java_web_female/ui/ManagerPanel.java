@@ -7,6 +7,7 @@ import javax.swing.JTabbedPane;
 
 import kr.or.yi.java_web_female.ui.car.CarPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
+import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.TestFrame;
@@ -67,7 +68,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			
 		}
 		pLoginInfo.add(lblLoginTime);
-		
+//		System.out.println("loginCustomer :" + LoginUI.loginCusotmer.getRentCnt());
 		JLabel lblRent = new JLabel("현재대여중인것이 있으면 보여줌");
 		pLoginInfo.add(lblRent);
 		
@@ -105,8 +106,10 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			panel_06.setRentListPanel(panel_07);
 			tabbedPane.addTab("대여관리", null, panel_06, null);
 			
-			
 			tabbedPane.addTab("반납현황", null, panel_07, null);
+			
+			AllRentPanel panel_12 = new AllRentPanel();
+			tabbedPane.addTab("대여현황", null, panel_12, null);
 			
 			CarChartPanel panel_9 = new CarChartPanel();
 			tabbedPane.addTab("차량통계", null, panel_9, null);

@@ -28,4 +28,7 @@ public interface CarModelMapper {
 	// rent 등록 시 대여중으로변경
 	@Update("update car_model set is_rent = 1, rent_cnt = rent_cnt + 1 where car_code = #{carCode}")
 	int updateCarModelRent(CarModel carModel);
+	
+	///////
+	List<CarModel> selectCarModel();
 }

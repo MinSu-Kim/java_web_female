@@ -37,12 +37,14 @@ public class RentListPanel extends JPanel {
 		pRentInfo.setRentListPanel(this);
 		pRentInfo.setService(service);
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+		pList = new RentList();
 		pSearch = new RentSearchPanel();
+		pSearch.setRentListPanel(this);
+		pSearch.setSelectedCarTypeIndex(0);
 		add(pSearch);
 		add(pRentInfo);
 		
-		pList = new RentList();
+		
 		
 		/////////////////////
 		pList.getTable().addMouseListener(new MouseAdapter() {
@@ -68,5 +70,8 @@ public class RentListPanel extends JPanel {
 		pList.loadDatas();
 	}
 	
-
+	public void reloadList(List<Rent> list) {
+		pList.setList(list);
+		pList.loadDatas();
+	}
 }
