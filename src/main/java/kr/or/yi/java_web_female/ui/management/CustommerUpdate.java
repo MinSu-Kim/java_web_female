@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Dimension;
 
 public class CustommerUpdate extends JPanel implements ActionListener {
 	private List<Customer> list;
@@ -106,7 +107,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel = new JComboBox<String>();
+		cmbTel.setPreferredSize(new Dimension(100, 22));
 		cmbTel.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
+		cmbTel.setSelectedIndex(-1);
 		pTel.add(cmbTel);
 
 		JLabel lblTel1 = new JLabel("-");
@@ -149,6 +152,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pEmail.add(tfDomain);
 
 		cmbDomain = new JComboBox<String>();
+		cmbDomain.setPreferredSize(new Dimension(150, 22));
 		cmbDomain.addActionListener(this);
 		cmbDomain.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
