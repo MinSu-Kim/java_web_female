@@ -25,7 +25,7 @@ public class ComboPanel<T> extends JPanel {
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		lblTitle = new JLabel("name");
-		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblTitle);
 
 		comboBox = new JComboBox<>();

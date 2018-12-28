@@ -30,7 +30,7 @@ public class CarChartPanel extends JPanel {
 		PieChartBrand panel = new PieChartBrand();
 		panelCar2.add(panel);
 		
-		JPanel panel_1 = new JPanel();
+		LineChartRentCount panel_1 = new LineChartRentCount();
 		panelCar2.add(panel_1);
 
 	}
