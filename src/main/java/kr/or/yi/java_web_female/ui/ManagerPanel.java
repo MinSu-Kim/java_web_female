@@ -16,6 +16,7 @@ import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
 import kr.or.yi.java_web_female.ui.management.GradeEventPanel;
 import kr.or.yi.java_web_female.ui.management.EmployeeListPanel;
 import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
+import kr.or.yi.java_web_female.ui.management.CustommerUpdate;
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel {
@@ -82,7 +83,7 @@ public class ManagerPanel extends JPanel {
 			CarPanel panel_02 = new CarPanel();
 			tabbedPane.addTab("보유차량", null, panel_02, null);
 
-			JPanel panel_03 = new CustommerListPannel();
+			JPanel panel_03 = new CustommerUpdate();
 			tabbedPane.addTab("개인정보관리", null, panel_03, null);
 		}
 		

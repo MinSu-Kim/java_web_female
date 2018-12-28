@@ -22,9 +22,9 @@ public class TestFrame extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		if(LoginUI.loginEmployee !=null) {
-			setBounds(100, 100, 1000, 700);
+			setBounds(100, 100, 1100, 700);
 		}else {
-			setBounds(100, 100, 800, 700);
+			setBounds(100, 100, 600, 700);
 		}
 		contentPane = new ManagerPanel();
 		setContentPane(contentPane);
