@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.ui.ManagerPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 
@@ -14,7 +15,7 @@ public class TestFrame extends JFrame {
 	private ManagerPanel contentPane;
 	private Customer loginCusotmer;
 	private Employee loginEmployee;
-	
+
 	
 	
 	

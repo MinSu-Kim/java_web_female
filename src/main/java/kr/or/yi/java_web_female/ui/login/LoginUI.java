@@ -24,6 +24,7 @@ import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.exception.LoginFailException;
 import kr.or.yi.java_web_female.service.LoginUiService;
 import kr.or.yi.java_web_female.ui.join.JoinUI;
@@ -42,7 +43,8 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	public static Customer loginCusotmer;
 	public static Employee loginEmployee;
-
+	public static Grade loginGrade;
+	
 	public static LoginUI loginUI;
 
 	public LoginUI() {

@@ -95,7 +95,7 @@ insert into customer values ('C001', 'asd132', password('rootroot'), '김철수'
 							('C007', 'fkufj12', password('dhtdhd5645'), '김민정', '13265','울산 서구', '010-6666-1111', '1994-03-16', 'fkufj12@naver.com' ,'E002' , '2종보통','G004', -1),
 							('C008', 'xbmhw325', password('aggarg54'), '김재영', '95625','서울 서초구', '010-7777-0000', '1977-01-02', 'xbmhw325@gmail.com' ,'E001' , '1종보통','G004', -1);
 						
-insert into customer values ('C000', 'C000', password('rootroot'), '탈퇴계정', '00000', '대구', '010-0000-0000', '1988-04-18', 'abc@gmail.com' ,null , null,null, null);
+insert into customer values ('C000', 'C000', password('rootroot'), '탈퇴계정', '00000', '대구', '010-0000-0000', '1988-04-18', 'abc@gmail.com' ,null , null, null, null);
 insert into customer values
 ('C009', 'xbmhw325',password('aggarg54'), '김영희','45236', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
 

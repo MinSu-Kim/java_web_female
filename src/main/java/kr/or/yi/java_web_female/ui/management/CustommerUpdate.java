@@ -388,7 +388,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
 		// Grade gradeCode = new Grade("G001");
 		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
-		//JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
+		// JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 
 		String license = null;
 		if (cmbLicence.getSelectedIndex() == 0) {
