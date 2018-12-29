@@ -151,7 +151,9 @@ public class LoginUI extends JFrame implements ActionListener {
 			Customer customer = loginService.selectCustomerByPw((Customer) getUser(false));
 			List<Customer> fullCustomer = loginService.selectCustomerByCode(customer);
 			loginCusotmer = fullCustomer.get(0);
-
+			/////////////////////
+			JOptionPane.showMessageDialog(null, loginCusotmer.getGradeCode().getCode() + " : " + loginCusotmer.getGradeCode().getName() + " : " + loginCusotmer.getGradeCode().getRate());
+			/////////////////
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(loginCusotmer.getDob());
 			if (cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {

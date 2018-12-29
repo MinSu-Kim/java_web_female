@@ -240,6 +240,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		cmbLicence = new JComboBox<>();
 		cmbLicence.setEnabled(false);
 		cmbLicence.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종보통", "2종보통" }));
+		cmbLicence.setSelectedItem(loginCustomer.getLicense());
 		panelInput1.add(cmbLicence);
 
 		JLabel lblNowPw = new JLabel("현재비밀번호");
@@ -356,18 +357,25 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pwfNowPw.setEditable(true);
 		pwfNewPw.setEditable(true);
 		pwfConfirmPw.setEditable(true);
-		cmbLicence.setEnabled(true);
+		// cmbLicence.setEnabled(true);
 	}
 
 	protected void do_btnSave_actionPerformed(ActionEvent arg0) {
 		Customer customer = getItem();
+		/*
+		 * if() {
+		 * 
+		 * }else {
+		 * 
+		 * }
+		 */
 		service.updateCustomer(customer);
 
 	}
 
 	private Customer getItem() {
 		Customer item = new Customer();
-		
+
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
 		String id = tfId.getText().trim();
@@ -379,12 +387,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		String zipCode = tfZipcode.getText().trim();
 		String addr = tfAddress.getText().trim();
 		String nowPw = new String(pwfNowPw.getPassword());
-		String newPw = new String(pwfNewPw.getPassword());
-		String confirmPw = new String(pwfConfirmPw.getPassword());
-
-		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
-	
 		
+		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
+
 		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
 		JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 
@@ -395,7 +400,12 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicence.getSelectedItem();
 		}
-		//Grade gradeCode = new Grade("G001");
+		// Grade gradeCode = new Grade("G001");
+		
+		
+		String newPw = new String(pwfNewPw.getPassword());
+		String confirmPw = new String(pwfConfirmPw.getPassword());
+		
 		item.setCode(code);
 		item.setName(name);
 		item.setId(id);
@@ -404,11 +414,13 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		item.setEmail(email);
 		item.setZipCode(zipCode);
 		item.setAddress(addr);
-		item.setPasswd(nowPw);
+		if (newPw == confirmPw) {
+			item.setPasswd(newPw);	
+		}
 		item.setLicense(license);
 		item.setEmpCode(empCode);
 		item.setGradeCode(gradeCode);
-		//JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
+		// JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 		return item;
 	}
 

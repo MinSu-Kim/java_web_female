@@ -99,7 +99,6 @@ insert into customer values ('C000', 'C000', password('rootroot'), '탈퇴계정
 insert into customer values
 ('C009', 'xzcdz',password('aggarg54'), '김영희','45236', '서울 서초구', '010-7777-0000', '1977-01-02', 'xzcdz@gmail.com' ,'E001' , '1종보통','G004', -1);
 
-
 -- event insert
 insert into event values('EVT1', '첫가입', 3),
 						('EVT2', '생일축하', 5);
