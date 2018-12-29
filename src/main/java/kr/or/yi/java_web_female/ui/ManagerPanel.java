@@ -81,6 +81,8 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		} else {
 			lblGrade.setText(LoginUI.loginCusotmer.getGradeCode().getName() + "등급입니다.");
 		}
+		
+		
 
 //		System.out.println("loginCustomer :" + LoginUI.loginCusotmer.getRentCnt());
 		JLabel lblRent = new JLabel("현재대여중인것이 있으면 보여줌");

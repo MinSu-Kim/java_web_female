@@ -366,7 +366,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	}
 
 	private Customer getItem() {
-
+		Customer item = new Customer();
+		
 		String code = tfCode.getText().trim();
 		String name = tfName.getText().trim();
 		String id = tfId.getText().trim();
@@ -374,11 +375,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		String phone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-" + (tfTel3.getText().trim());
 
 		String email = (tfEmail.getText().trim()) + "@" + (tfDomain.getText().trim());
-		/*
-		 * String email1 = tfEmail.getText().trim(); String domain =
-		 * tfDomain.getText().trim(); String cmbdomain =(String)
-		 * cmbDomain.getSelectedItem();
-		 */
+
 		String zipCode = tfZipcode.getText().trim();
 		String addr = tfAddress.getText().trim();
 		String nowPw = new String(pwfNowPw.getPassword());
@@ -386,9 +383,10 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		String confirmPw = new String(pwfConfirmPw.getPassword());
 
 		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
-		// Grade gradeCode = new Grade("G001");
+	
+		
 		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
-		// JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
+		JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 
 		String license = null;
 		if (cmbLicence.getSelectedIndex() == 0) {
@@ -397,8 +395,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicence.getSelectedItem();
 		}
-
-		Customer item = new Customer();
+		//Grade gradeCode = new Grade("G001");
 		item.setCode(code);
 		item.setName(name);
 		item.setId(id);
@@ -411,6 +408,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		item.setLicense(license);
 		item.setEmpCode(empCode);
 		item.setGradeCode(gradeCode);
+		//JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 		return item;
 	}
 

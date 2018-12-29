@@ -97,7 +97,7 @@ insert into customer values ('C001', 'asd132', password('rootroot'), '김철수'
 						
 insert into customer values ('C000', 'C000', password('rootroot'), '탈퇴계정', '00000', '대구', '010-0000-0000', '1988-04-18', 'abc@gmail.com' ,null , null, null, null);
 insert into customer values
-('C009', 'xbmhw325',password('aggarg54'), '김영희','45236', '서울 서초구', '010-7777-0000', '1977-01-02', 'abc@gmail.com' ,'E001' , '1종보통','G004', -1);
+('C009', 'xzcdz',password('aggarg54'), '김영희','45236', '서울 서초구', '010-7777-0000', '1977-01-02', 'xzcdz@gmail.com' ,'E001' , '1종보통','G004', -1);
 
 
 -- event insert
