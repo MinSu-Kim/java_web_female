@@ -14,6 +14,10 @@ public class SearchIdPwService {
 		return cusDao.searchId(customer);
 	}
 	
+	public String getRandPw() {
+		return cusDao.getRandomPassword();
+	}
+	
 	public int changePw(Customer customer) {
 		return cusDao.changePw(customer);
 	}

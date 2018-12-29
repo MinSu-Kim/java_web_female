@@ -50,7 +50,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private JPasswordField pwfNewPw;
 	private JPasswordField pwfConfirmPw;
 	private JTextField tfConfirm;
-	private JButton btnSave;
 	private JButton btnUpdate;
 	private JButton btnZipcode;
 	private JTextField tfCode;
@@ -88,8 +87,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblCode);
 
 		tfCode = new JTextField();
-		tfCode.setText(loginCustomer.getCode());
 		tfCode.setEditable(false);
+		tfCode.setText(loginCustomer.getCode());
 		panelInput1.add(tfCode);
 		tfCode.setColumns(10);
 
@@ -98,7 +97,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblName);
 
 		tfName = new JTextField();
-		tfName.setEditable(false);
 		tfName.setText(loginCustomer.getName());
 		panelInput1.add(tfName);
 		tfName.setColumns(10);
@@ -109,7 +107,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 
 		tfId = new JTextField();
 		tfId.setText(loginCustomer.getId());
-		tfId.setEditable(false);
 		panelInput1.add(tfId);
 		tfId.setColumns(10);
 
@@ -118,8 +115,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblDob);
 
 		dateChooser = new JDateChooser();
-		dateChooser.setEnabled(false);
-		dateChooser.getCalendarButton().setEnabled(false);
 		dateChooser.setDate(loginCustomer.getDob());
 		panelInput1.add(dateChooser);
 
@@ -132,7 +127,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel = new JComboBox<String>();
-		cmbTel.setEnabled(false);
+		cmbTel.setEditable(true);
 		String[] arrayT1 = loginCustomer.getPhone().split("-");
 		cmbTel.setPreferredSize(new Dimension(100, 22));
 		cmbTel.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
@@ -146,7 +141,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.add(lblTel1);
 
 		tfTel2 = new JTextField();
-		tfTel2.setEditable(false);
 		String[] arrayT2 = loginCustomer.getPhone().split("-");
 		tfTel2.setText(arrayT2[1] + "");
 		tfTel2.setColumns(10);
@@ -158,7 +152,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pTel.add(lblTel2);
 
 		tfTel3 = new JTextField();
-		tfTel3.setEditable(false);
 		String[] arrayT3 = loginCustomer.getPhone().split("-");
 		tfTel3.setText(arrayT3[2] + "");
 		tfTel3.setColumns(10);
@@ -173,7 +166,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
 
 		tfEmail = new JTextField();
-		tfEmail.setEditable(false);
 		String[] arrayE1 = loginCustomer.getEmail().split("@");
 		tfEmail.setText(arrayE1[0] + "");
 		tfEmail.setColumns(15);
@@ -186,12 +178,11 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		tfDomain = new JTextField();
 		String[] arrayE2 = loginCustomer.getEmail().split("@");
 		tfDomain.setText(arrayE2[1] + "");
-		tfDomain.setEditable(false);
 		tfDomain.setColumns(15);
 		pEmail.add(tfDomain);
 
 		cmbDomain = new JComboBox<String>();
-		cmbDomain.setEnabled(false);
+		cmbDomain.setEditable(true);
 		cmbDomain.setPreferredSize(new Dimension(150, 22));
 		cmbDomain.addActionListener(this);
 		cmbDomain.setModel(new DefaultComboBoxModel<String>(
@@ -207,13 +198,11 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pAddr.setLayout(new BoxLayout(pAddr, BoxLayout.X_AXIS));
 
 		tfZipcode = new JTextField();
-		tfZipcode.setEditable(false);
 		tfZipcode.setText(loginCustomer.getZipCode());
 		pAddr.add(tfZipcode);
 		tfZipcode.setColumns(10);
 
 		btnZipcode = new JButton("우편번호 검색");
-		btnZipcode.setEnabled(false);
 		btnZipcode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SearchPostUI frame = new SearchPostUI();
@@ -228,7 +217,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblAddress);
 
 		tfAddress = new JTextField();
-		tfAddress.setEditable(false);
 		tfAddress.setText(loginCustomer.getAddress());
 		panelInput1.add(tfAddress);
 		tfAddress.setColumns(10);
@@ -238,7 +226,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblLicence);
 
 		cmbLicence = new JComboBox<>();
-		cmbLicence.setEnabled(false);
+		cmbLicence.setEditable(true);
 		cmbLicence.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "1종보통", "2종보통" }));
 		cmbLicence.setSelectedItem(loginCustomer.getLicense());
 		panelInput1.add(cmbLicence);
@@ -248,8 +236,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panelInput1.add(lblNowPw);
 
 		pwfNowPw = new JPasswordField();
-		pwfNowPw.setEditable(false);
-		pwfNowPw.setText(loginCustomer.getPasswd());
 		panelInput1.add(pwfNowPw);
 
 		JLabel lblNewPw = new JLabel("새비밀번호");
@@ -261,7 +247,22 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		pPw.setLayout(new GridLayout(0, 2, 0, 0));
 
 		pwfNewPw = new JPasswordField();
-		pwfNewPw.setEditable(false);
+		pwfNewPw.getDocument().addDocumentListener(new MyDocumentListener() {
+
+			@Override
+			public void msg() {
+				String pw1 = new String(pwfNewPw.getPassword());
+				String pw2 = new String(pwfConfirmPw.getPassword());
+				if (pw1.length() == 0 && pw2.length() == 0) {
+					tfConfirm.setText("");
+				} else if (pw1.equals(pw2)) {
+					tfConfirm.setText("비밀번호 일치.");
+				} else {
+					tfConfirm.setText("비밀번호 불일치.");
+				}
+			}
+		});
+
 		pPw.add(pwfNewPw);
 
 		JLabel lblConfirmPw = new JLabel("비밀번호확인");
@@ -273,11 +274,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 
 		pwfConfirmPw = new JPasswordField();
-		pwfConfirmPw.setEditable(false);
 		panel_1.add(pwfConfirmPw);
 
 		tfConfirm = new JTextField();
-		tfConfirm.setEditable(false);
 		panel_1.add(tfConfirm);
 		tfConfirm.setColumns(10);
 
@@ -289,7 +288,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 				String pw1 = new String(pwfNewPw.getPassword());
 				String pw2 = new String(pwfConfirmPw.getPassword());
 
-				if (pw1.equals(pw2)) {
+				if (pw1.length() == 0 && pw2.length() == 0) {
+					tfConfirm.setText("");
+				} else if (pw1.equals(pw2)) {
 					tfConfirm.setText("비밀번호 일치.");
 				} else {
 					tfConfirm.setText("비밀번호 불일치.");
@@ -297,18 +298,12 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 			}
 		});
 
-		// setLayout(new BorderLayout(0, 0));
-
 		JPanel pBtn = new JPanel();
 		panel.add(pBtn, BorderLayout.SOUTH);
 
 		btnUpdate = new JButton("수정");
 		btnUpdate.addActionListener(this);
 		pBtn.add(btnUpdate);
-
-		btnSave = new JButton("저장");
-		btnSave.addActionListener(this);
-		pBtn.add(btnSave);
 	}
 
 	/* 추가해줌 */
@@ -321,9 +316,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnUpdate) {
 			do_btnUpdate_actionPerformed(arg0);
-		}
-		if (arg0.getSource() == btnSave) {
-			do_btnSave_actionPerformed(arg0);
 		}
 		if (arg0.getSource() == cmbDomain) {
 			do_cmbDomain_actionPerformed(arg0);
@@ -342,35 +334,22 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	}
 
 	protected void do_btnUpdate_actionPerformed(ActionEvent arg0) {
-		tfName.setEditable(true);
-		dateChooser.getCalendarButton().setEnabled(true);
-		dateChooser.setEnabled(true);
-		cmbTel.setEnabled(true);
-		tfTel2.setEditable(true);
-		tfTel3.setEditable(true);
-		tfEmail.setEditable(true);
-		tfDomain.setEditable(true);
-		cmbDomain.setEnabled(true);
-		btnZipcode.setEnabled(true);
-		tfZipcode.setEditable(true);
-		tfAddress.setEditable(true);
-		pwfNowPw.setEditable(true);
-		pwfNewPw.setEditable(true);
-		pwfConfirmPw.setEditable(true);
-		// cmbLicence.setEnabled(true);
-	}
-
-	protected void do_btnSave_actionPerformed(ActionEvent arg0) {
 		Customer customer = getItem();
-		/*
-		 * if() {
-		 * 
-		 * }else {
-		 * 
-		 * }
-		 */
-		service.updateCustomer(customer);
 
+		String nowPw = new String(pwfNowPw.getPassword());
+		
+		Customer c = LoginUI.loginCusotmer;
+		c.setPasswd(nowPw);
+		int sameResult = service.samePwd(c); //0이면 다름 1이면 같음
+		
+		if(sameResult==1) {
+			service.updateCustomer(customer);
+			
+		}else {
+			JOptionPane.showMessageDialog(null, "비밀번호를 확인해 주세요");
+		}
+	
+		
 	}
 
 	private Customer getItem() {
@@ -387,7 +366,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		String zipCode = tfZipcode.getText().trim();
 		String addr = tfAddress.getText().trim();
 		String nowPw = new String(pwfNowPw.getPassword());
-		
+		String newPw = new String(pwfNewPw.getPassword());
+		String confirmPw = new String(pwfConfirmPw.getPassword());
 		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
 
 		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
@@ -401,11 +381,12 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 			license = (String) cmbLicence.getSelectedItem();
 		}
 		// Grade gradeCode = new Grade("G001");
-		
-		
-		String newPw = new String(pwfNewPw.getPassword());
-		String confirmPw = new String(pwfConfirmPw.getPassword());
-		
+
+		/*
+		 * String newPw = new String(pwfNewPw.getPassword()); String confirmPw = new
+		 * String(pwfConfirmPw.getPassword());
+		 */
+
 		item.setCode(code);
 		item.setName(name);
 		item.setId(id);
@@ -415,7 +396,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		item.setZipCode(zipCode);
 		item.setAddress(addr);
 		if (newPw == confirmPw) {
-			item.setPasswd(newPw);	
+			item.setPasswd(newPw);
 		}
 		item.setLicense(license);
 		item.setEmpCode(empCode);

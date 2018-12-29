@@ -103,10 +103,11 @@ public class LoginUI extends JFrame implements ActionListener {
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
 
-		// 테스트용도
-
+		
+		//test
 		tfId.setText("asd132");
 		tfPwd.setText("rootroot");
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -179,5 +180,14 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	public void close() {
 		dispose();
+	}
+
+	public void setPasswd(String newPwd) {
+		tfPwd.setText(newPwd);		
+	}
+
+	public void setId(String id) {
+		tfId.setText(id);
+		tfPwd.requestFocus();
 	}
 }

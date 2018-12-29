@@ -87,11 +87,10 @@
 
 
 	<!-- delete -->
-
+<!-- 
 	<delete id="deleteCustomer" parameterType="Customer">
-		delete from customer
-		where code=#{code}
-	</delete>
+		delete from customer where code=#{code}
+	</delete> -->
 
 	<resultMap type="Customer" id="Result">
 		<result column="id" property="id" />
@@ -103,10 +102,4 @@
 		where phone = #{phone}
 		and email =	#{email}
 	</select>
-
-	<update id="changePw" parameterType="Customer">
-		update customer c
-		set passwd=password('12341234')
-		where c.phone = #{phone} and c.email = #{email}
-	</update>
 </mapper>
