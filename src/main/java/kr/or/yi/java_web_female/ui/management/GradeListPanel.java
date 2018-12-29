@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.service.GradeEventUiService;
@@ -20,6 +21,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class GradeListPanel extends JPanel implements ActionListener {
@@ -48,6 +51,16 @@ public class GradeListPanel extends JPanel implements ActionListener {
 			panelList= new GradeList();
 			list = service.selectGradeByAll();
 			panelList.setList(list);
+			panelList.getTable().addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if (e.getClickCount() == 2) {
+						Grade item = panelList.getSelectedItem();
+						setItem(item);
+						btnGradeOk.setText("수정");
+					}
+				}
+			});
 			panelList.loadDatas();	
 			
 			setLayout(new GridLayout(0, 2, 0, 0));

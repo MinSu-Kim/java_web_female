@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.service.EmployeeUiService;
@@ -19,6 +20,8 @@ import kr.or.yi.java_web_female.ui.list.EmployeeList;
 
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import java.awt.FlowLayout;
@@ -54,6 +57,17 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		list = service.selectEmployeeByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
+		
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Employee item = panelList.getSelectedItem();
+					setItem(item);
+					btnEmpOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new BorderLayout(0, 0));
 		add(panelList, BorderLayout.CENTER);
 

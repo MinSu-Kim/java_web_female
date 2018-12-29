@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
@@ -29,6 +30,8 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -70,6 +73,16 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Customer item = panelList.getSelectedItem();
+					setItem(item);
+					btnCusOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
