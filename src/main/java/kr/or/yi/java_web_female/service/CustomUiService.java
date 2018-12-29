@@ -34,6 +34,11 @@ public class CustomUiService {
 	public int updateCustomer(Customer customer){
 		return customerDao.updateCustomer(customer);
 	}
+	
+	public Customer selectCustomerById(Customer customer){
+		return customerDao.selectCustomerById(customer);
+	}
+	
 	public void deleteCustomerEvent(Customer customer, CustomEvent customEvent){
 		customerDao.deleteCustomerEvent(customer, customEvent);
 	}
@@ -52,6 +57,10 @@ public class CustomUiService {
 	
 	public List<Grade> getGradeList(){
 		return gradeDao.selectGradeByAll();
+	}
+	
+	public int samePwd(Customer customer) {
+		return customerDao.samePwd(customer);
 	}
 }
 

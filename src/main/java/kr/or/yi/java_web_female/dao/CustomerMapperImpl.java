@@ -173,5 +173,37 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
+	@Override
+	public Customer searchId(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".searchId", customer);
+		}
+	}
+
+	@Override
+	public int changePw(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".changePw", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public String getRandomPassword() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".getRandomPassword");
+		}
+	}
+
+	@Override
+	public int samePwd(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".samePwd",customer );
+		}
+	}
+
+
+
 
 }

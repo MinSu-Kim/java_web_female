@@ -33,6 +33,7 @@ import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
 import kr.or.yi.java_web_female.ui.list.CarTotalList;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class CarPanel extends JPanel implements ActionListener, ItemListener {
@@ -49,6 +50,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private JButton btnAdd;
 	private ComboPanel<CarType> panelCarType;
 	private JRadioButton rdbtnAuto;
+	private JPanel panel_reset;
 
 	public CarPanel() {
 		service = new CarUiService();
@@ -58,7 +60,6 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		JTable table = new JTable(model); 
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model); 
 		table.setRowSorter(sorter);*/
-
 	}
 
 	private void initComponents() {
@@ -68,12 +69,15 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		JPanel panelSelect = new JPanel();
 		panelSelect.setBorder(new TitledBorder(null, "\uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(panelSelect, BorderLayout.NORTH);
-		panelSelect.setLayout(new GridLayout(0, 2, 0, 0));
 
 		panelCarType = new ComboPanel<>();
+		GridLayout gridLayout = (GridLayout) panelCarType.getLayout();
+		gridLayout.setVgap(10);
+		gridLayout.setHgap(10);
 
 		panelCarType.setTitle("차종");
 		List<CarType> arrCarType = service.selectAllCarType();
+		panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		// 콤보박스에 차종 불러오기
 		panelCarType.setComboItems(arrCarType);
@@ -83,6 +87,9 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelSelect.add(panelCarType);
 
 		panelBrand = new ComboPanel<>();
+		GridLayout gridLayout_1 = (GridLayout) panelBrand.getLayout();
+		gridLayout_1.setHgap(10);
+		gridLayout_1.setVgap(10);
 
 		panelBrand.setTitle("브랜드");
 		List<Brand> arrBrand = service.selectAllBrand();
@@ -100,14 +107,14 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelFuel.setComboItems(arrFuel);
 		panelFuel.setSelectedIndex(-1);
 		panelSelect.add(panelFuel);
-		panelFuel.setLayout(new GridLayout(0, 2, 0, 0));
+		panelFuel.setLayout(new GridLayout(0, 2, 10, 10));
 
 		JPanel panelGear = new JPanel();
 		panelSelect.add(panelGear);
 		panelGear.setLayout(new GridLayout(0, 2, 0, 0));
 
 		JLabel lblGear = new JLabel("변속기");
-		lblGear.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGear.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelGear.add(lblGear);
 
 		JPanel panelRbtn = new JPanel();
@@ -125,6 +132,15 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 
 		group.add(rdbtnStick);
 		panelRbtn.add(rdbtnStick);
+		
+		panel_reset = new JPanel();
+		panelSelect.add(panel_reset);
+		
+		btnCancel = new JButton("초기화");
+		btnCancel.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_reset.add(btnCancel);
+		btnCancel.addActionListener(this);
+		
 		// 전체 테이블 불러오기
 		panelList = new CarTotalList();
 		
@@ -143,7 +159,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		list = modelService.selectCarModelByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-		add(panelList);
+		add(panelList); //add 한번만!
 
 		panelList.setPopupMenu(createDeptPopupMenu());
 
@@ -157,10 +173,6 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		btnAdd.addActionListener(this);
 		panelBtn.add(btnAdd);
 		panelBtn.add(btnOk);
-
-		btnCancel = new JButton("초기화");
-		btnCancel.addActionListener(this);
-		panelBtn.add(btnCancel);
 
 		panelCarType.getComboBox().addItemListener(this);
 		panelBrand.getComboBox().addItemListener(this);
@@ -214,17 +226,16 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	}
 
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {// 취소 클릭시 검색초기화
+		// 테이블 전체 불러오기
+		list = modelService.selectCarModelByAll();
+		panelList.setList(list);
+		panelList.loadDatas();
 		// 검색필드초기화
 		panelBrand.setSelectedIndex(-1);
 		panelFuel.setSelectedIndex(-1);
 		panelCarType.setSelectedIndex(-1);
 		rdbtnStick.setSelected(false);
 		rdbtnAuto.setSelected(false);
-		// 테이블 전체 불러오기
-		list = modelService.selectCarModelByAll();
-		panelList.setList(list);
-		panelList.loadDatas();
-		add(panelList);
 	}
 
 	protected void do_btnAdd_actionPerformed(ActionEvent e) {
@@ -253,7 +264,6 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		list = modelService.selectCarModelByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-		add(panelList);
 	}
 
 	private void setLoadAddList() {
@@ -285,7 +295,6 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		list = modelService.SelectCarModelWithWhere(maps);
 		panelList.setList(list);
 		panelList.loadDatas();
-		add(panelList);
 	}
 
 

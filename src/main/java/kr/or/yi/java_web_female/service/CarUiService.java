@@ -61,6 +61,10 @@ public class CarUiService {
 		return typeDao.updateCarType(carType);
 	}
 	
+	public CarType selectByCarCode(CarType carType) {
+		return typeDao.selectCarTypeByNo(carType);
+	}
+	
 	//연료
 	public List<Fuel> selectAllFuel(){
 		return fuelDao.selectFuelByAll();
@@ -94,7 +98,9 @@ public class CarUiService {
 	public int updateBrand(Brand brand) {
 		return brandDao.updateBrand(brand);
 	}
-	
+	public Brand selectByBrandNo(Brand brand) {
+		return brandDao.selectBrandByNo(brand);
+	}
 	
 	
 }

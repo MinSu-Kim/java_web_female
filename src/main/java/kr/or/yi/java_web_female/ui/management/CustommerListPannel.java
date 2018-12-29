@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
@@ -29,6 +30,8 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -70,6 +73,16 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Customer item = panelList.getSelectedItem();
+					setItem(item);
+					btnCusOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
@@ -257,15 +270,15 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		add(panelList, BorderLayout.CENTER);
 
 		panelList.setPopupMenu(createDeptPopupMenu());
-		
+
 		enableField();
 	}
 
 	private void enableField() {
-		if(btnCusOk.getText().equals("수정")) {
+		if (btnCusOk.getText().equals("수정")) {
 			cmbGrade.setEnabled(true);
 			tfRentCnt.setEditable(true);
-		}else {
+		} else {
 			cmbGrade.setEnabled(false);
 			tfRentCnt.setEditable(false);
 		}
@@ -311,8 +324,8 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				// CustomEvent customEvent = new CustomEvent();
 				// CustomEvent("EVT1", customer.getCode(), false);
 
-				JOptionPane.showMessageDialog(null, customer);
-				JOptionPane.showMessageDialog(null, customEvent);
+//				JOptionPane.showMessageDialog(null, customer);
+//				JOptionPane.showMessageDialog(null, customEvent);
 
 			}
 
@@ -383,15 +396,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		String cAddr = tfAddr.getText().trim();
 		String zipCode = tfZipCode.getText().trim();
 		Date cusDob = birthday.getDate();
-		/*String cTel1 = (String) cmbTel1.getSelectedItem();
-		String cTel2 = tfTel2.getText().trim();
-		String cTel3 = tfTel3.getText().trim();*/
+		
 		String cEmail1 = tfCusEmail1.getText().trim();
 		String cEmail2 = tfCusEmail2.getText().trim();
 		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();
 		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
 				+ (tfTel3.getText().trim());
-		
+
 		String license = null;
 		if (cmbLicense.getSelectedIndex() == 0) {
 			cmbLicense.setSelectedIndex(2);
@@ -411,7 +422,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		updateCustomer.setName(cName);
 		updateCustomer.setDob(cusDob);
 		updateCustomer.setPhone(cusPhone);
-		
+
 		updateCustomer.setAddress(zipCode);
 		updateCustomer.setLicense(license);
 		updateCustomer.setEmpCode(empCode);
@@ -420,7 +431,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	}
 
 	protected void do_btnCusOk_actionPerformed(ActionEvent arg0) {
-		JOptionPane.showMessageDialog(null, "do_btnCusOk_actionPerformed 추가");
+
 		String cId = tfCusId.getText().trim();
 		String cName = tfCusName.getText().trim();
 		String cCode = tfCusCode.getText().trim();
@@ -428,9 +439,9 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		Date cusDob = birthday.getDate();
 		String cEmail1 = tfCusEmail1.getText().trim();
 		String cEmail2 = tfCusEmail2.getText().trim();
-		
+
 		Employee eCode = (Employee) cmbEmpCode.getSelectedItem();
-		Grade gradeName=(Grade) cmbGrade.getSelectedItem();
+		Grade gradeName = (Grade) cmbGrade.getSelectedItem();
 		String license = null;
 		if (cmbLicense.getSelectedIndex() == 0) {
 			cmbLicense.setSelectedIndex(2);
@@ -440,12 +451,10 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		}
 		String zipCode = tfZipCode.getText();
 
-//		Grade gradeName = (Grade) cmbGrade.getSelectedItem();
 		int rentCnt = 0;
 
 		Customer customer = new Customer();
-		//Grade gradeCode = new Grade("G001");
-		
+
 		customer.setId(cId);
 		customer.setPasswd("1234");
 		customer.setGradeCode(new Grade("G001"));
@@ -457,8 +466,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setDob(cusDob);
 
 		customer.setEmail(String.format("%s@%s", cEmail1, cEmail2));
-		
-		
 
 		Employee empCode = service.getEmployeeByNo(eCode);
 		Grade gradeCode = service.getGradeByName(gradeName);
@@ -472,13 +479,12 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
 
-		JOptionPane.showMessageDialog(null, customer);
 		service.insertCustomer(customer);
-		
+
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-//		add(panelList);
+
 		clearTf();
 	}
 

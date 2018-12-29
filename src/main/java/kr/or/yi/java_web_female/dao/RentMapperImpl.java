@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.dto.RentHour;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class RentMapperImpl implements RentMapper {
@@ -69,6 +71,36 @@ public class RentMapperImpl implements RentMapper {
 	public List<Rent> selectRentByAll() {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
 			return sqlSession.selectList(namespace + ".selectRentByAll");
+		}
+	}
+
+	@Override
+	public RentHour selectRentHours(Map<String, String> map) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectOne(namespace + ".selectRentHours" ,map );
+		}
+	}
+
+	@Override
+	public int changeisReturn(Rent rent) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlSession.update(namespace + ".changeisReturn", rent);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public List<Rent> FilterRentInfo(Map<String, String> map) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".FilterRentInfo", map);
+		}
+	}
+
+	@Override
+	public List<Rent> selectRentAll() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectRentAll");
 		}
 	}
 

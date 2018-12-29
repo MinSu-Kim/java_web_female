@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -17,9 +19,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
+import javax.swing.UIManager;
+import java.awt.Color;
 @SuppressWarnings("serial")
 public class CarTypeListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -34,7 +40,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public CarTypeListPanel() {
-		setBorder(new TitledBorder(null, "\uCC28\uC885", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		service = new CarUiService();
 		initcomponent();
 	}
@@ -42,21 +48,32 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	private void initcomponent() {
 		
 		panelList = new CarTypeList();
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		list = service.selectAllCarType();
 		panelList.setList(list);
 		panelList.loadDatas();
-		setLayout(new GridLayout(0, 2, 0, 0));
+		//더블클릭시 수정 구현
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					CarType item = panelList.getSelectedItem();
+					setItem(item);
+					btnOk.setText("수정");
+				}
+			}
+		});
+		
+		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		
 		JPanel panelList_2 = new JPanel();
-		add(panelList_2);
+		add(panelList_2, BorderLayout.EAST);
 		panelList_2.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panelList_2.add(panelInput, BorderLayout.CENTER);
+		panelList_2.add(panelInput);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		JLabel lblCode = new JLabel("차종코드");
@@ -111,7 +128,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 					service.deleteCarType(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarType());
 					panelList.loadDatas();
-				} catch (Exception e2) {
+				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 차종의 차량을 보유 중 (삭제 불가능)");
 				}
 			}

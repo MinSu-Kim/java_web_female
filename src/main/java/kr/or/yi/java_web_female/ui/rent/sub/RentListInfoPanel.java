@@ -5,18 +5,32 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.java_web_female.dao.RentMapper;
+import kr.or.yi.java_web_female.dao.RentMapperImpl;
 import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.dto.RentHour;
+import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
+import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class RentListInfoPanel extends JPanel {
+public class RentListInfoPanel extends JPanel implements ActionListener {
 	private JTextField tfRentCode;
 	private JTextField tfCarName;
 	private JTextField tfCstmCode;
@@ -26,14 +40,27 @@ public class RentListInfoPanel extends JPanel {
 	private JTextField tfEndDate;
 	private JTextField tfEndTime;
 	private Rent rent;
+	private JLabel lblResult;
+	private JButton btnReturn;
+	private RentUIService service;
+	private RentListPanel rentListPanel;
 	
+	
+	public void setRentListPanel(RentListPanel rentListPanel) {
+		this.rentListPanel = rentListPanel;
+	}
+
+	public void setService(RentUIService service) {
+		this.service = service;
+	}
+
 	public Rent getRent() {
 		return rent;
 	}
 
 	public void setRent(Rent rent) {
 		this.rent = rent;
-		JOptionPane.showMessageDialog(null, rent);
+//		JOptionPane.showMessageDialog(null, rent);
 		tfRentCode.setText(rent.getCode());
 		tfCarName.setText(rent.getCarCode().getName());
 		tfCstmCode.setText(rent.getCustomerCode().getCode());
@@ -42,6 +69,14 @@ public class RentListInfoPanel extends JPanel {
 		tfStartTime.setText(rent.getEndTime());
 		tfEndDate.setText(rent.getEndDate());
 		tfEndTime.setText(rent.getEndTime());
+		RentMapper dao = RentMapperImpl.getInstance();
+		Map<String, String> map = new HashMap<>();
+		map.put("carCode", rent.getCarCode().getCarCode());
+		map.put("rCode", rent.getCode());
+		
+		RentHour result = dao.selectRentHours(map);
+//		JOptionPane.showMessageDialog(null, result);
+		lblResult.setText(result.getAddPrice() + "원");
 	}
 
 	/**
@@ -138,12 +173,12 @@ public class RentListInfoPanel extends JPanel {
 		JLabel lblNewLabel = new JLabel("");
 		pRentInfo.add(lblNewLabel);
 		
-		JLabel lblExcessCosts = new JLabel("초과 비용");
-		lblExcessCosts.setFont(new Font("굴림", Font.BOLD, 12));
-		lblExcessCosts.setHorizontalAlignment(SwingConstants.CENTER);
-		pRentInfo.add(lblExcessCosts);
+		JLabel lblOverdue = new JLabel("초과 비용");
+		lblOverdue.setFont(new Font("굴림", Font.BOLD, 12));
+		lblOverdue.setHorizontalAlignment(SwingConstants.CENTER);
+		pRentInfo.add(lblOverdue);
 		
-		JLabel lblResult = new JLabel("");
+		lblResult = new JLabel("");
 		lblResult.setFont(new Font("굴림", Font.BOLD, 12));
 		lblResult.setForeground(Color.RED);
 		lblResult.setHorizontalAlignment(SwingConstants.CENTER);
@@ -155,9 +190,26 @@ public class RentListInfoPanel extends JPanel {
 		JPanel pBtn = new JPanel();
 		add(pBtn, BorderLayout.SOUTH);
 		
-		JButton btnReturn = new JButton("반납");
+		btnReturn = new JButton("반납");
+		btnReturn.addActionListener(this);
 		pBtn.add(btnReturn);
 
 	}
 
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnReturn) {
+			do_btnReturn_actionPerformed(e);
+		}
+	}
+	
+	//반납버튼
+	protected void do_btnReturn_actionPerformed(ActionEvent e) {
+		service.changeIsReturn(rent);
+		JOptionPane.showMessageDialog(null, "반납되었습니다.");
+		
+		if(LoginUI.loginCusotmer == null) {
+			rentListPanel.reloadList();
+		}
+	}
 }

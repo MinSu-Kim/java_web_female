@@ -97,4 +97,24 @@ public class RentUIService {
 	public List<Rent> selectRentByAll(){
 		return rentDao.selectRentByAll();
 	}
+	
+	public List<Rent> selectRentAll(){
+		return rentDao.selectRentAll();
+	}
+	
+	//반납
+	public int changeIsReturn(Rent rent) {
+		return rentDao.changeisReturn(rent);
+	}
+	
+	//////////////
+	public List<CarModel> selectCarModel(){
+		return carModelDao.selectCarModel();
+	}
+	
+	public List<Rent> FilterRentInfo(Map<String, String> map){
+		return rentDao.FilterRentInfo(map);
+	}
+	
+	
 }

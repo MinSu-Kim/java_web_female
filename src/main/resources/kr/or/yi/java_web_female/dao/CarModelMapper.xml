@@ -117,6 +117,12 @@
 		from car_type t left join car_model m on t.code = m.cartype
 		group by cartype
 	</select>
+	
+	<!-- rent -->
+	<select id="selectCarModel" resultType="CarModel">
+		select car_code, name from car_model;
+	</select>
+
 </mapper>
 
 

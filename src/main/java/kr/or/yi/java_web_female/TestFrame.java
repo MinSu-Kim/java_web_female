@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.ui.ManagerPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 
@@ -14,18 +15,32 @@ public class TestFrame extends JFrame {
 	private ManagerPanel contentPane;
 	private Customer loginCusotmer;
 	private Employee loginEmployee;
+
 	
-	public TestFrame() {
+	
+	
+	
+	public TestFrame(String today) {
 		setTitle(getLoginUser());
 		
 		JOptionPane.showMessageDialog(null, loginCusotmer==null?loginEmployee:loginCusotmer);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 700);
-		contentPane = new ManagerPanel();
+		if(LoginUI.loginEmployee !=null) {
+			setBounds(100, 100, 1100, 700);
+		}else {
+			setBounds(100, 100, 600, 700);
+		}
+		
+		contentPane = new ManagerPanel(today);
+		
+		
+		contentPane.setTestFrame(this);
 		setContentPane(contentPane);
 	}
-	
+	public void dispose() {
+		this.setVisible(false);
+	}
 	private String getLoginUser() {
 		String loginUserName = null;
 		if (LoginUI.loginCusotmer !=null) {

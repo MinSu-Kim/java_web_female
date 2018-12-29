@@ -12,24 +12,28 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import kr.or.yi.java_web_female.InitScene;
+import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
-import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.service.StateCarChartService;
+import java.awt.Font;
 
-public class DataPieChartCarType extends JFXPanel implements InitScene{
+public class DataPieChartBrand extends JFXPanel implements InitScene{
+	public DataPieChartBrand() {
+		setFont(new Font("Dialog", Font.BOLD, 12));
+	}
 
 	
 	private PieChart pieChart;
-	private StateCarChartService chartService;
+	private StateCarChartService service;
 	private CarModelService modelService;
 	private CarUiService carService;
 	
 	@Override
 	public Scene createScene() {
-		chartService = new StateCarChartService();
+		service = new StateCarChartService();
 		modelService = new CarModelService();
 		carService = new CarUiService();
 		
@@ -40,7 +44,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 		pieChart = new PieChart();
 		pieChart.setPrefSize(450, 275);
 		pieChart.setData(getChartData());
-		pieChart.setTitle("차종별 보유차량");
+		pieChart.setTitle("브랜드별 보유차량");
 		pieChart.setLegendVisible(true);	// 범례 표시 유무
 		pieChart.setLegendSide(Side.BOTTOM);// 범례 위치
 		pieChart.setLabelLineLength(30);	// 원의 둘레 가장자리와 라벨간의 거리 지정
@@ -60,21 +64,18 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	private ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
 
-		List<StateCar> slist = chartService.selectCountByCarType();
+		List<StateCar> slist = service.selectCountByBrand();
 		List<CarModel> clist = modelService.selectCarModelByAll();
 		int totalCount = clist.size();
 		
 		for(int i=0;i<slist.size();i++) {
-
 			StateCar sCar = slist.get(i);
-
-			CarType type = new CarType();
-			type.setCode(sCar.getTitle());
-			//코드로 차종이름 검색
-			CarType resType = carService.selectByCarCode(type);
 			
+			Brand brand = new Brand();
+			brand.setNo(sCar.getTitle());
+			Brand resBrand = carService.selectByBrandNo(brand);
 			double rate = Math.round((sCar.getCount()*100.0)/totalCount);
-			list.add(new PieChart.Data(resType.getType(),rate ));
+			list.add(new PieChart.Data(resBrand.getName(), rate));
 		}
 		return list;
 	}
