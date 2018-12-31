@@ -333,6 +333,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			CarModel model = getItem();			
 			service.updateCarModel(model);
 			carUi.reloadDataCarPanel();
+			JOptionPane.showMessageDialog(null, "차량이 수정되었습니다.");
 			carUi.close();
 		}else {
 			//추가 클릭
@@ -347,6 +348,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
 			
 			carUi.reloadDataCarPanel();
+			JOptionPane.showMessageDialog(null, "차량이 등록되었습니다.");
 			carUi.close();
 		}
 		
@@ -382,6 +384,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		model.setCarCode(tfCode.getText());
 		service.deleteCarModel(model);
 		carUi.reloadDataCarPanel();
+		JOptionPane.showMessageDialog(null, "차량이 삭제되었습니다.");
 		carUi.close();
 	}
 	

@@ -17,6 +17,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
@@ -211,6 +212,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 				modelService.deleteCarModel(panelList.getSelectedItem());
 				panelList.setList(modelService.selectCarModelByAll());
 				panelList.loadDatas();
+				JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 			}
 		});
 		popMenu.add(delItem);

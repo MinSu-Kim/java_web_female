@@ -62,6 +62,10 @@ public class CarChartPanel extends JPanel {
 		JRadioButton rdbtnRentCount = new JRadioButton("차종별 월 렌트 수");
 		group.add(rdbtnRentCount);
 		panelBtn.add(rdbtnRentCount);
+		
+		JRadioButton rdbtnTotal = new JRadioButton("전체보기");
+		group.add(rdbtnTotal);
+		panelBtn.add(rdbtnTotal);
 
 	}
 
