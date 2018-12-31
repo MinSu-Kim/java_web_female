@@ -25,6 +25,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
+import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -52,14 +53,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private JRadioButton rdbtnAuto;
 	private JPanel panel_reset;
 
+
 	public CarPanel() {
 		service = new CarUiService();
 		modelService = new CarModelService();
 		initComponents();
-		/* 테이블 정렬
-		JTable table = new JTable(model); 
-		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model); 
-		table.setRowSorter(sorter);*/
 	}
 
 	private void initComponents() {
@@ -77,7 +75,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 
 		panelCarType.setTitle("차종");
 		List<CarType> arrCarType = service.selectAllCarType();
-		panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		if(TestFrame.loginEmployee()) {
+			panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		}else {
+			panelSelect.setLayout(new GridLayout(0, 2, 0, 0));
+		}
 
 		// 콤보박스에 차종 불러오기
 		panelCarType.setComboItems(arrCarType);
