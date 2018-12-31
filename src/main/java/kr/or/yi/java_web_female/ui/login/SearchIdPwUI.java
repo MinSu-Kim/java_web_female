@@ -46,7 +46,6 @@ public class SearchIdPwUI extends JFrame implements ActionListener {
 	private JPanel panel_2;
 	private JPanel panel_3;
 
-
 	public SearchIdPwUI() {
 
 		searchService = new SearchIdPwService();

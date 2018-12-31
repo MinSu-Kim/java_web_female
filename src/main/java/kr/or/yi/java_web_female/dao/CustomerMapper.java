@@ -56,6 +56,8 @@ public interface CustomerMapper {
 	@Select("select passwd = password(#{passwd}) as samePwd from customer where Id = #{id}")
 	int samePwd(Customer customer);
 	
-
+	@Update("update customer set Name=#{name}, address=#{address}, zip_code=#{zipCode}, phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license} where code=#{code}")
+	int updateCustomerInfo(Customer customer);
+	
 	
 }

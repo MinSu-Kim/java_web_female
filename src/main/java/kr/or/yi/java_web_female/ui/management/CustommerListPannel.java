@@ -392,7 +392,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		String cAddr = tfAddr.getText().trim();
 		String zipCode = tfZipCode.getText().trim();
 		Date cusDob = birthday.getDate();
-		
+
 		String cEmail1 = tfCusEmail1.getText().trim();
 		String cEmail2 = tfCusEmail2.getText().trim();
 		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();

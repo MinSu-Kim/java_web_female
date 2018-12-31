@@ -33,7 +33,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 	private EmployeeList panelList;
 	private JButton btnEmpOk;
 	private JButton btnEmpCancel;
-	//private JPasswordField ptfEmpPw;
+	// private JPasswordField ptfEmpPw;
 
 	/**
 	 * Create the panel.
@@ -53,7 +53,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		list = service.selectEmployeeByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-		
+
 		panelList.getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -111,12 +111,13 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		panelInput.add(tfEmpPhone);
 		tfEmpPhone.setColumns(15);
 
-		/*JLabel lblEmpPw = new JLabel("비밀번호");
-		lblEmpPw.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblEmpPw);
-
-		ptfEmpPw = new JPasswordField();
-		panelInput.add(ptfEmpPw);*/
+		/*
+		 * JLabel lblEmpPw = new JLabel("비밀번호");
+		 * lblEmpPw.setHorizontalAlignment(SwingConstants.RIGHT);
+		 * panelInput.add(lblEmpPw);
+		 * 
+		 * ptfEmpPw = new JPasswordField(); panelInput.add(ptfEmpPw);
+		 */
 
 		panelList.setPopupMenu(createDeptPopupMenu());
 
@@ -177,12 +178,12 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
 		String ePhone = tfEmpPhone.getText();
-		//String ePassword = new String(ptfEmpPw.getPassword());
+		// String ePassword = new String(ptfEmpPw.getPassword());
 		Employee item = new Employee();
 		item.setCode(eCode);
 		item.setName(eName);
 		item.setPhone(ePhone);
-		//item.setPasswd(ePassword);
+		// item.setPasswd(ePassword);
 		return item;
 	}
 
@@ -190,12 +191,12 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
 		String ePhone = tfEmpPhone.getText();
-		//String ePassword = new String(ptfEmpPw.getPassword());
+		// String ePassword = new String(ptfEmpPw.getPassword());
 		Employee employee = new Employee();
 		employee.setCode(eCode);
 		employee.setName(eName);
 		employee.setPhone(ePhone);
-		//employee.setPasswd(ePassword);
+		// employee.setPasswd(ePassword);
 		service.insertEmployee(employee);
 		list = service.selectEmployeeByAll();
 		panelList.setList(list);
@@ -208,7 +209,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		tfEmpCode.setText("");
 		tfEmpName.setText("");
 		tfEmpPhone.setText("");
-		//ptfEmpPw.setText("");
+		// ptfEmpPw.setText("");
 
 	}
 
@@ -223,7 +224,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		tfEmpCode.setText(item.getCode() + "");
 		tfEmpName.setText(item.getName() + "");
 		tfEmpPhone.setText(item.getPhone() + "");
-		//ptfEmpPw.setText(item.getPasswd() + "");
+		// ptfEmpPw.setText(item.getPasswd() + "");
 
 	}
 
