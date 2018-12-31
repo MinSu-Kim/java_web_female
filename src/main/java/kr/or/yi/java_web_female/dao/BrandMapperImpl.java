@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.Brand;
+import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class BrandMapperImpl implements BrandMapper {
@@ -58,6 +59,12 @@ public class BrandMapperImpl implements BrandMapper {
 			sqlSession.commit();
 			return res;
 		}
+	}
+
+	@Override
+	public List<StateCar> selectCountByBrand() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
