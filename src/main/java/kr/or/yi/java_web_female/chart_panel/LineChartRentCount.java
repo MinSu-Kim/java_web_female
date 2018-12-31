@@ -9,6 +9,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
 
+@SuppressWarnings("serial")
 public class LineChartRentCount extends JPanel {
 	private JPanel contentPane;
 	private DataLineChartRentCount pLineChart;

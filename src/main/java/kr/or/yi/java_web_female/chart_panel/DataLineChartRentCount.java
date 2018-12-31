@@ -1,5 +1,8 @@
   package kr.or.yi.java_web_female.chart_panel;
 
+import java.awt.Font;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -12,13 +15,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import kr.or.yi.java_web_female.InitScene;
-import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.service.RentUIService;
 
-import java.awt.Font;
-import java.util.List;
-
+@SuppressWarnings("serial")
 public class DataLineChartRentCount extends JFXPanel implements InitScene {
 	private RentUIService service;
 	

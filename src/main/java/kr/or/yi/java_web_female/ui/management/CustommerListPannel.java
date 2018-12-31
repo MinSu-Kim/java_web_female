@@ -1,41 +1,37 @@
 package kr.or.yi.java_web_female.ui.management;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-
-import java.awt.GridLayout;
-import javax.swing.border.TitledBorder;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
-
-import kr.or.yi.java_web_female.dto.CarOption;
-import kr.or.yi.java_web_female.dto.CustomEvent;
-import kr.or.yi.java_web_female.dto.Customer;
-import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.dto.Grade;
-import kr.or.yi.java_web_female.dto.Post;
-import kr.or.yi.java_web_female.service.CustomUiService;
-import kr.or.yi.java_web_female.ui.join.JoinUI;
-import kr.or.yi.java_web_female.ui.join.SearchPostUI;
-import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
-import kr.or.yi.java_web_female.ui.list.CustomerList;
-
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-import java.awt.event.ActionEvent;
+
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import com.toedter.calendar.JDateChooser;
+
+import kr.or.yi.java_web_female.dto.CustomEvent;
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
+import kr.or.yi.java_web_female.dto.Post;
+import kr.or.yi.java_web_female.service.CustomUiService;
+import kr.or.yi.java_web_female.ui.join.SearchPostUI;
+import kr.or.yi.java_web_female.ui.list.CustomerList;
 
 @SuppressWarnings("serial")
 public class CustommerListPannel extends JPanel implements ActionListener {
@@ -396,7 +392,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		String cAddr = tfAddr.getText().trim();
 		String zipCode = tfZipCode.getText().trim();
 		Date cusDob = birthday.getDate();
-		
+
 		String cEmail1 = tfCusEmail1.getText().trim();
 		String cEmail2 = tfCusEmail2.getText().trim();
 		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();

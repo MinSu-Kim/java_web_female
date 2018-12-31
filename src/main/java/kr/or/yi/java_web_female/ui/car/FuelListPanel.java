@@ -1,10 +1,13 @@
 package kr.or.yi.java_web_female.ui.car;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -17,18 +20,11 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 
-import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.Fuel;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.FuelList;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import javax.swing.UIManager;
-import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class FuelListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
 	private JTextField tfNo;

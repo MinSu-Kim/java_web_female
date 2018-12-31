@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.RentHour;
 import kr.or.yi.java_web_female.dto.StateCar;

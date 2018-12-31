@@ -10,11 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import kr.or.yi.java_web_female.TestFrame;
-
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-
 @SuppressWarnings("serial")
 public class ComboPanel<T> extends JPanel {
 

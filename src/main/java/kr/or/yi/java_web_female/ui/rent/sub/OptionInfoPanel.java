@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
@@ -17,10 +15,11 @@ import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.MyCheckBox;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
+@SuppressWarnings("serial")
 public class OptionInfoPanel extends CarSubPanel {
 	private List<CarOption> coList;
 	private MyCheckBox mcb;
-	private CarModel selectedCarModel;
+//	private CarModel selectedCarModel;
 	private List<CarOption> carOptionList= new ArrayList<>();
 	private RentPanel rentPanel;
 	
@@ -81,7 +80,7 @@ public class OptionInfoPanel extends CarSubPanel {
 	};
 
 	public void setSelectedCarModel(CarModel selectedCarModel) {
-		this.selectedCarModel = selectedCarModel;
+//		this.selectedCarModel = selectedCarModel;
 
 		if (selectedCarModel.getCarType().getCode().equals("S2")) {
 			chkDriver(true);
