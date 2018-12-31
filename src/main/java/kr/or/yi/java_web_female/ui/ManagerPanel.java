@@ -12,6 +12,7 @@ import javax.swing.JTabbedPane;
 
 import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.chart_panel.CarChartPanel;
+import kr.or.yi.java_web_female.chart_panel.CustomerChartPanel;
 import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
 import kr.or.yi.java_web_female.ui.car.CarPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
@@ -78,10 +79,6 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			lblGrade.setText(LoginUI.loginCusotmer.getGradeCode().getName() + " 등급입니다.");
 		}
 
-//		System.out.println("loginCustomer :" + LoginUI.loginCusotmer.getRentCnt());
-		JLabel lblRent = new JLabel("현재대여중인것이 있으면 보여줌");
-		pLoginInfo.add(lblRent);
-
 		btnLogout = new JButton("로그아웃");
 		btnLogout.addActionListener(this);
 		pLoginInfo.add(btnLogout);
@@ -123,7 +120,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			CarChartPanel panel_9 = new CarChartPanel();
 			tabbedPane.addTab("차량통계", null, panel_9, null);
 
-			JPanel panel_10 = new JPanel();
+			JPanel panel_10 = new CustomerChartPanel();
 			tabbedPane.addTab("고객통계", null, panel_10, null);
 
 			JPanel panel_11 = new JPanel();
