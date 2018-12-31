@@ -24,6 +24,7 @@ import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.dto.UserPic;
 
 public class RentUIService {
@@ -114,6 +115,10 @@ public class RentUIService {
 	
 	public List<Rent> FilterRentInfo(Map<String, String> map){
 		return rentDao.FilterRentInfo(map);
+	}
+	
+	public List<StateCar> selectCountRentByMonth(){
+		return rentDao.selectCountRentByMonth();
 	}
 	
 	

@@ -15,7 +15,7 @@ import kr.or.yi.java_web_female.dto.StateCar;
 public interface RentMapper {
 	
 	//월별 카운트 select
-	@Select("SELECT DATE_FORMAT(start_date,'%Y-%m') m, COUNT(*) FROM rent GROUP BY m")
+	@Select("SELECT DATE_FORMAT(start_date,'%Y-%m') as title, COUNT(*) as count FROM rent GROUP BY title")
 	List<StateCar> selectCountRentByMonth();//2018-12로 출력 카운트는 숫자로 출력
 	
 	@Select("select concat('R', lpad((round(substring(max(code), 2,3)) + 1), 3, '0')) from rent")
