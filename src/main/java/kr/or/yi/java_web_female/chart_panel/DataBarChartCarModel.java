@@ -1,14 +1,8 @@
 package kr.or.yi.java_web_female.chart_panel;
 
-import java.awt.GridLayout;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +14,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
-import javafx.scene.paint.Color;
 import kr.or.yi.java_web_female.InitScene;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.service.CarModelService;

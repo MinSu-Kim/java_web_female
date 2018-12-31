@@ -4,12 +4,11 @@ import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.Customer;
 
-public class CustomerList extends AbstractListPanel<Customer>{
+@SuppressWarnings("serial")
+public class CustomerList extends AbstractListPanel<Customer> {
 
-	
-	
 	public CustomerList() {
-		
+
 	}
 
 	@Override
@@ -20,14 +19,14 @@ public class CustomerList extends AbstractListPanel<Customer>{
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] {"고객코드","아이디", "고객이름", "우편번호", "주소", "연락처", "생년월일", "이메일","면허종류", "등급명", "대여횟수"};
+		return new String[] { "고객코드", "아이디", "고객이름", "우편번호", "주소", "연락처", "생년월일", "이메일", "면허종류", "등급명", "대여횟수" };
 	}
 
 	@Override
 	protected Object[] getItemRows(Customer item) {
-		return new Object[] {
-				item.getCode(),item.getId(), item.getName(), item.getZipCode() ,item.getAddress(), item.getPhone(), String.format("%tF", item.getDob()), item.getEmail(), item.getLicense(), item.getGradeCode(), item.getRentCnt() 
-		};
+		return new Object[] { item.getCode(), item.getId(), item.getName(), item.getZipCode(), item.getAddress(),
+				item.getPhone(), String.format("%tF", item.getDob()), item.getEmail(), item.getLicense(),
+				item.getGradeCode(), item.getRentCnt() };
 	}
 
 	@Override

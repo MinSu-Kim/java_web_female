@@ -1,7 +1,13 @@
 package kr.or.yi.java_web_female.chart_panel;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -9,21 +15,12 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
-import kr.or.yi.java_web_female.dto.CarModel;
-import kr.or.yi.java_web_female.service.CarModelService;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
-
+@SuppressWarnings("serial")
 public class BarChartCarModel extends JPanel implements ActionListener{
 	
 	private JPanel contentPane;
-	private CarModelService service;
+//	private CarModelService service;
 	private DataBarChartCarModel pBarChart;
 	
 	//차종별 라디오버튼
@@ -38,7 +35,7 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 	 * Create the panel.
 	 */
 	public BarChartCarModel() {
-		service = new CarModelService();
+//		service = new CarModelService();
 		initComponents();
 	}
 	private void initComponents() {

@@ -23,14 +23,12 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.JoinUiService;
-import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 @SuppressWarnings("serial")
@@ -51,22 +49,12 @@ public class JoinUI extends JFrame implements ActionListener {
 	private JButton btnJoin;
 	private JComboBox<String> cmbEmail3;
 	private JDateChooser birthDay;
-//	private AbstractListPanel<Customer> cTable;
 	private JTextField tfConfirm;
 	private JButton btnCalcel;
-	private String eventCode;
-	private String customCode;
-	private boolean isUse;
 	private JComboBox<String> cmbTel1;
 
 	private JoinUiService joinService;
 	private JComboBox<String> cmbLicense;
-	private String license;
-
-	/*
-	 * public void setcTable(AbstractListPanel<Customer> cTable) { this.cTable =
-	 * cTable; }
-	 */
 
 	public JoinUI() {
 		joinService = new JoinUiService();

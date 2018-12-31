@@ -4,11 +4,10 @@ import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.Rent;
 
+@SuppressWarnings("serial")
 public class RentList extends AbstractListPanel<Rent> {
 
-	/**
-	 * Create the panel.
-	 */
+
 	public RentList() {
 
 	}

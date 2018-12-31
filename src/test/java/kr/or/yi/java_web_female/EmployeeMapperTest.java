@@ -10,7 +10,6 @@ import org.junit.runners.MethodSorters;
 import kr.or.yi.java_web_female.dao.EmployeeMapper;
 import kr.or.yi.java_web_female.dao.EmployeeMapperImpl;
 import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.dto.Grade;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

@@ -1,7 +1,7 @@
 package kr.or.yi.java_web_female.ui.rent.sub;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,10 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.java_web_female.service.RentUIService;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-
+@SuppressWarnings("serial")
 public class test extends JFrame {
 
 	private JPanel contentPane;
