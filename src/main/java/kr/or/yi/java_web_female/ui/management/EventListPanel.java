@@ -177,18 +177,18 @@ public class EventListPanel extends JPanel implements ActionListener {
 		String etCode = tfEventCode.getText();
 		String etName = tfEventName.getText();
 		int etRate = Integer.parseInt(tfEventRate.getText());
-		
+
 		Event event = new Event();
 		event.setCode(etCode);
 		event.setName(etName);
 		event.setRate(etRate);
-		
+
 		service.insertEvent(event);
 		list = service.selectEventByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
-		
+
 		clearTf();
 	}
 

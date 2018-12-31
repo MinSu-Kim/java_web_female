@@ -6,8 +6,10 @@ import java.util.List;
 public class Customer {
 	private String code;
 	private String id;
-	private String passwd;
-	private String name;
+	private String passwd;//현재 비번
+	/*private String newPw;//새비번
+	private String confirm;//비번확인
+*/	private String name;
 	private String zipCode;
 	private String address;
 	private String phone;
@@ -19,6 +21,8 @@ public class Customer {
 	private int rentCnt;
 	private List<CustomEvent> events;
 
+	
+	
 	public String getZipCode() {
 		return zipCode;
 	}
@@ -215,15 +219,12 @@ public class Customer {
 		this.events = events;
 	}
 
-	/*@Override
-	public String toString() {
-		return String.format(
-				"Customer [code=%s, id=%s, passwd=%s, name=%s, zipCode=%s, address=%s, phone=%s, dob=%s, email=%s, empCode=%s, license=%s, gradeCode=%s, rentCnt=%s, events=%s]",
-				code, id, passwd, name, zipCode, address, phone, dob, email, empCode, license, gradeCode, rentCnt,
-				events);
-	}*/
-	
-	
+	/*
+	 * @Override public String toString() { return String.format(
+	 * "Customer [code=%s, id=%s, passwd=%s, name=%s, zipCode=%s, address=%s, phone=%s, dob=%s, email=%s, empCode=%s, license=%s, gradeCode=%s, rentCnt=%s, events=%s]"
+	 * , code, id, passwd, name, zipCode, address, phone, dob, email, empCode,
+	 * license, gradeCode, rentCnt, events); }
+	 */
 
 	@Override
 	public int hashCode() {
@@ -257,7 +258,5 @@ public class Customer {
 			return false;
 		return true;
 	}
-	
-	
 
 }

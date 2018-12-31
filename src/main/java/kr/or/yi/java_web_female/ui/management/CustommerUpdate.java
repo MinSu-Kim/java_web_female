@@ -26,6 +26,7 @@ import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -334,22 +335,26 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	}
 
 	protected void do_btnUpdate_actionPerformed(ActionEvent arg0) {
-		Customer customer = getItem();
+		Customer customer = getItem();		
 
 		String nowPw = new String(pwfNowPw.getPassword());
-		
+		String newPw = new String(pwfNewPw.getPassword()).trim();
+		String confirmPw = new String(pwfConfirmPw.getPassword()).trim();		
+
 		Customer c = LoginUI.loginCusotmer;
 		c.setPasswd(nowPw);
-		int sameResult = service.samePwd(c); //0이면 다름 1이면 같음
-		
-		if(sameResult==1) {
+		int sameResult = service.samePwd(c); // 현재 비밀번호를 db랑 비교 0이면 다름 1이면 같음
+
+		if (sameResult == 1 && newPw.equals(confirmPw)) {
+			customer.setPasswd(newPw);
 			service.updateCustomer(customer);
-			
+
+		}else if(sameResult == 1){
+			service.updateInfo(customer);
 		}else {
 			JOptionPane.showMessageDialog(null, "비밀번호를 확인해 주세요");
 		}
-	
-		
+
 	}
 
 	private Customer getItem() {
@@ -360,19 +365,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		String id = tfId.getText().trim();
 		Date dob = dateChooser.getDate();
 		String phone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-" + (tfTel3.getText().trim());
-
 		String email = (tfEmail.getText().trim()) + "@" + (tfDomain.getText().trim());
-
 		String zipCode = tfZipcode.getText().trim();
 		String addr = tfAddress.getText().trim();
-		String nowPw = new String(pwfNowPw.getPassword());
-		String newPw = new String(pwfNewPw.getPassword());
-		String confirmPw = new String(pwfConfirmPw.getPassword());
-		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
-
-		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
-		JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
-
 		String license = null;
 		if (cmbLicence.getSelectedIndex() == 0) {
 			cmbLicence.setSelectedIndex(2);
@@ -380,10 +375,16 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicence.getSelectedItem();
 		}
-		// Grade gradeCode = new Grade("G001");
+		String nowPw = new String(pwfNowPw.getPassword());
+	
+		
+		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
+		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
+		JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 
 		/*
-		 * String newPw = new String(pwfNewPw.getPassword()); String confirmPw = new
+		 * String newPw = new String(pwfNewPw.getPassword());
+		 *  String confirmPw = new
 		 * String(pwfConfirmPw.getPassword());
 		 */
 
@@ -395,13 +396,17 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		item.setEmail(email);
 		item.setZipCode(zipCode);
 		item.setAddress(addr);
-		if (newPw == confirmPw) {
-			item.setPasswd(newPw);
-		}
+		
+		item.setPasswd(nowPw);
+		/*item.setPasswd(newPw);
+		item.setPasswd(confirmPw);*/
+		
 		item.setLicense(license);
 		item.setEmpCode(empCode);
 		item.setGradeCode(gradeCode);
-		// JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
+		
+		
+		
 		return item;
 	}
 

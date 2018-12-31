@@ -45,7 +45,7 @@ public class CustomerMapperImpl implements CustomerMapper {
 			return sqlSession.selectOne(namespace + ".selectCustomerById", customer);
 		}
 	}
-	
+
 	@Override
 	public int insertCustomer(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -85,7 +85,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-	
 	// 추가
 	@Override
 	public List<Customer> selectCustomerByCode(Customer customer) {
@@ -120,7 +119,7 @@ public class CustomerMapperImpl implements CustomerMapper {
 			sqlSession.insert(namespace + ".insertCustomer", customer);
 			sqlSession.insert("kr.or.yi.java_web_female.dao.CustomEventMapper.insertCustomEvent", customEvent);
 			sqlSession.commit();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			sqlSession.rollback();
 			System.err.println("sqlSession.rollback()");
@@ -138,12 +137,12 @@ public class CustomerMapperImpl implements CustomerMapper {
 			sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
 			sqlSession.delete(namespace + ".deleteCustomer", customer);
 			sqlSession.commit();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			sqlSession.rollback();
 			System.err.println("sqlSession.rollback()");
 			throw new RuntimeException(e.getCause());
-		}finally {
+		} finally {
 			sqlSession.close();
 		}
 	}
@@ -199,11 +198,17 @@ public class CustomerMapperImpl implements CustomerMapper {
 	@Override
 	public int samePwd(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			return sqlSession.selectOne(namespace + ".samePwd",customer );
+			return sqlSession.selectOne(namespace + ".samePwd", customer);
 		}
 	}
 
-
-
+	@Override
+	public int updateCustomerInfo(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".updateCustomerInfo", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
 
 }

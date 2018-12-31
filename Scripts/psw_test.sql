@@ -230,10 +230,6 @@ select  Id
 from customer c 
 where c.phone = '010-0000-7777' and c.email ='abc@gmail.com';
 
-select * from customer;
-
-
-
 select c.code, Id, passwd, c.Name, zip_code ,address, phone,dob, email, emp_code, license,  rent_cnt, event_code,
 				custom_code, is_use, e.name as eName, e.rate as eRate, e.code as eCode, g.rate as gRate , grade_code, g.name gName
 from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code join grade g on c.grade_code = g.code
@@ -292,3 +288,9 @@ set Id=#{id}, Name=#{name},
 		rent_cnt=#{rentCnt}
 where code=#{code}
 
+select * from customer;
+
+select passwd = password('rootroot') as samePwd from customer 
+where Id = 'asd132';
+
+update customer set Name=#{name}, address=#{address}, zip_code=#{zipCode}, phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license} where code=#{code}		
