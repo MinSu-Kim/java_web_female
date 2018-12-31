@@ -26,13 +26,14 @@ public class LineChartRentCount extends JPanel {
 		// TODO Auto-generated method stub
 		setLayout(new BorderLayout(0, 0));
 		
-		contentPane = new JPanel();
-		add(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+//		contentPane = new JPanel();
+//		add(contentPane);
+//		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		//라인차트 패널 붙이기
 		pLineChart = new DataLineChartRentCount();
-		contentPane.add(pLineChart);
+//		contentPane.add(pLineChart);
+		add(pLineChart);
 		
 		Platform.runLater(() -> initFX(pLineChart));
 	}

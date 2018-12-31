@@ -66,18 +66,16 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 		service = new RentUIService();
 		List<StateCar> countList = service.selectCountRentByMonth();
 		StateCar car = countList.get(0);
-		StateCar car2 = countList.get(1);
-		list.add(getChartData(car, car2));
+		list.add(getChartData(car));
 		
 		return list;
 	}
 
-	private XYChart.Series<String, Number> getChartData(StateCar model,StateCar model2) {
+	private XYChart.Series<String, Number> getChartData(StateCar model) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		
 		dataSeries.setName("전체차종");
 		dataSeries.getData().add(new XYChart.Data<>(model.getTitle(),model.getCount()));
-		dataSeries.getData().add(new XYChart.Data<>(model2.getTitle(),model2.getCount()));
 		
 		return dataSeries;
 	}

@@ -25,13 +25,14 @@ public class PieChartCarType extends JPanel{
 	
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
-		
+/*		
 		contentPane = new JPanel();
 		add(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new BorderLayout(0, 0));*/
 		
 		pPieChart = new DataPieChartCarType();
-		contentPane.add(pPieChart);
+//		contentPane.add(pPieChart);
+		add(pPieChart);
 		
 		Platform.runLater(() -> initFX(pPieChart));
 		

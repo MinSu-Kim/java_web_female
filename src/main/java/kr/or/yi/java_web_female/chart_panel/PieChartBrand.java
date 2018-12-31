@@ -25,12 +25,12 @@ public class PieChartBrand extends JPanel{
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
-		contentPane = new JPanel();
+/*		contentPane = new JPanel();
 		add(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new BorderLayout(0, 0));*/
 		
 		pPieChart = new DataPieChartBrand();
-		contentPane.add(pPieChart);
+		add(pPieChart);
 		
 		Platform.runLater(() -> initFX(pPieChart));
 		

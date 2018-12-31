@@ -46,13 +46,14 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
-		contentPane = new JPanel();
+/*		contentPane = new JPanel();
 		add(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new BorderLayout(0, 0));*/
 		
 		//바차트 패널 붙임
 		pBarChart = new DataBarChartCarModel();
-		contentPane.add(pBarChart);
+//		contentPane.add(pBarChart);
+		add(pBarChart);
 		
 		Platform.runLater(() -> initFX(pBarChart));
 		
@@ -98,8 +99,8 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 		group.add(btnReset);
 		panelRbtn.add(btnReset);
 		
-		contentPane.add(panelRbtn, BorderLayout.SOUTH);
-	
+//		contentPane.add(panelRbtn, BorderLayout.SOUTH);
+		add(panelRbtn, BorderLayout.SOUTH);
 	}
 	
 	public void initFX(InitScene fxPanel) {
