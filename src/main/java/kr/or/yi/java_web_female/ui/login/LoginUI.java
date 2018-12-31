@@ -104,9 +104,9 @@ public class LoginUI extends JFrame implements ActionListener {
 		pBtn.add(btnSearch);
 
 		// test
-		tfId.setText("asd132");
+		tfId.setText("E001");
 		tfPwd.setText("rootroot");
-
+		checkManager.setSelected(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {

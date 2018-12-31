@@ -32,6 +32,7 @@ import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
 import kr.or.yi.java_web_female.ui.join.SearchPostUI;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class CustommerListPannel extends JPanel implements ActionListener {
@@ -133,6 +134,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel1 = new JComboBox<>();
+		cmbTel1.setPreferredSize(new Dimension(100, 27));
 		cmbTel1.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
 		pTel.add(cmbTel1);
 
@@ -176,6 +178,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pEmail.add(tfCusEmail2);
 
 		cmbCusEmail2 = new JComboBox<String>();
+		cmbCusEmail2.setPreferredSize(new Dimension(150, 21));
 		cmbCusEmail2.addActionListener(this);
 
 		cmbCusEmail2.setModel(new DefaultComboBoxModel<String>(

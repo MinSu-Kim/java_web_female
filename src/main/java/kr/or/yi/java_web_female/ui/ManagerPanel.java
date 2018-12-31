@@ -55,7 +55,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		lblID = new JLabel("");
 		pLoginInfo.add(lblID);
 		if (LoginUI.loginCusotmer == null) {
-			lblID.setText(LoginUI.loginEmployee.getCode() + "님");
+			lblID.setText(LoginUI.loginEmployee.getCode()+ "(" + LoginUI.loginEmployee.getName() + ")" + "님");
 		} else {
 			lblID.setText(LoginUI.loginCusotmer.getId() + "(" + LoginUI.loginCusotmer.getName() + ")" + "님");
 		}
@@ -70,10 +70,10 @@ public class ManagerPanel extends JPanel implements ActionListener {
 
 		}
 
-		lblGrade = new JLabel("고객등급");
+		lblGrade = new JLabel("");
 		pLoginInfo.add(lblGrade);
 		if (LoginUI.loginCusotmer == null) {
-			/* lblGrade.setText(LoginUI.loginEmployee.getCode() + "님"); */
+			
 		} else {
 			lblGrade.setText(LoginUI.loginCusotmer.getGradeCode().getName() + " 등급입니다.");
 		}
