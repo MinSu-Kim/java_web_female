@@ -174,6 +174,12 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		btnAdd = new JButton("추가");
 		btnAdd.addActionListener(this);
 		panelBtn.add(btnAdd);
+		//고객은 추가버튼 이용불가능
+		if(TestFrame.loginEmployee()) {
+			btnAdd.setVisible(true);
+		}else {
+			btnAdd.setVisible(false);
+		}
 		panelBtn.add(btnOk);
 
 		panelCarType.getComboBox().addItemListener(this);
