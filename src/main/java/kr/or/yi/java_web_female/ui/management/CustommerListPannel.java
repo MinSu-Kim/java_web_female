@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
@@ -29,6 +30,8 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -70,6 +73,16 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Customer item = panelList.getSelectedItem();
+					setItem(item);
+					btnCusOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_4 = new JPanel();
@@ -383,10 +396,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		String cAddr = tfAddr.getText().trim();
 		String zipCode = tfZipCode.getText().trim();
 		Date cusDob = birthday.getDate();
-		/*
-		 * String cTel1 = (String) cmbTel1.getSelectedItem(); String cTel2 =
-		 * tfTel2.getText().trim(); String cTel3 = tfTel3.getText().trim();
-		 */
+		
 		String cEmail1 = tfCusEmail1.getText().trim();
 		String cEmail2 = tfCusEmail2.getText().trim();
 		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();
@@ -421,7 +431,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	}
 
 	protected void do_btnCusOk_actionPerformed(ActionEvent arg0) {
-//		JOptionPane.showMessageDialog(null, "do_btnCusOk_actionPerformed 추가");
+
 		String cId = tfCusId.getText().trim();
 		String cName = tfCusName.getText().trim();
 		String cCode = tfCusCode.getText().trim();
@@ -441,11 +451,9 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		}
 		String zipCode = tfZipCode.getText();
 
-//		Grade gradeName = (Grade) cmbGrade.getSelectedItem();
 		int rentCnt = 0;
 
 		Customer customer = new Customer();
-		// Grade gradeCode = new Grade("G001");
 
 		customer.setId(cId);
 		customer.setPasswd("1234");
@@ -471,13 +479,12 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
 
-		// JOptionPane.showMessageDialog(null, customer);
 		service.insertCustomer(customer);
 
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-//		add(panelList);
+
 		clearTf();
 	}
 

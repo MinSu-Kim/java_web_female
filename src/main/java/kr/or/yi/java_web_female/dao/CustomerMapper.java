@@ -2,6 +2,8 @@ package kr.or.yi.java_web_female.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -14,7 +16,10 @@ public interface CustomerMapper {
 	Customer selectCustomerById(Customer customer);
 	
 	int insertCustomer(Customer customer);
+	
 	int updateCustomer(Customer customer);
+	
+	@Delete("delete from customer where code=#{code}")
 	int deleteCustomer(Customer customer);
 
 	int nextCustomerCode();
@@ -43,5 +48,15 @@ public interface CustomerMapper {
 	/*@Select("select Id from customer c where c.phone = #{phone} and c.email = #{email}")*/
 	Customer searchId(Customer customer);
 	
+	@Select("select concat( char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65), char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65)) as randomPwd")
+	String getRandomPassword();
+	
+	@Update("update customer set passwd=password(#{passwd}) where phone = #{phone} and email = #{email}")
 	int changePw(Customer customer);
+	
+	@Select("select passwd = password(#{passwd}) as samePwd from customer where Id = #{id}")
+	int samePwd(Customer customer);
+	
+
+	
 }

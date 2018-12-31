@@ -12,8 +12,19 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import kr.or.yi.java_web_female.InitScene;
+import kr.or.yi.java_web_female.dto.CarModel;
+import kr.or.yi.java_web_female.dto.StateCar;
+import kr.or.yi.java_web_female.service.RentUIService;
+
+import java.awt.Font;
+import java.util.List;
 
 public class DataLineChartRentCount extends JFXPanel implements InitScene {
+	private RentUIService service;
+	
+	public DataLineChartRentCount() {
+		setFont(new Font("Dialog", Font.PLAIN, 12));
+	}
 
 	private LineChart<String, Number> lineChart;
 	private CategoryAxis xAxis;
@@ -25,26 +36,45 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 		root.setAutoSizeChildren(true);
 		
 		xAxis = new CategoryAxis();
-		xAxis.setLabel("모델별 렌트추이");
+		xAxis.setLabel("차종별 렌트추이");
 		
 		NumberAxis yAxis = new NumberAxis();
-		yAxis.setLabel(" 렌트회수");
+		yAxis.setLabel(" 렌트 수");
 		
 		lineChart = new LineChart<>(xAxis, yAxis);
-		lineChart.setPrefSize(430, 250);
+		lineChart.setPrefSize(450, 275);
 		lineChart.setData(getChartData());
-		lineChart.setTitle("기간별 렌트회수");
+		lineChart.setTitle("기간별 렌트횟수");
 		lineChart.setLegendVisible(true);	// 범례 표시 유무
 		lineChart.setLegendSide(Side.BOTTOM);// 범례 위치
 		
-		return null;
+		root.getChildren().add(lineChart);
+		
+		return scene;
 	}
 
 	private ObservableList<Series<String, Number>> getChartData() {
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
 		/*CarModel model1 = new CarModel(CarModel.getCarCode,CarModel.getCarName,기간1의 렌트수, 기간2의 렌트수, ... );
 		list.add(getChartData(model1));*/
+		
+		//일단 기간별 전체 렌트횟수 표시
+		service = new RentUIService();
+		List<StateCar> countList = service.selectCountRentByMonth();
+		for(int i=0;i<countList.size();i++) {
+			StateCar car = countList.get(i);
+			list.add(getChartData(car));
+		}
 		return list;
+	}
+
+	private XYChart.Series<String, Number> getChartData(StateCar model) {
+		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
+		
+		dataSeries.setName(model.getTitle());
+		dataSeries.getData().add(new XYChart.Data<>("대여횟수",model.getCount()));
+		
+		return dataSeries;
 	}
 
 }

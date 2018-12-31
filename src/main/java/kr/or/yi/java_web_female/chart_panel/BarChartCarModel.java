@@ -89,7 +89,7 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 		group.add(rdbtnS6);
 		panelRbtn.add(rdbtnS6);
 		
-		btnReset = new JRadioButton("초기화");
+		btnReset = new JRadioButton("전체");
 		btnReset.addActionListener(this);
 		group.add(btnReset);
 		panelRbtn.add(btnReset);

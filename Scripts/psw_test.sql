@@ -73,6 +73,9 @@ select length(password('root123345')) from dual;
 -- 비밀번호가 같은지 확인
 select password('rootroot') = password('rootroot1') from dual;
 
+select passwd = password('rootroot1') as samePwd from customer where Id = 'asd132' ;
+
+
 select * from event;
 select * from custom_event;
 select * from customer;
@@ -226,3 +229,66 @@ where c.phone = '010-0000-7777' and c.email = 'abc@gmail.com';
 select  Id
 from customer c 
 where c.phone = '010-0000-7777' and c.email ='abc@gmail.com';
+
+select * from customer;
+
+
+
+select c.code, Id, passwd, c.Name, zip_code ,address, phone,dob, email, emp_code, license,  rent_cnt, event_code,
+				custom_code, is_use, e.name as eName, e.rate as eRate, e.code as eCode, g.rate as gRate , grade_code, g.name gName
+from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code join grade g on c.grade_code = g.code
+		
+		
+select code, Id, Name,zip_code,	address, phone, dob, email, emp_code, license,	grade_code, rent_cnt
+from customer
+where Id = 'asd132' and passwd = password('rootroot');
+
+update customer
+set passwd = password('rootroot')
+
+
+
+
+select concat( char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65), char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65)) as randomPwd;
+
+
+
+select char(65), char(90)
+
+where Id = 'asd132';
+
+select code, Id,
+		Name,zip_code,
+		address, phone, dob, email, emp_code, license,
+		grade_code, rent_cnt
+		from customer
+		where Id = 'asd132' and passwd = password('rootroot');
+		
+select c.code, Id, passwd, c.Name, zip_code ,address, phone,dob, email, emp_code, license,  rent_cnt, event_code,
+	custom_code, is_use, e.name as eName, e.rate as eRate, e.code as eCode, g.rate as gRate ,grade_code, g.name gname
+from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code join grade g on c.grade_code = g.code
+where c.code ='C001';
+
+
+select * from customer c
+where c.phone = '010-7777-0000' and c.email ='xbmhw325@gmail.com' and passwd = password('M20QO83O');
+
+
+
+select concat( char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65), char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65)) as randomPwd;
+
+update customer c
+set passwd=password(concat( char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65), char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65)))
+where c.phone = '010-0000-7777' and c.email ='abc@gmail.com';
+
+
+
+update customer
+set Id=#{id}, Name=#{name},
+		address=#{address}, zip_code=#{zipCode},
+		phone=#{phone}, dob=#{dob},
+		email=#{email}, emp_code=#{empCode.code}, license=#{license},
+		grade_code=#{gradeCode.code},
+		rent_cnt=#{rentCnt}
+where code=#{code}
+

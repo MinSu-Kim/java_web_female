@@ -18,8 +18,12 @@ import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.service.StateCarChartService;
+import java.awt.Font;
 
 public class DataPieChartBrand extends JFXPanel implements InitScene{
+	public DataPieChartBrand() {
+		setFont(new Font("Dialog", Font.BOLD, 12));
+	}
 
 	
 	private PieChart pieChart;

@@ -235,7 +235,10 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return String.format("id = %s", id);
+		return String.format(
+				"Customer [code=%s, id=%s, passwd=%s, name=%s, zipCode=%s, address=%s, phone=%s, dob=%s, email=%s, empCode=%s, license=%s, gradeCode=%s, rentCnt=%s, events=%s]",
+				code, id, passwd, name, zipCode, address, phone, dob, email, empCode, license, gradeCode, rentCnt,
+				events);
 	}
 
 	@Override

@@ -9,6 +9,8 @@
 	
 	<resultMap type="Rent" id="resultRent">
 		<id column="rentCode" property="code" />
+		<result column="carTypeCode" property="carCode.carType.code" />
+		<result column="carTypeName" property="carCode.carType.type"/>
 		<result column="carCode" property="carCode.carCode" />
 		<result column="carModelName" property="carCode.name" />
 		<result column="customerCode" property="customerCode.code" />
@@ -23,14 +25,48 @@
 	</resultMap>
 	
 	<!-- 반납여부가 N인 차량만 가지고 오기 -->
-	<select id="selectRentByAll" resultType="Rent" resultMap="resultRent">
-		select r.code as rentCode, cm.car_code as carCode, cm.name as carModelName, c.code as customerCode, c.name as customerName, start_date, start_time, end_date, end_time, is_return, insurance_code, basic_price 
-		from rent r join car_model cm on r.car_code = cm.car_code join customer c on r.costomer_code = c.code
+	<select id="selectRentByAll" resultMap="resultRent">
+		<include refid="selectSql" />
+		where r.is_return = 0;
+	</select>
+	
+	<select id="selectRentAll" resultMap="resultRent">
+		<include refid="selectSql" />
+		order by is_return;
 	</select>
 	
 	<select id="selectRentHours" resultType="RentHour" parameterType="map">
 		select hour6, hour10, hour12, hour_else, basic_charge, timestampdiff(hour, concat(end_date, ' ', end_time), now()) as overHour
 		from rent r join car_model cm on r.car_code = cm.car_code 
 		where cm.car_code = #{carCode} and r.code = #{rCode};
+	</select>
+	
+	<!-- 검색하기 -->
+	<sql id="selectSql">
+		select r.code as rentCode, ct.code as carTypeCode, ct.type as carTypeName, cm.car_code as carCode, cm.name as carModelName, c.code as customerCode, c.name as customerName, start_date, start_time, end_date, end_time, is_return, insurance_code, basic_price 
+		from rent r join car_model cm on r.car_code = cm.car_code join customer c on r.costomer_code = c.code join car_type ct on cm.cartype = ct.code
+		
+	</sql>
+	
+	<sql id="whereSql">
+		<where>
+			<if test="isReturn != null">
+				r.is_return = 0
+			</if>
+			<if test="carTypeCode != null">
+				AND ct.type = #{carTypeCode}
+			</if>
+			<if test="carTypeName != null">
+				AND cm.name = #{carTypeName}
+			</if>
+			<if test="customerName != null">
+				AND c.name = #{customerName}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="FilterRentInfo" parameterType="map" resultMap="resultRent">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
 	</select>
 </mapper>

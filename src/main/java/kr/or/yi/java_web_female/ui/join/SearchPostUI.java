@@ -23,6 +23,7 @@ import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.SearchPostService;
 import kr.or.yi.java_web_female.ui.list.AddressTable;
 import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
+import kr.or.yi.java_web_female.ui.management.CustommerUpdate;
 
 @SuppressWarnings("serial")
 public class SearchPostUI extends JFrame implements ActionListener {
@@ -34,10 +35,10 @@ public class SearchPostUI extends JFrame implements ActionListener {
 	private SearchPostService postService;
 	private AddressTable pList;
 	private Post doro;
-	
-	private ActionListener joinUi; //추가
-	
-	public void setJoinUi(ActionListener joinUi) {  //추가
+
+	private ActionListener joinUi; // 추가
+
+	public void setJoinUi(ActionListener joinUi) { // 추가
 		this.joinUi = joinUi;
 	}
 
@@ -84,22 +85,24 @@ public class SearchPostUI extends JFrame implements ActionListener {
 		pCond.add(btnSearch);
 
 		pList = new AddressTable();
-		
-		/*클릭리스너추가*/
+
+		/* 클릭리스너추가 */
 		pList.getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Post post = pList.getSelectedItem();
-				if(joinUi instanceof JoinUI) {
-					((JoinUI)joinUi).setAddress(post);
-				}else if(joinUi instanceof CustommerListPannel) {
-					((CustommerListPannel)joinUi).setAddress(post);
+				if (joinUi instanceof JoinUI) {
+					((JoinUI) joinUi).setAddress(post);
+				} else if (joinUi instanceof CustommerListPannel) {
+					((CustommerListPannel) joinUi).setAddress(post);
+				} else if (joinUi instanceof CustommerUpdate) {
+					((CustommerUpdate) joinUi).setAddress(post);
+
+					SearchPostUI.this.dispose();
 				}
-				
-				SearchPostUI.this.dispose();
 			}
 		});
-		
+
 		contentPane.add(pList, BorderLayout.CENTER);
 
 	}

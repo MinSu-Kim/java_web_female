@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ import javax.swing.border.TitledBorder;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import kr.or.yi.java_web_female.dto.Brand;
+import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.BrandList;
 
@@ -35,7 +38,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public BrandListPanel() {
-		setBorder(new TitledBorder(null, "\uBE0C\uB79C\uB4DC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Brand", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponent();
 	}
@@ -46,6 +49,17 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		list = service.selectAllBrand();
 		panelList.setList(list);
 		panelList.loadDatas();
+		//더블클릭시 구현
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Brand item = panelList.getSelectedItem();
+					setItem(item);
+					btnOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		

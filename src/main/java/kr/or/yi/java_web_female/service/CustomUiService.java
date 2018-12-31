@@ -58,6 +58,10 @@ public class CustomUiService {
 	public List<Grade> getGradeList(){
 		return gradeDao.selectGradeByAll();
 	}
+	
+	public int samePwd(Customer customer) {
+		return customerDao.samePwd(customer);
+	}
 }
 
 

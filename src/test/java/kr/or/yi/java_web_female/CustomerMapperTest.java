@@ -108,7 +108,7 @@ public class CustomerMapperTest extends AbstractTest {
 
 		Customer searchPw = new Customer();
 		searchPw.setId("asd132");
-		searchPw.setPasswd("rootroot");//틀린 비밀번호
+		searchPw.setPasswd("rootroot1");//틀린 비밀번호
 		Customer selCustomer = dao.selectCustomerByPw(searchPw);
 		Assert.assertNull(selCustomer);
 	}
@@ -207,11 +207,32 @@ public class CustomerMapperTest extends AbstractTest {
 	@Test
 	public void test14changePw() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		String rndPwd = dao.getRandomPassword();
+		System.out.println("임시비밀번호" +rndPwd);
+		
 		Customer customer = new Customer();
-		customer.setPhone("010-0000-7777");
-		customer.setEmail("abc@gmail.com");
-		customer.setPasswd("password");
+		customer.setPhone("010-7777-0000");
+		customer.setEmail("xbmhw325@gmail.com");
+		customer.setPasswd(rndPwd);
 		int res = dao.changePw(customer);
 		Assert.assertEquals(1, res);
 	}
+
+	@Test
+	public void test15samePwd() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Customer customer = new Customer();
+		customer.setId("asd132");
+		customer.setPasswd("rootroot");
+		int res = dao.samePwd(customer);
+		Assert.assertEquals(1, res);
+		
+		 customer = new Customer();
+		customer.setId("asd132");
+		customer.setPasswd("rootroot1");
+		 res = dao.samePwd(customer);
+		Assert.assertEquals(0, res);
+	}
+	
 }

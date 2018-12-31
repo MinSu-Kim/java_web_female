@@ -17,12 +17,17 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 
+import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.Fuel;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.FuelList;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class FuelListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -37,7 +42,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public FuelListPanel() {
-		setBorder(new TitledBorder(null, "\uC5F0\uB8CC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Fuel", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponent();
 	}
@@ -51,6 +56,17 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();
+		//더블클릭시 구현
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Fuel item = panelList.getSelectedItem();
+					setItem(item);
+					btnOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new BorderLayout(0, 0));
 		add(panelList, BorderLayout.CENTER);
 		
@@ -60,7 +76,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		
 		JPanel panelInput = new JPanel();
 		panel_1.add(panelInput);
-		panelInput.setLayout(new GridLayout(0, 2, 0, 0));
+		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		JLabel lblNo = new JLabel("번호");
 		lblNo.setHorizontalAlignment(SwingConstants.RIGHT);

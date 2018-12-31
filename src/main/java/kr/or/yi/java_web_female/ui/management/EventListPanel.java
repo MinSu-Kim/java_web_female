@@ -18,6 +18,8 @@ import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.service.GradeEventUiService;
 import kr.or.yi.java_web_female.ui.list.EventList;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class EventListPanel extends JPanel implements ActionListener {
@@ -48,7 +50,16 @@ public class EventListPanel extends JPanel implements ActionListener {
 		list = service.selectEventByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-		
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Event item = panelList.getSelectedItem();
+					setItem(item);
+					btnEventOk.setText("수정");
+				}
+			}
+		});
 		setLayout(new GridLayout(0, 2, 0, 0));
 		add(panelList);
 
