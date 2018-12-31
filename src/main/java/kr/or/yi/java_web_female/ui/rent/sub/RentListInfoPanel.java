@@ -10,7 +10,9 @@ import kr.or.yi.java_web_female.dao.RentMapperImpl;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.RentHour;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.list.RentList;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
+import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 
 import javax.swing.UIManager;
@@ -44,8 +46,12 @@ public class RentListInfoPanel extends JPanel implements ActionListener {
 	private JButton btnReturn;
 	private RentUIService service;
 	private RentListPanel rentListPanel;
+	private AllRentPanel allRentPanel;
 	
-	
+	public void setAllRentPanel(AllRentPanel allRentPanel) {
+		this.allRentPanel = allRentPanel;
+	}
+
 	public void setRentListPanel(RentListPanel rentListPanel) {
 		this.rentListPanel = rentListPanel;
 	}
@@ -210,6 +216,8 @@ public class RentListInfoPanel extends JPanel implements ActionListener {
 		
 		if(LoginUI.loginCusotmer == null) {
 			rentListPanel.reloadList();
+/*			allRentPanel.reloadList();
+			JOptionPane.showMessageDialog(null, allRentPanel);*/
 		}
 	}
 }

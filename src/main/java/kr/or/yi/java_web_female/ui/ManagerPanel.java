@@ -10,6 +10,7 @@ import kr.or.yi.java_web_female.ui.login.LoginUI;
 import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
+import kr.or.yi.java_web_female.ui.rent.RentStatistics;
 import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.chart_panel.BarChartCarModel;
 import kr.or.yi.java_web_female.chart_panel.PieChartCarType;
@@ -132,7 +133,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			JPanel panel_10 = new JPanel();
 			tabbedPane.addTab("고객통계", null, panel_10, null);
 
-			JPanel panel_11 = new JPanel();
+			RentStatistics panel_11 = new RentStatistics();
 			tabbedPane.addTab("렌트통계", null, panel_11, null);
 
 		}
