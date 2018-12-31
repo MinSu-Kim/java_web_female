@@ -14,6 +14,10 @@ public class LineChartRentCount extends JPanel {
 	private JPanel contentPane;
 	private DataLineChartRentCount pLineChart;
 	
+	public DataLineChartRentCount getpLineChart() {
+		return pLineChart;
+	}
+
 	public LineChartRentCount() {
 		initComponents();
 	}
@@ -24,6 +28,7 @@ public class LineChartRentCount extends JPanel {
 		
 		contentPane = new JPanel();
 		add(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		//라인차트 패널 붙이기
 		pLineChart = new DataLineChartRentCount();

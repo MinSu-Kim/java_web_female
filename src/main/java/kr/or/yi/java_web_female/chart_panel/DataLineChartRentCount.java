@@ -29,6 +29,10 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 	private LineChart<String, Number> lineChart;
 	private CategoryAxis xAxis;
 	
+	public LineChart<String, Number> getLineChart() {
+		return lineChart;
+	}
+
 	@Override
 	public Scene createScene() {
 		Group root = new Group();
@@ -42,7 +46,7 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 		yAxis.setLabel(" 렌트 수");
 		
 		lineChart = new LineChart<>(xAxis, yAxis);
-		lineChart.setPrefSize(450, 275);
+		lineChart.setPrefSize(440, 250);
 		lineChart.setData(getChartData());
 		lineChart.setTitle("기간별 렌트횟수");
 		lineChart.setLegendVisible(true);	// 범례 표시 유무

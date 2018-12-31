@@ -15,14 +15,19 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
+import java.awt.FlowLayout;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class BarChartCarModel extends JPanel implements ActionListener{
 	
 	private JPanel contentPane;
-//	private CarModelService service;
 	private DataBarChartCarModel pBarChart;
-	
+
+	public DataBarChartCarModel getpBarChart() {
+		return pBarChart;
+	}
 	//차종별 라디오버튼
 	private JRadioButton rdbtnS1;
 	private JRadioButton rdbtnS2;
@@ -31,11 +36,11 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 	private JRadioButton rdbtnS5;
 	private JRadioButton rdbtnS6;
 	private JRadioButton btnReset;
+	private JPanel panelRbtn;
 	/**
 	 * Create the panel.
 	 */
 	public BarChartCarModel() {
-//		service = new CarModelService();
 		initComponents();
 	}
 	private void initComponents() {
@@ -43,6 +48,7 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 		
 		contentPane = new JPanel();
 		add(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		//바차트 패널 붙임
 		pBarChart = new DataBarChartCarModel();
@@ -51,7 +57,8 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 		Platform.runLater(() -> initFX(pBarChart));
 		
 		//라디오버튼
-		JPanel panelRbtn = new JPanel();
+		
+		panelRbtn = new JPanel();
 		panelRbtn.setLayout(new GridLayout(0, 7, 0, 0));
 				
 		ButtonGroup group = new ButtonGroup();
@@ -91,7 +98,7 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 		group.add(btnReset);
 		panelRbtn.add(btnReset);
 		
-		contentPane.add(panelRbtn);
+		contentPane.add(panelRbtn, BorderLayout.SOUTH);
 	
 	}
 	
@@ -182,5 +189,9 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 			maps.put("cartype", "S5");
 			pBarChart.getBarChart().setData(pBarChart.getChartData(maps));
 		});
+	}
+	
+	public void isRadioBtns(boolean isVisible) {
+		this.panelRbtn.setVisible(isVisible);
 	}
 }

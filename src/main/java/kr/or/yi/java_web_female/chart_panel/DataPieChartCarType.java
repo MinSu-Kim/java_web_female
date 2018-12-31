@@ -27,7 +27,12 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	private StateCarChartService chartService;
 	private CarModelService modelService;
 	private CarUiService carService;
-	
+
+	public PieChart getPieChart() {
+		return pieChart;
+	}
+
+
 	@Override
 	public Scene createScene() {
 		chartService = new StateCarChartService();
@@ -39,7 +44,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 		root.setAutoSizeChildren(true);
 		
 		pieChart = new PieChart();
-		pieChart.setPrefSize(450, 275);
+		pieChart.setPrefSize(440, 250);
 		pieChart.setData(getChartData());
 		pieChart.setTitle("차종별 보유차량");
 		pieChart.setLegendVisible(true);	// 범례 표시 유무

@@ -12,13 +12,13 @@ import javafx.scene.Scene;
 public class PieChartBrand extends JPanel{
 	
 	private JPanel contentPane;
-//	private CarModelService service;
 	private DataPieChartBrand pPieChart;
-	/**
-	 * Create the panel.
-	 */
+	
+	public DataPieChartBrand getpPieChart() {
+		return pPieChart;
+	}
+
 	public PieChartBrand() {
-//		service = new CarModelService();
 		initComponents();
 	}
 	
@@ -27,6 +27,7 @@ public class PieChartBrand extends JPanel{
 		
 		contentPane = new JPanel();
 		add(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		pPieChart = new DataPieChartBrand();
 		contentPane.add(pPieChart);

@@ -50,7 +50,7 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		
 		barChart = new BarChart<>(xAxis, yAxis);
 
-		barChart.setPrefSize(450, 250);
+		barChart.setPrefSize(440, 230);
 		Map<String, String> maps = new HashMap<>();
 		barChart.setData(getChartData(maps));
 		
