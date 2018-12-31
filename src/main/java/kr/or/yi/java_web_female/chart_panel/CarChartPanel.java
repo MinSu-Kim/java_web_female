@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Component;
+
 import javax.swing.JRadioButton;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -63,14 +65,9 @@ public class CarChartPanel extends JPanel implements ActionListener{
 		panel_LineRentCount.getpLineChart().setBorder(new EmptyBorder(0, 0, 0, 20));
 		panelAllChart.add(panel_LineRentCount);
 		
-/*		panelSelect = new JPanel();
-		panelTotal.add(panelSelect, BorderLayout.SOUTH);
-		panelSelect.setVisible(false);
-		panelSelect.setLayout(new GridLayout(0, 1, 0, 0));*/
-		
 		panelSelectedOne = new JPanel();
 		add(panelSelectedOne, BorderLayout.SOUTH);
-//		panelSelectedOne.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelSelectedOne.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panelBtn = new JPanel();
 		add(panelBtn, BorderLayout.NORTH);
@@ -121,15 +118,14 @@ public class CarChartPanel extends JPanel implements ActionListener{
 		if (e.getSource() == rdbtnTotal) {
 			do_rdbtnTotal_actionPerformed(e);
 		}
-		panelSelectedOne.revalidate();
+		revalidate();
 	}
+	
 	protected void do_rdbtnTotal_actionPerformed(ActionEvent e) {
 		//전체보기 선택
 		panelAllChart.setVisible(true);
 		panelSelectedOne.setVisible(false);
 		
-		panelSelectedOne.removeAll();
-		//사이즈 원래대로 복구
 		panel_BarChart.getpBarChart().getBarChart().setPrefSize(440,230);
 		panel_PieCarType.getpPieChart().getPieChart().setPrefSize(440, 250);
 		panel_PieBrand.getpPieChart().getPieChart().setPrefSize(440, 250);
@@ -139,41 +135,37 @@ public class CarChartPanel extends JPanel implements ActionListener{
 		panelAllChart.add(panel_PieCarType);
 		panelAllChart.add(panel_PieBrand);
 		panelAllChart.add(panel_LineRentCount);
-//		revalidate();
 	}
+	
 	protected void do_rdbtnRentCount_actionPerformed(ActionEvent e) {
 		//월별 차종별 렌트 횟수 선택
-		setSelectedOneChart();
-		panelSelectedOne.add(panel_LineRentCount);
+		addReplaceChartPanel(panel_LineRentCount);
 		panel_LineRentCount.getpLineChart().getLineChart().setPrefSize(700,450);
-//		revalidate();
 	}
+	
 	protected void do_rdbtnCarType_actionPerformed(ActionEvent e) {
 		//차종별 보유차량 수 선택
-		setSelectedOneChart();
-		panelSelectedOne.add(panel_PieCarType);
+		addReplaceChartPanel(panel_PieCarType);
 		panel_PieCarType.getpPieChart().getPieChart().setPrefSize(700,450);
-//		revalidate();
 	}
 	protected void do_rdbtnBrand_actionPerformed(ActionEvent e) {
 		//브랜드별 보유차량 수 선택
-		setSelectedOneChart();
-		panelSelectedOne.add(panel_PieBrand);
+		addReplaceChartPanel(panel_PieBrand);
 		panel_PieBrand.getpPieChart().getPieChart().setPrefSize(700,450);
-//		revalidate();
 	}
+	
 	protected void do_rdbtnCarModel_actionPerformed(ActionEvent e) {
 		//모델별 렌트 횟수 선택
-		setSelectedOneChart();
-		panelSelectedOne.add(panel_BarChart);
+		addReplaceChartPanel(panel_BarChart);
 		panel_BarChart.getpBarChart().getBarChart().setPrefSize(700,450);
-//		revalidate();
 	}
 
-	private void setSelectedOneChart() {
+	private void addReplaceChartPanel(JPanel panel) {
 		panelAllChart.setVisible(false);
 		panelSelectedOne.setVisible(true);
-		panelTotal.add(panelSelectedOne, BorderLayout.CENTER);
+
 		panelSelectedOne.removeAll();
+		panelSelectedOne.add(panel);
 	}
+
 }
