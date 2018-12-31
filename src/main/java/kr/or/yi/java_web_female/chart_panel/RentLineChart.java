@@ -98,18 +98,7 @@ public class RentLineChart extends JFXPanel implements InitScene{
 		}
 
 		list.add(dataSeries1);	
-		
-	/*	XYChart.Series<String, Number> dataSeries1 = new Series<String, Number>();
-		dataSeries1.setName("2017년");
-		
-		List<StateCar> arr1 = service.selectCountRentByMonth();
-		for(int i = 0 ; i < arr1.size() ; i++) {
-			StateCar sc = arr1.get(i);
-			dataSeries1.getData().add(new XYChart.Data<>(sc.getTitle().split("-")[1]+"월", sc.getCount() + 10));
-		}
-		
-		list.add(dataSeries1);*/
-		
+				
 		return list;
 	}
 	
