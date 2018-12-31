@@ -10,6 +10,7 @@ import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.RentHour;
+import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class RentMapperImpl implements RentMapper {
@@ -105,7 +106,7 @@ public class RentMapperImpl implements RentMapper {
 	}
 
 	@Override
-	public List<String> selectCountRentByMonth() {
+	public List<StateCar> selectCountRentByMonth() {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
 			return sqlSession.selectList(namespace+".selectCountRentByMonth");
 		}

@@ -17,6 +17,7 @@ import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.RentHour;
+import kr.or.yi.java_web_female.dto.StateCar;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RentMapperTest extends AbstractTest {
@@ -136,7 +137,7 @@ public class RentMapperTest extends AbstractTest {
 	public void test07selectCountRentByMonth() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
-		List<String> list = dao.selectCountRentByMonth();
+		List<StateCar> list = dao.selectCountRentByMonth();
 		Assert.assertNotNull(list);
 	}
 }
