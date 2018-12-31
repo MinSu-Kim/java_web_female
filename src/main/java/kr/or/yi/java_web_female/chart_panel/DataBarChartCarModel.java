@@ -44,7 +44,8 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 	@Override
 	public Scene createScene() {
 		Group root = new Group();//javafx.scene.Group - import
-		Scene scene = new Scene(root, Color.ALICEBLUE);
+		Scene scene = new Scene(root);
+		
 		root.setAutoSizeChildren(true);//"자동 크기 조정"하여 상태가 변경 될 때 영역과 컨트롤의 크기가 올바르게 조정
 		
 		//막대형 차트의 X축과 Y축을 정의하고 레이블을 설정
@@ -55,7 +56,6 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 		yAxis.setLabel("대여 횟수");
 		
 		barChart = new BarChart<>(xAxis, yAxis);
-		barChart.setTitle("차량별 대여 횟수 통계");
 
 		barChart.setPrefSize(450, 250);
 		Map<String, String> maps = new HashMap<>();
