@@ -2,8 +2,6 @@ package kr.or.yi.java_web_female.chart_panel;
 
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -16,7 +14,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import kr.or.yi.java_web_female.InitScene;
-import kr.or.yi.java_web_female.dto.Rent;
+import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.service.RentUIService;
 
@@ -72,18 +70,34 @@ public class RentLineChart extends JFXPanel implements InitScene{
 		// TODO Auto-generated method stub
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
 		
-		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
-		//2018년도에 있는 데이터
-		dataSeries.setName("2018년");
+		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();		
 		
-		List<StateCar> arr = service.selectCountRentByMonth();
-		//selectCountRentByMonth 결과 ==> 2018-11, 1 // 2018-12, 6 ...
+		
+		List<StateCar> arr = service.selectCountRentByMonthWithCarType("경형");
+		
 		for(int i = 0 ; i < arr.size() ; i++) {
 			StateCar sc = arr.get(i);
+			//x축 : 월, y축 : 대여횟수
 			dataSeries.getData().add(new XYChart.Data<>(sc.getTitle().split("-")[1] + "월", sc.getCount()));
+			//범례 이름 ====> 차종(경형, 중형, 소형, 대형, ...)
+			dataSeries.setName("경형");
 		}
 		
 		list.add(dataSeries);
+		
+		XYChart.Series<String, Number> dataSeries1 = new Series<String, Number>();
+
+		List<StateCar> arr1 = service.selectCountRentByMonthWithCarType("소형");
+
+		for (int i = 0; i < arr1.size(); i++) {
+			StateCar sc = arr1.get(i);
+			// x축 : 월, y축 : 대여횟수
+			dataSeries1.getData().add(new XYChart.Data<>(sc.getTitle().split("-")[1] + "월", sc.getCount()));
+			// 범례 이름 ====> 차종(경형, 중형, 소형, 대형, ...)
+			dataSeries1.setName("소형");
+		}
+
+		list.add(dataSeries1);	
 		
 	/*	XYChart.Series<String, Number> dataSeries1 = new Series<String, Number>();
 		dataSeries1.setName("2017년");
