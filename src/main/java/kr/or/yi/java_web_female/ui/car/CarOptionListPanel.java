@@ -136,6 +136,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 					service.deleteCarOption(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarOption());
 					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 옵션이 포함된 차량 보유 중 (삭제 불가능)");
 				}
@@ -163,6 +164,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 		
 	}
@@ -211,6 +213,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		service.updateCarOption(carOption);
 		panelList.setList(service.selectAllCarOption());
 		panelList.loadDatas();
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
 	}

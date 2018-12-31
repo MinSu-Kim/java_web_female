@@ -125,6 +125,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 					service.deleteCarType(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarType());
 					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 차종의 차량을 보유 중 (삭제 불가능)");
 				}
@@ -152,6 +153,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		service.updateCarType(item);
 		panelList.setList(service.selectAllCarType());
 		panelList.loadDatas();
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
 	}
@@ -176,6 +178,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {

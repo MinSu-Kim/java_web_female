@@ -17,12 +17,14 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -49,14 +51,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private JRadioButton rdbtnAuto;
 	private JPanel panel_reset;
 
+
 	public CarPanel() {
 		service = new CarUiService();
 		modelService = new CarModelService();
 		initComponents();
-		/* 테이블 정렬
-		JTable table = new JTable(model); 
-		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model); 
-		table.setRowSorter(sorter);*/
 	}
 
 	private void initComponents() {
@@ -74,7 +73,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 
 		panelCarType.setTitle("차종");
 		List<CarType> arrCarType = service.selectAllCarType();
-		panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		if(TestFrame.loginEmployee()) {
+			panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		}else {
+			panelSelect.setLayout(new GridLayout(0, 2, 0, 0));
+		}
 
 		// 콤보박스에 차종 불러오기
 		panelCarType.setComboItems(arrCarType);
@@ -169,6 +172,12 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		btnAdd = new JButton("추가");
 		btnAdd.addActionListener(this);
 		panelBtn.add(btnAdd);
+		//고객은 추가버튼 이용불가능
+		if(TestFrame.loginEmployee()) {
+			btnAdd.setVisible(true);
+		}else {
+			btnAdd.setVisible(false);
+		}
 		panelBtn.add(btnOk);
 
 		panelCarType.getComboBox().addItemListener(this);
@@ -203,6 +212,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 				modelService.deleteCarModel(panelList.getSelectedItem());
 				panelList.setList(modelService.selectCarModelByAll());
 				panelList.loadDatas();
+				JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 			}
 		});
 		popMenu.add(delItem);
