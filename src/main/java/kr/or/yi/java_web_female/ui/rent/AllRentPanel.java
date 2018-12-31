@@ -1,14 +1,16 @@
 package kr.or.yi.java_web_female.ui.rent;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.List;
 
-import kr.or.yi.java_web_female.ui.rent.sub.RentSearchPanel;
+import javax.swing.JPanel;
+
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.list.RentList;
+import kr.or.yi.java_web_female.ui.rent.sub.RentSearchPanel;
 
+@SuppressWarnings("serial")
 public class AllRentPanel extends JPanel {
 	private RentUIService service;
 	

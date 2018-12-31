@@ -1,31 +1,27 @@
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-import kr.or.yi.java_web_female.ui.car.CarPanel;
-import kr.or.yi.java_web_female.ui.login.LoginUI;
-import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
-import kr.or.yi.java_web_female.ui.rent.RentListPanel;
-import kr.or.yi.java_web_female.ui.rent.RentPanel;
-import kr.or.yi.java_web_female.TestFrame;
-import kr.or.yi.java_web_female.chart_panel.BarChartCarModel;
-import kr.or.yi.java_web_female.chart_panel.PieChartCarType;
-import kr.or.yi.java_web_female.service.LoginUiService;
-import kr.or.yi.java_web_female.chart_panel.CarChartPanel;
-import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
-import kr.or.yi.java_web_female.ui.management.GradeEventPanel;
-import kr.or.yi.java_web_female.ui.management.EmployeeListPanel;
-import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
-import kr.or.yi.java_web_female.ui.management.CustommerUpdate;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kr.or.yi.java_web_female.TestFrame;
+import kr.or.yi.java_web_female.chart_panel.CarChartPanel;
+import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
+import kr.or.yi.java_web_female.ui.car.CarPanel;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
+import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
+import kr.or.yi.java_web_female.ui.management.CustommerUpdate;
+import kr.or.yi.java_web_female.ui.management.EmployeeListPanel;
+import kr.or.yi.java_web_female.ui.management.GradeEventPanel;
+import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
+import kr.or.yi.java_web_female.ui.rent.RentListPanel;
+import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel implements ActionListener {

@@ -19,6 +19,7 @@ import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.service.StateCarChartService;
 
+@SuppressWarnings("serial")
 public class DataPieChartCarType extends JFXPanel implements InitScene{
 
 	

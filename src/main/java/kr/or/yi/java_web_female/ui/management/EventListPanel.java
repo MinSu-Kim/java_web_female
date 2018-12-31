@@ -1,27 +1,27 @@
 package kr.or.yi.java_web_female.ui.management;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-
-import java.awt.GridLayout;
-import java.util.List;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.service.GradeEventUiService;
 import kr.or.yi.java_web_female.ui.list.EventList;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class EventListPanel extends JPanel implements ActionListener {
 	protected List<Event> list;
 	private JTextField tfEventCode;
@@ -33,9 +33,7 @@ public class EventListPanel extends JPanel implements ActionListener {
 	private JButton btnEventOk;
 	private JButton btnEventCancel;
 
-	/**
-	 * Create the panel.
-	 */
+
 	public EventListPanel() {
 		setBorder(new TitledBorder(null, "\uC774\uBCA4\uD2B8\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null,
 				null));

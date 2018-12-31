@@ -3,7 +3,6 @@ package kr.or.yi.java_web_female;
 import java.awt.EventQueue;
 
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 

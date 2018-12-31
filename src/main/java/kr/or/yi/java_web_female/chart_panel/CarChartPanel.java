@@ -1,10 +1,10 @@
 package kr.or.yi.java_web_female.chart_panel;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
 public class CarChartPanel extends JPanel {
 
 	/**

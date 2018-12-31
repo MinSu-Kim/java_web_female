@@ -6,10 +6,8 @@ import java.util.List;
 public class Customer {
 	private String code;
 	private String id;
-	private String passwd;//현재 비번
-	/*private String newPw;//새비번
-	private String confirm;//비번확인
-*/	private String name;
+	private String passwd;// 현재 비번
+	private String name;
 	private String zipCode;
 	private String address;
 	private String phone;
@@ -21,8 +19,6 @@ public class Customer {
 	private int rentCnt;
 	private List<CustomEvent> events;
 
-	
-	
 	public String getZipCode() {
 		return zipCode;
 	}

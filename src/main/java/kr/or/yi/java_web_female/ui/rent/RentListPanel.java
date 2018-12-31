@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.yi.java_web_female.dto.Rent;
@@ -14,6 +13,7 @@ import kr.or.yi.java_web_female.ui.list.RentList;
 import kr.or.yi.java_web_female.ui.rent.sub.RentListInfoPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.RentSearchPanel;
 
+@SuppressWarnings("serial")
 public class RentListPanel extends JPanel {
 	private RentUIService service;
 	private List<Rent> list;

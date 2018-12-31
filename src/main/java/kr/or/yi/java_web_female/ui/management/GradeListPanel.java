@@ -1,30 +1,27 @@
 package kr.or.yi.java_web_female.ui.management;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-
-import java.awt.GridLayout;
-import java.util.List;
-import java.awt.BorderLayout;
-import javax.swing.JTable;
-import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import kr.or.yi.java_web_female.dto.CarOption;
-import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.service.GradeEventUiService;
 import kr.or.yi.java_web_female.ui.list.GradeList;
 
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-
+@SuppressWarnings("serial")
 public class GradeListPanel extends JPanel implements ActionListener {
 	protected List<Grade> list;
 	private JTextField tfGradeCode;

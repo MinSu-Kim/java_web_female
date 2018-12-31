@@ -2,6 +2,8 @@ package kr.or.yi.java_web_female.ui.rent.sub;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.HashMap;
@@ -12,7 +14,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -24,21 +25,20 @@ import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.list.RentList;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class RentSearchPanel extends JPanel implements ItemListener, ActionListener {
 	private JTextField tfCstmName;
 	private RentUIService service;
-	private JComboBox<String> comboBoxCarType;
-	private JComboBox cmbCarType;
-	private CarInfoPanel carInfoPanel;
+//	private JComboBox<String> comboBoxCarType;
+	private JComboBox<String> cmbCarType;
+//	private CarInfoPanel carInfoPanel;
 	private List<CarType> carTypeList;
 	private List<CarModel> carModelList;
-	private int selectedIndex;
+//	private int selectedIndex;
 	private RentListPanel rentListPanel;
 	private Map<String, String> map;
-	private JComboBox cmbCarModel;
+	private JComboBox<String> cmbCarModel;
 	private JButton btnSearch;
 	private RentList rentList;
 
@@ -66,7 +66,7 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 		pCarType.add(lblCarType);
 
 		////////////////////////////////////////////
-		cmbCarType = new JComboBox();
+		JComboBox<String> cmbCarType = new JComboBox<>();
 		cmbCarType.addItemListener(this);
 
 		carTypeList = service.selectAllCarTypes();
@@ -88,7 +88,7 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 		pCarModel.add(lblCarModel);
 
 		//////////////////////////////////////
-		cmbCarModel = new JComboBox();
+		cmbCarModel = new JComboBox<>();
 		cmbCarModel.addItemListener(this);
 
 		carModelList = service.selectCarModel();
@@ -190,7 +190,6 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 	}
 
 	public void setRentList(RentList rentList) {
-		// TODO Auto-generated method stub
 		this.rentList = rentList;
 	}
 	

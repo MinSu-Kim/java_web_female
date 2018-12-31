@@ -21,10 +21,10 @@ import javax.swing.border.TitledBorder;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import kr.or.yi.java_web_female.dto.Brand;
-import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.BrandList;
 
+@SuppressWarnings("serial")
 public class BrandListPanel extends JPanel implements ActionListener {
 	private JTextField tfNo;
 	private JTextField tfName;

@@ -9,10 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -35,7 +33,6 @@ import kr.or.yi.java_web_female.ui.rent.sub.RentInfoPanel;
 
 @SuppressWarnings("serial")
 public class RentPanel extends JPanel implements ActionListener {
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private RentUIService service;
 	private JButton btnOk;
 	private CarModel selectedCarModel;
