@@ -131,4 +131,12 @@ public class RentMapperTest extends AbstractTest {
 		/*List<Rent> list = dao.FilterRentInfo(map);
 		Assert.assertNotNull(list);*/
 	}
+	
+	@Test
+	public void test07selectCountRentByMonth() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<String> list = dao.selectCountRentByMonth();
+		Assert.assertNotNull(list);
+	}
 }

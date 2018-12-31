@@ -104,4 +104,12 @@ public class RentMapperImpl implements RentMapper {
 		}
 	}
 
+	@Override
+	public List<String> selectCountRentByMonth() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace+".selectCountRentByMonth");
+		}
+		
+	}
+
 }

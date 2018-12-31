@@ -13,6 +13,10 @@ import kr.or.yi.java_web_female.dto.RentHour;
 
 public interface RentMapper {
 	
+	//월별 카운트 select
+	@Select("SELECT DATE_FORMAT(start_date,'%Y-%m') m, COUNT(*) FROM rent GROUP BY m")
+	List<String> selectCountRentByMonth();//12나 11등 숫자로 보이지만 substring사용했기때문에 String
+	
 	@Select("select concat('R', lpad((round(substring(max(code), 2,3)) + 1), 3, '0')) from rent")
 	String getNextRentNo();
 	
