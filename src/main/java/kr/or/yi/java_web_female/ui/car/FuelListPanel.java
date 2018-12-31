@@ -128,6 +128,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 					service.deleteFuel(panelList.getSelectedItem());
 					panelList.setList(service.selectAllFuel());
 					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 연료를 사용하는 차량 보유 중 (삭제 불가능)");//외래키 걸려있지 않기에 다른방법 필요
 				}
@@ -157,6 +158,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();	
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
 	}
@@ -179,6 +181,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 		
 	}

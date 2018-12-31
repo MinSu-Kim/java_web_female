@@ -294,3 +294,23 @@ select passwd = password('rootroot') as samePwd from customer
 where Id = 'asd132';
 
 update customer set Name=#{name}, address=#{address}, zip_code=#{zipCode}, phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license} where code=#{code}		
+
+
+
+--
+select grade_code from customer;
+
+
+select distinct sigungu from post;
+
+
+select mid(address, 7, 3) as 구, count(*) as 인원수
+from customer
+where mid(address, 7, 3) <> ''
+group by mid(address, 7, 3);
+
+select g.name, count(g.name) 
+from customer c left join grade g on c.grade_code = g.code
+where grade_code is not null
+group by grade_code;
+

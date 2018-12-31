@@ -66,7 +66,7 @@ public class RentSearchPanel extends JPanel implements ItemListener, ActionListe
 		pCarType.add(lblCarType);
 
 		////////////////////////////////////////////
-		JComboBox<String> cmbCarType = new JComboBox<>();
+		cmbCarType = new JComboBox<>();
 		cmbCarType.addItemListener(this);
 
 		carTypeList = service.selectAllCarTypes();

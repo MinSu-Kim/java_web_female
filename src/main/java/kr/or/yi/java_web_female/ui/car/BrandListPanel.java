@@ -123,6 +123,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 					service.deleteBrand(panelList.getSelectedItem());
 					panelList.setList(service.selectAllBrand());
 					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 브랜드에 속하는 차량을 보유 중 (삭제 불가능)");
 				}
@@ -152,6 +153,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		service.updateBrand(item);
 		panelList.setList(service.selectAllBrand());
 		panelList.loadDatas();
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
 	}
@@ -162,7 +164,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		list = service.selectAllBrand();
 		panelList.setList(list);
 		panelList.loadDatas();
-		add(panelList);
+		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 	}
 	

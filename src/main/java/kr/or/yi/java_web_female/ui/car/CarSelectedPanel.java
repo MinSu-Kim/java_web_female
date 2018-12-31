@@ -66,6 +66,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private String filePath;
 	private String currentDirectoryPath;
 	private JFileChooser chooser;
+	private JPanel panelRentCnt;
 	/**
 	 * Create the panel.
 	 */
@@ -269,10 +270,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			rdbtnAuto.setEnabled(false);
 			rdbtnStick.setEnabled(false);
 	}
-		
-		JPanel panelRentCnt = new JPanel();
+		//관리자만 대여횟수 확인가능, 고객은 렌트횟수 
+		panelRentCnt = new JPanel();
 		panel_info.add(panelRentCnt);
 		panelRentCnt.setLayout(new BorderLayout(0, 0));
+		
 		if(isAdd) {
 			JButton imgbtn = new JButton("사진추가");
 			imgbtn.addActionListener(new ActionListener() {			
@@ -283,7 +285,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			});
 			panelRentCnt.add(imgbtn);
 		}else {
-			lblCount = new JLabel("대여횟수 : ");
+			lblCount = new JLabel("");
 			lblCount.setHorizontalAlignment(SwingConstants.CENTER);
 			panelRentCnt.add(lblCount);
 		}
@@ -331,6 +333,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			CarModel model = getItem();			
 			service.updateCarModel(model);
 			carUi.reloadDataCarPanel();
+			JOptionPane.showMessageDialog(null, "차량이 수정되었습니다.");
 			carUi.close();
 		}else {
 			//추가 클릭
@@ -345,6 +348,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
 			
 			carUi.reloadDataCarPanel();
+			JOptionPane.showMessageDialog(null, "차량이 등록되었습니다.");
 			carUi.close();
 		}
 		
@@ -380,6 +384,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		model.setCarCode(tfCode.getText());
 		service.deleteCarModel(model);
 		carUi.reloadDataCarPanel();
+		JOptionPane.showMessageDialog(null, "차량이 삭제되었습니다.");
 		carUi.close();
 	}
 	
@@ -507,8 +512,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		}else {
 			rdbtnStick.setSelected(true);
 		}
-		
-		lblCount.setText("대여횟수 : "+ carModel.getRentCnt() +"번");
+		if(TestFrame.loginEmployee()) {
+			lblCount.setText("대여횟수 : "+ carModel.getRentCnt() +"번");
+		}
+
 	}
 
 	public void setCarUi(CarUi carUi) {
