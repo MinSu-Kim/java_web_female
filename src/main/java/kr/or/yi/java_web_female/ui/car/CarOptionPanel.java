@@ -1,22 +1,17 @@
 package kr.or.yi.java_web_female.ui.car;
 
-import java.util.List;
-
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.CarOption;
-import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 
+@SuppressWarnings("serial")
 public class CarOptionPanel extends AbstractListPanel<CarOption> {
-	private CarUiService service;
-	private List<CarOption> list;
-	/**
-	 * Create the panel.
-	 */
+/*	private CarUiService service;
+	private List<CarOption> list;*/
+
 	public CarOptionPanel() {
-		service = new CarUiService();
+//		service = new CarUiService();
 	}
 
 	@Override

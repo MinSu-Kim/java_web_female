@@ -33,6 +33,7 @@ import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
 
+@SuppressWarnings("serial")
 public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
 	private JTextField tfName;

@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female.ui.car;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -24,8 +25,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
-import javax.swing.UIManager;
-import java.awt.Color;
+
 @SuppressWarnings("serial")
 public class CarTypeListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -36,9 +36,6 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	private JButton btnOk;
 	private JButton btnCancel;
 
-	/**
-	 * Create the panel.
-	 */
 	public CarTypeListPanel() {
 		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		service = new CarUiService();

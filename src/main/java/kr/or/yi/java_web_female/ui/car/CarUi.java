@@ -1,7 +1,6 @@
 package kr.or.yi.java_web_female.ui.car;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,15 +8,14 @@ import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 
+@SuppressWarnings("serial")
 public class CarUi extends JFrame {
 
 	private JPanel contentPane;
 	private CarSelectedPanel panelUpdate;
 	private boolean isAdd;
 	private CarPanel carPanel;
-	/**
-	 * Create the frame.
-	 */
+
 	public CarUi(boolean isAdd) {
 		this.isAdd = isAdd;
 		initComponents();

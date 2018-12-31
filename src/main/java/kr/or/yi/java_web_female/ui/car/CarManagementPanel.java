@@ -1,14 +1,13 @@
 package kr.or.yi.java_web_female.ui.car;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
 public class CarManagementPanel extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
 	public CarManagementPanel() {
 		setLayout(new BorderLayout(0, 0));
 		

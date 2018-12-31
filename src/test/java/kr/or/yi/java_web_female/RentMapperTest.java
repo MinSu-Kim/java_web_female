@@ -3,7 +3,6 @@ package kr.or.yi.java_web_female;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
@@ -12,11 +11,7 @@ import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.RentMapper;
 import kr.or.yi.java_web_female.dao.RentMapperImpl;
-import kr.or.yi.java_web_female.dto.CarModel;
-import kr.or.yi.java_web_female.dto.Customer;
-import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
-import kr.or.yi.java_web_female.dto.RentHour;
 import kr.or.yi.java_web_female.dto.StateCar;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

@@ -4,12 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -18,15 +16,16 @@ import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.list.CarModelListPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.CarInfoPanel;
 
+@SuppressWarnings("serial")
 public class CarSearchFrame extends JFrame {
 
 	private JPanel contentPane;
 	private AbstractListPanel<CarModel> carPanel;
-	private List<CarModel> carList;
+//	private List<CarModel> carList;
 	private CarInfoPanel carInfoPanel;
 	
 	public void setCarList(List<CarModel> carList) {
-		this.carList = carList;
+//		this.carList = carList;
 		carPanel.setList(carList);
 		carPanel.loadDatas();
 	}

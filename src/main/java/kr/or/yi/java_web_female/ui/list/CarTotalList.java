@@ -1,8 +1,6 @@
 package kr.or.yi.java_web_female.ui.list;
 
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 

@@ -1,11 +1,12 @@
 package kr.or.yi.java_web_female.ui.login;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -20,11 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.yi.java_web_female.dto.Customer;
-import kr.or.yi.java_web_female.service.JoinUiService;
 import kr.or.yi.java_web_female.service.SearchIdPwService;
-
-import javax.swing.BoxLayout;
-import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class SearchIdPwUI extends JFrame implements ActionListener {

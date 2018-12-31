@@ -1,14 +1,14 @@
 package kr.or.yi.java_web_female.ui.rent.sub;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
@@ -17,9 +17,6 @@ import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.CarSearchFrame;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 @SuppressWarnings("serial")
 public class CarInfoPanel extends CarSubPanel implements ActionListener {
 	private JComboBox<String> comboBoxCar;
@@ -27,7 +24,7 @@ public class CarInfoPanel extends CarSubPanel implements ActionListener {
 	private int selectedIndex;
 	private List<CarType> list;
 	private CarSearchFrame csf;	//차량선택프레임
-	private CarModel selectedCarModel;
+//	private CarModel selectedCarModel;
 	private RentPanel rentPanel;
 	/**
 	 * Create the panel.
@@ -85,7 +82,7 @@ public class CarInfoPanel extends CarSubPanel implements ActionListener {
 	}
 
 	public void setSelectedCarModel(CarModel selectedCarModel) {
-		this.selectedCarModel = selectedCarModel;
+//		this.selectedCarModel = selectedCarModel;
 		rentPanel.setSelectedCarModel(selectedCarModel);		
 	}
 
