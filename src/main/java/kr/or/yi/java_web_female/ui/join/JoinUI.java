@@ -58,6 +58,7 @@ public class JoinUI extends JFrame implements ActionListener {
 
 	public JoinUI() {
 		joinService = new JoinUiService();
+		
 
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -331,10 +332,7 @@ public class JoinUI extends JFrame implements ActionListener {
 			Customer customer = getItemCustomer();
 			customer.setCode(joinService.getNextCustomerCode());
 			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-			/*
-			 * JOptionPane.showMessageDialog(null, customer);
-			 * JOptionPane.showMessageDialog(null, customEvent);
-			 */
+		
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 
 			joinService.joinCustomer(customer, customEvent);

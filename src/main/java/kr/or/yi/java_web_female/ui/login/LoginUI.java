@@ -50,7 +50,6 @@ public class LoginUI extends JFrame implements ActionListener {
 	public LoginUI() {
 		loginUI = this;
 		loginService = new LoginUiService();
-		
 
 		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -153,13 +152,16 @@ public class LoginUI extends JFrame implements ActionListener {
 			List<Customer> fullCustomer = loginService.selectCustomerByCode(customer);
 			loginCusotmer = fullCustomer.get(0);
 			/////////////////////
-			JOptionPane.showMessageDialog(null, loginCusotmer.getGradeCode().getCode() + " : "
-					+ loginCusotmer.getGradeCode().getName() + " : " + loginCusotmer.getGradeCode().getRate());
+			/*
+			 * JOptionPane.showMessageDialog(null, loginCusotmer.getGradeCode().getCode() +
+			 * " : " + loginCusotmer.getGradeCode().getName() + " : " +
+			 * loginCusotmer.getGradeCode().getRate());
+			 */
 			/////////////////
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(loginCusotmer.getDob());
 			if (cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
-//				JOptionPane.showMessageDialog(null, "생월이 같음");
+//				
 				loginService.insertCustomEvent(new CustomEvent("EVT2", loginCusotmer.getCode(), false));
 			}
 		}
