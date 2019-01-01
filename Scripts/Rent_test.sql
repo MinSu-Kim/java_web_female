@@ -101,6 +101,7 @@ select c.code, Id, passwd, c.Name, zip_code ,address, phone, dob, email, emp_cod
 		where c.code = 'C005'
 		
 select * from rent;
+SELECT * FROM customer;
 
 select hour6, hour10, hour12, hour_else, basic_charge, timestampdiff(hour, concat(end_date, ' ', end_time), now()) as overHour
 from rent r join car_model cm on r.car_code = cm.car_code 

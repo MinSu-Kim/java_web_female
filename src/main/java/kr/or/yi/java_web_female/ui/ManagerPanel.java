@@ -124,7 +124,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			tabbedPane.addTab("고객통계", null, panel_10, null);
 
 			RentStatistics panel_11 = new RentStatistics();
-			tabbedPane.addTab("렌트통계", null, panel_11, null);
+			tabbedPane.addTab("대여통계", null, panel_11, null);
 
 		}
 

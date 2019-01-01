@@ -47,9 +47,9 @@ public class OptionInfoPanel extends CarSubPanel {
 //			JCheckBox cb = new JCheckBox(co.getName());
 			mcb.addActionListener(chkListener);
 			add(mcb);
-/*			if (co.getName().equals("driver")) {
-				mcb.setEnabled(false);
-			}*/
+			if (co.getName().equals("없음")) {
+				mcb.setVisible(false);
+			}
 		}
 	}
 
