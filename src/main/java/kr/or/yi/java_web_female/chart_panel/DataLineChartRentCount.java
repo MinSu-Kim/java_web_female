@@ -70,7 +70,7 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 			for (int i = 0; i < arr1.size(); i++) {
 				StateCar sc = arr1.get(i);
 				dataSeriesS1.getData().add(new XYChart.Data<>(sc.getTitle().split("-")[1] + "월", sc.getCount()));
-				dataSeriesS1.setName("kia");
+				dataSeriesS1.setName(arrBrand[j]);
 			}		
 			list.add(dataSeriesS1);
 		}

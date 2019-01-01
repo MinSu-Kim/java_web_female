@@ -8,40 +8,31 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 
-@SuppressWarnings("serial")
-public class PieChartCarType extends JPanel {
+public class PieChartGradeType extends JPanel {
 
 	private JPanel contentPane;
-	private DataPieChartCarType pPieChart;
+	private DataPieChartGradeType pPieChart;
 
-	public DataPieChartCarType getpPieChart() {
+	public DataPieChartGradeType getpPieChart() {
 		return pPieChart;
 	}
 
-	public PieChartCarType() {
+	public PieChartGradeType() {
 		initComponents();
 	}
 
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
-		/*
-		 * contentPane = new JPanel(); add(contentPane); contentPane.setLayout(new
-		 * BorderLayout(0, 0));
-		 */
-
 		
-		pPieChart = new DataPieChartCarType();
-//		contentPane.add(pPieChart);
+		pPieChart = new DataPieChartGradeType();
 		add(pPieChart);
 
 		Platform.runLater(() -> initFX(pPieChart));
-
 	}
 
-	private void initFX(DataPieChartCarType fxPanel) {
+	private void initFX(DataPieChartGradeType fxPanel) {
 		Scene scene = fxPanel.createScene();
 		JFXPanel panel = (JFXPanel) fxPanel;
 		panel.setScene(scene);
 	}
-
 }

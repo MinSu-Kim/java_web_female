@@ -304,13 +304,9 @@ select grade_code from customer;
 select distinct sigungu from post;
 
 
-select mid(address, 7, 3) as 구, count(*) as 인원수
-from customer
-where mid(address, 7, 3) <> ''
-group by mid(address, 7, 3);
+select mid(address, 7, 3) as 구, count(*) as 인원수 from customer where mid(address, 7, 3) <> '' group by mid(address, 7, 3);
 
-select g.name, count(g.name) 
-from customer c left join grade g on c.grade_code = g.code
-where grade_code is not null
-group by grade_code;
+select g.name, count(g.name) from customer c left join grade g on c.grade_code = g.code where grade_code is not null group by grade_code;
 
+
+select g.name as title , count(g.name) as count from customer c left join grade g on c.grade_code = g.code where grade_code is not null group by grade_code;

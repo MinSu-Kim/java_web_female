@@ -26,6 +26,7 @@ public class LineChartRentCount extends JPanel {
 
 		JPanel pRentLineChart = new JPanel();
 		add(pRentLineChart);
+		pRentLineChart.setLayout(new BorderLayout(0, 0));
 		
 		//라인차트 패널 붙이기
 		pLineChart = new DataLineChartRentCount();

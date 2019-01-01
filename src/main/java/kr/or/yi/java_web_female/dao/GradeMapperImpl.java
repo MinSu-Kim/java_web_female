@@ -62,8 +62,14 @@ public class GradeMapperImpl implements GradeMapper {
 	@Override
 	public Grade selectGradeByName(Grade gradeName) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			return sqlSession.selectOne(namespace + ".selectGradeByName",gradeName);
+			return sqlSession.selectOne(namespace + ".selectGradeByName", gradeName);
 		}
 	}
 
+	@Override
+	public int chartGrade(Grade grade) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".chartGrade", grade);
+		}
+	}
 }

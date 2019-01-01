@@ -79,6 +79,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 			//코드로 차종이름 검색
 			CarType resType = carService.selectByCarCode(type);
 			
+			
 			double rate = Math.round((sCar.getCount()*100.0)/totalCount);
 			list.add(new PieChart.Data(resType.getType(),rate ));
 		}
@@ -88,25 +89,4 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
