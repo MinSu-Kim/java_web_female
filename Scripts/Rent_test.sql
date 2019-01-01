@@ -109,3 +109,5 @@ where cm.car_code = 'V002' and r.code = 'R005';
 select * 
 from rent, (select hour6, hour10, hour12, hour_else from car_model where car_code = 'V010') as t
 where timestampdiff(hour, concat(end_date, ' ', end_time), now())
+
+select code, opt_price from rent;

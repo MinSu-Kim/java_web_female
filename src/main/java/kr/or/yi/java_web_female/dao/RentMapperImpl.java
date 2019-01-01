@@ -126,5 +126,12 @@ public class RentMapperImpl implements RentMapper {
 		}
 	}
 
+	@Override
+	public List<StateCar> selectCarOptionsWithRentCode() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectCarOptionsWithRentCode");
+		}
+	}
+
 
 }

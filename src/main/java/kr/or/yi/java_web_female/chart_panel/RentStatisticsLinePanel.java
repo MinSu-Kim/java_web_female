@@ -1,27 +1,29 @@
 package kr.or.yi.java_web_female.chart_panel;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
+import java.awt.FlowLayout;
 
-import javax.swing.BoxLayout;
+@SuppressWarnings("serial")
+public class RentStatisticsLinePanel extends JPanel {
 
-public class RentStatisticsPanel extends JPanel {
 	private RentLineChart rentLineChart;
-	
+
 	/**
 	 * Create the panel.
 	 */
-	public RentStatisticsPanel() {
+	public RentStatisticsLinePanel() {
 		initComponents();
 
 	}
 
 	private void initComponents() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel pRentLineChart = new JPanel();
 		add(pRentLineChart);

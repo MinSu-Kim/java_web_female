@@ -2,7 +2,8 @@ package kr.or.yi.java_web_female.ui.rent;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
-import kr.or.yi.java_web_female.chart_panel.RentStatisticsPanel;
+import kr.or.yi.java_web_female.chart_panel.RentStatisticsLinePanel;
+import kr.or.yi.java_web_female.chart_panel.RentStatisticsPiePanel;
 
 public class RentStatistics extends JPanel {
 
@@ -12,8 +13,12 @@ public class RentStatistics extends JPanel {
 	public RentStatistics() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
-		RentStatisticsPanel panel = new RentStatisticsPanel();
+		RentStatisticsLinePanel panel = new RentStatisticsLinePanel();
+		RentStatisticsPiePanel piePanel = new RentStatisticsPiePanel();
 		add(panel);
+		add(piePanel);
+		
+		
 
 	}
 

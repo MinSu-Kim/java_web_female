@@ -1,12 +1,10 @@
 package kr.or.yi.java_web_female.ui.rent.sub;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
@@ -49,9 +47,9 @@ public class OptionInfoPanel extends CarSubPanel {
 //			JCheckBox cb = new JCheckBox(co.getName());
 			mcb.addActionListener(chkListener);
 			add(mcb);
-			if (co.getName().equals("driver")) {
+/*			if (co.getName().equals("driver")) {
 				mcb.setEnabled(false);
-			}
+			}*/
 		}
 	}
 
@@ -79,7 +77,7 @@ public class OptionInfoPanel extends CarSubPanel {
 		}
 	};
 
-	public void setSelectedCarModel(CarModel selectedCarModel) {
+/*	public void setSelectedCarModel(CarModel selectedCarModel) {
 //		this.selectedCarModel = selectedCarModel;
 
 		if (selectedCarModel.getCarType().getCode().equals("S2")) {
@@ -97,6 +95,6 @@ public class OptionInfoPanel extends CarSubPanel {
 				break;
 			}
 		}
-	}
+	}*/
 
 }
