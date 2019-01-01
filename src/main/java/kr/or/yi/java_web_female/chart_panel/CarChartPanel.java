@@ -88,7 +88,7 @@ public class CarChartPanel extends JPanel implements ActionListener{
 		group.add(rdbtnBrand);
 		panelBtn.add(rdbtnBrand);
 		
-		rdbtnRentCount = new JRadioButton("차종별 월 렌트 수");
+		rdbtnRentCount = new JRadioButton("브랜드별 월 렌트 수");
 		rdbtnRentCount.addActionListener(this);
 		group.add(rdbtnRentCount);
 		panelBtn.add(rdbtnRentCount);
