@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class CustomerMapperImpl implements CustomerMapper {
@@ -208,6 +209,21 @@ public class CustomerMapperImpl implements CustomerMapper {
 			int res = sqlSession.delete(namespace + ".updateCustomerInfo", customer);
 			sqlSession.commit();
 			return res;
+		}
+	}
+
+	@Override
+	public List<StateCar> chartAddr() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".chartAddr");
+			
+		}
+	}
+
+	@Override
+	public List<StateCar> chartGrade() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".chartGrade");
 		}
 	}
 

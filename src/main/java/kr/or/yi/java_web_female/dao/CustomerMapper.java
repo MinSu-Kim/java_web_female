@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Grade;
+import kr.or.yi.java_web_female.dto.StateCar;
 
 public interface CustomerMapper {
 	List<Customer> selectCustomerByName(Customer customer);
@@ -59,5 +61,10 @@ public interface CustomerMapper {
 	@Update("update customer set Name=#{name}, address=#{address}, zip_code=#{zipCode}, phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license} where code=#{code}")
 	int updateCustomerInfo(Customer customer);
 	
+	@Select("select mid(address, 7, 3) as title, count(*) as count from customer where mid(address, 7, 3) <> '' group by mid(address, 7, 3)")
+	List<StateCar> chartAddr();
+	
+	@Select("select g.name as title , count(g.name) as count from customer c left join grade g on c.grade_code = g.code where grade_code is not null group by grade_code")
+	List<StateCar> chartGrade();
 	
 }

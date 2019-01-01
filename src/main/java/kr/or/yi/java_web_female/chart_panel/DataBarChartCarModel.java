@@ -91,22 +91,3 @@ public class DataBarChartCarModel extends JFXPanel implements InitScene {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

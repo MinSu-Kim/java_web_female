@@ -2,52 +2,63 @@ package kr.or.yi.java_web_female.chart_panel;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JRadioButton;
+import javax.swing.border.EmptyBorder;
 import javax.swing.ButtonGroup;
 
 public class CustomerChartPanel extends JPanel {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JPanel panel_BarCustomer;
+	private JPanel panelAllChart;
+	private JPanel panelTotal;
+	private JPanel panelSelectedOne;
+	private JRadioButton rdbtnAddr;
+	private JRadioButton rdbtnGrade;
+	
+	private JRadioButton rdbtnTotal;
+	private PieChartGradeType panel_PieGrade;
 
 	/**
 	 * Create the panel.
 	 */
 	public CustomerChartPanel() {
 		setLayout(new BorderLayout(0, 0));
-		
-		JPanel panelTotal = new JPanel();
-		add(panelTotal, BorderLayout.CENTER);
+
+		panelTotal = new JPanel();
+		panelTotal.setBorder(new EmptyBorder(15, 15, 15, 15));
+		add(panelTotal);
 		panelTotal.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panelTotal_1 = new JPanel();
-		panelTotal.add(panelTotal_1, BorderLayout.CENTER);
-		panelTotal_1.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JPanel panelAllChart = new JPanel();
-		panelTotal_1.add(panelAllChart);
+
+		panelAllChart = new JPanel();
+		panelTotal.add(panelAllChart, BorderLayout.CENTER);
 		panelAllChart.setLayout(new GridLayout(0, 2, 0, 0));
+
+		panel_BarCustomer = new BarChartAddr();
+
+		panelAllChart.add(panel_BarCustomer);
 		
-		JPanel panel_1 = new JPanel();
-		panelAllChart.add(panel_1);
-		
-		JPanel panel_2 = new JPanel();
-		panelAllChart.add(panel_2);
-		
-		JPanel panelSelectedOne = new JPanel();
+		panel_PieGrade = new PieChartGradeType();
+		panelAllChart.add(panel_PieGrade);
+
+
+		panelSelectedOne = new JPanel();
 		add(panelSelectedOne, BorderLayout.SOUTH);
-		
+		panelSelectedOne.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
 		JPanel panelRbtn = new JPanel();
 		add(panelRbtn, BorderLayout.NORTH);
-		
-		JRadioButton rdbtnAddr = new JRadioButton("지역별 고객 인원");
+
+		rdbtnAddr = new JRadioButton("지역별 고객 인원");
 		buttonGroup.add(rdbtnAddr);
 		panelRbtn.add(rdbtnAddr);
-		
-		JRadioButton rdbtnGrade = new JRadioButton("등급별  고객 인원");
+
+		rdbtnGrade = new JRadioButton("등급별  고객 인원");
 		buttonGroup.add(rdbtnGrade);
 		panelRbtn.add(rdbtnGrade);
-		
-		JRadioButton rdbtnTotal = new JRadioButton("전체보기");
+
+		rdbtnTotal = new JRadioButton("전체보기");
 		buttonGroup.add(rdbtnTotal);
 		panelRbtn.add(rdbtnTotal);
 
