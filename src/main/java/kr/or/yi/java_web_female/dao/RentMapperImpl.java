@@ -119,5 +119,12 @@ public class RentMapperImpl implements RentMapper {
 		}
 	}
 
+	@Override
+	public List<StateCar> selectCountRentByMonthWithBrand(String brand) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace+".selectCountRentByMonthWithBrand",brand);
+		}
+	}
+
 
 }

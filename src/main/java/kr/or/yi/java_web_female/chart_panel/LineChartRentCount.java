@@ -11,7 +11,6 @@ import kr.or.yi.java_web_female.InitScene;
 
 @SuppressWarnings("serial")
 public class LineChartRentCount extends JPanel {
-	private JPanel contentPane;
 	private DataLineChartRentCount pLineChart;
 	
 	public DataLineChartRentCount getpLineChart() {
@@ -23,17 +22,14 @@ public class LineChartRentCount extends JPanel {
 	}
 
 	private void initComponents() {
-		// TODO Auto-generated method stub
 		setLayout(new BorderLayout(0, 0));
-		
-//		contentPane = new JPanel();
-//		add(contentPane);
-//		contentPane.setLayout(new BorderLayout(0, 0));
+
+		JPanel pRentLineChart = new JPanel();
+		add(pRentLineChart);
 		
 		//라인차트 패널 붙이기
 		pLineChart = new DataLineChartRentCount();
-//		contentPane.add(pLineChart);
-		add(pLineChart);
+		pRentLineChart.add(pLineChart);
 		
 		Platform.runLater(() -> initFX(pLineChart));
 	}

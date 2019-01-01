@@ -125,4 +125,8 @@ public class RentUIService {
 		return rentDao.selectCountRentByMonthWithCarType(carType);
 	}
 	
+	public List<StateCar> selectCountRentByMonthWithBrand(String brand){
+		return rentDao.selectCountRentByMonthWithBrand(brand);
+	}
+	
 }

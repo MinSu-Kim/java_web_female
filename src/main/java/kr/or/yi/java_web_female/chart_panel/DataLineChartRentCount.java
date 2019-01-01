@@ -23,6 +23,7 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 	private RentUIService service;
 	
 	public DataLineChartRentCount() {
+		service = new RentUIService();
 		setFont(new Font("Dialog", Font.PLAIN, 12));
 	}
 
@@ -40,10 +41,10 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 		root.setAutoSizeChildren(true);
 		
 		xAxis = new CategoryAxis();
-		xAxis.setLabel("차종별 렌트추이");
+		xAxis.setLabel("브랜드별 렌트추이");
 		
 		NumberAxis yAxis = new NumberAxis();
-		yAxis.setLabel(" 렌트 수");
+		yAxis.setLabel("렌트 수");
 		
 		lineChart = new LineChart<>(xAxis, yAxis);
 		lineChart.setPrefSize(440, 250);
@@ -59,26 +60,26 @@ public class DataLineChartRentCount extends JFXPanel implements InitScene {
 
 	private ObservableList<Series<String, Number>> getChartData() {
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		/*CarModel model1 = new CarModel(CarModel.getCarCode,CarModel.getCarName,기간1의 렌트수, 기간2의 렌트수, ... );
-		list.add(getChartData(model1));*/
 		
-		//일단 기간별 전체 렌트횟수 표시
-		service = new RentUIService();
-		List<StateCar> countList = service.selectCountRentByMonth();
-		StateCar car = countList.get(0);
-		list.add(getChartData(car));
+		
+		String[] arrBrand = {"kia","hyundai","bmw","포드"};
+		for(int j=0;j<arrBrand.length;j++) {
+			
+			List<StateCar> arr1 = service.selectCountRentByMonthWithBrand(arrBrand[j]);
+			XYChart.Series<String, Number> dataSeriesS1 = new Series<String, Number>();
+			for (int i = 0; i < arr1.size(); i++) {
+				StateCar sc = arr1.get(i);
+				dataSeriesS1.getData().add(new XYChart.Data<>(sc.getTitle().split("-")[1] + "월", sc.getCount()));
+				dataSeriesS1.setName("kia");
+			}		
+			list.add(dataSeriesS1);
+		}
+		
 		
 		return list;
 	}
 
-	private XYChart.Series<String, Number> getChartData(StateCar model) {
-		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
-		
-		dataSeries.setName("전체차종");
-		dataSeries.getData().add(new XYChart.Data<>(model.getTitle(),model.getCount()));
-		
-		return dataSeries;
-	}
+
 
 }
 

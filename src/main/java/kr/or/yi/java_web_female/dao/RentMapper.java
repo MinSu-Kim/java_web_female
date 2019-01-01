@@ -18,6 +18,10 @@ public interface RentMapper {
 	@Select("SELECT DATE_FORMAT(start_date,'%Y-%m') as title, COUNT(*) as count FROM rent GROUP BY title")
 	List<StateCar> selectCountRentByMonth();//2018-12로 출력 카운트는 숫자로 출력
 	
+	//브랜드별 카운트 select
+	@Select("SELECT DATE_FORMAT(start_date,'%Y-%m') as title, b.name as brand, COUNT(*) as count FROM rent r join car_model cm on r.car_code = cm.car_code join brand b on cm.brand = b.no GROUP BY title, brand having b.name = #{brand}")
+	List<StateCar> selectCountRentByMonthWithBrand(String brand);
+	
 	// ==========================================
 	@Select("SELECT DATE_FORMAT(start_date,'%Y-%m') as title, ct.`type` as carType, COUNT(*) as count FROM rent r join car_model cm on r.car_code = cm.car_code join car_type ct on cm.cartype = ct.code GROUP BY title, carType having ct.`type` = #{carType}")
 	List<StateCar> selectCountRentByMonthWithCarType(String carType);

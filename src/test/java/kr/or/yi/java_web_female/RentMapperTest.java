@@ -135,4 +135,12 @@ public class RentMapperTest extends AbstractTest {
 		List<StateCar> list = dao.selectCountRentByMonth();
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void test08selectCountRentByMonthWithBrand() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<StateCar> list = dao.selectCountRentByMonthWithBrand("kia");
+		Assert.assertNotNull(list);
+	}
 }
