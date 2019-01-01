@@ -50,6 +50,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	public LoginUI() {
 		loginUI = this;
 		loginService = new LoginUiService();
+		
 
 		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,10 +104,10 @@ public class LoginUI extends JFrame implements ActionListener {
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
 
-	/*	// test
+		// test
 		tfId.setText("E001");
 		tfPwd.setText("rootroot");
-		checkManager.setSelected(true);*/
+		checkManager.setSelected(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
