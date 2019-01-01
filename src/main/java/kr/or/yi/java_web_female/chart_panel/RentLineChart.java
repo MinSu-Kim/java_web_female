@@ -23,7 +23,12 @@ import kr.or.yi.java_web_female.service.RentUIService;
 public class RentLineChart extends JFXPanel implements InitScene{
 	private RentUIService service;
 	private String[] arrTypes;
+	private LineChart<String, Number> lineChart;
 	
+	public LineChart<String, Number> getLineChart() {
+		return lineChart;
+	}
+
 	/**
 	 * Create the panel.
 	 */
@@ -48,9 +53,8 @@ public class RentLineChart extends JFXPanel implements InitScene{
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setLabel("대여횟수");
 		
-		//Line Chart
-		LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
-		lineChart.setPrefSize(500, 300);	//차트 크기
+		lineChart = new LineChart<>(xAxis, yAxis);
+		lineChart.setPrefSize(440, 230);	//차트 크기
 		lineChart.setData(getChartData());
 		lineChart.setTitle("월별 차량 대여 횟수");	//차트 제목
 		lineChart.setLegendVisible(true);	//범례 표시 유무
@@ -77,7 +81,6 @@ public class RentLineChart extends JFXPanel implements InitScene{
 		arrTypes = new String[] {"경형","소형","중형","대형","승합","SUV"};
 		for(int j = 0 ; j < arrTypes.length ; j++) {
 			
-<<<<<<< HEAD
 			List<StateCar> arr = service.selectCountRentByMonthWithCarType(arrTypes[j]);
 			XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 			for (int i = 0; i < arr.size(); i++) {
@@ -85,14 +88,7 @@ public class RentLineChart extends JFXPanel implements InitScene{
 				dataSeries.getData().add(new XYChart.Data<>(sc.getTitle().split("-")[1] + "월", sc.getCount()));
 //				JOptionPane.showMessageDialog(null, arrTypes.toString());
 				dataSeries.setName(arrTypes[j]);
-=======
-			List<StateCar> arr1 = service.selectCountRentByMonthWithCarType(arrType[j]);
-			XYChart.Series<String, Number> dataSeriesS1 = new Series<String, Number>();
-			for (int i = 0; i < arr1.size(); i++) {
-				StateCar sc = arr1.get(i);
-				dataSeriesS1.getData().add(new XYChart.Data<>(sc.getTitle().split("-")[1] + "월", sc.getCount()));
-				dataSeriesS1.setName(arrType[j]);
->>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
+
 			}		
 			list.add(dataSeries);
 		}

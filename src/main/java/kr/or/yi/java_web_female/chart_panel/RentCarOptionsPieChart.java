@@ -24,6 +24,7 @@ public class RentCarOptionsPieChart extends JFXPanel implements InitScene {
 	private RentUIService service;
 	private int total;
 	
+
 	public PieChart getPieChart() {
 		return pieChart;
 	}
@@ -45,7 +46,7 @@ public class RentCarOptionsPieChart extends JFXPanel implements InitScene {
 		root.setAutoSizeChildren(true);
 		
 		pieChart = new PieChart();
-		pieChart.setPrefSize(500, 300);
+		pieChart.setPrefSize(440, 230);
 		pieChart.setData(getChartData());
 		pieChart.setTitle("대여 시 옵션 선호도");
 		pieChart.setLegendVisible(true);

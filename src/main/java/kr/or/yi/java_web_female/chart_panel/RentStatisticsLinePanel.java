@@ -8,11 +8,17 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
 import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class RentStatisticsLinePanel extends JPanel {
 
 	private RentLineChart rentLineChart;
+	private JPanel pRentLineChart;
+
+	public RentLineChart getRentLineChart() {
+		return rentLineChart;
+	}
 
 	/**
 	 * Create the panel.
@@ -23,10 +29,11 @@ public class RentStatisticsLinePanel extends JPanel {
 	}
 
 	private void initComponents() {
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		setLayout(new BorderLayout(0, 0));
 		
-		JPanel pRentLineChart = new JPanel();
+		pRentLineChart = new JPanel();
 		add(pRentLineChart);
+		pRentLineChart.setLayout(new BorderLayout(0, 0));
 		
 		rentLineChart = new RentLineChart();
 		pRentLineChart.add(rentLineChart);
