@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -32,6 +33,8 @@ import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
 import kr.or.yi.java_web_female.ui.join.SearchPostUI;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
+
 import java.awt.Dimension;
 
 @SuppressWarnings("serial")
@@ -57,6 +60,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private JDateChooser birthday;
 	private JComboBox<Employee> cmbEmpCode;
 	private JComboBox<Grade> cmbGrade;
+	private Customer loginCustomer;
 
 	public CustommerListPannel() {
 		setBorder(
@@ -70,6 +74,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
+		loginCustomer = LoginUI.loginCusotmer;
 		panelList.getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -99,6 +104,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput1.add(lblCusCode);
 
 		tfCusCode = new JTextField();
+		tfCusCode.setEditable(false);
 		tfCusCode.setColumns(10);
 		panelInput1.add(tfCusCode);
 
@@ -115,6 +121,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput1.add(lblCusId);
 
 		tfCusId = new JTextField();
+		tfCusId.setEditable(false);
 		tfCusId.setColumns(10);
 		panelInput1.add(tfCusId);
 
@@ -354,7 +361,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private void do_btnUpdate_actionPerformed(ActionEvent arg0) {
 		Customer customer = getItem();
 
-		service.updateCustomer(customer);
+		service.updateInfo(customer);
 		panelList.setList(service.selectCustomerByAll());
 		panelList.loadDatas();
 		clearTf();
@@ -390,17 +397,18 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		Customer updateCustomer = list.get(list.indexOf(item));
 
-		String cId = tfCusId.getText().trim();
 		String cName = tfCusName.getText().trim();
-		String cAddr = tfAddr.getText().trim();
-		String zipCode = tfZipCode.getText().trim();
+		String cId = tfCusId.getText().trim();
 		Date cusDob = birthday.getDate();
-
-		String cEmail1 = tfCusEmail1.getText().trim();
-		String cEmail2 = tfCusEmail2.getText().trim();
-		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();
 		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
 				+ (tfTel3.getText().trim());
+				
+		String email = (tfCusEmail1.getText().trim()) + "@" + (tfCusEmail2.getText().trim());
+		String zipCode = tfZipCode.getText().trim();
+		String cAddr = tfAddr.getText().trim();
+		Employee empCode = new Employee("E001");
+		Grade gradeCode = new Grade("G001");
+		
 
 		String license = null;
 		if (cmbLicense.getSelectedIndex() == 0) {
@@ -409,23 +417,18 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicense.getSelectedItem();
 		}
-
-		Employee empCode = new Employee("E001");
-		Grade gradeCode = new Grade("G001");
-		updateCustomer.setId(cId);
-		updateCustomer.setAddress(cAddr);
-		updateCustomer.setZipCode(zipCode);
-		updateCustomer.setEmail(cEmail1);
-		updateCustomer.setEmail(cEmail2);
-		updateCustomer.setEmail(cEmail3);
+		
 		updateCustomer.setName(cName);
+		updateCustomer.setId(cId);
 		updateCustomer.setDob(cusDob);
 		updateCustomer.setPhone(cusPhone);
-
-		updateCustomer.setAddress(zipCode);
-		updateCustomer.setLicense(license);
+		updateCustomer.setEmail(email);
+		updateCustomer.setZipCode(zipCode);
+		updateCustomer.setAddress(cAddr);
 		updateCustomer.setEmpCode(empCode);
 		updateCustomer.setGradeCode(gradeCode);
+		updateCustomer.setLicense(license);
+		
 		return updateCustomer;
 	}
 
