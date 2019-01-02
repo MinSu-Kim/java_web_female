@@ -7,11 +7,11 @@ public class Rent {
 	private String endDate;	//대여반납일
 	private String endTime;	//대여반납시간
 	private boolean isReturn;	//반납여부
-	private int totalPrice;	//대여총비용(DB -> basic_price)
+	private long totalPrice;	//대여총비용(DB -> basic_price)
 	private CarModel carCode;	//차량코드
 	private Customer customerCode;	//고객코드
 	private Insurance insuranceCode;	//보험코드
-	private Event eRate;	//이벤트 할인율
+	private String eCode;
 	private int optPrice;	//옵션비용
 	
 	public Rent() {
@@ -19,27 +19,25 @@ public class Rent {
 	}
 
 	public Rent(String code, String startDate, String startTime, String endDate, String endTime, boolean isReturn,
-			int totalPrice, CarModel carCode, Customer customerCode, Insurance insuranceCode, Event eRate,
-			int optPrice) {
-		super();
-		this.code = code;
-		this.startDate = startDate;
-		this.startTime = startTime;
-		this.endDate = endDate;
-		this.endTime = endTime;
-		this.isReturn = isReturn;
-		this.totalPrice = totalPrice;
-		this.carCode = carCode;
-		this.customerCode = customerCode;
-		this.insuranceCode = insuranceCode;
-		this.eRate = eRate;
-		this.optPrice = optPrice;
+		long totalPrice, CarModel carCode, Customer customerCode, Insurance insuranceCode, String eCode, int optPrice) {
+	this.code = code;
+	this.startDate = startDate;
+	this.startTime = startTime;
+	this.endDate = endDate;
+	this.endTime = endTime;
+	this.isReturn = isReturn;
+	this.totalPrice = totalPrice;
+	this.carCode = carCode;
+	this.customerCode = customerCode;
+	this.insuranceCode = insuranceCode;
+	this.eCode = eCode;
+	this.optPrice = optPrice;
 	}
 
+	
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -84,11 +82,11 @@ public class Rent {
 		this.isReturn = isReturn;
 	}
 
-	public int getTotalPrice() {
+	public long getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(int totalPrice) {
+	public void setTotalPrice(long totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
@@ -116,16 +114,16 @@ public class Rent {
 		this.insuranceCode = insuranceCode;
 	}
 
-	public Event geteRate() {
-		return eRate;
-	}
-
-	public void seteRate(Event eRate) {
-		this.eRate = eRate;
-	}
-
 	public int getOptPrice() {
 		return optPrice;
+	}
+
+	public String geteCode() {
+		return eCode;
+	}
+
+	public void seteCode(String eCode) {
+		this.eCode = eCode;
 	}
 
 	public void setOptPrice(int optPrice) {
@@ -134,9 +132,11 @@ public class Rent {
 
 	@Override
 	public String toString() {
-		return "Rent [code=" + code + ", startDate=" + startDate + ", startTime=" + startTime + ", endDate=" + endDate
-				+ ", endTime=" + endTime + ", isReturn=" + isReturn + ", totalPrice=" + totalPrice + ", carCode="
-				+ carCode + ", customerCode=" + customerCode + ", insuranceCode=" + insuranceCode + ", eRate=" + eRate
-				+ ", optPrice=" + optPrice + "]";
+		return String.format(
+				"Rent [code=%s, startDate=%s, startTime=%s, endDate=%s, endTime=%s, isReturn=%s, totalPrice=%s, carCode=%s, customerCode=%s, insuranceCode=%s, eRate=%s, optPrice=%s]",
+				code, startDate, startTime, endDate, endTime, isReturn, totalPrice, carCode, customerCode,
+				insuranceCode, eCode, optPrice);
 	}
+
+	
 }

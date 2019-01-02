@@ -1,7 +1,5 @@
 package kr.or.yi.java_web_female;
 
-import static org.junit.Assert.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +45,12 @@ public class CarModelMapperTest extends AbstractTest {
 	public void test03insertCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
-		carModel.setCarCode("V009");
-		carModel.setName("레이");
+		carModel.setCarCode("V019");
+		carModel.setName("벤츠");
 		carModel.setColor("wh");
-		carModel.setGear("stick");
-		carModel.setBrand(new Brand("B2"));
-		carModel.setCarType(new CarType("S1"));
+		carModel.setGear("auto");
+		carModel.setBrand(new Brand("B3"));
+		carModel.setCarType(new CarType("S2"));
 		carModel.setBasicCharge(70000);
 		carModel.setHour6(40000);
 		carModel.setHour10(53000);
@@ -73,7 +71,7 @@ public class CarModelMapperTest extends AbstractTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
 		
-		carModel.setCarCode("V009");
+		carModel.setCarCode("V019");
 		carModel.setName("마티즈");
 		carModel.setColor("bl");
 		carModel.setGear("stick");
@@ -98,7 +96,7 @@ public class CarModelMapperTest extends AbstractTest {
 	public void test05deleteCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
-		carModel.setCarCode("V009");
+		carModel.setCarCode("V019");
 		int res = dao.deleteCarModel(carModel);
 		Assert.assertEquals(1, res);
 	}
@@ -139,6 +137,14 @@ public class CarModelMapperTest extends AbstractTest {
 		List<CarModel> list = dao.SelectCarModelWithWhere(maps);
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void test10nextCarCode() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		String carCode = dao.nextCarCode();
+		Assert.assertNotNull(carCode);
+	}
+	
 }
 
 

@@ -93,7 +93,29 @@ public class CarModelMapperImpl implements CarModelMapper {
 		
 	}
 
-	
+	@Override
+	public String nextCarCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(namespace+".nextCarCode");
+		}
+	}
+
+	@Override
+	public int updateCarModelRent(CarModel carModel) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.update(namespace+".updateCarModelRent", carModel);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public List<CarModel> selectCarModel() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".selectCarModel");
+		}
+	}
+
 
 }
 

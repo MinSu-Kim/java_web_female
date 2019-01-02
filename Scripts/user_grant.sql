@@ -1,3 +1,8 @@
+DROP USER 'user_rentCar'@'%';
+DROP USER 'user_rentCar'@'localhost';
+FLUSH PRIVILEGES;
+
+
 CREATE USER 'user_rentCar'@'%';
 ALTER USER 'user_rentCar'@'%'
 IDENTIFIED BY 'rootroot' ;
@@ -44,3 +49,4 @@ GRANT Create temporary tables ON proj_rentcar.* TO 'user_rentCar'@'localhost';
 GRANT Execute ON proj_rentcar.* TO 'user_rentCar'@'localhost';
 GRANT Lock tables ON proj_rentcar.* TO 'user_rentCar'@'localhost';
 FLUSH PRIVILEGES;
+

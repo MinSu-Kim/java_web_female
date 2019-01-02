@@ -6,7 +6,9 @@ import org.apache.ibatis.session.ResultContext;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class CustomerMapperImpl implements CustomerMapper {
@@ -38,24 +40,13 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-/*	@Override
-	public int selectCustomerById(Customer customer) {
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerById", customer);
-			if (selectedCustomer == null) {
-				return 0;
-			}
-			return 1;
-		}
-	}*/
-
 	@Override
 	public Customer selectCustomerById(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + ".selectCustomerById", customer);
 		}
 	}
-	
+
 	@Override
 	public int insertCustomer(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -88,17 +79,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-/*	@Override
-	public int selectCustomerByPw(Customer customer) {
-		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
-			Customer selectedCustomer = sqlSession.selectOne(namespace + ".selectCustomerByPw", customer);
-			if (selectedCustomer == null) {
-				return 0;
-			}
-			return 1;
-		}
-	}*/
-
 	@Override
 	public Customer selectCustomerByPw(Customer customer) {
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
@@ -106,7 +86,6 @@ public class CustomerMapperImpl implements CustomerMapper {
 		}
 	}
 
-	
 	// 추가
 	@Override
 	public List<Customer> selectCustomerByCode(Customer customer) {
@@ -114,4 +93,138 @@ public class CustomerMapperImpl implements CustomerMapper {
 			return sqlSession.selectList(namespace + ".selectCustomerByCode", customer);
 		}
 	}
+
+	@Override
+	public int updateCustomer(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.update(namespace + ".updateCustomer", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteCustomer(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".deleteCustomer", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+///////////////////////// 트랜잭션 처리 //////////////////////////
+	@Override
+	public void insertCustomerJoin(Customer customer, CustomEvent customEvent) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			sqlSession.insert(namespace + ".insertCustomer", customer);
+			sqlSession.insert("kr.or.yi.java_web_female.dao.CustomEventMapper.insertCustomEvent", customEvent);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		} finally {
+			sqlSession.close();
+		}
+	}
+///////////////////////// 트랜잭션 처리 //////////////////////////
+
+	@Override
+	public void deleteCustomerEvent(Customer customer, CustomEvent customEvent) {
+		SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();
+		try {
+			sqlSession.delete("kr.or.yi.java_web_female.dao.CustomEventMapper.deleteCustomEvent", customEvent);
+			sqlSession.delete(namespace + ".deleteCustomer", customer);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			System.err.println("sqlSession.rollback()");
+			throw new RuntimeException(e.getCause());
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	@Override
+	public int updateCustomerRentCnt(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".updateCustomerRentCnt", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public String selectGradeCustomer(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".selectGradeCustomer", customer);
+		}
+	}
+
+	@Override
+	public int updateCustomerGrade(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".updateCustomerGrade", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public Customer searchId(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".searchId", customer);
+		}
+	}
+
+	@Override
+	public int changePw(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".changePw", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public String getRandomPassword() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".getRandomPassword");
+		}
+	}
+
+	@Override
+	public int samePwd(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + ".samePwd", customer);
+		}
+	}
+
+	@Override
+	public int updateCustomerInfo(Customer customer) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			int res = sqlSession.delete(namespace + ".updateCustomerInfo", customer);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public List<StateCar> chartAddr() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".chartAddr");
+			
+		}
+	}
+
+	@Override
+	public List<StateCar> chartGrade() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + ".chartGrade");
+		}
+	}
+
 }

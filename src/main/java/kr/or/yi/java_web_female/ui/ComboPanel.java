@@ -9,8 +9,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
 public class ComboPanel<T> extends JPanel {
@@ -22,7 +20,7 @@ public class ComboPanel<T> extends JPanel {
 		setLayout(new GridLayout(1, 0, 0, 0));
 
 		lblTitle = new JLabel("name");
-		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lblTitle);
 
 		comboBox = new JComboBox<>();
@@ -41,6 +39,10 @@ public class ComboPanel<T> extends JPanel {
 	public void setSelectedIndex(int index) {
 		comboBox.setSelectedIndex(index);
 	}
+	
+	public int getSelectedIndex() {
+		return comboBox.getSelectedIndex();
+	}
 
 	public void setSelectedItem(T item) {
 		comboBox.setSelectedItem(item);
@@ -56,7 +58,7 @@ public class ComboPanel<T> extends JPanel {
 		return comboBox;
 	}
 	
-
+	
 }
 
 

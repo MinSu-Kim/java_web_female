@@ -3,22 +3,26 @@ package kr.or.yi.java_web_female.ui.car;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarOptionList;
-import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
 public class CarOptionListPanel extends JPanel implements ActionListener {
@@ -36,7 +40,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 
 
 	public CarOptionListPanel() {
-		setBorder(new TitledBorder(null, "\uCC28\uB7C9\uC635\uC158", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Option", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
 		initcomponents();
 	}
@@ -49,16 +53,27 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		list = service.selectAllCarOption();
 		panelList.setList(list);
 		panelList.loadDatas();
-		setLayout(new GridLayout(0, 2, 0, 0));
+		//더블클릭시 구현
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					CarOption item = panelList.getSelectedItem();
+					setItem(item);
+					btnOk.setText("수정");
+				}
+			}
+		});
+		setLayout(new BorderLayout(0, 0));
 		add(panelList);
 		
 
 		JPanel panel = new JPanel();
-		add(panel);
+		add(panel, BorderLayout.EAST);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelInput = new JPanel();
-		panel.add(panelInput, BorderLayout.CENTER);
+		panel.add(panelInput);
 		panelInput.setLayout(new GridLayout(0, 2, 10, 10));
 		
 		JLabel lblNo = new JLabel("옵션번호");
@@ -117,9 +132,15 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				service.deleteCarOption(panelList.getSelectedItem());
-				panelList.setList(service.selectAllCarOption());
-				panelList.loadDatas();
+				try {
+					service.deleteCarOption(panelList.getSelectedItem());
+					panelList.setList(service.selectAllCarOption());
+					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+				} catch (PersistenceException e2) {
+					JOptionPane.showMessageDialog(null, "해당 옵션이 포함된 차량 보유 중 (삭제 불가능)");
+				}
+				
 			}
 		});
 		popMenu.add(delItem);
@@ -143,6 +164,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 		
 	}
@@ -191,6 +213,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		service.updateCarOption(carOption);
 		panelList.setList(service.selectAllCarOption());
 		panelList.loadDatas();
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
 	}

@@ -94,7 +94,7 @@
 				AND brand=#{brand}
 			</if>
 			<if test="fuel!=null">
-				AND fuel=#{fuel}
+				AND fuel_code=#{fuel}
 			</if>
 			<if test="gear!=null">
 				AND gear=#{gear}
@@ -106,6 +106,23 @@
 		<include refid="selectSql"/>
 		<include refid="whereSql"/>
 	</select>
+	
+	<select id="nextCarCode" resultType="String">
+		select max(car_code) nextto from car_model
+	</select>
+	
+	<!-- 차종별 카운트 select문 -->
+	<select id="selectCountByCarType" resultType="CarModel">
+		select cartype, count(*) as count
+		from car_type t left join car_model m on t.code = m.cartype
+		group by cartype
+	</select>
+	
+	<!-- rent -->
+	<select id="selectCarModel" resultType="CarModel">
+		select car_code, name from car_model;
+	</select>
+
 </mapper>
 
 

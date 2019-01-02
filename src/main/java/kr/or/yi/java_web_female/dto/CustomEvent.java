@@ -10,6 +10,8 @@ public class CustomEvent {
 
 	public CustomEvent() {
 	}
+	
+	
 
 	public CustomEvent(String eventCode, String customCode, boolean isUse) {
 		this.eventCode = eventCode;
@@ -51,7 +53,8 @@ public class CustomEvent {
 
 	@Override
 	public String toString() {
-		return "CustomEvent [eventCode=" + eventCode + ", customCode=" + customCode + ", isUse=" + isUse + "]";
+		return String.format("CustomEvent [eventCode=%s, customCode=%s, isUse=%s, events=%s]", eventCode, customCode,
+				isUse, events);
 	}
 
 }
