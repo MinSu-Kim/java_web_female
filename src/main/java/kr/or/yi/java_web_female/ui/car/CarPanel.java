@@ -24,6 +24,8 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
 import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
@@ -50,6 +52,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private ComboPanel<CarType> panelCarType;
 	private JRadioButton rdbtnAuto;
 	private JPanel panel_reset;
+	private ButtonGroup group;
 
 
 	public CarPanel() {
@@ -121,7 +124,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelGear.add(panelRbtn);
 		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 
 		rdbtnAuto = new JRadioButton("자동");
 
@@ -209,10 +212,15 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				modelService.deleteCarModel(panelList.getSelectedItem());
-				panelList.setList(modelService.selectCarModelByAll());
-				panelList.loadDatas();
-				JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+				try {
+					modelService.deleteCarModel(panelList.getSelectedItem());
+					panelList.setList(modelService.selectCarModelByAll());
+					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+				}catch(Exception e1){
+					JOptionPane.showMessageDialog(null, "해당차량은 렌트중으로 삭제가 불가능합니다.");
+				}
+				
 			}
 		});
 		popMenu.add(delItem);
@@ -241,8 +249,14 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelBrand.setSelectedIndex(-1);
 		panelFuel.setSelectedIndex(-1);
 		panelCarType.setSelectedIndex(-1);
+		
+		//그룹해제 후 setSelectedFalse
+		group.remove(rdbtnAuto);
+		group.remove(rdbtnStick);
 		rdbtnStick.setSelected(false);
 		rdbtnAuto.setSelected(false);
+		group.add(rdbtnAuto);
+		group.add(rdbtnStick);
 	}
 
 	protected void do_btnAdd_actionPerformed(ActionEvent e) {

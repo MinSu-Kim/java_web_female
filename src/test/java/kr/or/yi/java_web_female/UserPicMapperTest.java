@@ -114,7 +114,7 @@ public class UserPicMapperTest extends AbstractTest {
 	}
 
 	
-	@AfterClass
+	/*@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		File pics = new File(System.getProperty("user.dir")+"/images/");
 		if(pics.exists()) {
@@ -123,7 +123,7 @@ public class UserPicMapperTest extends AbstractTest {
 			}
 			pics.delete();
 		}
-	}
+	}*/
 }
 
 

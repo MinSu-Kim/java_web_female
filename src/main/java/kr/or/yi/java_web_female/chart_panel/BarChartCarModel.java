@@ -38,6 +38,10 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 	private JRadioButton rdbtnS6;
 	private JRadioButton btnReset;
 	private JPanel panelRbtn;
+	
+	public JPanel getPanelRbtn() {
+		return panelRbtn;
+	}
 	/**
 	 * Create the panel.
 	 */

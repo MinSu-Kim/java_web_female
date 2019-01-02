@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -59,6 +60,7 @@ public class CustomerSearchFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Customer i = cPanel.getSelectedItem();
+//				JOptionPane.showMessageDialog(null, "Customer " + i);
 				customerInfoPanel.setRentCustomer(i);
 				CustomerSearchFrame.this.dispose();
 			}
