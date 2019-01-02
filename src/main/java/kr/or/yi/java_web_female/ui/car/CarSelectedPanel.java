@@ -52,12 +52,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfHour12;
 	private JTextField tfHourElse;
 	private ComboPanel<Brand> cmbBrand;
+	private JComboBox cmbColor;
 
 	private JRadioButton rdbtnAuto;
 	private JRadioButton rdbtnStick;
 	
 	private ComboPanel<CarType> cmbCarType;
-	private JTextField tfColor;
 	private ComboPanel<Fuel> cmbFuel;
 
 	String imgPath = System.getProperty("user.dir")+"\\images\\"; //이미지가 들어있는 경로
@@ -71,6 +71,9 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JFileChooser chooser;
 	private JPanel panelRentCnt;
 	private ButtonGroup group;
+	private String[] arrColorCodes;
+	private String[] arrColorNames;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -182,14 +185,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 		panelColor.add(lblColor);
 		
-		String[] arrColorCode = {"wh","bk","bl","gr","re","mt"};
-		String[] arrColorName = {"하양","검정","파랑","회색","빨강","민트"};
+		arrColorCodes = new String[] {"wh","bk","bl","gr","re","mt"};
+		arrColorNames = new String[] {"하양","검정","파랑","회색","빨강","민트"};
+		
 		//색상콤보박스
-		JComboBox cmbColor = new JComboBox();
+		cmbColor = new JComboBox();
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(arrColorNames);
+		cmbColor.setModel(model);
 		panelColor.add(cmbColor);
-		
-//		cmbColor.setComboItems(arrColor);
-		
+		cmbColor.setSelectedIndex(-1);
+		panelColor.add(cmbColor);
 		
 		JPanel panelGear = new JPanel();
 		panel_info.add(panelGear);
@@ -261,7 +266,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			tfHour10.setEditable(true);
 			tfHour12.setEditable(true);
 			tfHourElse.setEditable(true);
-			tfColor.setEditable(true);
+			cmbColor.setEditable(true);
 			cmbBrand.getComboBox().setEnabled(true);
 			cmbCarType.getComboBox().setEnabled(true);
 			cmbFuel.getComboBox().setEnabled(true);
@@ -272,7 +277,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			tfHour10.setEditable(false);
 			tfHour12.setEditable(false);
 			tfHourElse.setEditable(false);
-			tfColor.setEditable(false);
+			cmbColor.setEditable(false);
 			cmbBrand.getComboBox().setEnabled(false);
 			cmbCarType.getComboBox().setEnabled(false);
 			cmbFuel.getComboBox().setEnabled(false);
@@ -380,7 +385,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbBrand.setSelectedIndex(-1);
 		cmbCarType.setSelectedIndex(-1);
 		cmbFuel.setSelectedIndex(-1);
-		tfColor.setText("");
+		cmbColor.setSelectedIndex(-1);
 		tfHour6.setText("");
 		tfHour10.setText("");
 		tfHour12.setText("");
@@ -412,7 +417,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		CarType cartype = cmbCarType.getSelectedItems();
 		Fuel fuel = cmbFuel.getSelectedItems();
 
-		String color = tfColor.getText().trim();//색상
+		//색상
+		int colorIndex = cmbColor.getSelectedIndex();
+		String colorName = arrColorCodes[colorIndex];
+		
 		String gear = "";
 		boolean selectedGear = rdbtnAuto.isSelected();
 		if(selectedGear) {
@@ -439,7 +447,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		}else if(hourElse<74000){
 			JOptionPane.showMessageDialog(null, "12시간 이상 초과비용을 74000원 이상 입력하세요.");
 		}else {
-			CarModel item = new CarModel(code, name, color, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
+			CarModel item = new CarModel(code, name, colorName, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
 			return item;
 		}
 		return null;
@@ -521,7 +529,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbCarType.setSelectedItem(carModel.getCarType());
 		cmbFuel.setSelectedItem(carModel.getFuel());
 		
-		tfColor.setText(carModel.getColor());
+		String colorCode = carModel.getColor();
+		int index = 0;
+		for(int i = 0;i<arrColorCodes.length;i++) {
+			if(arrColorCodes[i].equals(colorCode)) {
+				index = i;
+			}
+		}
+		String colorName = arrColorNames[index];
+		
+		cmbColor.setSelectedItem(colorName);
 		
 		//천단위 콤마찍기
 		tfHour6.setText(String.format("%,d",carModel.getHour6()));
