@@ -1,7 +1,5 @@
 package kr.or.yi.java_web_female.ui.car;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -12,8 +10,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -34,6 +34,7 @@ import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class CarSelectedPanel extends JPanel implements ActionListener {
@@ -181,9 +182,14 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 		panelColor.add(lblColor);
 		
-		tfColor = new JTextField();
-		panelColor.add(tfColor);
-		tfColor.setColumns(10);
+		String[] arrColorCode = {"wh","bk","bl","gr","re","mt"};
+		String[] arrColorName = {"하양","검정","파랑","회색","빨강","민트"};
+		//색상콤보박스
+		JComboBox cmbColor = new JComboBox();
+		panelColor.add(cmbColor);
+		
+//		cmbColor.setComboItems(arrColor);
+		
 		
 		JPanel panelGear = new JPanel();
 		panel_info.add(panelGear);
