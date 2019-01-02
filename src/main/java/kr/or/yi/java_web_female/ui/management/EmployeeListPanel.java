@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female.ui.management;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -21,18 +23,24 @@ import javax.swing.border.TitledBorder;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.service.EmployeeUiService;
 import kr.or.yi.java_web_female.ui.list.EmployeeList;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class EmployeeListPanel extends JPanel implements ActionListener {
 	protected List<Employee> list;
 	private JTextField tfEmpCode;
 	private JTextField tfEmpName;
-	private JTextField tfEmpPhone;
 	private EmployeeUiService service;
 
 	private EmployeeList panelList;
 	private JButton btnEmpOk;
 	private JButton btnEmpCancel;
+	private JPanel pTel;
+	private JComboBox<String> cmbTel;
+	private JLabel lblTel;
+	private JTextField tfTel2;
+	private JLabel lblTel2;
+	private JTextField tfTel3;
 	// private JPasswordField ptfEmpPw;
 
 	/**
@@ -71,15 +79,15 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_1 = new JPanel();
-		panel.add(panel_1, BorderLayout.EAST);
-		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel pBtn = new JPanel();
+		panel.add(pBtn, BorderLayout.EAST);
+		pBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		btnEmpOk = new JButton("추가");
-		panel_1.add(btnEmpOk);
+		pBtn.add(btnEmpOk);
 
 		btnEmpCancel = new JButton("취소");
-		panel_1.add(btnEmpCancel);
+		pBtn.add(btnEmpCancel);
 		btnEmpCancel.addActionListener(this);
 		btnEmpOk.addActionListener(this);
 
@@ -106,10 +114,33 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		JLabel lblEmpPhone = new JLabel("연락처");
 		lblEmpPhone.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelInput.add(lblEmpPhone);
-
-		tfEmpPhone = new JTextField();
-		panelInput.add(tfEmpPhone);
-		tfEmpPhone.setColumns(15);
+		
+		pTel = new JPanel();
+		panelInput.add(pTel);
+		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
+		
+		cmbTel = new JComboBox();
+		cmbTel.setPreferredSize(new Dimension(100, 27));
+		cmbTel.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
+		pTel.add(cmbTel);
+		
+		lblTel = new JLabel("-");
+		lblTel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTel.setEnabled(false);
+		pTel.add(lblTel);
+		
+		tfTel2 = new JTextField();
+		tfTel2.setColumns(10);
+		pTel.add(tfTel2);
+		
+		lblTel2 = new JLabel("-");
+		lblTel2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTel2.setEnabled(false);
+		pTel.add(lblTel2);
+		
+		tfTel3 = new JTextField();
+		tfTel3.setColumns(10);
+		pTel.add(tfTel3);
 
 		/*
 		 * JLabel lblEmpPw = new JLabel("비밀번호");
@@ -177,7 +208,9 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 	private Employee getItem() {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
-		String ePhone = tfEmpPhone.getText();
+		String ePhone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
+				+ (tfTel3.getText().trim());
+				
 		// String ePassword = new String(ptfEmpPw.getPassword());
 		Employee item = new Employee();
 		item.setCode(eCode);
@@ -190,7 +223,9 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 	protected void do_btnEmpOk_actionPerformed(ActionEvent e) {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
-		String ePhone = tfEmpPhone.getText();
+		String ePhone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
+				+ (tfTel3.getText().trim());
+
 		// String ePassword = new String(ptfEmpPw.getPassword());
 		Employee employee = new Employee();
 		employee.setCode(eCode);
@@ -208,7 +243,9 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 	private void clearTf() {
 		tfEmpCode.setText("");
 		tfEmpName.setText("");
-		tfEmpPhone.setText("");
+		tfTel2.setText("");
+		tfTel3.setText("");
+		cmbTel.setSelectedItem("010");
 		// ptfEmpPw.setText("");
 
 	}
@@ -223,7 +260,11 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 	private void setItem(Employee item) {
 		tfEmpCode.setText(item.getCode() + "");
 		tfEmpName.setText(item.getName() + "");
-		tfEmpPhone.setText(item.getPhone() + "");
+		String[] array = item.getPhone().split("-");
+		cmbTel.setSelectedItem(array[0] + "");
+		tfTel2.setText(array[1] + "");
+		tfTel3.setText(array[2] + "");
+
 		// ptfEmpPw.setText(item.getPasswd() + "");
 
 	}
