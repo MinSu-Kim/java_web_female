@@ -121,11 +121,37 @@ join custom_event ce on c.code = ce.custom_code join event e on e.code = ce.even
 
 
 
-select r.code, 
-round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ), 
-e.rate as eventRate, g.rate as gradeRate, if(g.rate > e.rate, g.rate, e.rate), (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100
+select cm.brand, cm.cartype,
+round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
+from rent r left join car_model cm on cm.car_code = r.car_code join insurance i on r.insurance_code = i.code
+join customer c on r.costomer_code = c.code
+join custom_event ce on c.code = ce.custom_code
+join event e on ce.event_code = e.code
+join grade g on c.grade_code = g.code
+group by cm.brand, cm.cartype;
+
+
+-- 매출액 통계
+-- limit 3 : 매출액 가장 높은 top3만 보여줌
+select *
+from (select cm.brand, cm.cartype,
+	round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
+	from rent r left join car_model cm on cm.car_code = r.car_code join insurance i on r.insurance_code = i.code
+	join customer c on r.costomer_code = c.code
+	join custom_event ce on c.code = ce.custom_code
+	join event e on ce.event_code = e.code
+	join grade g on c.grade_code = g.code) as t
+order by totalPrice desc
+limit 3;
+
+create view vw_price_stat as
+select cm.brand, cm.cartype,
+round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
 from rent r left join car_model cm on cm.car_code = r.car_code join insurance i on r.insurance_code = i.code
 join customer c on r.costomer_code = c.code
 join custom_event ce on c.code = ce.custom_code
 join event e on ce.event_code = e.code
 join grade g on c.grade_code = g.code;
+
+-- ddl에서 view 만들어놓고 매출액 관련 dto를 만든다음 dao에서 아래 select 문에서 vw_price_stat 테이블 검색하도록 한다.
+select * from vw_price_stat;
