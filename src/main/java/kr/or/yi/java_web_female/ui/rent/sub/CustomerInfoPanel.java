@@ -31,9 +31,10 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 
 	public void setRentCustomer(Customer rentCustomer) {
 		//code로 검색.
+//		JOptionPane.showMessageDialog(null, " =======> rentCustomer " + rentCustomer );
 		this.rentCustomer = service.selectCustomerByCode(rentCustomer).get(0);
 		//this.rentCustomer = rentCustomer;
-		
+//		JOptionPane.showMessageDialog(null, "this.rentCustomer " + this.rentCustomer);
 
 		// 고객 정보가 들어오는 지 확인하기
 /*		JOptionPane.showMessageDialog(null, "선택된 고객 " + this.rentCustomer);

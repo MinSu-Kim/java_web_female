@@ -116,7 +116,7 @@ public class CustomerMapperTest extends AbstractTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
 		Customer searchPw = new Customer();
-		searchPw.setCode("C001");
+		searchPw.setCode("C045");
 		List<Customer> cusList = dao.selectCustomerByCode(searchPw);
 		for (Customer c : cusList) {
 			System.out.println(c);

@@ -354,7 +354,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(null, e2.getMessage());
+			/*JOptionPane.showMessageDialog(null, e2.getMessage());*/
 			e2.printStackTrace();
 		}
 	}
