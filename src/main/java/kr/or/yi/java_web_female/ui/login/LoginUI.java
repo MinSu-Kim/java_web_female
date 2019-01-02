@@ -134,10 +134,11 @@ public class LoginUI extends JFrame implements ActionListener {
 			isLoginCheck();
 			dispose();
 			TestFrame frame = new TestFrame(day);
-
+			JOptionPane.showMessageDialog(null, "로그인 되엇습니다.");
 			frame.setVisible(true);
+			
 		} catch (LoginFailException e1) {
-			//JOptionPane.showMessageDialog(null, e1.getMessage());
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 			e1.printStackTrace();
 		}
 		

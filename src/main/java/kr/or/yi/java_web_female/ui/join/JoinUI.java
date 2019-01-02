@@ -336,25 +336,16 @@ public class JoinUI extends JFrame implements ActionListener {
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 
 			joinService.joinCustomer(customer, customEvent);
-
+			JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
 			LoginUI frame = new LoginUI();
 			frame.setVisible(true);
 
 			close();
-
-///////////////////////// 트랜잭션 처리 //////////////////////////
-			/*
-			 * 트랜잭션처리 전 int res = joinService.addcus(customer, customEvent);
-			 * 
-			 * if(res==1) { JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
-			 * JoinUI.this.dispose(); }
-			 */
-/////////////////////////////////////// 
 			clearTf();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} catch (Exception e2) {
-			/*JOptionPane.showMessageDialog(null, e2.getMessage());*/
+			JOptionPane.showMessageDialog(null, e2.getMessage());
 			e2.printStackTrace();
 		}
 	}
