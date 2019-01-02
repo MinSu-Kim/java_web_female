@@ -44,7 +44,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	public static Customer loginCusotmer;
 	public static Employee loginEmployee;
 	public static Grade loginGrade;
-	
+
 	public static LoginUI loginUI;
 
 	public LoginUI() {
@@ -103,11 +103,10 @@ public class LoginUI extends JFrame implements ActionListener {
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
 
-		
-		//test
-		tfId.setText("asd132");
+		// test
+		tfId.setText("E001");
 		tfPwd.setText("rootroot");
-		
+		checkManager.setSelected(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -126,22 +125,25 @@ public class LoginUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_btnLogin_actionPerformed(ActionEvent e) {
-		try {
+	try {
 			String day = "";
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
 			day = sdf.format(date);
-
+			
 			isLoginCheck();
 			dispose();
 			TestFrame frame = new TestFrame(day);
-
+			JOptionPane.showMessageDialog(null, "로그인 되엇습니다.");
 			frame.setVisible(true);
+			
 		} catch (LoginFailException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 			e1.printStackTrace();
 		}
+		
+	
+		
 	}
 
 	private void isLoginCheck() throws LoginFailException {
@@ -153,12 +155,15 @@ public class LoginUI extends JFrame implements ActionListener {
 			List<Customer> fullCustomer = loginService.selectCustomerByCode(customer);
 			loginCusotmer = fullCustomer.get(0);
 			/////////////////////
-			JOptionPane.showMessageDialog(null, loginCusotmer.getGradeCode().getCode() + " : " + loginCusotmer.getGradeCode().getName() + " : " + loginCusotmer.getGradeCode().getRate());
+			/*
+			 * JOptionPane.showMessageDialog(null, loginCusotmer.getGradeCode().getCode() +
+			 * " : " + loginCusotmer.getGradeCode().getName() + " : " +
+			 * loginCusotmer.getGradeCode().getRate());
+			 */
 			/////////////////
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(loginCusotmer.getDob());
-			if (cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
-//				JOptionPane.showMessageDialog(null, "생월이 같음");
+			if (cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {			
 				loginService.insertCustomEvent(new CustomEvent("EVT2", loginCusotmer.getCode(), false));
 			}
 		}
@@ -183,7 +188,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	}
 
 	public void setPasswd(String newPwd) {
-		tfPwd.setText(newPwd);		
+		tfPwd.setText(newPwd);
 	}
 
 	public void setId(String id) {

@@ -1,10 +1,14 @@
 package kr.or.yi.java_web_female.ui.rent.sub;
 
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.Customer;
@@ -13,11 +17,7 @@ import kr.or.yi.java_web_female.ui.login.LoginUI;
 import kr.or.yi.java_web_female.ui.rent.CustomerSearchFrame;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.util.List;
-import java.awt.event.ActionEvent;
-
+@SuppressWarnings("serial")
 public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 	private JTextField tfCstmName;
 	private Customer rentCustomer;
@@ -31,9 +31,10 @@ public class CustomerInfoPanel extends CarSubPanel implements ActionListener {
 
 	public void setRentCustomer(Customer rentCustomer) {
 		//code로 검색.
+//		JOptionPane.showMessageDialog(null, " =======> rentCustomer " + rentCustomer );
 		this.rentCustomer = service.selectCustomerByCode(rentCustomer).get(0);
 		//this.rentCustomer = rentCustomer;
-		
+//		JOptionPane.showMessageDialog(null, "this.rentCustomer " + this.rentCustomer);
 
 		// 고객 정보가 들어오는 지 확인하기
 /*		JOptionPane.showMessageDialog(null, "선택된 고객 " + this.rentCustomer);

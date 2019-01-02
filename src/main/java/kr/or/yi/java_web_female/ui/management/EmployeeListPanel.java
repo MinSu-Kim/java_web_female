@@ -1,32 +1,28 @@
 package kr.or.yi.java_web_female.ui.management;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-
-import java.awt.GridLayout;
-import java.util.List;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-
-import kr.or.yi.java_web_female.dto.CarOption;
-import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.dto.Event;
-import kr.or.yi.java_web_female.service.EmployeeUiService;
-import kr.or.yi.java_web_female.ui.list.EmployeeList;
-
-import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
+import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.service.EmployeeUiService;
+import kr.or.yi.java_web_female.ui.list.EmployeeList;
+
+@SuppressWarnings("serial")
 public class EmployeeListPanel extends JPanel implements ActionListener {
 	protected List<Employee> list;
 	private JTextField tfEmpCode;
@@ -37,7 +33,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 	private EmployeeList panelList;
 	private JButton btnEmpOk;
 	private JButton btnEmpCancel;
-	//private JPasswordField ptfEmpPw;
+	// private JPasswordField ptfEmpPw;
 
 	/**
 	 * Create the panel.
@@ -57,7 +53,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		list = service.selectEmployeeByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
-		
+
 		panelList.getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -115,12 +111,13 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		panelInput.add(tfEmpPhone);
 		tfEmpPhone.setColumns(15);
 
-		/*JLabel lblEmpPw = new JLabel("비밀번호");
-		lblEmpPw.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput.add(lblEmpPw);
-
-		ptfEmpPw = new JPasswordField();
-		panelInput.add(ptfEmpPw);*/
+		/*
+		 * JLabel lblEmpPw = new JLabel("비밀번호");
+		 * lblEmpPw.setHorizontalAlignment(SwingConstants.RIGHT);
+		 * panelInput.add(lblEmpPw);
+		 * 
+		 * ptfEmpPw = new JPasswordField(); panelInput.add(ptfEmpPw);
+		 */
 
 		panelList.setPopupMenu(createDeptPopupMenu());
 
@@ -181,12 +178,12 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
 		String ePhone = tfEmpPhone.getText();
-		//String ePassword = new String(ptfEmpPw.getPassword());
+		// String ePassword = new String(ptfEmpPw.getPassword());
 		Employee item = new Employee();
 		item.setCode(eCode);
 		item.setName(eName);
 		item.setPhone(ePhone);
-		//item.setPasswd(ePassword);
+		// item.setPasswd(ePassword);
 		return item;
 	}
 
@@ -194,12 +191,12 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		String eCode = tfEmpCode.getText();
 		String eName = tfEmpName.getText();
 		String ePhone = tfEmpPhone.getText();
-		//String ePassword = new String(ptfEmpPw.getPassword());
+		// String ePassword = new String(ptfEmpPw.getPassword());
 		Employee employee = new Employee();
 		employee.setCode(eCode);
 		employee.setName(eName);
 		employee.setPhone(ePhone);
-		//employee.setPasswd(ePassword);
+		// employee.setPasswd(ePassword);
 		service.insertEmployee(employee);
 		list = service.selectEmployeeByAll();
 		panelList.setList(list);
@@ -212,7 +209,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		tfEmpCode.setText("");
 		tfEmpName.setText("");
 		tfEmpPhone.setText("");
-		//ptfEmpPw.setText("");
+		// ptfEmpPw.setText("");
 
 	}
 
@@ -227,7 +224,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		tfEmpCode.setText(item.getCode() + "");
 		tfEmpName.setText(item.getName() + "");
 		tfEmpPhone.setText(item.getPhone() + "");
-		//ptfEmpPw.setText(item.getPasswd() + "");
+		// ptfEmpPw.setText(item.getPasswd() + "");
 
 	}
 

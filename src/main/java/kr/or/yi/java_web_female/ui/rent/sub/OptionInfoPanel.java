@@ -1,14 +1,10 @@
 package kr.or.yi.java_web_female.ui.rent.sub;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import kr.or.yi.java_web_female.dto.CarModel;
@@ -17,10 +13,11 @@ import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.MyCheckBox;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
+@SuppressWarnings("serial")
 public class OptionInfoPanel extends CarSubPanel {
 	private List<CarOption> coList;
 	private MyCheckBox mcb;
-	private CarModel selectedCarModel;
+//	private CarModel selectedCarModel;
 	private List<CarOption> carOptionList= new ArrayList<>();
 	private RentPanel rentPanel;
 	
@@ -50,8 +47,8 @@ public class OptionInfoPanel extends CarSubPanel {
 //			JCheckBox cb = new JCheckBox(co.getName());
 			mcb.addActionListener(chkListener);
 			add(mcb);
-			if (co.getName().equals("driver")) {
-				mcb.setEnabled(false);
+			if (co.getName().equals("없음")) {
+				mcb.setVisible(false);
 			}
 		}
 	}
@@ -80,8 +77,8 @@ public class OptionInfoPanel extends CarSubPanel {
 		}
 	};
 
-	public void setSelectedCarModel(CarModel selectedCarModel) {
-		this.selectedCarModel = selectedCarModel;
+/*	public void setSelectedCarModel(CarModel selectedCarModel) {
+//		this.selectedCarModel = selectedCarModel;
 
 		if (selectedCarModel.getCarType().getCode().equals("S2")) {
 			chkDriver(true);
@@ -98,6 +95,6 @@ public class OptionInfoPanel extends CarSubPanel {
 				break;
 			}
 		}
-	}
+	}*/
 
 }

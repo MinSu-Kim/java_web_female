@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female.ui.car;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,15 +17,16 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
-import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 
+import org.apache.ibatis.exceptions.PersistenceException;
+
+import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -33,7 +35,6 @@ import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
 import kr.or.yi.java_web_female.ui.list.CarTotalList;
-import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class CarPanel extends JPanel implements ActionListener, ItemListener {
@@ -51,22 +52,21 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private ComboPanel<CarType> panelCarType;
 	private JRadioButton rdbtnAuto;
 	private JPanel panel_reset;
-
+	private ButtonGroup group;
+	private List<CarType> arrCarType;
+	private JPanel panelSelect;
+	
 	public CarPanel() {
 		service = new CarUiService();
 		modelService = new CarModelService();
 		initComponents();
-		/* 테이블 정렬
-		JTable table = new JTable(model); 
-		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model); 
-		table.setRowSorter(sorter);*/
 	}
 
 	private void initComponents() {
 
 		setLayout(new BorderLayout(0, 0));
 
-		JPanel panelSelect = new JPanel();
+		panelSelect = new JPanel();
 		panelSelect.setBorder(new TitledBorder(null, "\uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(panelSelect, BorderLayout.NORTH);
 
@@ -76,15 +76,17 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		gridLayout.setHgap(10);
 
 		panelCarType.setTitle("차종");
-		List<CarType> arrCarType = service.selectAllCarType();
-		panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		setListComboBox();
+		if(TestFrame.loginEmployee()) {
+			panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		}else {
+			panelSelect.setLayout(new GridLayout(0, 2, 0, 0));
+		}
 
 		// 콤보박스에 차종 불러오기
-		panelCarType.setComboItems(arrCarType);
+
 		panelCarType.setSelectedIndex(-1);
 		// 아이템리스너
-
-		panelSelect.add(panelCarType);
 
 		panelBrand = new ComboPanel<>();
 		GridLayout gridLayout_1 = (GridLayout) panelBrand.getLayout();
@@ -121,7 +123,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelGear.add(panelRbtn);
 		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 
 		rdbtnAuto = new JRadioButton("자동");
 
@@ -172,6 +174,12 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		btnAdd = new JButton("추가");
 		btnAdd.addActionListener(this);
 		panelBtn.add(btnAdd);
+		//고객은 추가버튼 이용불가능
+		if(TestFrame.loginEmployee()) {
+			btnAdd.setVisible(true);
+		}else {
+			btnAdd.setVisible(false);
+		}
 		panelBtn.add(btnOk);
 
 		panelCarType.getComboBox().addItemListener(this);
@@ -203,9 +211,15 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		delItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				modelService.deleteCarModel(panelList.getSelectedItem());
-				panelList.setList(modelService.selectCarModelByAll());
-				panelList.loadDatas();
+				try {
+					modelService.deleteCarModel(panelList.getSelectedItem());
+					panelList.setList(modelService.selectCarModelByAll());
+					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+				}catch(Exception e1){
+					JOptionPane.showMessageDialog(null, "해당차량은 렌트중으로 삭제가 불가능합니다.");
+				}
+				
 			}
 		});
 		popMenu.add(delItem);
@@ -234,8 +248,14 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelBrand.setSelectedIndex(-1);
 		panelFuel.setSelectedIndex(-1);
 		panelCarType.setSelectedIndex(-1);
+		
+		//그룹해제 후 setSelectedFalse
+		group.remove(rdbtnAuto);
+		group.remove(rdbtnStick);
 		rdbtnStick.setSelected(false);
 		rdbtnAuto.setSelected(false);
+		group.add(rdbtnAuto);
+		group.add(rdbtnStick);
 	}
 
 	protected void do_btnAdd_actionPerformed(ActionEvent e) {
@@ -296,6 +316,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 	}
-
+	
+	public void setListComboBox() {
+		arrCarType = service.selectAllCarType();
+		panelCarType.setComboItems(arrCarType);
+		panelSelect.add(panelCarType);
+	}
 
 }

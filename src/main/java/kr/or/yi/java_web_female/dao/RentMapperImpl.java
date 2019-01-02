@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.RentHour;
+import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.jdbc.MyBatisSqlSessionFactory;
 
 public class RentMapperImpl implements RentMapper {
@@ -103,5 +103,35 @@ public class RentMapperImpl implements RentMapper {
 			return sqlSession.selectList(namespace + ".selectRentAll");
 		}
 	}
+
+	@Override
+	public List<StateCar> selectCountRentByMonth() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace+".selectCountRentByMonth");
+		}
+		
+	}
+
+	@Override
+	public List<StateCar> selectCountRentByMonthWithCarType(String carType) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectCountRentByMonthWithCarType", carType);
+		}
+	}
+
+	@Override
+	public List<StateCar> selectCountRentByMonthWithBrand(String brand) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace+".selectCountRentByMonthWithBrand",brand);
+		}
+	}
+
+	@Override
+	public List<StateCar> selectCarOptionsWithRentCode() {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectCarOptionsWithRentCode");
+		}
+	}
+
 
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
@@ -19,6 +18,7 @@ import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
+@SuppressWarnings("serial")
 public class InsurancePanel extends CarSubPanel implements ItemListener {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton rbReg;

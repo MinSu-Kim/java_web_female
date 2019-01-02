@@ -1,7 +1,5 @@
 package kr.or.yi.java_web_female;
 
-import static org.junit.Assert.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

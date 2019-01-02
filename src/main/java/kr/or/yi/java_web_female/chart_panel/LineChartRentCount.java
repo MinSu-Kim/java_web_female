@@ -9,24 +9,28 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
 
+@SuppressWarnings("serial")
 public class LineChartRentCount extends JPanel {
-	private JPanel contentPane;
 	private DataLineChartRentCount pLineChart;
 	
+	public DataLineChartRentCount getpLineChart() {
+		return pLineChart;
+	}
+
 	public LineChartRentCount() {
 		initComponents();
 	}
 
 	private void initComponents() {
-		// TODO Auto-generated method stub
 		setLayout(new BorderLayout(0, 0));
-		
-		contentPane = new JPanel();
-		add(contentPane);
+
+		JPanel pRentLineChart = new JPanel();
+		add(pRentLineChart);
+		pRentLineChart.setLayout(new BorderLayout(0, 0));
 		
 		//라인차트 패널 붙이기
 		pLineChart = new DataLineChartRentCount();
-		contentPane.add(pLineChart);
+		pRentLineChart.add(pLineChart);
 		
 		Platform.runLater(() -> initFX(pLineChart));
 	}

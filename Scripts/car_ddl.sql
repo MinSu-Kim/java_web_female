@@ -414,4 +414,14 @@ ALTER TABLE proj_rentcar.userpic
 		)
 		ON DELETE cascade
 		ON UPDATE cascade;
-	
+		
+-- 매출액 통계를 내기위한 view
+create view vw_price_stat as
+select cm.brand, cm.cartype,
+round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
+from proj_rentcar.rent r left join proj_rentcar.car_model cm on cm.car_code = r.car_code 
+join proj_rentcar.insurance i on r.insurance_code = i.code
+join proj_rentcar.customer c on r.costomer_code = c.code
+join proj_rentcar.custom_event ce on c.code = ce.custom_code
+join proj_rentcar.event e on ce.event_code = e.code
+join proj_rentcar.grade g on c.grade_code = g.code;

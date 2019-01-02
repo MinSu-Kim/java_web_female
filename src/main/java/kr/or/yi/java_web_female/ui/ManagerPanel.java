@@ -1,31 +1,29 @@
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-
-import kr.or.yi.java_web_female.ui.car.CarPanel;
-import kr.or.yi.java_web_female.ui.login.LoginUI;
-import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
-import kr.or.yi.java_web_female.ui.rent.RentListPanel;
-import kr.or.yi.java_web_female.ui.rent.RentPanel;
-import kr.or.yi.java_web_female.TestFrame;
-import kr.or.yi.java_web_female.chart_panel.BarChartCarModel;
-import kr.or.yi.java_web_female.chart_panel.PieChartCarType;
-import kr.or.yi.java_web_female.service.LoginUiService;
-import kr.or.yi.java_web_female.chart_panel.CarChartPanel;
-import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
-import kr.or.yi.java_web_female.ui.management.GradeEventPanel;
-import kr.or.yi.java_web_female.ui.management.EmployeeListPanel;
-import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
-import kr.or.yi.java_web_female.ui.management.CustommerUpdate;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kr.or.yi.java_web_female.TestFrame;
+import kr.or.yi.java_web_female.chart_panel.CarChartPanel;
+import kr.or.yi.java_web_female.chart_panel.CustomerChartPanel;
+import kr.or.yi.java_web_female.ui.car.CarManagementPanel;
+import kr.or.yi.java_web_female.ui.car.CarPanel;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
+import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
+import kr.or.yi.java_web_female.ui.management.CustommerUpdate;
+import kr.or.yi.java_web_female.ui.management.EmployeeListPanel;
+import kr.or.yi.java_web_female.ui.management.GradeEventPanel;
+import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
+import kr.or.yi.java_web_female.ui.rent.RentListPanel;
+import kr.or.yi.java_web_female.ui.rent.RentPanel;
+import kr.or.yi.java_web_female.ui.rent.RentStatistics;
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel implements ActionListener {
@@ -34,7 +32,6 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JButton btnLogout;
 	private TestFrame testFrame;
 	private JLabel lblName;
-
 	private JLabel lblLoginTime;
 	private JLabel lblGrade;
 	private JLabel lblID;
@@ -59,9 +56,9 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		lblID = new JLabel("");
 		pLoginInfo.add(lblID);
 		if (LoginUI.loginCusotmer == null) {
-			lblID.setText(LoginUI.loginEmployee.getCode() + "님");
+			lblID.setText(LoginUI.loginEmployee.getCode() + "(" + LoginUI.loginEmployee.getName() + ")" + "님");
 		} else {
-			lblID.setText(LoginUI.loginCusotmer.getId() + "님");
+			lblID.setText(LoginUI.loginCusotmer.getId() + "(" + LoginUI.loginCusotmer.getName() + ")" + "님");
 		}
 
 		lblLoginTime = new JLabel("");
@@ -74,19 +71,13 @@ public class ManagerPanel extends JPanel implements ActionListener {
 
 		}
 
-		lblGrade = new JLabel("고객등급");
+		lblGrade = new JLabel("");
 		pLoginInfo.add(lblGrade);
 		if (LoginUI.loginCusotmer == null) {
-			/*lblGrade.setText(LoginUI.loginEmployee.getCode() + "님");*/
-		} else {
-			lblGrade.setText(LoginUI.loginCusotmer.getGradeCode().getName() + "등급입니다.");
-		}
-		
-		
 
-//		System.out.println("loginCustomer :" + LoginUI.loginCusotmer.getRentCnt());
-		JLabel lblRent = new JLabel("현재대여중인것이 있으면 보여줌");
-		pLoginInfo.add(lblRent);
+		} else {
+			lblGrade.setText(LoginUI.loginCusotmer.getGradeCode().getName() + " 등급입니다.");
+		}
 
 		btnLogout = new JButton("로그아웃");
 		btnLogout.addActionListener(this);
@@ -129,21 +120,21 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			CarChartPanel panel_9 = new CarChartPanel();
 			tabbedPane.addTab("차량통계", null, panel_9, null);
 
-			JPanel panel_10 = new JPanel();
+			JPanel panel_10 = new CustomerChartPanel();
 			tabbedPane.addTab("고객통계", null, panel_10, null);
 
-			JPanel panel_11 = new JPanel();
-			tabbedPane.addTab("렌트통계", null, panel_11, null);
+			RentStatistics panel_11 = new RentStatistics();
+			tabbedPane.addTab("대여통계", null, panel_11, null);
 
 		}
 
 		if (!TestFrame.loginEmployee()) {
 
 			RentPanel panel_01 = new RentPanel();
-			tabbedPane.addTab("대여관리", null, panel_01, null);
+			tabbedPane.addTab("차량대여", null, panel_01, null);
 
 			CarPanel panel_02 = new CarPanel();
-			tabbedPane.addTab("보유차량", null, panel_02, null);
+			tabbedPane.addTab("차량조회", null, panel_02, null);
 
 			JPanel panel_03 = new CustommerUpdate();
 			tabbedPane.addTab("개인정보관리", null, panel_03, null);

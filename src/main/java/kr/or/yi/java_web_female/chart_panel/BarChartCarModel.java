@@ -1,7 +1,14 @@
+
 package kr.or.yi.java_web_female.chart_panel;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -9,23 +16,19 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import kr.or.yi.java_web_female.InitScene;
-import kr.or.yi.java_web_female.dto.CarModel;
-import kr.or.yi.java_web_female.service.CarModelService;
-
-import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.Color;
+import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class BarChartCarModel extends JPanel implements ActionListener{
 	
 	private JPanel contentPane;
-	private CarModelService service;
 	private DataBarChartCarModel pBarChart;
-	
+
+	public DataBarChartCarModel getpBarChart() {
+		return pBarChart;
+	}
 	//차종별 라디오버튼
 	private JRadioButton rdbtnS1;
 	private JRadioButton rdbtnS2;
@@ -34,27 +37,34 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 	private JRadioButton rdbtnS5;
 	private JRadioButton rdbtnS6;
 	private JRadioButton btnReset;
+	private JPanel panelRbtn;
+	
+	public JPanel getPanelRbtn() {
+		return panelRbtn;
+	}
 	/**
 	 * Create the panel.
 	 */
 	public BarChartCarModel() {
-		service = new CarModelService();
 		initComponents();
 	}
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
-		contentPane = new JPanel();
+/*		contentPane = new JPanel();
 		add(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));*/
 		
 		//바차트 패널 붙임
 		pBarChart = new DataBarChartCarModel();
-		contentPane.add(pBarChart);
+//		contentPane.add(pBarChart);
+		add(pBarChart);
 		
 		Platform.runLater(() -> initFX(pBarChart));
 		
 		//라디오버튼
-		JPanel panelRbtn = new JPanel();
+		
+		panelRbtn = new JPanel();
 		panelRbtn.setLayout(new GridLayout(0, 7, 0, 0));
 				
 		ButtonGroup group = new ButtonGroup();
@@ -94,8 +104,8 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 		group.add(btnReset);
 		panelRbtn.add(btnReset);
 		
-		contentPane.add(panelRbtn);
-	
+//		contentPane.add(panelRbtn, BorderLayout.SOUTH);
+		add(panelRbtn, BorderLayout.SOUTH);
 	}
 	
 	public void initFX(InitScene fxPanel) {
@@ -185,5 +195,9 @@ public class BarChartCarModel extends JPanel implements ActionListener{
 			maps.put("cartype", "S5");
 			pBarChart.getBarChart().setData(pBarChart.getChartData(maps));
 		});
+	}
+	
+	public void isRadioBtns(boolean isVisible) {
+		this.panelRbtn.setVisible(isVisible);
 	}
 }

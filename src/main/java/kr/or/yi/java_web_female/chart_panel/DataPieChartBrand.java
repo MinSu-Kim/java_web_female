@@ -20,17 +20,22 @@ import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.service.StateCarChartService;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class DataPieChartBrand extends JFXPanel implements InitScene{
+	
 	public DataPieChartBrand() {
 		setFont(new Font("Dialog", Font.BOLD, 12));
 	}
 
-	
 	private PieChart pieChart;
 	private StateCarChartService service;
 	private CarModelService modelService;
 	private CarUiService carService;
-	
+
+	public PieChart getPieChart() {
+		return pieChart;
+	}
+
 	@Override
 	public Scene createScene() {
 		service = new StateCarChartService();
@@ -42,7 +47,7 @@ public class DataPieChartBrand extends JFXPanel implements InitScene{
 		root.setAutoSizeChildren(true);
 		
 		pieChart = new PieChart();
-		pieChart.setPrefSize(450, 275);
+		pieChart.setPrefSize(440, 250);
 		pieChart.setData(getChartData());
 		pieChart.setTitle("브랜드별 보유차량");
 		pieChart.setLegendVisible(true);	// 범례 표시 유무

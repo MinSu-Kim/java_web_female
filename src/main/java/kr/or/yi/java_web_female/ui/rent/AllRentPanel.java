@@ -1,16 +1,21 @@
 package kr.or.yi.java_web_female.ui.rent;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.util.List;
 
-import kr.or.yi.java_web_female.ui.rent.sub.RentSearchPanel;
+import javax.swing.JPanel;
+
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.list.RentList;
+import kr.or.yi.java_web_female.ui.rent.sub.RentSearchPanel;
 
+@SuppressWarnings("serial")
 public class AllRentPanel extends JPanel {
 	private RentUIService service;
+	private List<Rent> list;
+	private RentList pList;
+	private RentSearchPanel pSearch;
 	
 	/**
 	 * Create the panel.
@@ -24,18 +29,20 @@ public class AllRentPanel extends JPanel {
 	private void initComponents() {
 		setLayout(new BorderLayout(0, 0));
 		
-		RentList pList = new RentList();
-		
-		RentSearchPanel pSearch = new RentSearchPanel();
+		pList = new RentList();
+		pSearch = new RentSearchPanel();
 		pSearch.setRentList(pList);
 		
-		
-		List<Rent> list = service.selectRentAll();
-		pList.setList(list);
-		pList.loadDatas();
+		reloadList();
 		
 		add(pSearch, BorderLayout.NORTH);
 		add(pList, BorderLayout.CENTER);
+	}
+
+	public void reloadList() {
+		list = service.selectRentAll();
+		pList.setList(list);
+		pList.loadDatas();
 	}
 
 }

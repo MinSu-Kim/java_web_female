@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -24,6 +23,7 @@ import com.toedter.calendar.JDateChooser;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 
+@SuppressWarnings("serial")
 public class RentInfoPanel extends CarSubPanel implements ActionListener {
 	private JDateChooser dateChooserEnd; // 대여일시
 	private JDateChooser dateChooserStart; // 반납일시

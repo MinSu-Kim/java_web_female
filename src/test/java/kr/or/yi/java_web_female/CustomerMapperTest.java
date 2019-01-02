@@ -8,8 +8,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import kr.or.yi.java_web_female.dao.CustomerMapper;
 import kr.or.yi.java_web_female.dao.CustomerMapperImpl;
 import kr.or.yi.java_web_female.dto.CustomEvent;
@@ -21,7 +19,7 @@ import kr.or.yi.java_web_female.dto.Grade;
 public class CustomerMapperTest extends AbstractTest {
 
 	private CustomerMapper dao = CustomerMapperImpl.getInstance();
-	private String orderDate;
+//	private String orderDate;
 
 	@Test
 	public void test01SelectCustomerByName() {
@@ -118,7 +116,7 @@ public class CustomerMapperTest extends AbstractTest {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 
 		Customer searchPw = new Customer();
-		searchPw.setCode("C001");
+		searchPw.setCode("C045");
 		List<Customer> cusList = dao.selectCustomerByCode(searchPw);
 		for (Customer c : cusList) {
 			System.out.println(c);

@@ -19,6 +19,7 @@ import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.service.StateCarChartService;
 
+@SuppressWarnings("serial")
 public class DataPieChartCarType extends JFXPanel implements InitScene{
 
 	
@@ -26,7 +27,12 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	private StateCarChartService chartService;
 	private CarModelService modelService;
 	private CarUiService carService;
-	
+
+	public PieChart getPieChart() {
+		return pieChart;
+	}
+
+
 	@Override
 	public Scene createScene() {
 		chartService = new StateCarChartService();
@@ -38,7 +44,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 		root.setAutoSizeChildren(true);
 		
 		pieChart = new PieChart();
-		pieChart.setPrefSize(450, 275);
+		pieChart.setPrefSize(440, 250);
 		pieChart.setData(getChartData());
 		pieChart.setTitle("차종별 보유차량");
 		pieChart.setLegendVisible(true);	// 범례 표시 유무
@@ -73,6 +79,7 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 			//코드로 차종이름 검색
 			CarType resType = carService.selectByCarCode(type);
 			
+			
 			double rate = Math.round((sCar.getCount()*100.0)/totalCount);
 			list.add(new PieChart.Data(resType.getType(),rate ));
 		}
@@ -82,25 +89,4 @@ public class DataPieChartCarType extends JFXPanel implements InitScene{
 	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

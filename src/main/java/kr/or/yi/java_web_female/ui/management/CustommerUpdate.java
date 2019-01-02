@@ -1,17 +1,24 @@
 package kr.or.yi.java_web_female.ui.management;
 
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
+import java.awt.Dimension;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.SwingConstants;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
 import com.toedter.calendar.JDateChooser;
 
 import kr.or.yi.java_web_female.dto.Customer;
@@ -21,18 +28,10 @@ import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
 import kr.or.yi.java_web_female.ui.join.MyDocumentListener;
 import kr.or.yi.java_web_female.ui.join.SearchPostUI;
-import kr.or.yi.java_web_female.ui.list.CustomerList;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
-import java.awt.Dimension;
-
+@SuppressWarnings("serial")
 public class CustommerUpdate extends JPanel implements ActionListener {
-	private List<Customer> list;
 	private JTextField tfName;
 	private JTextField tfId;
 	private JTextField tfZipcode;
@@ -43,7 +42,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private JTextField tfTel3;
 	private JComboBox<String> cmbDomain;
 	private JComboBox<String> cmbTel;
-	private CustomerList panelList;
+//	private CustomerList panelList;
 	private CustomUiService service;
 	private JDateChooser dateChooser;
 	private JPasswordField pwfNowPw;
@@ -55,10 +54,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 	private JTextField tfCode;
 	private JComboBox<String> cmbLicence;
 	private Customer loginCustomer;
-
-	/**
-	 * Create the panel.
-	 */
 
 	public CustommerUpdate() {
 		service = new CustomUiService();
@@ -337,19 +332,37 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		Customer customer = getItem();
 
 		String nowPw = new String(pwfNowPw.getPassword());
-		
+		String newPw = new String(pwfNewPw.getPassword()).trim();
+		String confirmPw = new String(pwfConfirmPw.getPassword()).trim();
+
 		Customer c = LoginUI.loginCusotmer;
 		c.setPasswd(nowPw);
-		int sameResult = service.samePwd(c); //0이면 다름 1이면 같음
-		
-		if(sameResult==1) {
+		int sameResult = service.samePwd(c); // 현재 비밀번호를 db랑 비교 0이면 다름 1이면 같음
+
+		if (sameResult == 1 && newPw.equals(confirmPw)) {
+			customer.setPasswd(newPw);
 			service.updateCustomer(customer);
+			JOptionPane.showMessageDialog(null, "고객정보가 수정되었습니다.");
+			LoginUI frame = new LoginUI();
+			frame.setVisible(true);
 			
-		}else {
+			CustommerUpdate pannel = new CustommerUpdate();
+			pannel.setVisible(false);
+
+		} else if (sameResult == 1) {
+			service.updateInfo(customer);
+			JOptionPane.showMessageDialog(null, "고객정보가 수정되었습니다.");
+			LoginUI frame = new LoginUI();
+			frame.setVisible(true);
+			
+			CustommerUpdate pannel = new CustommerUpdate();
+			pannel.setVisible(false);
+		} else {
 			JOptionPane.showMessageDialog(null, "비밀번호를 확인해 주세요");
 		}
-	
 		
+		
+
 	}
 
 	private Customer getItem() {
@@ -360,18 +373,9 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		String id = tfId.getText().trim();
 		Date dob = dateChooser.getDate();
 		String phone = (cmbTel.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-" + (tfTel3.getText().trim());
-
 		String email = (tfEmail.getText().trim()) + "@" + (tfDomain.getText().trim());
-
 		String zipCode = tfZipcode.getText().trim();
 		String addr = tfAddress.getText().trim();
-		String nowPw = new String(pwfNowPw.getPassword());
-		String newPw = new String(pwfNewPw.getPassword());
-		String confirmPw = new String(pwfConfirmPw.getPassword());
-		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
-
-		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
-		JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 
 		String license = null;
 		if (cmbLicence.getSelectedIndex() == 0) {
@@ -380,12 +384,11 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicence.getSelectedItem();
 		}
-		// Grade gradeCode = new Grade("G001");
+		String nowPw = new String(pwfNowPw.getPassword());
 
-		/*
-		 * String newPw = new String(pwfNewPw.getPassword()); String confirmPw = new
-		 * String(pwfConfirmPw.getPassword());
-		 */
+		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
+		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
+		//JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 
 		item.setCode(code);
 		item.setName(name);
@@ -395,14 +398,12 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		item.setEmail(email);
 		item.setZipCode(zipCode);
 		item.setAddress(addr);
-		if (newPw == confirmPw) {
-			item.setPasswd(newPw);
-		}
+		item.setPasswd(nowPw);
 		item.setLicense(license);
 		item.setEmpCode(empCode);
 		item.setGradeCode(gradeCode);
-		// JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
+
 		return item;
 	}
-
+	
 }

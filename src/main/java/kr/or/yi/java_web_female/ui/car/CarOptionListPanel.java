@@ -3,9 +3,11 @@ package kr.or.yi.java_web_female.ui.car;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -18,13 +20,9 @@ import javax.swing.border.TitledBorder;
 
 import org.apache.ibatis.exceptions.PersistenceException;
 
-import kr.or.yi.java_web_female.dto.Brand;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarOptionList;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class CarOptionListPanel extends JPanel implements ActionListener {
@@ -138,6 +136,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 					service.deleteCarOption(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarOption());
 					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 옵션이 포함된 차량 보유 중 (삭제 불가능)");
 				}
@@ -165,6 +164,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 		
 	}
@@ -213,6 +213,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		service.updateCarOption(carOption);
 		panelList.setList(service.selectAllCarOption());
 		panelList.loadDatas();
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
 	}

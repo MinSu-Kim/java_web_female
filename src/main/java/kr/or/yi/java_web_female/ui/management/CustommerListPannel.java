@@ -1,41 +1,42 @@
 package kr.or.yi.java_web_female.ui.management;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-
-import java.awt.GridLayout;
-import javax.swing.border.TitledBorder;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
-
-import kr.or.yi.java_web_female.dto.CarOption;
-import kr.or.yi.java_web_female.dto.CustomEvent;
-import kr.or.yi.java_web_female.dto.Customer;
-import kr.or.yi.java_web_female.dto.Employee;
-import kr.or.yi.java_web_female.dto.Grade;
-import kr.or.yi.java_web_female.dto.Post;
-import kr.or.yi.java_web_female.service.CustomUiService;
-import kr.or.yi.java_web_female.ui.join.JoinUI;
-import kr.or.yi.java_web_female.ui.join.SearchPostUI;
-import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
-import kr.or.yi.java_web_female.ui.list.CustomerList;
-
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-import java.awt.event.ActionEvent;
+
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import com.toedter.calendar.JDateChooser;
+
+import kr.or.yi.java_web_female.dto.CustomEvent;
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Grade;
+import kr.or.yi.java_web_female.dto.Post;
+import kr.or.yi.java_web_female.service.CustomUiService;
+import kr.or.yi.java_web_female.service.JoinUiService;
+import kr.or.yi.java_web_female.ui.join.SearchPostUI;
+import kr.or.yi.java_web_female.ui.list.CustomerList;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
+
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class CustommerListPannel extends JPanel implements ActionListener {
@@ -60,11 +61,14 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private JDateChooser birthday;
 	private JComboBox<Employee> cmbEmpCode;
 	private JComboBox<Grade> cmbGrade;
+	private Customer loginCustomer;
+	private JoinUiService joinService;
 
 	public CustommerListPannel() {
 		setBorder(
 				new TitledBorder(null, "\uACE0\uAC1D\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CustomUiService();
+		joinService = new JoinUiService();
 		initcomponents();
 	}
 
@@ -73,6 +77,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
+		loginCustomer = LoginUI.loginCusotmer;
 		panelList.getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -137,6 +142,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel1 = new JComboBox<>();
+		cmbTel1.setPreferredSize(new Dimension(100, 27));
 		cmbTel1.setModel(new DefaultComboBoxModel<String>(new String[] { "010", "011", "017" }));
 		pTel.add(cmbTel1);
 
@@ -180,6 +186,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		pEmail.add(tfCusEmail2);
 
 		cmbCusEmail2 = new JComboBox<String>();
+		cmbCusEmail2.setPreferredSize(new Dimension(150, 21));
 		cmbCusEmail2.addActionListener(this);
 
 		cmbCusEmail2.setModel(new DefaultComboBoxModel<String>(
@@ -321,12 +328,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				panelList.setList(service.selectCustomerByAll());
 				panelList.loadDatas();
 
-				// CustomEvent customEvent = new CustomEvent();
-				// CustomEvent("EVT1", customer.getCode(), false);
-
-//				JOptionPane.showMessageDialog(null, customer);
-//				JOptionPane.showMessageDialog(null, customEvent);
-
 			}
 
 		});
@@ -355,10 +356,11 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private void do_btnUpdate_actionPerformed(ActionEvent arg0) {
 		Customer customer = getItem();
 
-		service.updateCustomer(customer);
+		service.updateInfo(customer);
 		panelList.setList(service.selectCustomerByAll());
 		panelList.loadDatas();
 		clearTf();
+		JOptionPane.showMessageDialog(null, "고객정보가 수정되었습니다.");
 		btnCusOk.setText("추가");
 		enableField();
 	}
@@ -391,17 +393,18 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		Customer updateCustomer = list.get(list.indexOf(item));
 
-		String cId = tfCusId.getText().trim();
 		String cName = tfCusName.getText().trim();
-		String cAddr = tfAddr.getText().trim();
-		String zipCode = tfZipCode.getText().trim();
+		String cId = tfCusId.getText().trim();
 		Date cusDob = birthday.getDate();
-		
-		String cEmail1 = tfCusEmail1.getText().trim();
-		String cEmail2 = tfCusEmail2.getText().trim();
-		String cEmail3 = (String) cmbCusEmail2.getSelectedItem();
 		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
 				+ (tfTel3.getText().trim());
+				
+		String email = (tfCusEmail1.getText().trim()) + "@" + (tfCusEmail2.getText().trim());
+		String zipCode = tfZipCode.getText().trim();
+		String cAddr = tfAddr.getText().trim();
+		Employee empCode = new Employee("E001");
+		Grade gradeCode = new Grade("G001");
+		
 
 		String license = null;
 		if (cmbLicense.getSelectedIndex() == 0) {
@@ -410,23 +413,18 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicense.getSelectedItem();
 		}
-
-		Employee empCode = new Employee("E001");
-		Grade gradeCode = new Grade("G001");
-		updateCustomer.setId(cId);
-		updateCustomer.setAddress(cAddr);
-		updateCustomer.setZipCode(zipCode);
-		updateCustomer.setEmail(cEmail1);
-		updateCustomer.setEmail(cEmail2);
-		updateCustomer.setEmail(cEmail3);
+		
 		updateCustomer.setName(cName);
+		updateCustomer.setId(cId);
 		updateCustomer.setDob(cusDob);
 		updateCustomer.setPhone(cusPhone);
-
-		updateCustomer.setAddress(zipCode);
-		updateCustomer.setLicense(license);
+		updateCustomer.setEmail(email);
+		updateCustomer.setZipCode(zipCode);
+		updateCustomer.setAddress(cAddr);
 		updateCustomer.setEmpCode(empCode);
 		updateCustomer.setGradeCode(gradeCode);
+		updateCustomer.setLicense(license);
+		
 		return updateCustomer;
 	}
 
@@ -479,13 +477,15 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
 
-		service.insertCustomer(customer);
+		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
+		joinService.joinCustomer(customer, customEvent);
 
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
 
 		clearTf();
+		JOptionPane.showMessageDialog(null, "고객이 추가되엇습니다.");
 	}
 
 	protected void do_btnCusCancel_actionPerformed(ActionEvent arg0) {

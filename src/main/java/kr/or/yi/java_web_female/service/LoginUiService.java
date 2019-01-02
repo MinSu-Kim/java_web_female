@@ -21,15 +21,6 @@ public class LoginUiService {
 		ceDao  = CustomEventMapperImpl.getInstance();
 	}
 
-/*	
-	public int selectEmployeeById(Employee employee) {
-		return empDao.selectEmployeeById(employee);
-	}
-
-	public Customer selectCustomerById(Customer customer) {
-		return cusDao.selectCustomerById(customer);
-	}
-*/	
 	public Customer selectCustomerByPw(Customer customer) throws LoginFailException {
 		Customer resCustomer = cusDao.selectCustomerByPw(customer);
 		if (resCustomer == null) {

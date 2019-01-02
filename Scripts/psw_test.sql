@@ -81,13 +81,28 @@ select * from custom_event;
 select * from customer;
 
 
+<<<<<<< HEAD
+=======
 desc customer;
 
 select * from grade;
 
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 select * from `level`;
 select * from grade;
 
+<<<<<<< HEAD
+select *
+from grade g join `level` l on g.name = l.grade; 
+
+-- 대여횟수에 따른 등급조정은 대여횟수가 변경될때마다 고객의 level을 체크하여 변경되도록 
+
+update customer
+set 
+select c.code, c.rent_cnt, l.grade
+from customer c, `level` l
+where rent_cnt between l.g_losal and l.g_hisal
+=======
 
 /*
 DROP PROCEDURE IF EXISTS update_customer_grade;
@@ -103,6 +118,7 @@ begin
     select g.code into gcode
 	from customer c , grade g
 	where (rent_cnt between g.g_losal and g.g_hisal) and c.code=custom_code;
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 
 	update customer
 	set grade_code = gcode
@@ -111,6 +127,8 @@ end $$
 DELIMITER ;
 */
 
+<<<<<<< HEAD
+=======
 call update_customer_grade('C007');
 
 select grade_code, rent_cnt
@@ -230,10 +248,6 @@ select  Id
 from customer c 
 where c.phone = '010-0000-7777' and c.email ='abc@gmail.com';
 
-select * from customer;
-
-
-
 select c.code, Id, passwd, c.Name, zip_code ,address, phone,dob, email, emp_code, license,  rent_cnt, event_code,
 				custom_code, is_use, e.name as eName, e.rate as eRate, e.code as eCode, g.rate as gRate , grade_code, g.name gName
 from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code join grade g on c.grade_code = g.code
@@ -250,6 +264,7 @@ set passwd = password('rootroot')
 
 
 select concat( char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65), char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65)) as randomPwd;
+>>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
 
 
 
@@ -292,3 +307,32 @@ set Id=#{id}, Name=#{name},
 		rent_cnt=#{rentCnt}
 where code=#{code}
 
+select * from customer;
+
+select passwd = password('rootroot') as samePwd from customer 
+where Id = 'asd132';
+
+update customer set Name=#{name}, address=#{address}, zip_code=#{zipCode}, phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license} where code=#{code}		
+
+
+
+--
+select grade_code from customer;
+
+
+select distinct sigungu from post;
+
+
+select mid(address, 7, 3) as 구, count(*) as 인원수 from customer where mid(address, 7, 3) <> '' group by mid(address, 7, 3);
+
+select g.name, count(g.name) from customer c left join grade g on c.grade_code = g.code where grade_code is not null group by grade_code;
+
+
+select g.name as title , count(g.name) as count from customer c left join grade g on c.grade_code = g.code where grade_code is not null group by grade_code;
+
+
+select * from custom_event;
+
+
+
+  

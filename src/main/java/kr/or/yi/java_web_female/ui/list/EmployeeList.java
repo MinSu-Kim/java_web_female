@@ -1,10 +1,10 @@
 package kr.or.yi.java_web_female.ui.list;
 
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import kr.or.yi.java_web_female.dto.Employee;
 
+@SuppressWarnings("serial")
 public class EmployeeList extends AbstractListPanel<Employee> {
 	public EmployeeList() {
 

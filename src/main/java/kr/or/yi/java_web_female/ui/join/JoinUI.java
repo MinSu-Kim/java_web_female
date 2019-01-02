@@ -23,14 +23,12 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
-import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.JoinUiService;
-import kr.or.yi.java_web_female.ui.list.AbstractListPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 
 @SuppressWarnings("serial")
@@ -51,25 +49,16 @@ public class JoinUI extends JFrame implements ActionListener {
 	private JButton btnJoin;
 	private JComboBox<String> cmbEmail3;
 	private JDateChooser birthDay;
-//	private AbstractListPanel<Customer> cTable;
 	private JTextField tfConfirm;
 	private JButton btnCalcel;
-	private String eventCode;
-	private String customCode;
-	private boolean isUse;
 	private JComboBox<String> cmbTel1;
 
 	private JoinUiService joinService;
 	private JComboBox<String> cmbLicense;
-	private String license;
-
-	/*
-	 * public void setcTable(AbstractListPanel<Customer> cTable) { this.cTable =
-	 * cTable; }
-	 */
 
 	public JoinUI() {
 		joinService = new JoinUiService();
+		
 
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -343,27 +332,15 @@ public class JoinUI extends JFrame implements ActionListener {
 			Customer customer = getItemCustomer();
 			customer.setCode(joinService.getNextCustomerCode());
 			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-			/*
-			 * JOptionPane.showMessageDialog(null, customer);
-			 * JOptionPane.showMessageDialog(null, customEvent);
-			 */
+		
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 
 			joinService.joinCustomer(customer, customEvent);
-
+			JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
 			LoginUI frame = new LoginUI();
 			frame.setVisible(true);
 
 			close();
-
-///////////////////////// 트랜잭션 처리 //////////////////////////
-			/*
-			 * 트랜잭션처리 전 int res = joinService.addcus(customer, customEvent);
-			 * 
-			 * if(res==1) { JOptionPane.showMessageDialog(null, "고객님의 회원가입을 축하합니다.");
-			 * JoinUI.this.dispose(); }
-			 */
-/////////////////////////////////////// 
 			clearTf();
 		} catch (SQLException e1) {
 			e1.printStackTrace();

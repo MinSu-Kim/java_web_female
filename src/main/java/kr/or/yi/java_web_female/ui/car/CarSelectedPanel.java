@@ -10,8 +10,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -32,7 +34,9 @@ import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.CarModelService;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.ComboPanel;
+import javax.swing.JComboBox;
 
+@SuppressWarnings("serial")
 public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
 	private JTextField tfName;
@@ -48,12 +52,12 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private JTextField tfHour12;
 	private JTextField tfHourElse;
 	private ComboPanel<Brand> cmbBrand;
+	private JComboBox cmbColor;
 
 	private JRadioButton rdbtnAuto;
 	private JRadioButton rdbtnStick;
 	
 	private ComboPanel<CarType> cmbCarType;
-	private JTextField tfColor;
 	private ComboPanel<Fuel> cmbFuel;
 
 	String imgPath = System.getProperty("user.dir")+"\\images\\"; //이미지가 들어있는 경로
@@ -65,6 +69,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private String filePath;
 	private String currentDirectoryPath;
 	private JFileChooser chooser;
+	private JPanel panelRentCnt;
+	private ButtonGroup group;
+	private String[] arrColorCodes;
+	private String[] arrColorNames;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -176,9 +185,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 		panelColor.add(lblColor);
 		
-		tfColor = new JTextField();
-		panelColor.add(tfColor);
-		tfColor.setColumns(10);
+		arrColorCodes = new String[] {"wh","bk","bl","gr","re","mt"};
+		arrColorNames = new String[] {"하양","검정","파랑","회색","빨강","민트"};
+		
+		//색상콤보박스
+		cmbColor = new JComboBox();
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(arrColorNames);
+		cmbColor.setModel(model);
+		panelColor.add(cmbColor);
+		cmbColor.setSelectedIndex(-1);
+		panelColor.add(cmbColor);
 		
 		JPanel panelGear = new JPanel();
 		panel_info.add(panelGear);
@@ -192,7 +208,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelGear.add(panelRbtn);
 		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 		
 		rdbtnAuto = new JRadioButton("자동");
 		group.add(rdbtnAuto);
@@ -250,7 +266,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			tfHour10.setEditable(true);
 			tfHour12.setEditable(true);
 			tfHourElse.setEditable(true);
-			tfColor.setEditable(true);
+			cmbColor.setEditable(true);
 			cmbBrand.getComboBox().setEnabled(true);
 			cmbCarType.getComboBox().setEnabled(true);
 			cmbFuel.getComboBox().setEnabled(true);
@@ -261,17 +277,18 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			tfHour10.setEditable(false);
 			tfHour12.setEditable(false);
 			tfHourElse.setEditable(false);
-			tfColor.setEditable(false);
+			cmbColor.setEditable(false);
 			cmbBrand.getComboBox().setEnabled(false);
 			cmbCarType.getComboBox().setEnabled(false);
 			cmbFuel.getComboBox().setEnabled(false);
 			rdbtnAuto.setEnabled(false);
 			rdbtnStick.setEnabled(false);
 	}
-		
-		JPanel panelRentCnt = new JPanel();
+		//관리자만 대여횟수 확인가능, 고객은 렌트횟수 
+		panelRentCnt = new JPanel();
 		panel_info.add(panelRentCnt);
 		panelRentCnt.setLayout(new BorderLayout(0, 0));
+		
 		if(isAdd) {
 			JButton imgbtn = new JButton("사진추가");
 			imgbtn.addActionListener(new ActionListener() {			
@@ -282,7 +299,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			});
 			panelRentCnt.add(imgbtn);
 		}else {
-			lblCount = new JLabel("대여횟수 : ");
+			lblCount = new JLabel("");
 			lblCount.setHorizontalAlignment(SwingConstants.CENTER);
 			panelRentCnt.add(lblCount);
 		}
@@ -330,6 +347,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			CarModel model = getItem();			
 			service.updateCarModel(model);
 			carUi.reloadDataCarPanel();
+			JOptionPane.showMessageDialog(null, "차량이 수정되었습니다.");
 			carUi.close();
 		}else {
 			//추가 클릭
@@ -344,6 +362,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
 			
 			carUi.reloadDataCarPanel();
+			JOptionPane.showMessageDialog(null, "차량이 등록되었습니다.");
 			carUi.close();
 		}
 		
@@ -362,16 +381,23 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 
 	private void cleartf() {
-		tfName.setText("new");
-		cmbBrand.setSelectedIndex(0);
-		cmbCarType.setSelectedIndex(0);
-		cmbFuel.setSelectedIndex(0);
-		tfColor.setText("bl");
-		tfHour6.setText("10000");
-		tfHour10.setText("15000");
-		tfHour12.setText("20000");
-		tfHourElse.setText("50000");
-		tfBasicCharge.setText("50000");
+		tfName.setText("");
+		cmbBrand.setSelectedIndex(-1);
+		cmbCarType.setSelectedIndex(-1);
+		cmbFuel.setSelectedIndex(-1);
+		cmbColor.setSelectedIndex(-1);
+		tfHour6.setText("");
+		tfHour10.setText("");
+		tfHour12.setText("");
+		tfHourElse.setText("");
+		tfBasicCharge.setText("");
+		//라디오버튼 
+		group.remove(rdbtnAuto);
+		group.remove(rdbtnStick);
+		rdbtnAuto.setSelected(false);
+		rdbtnStick.setSelected(false);
+		group.add(rdbtnAuto);
+		group.add(rdbtnStick);
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
@@ -379,6 +405,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		model.setCarCode(tfCode.getText());
 		service.deleteCarModel(model);
 		carUi.reloadDataCarPanel();
+		JOptionPane.showMessageDialog(null, "차량이 삭제되었습니다.");
 		carUi.close();
 	}
 	
@@ -390,7 +417,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		CarType cartype = cmbCarType.getSelectedItems();
 		Fuel fuel = cmbFuel.getSelectedItems();
 
-		String color = tfColor.getText().trim();//색상
+		//색상
+		int colorIndex = cmbColor.getSelectedIndex();
+		String colorName = arrColorCodes[colorIndex];
+		
 		String gear = "";
 		boolean selectedGear = rdbtnAuto.isSelected();
 		if(selectedGear) {
@@ -406,9 +436,21 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		int hour10 = Integer.parseInt(tfHour10.getText().replaceAll(",", ""));
 		int hour12 = Integer.parseInt(tfHour12.getText().replaceAll(",", ""));
 		int hourElse = Integer.parseInt(tfHourElse.getText().replaceAll(",", ""));
-		
-		CarModel item = new CarModel(code, name, color, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
-		return item;
+		if(basicCharge<74000) {
+			JOptionPane.showMessageDialog(null, "기본 비용의 비용을 74000원 이상 입력하세요.");
+		}else if(hour6<40000){
+			JOptionPane.showMessageDialog(null, "6사간이하 초과 비용을 40000원 이상 입력하세요.");
+		}else if(hour10<50000){
+			JOptionPane.showMessageDialog(null, "10시간이하 초과 비용을 50000원 이상 입력하세요.");
+		}else if(hour12<59000){
+			JOptionPane.showMessageDialog(null, "12시간이하 초과 비용을 74000원 이상 입력하세요.");
+		}else if(hourElse<74000){
+			JOptionPane.showMessageDialog(null, "12시간 이상 초과비용을 74000원 이상 입력하세요.");
+		}else {
+			CarModel item = new CarModel(code, name, colorName, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
+			return item;
+		}
+		return null;
 	}
 	
 	//파일 읽어오기(폴더에 있는 파일)
@@ -487,7 +529,16 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbCarType.setSelectedItem(carModel.getCarType());
 		cmbFuel.setSelectedItem(carModel.getFuel());
 		
-		tfColor.setText(carModel.getColor());
+		String colorCode = carModel.getColor();
+		int index = 0;
+		for(int i = 0;i<arrColorCodes.length;i++) {
+			if(arrColorCodes[i].equals(colorCode)) {
+				index = i;
+			}
+		}
+		String colorName = arrColorNames[index];
+		
+		cmbColor.setSelectedItem(colorName);
 		
 		//천단위 콤마찍기
 		tfHour6.setText(String.format("%,d",carModel.getHour6()));
@@ -506,8 +557,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		}else {
 			rdbtnStick.setSelected(true);
 		}
-		
-		lblCount.setText("대여횟수 : "+ carModel.getRentCnt() +"번");
+		if(TestFrame.loginEmployee()) {
+			lblCount.setText("대여횟수 : "+ carModel.getRentCnt() +"번");
+		}
+
 	}
 
 	public void setCarUi(CarUi carUi) {

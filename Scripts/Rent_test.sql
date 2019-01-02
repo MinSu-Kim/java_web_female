@@ -101,6 +101,7 @@ select c.code, Id, passwd, c.Name, zip_code ,address, phone, dob, email, emp_cod
 		where c.code = 'C005'
 		
 select * from rent;
+SELECT * FROM customer;
 
 select hour6, hour10, hour12, hour_else, basic_charge, timestampdiff(hour, concat(end_date, ' ', end_time), now()) as overHour
 from rent r join car_model cm on r.car_code = cm.car_code 
@@ -109,3 +110,48 @@ where cm.car_code = 'V002' and r.code = 'R005';
 select * 
 from rent, (select hour6, hour10, hour12, hour_else from car_model where car_code = 'V010') as t
 where timestampdiff(hour, concat(end_date, ' ', end_time), now())
+
+select code, opt_price from rent;
+
+select r.code, i.car_type, i.code, i.price from rent r join insurance i on r.insurance_code = i.code;
+
+select r.code, c.code, g.code, g.rate as gradeRate, e.rate as eventRate, if(g.rate > e.rate, g.rate, e.rate)
+from rent r join customer c on r.costomer_code = c.code join grade g on c.grade_code = g.code
+join custom_event ce on c.code = ce.custom_code join event e on e.code = ce.event_code;
+
+
+
+select cm.brand, cm.cartype,
+round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
+from rent r left join car_model cm on cm.car_code = r.car_code join insurance i on r.insurance_code = i.code
+join customer c on r.costomer_code = c.code
+join custom_event ce on c.code = ce.custom_code
+join event e on ce.event_code = e.code
+join grade g on c.grade_code = g.code
+group by cm.brand, cm.cartype;
+
+
+-- 매출액 통계
+-- limit 3 : 매출액 가장 높은 top3만 보여줌
+select *
+from (select cm.brand, cm.cartype,
+	round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
+	from rent r left join car_model cm on cm.car_code = r.car_code join insurance i on r.insurance_code = i.code
+	join customer c on r.costomer_code = c.code
+	join custom_event ce on c.code = ce.custom_code
+	join event e on ce.event_code = e.code
+	join grade g on c.grade_code = g.code) as t
+order by totalPrice desc
+limit 3;
+
+create view vw_price_stat as
+select cm.brand, cm.cartype,
+round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
+from rent r left join car_model cm on cm.car_code = r.car_code join insurance i on r.insurance_code = i.code
+join customer c on r.costomer_code = c.code
+join custom_event ce on c.code = ce.custom_code
+join event e on ce.event_code = e.code
+join grade g on c.grade_code = g.code;
+
+-- ddl에서 view 만들어놓고 매출액 관련 dto를 만든다음 dao에서 아래 select 문에서 vw_price_stat 테이블 검색하도록 한다.
+select * from vw_price_stat;

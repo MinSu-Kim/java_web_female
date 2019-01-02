@@ -1,6 +1,7 @@
 package kr.or.yi.java_web_female.ui.car;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -24,8 +25,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
-import javax.swing.UIManager;
-import java.awt.Color;
+
 @SuppressWarnings("serial")
 public class CarTypeListPanel extends JPanel implements ActionListener {
 	private JTextField tfCode;
@@ -35,11 +35,10 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	private List<CarType> list;
 	private JButton btnOk;
 	private JButton btnCancel;
-
-	/**
-	 * Create the panel.
-	 */
+	private CarPanel carPanel;
+	
 	public CarTypeListPanel() {
+		carPanel = new CarPanel();
 		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		service = new CarUiService();
 		initcomponent();
@@ -128,6 +127,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 					service.deleteCarType(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarType());
 					panelList.loadDatas();
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 차종의 차량을 보유 중 (삭제 불가능)");
 				}
@@ -155,6 +155,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		service.updateCarType(item);
 		panelList.setList(service.selectAllCarType());
 		panelList.loadDatas();
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
 	}
@@ -179,8 +180,12 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		//carPanel에 업데이트
+		carPanel.setListComboBox();///////////////////////////////////왜 안되는걸까
+		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 	}
+	
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
 		if(btnOk.getText()=="수정") {
 			btnOk.setText("추가");
