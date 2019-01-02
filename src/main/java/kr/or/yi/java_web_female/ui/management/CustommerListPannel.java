@@ -104,7 +104,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput1.add(lblCusCode);
 
 		tfCusCode = new JTextField();
-		tfCusCode.setEditable(false);
 		tfCusCode.setColumns(10);
 		panelInput1.add(tfCusCode);
 
@@ -121,7 +120,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput1.add(lblCusId);
 
 		tfCusId = new JTextField();
-		tfCusId.setEditable(false);
 		tfCusId.setColumns(10);
 		panelInput1.add(tfCusId);
 
@@ -327,12 +325,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				panelList.setList(service.selectCustomerByAll());
 				panelList.loadDatas();
 
-				// CustomEvent customEvent = new CustomEvent();
-				// CustomEvent("EVT1", customer.getCode(), false);
-
-//				JOptionPane.showMessageDialog(null, customer);
-//				JOptionPane.showMessageDialog(null, customEvent);
-
 			}
 
 		});
@@ -365,6 +357,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelList.setList(service.selectCustomerByAll());
 		panelList.loadDatas();
 		clearTf();
+		JOptionPane.showMessageDialog(null, "고객정보가 수정되었습니다.");
 		btnCusOk.setText("추가");
 		enableField();
 	}
