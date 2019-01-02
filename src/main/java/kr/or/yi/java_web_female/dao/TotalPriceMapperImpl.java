@@ -15,7 +15,7 @@ public class TotalPriceMapperImpl implements TotalPriceMapper {
 		return instance;
 	}
 
-	private static final String namespace = "kr.or.yi.java_web_female.dao.totalPriceMapper";
+	private static final String namespace = "kr.or.yi.java_web_female.dao.TotalPriceMapper";
 	
 	@Override
 	public List<totalPrice> selectTotalPrice() {

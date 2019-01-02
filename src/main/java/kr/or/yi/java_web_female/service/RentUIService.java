@@ -19,6 +19,7 @@ import kr.or.yi.java_web_female.dao.RentMapperImpl;
 import kr.or.yi.java_web_female.dao.UserPicMapper;
 import kr.or.yi.java_web_female.dao.UserPicMapperImpl;
 import kr.or.yi.java_web_female.dao.TotalPriceMapper;
+import kr.or.yi.java_web_female.dao.TotalPriceMapperImpl;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -48,6 +49,7 @@ public class RentUIService {
 		insuranceDao = InsuranceMapperImpl.getInstance();
 		rentDao = RentMapperImpl.getInstance();
 		userPicDao = UserPicMapperImpl.getInstance();
+		totalPriceDao = TotalPriceMapperImpl.getInstance();
 	}
 	
 	public List<Customer> selectCustomer(Customer name) throws SQLException{
