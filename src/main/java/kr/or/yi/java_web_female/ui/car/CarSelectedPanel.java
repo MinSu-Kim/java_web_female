@@ -67,6 +67,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	private String currentDirectoryPath;
 	private JFileChooser chooser;
 	private JPanel panelRentCnt;
+	private ButtonGroup group;
 	/**
 	 * Create the panel.
 	 */
@@ -194,7 +195,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		panelGear.add(panelRbtn);
 		panelRbtn.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		ButtonGroup group = new ButtonGroup();
+		group = new ButtonGroup();
 		
 		rdbtnAuto = new JRadioButton("자동");
 		group.add(rdbtnAuto);
@@ -367,16 +368,23 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	}
 
 	private void cleartf() {
-		tfName.setText("new");
-		cmbBrand.setSelectedIndex(0);
-		cmbCarType.setSelectedIndex(0);
-		cmbFuel.setSelectedIndex(0);
-		tfColor.setText("bl");
-		tfHour6.setText("10000");
-		tfHour10.setText("15000");
-		tfHour12.setText("20000");
-		tfHourElse.setText("50000");
-		tfBasicCharge.setText("50000");
+		tfName.setText("");
+		cmbBrand.setSelectedIndex(-1);
+		cmbCarType.setSelectedIndex(-1);
+		cmbFuel.setSelectedIndex(-1);
+		tfColor.setText("");
+		tfHour6.setText("");
+		tfHour10.setText("");
+		tfHour12.setText("");
+		tfHourElse.setText("");
+		tfBasicCharge.setText("");
+		//라디오버튼 
+		group.remove(rdbtnAuto);
+		group.remove(rdbtnStick);
+		rdbtnAuto.setSelected(false);
+		rdbtnStick.setSelected(false);
+		group.add(rdbtnAuto);
+		group.add(rdbtnStick);
 	}
 
 	protected void do_btnDelete_actionPerformed(ActionEvent arg0) {
