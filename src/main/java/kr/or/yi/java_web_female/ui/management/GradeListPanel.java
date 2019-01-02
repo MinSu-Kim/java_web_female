@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -175,6 +176,7 @@ public class GradeListPanel extends JPanel implements ActionListener {
 		panelList.setList(service.selectGradeByAll());
 		panelList.loadDatas();
 		clearTf();
+		JOptionPane.showMessageDialog(null, "등급이 수정되었습니다.");
 		btnGradeOk.setText("추가");
 	}
 
@@ -223,6 +225,7 @@ public class GradeListPanel extends JPanel implements ActionListener {
 		add(panelList);
 
 		clearTf();
+		JOptionPane.showMessageDialog(null, "등급이 추가되었습니다.");
 	}
 
 	protected void do_btnGradeCancel_actionPerformed(ActionEvent arg0) {

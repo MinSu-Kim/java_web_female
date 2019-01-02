@@ -14,6 +14,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -201,6 +202,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		panelList.setList(service.selectEmployeeByAll());
 		panelList.loadDatas();
 		clearTf();
+		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		btnEmpOk.setText("추가");
 
 	}
@@ -238,6 +240,7 @@ public class EmployeeListPanel extends JPanel implements ActionListener {
 		panelList.loadDatas();
 		add(panelList);
 		clearTf();
+		JOptionPane.showMessageDialog(null, "직원이 추가되었습니다.");
 	}
 
 	private void clearTf() {

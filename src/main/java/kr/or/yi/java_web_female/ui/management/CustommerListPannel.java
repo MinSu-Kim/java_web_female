@@ -171,27 +171,27 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		JPanel pEmail = new JPanel();
 		panelInput1.add(pEmail);
 		pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
-
-		tfCusEmail1 = new JTextField();
-		tfCusEmail1.setColumns(15);
-		pEmail.add(tfCusEmail1);
-
-		JLabel lblAt = new JLabel("@");
-		lblAt.setHorizontalAlignment(SwingConstants.CENTER);
-		pEmail.add(lblAt);
-
-		tfCusEmail2 = new JTextField();
-		tfCusEmail2.setEditable(false);
-		tfCusEmail2.setColumns(15);
-		pEmail.add(tfCusEmail2);
-
-		cmbCusEmail2 = new JComboBox<String>();
-		cmbCusEmail2.setPreferredSize(new Dimension(150, 21));
-		cmbCusEmail2.addActionListener(this);
-
-		cmbCusEmail2.setModel(new DefaultComboBoxModel<String>(
-				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
-		pEmail.add(cmbCusEmail2);
+		
+				tfCusEmail1 = new JTextField();
+				tfCusEmail1.setColumns(15);
+				pEmail.add(tfCusEmail1);
+				
+						JLabel lblAt = new JLabel("@");
+						lblAt.setHorizontalAlignment(SwingConstants.CENTER);
+						pEmail.add(lblAt);
+						
+								tfCusEmail2 = new JTextField();
+								tfCusEmail2.setEditable(false);
+								tfCusEmail2.setColumns(15);
+								pEmail.add(tfCusEmail2);
+								
+										cmbCusEmail2 = new JComboBox<String>();
+										cmbCusEmail2.setPreferredSize(new Dimension(150, 21));
+										cmbCusEmail2.addActionListener(this);
+										
+												cmbCusEmail2.setModel(new DefaultComboBoxModel<String>(
+														new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
+												pEmail.add(cmbCusEmail2);
 
 		JPanel panelInput2 = new JPanel();
 		panel.add(panelInput2);

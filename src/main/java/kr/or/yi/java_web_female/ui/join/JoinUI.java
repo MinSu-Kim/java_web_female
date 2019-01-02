@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -328,7 +330,7 @@ public class JoinUI extends JFrame implements ActionListener {
 
 		try {
 			validCheck();
-
+			regCheck();
 			Customer customer = getItemCustomer();
 			customer.setCode(joinService.getNextCustomerCode());
 			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
@@ -348,6 +350,16 @@ public class JoinUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, e2.getMessage());
 			e2.printStackTrace();
 		}
+	}
+
+	private void regCheck() {
+		String phone = tfTel2.getText().trim();
+		 Pattern phonePattern = Pattern.compile("([0-9-*]{4})");
+			Matcher phoneMacher = phonePattern.matcher(phone);
+			if(phoneMacher.find()){
+				System.out.println(phoneMacher.group()); // 2018-01-01
+			}
+		
 	}
 
 	private void clearTf() {

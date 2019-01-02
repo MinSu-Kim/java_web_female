@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
@@ -157,6 +158,7 @@ public class EventListPanel extends JPanel implements ActionListener {
 		panelList.setList(service.selectEventByAll());
 		panelList.loadDatas();
 		clearTf();
+		JOptionPane.showMessageDialog(null, "이벤트가 수정되었습니다.");
 		btnEventOk.setText("추가");
 	}
 
@@ -188,6 +190,7 @@ public class EventListPanel extends JPanel implements ActionListener {
 		add(panelList);
 
 		clearTf();
+		JOptionPane.showMessageDialog(null, "이벤트가 추가되었습니다.");
 	}
 
 	private void clearTf() {
