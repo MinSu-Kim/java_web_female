@@ -53,8 +53,9 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private JRadioButton rdbtnAuto;
 	private JPanel panel_reset;
 	private ButtonGroup group;
-
-
+	private List<CarType> arrCarType;
+	private JPanel panelSelect;
+	
 	public CarPanel() {
 		service = new CarUiService();
 		modelService = new CarModelService();
@@ -65,7 +66,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 
 		setLayout(new BorderLayout(0, 0));
 
-		JPanel panelSelect = new JPanel();
+		panelSelect = new JPanel();
 		panelSelect.setBorder(new TitledBorder(null, "\uAC80\uC0C9", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		add(panelSelect, BorderLayout.NORTH);
 
@@ -75,7 +76,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		gridLayout.setHgap(10);
 
 		panelCarType.setTitle("차종");
-		List<CarType> arrCarType = service.selectAllCarType();
+		setListComboBox();
 		if(TestFrame.loginEmployee()) {
 			panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		}else {
@@ -83,11 +84,9 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		}
 
 		// 콤보박스에 차종 불러오기
-		panelCarType.setComboItems(arrCarType);
+
 		panelCarType.setSelectedIndex(-1);
 		// 아이템리스너
-
-		panelSelect.add(panelCarType);
 
 		panelBrand = new ComboPanel<>();
 		GridLayout gridLayout_1 = (GridLayout) panelBrand.getLayout();
@@ -317,6 +316,11 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 	}
-
+	
+	public void setListComboBox() {
+		arrCarType = service.selectAllCarType();
+		panelCarType.setComboItems(arrCarType);
+		panelSelect.add(panelCarType);
+	}
 
 }

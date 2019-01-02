@@ -35,8 +35,10 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	private List<CarType> list;
 	private JButton btnOk;
 	private JButton btnCancel;
-
+	private CarPanel carPanel;
+	
 	public CarTypeListPanel() {
+		carPanel = new CarPanel();
 		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		service = new CarUiService();
 		initcomponent();
@@ -178,9 +180,12 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		//carPanel에 업데이트
+		carPanel.setListComboBox();///////////////////////////////////왜 안되는걸까
 		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 	}
+	
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
 		if(btnOk.getText()=="수정") {
 			btnOk.setText("추가");
