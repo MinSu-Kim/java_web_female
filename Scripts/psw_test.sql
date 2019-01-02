@@ -90,10 +90,17 @@ select * from event;
 select * from custom_event;
 select * from customer;
 
+
 select * from `level`;
 select * from grade;
 
+select *
+from grade g join `level` l on g.name = l.grade; 
+
 -- 대여횟수에 따른 등급조정은 대여횟수가 변경될때마다 고객의 level을 체크하여 변경되도록 
+
+update customer
+set 
 select c.code, c.rent_cnt, l.grade
 from customer c, `level` l
 where rent_cnt between l.g_losal and l.g_hisal
@@ -103,15 +110,6 @@ select c.code, c.rent_cnt, c.grade_code,
        from customer c join `level` l on c. )
 from customer c;
 
--- 로그인 했을 경우 해당 월과 일치할 경우 해당 고객에게 생일 쿠폰 지급 중복지급불가(event_code와 custom_code가 기본키) duplicate 발생(중복)
-insert into custom_event 
-select 'EVT2', 'C005' , 0 from customer 
-where month(dob) = month(sysdate()) and code='C005';
-
-
-
-
-select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license, grade_code, rent_cnt, event_code, custom_code, is_use, e.code, e.name, rate from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code where c.code = 'C005'; 
 
 
 
