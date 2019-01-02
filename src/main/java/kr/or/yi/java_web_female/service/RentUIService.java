@@ -18,6 +18,7 @@ import kr.or.yi.java_web_female.dao.RentMapper;
 import kr.or.yi.java_web_female.dao.RentMapperImpl;
 import kr.or.yi.java_web_female.dao.UserPicMapper;
 import kr.or.yi.java_web_female.dao.UserPicMapperImpl;
+import kr.or.yi.java_web_female.dao.totalPriceMapper;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -26,6 +27,7 @@ import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.dto.UserPic;
+import kr.or.yi.java_web_female.dto.totalPrice;
 
 public class RentUIService {
 	private CustomerMapper customerDao;
@@ -35,6 +37,8 @@ public class RentUIService {
 	private InsuranceMapper insuranceDao;
 	private RentMapper rentDao;
 	private UserPicMapper userPicDao;
+	private totalPriceMapper totalPriceDao;
+	
 	
 	public RentUIService() {
 		customerDao = CustomerMapperImpl.getInstance();
@@ -131,6 +135,11 @@ public class RentUIService {
 	
 	public List<StateCar> selectCarOptionsWithRentCode(){
 		return rentDao.selectCarOptionsWithRentCode();
+	}
+	
+	//매출액 통계
+	public List<totalPrice> selectTotalPrice(){
+		return totalPriceDao.selectTotalPrice();
 	}
 	
 }
