@@ -69,22 +69,24 @@ public class RentTotalPriceBarChart extends JFXPanel implements InitScene{
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
 		
 		List<totalPrice> pList = service.selectTotalPrice();
+	//	JOptionPane.showMessageDialog(null, pList);
 		
 		for(int i = 0 ; i < pList.size() ; i++) {
-			totalPrice totalPrice = pList.get(i);
+			totalPrice result = pList.get(i);
 			
-			list.add(getChartData(totalPrice));
+			list.add(getChartData(result));
 		}
 		
 		return list;
 	}
 
-	private XYChart.Series<String, Number> getChartData(totalPrice totalPrice) {
+	private XYChart.Series<String, Number> getChartData(totalPrice result) {
 		// TODO Auto-generated method stub
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		
-		dataSeries.setName(totalPrice.getBrand());
-		dataSeries.getData().add(new XYChart.Data<>("매출액", totalPrice.getTotalPrice()));
+		dataSeries.setName(result.getBrand());
+		
+		dataSeries.getData().add(new XYChart.Data<>("매출액", result.getTotalPrice()));
 		
 		return dataSeries;
 	}

@@ -26,6 +26,7 @@ public class RentStatistics extends JPanel implements ActionListener{
 	private RentStatisticsBarPanel barPanel;
 	private JPanel panel_3;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JRadioButton rdbtnBar;
 
 	/**
 	 * Create the panel.
@@ -36,20 +37,25 @@ public class RentStatistics extends JPanel implements ActionListener{
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.NORTH);
 		
-		rdbtnAll = new JRadioButton("전체보기");
-		buttonGroup.add(rdbtnAll);
-		rdbtnAll.addActionListener(this);
-		panel.add(rdbtnAll);
-		
 		rdbtnLine = new JRadioButton("월별 차량 대여 횟수");
 		buttonGroup.add(rdbtnLine);
 		rdbtnLine.addActionListener(this);
 		panel.add(rdbtnLine);
 		
+		rdbtnBar = new JRadioButton("브랜드별 매출액");
+		buttonGroup.add(rdbtnBar);
+		rdbtnBar.addActionListener(this);
+		panel.add(rdbtnBar);
+		
 		rdbtnPie = new JRadioButton("대여 시 옵션 선호도");
 		buttonGroup.add(rdbtnPie);
 		rdbtnPie.addActionListener(this);
 		panel.add(rdbtnPie);
+		
+		rdbtnAll = new JRadioButton("전체보기");
+		buttonGroup.add(rdbtnAll);
+		rdbtnAll.addActionListener(this);
+		panel.add(rdbtnAll);
 		
 		panelSelectedOne = new JPanel();
 		add(panelSelectedOne, BorderLayout.SOUTH);
@@ -96,6 +102,9 @@ public class RentStatistics extends JPanel implements ActionListener{
 		panelSelectedOne.add(panel);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == rdbtnBar) {
+			do_rdbtnBar_actionPerformed(e);
+		}
 		if (e.getSource() == rdbtnAll) {
 			do_rdbtnAll_actionPerformed(e);
 		}
@@ -111,10 +120,17 @@ public class RentStatistics extends JPanel implements ActionListener{
 		addReplaceChartPanel(piePanel);
 		piePanel.getRentCarOptionsPieChart().getPieChart().setPrefSize(700, 450);
 	}
+	
 	protected void do_rdbtnLine_actionPerformed(ActionEvent e) {
 		addReplaceChartPanel(linePanel);
 		linePanel.getRentLineChart().getLineChart().setPrefSize(700, 450);
 	}
+	
+	protected void do_rdbtnBar_actionPerformed(ActionEvent e) {
+		addReplaceChartPanel(barPanel);
+		barPanel.getpBarChart().getBarChart().setPrefSize(700, 450);
+	}
+	
 	protected void do_rdbtnAll_actionPerformed(ActionEvent e) {
 		// 전체보기 선택
 		panelTotal.setVisible(true);
@@ -125,6 +141,7 @@ public class RentStatistics extends JPanel implements ActionListener{
 
 		linePanel.getRentLineChart().getLineChart().setPrefSize(440, 250);
 		piePanel.getRentCarOptionsPieChart().getPieChart().setPrefSize(440, 250);
+		barPanel.getpBarChart().getBarChart().setPrefSize(440, 250);
 
 		/*panelTotal.setBorder(new EmptyBorder(0, 10, 0, 10));
 		panelFour.setBorder(new EmptyBorder(0, 15, 0, 15));*/
@@ -136,4 +153,5 @@ public class RentStatistics extends JPanel implements ActionListener{
 		panelFour.add(panel_3);
 		panelTotal.add(panelFour);
 	}
+	
 }

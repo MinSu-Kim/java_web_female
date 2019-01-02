@@ -417,11 +417,14 @@ ALTER TABLE proj_rentcar.userpic
 		
 -- 매출액 통계를 내기위한 view
 create view proj_rentcar.vw_price_stat as
-select cm.brand, cm.cartype,
+select b.name as brand, ct.`type` as carType,
 round( ( datediff(concat(end_date, ' ', end_time), concat(start_date, ' ', start_time)) * cm.basic_charge ) + i.price + r.opt_price * (100 - if(g.rate > e.rate, g.rate, e.rate)) / 100 ) as totalPrice
 from proj_rentcar.rent r left join proj_rentcar.car_model cm on cm.car_code = r.car_code 
 join proj_rentcar.insurance i on r.insurance_code = i.code
 join proj_rentcar.customer c on r.costomer_code = c.code
 join proj_rentcar.custom_event ce on c.code = ce.custom_code
 join proj_rentcar.event e on ce.event_code = e.code
-join proj_rentcar.grade g on c.grade_code = g.code;
+join proj_rentcar.grade g on c.grade_code = g.code
+join proj_rentcar.car_type ct on cm.cartype = ct.code
+join proj_rentcar.brand b on b.`no` = cm.brand
+group by b.name, ct.`type`;
