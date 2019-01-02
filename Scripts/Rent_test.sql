@@ -154,8 +154,10 @@ join event e on ce.event_code = e.code
 join grade g on c.grade_code = g.code;
 
 -- ddl에서 view 만들어놓고 매출액 관련 dto를 만든다음 dao에서 아래 select 문에서 vw_price_stat 테이블 검색하도록 한다.
-select brand, totalPrice from vw_price_stat;
+select * from vw_price_stat;
 
 select cartype as title, count(*) as count from car_type t left join car_model m on t.code = m.cartype group by cartype;
 select brand as title, count(*) as count from brand b left join car_model m on b.no = m.brand group by brand;
 select mid(address, 7, 3) as title, count(*) as count from customer where mid(address, 7, 3) <> '' group by mid(address, 7, 3);
+
+select * from brand;
