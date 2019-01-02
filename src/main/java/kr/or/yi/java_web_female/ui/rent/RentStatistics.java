@@ -1,16 +1,18 @@
 package kr.or.yi.java_web_female.ui.rent;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
+import javax.swing.JRadioButton;
+import javax.swing.border.EmptyBorder;
+
+import kr.or.yi.java_web_female.chart_panel.RentStatisticsBarPanel;
 import kr.or.yi.java_web_female.chart_panel.RentStatisticsLinePanel;
 import kr.or.yi.java_web_female.chart_panel.RentStatisticsPiePanel;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.ButtonGroup;
-import javax.swing.border.EmptyBorder;
 
 public class RentStatistics extends JPanel implements ActionListener{
 	private JRadioButton rdbtnLine;
@@ -21,7 +23,7 @@ public class RentStatistics extends JPanel implements ActionListener{
 	private JPanel panelTotal;
 	private RentStatisticsLinePanel linePanel;
 	private RentStatisticsPiePanel piePanel;
-	private JPanel panel_2;
+	private RentStatisticsBarPanel barPanel;
 	private JPanel panel_3;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
@@ -66,12 +68,14 @@ public class RentStatistics extends JPanel implements ActionListener{
 		linePanel = new RentStatisticsLinePanel();
 		linePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
 		panelFour.add(linePanel);
+		
 		piePanel = new RentStatisticsPiePanel();
 		piePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
 		panelFour.add(piePanel);
 		
-		panel_2 = new JPanel();
-		panelFour.add(panel_2);
+		barPanel = new RentStatisticsBarPanel();
+		piePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+		panelFour.add(barPanel);
 		
 		panel_3 = new JPanel();
 		panelFour.add(panel_3);
@@ -128,7 +132,7 @@ public class RentStatistics extends JPanel implements ActionListener{
 		// 네개 다시 붙여넣기
 		panelFour.add(linePanel);
 		panelFour.add(piePanel);
-		panelFour.add(panel_2);
+		panelFour.add(barPanel);
 		panelFour.add(panel_3);
 		panelTotal.add(panelFour);
 	}

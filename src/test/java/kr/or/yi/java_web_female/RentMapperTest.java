@@ -11,12 +11,16 @@ import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.RentMapper;
 import kr.or.yi.java_web_female.dao.RentMapperImpl;
+import kr.or.yi.java_web_female.dao.TotalPriceMapperImpl;
+import kr.or.yi.java_web_female.dao.TotalPriceMapper;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.StateCar;
+import kr.or.yi.java_web_female.dto.totalPrice;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RentMapperTest extends AbstractTest {
 	private RentMapper dao = RentMapperImpl.getInstance();
+	private TotalPriceMapper priceDao = TotalPriceMapperImpl.getInstance();
 	
 	@Test
 	public void test01GetNextRentNo() {
@@ -84,6 +88,18 @@ public class RentMapperTest extends AbstractTest {
 		List<Rent> list = dao.selectRentByAll();
 		for(Rent r : list) {
 			System.out.println(r);
+		}
+		Assert.assertNotNull(list);
+	}
+	
+	@Test
+	public void test04selectTotalPrice() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<totalPrice> list = priceDao.selectTotalPrice();
+		
+		for(totalPrice tp : list) {
+			System.out.println(tp);
 		}
 		Assert.assertNotNull(list);
 	}

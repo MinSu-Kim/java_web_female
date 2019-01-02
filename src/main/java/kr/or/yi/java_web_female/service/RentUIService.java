@@ -18,7 +18,7 @@ import kr.or.yi.java_web_female.dao.RentMapper;
 import kr.or.yi.java_web_female.dao.RentMapperImpl;
 import kr.or.yi.java_web_female.dao.UserPicMapper;
 import kr.or.yi.java_web_female.dao.UserPicMapperImpl;
-import kr.or.yi.java_web_female.dao.totalPriceMapper;
+import kr.or.yi.java_web_female.dao.TotalPriceMapper;
 import kr.or.yi.java_web_female.dto.CarModel;
 import kr.or.yi.java_web_female.dto.CarOption;
 import kr.or.yi.java_web_female.dto.CarType;
@@ -37,7 +37,7 @@ public class RentUIService {
 	private InsuranceMapper insuranceDao;
 	private RentMapper rentDao;
 	private UserPicMapper userPicDao;
-	private totalPriceMapper totalPriceDao;
+	private TotalPriceMapper totalPriceDao;
 	
 	
 	public RentUIService() {
