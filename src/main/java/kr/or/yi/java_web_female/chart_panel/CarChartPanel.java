@@ -137,29 +137,34 @@ public class CarChartPanel extends JPanel implements ActionListener{
 		panelChart.add(panel_PieCarType);
 		panelChart.add(panel_PieBrand);
 		panelChart.add(panel_LineRentCount);
+		panel_BarChart.getPanelRbtn().setVisible(true);
 	}
 	
 	protected void do_rdbtnRentCount_actionPerformed(ActionEvent e) {
 		//월별 차종별 렌트 횟수 선택
 		addReplaceChartPanel(panel_LineRentCount);
-		panel_LineRentCount.getpLineChart().getLineChart().setPrefSize(700,450);
+		panel_BarChart.getPanelRbtn().setVisible(false);
+		panel_LineRentCount.getpLineChart().getLineChart().setPrefSize(730,450);
 	}
 	
 	protected void do_rdbtnCarType_actionPerformed(ActionEvent e) {
 		//차종별 보유차량 수 선택
 		addReplaceChartPanel(panel_PieCarType);
-		panel_PieCarType.getpPieChart().getPieChart().setPrefSize(700,450);
+		panel_BarChart.getPanelRbtn().setVisible(false);
+		panel_PieCarType.getpPieChart().getPieChart().setPrefSize(730,450);
 	}
 	protected void do_rdbtnBrand_actionPerformed(ActionEvent e) {
 		//브랜드별 보유차량 수 선택
 		addReplaceChartPanel(panel_PieBrand);
-		panel_PieBrand.getpPieChart().getPieChart().setPrefSize(700,450);
+		panel_BarChart.getPanelRbtn().setVisible(false);
+		panel_PieBrand.getpPieChart().getPieChart().setPrefSize(730,450);
 	}
 	
 	protected void do_rdbtnCarModel_actionPerformed(ActionEvent e) {
 		//모델별 렌트 횟수 선택
 		addReplaceChartPanel(panel_BarChart);
-		panel_BarChart.getpBarChart().getBarChart().setPrefSize(700,450);
+		panel_BarChart.getPanelRbtn().setVisible(true);
+		panel_BarChart.getpBarChart().getBarChart().setPrefSize(730,450);
 	}
 
 	private void addReplaceChartPanel(JPanel panel) {
