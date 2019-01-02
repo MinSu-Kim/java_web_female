@@ -125,22 +125,24 @@ public class LoginUI extends JFrame implements ActionListener {
 	}
 
 	protected void do_btnLogin_actionPerformed(ActionEvent e) {
-		try {
+	try {
 			String day = "";
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
 			day = sdf.format(date);
-
+			
 			isLoginCheck();
 			dispose();
 			TestFrame frame = new TestFrame(day);
 
 			frame.setVisible(true);
 		} catch (LoginFailException e1) {
-			JOptionPane.showMessageDialog(null, e1.getMessage());
+			//JOptionPane.showMessageDialog(null, e1.getMessage());
 			e1.printStackTrace();
 		}
+		
+	
+		
 	}
 
 	private void isLoginCheck() throws LoginFailException {
@@ -160,8 +162,7 @@ public class LoginUI extends JFrame implements ActionListener {
 			/////////////////
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(loginCusotmer.getDob());
-			if (cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {
-//				
+			if (cal.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)) {			
 				loginService.insertCustomEvent(new CustomEvent("EVT2", loginCusotmer.getCode(), false));
 			}
 		}

@@ -31,6 +31,7 @@ import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
+import kr.or.yi.java_web_female.service.JoinUiService;
 import kr.or.yi.java_web_female.ui.join.SearchPostUI;
 import kr.or.yi.java_web_female.ui.list.CustomerList;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
@@ -61,11 +62,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private JComboBox<Employee> cmbEmpCode;
 	private JComboBox<Grade> cmbGrade;
 	private Customer loginCustomer;
+	private JoinUiService joinService;
 
 	public CustommerListPannel() {
 		setBorder(
 				new TitledBorder(null, "\uACE0\uAC1D\uAD00\uB9AC", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CustomUiService();
+		joinService = new JoinUiService();
 		initcomponents();
 	}
 
@@ -474,7 +477,8 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
 
-		service.insertCustomer(customer);
+		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
+		joinService.joinCustomer(customer, customEvent);
 
 		list = service.selectCustomerByAll();
 		panelList.setList(list);

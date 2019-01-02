@@ -18,7 +18,7 @@ public class TestFrame extends JFrame {
 	public TestFrame(String today) {
 		setTitle(getLoginUser());
 
-		JOptionPane.showMessageDialog(null, loginCusotmer == null ? loginEmployee : loginCusotmer);
+		//JOptionPane.showMessageDialog(null, loginCusotmer == null ? loginEmployee : loginCusotmer);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		if (LoginUI.loginEmployee != null) {
