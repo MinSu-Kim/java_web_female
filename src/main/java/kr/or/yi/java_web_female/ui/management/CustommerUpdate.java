@@ -342,12 +342,26 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		if (sameResult == 1 && newPw.equals(confirmPw)) {
 			customer.setPasswd(newPw);
 			service.updateCustomer(customer);
+			JOptionPane.showMessageDialog(null, "고객정보가 수정되었습니다.");
+			LoginUI frame = new LoginUI();
+			frame.setVisible(true);
+			
+			CustommerUpdate pannel = new CustommerUpdate();
+			pannel.setVisible(false);
 
 		} else if (sameResult == 1) {
 			service.updateInfo(customer);
+			JOptionPane.showMessageDialog(null, "고객정보가 수정되었습니다.");
+			LoginUI frame = new LoginUI();
+			frame.setVisible(true);
+			
+			CustommerUpdate pannel = new CustommerUpdate();
+			pannel.setVisible(false);
 		} else {
 			JOptionPane.showMessageDialog(null, "비밀번호를 확인해 주세요");
 		}
+		
+		
 
 	}
 
@@ -391,5 +405,5 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 
 		return item;
 	}
-
+	
 }

@@ -485,6 +485,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelList.loadDatas();
 
 		clearTf();
+		JOptionPane.showMessageDialog(null, "고객이 추가되엇습니다.");
 	}
 
 	protected void do_btnCusCancel_actionPerformed(ActionEvent arg0) {
