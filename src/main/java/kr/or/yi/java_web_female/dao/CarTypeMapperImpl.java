@@ -60,4 +60,11 @@ public class CarTypeMapperImpl implements CarTypeMapper {
 		}
 	}
 
+	@Override
+	public String nextTypeCode() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace+".nextTypeCode");
+		}
+	}
+
 }

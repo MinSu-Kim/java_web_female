@@ -55,6 +55,17 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private ButtonGroup group;
 	private List<CarType> arrCarType;
 	private JPanel panelSelect;
+	private CarPanel carPanel;
+	
+	public ComboPanel<CarType> getPanelCarType() {
+		return panelCarType;
+	}
+	public CarPanel getCarPanel() {
+		return carPanel;
+	}
+	public List<CarType> getArrCarType() {
+		return arrCarType;
+	}
 	
 	public CarPanel() {
 		service = new CarUiService();
@@ -320,7 +331,10 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	public void setListComboBox() {
 		arrCarType = service.selectAllCarType();
 		panelCarType.setComboItems(arrCarType);
-		panelSelect.add(panelCarType);
+		System.out.println("**************"+arrCarType+"******************");
+		System.out.println(panelCarType);
+//		panelSelect.add(panelCarType);
 	}
+	
 
 }

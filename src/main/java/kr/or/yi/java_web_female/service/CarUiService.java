@@ -64,6 +64,9 @@ public class CarUiService {
 	public CarType selectByCarCode(CarType carType) {
 		return typeDao.selectCarTypeByNo(carType);
 	}
+	public String nextTypeCode() {
+		return typeDao.nextTypeCode();
+	}
 	
 	//연료
 	public List<Fuel> selectAllFuel(){

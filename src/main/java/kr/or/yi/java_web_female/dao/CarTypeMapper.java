@@ -11,4 +11,6 @@ public interface CarTypeMapper {
 	int insertCarType(CarType carType);
 	int updateCarType(CarType carType);
 	int deleteCarType(CarType carType);
+	
+	String nextTypeCode();
 }
