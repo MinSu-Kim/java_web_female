@@ -57,11 +57,6 @@ public class RentPanel extends JPanel implements ActionListener {
 	private String eCode;
 	private RentListPanel rentListPanel;
 	private CustomerStaticsPanel customerStaticsPanel;
-	private CustomerAllStat customerAllStat;
-	
-	public void setCustomerAllStat(CustomerAllStat customerAllStat) {
-		this.customerAllStat = customerAllStat;
-	}
 
 	public void setRentListPanel(RentListPanel rentListPanel) {
 		this.rentListPanel = rentListPanel;

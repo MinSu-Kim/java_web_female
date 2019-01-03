@@ -59,7 +59,7 @@ public class RentList extends AbstractListPanel<Rent> {
 			if (value.toString().equals("N")) {
 				setBackground(new Color(255, 0, 0, 20));
 			}else {
-				setBackground(Color.WHITE);
+				setBackground(new Color(178, 235, 244, 80));
 			}
 			return this;
 		}
