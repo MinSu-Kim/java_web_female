@@ -149,19 +149,19 @@ public class ManagerPanel extends JPanel implements ActionListener {
 		}
 
 		if (!TestFrame.loginEmployee()) {
-
+			
+			CustomerStaticsPanel panel_04 = new CustomerStaticsPanel();
+			CustomerAllStat panel_05 = new CustomerAllStat();
 			RentPanel panel_01 = new RentPanel();
+			panel_01.setCustomerStaticsPanel(panel_04);
+			
 			tabbedPane.addTab("차량대여", null, panel_01, null);
-
+			tabbedPane.addTab("대여내역", null, panel_04, null);
+			tabbedPane.addTab("MY", null, panel_05, null);
+			
 			CarPanel panel_02 = new CarPanel();
 			tabbedPane.addTab("차량조회", null, panel_02, null);
 
-			CustomerStaticsPanel panel_04 = new CustomerStaticsPanel();
-			tabbedPane.addTab("대여내역", null, panel_04, null);
-			
-			CustomerAllStat panel_05 = new CustomerAllStat();
-			tabbedPane.addTab("MY", null, panel_05, null);
-			
 			JPanel panel_03 = new CustommerUpdate();
 			tabbedPane.addTab("개인정보관리", null, panel_03, null);
 		}

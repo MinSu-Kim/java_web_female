@@ -25,6 +25,8 @@ import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
+import kr.or.yi.java_web_female.ui.rent.customer.CustomerAllStat;
+import kr.or.yi.java_web_female.ui.rent.customer.CustomerStaticsPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.CarInfoPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.CustomerInfoPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.InsurancePanel;
@@ -54,9 +56,19 @@ public class RentPanel extends JPanel implements ActionListener {
 	private int optionPrice;
 	private String eCode;
 	private RentListPanel rentListPanel;
+	private CustomerStaticsPanel customerStaticsPanel;
+	private CustomerAllStat customerAllStat;
+	
+	public void setCustomerAllStat(CustomerAllStat customerAllStat) {
+		this.customerAllStat = customerAllStat;
+	}
 
 	public void setRentListPanel(RentListPanel rentListPanel) {
 		this.rentListPanel = rentListPanel;
+	}
+
+	public void setCustomerStaticsPanel(CustomerStaticsPanel customerStaticsPanel) {
+		this.customerStaticsPanel = customerStaticsPanel;
 	}
 
 	public RentPanel() {
@@ -255,6 +267,8 @@ public class RentPanel extends JPanel implements ActionListener {
 		rentResultFrame.setRent(rent);
 		if(LoginUI.loginCusotmer == null) {
 			rentResultFrame.setRentListPanel(rentListPanel);
+		} else {
+			rentResultFrame.setCustomerStaticsPanel(customerStaticsPanel);
 		}
 
 		rentResultFrame.setDisCount(isEventRate ? maxEventRate : cGradeRate);
