@@ -80,6 +80,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		tfNo = new JTextField();
 		panelInput.add(tfNo);
 		tfNo.setColumns(10);
+		tfNo.setEditable(false);
 		
 		JLabel lblName = new JLabel("브랜드명");
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -99,6 +100,8 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		btnCancel = new JButton("취소");
 		btnCancel.addActionListener(this);
 		panelBtn.add(btnCancel);
+		
+		setNextCode();
 	}
 
 	private JPopupMenu createDeptPopupMenu() {
@@ -156,6 +159,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
+		setNextCode();
 	}
 
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
@@ -166,6 +170,7 @@ public class BrandListPanel extends JPanel implements ActionListener {
 		panelList.loadDatas();
 		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
+		setNextCode();
 	}
 	
 	private void setItem(Brand item) {
@@ -189,7 +194,16 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	}
 
 	private void clearTf() {
-		tfNo.setText("");
+		setNextCode();
 		tfName.setText("");
+	}
+	
+	private void setNextCode() {
+		if(btnOk.getText().equals("추가")) {
+			String maxCode = service.nextBrandNo();
+			int numCode = (Integer.parseInt(maxCode.substring(1)))+1;
+			String nextCode = String.format("B%d", numCode);
+			tfNo.setText(nextCode);
+		}
 	}
 }

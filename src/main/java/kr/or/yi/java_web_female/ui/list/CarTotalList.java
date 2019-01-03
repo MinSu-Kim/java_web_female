@@ -1,6 +1,13 @@
 package kr.or.yi.java_web_female.ui.list;
 
+import java.awt.Color;
+import java.awt.Component;
+
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import kr.or.yi.java_web_female.dto.CarModel;
 
@@ -11,7 +18,8 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 	protected void setAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7);
 		tableSetWidth(100, 100, 100,100,100,100,100,100);
-		
+		TableColumn tcName = table.getColumn("색상");
+		tcName.setCellRenderer(new CarColorTableCellRenderer());
 	}
 
 	@Override
@@ -46,6 +54,26 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 		return list.get(selectedIndex);
 	}
 	
-	
+	public class CarColorTableCellRenderer extends JLabel implements TableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			setText(value.toString());
+			setHorizontalAlignment(JLabel.CENTER);
+			setOpaque(true);
+			if (value.toString().equals("하양")) {
+				setBackground(Color.WHITE);
+			}
+			if (value.toString().equals("검정")) {
+				setBackground(Color.BLACK);
+			}
+			if (value.toString().equals("회색")) {
+				setBackground(Color.GRAY);
+			}
+			if (value.toString().equals("파랑")) {
+				setBackground(Color.BLUE);
+			}
+			return this;
+		}
+	}
 
 }

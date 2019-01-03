@@ -28,6 +28,10 @@
 		where no=#{no};
 	</delete>
 	
+	<select id="nextBrandNo" resultType="String">
+		select max(no) nextto from brand
+	</select>
+	
 </mapper>
 
 

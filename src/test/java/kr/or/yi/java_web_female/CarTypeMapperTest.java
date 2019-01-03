@@ -65,6 +65,13 @@ public class CarTypeMapperTest extends AbstractTest {
 		int res = dao.deleteCarType(carType);
 		Assert.assertEquals(1, res);
 	}
+	
+	@Test
+	public void test06nextTypeCode() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		String typeCode = dao.nextTypeCode();
+		Assert.assertNotNull(typeCode);
+	}
 
 }
 

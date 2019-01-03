@@ -44,6 +44,10 @@ public class CarUiService {
 		return optionDao.updateCarOption(carOption);
 	}
 	
+	public int nextOptionNo() {
+		return optionDao.nextOptionNo();
+	}
+	
 	//차종
 	public List<CarType> selectAllCarType(){
 		return typeDao.selectCarTypeByAll();
@@ -64,6 +68,9 @@ public class CarUiService {
 	public CarType selectByCarCode(CarType carType) {
 		return typeDao.selectCarTypeByNo(carType);
 	}
+	public String nextTypeCode() {
+		return typeDao.nextTypeCode();
+	}
 	
 	//연료
 	public List<Fuel> selectAllFuel(){
@@ -80,6 +87,10 @@ public class CarUiService {
 	
 	public int updateFuel(Fuel fuel) {
 		return fuelDao.updateFuel(fuel);
+	}
+	
+	public int nextFuelNo() {
+		return fuelDao.nextFuelNo();
 	}
 	
 	//브랜드
@@ -100,6 +111,10 @@ public class CarUiService {
 	}
 	public Brand selectByBrandNo(Brand brand) {
 		return brandDao.selectBrandByNo(brand);
+	}
+	
+	public String nextBrandNo() {
+		return brandDao.nextBrandNo();
 	}
 	
 	

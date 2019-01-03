@@ -28,4 +28,8 @@
 		from fuel
 		where no=#{no};
 	</delete>
+	
+	<select id="nextFuelNo" resultType="int">
+		select max(no) nextto from fuel
+	</select>
 </mapper>

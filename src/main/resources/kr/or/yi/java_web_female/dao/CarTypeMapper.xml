@@ -29,4 +29,8 @@
 		where code=#{code};
 	</delete>
 	
+	<select id="nextTypeCode" resultType="String">
+		select max(code) nextto from car_type
+	</select>
+	
 </mapper>

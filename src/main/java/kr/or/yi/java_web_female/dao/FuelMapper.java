@@ -11,4 +11,6 @@ public interface FuelMapper {
 	int insertFuel(Fuel fuel);
 	int updateFuel(Fuel fuel);
 	int deleteFuel(Fuel fuel);
+	
+	int nextFuelNo();
 }
