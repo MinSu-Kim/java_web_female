@@ -47,6 +47,12 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	public static LoginUI loginUI;
 
+	//테스트
+	public static LoginUI getLoginUI() {
+		return loginUI;
+	}
+	//
+	
 	public LoginUI() {
 		loginUI = this;
 		loginService = new LoginUiService();
@@ -134,7 +140,7 @@ public class LoginUI extends JFrame implements ActionListener {
 			isLoginCheck();
 			dispose();
 			TestFrame frame = new TestFrame(day);
-			JOptionPane.showMessageDialog(null, "로그인 되엇습니다.");
+			JOptionPane.showMessageDialog(null, "로그인 되었습니다.");
 			frame.setVisible(true);
 			
 		} catch (LoginFailException e1) {

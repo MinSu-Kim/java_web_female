@@ -122,7 +122,7 @@ public class RentMapperImpl implements RentMapper {
 	@Override
 	public List<StateCar> selectCountRentByMonthWithBrand(String brand) {
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			return sqlSession.selectList(namespace+".selectCountRentByMonthWithBrand",brand);
+			return sqlSession.selectList(namespace+".selectCountRentByMonthWithBrand", brand);
 		}
 	}
 
@@ -133,5 +133,32 @@ public class RentMapperImpl implements RentMapper {
 		}
 	}
 
+	@Override
+	public List<Rent> selectRentAllByCustomerCode(String customerCode) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectRentAllByCustomerCode", customerCode);
+		}
+	}
+
+	@Override
+	public List<StateCar> selectPreference(String customerCode) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectPreference", customerCode);
+		}
+	}
+
+	@Override
+	public List<StateCar> selectCarTypeStat(String customerCode) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectCarTypeStat", customerCode);
+		}
+	}
+
+/*	@Override
+	public List<StateCar> selectCarTypeCarNameStat(Map<String, String> map) {
+		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace + ".selectCarTypeStat", map);
+		}
+	}*/
 
 }

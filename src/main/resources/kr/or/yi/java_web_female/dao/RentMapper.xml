@@ -30,6 +30,32 @@
 		where r.is_return = 0;
 	</select>
 	
+	
+	
+	<!-- 확인 -->
+	<resultMap type="Rent" id="customerRentStat">
+		<id column="rentCode" property="code" />
+		<result column="start_date" property="startDate"/>
+		<result column="start_time" property="startTime" />
+		<result column="end_date" property="endDate" />
+		<result column="end_time" property="endTime" />
+		<result column="carType" property="carCode.carType.type" />
+		<result column="brandName" property="carCode.brand.name" />
+		<result column="carName" property="carCode.name" />
+		<result column="customerCode" property="customerCode.code" />
+	</resultMap>
+	
+	<select id="selectRentAllByCustomerCode" resultMap="customerRentStat">
+		select r.code as rentCode, start_date, start_time, end_date, end_time, ct.`type` as carType, b.name as brandName, cm.name as carName
+		from rent r join car_model cm on r.car_code = cm.car_code
+		join car_type ct on cm.cartype = ct.code
+		join brand b on cm.brand = b.no
+		where costomer_code = #{customerCode};
+	</select>
+	
+	
+	<!-- 여기까지 -->
+	
 	<select id="selectRentAll" resultMap="resultRent">
 		<include refid="selectSql" />
 		order by is_return;
@@ -69,4 +95,9 @@
 		<include refid="selectSql" />
 		<include refid="whereSql" />
 	</select>
+	
+	<!-- 테스트 -->
+	<sql id="selectStatSql">
+	
+	</sql>
 </mapper>

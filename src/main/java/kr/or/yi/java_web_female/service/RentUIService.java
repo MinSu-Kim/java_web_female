@@ -144,4 +144,23 @@ public class RentUIService {
 		return totalPriceDao.selectTotalPrice();
 	}
 	
+	//고객 대여내역
+	public List<Rent> selectRentAllByCustomerCode(String customerCode){
+		return rentDao.selectRentAllByCustomerCode(customerCode);
+	}
+	
+	//고객통계1
+	public List<StateCar> selectPreference(String customerCode){
+		return rentDao.selectPreference(customerCode);
+	}
+	
+	//고객통계2
+	public List<StateCar> selectCarTypeStat(String customerCode){
+		return rentDao.selectCarTypeStat(customerCode);
+	}
+	
+/*	//통계 테스트
+	public List<StateCar> selectCarTypeCarNameStat(Map<String, String> map){
+		return rentDao.selectCarTypeCarNameStat(map);
+	}*/
 }

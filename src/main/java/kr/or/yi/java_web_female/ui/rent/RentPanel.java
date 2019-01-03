@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -53,8 +54,7 @@ public class RentPanel extends JPanel implements ActionListener {
 	private int optionPrice;
 	private String eCode;
 	private RentListPanel rentListPanel;
-	
-	
+
 	public void setRentListPanel(RentListPanel rentListPanel) {
 		this.rentListPanel = rentListPanel;
 	}
@@ -194,6 +194,7 @@ public class RentPanel extends JPanel implements ActionListener {
 		if (rentDateDto != null) {
 			diff = rentDateDto.getDiff();
 		}
+
 		totalPrice = ((basicCharge * diff) + (insurance == null ? 0 : insurance.getPrice()) + optionPrice)
 				* (100 - maxEventRate) / 100;
 
@@ -235,7 +236,7 @@ public class RentPanel extends JPanel implements ActionListener {
 		Rent rent = new Rent(service.nextRentNo(), rentDateDto.getStartDate(), rentDateDto.getStartHour() + ":00:00",
 				rentDateDto.getEndDate(), rentDateDto.getEndHour() + ":00:00", false, totalPrice, selectedCarModel,
 				selectedCustomer, insurance, eCode, optionPrice);
-
+		
 //		JOptionPane.showMessageDialog(null, eCode);
 
 		if (rentResultFrame == null) {

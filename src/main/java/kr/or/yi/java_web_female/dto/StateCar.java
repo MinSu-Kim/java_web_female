@@ -6,12 +6,27 @@ public class StateCar {
 	private int count;
 	private String type;	//차 종류
 	private String brand;
+	private String name;	//차 이름
+	private String customerCode;	//고객 코드
 	
-	private StateCar() {
+	public StateCar() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+	public String getCustomerCode() {
+		return customerCode;
+	}
+
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getType() {
 		return type;
 	}
@@ -37,14 +52,9 @@ public class StateCar {
 		this.brand = brand;
 	}
 
-
 	@Override
 	public String toString() {
-		return String.format("StateCar [title=%s, count=%s, type=%s, brand=%s]", title, count, type, brand);
-	}
-
-
-
-	
-	
+		return String.format("StateCar [title=%s, count=%s, type=%s, brand=%s, name=%s, customerCode=%s]", title, count,
+				type, brand, name, customerCode);
+	}	
 }

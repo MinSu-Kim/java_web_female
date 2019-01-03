@@ -63,7 +63,7 @@ public class RentStatistics extends JPanel implements ActionListener{
 		panelSelectedOne.setVisible(false);
 		
 		panelTotal = new JPanel();
-		panelTotal.setBorder(new EmptyBorder(15, 15, 15, 15));
+		panelTotal.setBorder(new EmptyBorder(10, 10, 10, 10));
 		add(panelTotal, BorderLayout.CENTER);
 		panelTotal.setLayout(new BorderLayout(0, 0));
 		
@@ -72,15 +72,15 @@ public class RentStatistics extends JPanel implements ActionListener{
 		panelFour.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		linePanel = new RentStatisticsLinePanel();
-		linePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+		linePanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 		panelFour.add(linePanel);
 		
 		piePanel = new RentStatisticsPiePanel();
-		piePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+		piePanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 		panelFour.add(piePanel);
 		
 		barPanel = new RentStatisticsBarPanel();
-		piePanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+		barPanel.setBorder(new EmptyBorder(5, 10, 5, 10));
 		panelFour.add(barPanel);
 		
 		panel_3 = new JPanel();
