@@ -194,7 +194,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbColor.setModel(model);
 		panelColor.add(cmbColor);
 		cmbColor.setSelectedIndex(-1);
-		panelColor.add(cmbColor);
 		
 		JPanel panelGear = new JPanel();
 		panel_info.add(panelGear);
@@ -270,6 +269,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			cmbBrand.getComboBox().setEnabled(true);
 			cmbCarType.getComboBox().setEnabled(true);
 			cmbFuel.getComboBox().setEnabled(true);
+			cmbColor.setEnabled(true);
 		}else {
 			tfName.setEditable(false);
 			tfBasicCharge.setEditable(false);
@@ -283,6 +283,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			cmbFuel.getComboBox().setEnabled(false);
 			rdbtnAuto.setEnabled(false);
 			rdbtnStick.setEnabled(false);
+			cmbColor.setEnabled(false);
 	}
 		//관리자만 대여횟수 확인가능, 고객은 렌트횟수 
 		panelRentCnt = new JPanel();
