@@ -32,4 +32,9 @@
 		from Car_option
 		where no=#{no};
 	</delete>
+	
+	<select id="nextOptionNo" resultType="int">
+		select max(no) nextto from car_option
+	</select>
+	
 </mapper>

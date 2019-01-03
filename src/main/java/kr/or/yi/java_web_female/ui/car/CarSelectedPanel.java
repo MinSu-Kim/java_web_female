@@ -194,7 +194,6 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		cmbColor.setModel(model);
 		panelColor.add(cmbColor);
 		cmbColor.setSelectedIndex(-1);
-		panelColor.add(cmbColor);
 		
 		JPanel panelGear = new JPanel();
 		panel_info.add(panelGear);
@@ -270,6 +269,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			cmbBrand.getComboBox().setEnabled(true);
 			cmbCarType.getComboBox().setEnabled(true);
 			cmbFuel.getComboBox().setEnabled(true);
+			cmbColor.setEnabled(true);
 		}else {
 			tfName.setEditable(false);
 			tfBasicCharge.setEditable(false);
@@ -283,6 +283,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			cmbFuel.getComboBox().setEnabled(false);
 			rdbtnAuto.setEnabled(false);
 			rdbtnStick.setEnabled(false);
+			cmbColor.setEnabled(false);
 	}
 		//관리자만 대여횟수 확인가능, 고객은 렌트횟수 
 		panelRentCnt = new JPanel();
@@ -437,15 +438,15 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		int hour12 = Integer.parseInt(tfHour12.getText().replaceAll(",", ""));
 		int hourElse = Integer.parseInt(tfHourElse.getText().replaceAll(",", ""));
 		if(basicCharge<74000) {
-			JOptionPane.showMessageDialog(null, "기본 비용의 비용을 74000원 이상 입력하세요.");
+			JOptionPane.showMessageDialog(null, "기본 비용의 비용을 60000원 이상 입력하세요.");
 		}else if(hour6<40000){
-			JOptionPane.showMessageDialog(null, "6사간이하 초과 비용을 40000원 이상 입력하세요.");
+			JOptionPane.showMessageDialog(null, "6사간이하 초과 비용을 30000원 이상 입력하세요.");
 		}else if(hour10<50000){
-			JOptionPane.showMessageDialog(null, "10시간이하 초과 비용을 50000원 이상 입력하세요.");
+			JOptionPane.showMessageDialog(null, "10시간이하 초과 비용을 40000원 이상 입력하세요.");
 		}else if(hour12<59000){
-			JOptionPane.showMessageDialog(null, "12시간이하 초과 비용을 74000원 이상 입력하세요.");
+			JOptionPane.showMessageDialog(null, "12시간이하 초과 비용을 5000원 이상 입력하세요.");
 		}else if(hourElse<74000){
-			JOptionPane.showMessageDialog(null, "12시간 이상 초과비용을 74000원 이상 입력하세요.");
+			JOptionPane.showMessageDialog(null, "12시간 이상 초과비용을 60000원 이상 입력하세요.");
 		}else {
 			CarModel item = new CarModel(code, name, colorName, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
 			return item;

@@ -36,6 +36,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 	private CarUiService service;
 	private JButton btnOk;
 	private JButton btnCancel;
+	private JButton btnCancel_1;
 	
 
 
@@ -83,6 +84,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		tfNo = new JTextField();
 		panelInput.add(tfNo);
 		tfNo.setColumns(10);
+		tfNo.setEditable(false);
 		
 		JLabel lblName = new JLabel("옵션명");
 		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -108,10 +110,13 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		
 		panelBtn.add(btnOk);
 		
-		JButton btnCancel = new JButton("취소");
-		panelBtn.add(btnCancel);
+		btnCancel_1 = new JButton("취소");
+		btnCancel_1.addActionListener(this);
+		panelBtn.add(btnCancel_1);
 		
 		panelList.setPopupMenu(createDeptPopupMenu());
+		
+		setNextCode();
 	}
 	
 	private JPopupMenu createDeptPopupMenu() {
@@ -166,7 +171,6 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		add(panelList);
 		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
-		
 	}
 	
 	
@@ -174,6 +178,7 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		//취소버튼 눌렀을시 실행
 		if(btnOk.getText()=="수정") {
 			btnOk.setText("추가");
+			clearTf();
 		}
 		clearTf();
 	}
@@ -187,13 +192,16 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 
 
 	private void clearTf() {
-		tfNo.setText("");
+		setNextCode();
 		tfName.setText("");
 		tfPrice.setText("");
 	}
 	
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel_1) {
+			do_btnCancel_actionPerformed(e);
+		}
 		if (e.getSource() == btnCancel) {
 			do_btnCancel_actionPerformed(e);
 		}
@@ -229,6 +237,13 @@ public class CarOptionListPanel extends JPanel implements ActionListener {
 		item.setName(name);
 		item.setPrice(price);
 		return item;
+	}
+	
+	private void setNextCode() {
+		if(btnOk.getText().equals("추가")) {
+			int nextCode = service.nextOptionNo()+1;
+			tfNo.setText(nextCode+"");
+		}
 	}
 }
 

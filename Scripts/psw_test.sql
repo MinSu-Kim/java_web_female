@@ -1,4 +1,4 @@
-select code, name, t_grant as tGrant from title where code='T001';
+-- select code, name, t_grant as tGrant from title where code='T001';
 
 
 -- 3이면 브론즈, 7이면 실버, 11이상은 골드 	
@@ -7,24 +7,12 @@ from customer c , level l
 where c.rent_cnt between l.g_losal and l.g_hisal 
 and c.code = 'C008';
 
-select code, name, phone, passwd, t_code as tCode from employee where code = 'E001';
-
-SELECT * FROM post;
-
-select zipcode, sido, sigungu, eupmyeon, doro, building1, building2
-from post;
-
-select code, name, rate from grade
-		where code='G001';
-select *
-from customer;
+-- select code, name, phone, passwd, t_code as tCode from employee where code = 'E001';
 
 insert into customer(code, Id, passwd, Name, address, phone, dob, email)
 		values('c015','psw2701', password('aggarg54'), '박수완', '대구', '010-1234-5656', '1977-01-02', 'psw2701@naver.com');
 
 desc customer;
-
-select * from employee;
 
 select c.code, id, passwd, c.name, address, phone, dob, email, event_code, is_use, e.name, e.rate
 from customer c join custom_event ce on c.code=ce.custom_code join event e on ce.event_code=e.code;
@@ -55,10 +43,6 @@ select c.code, Id, passwd, c.Name, address, phone, dob, email, emp_code, license
 from customer c join custom_event ce on c.code = ce.custom_code join event e on ce.event_code = e.code
 where c.code = 'C001';
 
-select * from custom_event;
-
-select * from event;
-
 select event_code, custom_code, is_use, code, name, rate 
 from custom_event ce join event e on ce.event_code = e.code
 where custom_code='C001';
@@ -81,17 +65,6 @@ select * from custom_event;
 select * from customer;
 
 
-<<<<<<< HEAD
-=======
-desc customer;
-
-select * from grade;
-
->>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
-select * from `level`;
-select * from grade;
-
-<<<<<<< HEAD
 select *
 from grade g join `level` l on g.name = l.grade; 
 
@@ -127,8 +100,7 @@ end $$
 DELIMITER ;
 */
 
-<<<<<<< HEAD
-=======
+
 call update_customer_grade('C007');
 
 select grade_code, rent_cnt
@@ -196,7 +168,7 @@ where custom_code='C017';
 select c.code, Id,c.Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, g.name as gname, rent_cnt
 from customer c join grade g on c.grade_code = g.code;
 
-select * from customer;
+select * from custome
 
 update customer
 		set code='C011', Id='swan2701', passwd=password('rootroot'), name='안녕', address='대구', 
@@ -260,13 +232,7 @@ where Id = 'asd132' and passwd = password('rootroot');
 update customer
 set passwd = password('rootroot')
 
-
-
-
 select concat( char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65), char(rand()*26 + 65) , round(rand() * 100), char(rand()*26 + 65)) as randomPwd;
->>>>>>> branch 'master' of https://github.com/MinSu-Kim/java_web_female.git
-
-
 
 select char(65), char(90)
 
@@ -314,9 +280,6 @@ where Id = 'asd132';
 
 update customer set Name=#{name}, address=#{address}, zip_code=#{zipCode}, phone=#{phone}, dob=#{dob}, email=#{email}, license=#{license} where code=#{code}		
 
-
-
---
 select grade_code from customer;
 
 
@@ -329,10 +292,6 @@ select g.name, count(g.name) from customer c left join grade g on c.grade_code =
 
 
 select g.name as title , count(g.name) as count from customer c left join grade g on c.grade_code = g.code where grade_code is not null group by grade_code;
-
-
-select * from custom_event;
-
 
 
   

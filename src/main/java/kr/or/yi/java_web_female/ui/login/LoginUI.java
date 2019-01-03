@@ -28,6 +28,7 @@ import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.exception.LoginFailException;
 import kr.or.yi.java_web_female.service.LoginUiService;
 import kr.or.yi.java_web_female.ui.join.JoinUI;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
@@ -159,6 +160,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		} else {
 			Customer customer = loginService.selectCustomerByPw((Customer) getUser(false));
 			List<Customer> fullCustomer = loginService.selectCustomerByCode(customer);
+			
 			loginCusotmer = fullCustomer.get(0);
 			/////////////////////
 			/*

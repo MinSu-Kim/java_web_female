@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Array;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -21,8 +23,10 @@ import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import kr.or.yi.java_web_female.dto.CustomEvent;
 import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
+import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.CustomUiService;
@@ -274,6 +278,13 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		tfConfirm = new JTextField();
 		panel_1.add(tfConfirm);
 		tfConfirm.setColumns(10);
+		
+		JLabel lblEvent = new JLabel("사용가능한 쿠폰");
+		lblEvent.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInput1.add(lblEvent);
+		
+		JComboBox cmbEvent = new JComboBox();
+		panelInput1.add(cmbEvent);
 
 		pwfConfirmPw.getDocument().addDocumentListener(new MyDocumentListener() {
 
@@ -388,6 +399,8 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 
 		Employee empCode = new Employee(loginCustomer.getEmpCode().getCode());
 		Grade gradeCode = new Grade(loginCustomer.getGradeCode().getCode());
+		/*Event event = new Event (loginCustomer.getEvents().get(0));*/
+		//String event = tfEvent.getText().trim();
 		//JOptionPane.showMessageDialog(null, "gradeCode = " + gradeCode);
 
 		item.setCode(code);
@@ -402,7 +415,7 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		item.setLicense(license);
 		item.setEmpCode(empCode);
 		item.setGradeCode(gradeCode);
-
+		
 		return item;
 	}
 	

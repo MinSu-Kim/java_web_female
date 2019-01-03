@@ -17,4 +17,6 @@ public interface BrandMapper {
 	
 	@Select("select brand, count(*)as count from rent r join car_model m on r.car_code = m.car_code group by m.brand")
 	List<StateCar> selectCountByBrand();
+	
+	String nextBrandNo();
 }

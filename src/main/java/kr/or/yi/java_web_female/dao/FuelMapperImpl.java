@@ -66,4 +66,11 @@ public class FuelMapperImpl implements FuelMapper {
 		
 	}
 
+	@Override
+	public int nextFuelNo() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(namespace+".nextFuelNo");
+		}
+	}
+
 }
