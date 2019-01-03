@@ -278,13 +278,6 @@ public class CustommerUpdate extends JPanel implements ActionListener {
 		tfConfirm = new JTextField();
 		panel_1.add(tfConfirm);
 		tfConfirm.setColumns(10);
-		
-		JLabel lblEvent = new JLabel("사용가능한 쿠폰");
-		lblEvent.setHorizontalAlignment(SwingConstants.CENTER);
-		panelInput1.add(lblEvent);
-		
-		JComboBox cmbEvent = new JComboBox();
-		panelInput1.add(cmbEvent);
 
 		pwfConfirmPw.getDocument().addDocumentListener(new MyDocumentListener() {
 
