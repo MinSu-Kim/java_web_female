@@ -196,7 +196,7 @@ where custom_code='C017';
 select c.code, Id,c.Name, zip_code ,address, phone, dob, email, emp_code,	license, grade_code, g.name as gname, rent_cnt
 from customer c join grade g on c.grade_code = g.code;
 
-select * from customer;
+select * from custome
 
 update customer
 		set code='C011', Id='swan2701', passwd=password('rootroot'), name='안녕', address='대구', 
