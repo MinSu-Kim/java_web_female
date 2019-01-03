@@ -7,6 +7,7 @@ import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Employee;
 import kr.or.yi.java_web_female.ui.ManagerPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class TestFrame extends JFrame {
@@ -16,6 +17,7 @@ public class TestFrame extends JFrame {
 	private Employee loginEmployee;
 
 	public TestFrame(String today) {
+		
 		setTitle(getLoginUser());
 
 		//JOptionPane.showMessageDialog(null, loginCusotmer == null ? loginEmployee : loginCusotmer);

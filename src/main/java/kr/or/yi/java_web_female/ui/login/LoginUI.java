@@ -28,6 +28,7 @@ import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.exception.LoginFailException;
 import kr.or.yi.java_web_female.service.LoginUiService;
 import kr.or.yi.java_web_female.ui.join.JoinUI;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener {
@@ -47,6 +48,12 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	public static LoginUI loginUI;
 
+	//테스트
+	public static LoginUI getLoginUI() {
+		return loginUI;
+	}
+	//
+	
 	public LoginUI() {
 		loginUI = this;
 		loginService = new LoginUiService();
@@ -104,9 +111,9 @@ public class LoginUI extends JFrame implements ActionListener {
 		pBtn.add(btnSearch);
 
 		// test
-		tfId.setText("asd132");
+		tfId.setText("E001");
 		tfPwd.setText("rootroot");
-		//checkManager.setSelected(true);
+		checkManager.setSelected(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -134,7 +141,7 @@ public class LoginUI extends JFrame implements ActionListener {
 			isLoginCheck();
 			dispose();
 			TestFrame frame = new TestFrame(day);
-			JOptionPane.showMessageDialog(null, "로그인 되엇습니다.");
+			JOptionPane.showMessageDialog(null, "로그인 되었습니다.");
 			frame.setVisible(true);
 			
 		} catch (LoginFailException e1) {
