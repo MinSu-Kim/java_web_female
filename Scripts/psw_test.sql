@@ -331,8 +331,5 @@ select g.name, count(g.name) from customer c left join grade g on c.grade_code =
 select g.name as title , count(g.name) as count from customer c left join grade g on c.grade_code = g.code where grade_code is not null group by grade_code;
 
 
-select * from custom_event;
-
-
 
   
