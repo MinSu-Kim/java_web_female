@@ -44,6 +44,10 @@ public class CarUiService {
 		return optionDao.updateCarOption(carOption);
 	}
 	
+	public int nextOptionNo() {
+		return optionDao.nextOptionNo();
+	}
+	
 	//차종
 	public List<CarType> selectAllCarType(){
 		return typeDao.selectCarTypeByAll();

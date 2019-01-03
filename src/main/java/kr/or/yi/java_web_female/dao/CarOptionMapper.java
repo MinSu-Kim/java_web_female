@@ -10,4 +10,6 @@ public interface CarOptionMapper {
 	int insertCarOption(CarOption carOption);
 	int updateCarOption(CarOption carOption);
 	int deleteCarOption(CarOption carOption);
+	
+	int nextOptionNo();
 }

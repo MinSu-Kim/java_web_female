@@ -63,4 +63,11 @@ public class CarOptionMapperImpl implements CarOptionMapper {
 
 	}
 
+	@Override
+	public int nextOptionNo() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(namespace+".nextOptionNo");
+		}
+	}
+
 }
