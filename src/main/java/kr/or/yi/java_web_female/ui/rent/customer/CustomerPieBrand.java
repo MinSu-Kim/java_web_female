@@ -66,7 +66,7 @@ public class CustomerPieBrand extends JFXPanel implements InitScene {
 		return scene;
 	}
 	
-	private ObservableList<Data> getChartData() {
+	public ObservableList<Data> getChartData() {
 		// TODO Auto-generated method stub
 		ObservableList<Data> list = FXCollections.observableArrayList();
 		
@@ -83,4 +83,12 @@ public class CustomerPieBrand extends JFXPanel implements InitScene {
 		return list;
 	}
 
+	public void addAllChartData() {
+		pieChart.getData().clear();
+		pieChart.setData(getChartData());
+	}
+/*	
+	public void deleteAllData() {
+		pieChart.getData().clear();
+	}*/
 }

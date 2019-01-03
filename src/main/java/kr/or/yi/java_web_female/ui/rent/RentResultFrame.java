@@ -46,7 +46,13 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	private JButton btnRent;
 	private RentListPanel rentListPanel;
 	private CustomerStaticsPanel customerStaticsPanel;
-
+	private CustomerAllStat customerAllStat;
+	
+	
+	public void setCustomerAllStat(CustomerAllStat customerAllStat) {
+		this.customerAllStat = customerAllStat;
+	}
+	
 	public void setRentListPanel(RentListPanel rentListPanel) {
 		this.rentListPanel = rentListPanel;
 	}
@@ -276,6 +282,7 @@ public class RentResultFrame extends JFrame implements ActionListener {
 			rentListPanel.reloadList();
 		} else {
 			customerStaticsPanel.reloadList();
+			customerAllStat.reloadList();
 		}
 		
 		dispose();

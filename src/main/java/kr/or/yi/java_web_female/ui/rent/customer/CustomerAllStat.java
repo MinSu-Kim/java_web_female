@@ -61,5 +61,12 @@ public class CustomerAllStat extends JPanel {
 	///////////////// 테스트
 	public void reloadList() {
 		list = service.selectRentByAll();
+		Platform.runLater(()->{
+			customerPieBrand.addAllChartData();
+			customerBarChart.addAllChartData();
+		});
+
 	}
+	
+
 }

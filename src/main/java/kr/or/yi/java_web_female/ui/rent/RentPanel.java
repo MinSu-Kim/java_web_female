@@ -57,6 +57,12 @@ public class RentPanel extends JPanel implements ActionListener {
 	private String eCode;
 	private RentListPanel rentListPanel;
 	private CustomerStaticsPanel customerStaticsPanel;
+	private CustomerAllStat customerAllStat;
+	
+	
+	public void setCustomerAllStat(CustomerAllStat customerAllStat) {
+		this.customerAllStat = customerAllStat;
+	}
 
 	public void setRentListPanel(RentListPanel rentListPanel) {
 		this.rentListPanel = rentListPanel;
@@ -264,6 +270,7 @@ public class RentPanel extends JPanel implements ActionListener {
 			rentResultFrame.setRentListPanel(rentListPanel);
 		} else {
 			rentResultFrame.setCustomerStaticsPanel(customerStaticsPanel);
+			rentResultFrame.setCustomerAllStat(customerAllStat);
 		}
 
 		rentResultFrame.setDisCount(isEventRate ? maxEventRate : cGradeRate);
