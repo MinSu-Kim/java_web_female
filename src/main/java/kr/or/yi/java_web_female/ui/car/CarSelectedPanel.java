@@ -185,6 +185,7 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 		panelColor.add(lblColor);
 		
+		//색상String배열
 		arrColorCodes = new String[] {"wh","bk","bl","gr","re","mt"};
 		arrColorNames = new String[] {"하양","검정","파랑","회색","빨강","민트"};
 		
@@ -357,11 +358,18 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			
 			//선택한 이미지 바이트로 변환하여 테이블에 저장하기
 			UserPic userpic = new UserPic();
-			userpic.setCarCode(model.getCarCode());
-			userpic.setPic(getPicFile());
-			service.insertUserPic(userpic);
-			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
-			
+			try {
+				userpic.setCarCode(model.getCarCode());
+				userpic.setPic(getPicFile());
+				service.insertUserPic(userpic);
+				JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
+			} catch (Exception e) {
+				userpic.setCarCode(model.getCarCode());
+				userpic.setPic(getPicFile());
+				service.insertUserPic(userpic);
+				JOptionPane.showMessageDialog(null, "이미지파일이 지정되지 않았습니다.");
+			}
+
 			carUi.reloadDataCarPanel();
 			JOptionPane.showMessageDialog(null, "차량이 등록되었습니다.");
 			carUi.close();
@@ -437,15 +445,15 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 		int hour10 = Integer.parseInt(tfHour10.getText().replaceAll(",", ""));
 		int hour12 = Integer.parseInt(tfHour12.getText().replaceAll(",", ""));
 		int hourElse = Integer.parseInt(tfHourElse.getText().replaceAll(",", ""));
-		if(basicCharge<74000) {
+		if(basicCharge<59999) {
 			JOptionPane.showMessageDialog(null, "기본 비용의 비용을 60000원 이상 입력하세요.");
-		}else if(hour6<40000){
+		}else if(hour6<29999){
 			JOptionPane.showMessageDialog(null, "6사간이하 초과 비용을 30000원 이상 입력하세요.");
-		}else if(hour10<50000){
+		}else if(hour10<39999){
 			JOptionPane.showMessageDialog(null, "10시간이하 초과 비용을 40000원 이상 입력하세요.");
-		}else if(hour12<59000){
-			JOptionPane.showMessageDialog(null, "12시간이하 초과 비용을 5000원 이상 입력하세요.");
-		}else if(hourElse<74000){
+		}else if(hour12<49999){
+			JOptionPane.showMessageDialog(null, "12시간이하 초과 비용을 50000원 이상 입력하세요.");
+		}else if(hourElse<59999){
 			JOptionPane.showMessageDialog(null, "12시간 이상 초과비용을 60000원 이상 입력하세요.");
 		}else {
 			CarModel item = new CarModel(code, name, colorName, gear, brand, cartype, basicCharge, hour6, hour10, hour12, hourElse, fuel, isRent, 0);
@@ -570,6 +578,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	private byte[] getPicFile() throws IOException{
 		byte[] pic = null;
+		if(filePath==null) {
+			filePath = imgPath + "V000.png";
+			JOptionPane.showMessageDialog(null, "noImage로 사진 저장됩니다.");
+		}
 		File file = new File(filePath);
 		System.out.println(filePath);
 		try(InputStream is = new FileInputStream(file)){

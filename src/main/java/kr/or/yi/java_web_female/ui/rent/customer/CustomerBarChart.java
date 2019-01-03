@@ -1,10 +1,11 @@
-package kr.or.yi.java_web_female.chart_panel;
+package kr.or.yi.java_web_female.ui.rent.customer;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,14 +18,26 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import kr.or.yi.java_web_female.InitScene;
+import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.dto.totalPrice;
+import kr.or.yi.java_web_female.service.LoginUiService;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.login.LoginUI;
 
-public class RentTotalPriceBarChart extends JFXPanel implements InitScene{
+public class CustomerBarChart extends JFXPanel implements InitScene {
 
 	private BarChart<String, Number> barChart;
 	private RentUIService service;
+	private LoginUiService loginService;
 	
+	public static Customer loginCustomer;
+	public static LoginUI loginUI;
+	
+	public static void setLoginUI(LoginUI loginUI) {
+		CustomerBarChart.loginUI = loginUI;
+	}
+
 	public BarChart<String, Number> getBarChart() {
 		return barChart;
 	}
@@ -32,8 +45,9 @@ public class RentTotalPriceBarChart extends JFXPanel implements InitScene{
 	/**
 	 * Create the panel.
 	 */
-	public RentTotalPriceBarChart() {
+	public CustomerBarChart() {
 		service = new RentUIService();
+		loginService = new LoginUiService();
 	}
 
 	@Override
@@ -44,52 +58,50 @@ public class RentTotalPriceBarChart extends JFXPanel implements InitScene{
 		
 		root.setAutoSizeChildren(true);
 		
-		//X축
+		// X축
 		CategoryAxis xAxis = new CategoryAxis();
-		xAxis.setLabel("브랜드");
-		
-		//Y축
+		xAxis.setLabel("차량명");
+
+		// Y축
 		NumberAxis yAxis = new NumberAxis();
-		yAxis.setLabel("매출액");
-		
+		yAxis.setLabel("대여횟수");
+
 		barChart = new BarChart<>(xAxis, yAxis);
-		
-		//크기
-		barChart.setPrefSize(440, 230);
+
+		barChart.setPrefSize(450, 250);
 		Map<String, String> maps = new HashMap<>();
 		barChart.setData(getChartData());
-//		barChart.setTitle("브랜드 별 매출액");
+		barChart.setTitle("차량별 대여횟수");
 		
 		root.getChildren().add(barChart);
-		
+
 		return scene;
 	}
 
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {
 		// TODO Auto-generated method stub
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
+
+		List<StateCar> scList = service.selectCarTypeStat(loginUI.loginCusotmer.getCode());
+//		JOptionPane.showMessageDialog(null, "scList " + scList);
 		
-		List<totalPrice> pList = service.selectTotalPrice();
-	//	JOptionPane.showMessageDialog(null, pList);
-		
-		for(int i = 0 ; i < pList.size() ; i++) {
-			totalPrice result = pList.get(i);
-			
+		for (int i = 0; i < scList.size(); i++) {
+			StateCar result = scList.get(i);
+
 			list.add(getChartData(result));
 		}
-		
+
 		return list;
 	}
 
-	private XYChart.Series<String, Number> getChartData(totalPrice result) {
+	private XYChart.Series<String, Number> getChartData(StateCar result) {
 		// TODO Auto-generated method stub
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
-		
-		dataSeries.setName(result.getBrand() + "(" + result.getCarType() + ")");
-		
-		dataSeries.getData().add(new XYChart.Data<>("매출액", result.getTotalPrice()));
-		
+
+		dataSeries.setName(result.getName());
+
+		dataSeries.getData().add(new XYChart.Data<>("대여횟수", result.getCount()));
+
 		return dataSeries;
 	}
-
 }

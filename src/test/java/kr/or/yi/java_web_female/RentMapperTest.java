@@ -11,8 +11,11 @@ import org.junit.runners.MethodSorters;
 
 import kr.or.yi.java_web_female.dao.RentMapper;
 import kr.or.yi.java_web_female.dao.RentMapperImpl;
+import kr.or.yi.java_web_female.dao.StateCarMapper;
+import kr.or.yi.java_web_female.dao.StateCarMapperImpl;
 import kr.or.yi.java_web_female.dao.TotalPriceMapperImpl;
 import kr.or.yi.java_web_female.dao.TotalPriceMapper;
+import kr.or.yi.java_web_female.dto.Customer;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.StateCar;
 import kr.or.yi.java_web_female.dto.totalPrice;
@@ -103,6 +106,20 @@ public class RentMapperTest extends AbstractTest {
 		}
 		Assert.assertNotNull(list);
 	}
+	
+	@Test
+	public void test05selectRentAllByCustomerCode() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		List<Rent> list = dao.selectRentAllByCustomerCode("C003");
+		
+		for(Rent rent : list) {
+			System.out.println(rent);
+		}
+		Assert.assertNotNull(list);
+	}
+	
+	
 /*	
 	@Test
 	public void test04SelectRentHoursForHashMap() {
@@ -159,4 +176,16 @@ public class RentMapperTest extends AbstractTest {
 		List<StateCar> list = dao.selectCountRentByMonthWithBrand("kia");
 		Assert.assertNotNull(list);
 	}
+	
+/*	@Test
+	public void test09selectCarTypeCarNameStat() {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("customerCode", "C003");
+		map.put("type", "경형");
+		
+		List<StateCar> list = dao.selectCarTypeCarNameStat(map);
+		Assert.assertNotNull(list);
+	}*/
 }

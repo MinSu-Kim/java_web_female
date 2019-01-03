@@ -55,4 +55,19 @@ public interface RentMapper {
 	
 	//
 	List<Rent> FilterRentInfo(Map<String, String> map);
+	
+	//고객 대여내역 확인
+	List<Rent> selectRentAllByCustomerCode(String customerCode);
+	
+	//고객통계1. 브랜드별 선호도
+	@Select("select b.name as title, count(*) as count from rent r join car_model cm on r.car_code = cm.car_code join car_type ct on cm.cartype = ct.code join brand b on cm.brand = b.no where costomer_code = #{customerCode} group by b.name")
+	List<StateCar> selectPreference(String customerCode);
+	
+	//고객통계2
+	@Select("select ct.`type` as type, cm.name as name, count(*) as count from rent r join car_model cm on r.car_code = cm.car_code join car_type ct on cm.cartype = ct.code join brand b on cm.brand = b.no where costomer_code = #{customerCode} group by cm.name")
+	List<StateCar> selectCarTypeStat(String customerCode);
+	
+/*	//통계 테스트
+	@Select("select ct.`type` as type, cm.name as name, count(*) as count from rent r join car_model cm on r.car_code = cm.car_code join car_type ct on cm.cartype = ct.code join brand b on cm.brand = b.no where costomer_code = #{customerCode} and ct.`type` = #{type} group by cm.name")
+	List<StateCar> selectCarTypeCarNameStat(Map<String, String> map);*/
 }

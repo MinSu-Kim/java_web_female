@@ -31,6 +31,7 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 	private JSpinner spEndHour; // 반납시간
 	private RentPanel rentPanel;
 	private JButton btnCalculate;
+	private long diff;
 
 	/**
 	 * Create the panel.
@@ -178,6 +179,21 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 		String startDate = startSdf.format(start);
 		// 2. 대여시간 가져오기
 		String sHour = spStartHour.getValue() + "";
+		
+		
+		//대여일시가 오늘 날짜보다 이전이면 대여못하게
+		Date now = new Date();
+		SimpleDateFormat nowSdf = new SimpleDateFormat("yyyyMMdd");
+//		SimpleDateFormat time = new SimpleDateFormat("HH");
+//		String todayHour = time.format(now);
+		String today = nowSdf.format(now);
+		
+//		JOptionPane.showMessageDialog(null, "today " + today + "todayHour " + todayHour);
+		
+		int s = Integer.parseInt(startDate);	//대여시작일
+		int t = Integer.parseInt(today);	//현재날짜
+		
+//		JOptionPane.showMessageDialog(null, "s :" + s + "t : " + t);
 
 		// ===================== 반납일시, 반납시간 ====================
 		Date end = dateChooserEnd.getDate();
@@ -185,15 +201,24 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 		String endDate = endSdf.format(end);
 		String eHour = spEndHour.getValue() + "";
 
-		//
-		long diff = diffDays(startDate + sHour, endDate + eHour);
+		diff = diffDays(startDate + sHour, endDate + eHour);
+		
+		if((t - s) > 0) {
+			JOptionPane.showMessageDialog(null, "대여가능한 날이 아닙니다.");			
+		}
+		
 		if (diff == 0) {
 			JOptionPane.showMessageDialog(null, "대여기간은 최소 1일입니다. 다시 선택해주세요.");
 		}
-//		JOptionPane.showMessageDialog(null, diff);
+//			JOptionPane.showMessageDialog(null, diff);
 		RentDateDto rdd = new RentDateDto(String.format("%tF", start), sHour, String.format("%tF", end), eHour, diff);
 		rentPanel.setRentDateDto(rdd);
+
+		// 확인용
+		JOptionPane.showMessageDialog(null, "diff " + diff);
+
 		return diff;
+		
 	}
 
 	public void setRentPanel(RentPanel rentPanel) {
@@ -208,6 +233,11 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 	
 	//대여일 계산하기
 	protected void do_btnCalculate_actionPerformed(ActionEvent e) {
+		/*if(diff > 0) {
+			totalRentDate();
+		} else {
+			JOptionPane.showMessageDialog(null, "대여기간을 확인해주세요.");
+		}*/
 		totalRentDate();
 	}
 }

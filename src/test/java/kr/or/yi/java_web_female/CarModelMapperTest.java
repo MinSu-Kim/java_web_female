@@ -41,7 +41,7 @@ public class CarModelMapperTest extends AbstractTest {
 		Assert.assertNotNull(list);
 	}
 	
-	@Test
+	/*@Test
 	public void test03insertCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
@@ -64,9 +64,9 @@ public class CarModelMapperTest extends AbstractTest {
 		
 		int res = dao.insertCarModel(carModel);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void test04updateCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
@@ -90,16 +90,16 @@ public class CarModelMapperTest extends AbstractTest {
 		
 		int res = dao.updateCarModel(carModel);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void test05deleteCarModel() {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		CarModel carModel = new CarModel();
 		carModel.setCarCode("V019");
 		int res = dao.deleteCarModel(carModel);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 	
 	/*@Test
 	public void test06selectCarModelWithCarOptionByAll() {

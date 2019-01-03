@@ -48,6 +48,12 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	public static LoginUI loginUI;
 
+	//테스트
+	public static LoginUI getLoginUI() {
+		return loginUI;
+	}
+	//
+	
 	public LoginUI() {
 		loginUI = this;
 		loginService = new LoginUiService();

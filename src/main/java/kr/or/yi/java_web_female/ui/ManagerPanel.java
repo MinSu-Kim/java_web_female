@@ -24,7 +24,10 @@ import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentStatistics;
+import kr.or.yi.java_web_female.ui.rent.customer.CustomerAllStat;
+import kr.or.yi.java_web_female.ui.rent.customer.CustomerStaticsPanel;
 import java.awt.Color;
+
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel implements ActionListener {
@@ -121,6 +124,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			tabbedPane.addTab("차량관리", null, panel_04, null);
 
 			CarManagementPanel panel_05 = new CarManagementPanel();
+			panel_05.setCarPanel(panel_04);
 			tabbedPane.addTab("차량옵션관리", null, panel_05, null);
 
 			RentListPanel panel_07 = new RentListPanel();
@@ -152,6 +156,12 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			CarPanel panel_02 = new CarPanel();
 			tabbedPane.addTab("차량조회", null, panel_02, null);
 
+			CustomerStaticsPanel panel_04 = new CustomerStaticsPanel();
+			tabbedPane.addTab("대여내역", null, panel_04, null);
+			
+			CustomerAllStat panel_05 = new CustomerAllStat();
+			tabbedPane.addTab("MY", null, panel_05, null);
+			
 			JPanel panel_03 = new CustommerUpdate();
 			tabbedPane.addTab("개인정보관리", null, panel_03, null);
 		}

@@ -24,7 +24,6 @@ import org.apache.ibatis.exceptions.PersistenceException;
 
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
-import kr.or.yi.java_web_female.ui.ComboPanel;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
 
 @SuppressWarnings("serial")
@@ -36,28 +35,16 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	private List<CarType> arrCarType;
 	private JButton btnOk;
 	private JButton btnCancel;
-	private CarPanel carPanel;
-	private ComboPanel<CarType> panelCarType;
-	
-	public void setCarPanel(CarPanel carPanel) {
-		this.carPanel = carPanel;
-	}
-	public void setArrCarType(List<CarType> arrCarType) {
-		this.arrCarType = arrCarType;
-	}
-	public void setPanelCarType(ComboPanel<CarType> panelCarType) {
-		this.panelCarType = panelCarType;
-	}
-	
+	private CarManagementPanel carManagementPanel;
+
+
 	public CarTypeListPanel() {
-		carPanel = new CarPanel();
 		setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Type", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		service = new CarUiService();
 		initcomponent();
 	}
 	
 	private void initcomponent() {
-		carPanel = new CarPanel();
 		panelList = new CarTypeList();
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "\uBAA9\uB85D", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -151,6 +138,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 					service.deleteCarType(panelList.getSelectedItem());
 					panelList.setList(service.selectAllCarType());
 					panelList.loadDatas();
+					carManagementPanel.setListComboBoxManagement();
 					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 차종의 차량을 보유 중 (삭제 불가능)");
@@ -179,6 +167,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		service.updateCarType(item);
 		panelList.setList(service.selectAllCarType());
 		panelList.loadDatas();
+		carManagementPanel.setListComboBoxManagement();
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		clearTf();
 		btnOk.setText("추가");
@@ -206,10 +195,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		panelList.loadDatas();
 		add(panelList);
 		//carPanel에 업데이트
-		carPanel.setListComboBox();///////////////////////////////////왜 안되는걸까
-		System.out.println("================"+arrCarType+"=============");
-		System.out.println(carPanel);
-		carPanel.getPanelCarType().setComboItems(arrCarType);
+		carManagementPanel.setListComboBoxManagement();
 		
 		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
@@ -232,4 +218,10 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 		setNextCode();
 		tfType.setText("");
 	}
+
+	public void setCarManagementPanel(CarManagementPanel carManagementPanel) {
+		this.carManagementPanel = carManagementPanel;
+	}
+	
+	
 }
