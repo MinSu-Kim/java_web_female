@@ -339,6 +339,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 				service.deleteCustomerEvent(customer, customEvent);
 				panelList.setList(service.selectCustomerByAll());
+				JOptionPane.showMessageDialog(null, "고객이 삭제 되었습니다.");
 				panelList.loadDatas();
 
 			}

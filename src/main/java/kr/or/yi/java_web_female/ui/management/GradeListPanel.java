@@ -150,6 +150,7 @@ public class GradeListPanel extends JPanel implements ActionListener {
 				service.deleteGrade(panelList.getSelectedItem());
 				panelList.setList(service.selectGradeByAll());
 				panelList.loadDatas();
+				JOptionPane.showMessageDialog(null, "등급이 삭제되었습니다.");
 			}
 		});
 		popMenu.add(delItem);
