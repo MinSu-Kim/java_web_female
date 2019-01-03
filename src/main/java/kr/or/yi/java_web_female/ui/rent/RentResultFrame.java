@@ -22,6 +22,8 @@ import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.dto.UserPic;
 import kr.or.yi.java_web_female.service.RentUIService;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
+import kr.or.yi.java_web_female.ui.rent.customer.CustomerAllStat;
+import kr.or.yi.java_web_female.ui.rent.customer.CustomerStaticsPanel;
 
 @SuppressWarnings("serial")
 public class RentResultFrame extends JFrame implements ActionListener {
@@ -43,9 +45,14 @@ public class RentResultFrame extends JFrame implements ActionListener {
 	private RentUIService service;
 	private JButton btnRent;
 	private RentListPanel rentListPanel;
+	private CustomerStaticsPanel customerStaticsPanel;
 
 	public void setRentListPanel(RentListPanel rentListPanel) {
 		this.rentListPanel = rentListPanel;
+	}
+
+	public void setCustomerStaticsPanel(CustomerStaticsPanel customerStaticsPanel) {
+		this.customerStaticsPanel = customerStaticsPanel;
 	}
 
 	public void setService(RentUIService service) {
@@ -267,6 +274,8 @@ public class RentResultFrame extends JFrame implements ActionListener {
 		service.insertRent(rent);
 		if(LoginUI.loginCusotmer == null) {
 			rentListPanel.reloadList();
+		} else {
+			customerStaticsPanel.reloadList();
 		}
 		
 		dispose();

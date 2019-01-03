@@ -44,7 +44,12 @@ public class RentListInfoPanel extends JPanel implements ActionListener {
 	private RentUIService service;
 	private RentListPanel rentListPanel;
 	private AllRentPanel allRentPanel;
+	private RentListInfoPanel rentListInfoPanel;
 	
+	public void setRentListInfoPanel(RentListInfoPanel rentListInfoPanel) {
+		this.rentListInfoPanel = rentListInfoPanel;
+	}
+
 	public void setAllRentPanel(AllRentPanel allRentPanel) {
 		this.allRentPanel = allRentPanel;
 	}
@@ -210,11 +215,10 @@ public class RentListInfoPanel extends JPanel implements ActionListener {
 	protected void do_btnReturn_actionPerformed(ActionEvent e) {
 		service.changeIsReturn(rent);
 		JOptionPane.showMessageDialog(null, "반납되었습니다.");
-		
+
 		if(LoginUI.loginCusotmer == null) {
 			rentListPanel.reloadList();
-/*			allRentPanel.reloadList();
-			JOptionPane.showMessageDialog(null, allRentPanel);*/
 		}
+		
 	}
 }

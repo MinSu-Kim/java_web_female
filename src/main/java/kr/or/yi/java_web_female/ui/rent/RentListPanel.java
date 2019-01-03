@@ -20,7 +20,21 @@ public class RentListPanel extends JPanel {
 	private RentList pList;
 	private RentListInfoPanel pRentInfo;
 	private RentSearchPanel pSearch;
+	private RentListPanel rentListPanel;
+	private AllRentPanel allRentPanel;
 	
+	public void setpRentInfo(RentListInfoPanel pRentInfo) {
+		this.pRentInfo = pRentInfo;
+	}
+
+	public void setRentListPanel(RentListPanel rentListPanel) {
+		this.rentListPanel = rentListPanel;
+	}
+	
+	public void setAllRentPanel(AllRentPanel allRentPanel) {
+		this.allRentPanel = allRentPanel;
+	}
+
 	/**
 	 * Create the panel.
 	 */
@@ -31,7 +45,6 @@ public class RentListPanel extends JPanel {
 	}
 
 	private void initComponents() {
-//		reloadList(); pList가 45번라인에서 생성되는데 먼저 호출되면 67라인에서 에러뜨지 않을까?
 
 		pRentInfo = new RentListInfoPanel();
 		pRentInfo.setRentListPanel(this);
@@ -44,9 +57,6 @@ public class RentListPanel extends JPanel {
 		add(pSearch);
 		add(pRentInfo);
 		
-		
-		
-		/////////////////////
 		pList.getTable().addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -74,4 +84,5 @@ public class RentListPanel extends JPanel {
 		pList.setList(list);
 		pList.loadDatas();
 	}
+	
 }

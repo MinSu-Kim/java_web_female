@@ -50,7 +50,7 @@
 		from rent r join car_model cm on r.car_code = cm.car_code
 		join car_type ct on cm.cartype = ct.code
 		join brand b on cm.brand = b.no
-		where costomer_code = #{customerCode};
+		where costomer_code = #{customerCode} order by start_date;
 	</select>
 	
 	
