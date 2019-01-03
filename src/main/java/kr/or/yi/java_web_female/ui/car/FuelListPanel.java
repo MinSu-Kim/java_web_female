@@ -33,6 +33,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 	private FuelList panelList;
 	private JButton btnOk;
 	private JButton btnCancel;
+	private CarManagementPanel carManagementPanel;
 	
 	/**
 	 * Create the panel.
@@ -131,6 +132,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 					service.deleteFuel(panelList.getSelectedItem());
 					panelList.setList(service.selectAllFuel());
 					panelList.loadDatas();
+					carManagementPanel.setListComboBoxManagement();
 					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 				} catch (PersistenceException e2) {
 					JOptionPane.showMessageDialog(null, "해당 연료를 사용하는 차량 보유 중 (삭제 불가능)");//외래키 걸려있지 않기에 다른방법 필요
@@ -161,6 +163,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		list = service.selectAllFuel();
 		panelList.setList(list);
 		panelList.loadDatas();	
+		carManagementPanel.setListComboBoxManagement();
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
 		btnOk.setText("추가");
 		clearTf();
@@ -184,6 +187,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();
 		add(panelList);
+		carManagementPanel.setListComboBoxManagement();
 		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
 		setNextCode();
@@ -211,5 +215,9 @@ public class FuelListPanel extends JPanel implements ActionListener {
 			int nextCode = service.nextFuelNo() + 1;
 			tfNo.setText(nextCode+"");
 		}
+	}
+	
+	public void setCarManagementPanel(CarManagementPanel carManagementPanel) {
+		this.carManagementPanel = carManagementPanel;
 	}
 }

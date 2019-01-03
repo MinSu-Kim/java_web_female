@@ -33,7 +33,7 @@ public class UserPicMapperTest extends AbstractTest {
 	public static void setUpBeforeClass() throws Exception {
 		//미리 이미지 외래키 무시하고 추가하기
 		String[] arr = {"V000","V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012"
-						,"V013","V014","V015","V016","V017","V018","V019","V020","V021"};
+						,"V013","V014","V015","V016","V017","V018","V019","V020","V021","V022","V023"};
 		
 		C3P0DataSourceFactory cds = new C3P0DataSourceFactory();
 		Properties properties = new Properties();
@@ -68,7 +68,7 @@ public class UserPicMapperTest extends AbstractTest {
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void test01insertUserPic() throws IOException, SQLException {
 		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
 		
@@ -79,7 +79,7 @@ public class UserPicMapperTest extends AbstractTest {
 		
 		int res = dao.insertUserPic(userpic);
 		Assert.assertEquals(1, res);
-	}
+	}*/
 
 	private static byte[] getPicFile(String fileName) throws IOException {
 		byte[] pic = null;

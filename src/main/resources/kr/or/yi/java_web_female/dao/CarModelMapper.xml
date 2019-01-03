@@ -42,7 +42,7 @@
 	
 	<select id="selectCarModelByAll" resultType="CarModel" resultMap="resultCarModel">
 		SELECT car_code, m.name, color, gear, brand, b.name as bName , cartype, basic_charge, hour6, hour10, hour12, hour_else, fuel_code, is_rent, rent_cnt, t.type as tType
-		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code;
+		FROM car_model m join brand b on m.brand = b.no join car_type t on m.cartype = t.code order by car_code;
 	</select>
 	
 	<insert id="insertCarModel" parameterType="CarModel">
