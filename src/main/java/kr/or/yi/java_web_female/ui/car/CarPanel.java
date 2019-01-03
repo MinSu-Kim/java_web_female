@@ -55,8 +55,8 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private ButtonGroup group;
 	private List<CarType> arrCarType;
 	private JPanel panelSelect;
-	private CarPanel carPanel;
 	private List<Brand> arrBrand;
+	private List<Fuel> arrFuel;
 	
 	public CarPanel() {
 		service = new CarUiService();
@@ -78,7 +78,6 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		gridLayout.setHgap(10);
 
 		panelCarType.setTitle("차종");
-		setListComboBox();
 		if(TestFrame.loginEmployee()) {
 			panelSelect.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		}else {
@@ -108,7 +107,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelFuel = new ComboPanel<>();
 
 		panelFuel.setTitle("연료");
-		List<Fuel> arrFuel = service.selectAllFuel();
+		arrFuel = service.selectAllFuel();
 		panelFuel.setComboItems(arrFuel);
 		panelFuel.setSelectedIndex(-1);
 		panelSelect.add(panelFuel);
@@ -194,7 +193,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		/*테이블 컬럼색상변경
 		TableCellRenderer renderer = new MyTableCellRenderer();
 		table.setDefaultRenderer(Class.forName("java.lang.Object"), renderer);*/
-		
+		setListComboBox();
 
 	}
 
@@ -323,16 +322,12 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	public void setListComboBox() {
 		arrCarType = service.selectAllCarType();
 		panelCarType.setComboItems(arrCarType);
-		System.out.println("**************"+arrCarType+"******************");
-		System.out.println(panelCarType);
 		
-		
-		
-		/*arrBrand = service.selectAllBrand();
-		System.out.println(arrBrand);//정상출력
+		arrBrand = service.selectAllBrand();
 		panelBrand.setComboItems(arrBrand);
-		panelSelect.add(panelBrand);*/
-
+		
+		arrFuel = service.selectAllFuel();
+		panelFuel.setComboItems(arrFuel);
 	}
 	
 	

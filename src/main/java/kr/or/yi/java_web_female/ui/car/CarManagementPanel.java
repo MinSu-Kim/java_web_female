@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class CarManagementPanel extends JPanel {
 	private CarPanel carPanel;
-	private CarTypeListPanel typePanel;
-
 
 	public CarManagementPanel() {
 		initComponents();
@@ -27,9 +25,11 @@ public class CarManagementPanel extends JPanel {
 		panel.add(panelType);
 		
 		BrandListPanel panelBrand = new BrandListPanel();
+		panelBrand.setCarManagementPanel(this);
 		panel.add(panelBrand);
 		
 		FuelListPanel panelFuel = new FuelListPanel();
+		panelFuel.setCarManagementPanel(this);
 		panel.add(panelFuel);
 		
 		CarOptionListPanel panelOption = new CarOptionListPanel();

@@ -24,7 +24,6 @@ import org.apache.ibatis.exceptions.PersistenceException;
 
 import kr.or.yi.java_web_female.dto.CarType;
 import kr.or.yi.java_web_female.service.CarUiService;
-import kr.or.yi.java_web_female.ui.ComboPanel;
 import kr.or.yi.java_web_female.ui.list.CarTypeList;
 
 @SuppressWarnings("serial")
@@ -36,7 +35,6 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	private List<CarType> arrCarType;
 	private JButton btnOk;
 	private JButton btnCancel;
-	private ComboPanel<CarType> panelCarType;
 	private CarManagementPanel carManagementPanel;
 
 
