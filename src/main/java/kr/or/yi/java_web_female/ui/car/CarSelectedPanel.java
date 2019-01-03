@@ -357,11 +357,18 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 			
 			//선택한 이미지 바이트로 변환하여 테이블에 저장하기
 			UserPic userpic = new UserPic();
-			userpic.setCarCode(model.getCarCode());
-			userpic.setPic(getPicFile());
-			service.insertUserPic(userpic);
-			JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
-			
+			try {
+				userpic.setCarCode(model.getCarCode());
+				userpic.setPic(getPicFile());
+				service.insertUserPic(userpic);
+				JOptionPane.showMessageDialog(null, "이미지파일이 저장되었습니다.");
+			} catch (Exception e) {
+				userpic.setCarCode(model.getCarCode());
+				userpic.setPic(getPicFile());
+				service.insertUserPic(userpic);
+				JOptionPane.showMessageDialog(null, "이미지파일이 지정되지 않았습니다.");
+			}
+
 			carUi.reloadDataCarPanel();
 			JOptionPane.showMessageDialog(null, "차량이 등록되었습니다.");
 			carUi.close();
@@ -570,6 +577,10 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	
 	private byte[] getPicFile() throws IOException{
 		byte[] pic = null;
+		if(filePath==null) {
+			filePath = imgPath + "V000.png";
+			JOptionPane.showMessageDialog(null, "noImage로 사진 저장됩니다.");
+		}
 		File file = new File(filePath);
 		System.out.println(filePath);
 		try(InputStream is = new FileInputStream(file)){

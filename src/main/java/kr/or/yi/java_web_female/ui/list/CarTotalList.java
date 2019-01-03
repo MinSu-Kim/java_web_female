@@ -38,7 +38,9 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 				item.getColor().equals("wh")==true?"하양":
 					item.getColor().equals("bk")==true?"검정":
 						item.getColor().equals("bl")==true?"파랑":
-							item.getColor().equals("gr")==true?"회색":item.getColor(),
+							item.getColor().equals("gr")==true?"회색":
+								item.getColor().equals("mt")==true?"민트":
+									item.getColor().equals("re")==true?"빨강":item.getColor(),
 				item.getGear().equals("auto")==true?"자동":"수동",
 				item.getBrand().getName().equals("hyundai")==true?"현대":
 					item.getBrand().getName().equals("kia")==true?"기아":
@@ -71,6 +73,12 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 			}
 			if (value.toString().equals("파랑")) {
 				setBackground(Color.BLUE);
+			}
+			if (value.toString().equals("민트")) {
+				setBackground(Color.GREEN);
+			}
+			if (value.toString().equals("빨강")) {
+				setBackground(Color.RED);
 			}
 			return this;
 		}

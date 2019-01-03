@@ -333,7 +333,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelCarType.setComboItems(arrCarType);
 		System.out.println("**************"+arrCarType+"******************");
 		System.out.println(panelCarType);
-//		panelSelect.add(panelCarType);
+		panelSelect.add(panelCarType);
 	}
 	
 
