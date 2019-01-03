@@ -215,10 +215,10 @@ public class RentListInfoPanel extends JPanel implements ActionListener {
 	protected void do_btnReturn_actionPerformed(ActionEvent e) {
 		service.changeIsReturn(rent);
 		JOptionPane.showMessageDialog(null, "반납되었습니다.");
-		
+
 		if(LoginUI.loginCusotmer == null) {
 			rentListPanel.reloadList();
-			rentListPanel.setpRentInfo(rentListInfoPanel);
 		}
+		
 	}
 }

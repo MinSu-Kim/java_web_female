@@ -84,4 +84,5 @@ public class RentListPanel extends JPanel {
 		pList.setList(list);
 		pList.loadDatas();
 	}
+	
 }
