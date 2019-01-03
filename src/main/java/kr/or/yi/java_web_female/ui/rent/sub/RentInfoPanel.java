@@ -159,8 +159,10 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 
 			// 차이
 			long diff = endDateTime - beginDateTime;
+			
 			// 24시간*60분*60초*1000밀리초 ==> 단위 "일"
 			diffDays = diff / (24 * 60 * 60 * 1000);
+			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,17 +186,11 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 		//대여일시가 오늘 날짜보다 이전이면 대여못하게
 		Date now = new Date();
 		SimpleDateFormat nowSdf = new SimpleDateFormat("yyyyMMdd");
-//		SimpleDateFormat time = new SimpleDateFormat("HH");
-//		String todayHour = time.format(now);
 		String today = nowSdf.format(now);
-		
-//		JOptionPane.showMessageDialog(null, "today " + today + "todayHour " + todayHour);
 		
 		int s = Integer.parseInt(startDate);	//대여시작일
 		int t = Integer.parseInt(today);	//현재날짜
 		
-//		JOptionPane.showMessageDialog(null, "s :" + s + "t : " + t);
-
 		// ===================== 반납일시, 반납시간 ====================
 		Date end = dateChooserEnd.getDate();
 		SimpleDateFormat endSdf = new SimpleDateFormat("yyyyMMdd");
@@ -203,19 +199,23 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 
 		diff = diffDays(startDate + sHour, endDate + eHour);
 		
-		if((t - s) > 0) {
-			JOptionPane.showMessageDialog(null, "대여가능한 날이 아닙니다.");			
-		}
 		
-		if (diff == 0) {
-			JOptionPane.showMessageDialog(null, "대여기간은 최소 1일입니다. 다시 선택해주세요.");
+		// ======= 대여일 계산하기 버튼 눌렀을 때 확인버튼 비활성화 하기 ========================
+		
+		// 경우 1. 대여하는 날짜가 오늘 날짜보다 이전일 경우
+		if((t - s) > 0) {
+			JOptionPane.showMessageDialog(null, "대여가능한 날이 아닙니다.");
+			diff = 0;
 		}
-//			JOptionPane.showMessageDialog(null, diff);
+		// 경우2. 대여하는 날짜 = 반납하는 날짜가 같을 경우
+		if (diff == 0) {
+			JOptionPane.showMessageDialog(null, "대여기간을 다시 선택해주세요.");
+		}
+
+		// =====================================================================
+		
 		RentDateDto rdd = new RentDateDto(String.format("%tF", start), sHour, String.format("%tF", end), eHour, diff);
 		rentPanel.setRentDateDto(rdd);
-
-		// 확인용
-		JOptionPane.showMessageDialog(null, "diff " + diff);
 
 		return diff;
 		
@@ -233,11 +233,6 @@ public class RentInfoPanel extends CarSubPanel implements ActionListener {
 	
 	//대여일 계산하기
 	protected void do_btnCalculate_actionPerformed(ActionEvent e) {
-		/*if(diff > 0) {
-			totalRentDate();
-		} else {
-			JOptionPane.showMessageDialog(null, "대여기간을 확인해주세요.");
-		}*/
 		totalRentDate();
 	}
 }

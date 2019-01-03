@@ -194,7 +194,16 @@ public class RentPanel extends JPanel implements ActionListener {
 		if (rentDateDto != null) {
 			diff = rentDateDto.getDiff();
 		}
-
+		
+		//////////////////////////////////////////////////////////////
+		//대여일자가 최소 1일이어야 확인버튼 활성화시키고, 그렇지 않을 경우 확인버튼 누르지 못하게 함
+		if(diff <= 0) {
+			btnOk.setEnabled(false);
+		} else {
+			btnOk.setEnabled(true);
+		}
+		//////////////////////////////////////////////////////////////
+		
 		totalPrice = ((basicCharge * diff) + (insurance == null ? 0 : insurance.getPrice()) + optionPrice)
 				* (100 - maxEventRate) / 100;
 

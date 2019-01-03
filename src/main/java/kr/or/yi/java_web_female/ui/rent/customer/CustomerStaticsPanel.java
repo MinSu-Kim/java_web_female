@@ -15,6 +15,7 @@ public class CustomerStaticsPanel extends JPanel {
 	private RentUIService service;
 	private LoginUiService loginService;
 	private RentCustomerStat pList;
+	private List<Rent> rentList;
 	
 	public static Customer loginCustomer;
 	public static LoginUI loginUI;
@@ -38,14 +39,12 @@ public class CustomerStaticsPanel extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		pList = new RentCustomerStat();
-		
 		reloadList();
-		
 		add(pList, BorderLayout.CENTER);
 	}
 
 	public void reloadList() {
-		List<Rent> rentList = service.selectRentAllByCustomerCode(loginUI.loginCusotmer.getCode());
+		rentList = service.selectRentAllByCustomerCode(loginUI.loginCusotmer.getCode());
 		pList.setList(rentList);
 		pList.loadDatas();
 	}
