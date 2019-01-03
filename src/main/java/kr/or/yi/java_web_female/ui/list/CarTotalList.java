@@ -69,7 +69,7 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 				setBackground(Color.BLACK);
 			}
 			if (value.toString().equals("회색")) {
-				setBackground(Color.GRAY);
+				setBackground(Color.LIGHT_GRAY);
 			}
 			if (value.toString().equals("파랑")) {
 				setBackground(Color.BLUE);
