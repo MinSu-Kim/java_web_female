@@ -66,6 +66,14 @@ public class BrandMapperImpl implements BrandMapper {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String nextBrandNo() {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(namespace+".nextBrandNo");
+		}
+		
+	}
 	
 }
 

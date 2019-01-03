@@ -81,6 +81,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		tfNo = new JTextField();
 		tfNo.setColumns(10);
 		panelInput.add(tfNo);
+		tfNo.setEditable(false);
 		
 		JLabel lblCode = new JLabel("연료코드");
 		panelInput.add(lblCode);
@@ -104,6 +105,8 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		
 		//pop
 		panelList.setPopupMenu(createDeptPopupMenu());
+		
+		setNextCode();
 	}
 
 	private JPopupMenu createDeptPopupMenu() {
@@ -159,8 +162,8 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		panelList.setList(list);
 		panelList.loadDatas();	
 		JOptionPane.showMessageDialog(null, "수정되었습니다.");
-		clearTf();
 		btnOk.setText("추가");
+		clearTf();
 	}
 
 	private Fuel getItem() {
@@ -183,7 +186,7 @@ public class FuelListPanel extends JPanel implements ActionListener {
 		add(panelList);
 		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
-		
+		setNextCode();
 	}
 	protected void do_btnCancel_actionPerformed(ActionEvent e) {
 		if(btnOk.getText()=="수정") {
@@ -194,12 +197,19 @@ public class FuelListPanel extends JPanel implements ActionListener {
 	}
 
 	private void clearTf() {
-		tfCode.setText("");
+		setNextCode();
 		tfNo.setText("");
 	}
 	
 	private void setItem(Fuel item) {
 		tfCode.setText(item.getCode());
 		tfNo.setText(item.getNo()+"");
+	}
+	
+	private void setNextCode() {
+		if(btnOk.getText().equals("추가")) {
+			int nextCode = service.nextFuelNo() + 1;
+			tfNo.setText(nextCode+"");
+		}
 	}
 }

@@ -229,7 +229,7 @@ public class CarTypeListPanel extends JPanel implements ActionListener {
 	}
 
 	private void clearTf() {
-		tfCode.setText("");
+		setNextCode();
 		tfType.setText("");
 	}
 }

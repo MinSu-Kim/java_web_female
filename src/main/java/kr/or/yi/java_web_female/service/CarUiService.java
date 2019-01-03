@@ -85,6 +85,10 @@ public class CarUiService {
 		return fuelDao.updateFuel(fuel);
 	}
 	
+	public int nextFuelNo() {
+		return fuelDao.nextFuelNo();
+	}
+	
 	//브랜드
 	public List<Brand> selectAllBrand(){
 		return brandDao.selectBrandByAll();
@@ -103,6 +107,10 @@ public class CarUiService {
 	}
 	public Brand selectByBrandNo(Brand brand) {
 		return brandDao.selectBrandByNo(brand);
+	}
+	
+	public String nextBrandNo() {
+		return brandDao.nextBrandNo();
 	}
 	
 	
