@@ -81,7 +81,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
 					
-					/*showCustomerUi();*/
+			
 				}
 			}
 
@@ -96,7 +96,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				if (e.getClickCount() == 2) {
 					Customer item = panelList.getSelectedItem();
 					setItem(item);
-//					JOptionPane.showMessageDialog(null, "고객이 가지고 있는 할인쿠폰은" + + "입니다.");
+
 					btnCusOk.setText("수정");
 				}
 			}
@@ -302,14 +302,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		enableField();
 	}
 
-	/*private void showCustomerUi() {
-		CustomerUi frame = new CustomerUi(false);
-		Customer customer = panelList.getSelectedItem();
-		frame.setCustomer(customer);
-		frame.setCustomerPanel(this);
-		frame.setVisible(true);
-
-	}*/
 
 	private void enableField() {
 		if (btnCusOk.getText().equals("수정")) {
@@ -488,13 +480,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		int rentCnt = 0;
 
-		List<CustomEvent> event = null;
+	/*	List<CustomEvent> event = null;
 		if(cmbEvent.getSelectedIndex()==0) {
 			cmbEvent.setSelectedIndex(2);
 			event = (List<CustomEvent>) (cmbEvent.getSelectedItem());
 		}else {
 			event = (List<CustomEvent>) cmbEvent.getSelectedItem();
-		}
+		}*/
 		
 		Customer customer = new Customer();
 
@@ -521,7 +513,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setAddress(cAddr);
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
-		customer.setEvents(event);
+	//	customer.setEvents(event);
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 		joinService.joinCustomer(customer, customEvent);
