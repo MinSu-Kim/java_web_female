@@ -58,7 +58,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private JComboBox<String> cmbTel1;
 	private JComboBox<String> cmbCusEmail2;
 	private JComboBox<String> cmbLicense;
-	private JComboBox<String> cmbEvent;
 	private JDateChooser birthday;
 	private JComboBox<Employee> cmbEmpCode;
 	private JComboBox<Grade> cmbGrade;
@@ -276,14 +275,6 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput2.add(tfRentCnt);
 		tfRentCnt.setEditable(false);
 		tfRentCnt.setColumns(10);
-		
-		JLabel lblEvent = new JLabel("할인쿠폰");
-		lblEvent.setHorizontalAlignment(SwingConstants.RIGHT);
-		panelInput2.add(lblEvent);
-		
-		cmbEvent = new JComboBox<>();
-		cmbEvent.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "첫가입할인", "생일축하할인" }));
-		panelInput2.add(cmbEvent);
 
 		JPanel panelBtn = new JPanel();
 		panel_4.add(panelBtn, BorderLayout.SOUTH);
@@ -435,13 +426,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicense.getSelectedItem();
 		}
-		List<CustomEvent> event = null;
+	/*	List<CustomEvent> event = null;
 		if(cmbEvent.getSelectedIndex()==0) {
 			cmbEvent.setSelectedIndex(2);
 			event = (List<CustomEvent>) (cmbEvent.getSelectedItem());
 		}else {
 			event = (List<CustomEvent>) cmbEvent.getSelectedItem();
-		}
+		}*/
 
 		updateCustomer.setName(cName);
 		updateCustomer.setId(cId);
@@ -453,7 +444,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		updateCustomer.setEmpCode(empCode);
 		updateCustomer.setGradeCode(gradeCode);
 		updateCustomer.setLicense(license);
-		updateCustomer.setEvents(event);
+/*		updateCustomer.setEvents(event);*/
 		return updateCustomer;
 	}
 
@@ -556,7 +547,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		tfAddr.setText(item.getAddress() + "");
 		cmbLicense.setSelectedItem(item.getLicense());
 		tfRentCnt.setText(item.getRentCnt() + "");
-		cmbEvent.setSelectedItem(item.getEvents() + "");
+	/*	cmbEvent.setSelectedItem(item.getEvents() + "");*/
 	}
 
 	protected void do_cmbCusEmail2_actionPerformed(ActionEvent arg0) {

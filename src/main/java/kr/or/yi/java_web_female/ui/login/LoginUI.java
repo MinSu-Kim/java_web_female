@@ -104,10 +104,10 @@ public class LoginUI extends JFrame implements ActionListener {
 		btnSearch.addActionListener(this);
 		pBtn.add(btnSearch);
 
-		// test
+/*		// test
 		tfId.setText("E001");
 		tfPwd.setText("rootroot");
-		checkManager.setSelected(true);
+		checkManager.setSelected(true);*/
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -135,7 +135,7 @@ public class LoginUI extends JFrame implements ActionListener {
 			isLoginCheck();
 			dispose();
 			TestFrame frame = new TestFrame(day);
-			JOptionPane.showMessageDialog(null, "로그인 되엇습니다.");
+			JOptionPane.showMessageDialog(null, "로그인 되었습니다.");
 			frame.setVisible(true);
 			
 		} catch (LoginFailException e1) {
