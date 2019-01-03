@@ -30,7 +30,7 @@ public class CustomerList extends AbstractListPanel<Customer> {
 
 	@Override
 	protected String[] getColumnNames() {
-		return new String[] { "고객코드", "아이디", "고객이름", "우편번호", "주소", "연락처", "생년월일", "이메일", "면허종류", "등급명", "대여횟수", "쿠폰" };
+		return new String[] { "고객코드", "아이디", "고객이름", "우편번호", "주소", "연락처", "생년월일", "이메일", "면허종류", "등급명", "대여횟수" };
 	}
 
 	@Override
