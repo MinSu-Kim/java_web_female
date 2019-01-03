@@ -56,16 +56,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 	private List<CarType> arrCarType;
 	private JPanel panelSelect;
 	private CarPanel carPanel;
-	
-	public ComboPanel<CarType> getPanelCarType() {
-		return panelCarType;
-	}
-	public CarPanel getCarPanel() {
-		return carPanel;
-	}
-	public List<CarType> getArrCarType() {
-		return arrCarType;
-	}
+	private List<Brand> arrBrand;
 	
 	public CarPanel() {
 		service = new CarUiService();
@@ -97,6 +88,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		// 콤보박스에 차종 불러오기
 
 		panelCarType.setSelectedIndex(-1);
+		panelSelect.add(panelCarType);
 		// 아이템리스너
 
 		panelBrand = new ComboPanel<>();
@@ -105,7 +97,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		gridLayout_1.setVgap(10);
 
 		panelBrand.setTitle("브랜드");
-		List<Brand> arrBrand = service.selectAllBrand();
+		arrBrand = service.selectAllBrand();
 		// 콤보박스에 브랜드 불러오기
 		panelBrand.setComboItems(arrBrand);
 		panelBrand.setSelectedIndex(-1);
@@ -202,7 +194,7 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		/*테이블 컬럼색상변경
 		TableCellRenderer renderer = new MyTableCellRenderer();
 		table.setDefaultRenderer(Class.forName("java.lang.Object"), renderer);*/
-
+		
 
 	}
 
@@ -333,8 +325,16 @@ public class CarPanel extends JPanel implements ActionListener, ItemListener {
 		panelCarType.setComboItems(arrCarType);
 		System.out.println("**************"+arrCarType+"******************");
 		System.out.println(panelCarType);
-		panelSelect.add(panelCarType);
+		
+		
+		
+		/*arrBrand = service.selectAllBrand();
+		System.out.println(arrBrand);//정상출력
+		panelBrand.setComboItems(arrBrand);
+		panelSelect.add(panelBrand);*/
+
 	}
+	
 	
 
 }

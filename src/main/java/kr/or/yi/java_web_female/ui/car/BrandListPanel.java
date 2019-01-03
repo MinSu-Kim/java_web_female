@@ -29,14 +29,12 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	private JTextField tfNo;
 	private JTextField tfName;
 	private CarUiService service;
-	private List<Brand> list;
+	private List<Brand> panelBrand;
 	private BrandList panelList;
 	private JButton btnOk;
 	private JButton btnCancel;
 	
-	/**
-	 * Create the panel.
-	 */
+
 	public BrandListPanel() {
 		setBorder(new TitledBorder(null, "Brand", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		service = new CarUiService();
@@ -46,8 +44,8 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	private void initcomponent() {
 		
 		panelList = new BrandList();
-		list = service.selectAllBrand();
-		panelList.setList(list);
+		panelBrand = service.selectAllBrand();
+		panelList.setList(panelBrand);
 		panelList.loadDatas();
 		//더블클릭시 구현
 		panelList.getTable().addMouseListener(new MouseAdapter() {
@@ -165,8 +163,8 @@ public class BrandListPanel extends JPanel implements ActionListener {
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
 		Brand brand = getItem();
 		service.insertBrand(brand);
-		list = service.selectAllBrand();
-		panelList.setList(list);
+		panelBrand = service.selectAllBrand();
+		panelList.setList(panelBrand);
 		panelList.loadDatas();
 		JOptionPane.showMessageDialog(null, "추가되었습니다.");
 		clearTf();
