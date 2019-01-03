@@ -24,6 +24,7 @@ import kr.or.yi.java_web_female.ui.rent.AllRentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentListPanel;
 import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentStatistics;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class ManagerPanel extends JPanel implements ActionListener {
@@ -35,6 +36,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 	private JLabel lblLoginTime;
 	private JLabel lblGrade;
 	private JLabel lblID;
+	private JLabel lblEvent;
 
 	/**
 	 * Create the panel.
@@ -79,10 +81,24 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			lblGrade.setText(LoginUI.loginCusotmer.getGradeCode().getName() + " 등급입니다.");
 		}
 
+		lblEvent = new JLabel("");
+		pLoginInfo.add(lblEvent);
+		if (LoginUI.loginCusotmer == null) {
+			/*
+			 * lblID.setText(LoginUI.loginEmployee.getCode() + "(" +
+			 * LoginUI.loginEmployee.getName() + ")" + "님");
+			 */
+		} else {
+			String event = LoginUI.loginCusotmer.getEvents().toString();
+			event=event.replace("[", "");
+			event=event.replace("]", "");
+			lblEvent.setText("고객님이 가지고 있는 쿠폰은 "+event + " 입니다.");
+		
+		}
+
 		btnLogout = new JButton("로그아웃");
 		btnLogout.addActionListener(this);
 		pLoginInfo.add(btnLogout);
-
 		panel = new JPanel();
 		add(panel);
 		panel.setLayout(new BorderLayout(0, 0));

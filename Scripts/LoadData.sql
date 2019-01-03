@@ -9,7 +9,6 @@ create table if not exists post (
 );
 
 
--- load data local infile 'C:/program/workspace-proj/java_web_female/DataFiles/대구광역시.txt' into table post
 load data local infile 'D:/workspace-proj/java_web_female/DataFiles/대구광역시.txt' into table post
 character set'euckr'
 fields terminated by'|'

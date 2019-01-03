@@ -104,9 +104,9 @@ public class LoginUI extends JFrame implements ActionListener {
 		pBtn.add(btnSearch);
 
 		// test
-		tfId.setText("E001");
+		tfId.setText("asd132");
 		tfPwd.setText("rootroot");
-		checkManager.setSelected(true);
+		//checkManager.setSelected(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -153,6 +153,7 @@ public class LoginUI extends JFrame implements ActionListener {
 		} else {
 			Customer customer = loginService.selectCustomerByPw((Customer) getUser(false));
 			List<Customer> fullCustomer = loginService.selectCustomerByCode(customer);
+			
 			loginCusotmer = fullCustomer.get(0);
 			/////////////////////
 			/*

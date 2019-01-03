@@ -24,7 +24,7 @@ public class TestFrame extends JFrame {
 		if (LoginUI.loginEmployee != null) {
 			setBounds(100, 100, 1100, 700);
 		} else {
-			setBounds(100, 100, 600, 700);
+			setBounds(100, 100, 725, 700);
 		}
 
 		contentPane = new ManagerPanel(today);
