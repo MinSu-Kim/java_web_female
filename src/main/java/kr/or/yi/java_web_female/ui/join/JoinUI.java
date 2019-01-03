@@ -379,15 +379,15 @@ public class JoinUI extends JFrame implements ActionListener {
 			throw new Exception("이름을 올바르게 입력해 주세요.");
 		}
 
-		String id = "^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$";
+		String id = "^[A-Za-z]{1}[A-Za-z0-9]{3,19}$";
 		boolean cusId = Pattern.matches(id, tfId.getText().trim());
 		if (cusId == true) {
 
 		} else {
-			throw new Exception("아이디 시작은 영문으로만, '_'를 제외한 특수문자 안되며 영문, 숫자, '_'으로만 이루어진 5 ~ 12자 이하");
+			throw new Exception("아이디 시작은 영문으로만, 4 ~ 20 자리 영(대, 소), 숫자 / 첫글자는 숫자 사용 불가\r\n");
 		}
 
-		String passwd = "^(?=.*\\\\d)(?=.*[~`!@#$%\\\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{8,12}$\r\n" + "\r\n";
+		String passwd = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z[0-9]$@$!%*#?&]{8,12}$";
 		String pw1 = new String(tfPwd1.getPassword());
 		String pw2 = new String(tfPwd2.getPassword());
 		boolean cusPasswd = Pattern.matches(passwd, pw1);
@@ -395,16 +395,12 @@ public class JoinUI extends JFrame implements ActionListener {
 		if (cusPasswd == true) {
 
 		} else {
-			throw new Exception("1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n" + "\r\n"
-					+ "3. 같은 문자 4개 이상 사용 불가\r\n" + "\r\n" + "4. 비밀번호에 ID 포함 불가\r\n" + "\r\n" + "5. 공백문자 사용 불가\r\n"
-					+ "\r\n" + "\r\n" + "\r\n");
+			throw new Exception("비밀번호 형식\r\n" + "1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n");
 		}
 		if (cusPass == true) {
 
 		} else {
-			throw new Exception("1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n" + "\r\n"
-					+ "3. 같은 문자 4개 이상 사용 불가\r\n" + "\r\n" + "4. 비밀번호에 ID 포함 불가\r\n" + "\r\n" + "5. 공백문자 사용 불가\r\n"
-					+ "\r\n" + "\r\n" + "\r\n");
+			throw new Exception("비밀번호 형식" + "\\r\\n\" +1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n");
 		}
 
 		String phoneM = "^[0-9]{3,4}$";
