@@ -31,20 +31,26 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 
 	@Override
 	protected Object[] getItemRows(CarModel item) {
-		
+		String color = item.getColor();
+		switch(color) {
+			case "wh":color = "하양";break;
+			case "bk":color = "검정";break;
+			case "bl":color = "파랑";break;
+			case "gr":color = "회색";break;
+			case "mt":color = "민트";break;
+			case "re":color = "빨강";break;
+		}
+		String brandName = item.getBrand().getName();
+		switch(brandName) {
+			case "hyundai"	: brandName="현대";break;
+			case "kia"		: brandName="기아";break;
+		}
 		return new Object[] {
 				item.getCarCode(),
 				item.getName(),
-				item.getColor().equals("wh")==true?"하양":
-					item.getColor().equals("bk")==true?"검정":
-						item.getColor().equals("bl")==true?"파랑":
-							item.getColor().equals("gr")==true?"회색":
-								item.getColor().equals("mt")==true?"민트":
-									item.getColor().equals("re")==true?"빨강":item.getColor(),
-				item.getGear().equals("auto")==true?"자동":"수동",
-				item.getBrand().getName().equals("hyundai")==true?"현대":
-					item.getBrand().getName().equals("kia")==true?"기아":
-						item.getBrand().getName(),
+				color,
+				item.getGear().equals("auto")?"자동":"수동",
+				brandName,
 				item.getCarType().getType(),
 				item.getFuel(),
 				item.isRent()==true?"렌트 중":"X"
@@ -64,21 +70,22 @@ public class CarTotalList extends AbstractListPanel<CarModel> {
 			setOpaque(true);
 			if (value.toString().equals("하양")) {
 				setBackground(Color.WHITE);
-			}
-			if (value.toString().equals("검정")) {
+				setForeground(Color.BLACK);
+			}else if (value.toString().equals("검정")) {
 				setBackground(Color.BLACK);
-			}
-			if (value.toString().equals("회색")) {
-				setBackground(Color.LIGHT_GRAY);
-			}
-			if (value.toString().equals("파랑")) {
+				setForeground(Color.WHITE);
+			}else if (value.toString().equals("회색")) {
+				setBackground(new Color(100, 100, 100, 40));
+				setForeground(Color.BLACK);
+			}else if (value.toString().equals("파랑")) {
 				setBackground(new Color(0, 0, 255, 70));
-			}
-			if (value.toString().equals("민트")) {
+				setForeground(Color.BLACK);
+			}else if (value.toString().equals("민트")) {
 				setBackground(Color.GREEN);
-			}
-			if (value.toString().equals("빨강")) {
+				setForeground(Color.BLACK);
+			}else if (value.toString().equals("빨강")) {
 				setBackground(Color.RED);
+				setForeground(Color.BLACK);
 			}
 			return this;
 		}
