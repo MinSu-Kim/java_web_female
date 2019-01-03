@@ -1,8 +1,17 @@
 package kr.or.yi.java_web_female.ui.list;
 
+import java.awt.Color;
+import java.awt.Component;
+
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import kr.or.yi.java_web_female.dto.Customer;
+import kr.or.yi.java_web_female.ui.list.CarTotalList.CarColorTableCellRenderer;
+import kr.or.yi.java_web_female.ui.list.RentList.ReturnTableCellRenderer;
 
 @SuppressWarnings("serial")
 public class CustomerList extends AbstractListPanel<Customer> {
@@ -15,6 +24,10 @@ public class CustomerList extends AbstractListPanel<Customer> {
 	protected void setAlignWidth() {
 		tableCellAlignment(SwingConstants.CENTER, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 		tableSetWidth(80, 150, 100, 100, 400, 150, 200, 100, 100, 100, 80);
+
+		for(int i=0; i<getColumnNames().length; i++) {
+			table.getColumnModel().getColumn(i).setCellRenderer(new ReturnTableCellRenderer());
+		}
 	}
 
 	@Override
@@ -31,8 +44,26 @@ public class CustomerList extends AbstractListPanel<Customer> {
 
 	@Override
 	protected Customer getItem(int selectedIndex) {
-		// TODO Auto-generated method stub
 		return list.get(selectedIndex);
 	}
 
+	public class ReturnTableCellRenderer extends JLabel implements TableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			setText(value.toString());
+			setHorizontalAlignment(JLabel.CENTER);
+			setOpaque(true);
+			if (value.toString().equals("블랙리스트")) {
+				setBackground(new Color(255, 0, 0, 20));
+			}else {
+				setBackground(Color.WHITE);
+			}
+			
+			if (table.getValueAt(row, 9).toString().equals("블랙리스트")) {
+				setBackground(new Color(255, 0, 0, 20));
+			}else {
+				setBackground(Color.WHITE);
+			}
+			return this;
+		}
+	}
 }
