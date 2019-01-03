@@ -58,11 +58,13 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 	private JComboBox<String> cmbTel1;
 	private JComboBox<String> cmbCusEmail2;
 	private JComboBox<String> cmbLicense;
+	private JComboBox<String> cmbEvent;
 	private JDateChooser birthday;
 	private JComboBox<Employee> cmbEmpCode;
 	private JComboBox<Grade> cmbGrade;
 	private Customer loginCustomer;
 	private JoinUiService joinService;
+
 
 	public CustommerListPannel() {
 		setBorder(
@@ -74,6 +76,16 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 	private void initcomponents() {
 		panelList = new CustomerList();
+		panelList.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					
+					/*showCustomerUi();*/
+				}
+			}
+
+		});
 		list = service.selectCustomerByAll();
 		panelList.setList(list);
 		panelList.loadDatas();
@@ -84,6 +96,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				if (e.getClickCount() == 2) {
 					Customer item = panelList.getSelectedItem();
 					setItem(item);
+//					JOptionPane.showMessageDialog(null, "고객이 가지고 있는 할인쿠폰은" + + "입니다.");
 					btnCusOk.setText("수정");
 				}
 			}
@@ -171,27 +184,27 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		JPanel pEmail = new JPanel();
 		panelInput1.add(pEmail);
 		pEmail.setLayout(new BoxLayout(pEmail, BoxLayout.X_AXIS));
-		
-				tfCusEmail1 = new JTextField();
-				tfCusEmail1.setColumns(15);
-				pEmail.add(tfCusEmail1);
-				
-						JLabel lblAt = new JLabel("@");
-						lblAt.setHorizontalAlignment(SwingConstants.CENTER);
-						pEmail.add(lblAt);
-						
-								tfCusEmail2 = new JTextField();
-								tfCusEmail2.setEditable(false);
-								tfCusEmail2.setColumns(15);
-								pEmail.add(tfCusEmail2);
-								
-										cmbCusEmail2 = new JComboBox<String>();
-										cmbCusEmail2.setPreferredSize(new Dimension(150, 21));
-										cmbCusEmail2.addActionListener(this);
-										
-												cmbCusEmail2.setModel(new DefaultComboBoxModel<String>(
-														new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
-												pEmail.add(cmbCusEmail2);
+
+		tfCusEmail1 = new JTextField();
+		tfCusEmail1.setColumns(15);
+		pEmail.add(tfCusEmail1);
+
+		JLabel lblAt = new JLabel("@");
+		lblAt.setHorizontalAlignment(SwingConstants.CENTER);
+		pEmail.add(lblAt);
+
+		tfCusEmail2 = new JTextField();
+		tfCusEmail2.setEditable(false);
+		tfCusEmail2.setColumns(15);
+		pEmail.add(tfCusEmail2);
+
+		cmbCusEmail2 = new JComboBox<String>();
+		cmbCusEmail2.setPreferredSize(new Dimension(150, 21));
+		cmbCusEmail2.addActionListener(this);
+
+		cmbCusEmail2.setModel(new DefaultComboBoxModel<String>(
+				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
+		pEmail.add(cmbCusEmail2);
 
 		JPanel panelInput2 = new JPanel();
 		panel.add(panelInput2);
@@ -263,6 +276,14 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelInput2.add(tfRentCnt);
 		tfRentCnt.setEditable(false);
 		tfRentCnt.setColumns(10);
+		
+		JLabel lblEvent = new JLabel("할인쿠폰");
+		lblEvent.setHorizontalAlignment(SwingConstants.RIGHT);
+		panelInput2.add(lblEvent);
+		
+		cmbEvent = new JComboBox<>();
+		cmbEvent.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "첫가입할인", "생일축하할인" }));
+		panelInput2.add(cmbEvent);
 
 		JPanel panelBtn = new JPanel();
 		panel_4.add(panelBtn, BorderLayout.SOUTH);
@@ -280,6 +301,15 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		enableField();
 	}
+
+	/*private void showCustomerUi() {
+		CustomerUi frame = new CustomerUi(false);
+		Customer customer = panelList.getSelectedItem();
+		frame.setCustomer(customer);
+		frame.setCustomerPanel(this);
+		frame.setVisible(true);
+
+	}*/
 
 	private void enableField() {
 		if (btnCusOk.getText().equals("수정")) {
@@ -387,6 +417,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private Customer getItem() {
 		Customer item = new Customer();
 		item.setCode(tfCusCode.getText().trim());
@@ -398,13 +429,12 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		Date cusDob = birthday.getDate();
 		String cusPhone = (cmbTel1.getSelectedItem()) + "-" + (tfTel2.getText().trim()) + "-"
 				+ (tfTel3.getText().trim());
-				
+
 		String email = (tfCusEmail1.getText().trim()) + "@" + (tfCusEmail2.getText().trim());
 		String zipCode = tfZipCode.getText().trim();
 		String cAddr = tfAddr.getText().trim();
 		Employee empCode = new Employee("E001");
 		Grade gradeCode = new Grade("G001");
-		
 
 		String license = null;
 		if (cmbLicense.getSelectedIndex() == 0) {
@@ -413,7 +443,14 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		} else {
 			license = (String) cmbLicense.getSelectedItem();
 		}
-		
+		List<CustomEvent> event = null;
+		if(cmbEvent.getSelectedIndex()==0) {
+			cmbEvent.setSelectedIndex(2);
+			event = (List<CustomEvent>) (cmbEvent.getSelectedItem());
+		}else {
+			event = (List<CustomEvent>) cmbEvent.getSelectedItem();
+		}
+
 		updateCustomer.setName(cName);
 		updateCustomer.setId(cId);
 		updateCustomer.setDob(cusDob);
@@ -424,7 +461,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		updateCustomer.setEmpCode(empCode);
 		updateCustomer.setGradeCode(gradeCode);
 		updateCustomer.setLicense(license);
-		
+		updateCustomer.setEvents(event);
 		return updateCustomer;
 	}
 
@@ -451,6 +488,14 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 
 		int rentCnt = 0;
 
+		List<CustomEvent> event = null;
+		if(cmbEvent.getSelectedIndex()==0) {
+			cmbEvent.setSelectedIndex(2);
+			event = (List<CustomEvent>) (cmbEvent.getSelectedItem());
+		}else {
+			event = (List<CustomEvent>) cmbEvent.getSelectedItem();
+		}
+		
 		Customer customer = new Customer();
 
 		customer.setId(cId);
@@ -476,6 +521,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		customer.setAddress(cAddr);
 		customer.setGradeCode(gradeCode);
 		customer.setRentCnt(rentCnt);
+		customer.setEvents(event);
 
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 		joinService.joinCustomer(customer, customEvent);
@@ -518,7 +564,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		tfAddr.setText(item.getAddress() + "");
 		cmbLicense.setSelectedItem(item.getLicense());
 		tfRentCnt.setText(item.getRentCnt() + "");
-
+		cmbEvent.setSelectedItem(item.getEvents() + "");
 	}
 
 	protected void do_cmbCusEmail2_actionPerformed(ActionEvent arg0) {

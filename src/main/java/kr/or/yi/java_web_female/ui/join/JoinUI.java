@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,7 +61,6 @@ public class JoinUI extends JFrame implements ActionListener {
 
 	public JoinUI() {
 		joinService = new JoinUiService();
-		
 
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -107,6 +107,21 @@ public class JoinUI extends JFrame implements ActionListener {
 		pPwd1.setLayout(new GridLayout(0, 2, 0, 0));
 
 		tfPwd1 = new JPasswordField();
+		tfPwd1.getDocument().addDocumentListener(new MyDocumentListener() {
+
+			@Override
+			public void msg() {
+				String pw1 = new String(tfPwd1.getPassword());
+				String pw2 = new String(tfPwd2.getPassword());
+				if (pw1.length() == 0 && pw2.length() == 0) {
+					tfConfirm.setText("");
+				} else if (pw1.equals(pw2)) {
+					tfConfirm.setText("비밀번호 일치.");
+				} else {
+					tfConfirm.setText("비밀번호 불일치.");
+				}
+			}
+		});
 		tfPwd1.setColumns(10);
 		pPwd1.add(tfPwd1);
 
@@ -215,7 +230,9 @@ public class JoinUI extends JFrame implements ActionListener {
 				String pw1 = new String(tfPwd1.getPassword());
 				String pw2 = new String(tfPwd2.getPassword());
 
-				if (pw1.equals(pw2)) {
+				if (pw1.length() == 0 && pw2.length() == 0) {
+					tfConfirm.setText("");
+				} else if (pw1.equals(pw2)) {
 					tfConfirm.setText("비밀번호 일치.");
 				} else {
 					tfConfirm.setText("비밀번호 불일치.");
@@ -279,7 +296,7 @@ public class JoinUI extends JFrame implements ActionListener {
 	/*
 	 * pList = new AddressTable();
 	 * 
-	 * 클릭리스너추가 pList.getTable().addMouseListener(new MouseAdapter() {
+	 * // 클릭리스너추가 pList.getTable().addMouseListener(new MouseAdapter() {
 	 * 
 	 * @Override public void mouseClicked(MouseEvent e) { Post post =
 	 * pList.getSelectedItem(); joinUi.setAddress(post);
@@ -334,7 +351,7 @@ public class JoinUI extends JFrame implements ActionListener {
 			Customer customer = getItemCustomer();
 			customer.setCode(joinService.getNextCustomerCode());
 			CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
-		
+
 ///////////////////////// 트랜잭션 처리 //////////////////////////
 
 			joinService.joinCustomer(customer, customEvent);
@@ -352,14 +369,60 @@ public class JoinUI extends JFrame implements ActionListener {
 		}
 	}
 
-	private void regCheck() {
-		String phone = tfTel2.getText().trim();
-		 Pattern phonePattern = Pattern.compile("([0-9-*]{4})");
-			Matcher phoneMacher = phonePattern.matcher(phone);
-			if(phoneMacher.find()){
-				System.out.println(phoneMacher.group()); // 2018-01-01
+	private void regCheck() throws Exception {
+		String name = "^[가-힣]{2,5}$";
+		boolean cusName = Pattern.matches(name, tfName.getText().trim());
+
+		if (cusName == true) {
+			tfId.requestFocus();
+		} else {
+			throw new Exception("이름을 올바르게 입력해 주세요.");
+		}
+
+		String id = "^[a-zA-Z]{1}[a-zA-Z0-9_]{4,11}$";
+		boolean cusId = Pattern.matches(id, tfId.getText().trim());
+		if (cusId == true) {
+
+		} else {
+			throw new Exception("아이디 시작은 영문으로만, '_'를 제외한 특수문자 안되며 영문, 숫자, '_'으로만 이루어진 5 ~ 12자 이하");
+		}
+
+		String passwd = "^(?=.*\\\\d)(?=.*[~`!@#$%\\\\^&*()-])(?=.*[a-z])(?=.*[A-Z]).{8,12}$\r\n" + "\r\n";
+		String pw1 = new String(tfPwd1.getPassword());
+		String pw2 = new String(tfPwd2.getPassword());
+		boolean cusPasswd = Pattern.matches(passwd, pw1);
+		boolean cusPass = Pattern.matches(passwd, pw2);
+		if (cusPasswd == true) {
+
+		} else {
+			throw new Exception("1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n" + "\r\n"
+					+ "3. 같은 문자 4개 이상 사용 불가\r\n" + "\r\n" + "4. 비밀번호에 ID 포함 불가\r\n" + "\r\n" + "5. 공백문자 사용 불가\r\n"
+					+ "\r\n" + "\r\n" + "\r\n");
+		}
+		if (cusPass == true) {
+
+		} else {
+			throw new Exception("1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n" + "\r\n"
+					+ "3. 같은 문자 4개 이상 사용 불가\r\n" + "\r\n" + "4. 비밀번호에 ID 포함 불가\r\n" + "\r\n" + "5. 공백문자 사용 불가\r\n"
+					+ "\r\n" + "\r\n" + "\r\n");
+		}
+
+		String phoneM = "^[0-9]{3,4}$";
+		String phoneL = "^[0-9]{4}$";
+		boolean phone2 = Pattern.matches(phoneM, tfTel2.getText().trim());
+		boolean phone3 = Pattern.matches(phoneL, tfTel3.getText().trim());
+		if (phone2 == true) {
+			tfTel3.requestFocus();
+			if (phone3 == true) {
+				tfEmail1.requestFocus();
+			} else {
+				throw new Exception("전화번호 형식이 올바르지 않습니다 숫자만 입력해 주세요");
 			}
-		
+		} else {
+			throw new Exception("전화번호 형식이 올바르지 않습니다  숫자만 입력해 주세요");
+
+		}
+
 	}
 
 	private void clearTf() {
@@ -398,8 +461,8 @@ public class JoinUI extends JFrame implements ActionListener {
 		Employee empCode = new Employee("E001");
 		Grade gradeCode = new Grade("G001");
 
-		return new Customer(cusId, cusPw, cusName, zipCode, cusAddress, cusPhone, cusDob, cusEmail, empCode, license, gradeCode,
-				0);
+		return new Customer(cusId, cusPw, cusName, zipCode, cusAddress, cusPhone, cusDob, cusEmail, empCode, license,
+				gradeCode, 0);
 	}
 
 	private void validCheck() throws Exception {
@@ -407,6 +470,7 @@ public class JoinUI extends JFrame implements ActionListener {
 			tfName.requestFocus();
 			throw new Exception("이름을 입력해 주세요.");
 		}
+
 		if (tfId.getText().equals("")) {
 			tfId.requestFocus();
 			throw new Exception("아이디를 입력해 주세요.");
