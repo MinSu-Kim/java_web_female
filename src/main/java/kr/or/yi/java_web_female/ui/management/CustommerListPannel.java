@@ -291,7 +291,21 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		panelList.setPopupMenu(createDeptPopupMenu());
 
 		enableField();
+		
+		tfCusCode.setText("C046");
+		tfCusName.setText("나추가");
+		tfCusId.setText("qwerasd123");
+
+		tfTel2.setText("1234");
+		tfTel3.setText("1321");
+		tfCusEmail1.setText("asdf");
+		tfCusEmail2.setText("naver.com");
+		tfZipCode.setText("42900");
+		tfAddr.setText("대구광역시 달성군 하빈면 달구벌대로 77");
+		
+		
 	}
+
 
 
 	private void enableField() {
