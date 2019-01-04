@@ -161,3 +161,10 @@ select brand as title, count(*) as count from brand b left join car_model m on b
 select mid(address, 7, 3) as title, count(*) as count from customer where mid(address, 7, 3) <> '' group by mid(address, 7, 3);
 
 select * from brand;
+
+
+select c.code, Id, passwd, c.Name, zip_code ,address, phone,dob, email, emp_code, license,  rent_cnt, event_code,
+		custom_code, is_use, e.name as eName, e.rate as eRate, e.code as eCode, g.rate as gRate , grade_code, g.name gName
+from customer c left join custom_event ce on c.code = ce.custom_code left join event e on ce.event_code = e.code left join grade g on c.grade_code = g.code
+where c.code !='C000' and ce.is_use = 0
+order by c.code;

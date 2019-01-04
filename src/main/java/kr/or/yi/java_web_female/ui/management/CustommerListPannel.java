@@ -85,9 +85,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 			}
 
 		});
-		list = service.selectCustomerByAll();
-		panelList.setList(list);
-		panelList.loadDatas();
+		reloadData();
 		loginCustomer = LoginUI.loginCusotmer;
 		panelList.getTable().addMouseListener(new MouseAdapter() {
 			@Override
@@ -306,7 +304,11 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		
 	}
 
-
+	public void reloadData() {
+		list = service.selectCustomerByAll();
+		panelList.setList(list);
+		panelList.loadDatas();
+	}
 
 	private void enableField() {
 		if (btnCusOk.getText().equals("수정")) {
@@ -354,8 +356,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 				service.deleteCustomerEvent(customer, customEvent);
 				panelList.setList(service.selectCustomerByAll());
 				JOptionPane.showMessageDialog(null, "고객이 삭제 되었습니다.");
-				panelList.loadDatas();
-
+				reloadData();
 			}
 
 		});
@@ -385,8 +386,9 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		Customer customer = getItem();
 
 		service.updateInfo(customer);
-		panelList.setList(service.selectCustomerByAll());
-		panelList.loadDatas();
+		/*panelList.setList(service.selectCustomerByAll());
+		panelList.loadDatas();*/
+		reloadData();
 		clearTf();
 		JOptionPane.showMessageDialog(null, "고객정보가 수정되었습니다.");
 		btnCusOk.setText("추가");
@@ -524,9 +526,7 @@ public class CustommerListPannel extends JPanel implements ActionListener {
 		CustomEvent customEvent = new CustomEvent("EVT1", customer.getCode(), false);
 		joinService.joinCustomer(customer, customEvent);
 
-		list = service.selectCustomerByAll();
-		panelList.setList(list);
-		panelList.loadDatas();
+		reloadData();
 
 		clearTf();
 		JOptionPane.showMessageDialog(null, "고객이 추가되엇습니다.");

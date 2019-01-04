@@ -30,6 +30,9 @@ public interface CarModelMapper {
 	@Update("update car_model set is_rent = 1, rent_cnt = rent_cnt + 1 where car_code = #{carCode}")
 	int updateCarModelRent(CarModel carModel);
 	
+	// rent 반납시 시 대여가능으로변경
+	@Update("update car_model set is_rent = 0 where car_code = #{carCode}")
+	int updateCarModelRentReturn(CarModel carModel);
 	///////
 	List<CarModel> selectCarModel();
 }

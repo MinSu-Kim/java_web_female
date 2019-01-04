@@ -53,6 +53,8 @@ public interface RentMapper {
 	@Update("update rent set is_return = 1 where code = #{code}")
 	int changeisReturn(Rent rent);
 	
+	
+	
 	//
 	List<Rent> FilterRentInfo(Map<String, String> map);
 	

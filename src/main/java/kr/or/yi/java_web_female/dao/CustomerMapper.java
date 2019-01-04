@@ -39,12 +39,15 @@ public interface CustomerMapper {
 	// rent 등록시 customer의 대여횟수 1증가
 	@Update("update customer set rent_cnt = rent_cnt + 1 where code=#{code}")
 	int updateCustomerRentCnt(Customer customer);
+	
 	// 대여횟수 1증가시 등급조정하기 위한 등급검색
 	@Select("select g.code from customer c , grade g where (rent_cnt between g.g_losal and g.g_hisal) and c.code=#{code}")
 	String selectGradeCustomer(Customer customer);
 	// 등급 조정
 	@Update("update customer set grade_code = #{gradeCode.code} where code = #{code}")
 	int updateCustomerGrade(Customer customer);
+	
+	
 	
 	/*@Select("select Id from customer c where c.phone = #{phone} and c.email = #{email}")*/
 	Customer searchId(Customer customer);

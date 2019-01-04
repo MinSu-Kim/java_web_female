@@ -128,6 +128,10 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			tabbedPane.addTab("차량옵션관리", null, panel_05, null);
 
 			RentListPanel panel_07 = new RentListPanel();
+			panel_07.setCarPanel(panel_04);
+			panel_07.setCustommerListPannel(panel_01);
+			
+			
 			AllRentPanel panel_12 = new AllRentPanel();
 			RentPanel panel_06 = new RentPanel();
 			

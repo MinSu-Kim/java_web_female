@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.car.CarPanel;
 import kr.or.yi.java_web_female.ui.list.RentList;
+import kr.or.yi.java_web_female.ui.management.CustommerListPannel;
 import kr.or.yi.java_web_female.ui.rent.sub.RentListInfoPanel;
 import kr.or.yi.java_web_female.ui.rent.sub.RentSearchPanel;
 
@@ -22,6 +24,17 @@ public class RentListPanel extends JPanel {
 	private RentSearchPanel pSearch;
 	private RentListPanel rentListPanel;
 	private AllRentPanel allRentPanel;
+	private CarPanel carPanel;
+	private CustommerListPannel custommerListPannel;
+	
+	
+	public void setCustommerListPannel(CustommerListPannel custommerListPannel) {
+		this.custommerListPannel = custommerListPannel;
+	}
+
+	public void setCarPanel(CarPanel carPanel) {
+		this.carPanel = carPanel;
+	}
 	
 	public void setpRentInfo(RentListInfoPanel pRentInfo) {
 		this.pRentInfo = pRentInfo;
@@ -78,6 +91,13 @@ public class RentListPanel extends JPanel {
 		list = service.selectRentByAll();
 		pList.setList(list);
 		pList.loadDatas();
+		if (carPanel!=null) {
+			carPanel.setLoadDatas();
+		}
+		if (custommerListPannel!=null) {
+			custommerListPannel.reloadData();
+		}
+
 	}
 	
 	public void reloadList(List<Rent> list) {

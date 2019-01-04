@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -24,6 +23,7 @@ import kr.or.yi.java_web_female.dto.Event;
 import kr.or.yi.java_web_female.dto.Insurance;
 import kr.or.yi.java_web_female.dto.Rent;
 import kr.or.yi.java_web_female.service.RentUIService;
+import kr.or.yi.java_web_female.ui.car.CarPanel;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
 import kr.or.yi.java_web_female.ui.rent.customer.CustomerAllStat;
 import kr.or.yi.java_web_female.ui.rent.customer.CustomerStaticsPanel;
@@ -58,8 +58,8 @@ public class RentPanel extends JPanel implements ActionListener {
 	private RentListPanel rentListPanel;
 	private CustomerStaticsPanel customerStaticsPanel;
 	private CustomerAllStat customerAllStat;
-	
-	
+
+
 	public void setCustomerAllStat(CustomerAllStat customerAllStat) {
 		this.customerAllStat = customerAllStat;
 	}
