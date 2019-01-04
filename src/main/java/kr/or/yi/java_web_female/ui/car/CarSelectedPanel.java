@@ -379,10 +379,11 @@ public class CarSelectedPanel extends JPanel implements ActionListener {
 	protected void do_btnCancel_actionPerformed(ActionEvent arg0) {
 		//취소클릭, 지우지 말고 원래값으로 변경(초기화)
 		if(btnOk.getText().equals("수정")) {
-			String code = tfCode.getText();
+			/*String code = tfCode.getText();
 			CarModel model = new CarModel();
 			model.setCarCode(code);
-			setCarModel(model);
+			setCarModel(model);*/
+			cleartf();
 		}else {
 			cleartf();
 		}
