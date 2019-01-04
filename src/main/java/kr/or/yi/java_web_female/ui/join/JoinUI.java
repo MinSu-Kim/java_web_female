@@ -282,6 +282,15 @@ public class JoinUI extends JFrame implements ActionListener {
 		btnCalcel = new JButton("취소");
 		btnCalcel.addActionListener(this);
 		pBtn.add(btnCalcel);
+		
+		tfName.setText("박수완");
+		tfId.setText("psw2701");
+		tfTel2.setText("5155");
+		tfTel3.setText("2701");
+		tfEmail1.setText("psw2701");
+		tfEmail2.setText("naver.com");
+		tfZipCode.setText("41458");
+		tfAddr.setText("대구광역시 북구 태전로");
 	}
 
 	/* 추가해줌 */
