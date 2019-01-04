@@ -104,4 +104,9 @@ public class CustomerBarChart extends JFXPanel implements InitScene {
 
 		return dataSeries;
 	}
+	
+	public void addAllChartData() {
+		barChart.getData().clear();
+		barChart.setData(getChartData());
+	}
 }

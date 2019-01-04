@@ -42,7 +42,7 @@ public class CustomerList extends AbstractListPanel<Customer> {
 		if (item.getEvents().size() > 0) {
 			for (CustomEvent e : item.getEvents()) {
 				for (Event subE : e.getEvents()) {
-					events.append(subE.getName().substring(0, subE.getName().length()-2) + ", ");
+					events.append(subE.getName().substring(0, subE.getName().length() - 2) + ", ");
 				}
 			}
 			events.replace(events.length() - 2, events.length() - 1, "");
@@ -61,14 +61,14 @@ public class CustomerList extends AbstractListPanel<Customer> {
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 				int row, int column) {
 			setText(value.toString());
-			if(column==4||column==7||column==11) {
+			if (column == 4 || column == 7 || column == 11) {
 				setHorizontalAlignment(JLabel.LEFT);
-			}else {
+			} else {
 				setHorizontalAlignment(JLabel.CENTER);
 			}
-/*			if(column==11) {
-				setFont(new Font("굴림", Font.PLAIN, 11) );
-			}*/
+			/*
+			 * if(column==11) { setFont(new Font("굴림", Font.PLAIN, 11) ); }
+			 */
 			setOpaque(true);
 			/*
 			 * if (value.toString().equals("블랙리스트")) { setBackground(new Color(255, 0, 0,

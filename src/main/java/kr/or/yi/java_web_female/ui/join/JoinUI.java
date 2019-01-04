@@ -33,6 +33,7 @@ import kr.or.yi.java_web_female.dto.Grade;
 import kr.or.yi.java_web_female.dto.Post;
 import kr.or.yi.java_web_female.service.JoinUiService;
 import kr.or.yi.java_web_female.ui.login.LoginUI;
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
 public class JoinUI extends JFrame implements ActionListener {
@@ -164,6 +165,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		pTel.setLayout(new BoxLayout(pTel, BoxLayout.X_AXIS));
 
 		cmbTel1 = new JComboBox<>();
+		cmbTel1.setPreferredSize(new Dimension(130, 27));
 		cmbTel1.setModel(new DefaultComboBoxModel<String>(new String[] { "선택하세요", "010", "011", "017" }));
 		pTel.add(cmbTel1);
 
@@ -205,6 +207,7 @@ public class JoinUI extends JFrame implements ActionListener {
 		pEmail.add(tfEmail2);
 
 		cmbEmail3 = new JComboBox<>();
+		cmbEmail3.setPreferredSize(new Dimension(130, 27));
 		cmbEmail3.addActionListener(this);
 		cmbEmail3.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "선택하세요", "naver.com", "gmail.com", "daum.net", "nate.com", "직접입력" }));
@@ -409,7 +412,8 @@ public class JoinUI extends JFrame implements ActionListener {
 		if (cusPass == true) {
 
 		} else {
-			throw new Exception("비밀번호 형식" + "\\r\\n\" +1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n");
+			throw new Exception(
+					"비밀번호 형식" + "\\r\\n\" +1. 영문(대소문자 구분), 숫자, 특수문자 조합\r\n" + "\r\n" + "2. 8~12자리 사이 문자\r\n");
 		}
 
 		String phoneM = "^[0-9]{3,4}$";
