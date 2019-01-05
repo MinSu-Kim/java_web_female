@@ -1,14 +1,18 @@
 package kr.or.yi.java_web_female.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import kr.or.yi.java_web_female.TestFrame;
 import kr.or.yi.java_web_female.chart_panel.CarChartPanel;
@@ -26,7 +30,6 @@ import kr.or.yi.java_web_female.ui.rent.RentPanel;
 import kr.or.yi.java_web_female.ui.rent.RentStatistics;
 import kr.or.yi.java_web_female.ui.rent.customer.CustomerAllStat;
 import kr.or.yi.java_web_female.ui.rent.customer.CustomerStaticsPanel;
-import java.awt.Color;
 
 
 @SuppressWarnings("serial")
@@ -133,6 +136,7 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			
 			
 			AllRentPanel panel_12 = new AllRentPanel();
+			
 			RentPanel panel_06 = new RentPanel();
 			
 			panel_06.setRentListPanel(panel_07);
@@ -153,6 +157,20 @@ public class ManagerPanel extends JPanel implements ActionListener {
 			RentStatistics panel_11 = new RentStatistics();
 			tabbedPane.addTab("대여통계", null, panel_11, null);
 
+			tabbedPane.addChangeListener(new ChangeListener() {
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					if (e.getSource() instanceof JTabbedPane) {
+						JTabbedPane pane = (JTabbedPane) e.getSource();
+						Component p = pane.getSelectedComponent();
+						if (p instanceof AllRentPanel) {
+							AllRentPanel arp = (AllRentPanel) p;
+							arp.reloadList();
+						}
+						System.out.println(p);
+					}
+				}
+			 });
 		}
 
 		if (!TestFrame.loginEmployee()) {

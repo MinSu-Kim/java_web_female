@@ -3,6 +3,7 @@ package kr.or.yi.java_web_female.ui.rent;
 import java.awt.BorderLayout;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import kr.or.yi.java_web_female.dto.Rent;
@@ -56,6 +57,8 @@ public class AllRentPanel extends JPanel {
 		list = service.selectRentAll();
 		pList.setList(list);
 		pList.loadDatas();
+		
+		
 	}
 
 }

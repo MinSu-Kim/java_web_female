@@ -76,7 +76,7 @@
 	<select id="selectCarModelByCarType" parameterType="CarType" resultMap="ResultCarModel">
 		select car_code, cm.name as carName, color, gear, b.name as brandName, cartype, basic_charge, fuel_code
 		from car_model cm join brand b on cm.brand = b.no
-		where cartype = #{code};
+		where cartype = #{code} and is_rent=0;
 	</select>
 	
 	<!-- 차량관리 where 조건절 select -->
