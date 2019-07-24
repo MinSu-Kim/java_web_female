@@ -32,10 +32,9 @@ public class UserPicMapperTest extends AbstractTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		//미리 이미지 외래키 무시하고 추가하기
-//		String[] arr = {"V000","V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012"
-//						,"V013","V014","V015","V016","V017","V018","V019","V020","V021","V022","V023"};
-		String[] arr = {"V000","V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012"
-				,"V013","V014","V015"};
+	    String[] arr = {"V000","V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012"
+						,"V013","V014","V015","V016","V017","V018","V019","V020","V021","V022"};
+//		String[] arr = {"V000","V001","V002","V003","V004","V005","V006","V007","V008","V009","V010","V011","V012","V013","V014","V015"};
 		C3P0DataSourceFactory cds = new C3P0DataSourceFactory();
 		Properties properties = new Properties();
 		properties.put("password", "rootroot");
@@ -69,28 +68,31 @@ public class UserPicMapperTest extends AbstractTest {
 		}
 	}
 	
-	/*@Test
-	public void test01insertUserPic() throws IOException, SQLException {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		
-		//외래키 문제에 따른 해결
-		UserPic userpic = new UserPic();
-		userpic.setCarCode("V022");
-		userpic.setPic(getPicFile("V022"));
-		
-		int res = dao.insertUserPic(userpic);
-		Assert.assertEquals(1, res);
-	}*/
-
 	private static byte[] getPicFile(String fileName) throws IOException {
 		byte[] pic = null;
-		File file = new File(System.getProperty("user.dir")+"/images/"+fileName+".png");
+		File file = new File(System.getProperty("user.dir") + "/images/" + fileName +".png");
 		try(InputStream is = new FileInputStream(file)){
 			pic = new byte[is.available()];
 			is.read(pic);
 		}
 		return pic;
 	}
+	@Test
+	public void test01insertUserPic() throws IOException, SQLException {
+		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+		
+		//외래키 문제에 따른 해결
+		UserPic userpic = new UserPic();
+		userpic.setCarCode("V023");
+		userpic.setPic(getPicFile("V023"));
+		
+		int res = dao.insertUserPic(userpic);
+		Assert.assertEquals(1, res);
+		
+		dao.deleteUserPic(userpic);
+	}
+
+
 	
 	@Test
 	public void test02getUserPic() throws IOException {
@@ -125,6 +127,7 @@ public class UserPicMapperTest extends AbstractTest {
 			pics.delete();
 		}
 	}*/
+	
 }
 
 

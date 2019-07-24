@@ -7,6 +7,11 @@
 		VALUES(#{carCode}, #{pic})
 	</insert>
 	
+	<delete id="deleteUserPic" parameterType="UserPic">
+		delete from userpic
+		where car_code=#{carCode}
+	</delete>
+	
 	<select id="getUserPic" resultType="UserPic">
 		select car_code, pic 
 		from userpic where car_code=#{carCode}

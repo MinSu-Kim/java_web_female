@@ -51,38 +51,38 @@ public class CustomerMapperTest extends AbstractTest {
 		Assert.assertNotNull(selectCustomer);
 	}
 
-	@Test
-	public void test04insertCustomer() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Customer customer = new Customer();
-		customer.setCode(dao.nextCode());
-		customer.setId("psw2701");
-		customer.setPasswd("password");
-		customer.setName("박수완");
-		customer.setZipCode("21236");
-		customer.setAddress("대구");
-		customer.setPhone("010-5757-5959");
-		Calendar cal = Calendar.getInstance();
-		cal.set(2018, 11, 13);
-		customer.setDob(cal.getTime());
-
-		customer.setEmail("psw2701@naver.com");
-
-		Employee employee = new Employee();
-		employee.setCode("E001");
-		customer.setEmpCode(employee);
-
-		customer.setLicense("2종보통");
-
-		Grade grade = new Grade();
-		grade.setCode("G001");
-		customer.setGradeCode(grade);
-
-		customer.setRentCnt(0);
-
-		int res = dao.insertCustomer(customer);
-		Assert.assertEquals(1, res);
-	}
+//	@Test
+//	public void test04insertCustomer() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+//		Customer customer = new Customer();
+//		customer.setCode(dao.nextCode());
+//		customer.setId("psw2701");
+//		customer.setPasswd("password");
+//		customer.setName("박수완");
+//		customer.setZipCode("21236");
+//		customer.setAddress("대구");
+//		customer.setPhone("010-5757-5959");
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(2018, 11, 13);
+//		customer.setDob(cal.getTime());
+//
+//		customer.setEmail("psw2701@naver.com");
+//
+//		Employee employee = new Employee();
+//		employee.setCode("E001");
+//		customer.setEmpCode(employee);
+//
+//		customer.setLicense("2종보통");
+//
+//		Grade grade = new Grade();
+//		grade.setCode("G001");
+//		customer.setGradeCode(grade);
+//
+//		customer.setRentCnt(0);
+//
+//		int res = dao.insertCustomer(customer);
+//		Assert.assertEquals(1, res);
+//	}
 
 	@Test
 	public void test05nextCustomerCode() {
@@ -124,38 +124,38 @@ public class CustomerMapperTest extends AbstractTest {
 		Assert.assertNotNull(cusList);
 	}
 
-	@Test
-	public void test04updateCustomer() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		Customer customer = new Customer();
-
-		customer.setCode("C009");
-		customer.setId("psw2701");
-		customer.setPasswd("password");
-		customer.setName("박수완");
-		customer.setZipCode("15426");
-		customer.setAddress("대구");
-		customer.setPhone("010-5757-5959");
-		Calendar cal = Calendar.getInstance();
-		cal.set(2018, 12, 20);
-		customer.setDob(cal.getTime());
-		customer.setEmail("qwerasdf@naver.com");
-		
-		Employee employee = new Employee();
-		employee.setCode("E001");
-		customer.setEmpCode(employee);
-		
-		customer.setLicense("2종 보통");
-		
-		Grade grade = new Grade();
-		grade.setCode("G001");
-		customer.setGradeCode(grade);
-		customer.setRentCnt(5);
-		
-		int res = dao.updateCustomer(customer);
-		Assert.assertSame(1, res);
-
-	}
+//	@Test
+//	public void test04updateCustomer() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+//		Customer customer = new Customer();
+//
+//		customer.setCode("C009");
+//		customer.setId("psw2701");
+//		customer.setPasswd("password");
+//		customer.setName("박수완");
+//		customer.setZipCode("15426");
+//		customer.setAddress("대구");
+//		customer.setPhone("010-5757-5959");
+//		Calendar cal = Calendar.getInstance();
+//		cal.set(2018, 12, 20);
+//		customer.setDob(cal.getTime());
+//		customer.setEmail("qwerasdf@naver.com");
+//		
+//		Employee employee = new Employee();
+//		employee.setCode("E001");
+//		customer.setEmpCode(employee);
+//		
+//		customer.setLicense("2종 보통");
+//		
+//		Grade grade = new Grade();
+//		grade.setCode("G001");
+//		customer.setGradeCode(grade);
+//		customer.setRentCnt(5);
+//		
+//		int res = dao.updateCustomer(customer);
+//		Assert.assertSame(1, res);
+//
+//	}
 
 	@Test
 	public void test11JoinTransactionTest03() {
@@ -202,19 +202,19 @@ public class CustomerMapperTest extends AbstractTest {
 		Customer findcustomer = dao.searchId(searchId);
 		Assert.assertNotNull(findcustomer);
 	}
-	@Test
-	public void test14changePw() {
-		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
-		String rndPwd = dao.getRandomPassword();
-		System.out.println("임시비밀번호" +rndPwd);
-		
-		Customer customer = new Customer();
-		customer.setPhone("010-7777-0000");
-		customer.setEmail("xbmhw325@gmail.com");
-		customer.setPasswd(rndPwd);
-		int res = dao.changePw(customer);
-		Assert.assertEquals(1, res);
-	}
+//	@Test
+//	public void test14changePw() {
+//		log.debug(Thread.currentThread().getStackTrace()[1].getMethodName() + "()");
+//		String rndPwd = dao.getRandomPassword();
+//		System.out.println("임시비밀번호" +rndPwd);
+//		
+//		Customer customer = new Customer();
+//		customer.setPhone("010-7777-0000");
+//		customer.setEmail("xbmhw325@gmail.com");
+//		customer.setPasswd(rndPwd);
+//		int res = dao.changePw(customer);
+//		Assert.assertEquals(1, res);
+//	}
 
 	@Test
 	public void test15samePwd() {

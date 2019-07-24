@@ -30,5 +30,13 @@ public class UserPicMapperImpl implements UserPicMapper {
 			return sqlSession.selectOne(namespace+".getUserPic",carCode);
 		}
 	}
+	@Override
+	public int deleteUserPic(UserPic userPic) {
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.delete(namespace+".deleteUserPic",userPic);
+			sqlSession.commit();
+			return res;
+		}
+	}
 
 }
